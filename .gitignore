@@ -5,6 +5,7 @@ Library/*
 !Library/UnityAssemblies/*
 /raw assets
 /build
+/Assets/UnityVS*
 *.suo
 *.csproj
 *.sln
