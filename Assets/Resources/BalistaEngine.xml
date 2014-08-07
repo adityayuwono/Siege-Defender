@@ -1,0 +1,143 @@
+<Engine>
+	<Projectiles>
+		<Projectile Id="WoodenBalista" Damage="10-15" AssetId="Projectiles/WoodenBalista" RoF="0.5" Ammunition="0">
+
+		</Projectile>
+		<Projectile Id="IronBall" Damage="100" AssetId="Projectiles/IronBall" RoF="2">
+
+		</Projectile>
+	</Projectiles>
+
+	<Enemies>
+		<Enemy Id="BoxDemon" 	AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" />
+		<Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1" />
+		<Enemy Id="Boss" 		AssetId="Enemies/BossBoxGoblin" 	Health="250" 	Speed="0.3" />
+	</Enemies>
+
+	<Levels>
+		<Level Id="Level1" Interval="3">
+			<SpawnSequence>
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="BoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="FatBoxDemon" />
+				<Spawn EnemyId="Boss" />
+			</SpawnSequence>
+		</Level>
+	</Levels>
+
+
+
+	
+
+	<Scene Id="Limbo" AssetId="Scenes/Limbo">
+		<Elements>
+			<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" LevelId="Level1" />
+			<Player Id="Player" AssetId="Player" >
+				<PlayerHitbox AssetId="PlayerHealth" />
+				<Shooters>
+					<Shooter Id="LeftShooter" AssetId="LeftShooter" ProjectileId="WoodenBalista" Index="0">
+						<Source AssetId="Shooter"/>
+						<Target AssetId="Target" Index="0"/>
+					</Shooter>
+					<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="WoodenBalista" Index="1">
+						<Source AssetId="Shooter"/>
+						<Target AssetId="Target" Index="1"/>
+					</Shooter>
+
+
+					<!-- <Shooter Id="MiddleShooter" AssetId="Shooter" Position="0,-2.5,0" ProjectileId="IronBall">
+						<Source AssetId="Target"/>
+						<Target AssetId="Target" Position="0,0,15"/>
+					</Shooter> -->
+				</Shooters>
+			</Player>
+		</Elements>
+	</Scene>
+
+
+
+	<GUIs>
+
+	</GUIs>
+</Engine>

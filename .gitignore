@@ -1,0 +1,13 @@
+Temp/UnityLockfile
+Temp/*
+obj/*
+Library/*
+!Library/UnityAssemblies/*
+/raw assets
+/build
+*.suo
+*.csproj
+*.sln
+*.unityproj
+*.DotSettings
+*.unitypackage
