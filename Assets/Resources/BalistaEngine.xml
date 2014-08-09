@@ -1,11 +1,9 @@
 <Engine>
 	<Projectiles>
-		<Projectile Id="WoodenBalista" Damage="10-15" AssetId="Projectiles/WoodenBalista" RoF="0.5" Ammunition="0">
+		<Projectile Id="WoodenBalista" Damage="10-15" AssetId="Projectiles/WoodenBalista" RoF="0.5" Ammunition="100" />
+		<Projectile Id="FireBall" Damage="5-8" AssetId="Projectiles/FireBall" RoF="1" Ammunition="0" AoE="20" />
 
-		</Projectile>
-		<Projectile Id="IronBall" Damage="100" AssetId="Projectiles/IronBall" RoF="2">
-
-		</Projectile>
+		<Projectile Id="IronBall" Damage="100" AssetId="Projectiles/IronBall" RoF="2" />
 	</Projectiles>
 
 	<Enemies>
@@ -15,7 +13,7 @@
 	</Enemies>
 
 	<Levels>
-		<Level Id="Level1" Interval="3">
+		<Level Id="Level1" Interval="2">
 			<SpawnSequence>
 				<Spawn EnemyId="BoxDemon" />
 				<Spawn EnemyId="BoxDemon" />
@@ -113,25 +111,26 @@
 	<Scene Id="Limbo" AssetId="Scenes/Limbo">
 		<Elements>
 			<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" LevelId="Level1" />
+
+			<PlayerHitbox AssetId="PlayerHealth" />
+			
 			<Player Id="Player" AssetId="Player" >
-				<PlayerHitbox AssetId="PlayerHealth" />
 				<Shooters>
 					<Shooter Id="LeftShooter" AssetId="LeftShooter" ProjectileId="WoodenBalista" Index="0">
 						<Source AssetId="Shooter"/>
 						<Target AssetId="Target" Index="0"/>
 					</Shooter>
-					<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="WoodenBalista" Index="1">
+					<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="FireBall" Index="1">
 						<Source AssetId="Shooter"/>
 						<Target AssetId="Target" Index="1"/>
 					</Shooter>
-
-
 					<!-- <Shooter Id="MiddleShooter" AssetId="Shooter" Position="0,-2.5,0" ProjectileId="IronBall">
 						<Source AssetId="Target"/>
 						<Target AssetId="Target" Position="0,0,15"/>
 					</Shooter> -->
 				</Shooters>
 			</Player>
+
 		</Elements>
 	</Scene>
 
