@@ -17,7 +17,6 @@ namespace Scripts.Views
         private void ShootProjectile(ObjectView source, ObjectView target)
         {
             var projectile = AttachController<ProjectileController>();
-            projectile.OnHit += _viewModel.DamageEnemy;
             projectile.OnDeath += _viewModel.Destroy;
             projectile.AoE = _viewModel.AoE;
 

@@ -2,14 +2,14 @@
 
 namespace Scripts.Components
 {
-    public class PlayerHealthController : RigidbodyController
+    public class PlayerHealthController : DamageEnemyController
     {
         private void OnTriggerEnter(Collider target)
         {
-            var controller = target.gameObject.GetComponent<ProjectileTargetController>();
-            if (controller != null)
+            var enemy = target.gameObject.GetComponent<EnemyBaseController>();
+            if (enemy != null)
             {
-                Destroy(target.gameObject);
+                OnHit(enemy.Id);
             }
         }
     }

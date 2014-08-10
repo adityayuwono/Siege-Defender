@@ -1,10 +1,11 @@
-﻿using Scripts.Models;
+﻿using Scripts.Interfaces;
+using Scripts.Models;
 using Scripts.Views;
 using UnityEngine;
 
 namespace Scripts.ViewModels
 {
-    public class ProjectileViewModel : ObjectViewModel
+    public class ProjectileViewModel : ObjectViewModel, IDamageEnemies
     {
         private ProjectileModel _model;
 

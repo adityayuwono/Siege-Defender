@@ -4,9 +4,8 @@ using Random = UnityEngine.Random;
 
 namespace Scripts.Components
 {
-    public class ProjectileController : RigidbodyController
+    public class ProjectileController : DamageEnemyController
     {
-        public Action<string> OnHit;
         public Action OnDeath;
         public float AoE;
 
