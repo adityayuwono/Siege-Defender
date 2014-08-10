@@ -34,23 +34,21 @@ namespace Scripts.Components
         private Rect _clickArea;
         private Rect _clickCheckArea;
 
-        private int _lastTouchIndex;
         private void Update()
         {
-            if (Input.touches.Length <= _lastTouchIndex)
-                _shooterView.StopShooting();
-            else if (Input.touches.Length >= _lastTouchIndex && !_clickCheckArea.Contains(Input.touches[_lastTouchIndex].position))
-                _shooterView.StopShooting();
-
+            var isShooting = false;
             for (var i = 0; i < Input.touches.Length; i++)
             {
                 var touch = Input.touches[i];
                 if (_clickCheckArea.Contains(touch.position))
                 {
-                    _lastTouchIndex = i;
                     _shooterView.StartShooting();
+                    break;
                 }
             }
+
+            if (!isShooting)
+                _shooterView.StopShooting();
         }
     }
 }
