@@ -8,7 +8,13 @@ namespace Scripts.Components
 
         protected override void OnSetup()
         {
-            Rigidbody = rigidbody;
+            if (rigidbody == null)
+            {
+                Rigidbody = gameObject.AddComponent<Rigidbody>();
+                Rigidbody.isKinematic = true;
+            }
+            else
+                Rigidbody = rigidbody;
 
             var centerOfMass = transform.FindChild("CenterOfMass");
             if (centerOfMass != null)
