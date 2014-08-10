@@ -9,6 +9,16 @@ namespace Scripts.Components
         public Action OnDeath;
         public float AoE;
 
+        private GameObject aoeGameObject;
+        protected override void OnSetup()
+        {
+            base.OnSetup();
+
+            var aoe = transform.FindChild("AoE");
+            if (aoe != null)
+                aoeGameObject = aoe.gameObject;
+        }
+
         public void Shoot(Transform target)
         {
             transform.localPosition = Vector3.zero;
@@ -38,7 +48,7 @@ namespace Scripts.Components
             {
                 if (AoE > 1)
                 {
-                    var aoE = Instantiate(Resources.Load("Projectiles/AoE")) as GameObject;
+                    var aoE = Instantiate(aoeGameObject) as GameObject;
                     aoE.layer = gameObject.layer;
                     var currentPosition = transform.position;
                     currentPosition.y = 0;
@@ -46,12 +56,11 @@ namespace Scripts.Components
                     aoE.transform.localScale = Vector3.one*AoE/2f;
                     var rb = aoE.AddComponent<Rigidbody>();
                     rb.constraints = RigidbodyConstraints.FreezeAll;
-                    
-                    var aoEController = aoE.AddComponent<AoEController>();
-                    aoEController.Setup(ViewModel);
-                    aoEController.OnHit = OnHit;
-
                     aoE.AddComponent<SphereCollider>();
+
+                    var aoEController = aoE.AddComponent<AoEController>();
+                    aoEController.OnHit = OnHit;
+                    aoEController.Setup(ViewModel);
                 }
 
                 _isHit = true;
@@ -62,7 +71,7 @@ namespace Scripts.Components
                 var enemy = controller as EnemyBaseController;
                 if (enemy != null)
                 {
-                    enemy.AttachProjectile(transform);
+                    enemy.AttachProjectile(this);
                     OnHit(enemy.Id);
                 }
                 else
@@ -70,12 +79,11 @@ namespace Scripts.Components
             }
         }
 
-        
 
 
         protected override void OnKilled()
         {
-            StartCoroutine(DelayedDeath(1f));
+            StartCoroutine(DelayedDeath(0.5f));
         }
 
         

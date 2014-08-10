@@ -4,16 +4,17 @@ using UnityEngine;
 
 namespace Scripts.Components
 {
-    public class FollowMouse : BaseController
+    public class FollowMouse : MouseInteraction
     {
         public Camera MainCamera;
+
+        public LayerMask LayerMask;
 
         private void Start()
         {
             MainCamera = GameObject.Find("Player").camera;
         }
 
-        private Texture2D _image;
         private Texture2D _crosshairImage;
 
         private TargetViewModel _viewModel;
@@ -42,18 +43,7 @@ namespace Scripts.Components
         }
 
 
-        private void Update()
-        {
-            if (Input.touches.Length > 0)
-            {
-                foreach (var touch in Input.touches)
-                {
-                    ProcessTouchOrMouse(touch.position);
-                }
-            }
-        }
-
-        private void ProcessTouchOrMouse(Vector2 inputPosition)
+        protected override void ProcessTouchOrMouse(Vector2 inputPosition)
         {
             inputPosition.y = Screen.height - inputPosition.y;
             if (_circleRect.Contains(inputPosition))
@@ -74,7 +64,7 @@ namespace Scripts.Components
             var ray = MainCamera.ScreenPointToRay(inputPosition);
             RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, ~(0 << 8)))
+            if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, ~(1 << 9)))
             {
                 var position = MainCamera.ScreenToWorldPoint(new Vector3(inputPosition.x, inputPosition.y, hitInfo.distance));
                 transform.position = position;

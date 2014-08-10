@@ -36,19 +36,30 @@ namespace Scripts.Components
 
         private void Update()
         {
-            var isShooting = false;
-            for (var i = 0; i < Input.touches.Length; i++)
+            if (Input.touches.Length > 0)
             {
-                var touch = Input.touches[i];
-                if (_clickCheckArea.Contains(touch.position))
+                var isShooting = false;
+                for (var i = 0; i < Input.touches.Length; i++)
                 {
-                    _shooterView.StartShooting();
-                    break;
+                    var touch = Input.touches[i];
+                    if (_clickCheckArea.Contains(touch.position))
+                    {
+                        isShooting = true;
+                        _shooterView.StartShooting();
+                        break;
+                    }
                 }
-            }
 
-            if (!isShooting)
-                _shooterView.StopShooting();
+                if (!isShooting)
+                    _shooterView.StopShooting();
+            }
+            else
+            {
+                if (Input.GetMouseButton(0))
+                    _shooterView.StartShooting();
+                else
+                    _shooterView.StopShooting();
+            }
         }
     }
 }

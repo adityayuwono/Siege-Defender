@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Scripts.Components;
 using Scripts.Helpers;
 using Scripts.ViewModels;
@@ -87,9 +86,8 @@ namespace Scripts.Views
         private void DestroyGameObject(ObjectViewModel viewModel)
         {
             foreach (var baseController in Controllers)
-            {
                 baseController.Kill();
-            }
+            Controllers.Clear();
 
             GameObject = null;
         }

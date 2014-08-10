@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using Scripts.Interfaces;
 using Scripts.ViewModels;
 using UnityEngine;
 
 namespace Scripts.Components
 {
-    public class BaseController : MonoBehaviour
+    public class BaseController : MonoBehaviour, IBase
     {
         protected ObjectViewModel ViewModel { get; private set; }
 
@@ -33,7 +34,21 @@ namespace Scripts.Components
             IsDead = true;
             OnKilled();
         }
-        protected virtual void OnKilled() { }
+        public void KillImmediate()
+        {
+            if (IsDead) return;
+
+            IsDead = true;
+
+            ClearEvents();
+            DelayedDeath(0f);
+        }
+
+
+        protected virtual void OnKilled()
+        {
+            DelayedDeath(0f);
+        }
         protected IEnumerator DelayedDeath(float delay)
         {
             yield return new WaitForSeconds(delay);
@@ -41,5 +56,10 @@ namespace Scripts.Components
         }
 
         public virtual void ClearEvents() { }
+
+        public string Id
+        {
+            get { return ViewModel.Id; }
+        }
     }
 }

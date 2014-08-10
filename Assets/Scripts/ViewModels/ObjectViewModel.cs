@@ -36,6 +36,14 @@ namespace Scripts.ViewModels
                 child.Show();
         }
 
+        public override void Hide()
+        {
+            base.Hide();
+
+            foreach (var child in Children)
+                child.Hide();
+        }
+
         protected override void OnDeactivate()
         {
             foreach (var child in Children)

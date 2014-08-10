@@ -46,7 +46,6 @@ namespace Scripts.ViewModels
         public ObjectViewModel Target { get; private set; }
 
 
-
         public ProjectileViewModel SpawnProjectile()
         {
             var duplicateProjectile = Copier.CopyAs<ProjectileModel>(_projectileModel);

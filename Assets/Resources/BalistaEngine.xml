@@ -1,7 +1,7 @@
 <Engine>
 	<Projectiles>
-		<Projectile Id="WoodenBalista" Damage="10-15" AssetId="Projectiles/WoodenBalista" RoF="0.5" Ammunition="100" />
-		<Projectile Id="FireBall" Damage="5-8" AssetId="Projectiles/FireBall" RoF="1" Ammunition="0" AoE="20" />
+		<Projectile Id="WoodenBalista" Damage="4-5" AssetId="Projectiles/WoodenBalista" RoF="0.1" Ammunition="100" />
+		<Projectile Id="FireBall" Damage="8-11" AssetId="Projectiles/FireBall" RoF="0.5" Ammunition="0" AoE="20" />
 
 		<Projectile Id="IronBall" Damage="100" AssetId="Projectiles/IronBall" RoF="2" />
 	</Projectiles>
@@ -13,7 +13,7 @@
 	</Enemies>
 
 	<Levels>
-		<Level Id="Level1" Interval="2">
+		<Level Id="Level1" Interval="1">
 			<SpawnSequence>
 				<Spawn EnemyId="BoxDemon" />
 				<Spawn EnemyId="BoxDemon" />

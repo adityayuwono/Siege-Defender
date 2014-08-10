@@ -1,11 +1,19 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Components
 {
-    public  class AoEController : BaseController
+    public class AoEController : BaseController
     {
         public Action<string> OnHit;
+
+        protected override void OnSetup()
+        {
+            base.OnSetup();
+
+            renderer.enabled = true;
+        }
 
         private void OnCollisionEnter(Collision collisionInfo)
         {

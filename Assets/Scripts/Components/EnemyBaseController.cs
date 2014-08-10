@@ -7,14 +7,9 @@ namespace Scripts.Components
 {
     public class EnemyBaseController : ProjectileTargetController
     {
-        public string Id
-        {
-            get { return ViewModel.Id; }
-        }
-
         private EnemyBaseViewModel _viewModel;
         private Animator _animator;
-
+        public Transform ProjectileRooTransform;
 
         protected override void OnSetup()
         {
@@ -22,6 +17,8 @@ namespace Scripts.Components
 
             _viewModel = ViewModel as EnemyBaseViewModel;
             _animator = GetComponent<Animator>();
+
+            ProjectileRooTransform = transform.FindChild("ProjectileRoot");
 
             StartCoroutine(Walking());
         }
@@ -44,19 +41,21 @@ namespace Scripts.Components
             collider.enabled = false;
             _animator.SetBool("IsDead", true);
 
-            foreach (var projectile in _projectiles)
-            {
-                Destroy(projectile.gameObject);
-            }
+            foreach (var projectileController in _projectiles)
+                projectileController.OnDeath();
 
-            StartCoroutine(DelayedDeath(1f));
+            StartCoroutine(DelayedDeath(2f));
         }
 
-        private readonly List<Transform> _projectiles = new List<Transform>();
-        public void AttachProjectile(Transform projectile)
+        private readonly List<ProjectileController> _projectiles = new List<ProjectileController>();
+        public void AttachProjectile(ProjectileController projectile)
         {
-            projectile.parent = transform;
-            projectile.localPosition = Vector3.up;
+            if (ProjectileRooTransform != null)
+            {
+                var projectileTransform = projectile.transform;
+                projectileTransform.parent = ProjectileRooTransform;
+                projectileTransform.localPosition = Vector3.zero;
+            }
             _projectiles.Add(projectile);
         }
     }

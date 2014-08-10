@@ -7,11 +7,13 @@ namespace Scripts.ViewModels
 {
     public class ProjectileViewModel : ObjectViewModel, IDamageEnemies
     {
-        private ProjectileModel _model;
+        private readonly ProjectileModel _model;
+        private readonly ShooterViewModel _parent;
 
-        public ProjectileViewModel(ProjectileModel model, BaseViewModel parent) : base(model, parent)
+        public ProjectileViewModel(ProjectileModel model, ShooterViewModel parent) : base(model, parent)
         {
             _model = model;
+            _parent = parent;
         }
 
         public System.Action<ObjectView, ObjectView> OnShootAction;
@@ -28,6 +30,7 @@ namespace Scripts.ViewModels
             
             Root.DamageEnemy(enemyId, damage);
         }
+
 
         private float CalculateDamage()
         {
