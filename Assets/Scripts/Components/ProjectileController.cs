@@ -8,7 +8,7 @@ namespace Scripts.Components
     {
         public Action<string> OnHit;
         public Action OnDeath;
-
+        public float AoE;
 
         public void Shoot(Transform target)
         {
@@ -37,6 +37,24 @@ namespace Scripts.Components
             var controller = collisionInfo.gameObject.GetComponent<ProjectileTargetController>();
             if (controller != null)
             {
+                if (AoE > 1)
+                {
+                    var aoE = Instantiate(Resources.Load("Projectiles/AoE")) as GameObject;
+                    aoE.layer = gameObject.layer;
+                    var currentPosition = transform.position;
+                    currentPosition.y = 0;
+                    aoE.transform.position = currentPosition;
+                    aoE.transform.localScale = Vector3.one*AoE/2f;
+                    var rb = aoE.AddComponent<Rigidbody>();
+                    rb.constraints = RigidbodyConstraints.FreezeAll;
+                    
+                    var aoEController = aoE.AddComponent<AoEController>();
+                    aoEController.Setup(View);
+                    aoEController.OnHit = OnHit;
+
+                    aoE.AddComponent<SphereCollider>();
+                }
+
                 _isHit = true;
 
                 rigidbody.isKinematic = true;

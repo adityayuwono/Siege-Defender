@@ -19,6 +19,8 @@ namespace Scripts.Views
             var projectile = AttachController<ProjectileController>();
             projectile.OnHit += _viewModel.DamageEnemy;
             projectile.OnDeath += _viewModel.Destroy;
+            projectile.AoE = _viewModel.AoE;
+
 
             projectile.Shoot(target.GameObject.transform);
         }

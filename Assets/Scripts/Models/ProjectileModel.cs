@@ -8,6 +8,20 @@ namespace Scripts.Models
     public class ProjectileModel : ObjectModel
     {
         [XmlAttribute]
+        public string BulletAssetId { get; set; }
+
+
+        [XmlAttribute][DefaultValue("1")]
+        public string Damage { get; set; }
+
+        [XmlAttribute][DefaultValue(1f)]
+        public float RoF { get; set; }
+
+        [XmlAttribute][DefaultValue(0)]
+        public float AoE { get; set; }
+
+
+        [XmlAttribute]
         [DefaultValue(-1)]
         public int Ammunition { get; set; }
 
@@ -15,17 +29,6 @@ namespace Scripts.Models
         [DefaultValue(3f)]
         public float ReloadTime { get; set; }
 
-
-        [XmlAttribute]
-        [DefaultValue("1")]
-        public string Damage { get; set; }
-
-        [XmlAttribute]
-        [DefaultValue(1f)]
-        public float RoF { get; set; }
-
-        [XmlAttribute]
-        public string BulletAssetId { get; set; }
 
         public ProjectileModel()
         {

@@ -38,5 +38,12 @@ namespace Scripts.ViewModels
 
             return currentDamage;
         }
+
+
+
+        public float AoE
+        {
+            get { return _model.AoE; }
+        }
     }
 }
