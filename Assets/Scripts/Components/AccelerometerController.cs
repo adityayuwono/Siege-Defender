@@ -7,13 +7,16 @@ namespace Scripts.Components
     /// </summary>
     public class AccelerometerController : BaseController
     {
+        // We need to keep track of the rotation on our own in Unity3d
         private float _yRotationAngle = 0f;
+
         private void Update()
         {
             var xClamped = -Input.acceleration.z/2f;
-            var xAngle = 45 + (xClamped*10f);
+            var xAngle = 35f + (xClamped*30f);
 
-            var yClamped = Input.acceleration.x*75f;
+            // Between 90 to the left, and 90 to the right
+            var yClamped = Input.acceleration.x*90f;
             _yRotationAngle += (yClamped - _yRotationAngle)*Time.deltaTime;
             
             transform.eulerAngles += (new Vector3(xAngle, 0, 0) - transform.eulerAngles) * Time.deltaTime;
