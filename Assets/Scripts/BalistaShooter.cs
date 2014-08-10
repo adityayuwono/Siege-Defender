@@ -31,10 +31,11 @@ namespace Scripts
 
             IoCContainer.RegisterFor<SceneViewModel>().TypeOf<BaseView>().To<SceneView>();
             IoCContainer.RegisterFor<ElementViewModel>().TypeOf<BaseView>().To<ElementView>();
-
+            IoCContainer.RegisterFor<PlayerHitboxViewModel>().TypeOf<BaseView>().To<PlayerHitboxView>();
 
             IoCContainer.RegisterFor<PlayerModel>().TypeOf<ElementViewModel>().To<PlayerViewModel>();
             IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<ElementViewModel>().To<EnemyManagerViewModel>();
+            IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<ElementViewModel>().To<PlayerHitboxViewModel>();
 
             base.MapInjections();
         }
