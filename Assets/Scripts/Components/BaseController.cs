@@ -6,13 +6,13 @@ namespace Scripts.Components
 {
     public class BaseController : MonoBehaviour
     {
-        protected ObjectViewModel View { get; private set; }
+        protected ObjectViewModel ViewModel { get; private set; }
 
         private bool _isSet;
-        public void Setup(ObjectViewModel view)
+        public void Setup(ObjectViewModel viewModel)
         {
             _isSet = true;
-            View = view;
+            ViewModel = viewModel;
 
             OnSetup();
         }

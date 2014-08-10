@@ -11,7 +11,7 @@ namespace Scripts.Components
         {
             base.OnSetup();
 
-            var iDamageEnemies = View as IDamageEnemies;
+            var iDamageEnemies = ViewModel as IDamageEnemies;
             if (iDamageEnemies != null)
                 OnHit = iDamageEnemies.DamageEnemy;
         }

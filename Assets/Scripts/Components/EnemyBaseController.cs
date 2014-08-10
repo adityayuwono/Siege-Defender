@@ -9,7 +9,7 @@ namespace Scripts.Components
     {
         public string Id
         {
-            get { return View.Id; }
+            get { return ViewModel.Id; }
         }
 
         private EnemyBaseViewModel _viewModel;
@@ -20,7 +20,7 @@ namespace Scripts.Components
         {
             base.OnSetup();
 
-            _viewModel = View as EnemyBaseViewModel;
+            _viewModel = ViewModel as EnemyBaseViewModel;
             _animator = GetComponent<Animator>();
 
             StartCoroutine(Walking());

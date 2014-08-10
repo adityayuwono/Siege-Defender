@@ -21,7 +21,7 @@ namespace Scripts.Components
         {
             base.OnSetup();
 
-            _viewModel = View as TargetViewModel;
+            _viewModel = ViewModel as TargetViewModel;
 
             _crosshairImage = Resources.Load<Texture2D>("GUIs/Crosshair");
 

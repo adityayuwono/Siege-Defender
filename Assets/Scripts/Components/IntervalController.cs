@@ -12,7 +12,7 @@ namespace Scripts.Components
         {
             base.OnSetup();
 
-            var viewModel = View as IntervalViewModel;
+            var viewModel = ViewModel as IntervalViewModel;
             _interval = viewModel.Interval;
         }
 

@@ -10,7 +10,7 @@ namespace Scripts.Components
         {
             base.OnSetup();
 
-            _viewModel = View as ShooterViewModel;
+            _viewModel = ViewModel as ShooterViewModel;
             _viewModel.IsShooting.OnChange += OnShootingChanged;
         }
 

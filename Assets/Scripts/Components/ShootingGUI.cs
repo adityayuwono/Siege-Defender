@@ -11,7 +11,7 @@ namespace Scripts.Components
         {
             base.OnSetup();
 
-            _shooterView = View as ShooterViewModel;
+            _shooterView = ViewModel as ShooterViewModel;
             
             _clickArea = new Rect(
                 (Screen.width * _shooterView.Index) - (_shooterView.Index * Screen.height * Values.GUI_CIRCLE_SIZE_F),

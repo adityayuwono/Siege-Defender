@@ -48,7 +48,7 @@ namespace Scripts.Components
                     rb.constraints = RigidbodyConstraints.FreezeAll;
                     
                     var aoEController = aoE.AddComponent<AoEController>();
-                    aoEController.Setup(View);
+                    aoEController.Setup(ViewModel);
                     aoEController.OnHit = OnHit;
 
                     aoE.AddComponent<SphereCollider>();
