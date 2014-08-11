@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Components
@@ -13,12 +12,11 @@ namespace Scripts.Components
             base.OnSetup();
 
             renderer.enabled = true;
+            StartCoroutine(DelayedDeath(0.5f));
         }
 
         private void OnCollisionEnter(Collision collisionInfo)
         {
-            StartCoroutine(DelayedDeath(0.5f));
-
             var controller = collisionInfo.gameObject.GetComponent<ProjectileTargetController>();
             if (controller != null)
             {

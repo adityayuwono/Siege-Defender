@@ -20,7 +20,6 @@ namespace Scripts.ViewModels
             var enemyModelToCopy = Root.GetEnemy(_model.EnemyId);
 
             var enemyModel = Copier.CopyAs<EnemyBaseModel>(enemyModelToCopy);
-            enemyModel.Type = enemyModel.Id;
             enemyModel.Id = Guid.NewGuid().ToString();
 
             var newEnemy = new EnemyBaseViewModel(enemyModel, _parent);

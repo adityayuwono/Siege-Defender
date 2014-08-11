@@ -8,7 +8,7 @@ namespace Scripts.Components
     public class AccelerometerController : BaseController
     {
         // We need to keep track of the rotation on our own in Unity3d
-        private float _yRotationAngle = 0f;
+        private float _yRotationAngle;
 
         private void Update()
         {

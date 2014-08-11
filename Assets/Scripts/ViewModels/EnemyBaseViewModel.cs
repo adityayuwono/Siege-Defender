@@ -1,5 +1,4 @@
-﻿using System.Security;
-using Scripts.Models;
+﻿using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
@@ -34,6 +33,5 @@ namespace Scripts.ViewModels
         #endregion
 
         public float Speed { get { return _model.Speed; } }
-        public string Type { get { return _model.Type; } }
     }
 }

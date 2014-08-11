@@ -7,11 +7,11 @@ namespace Scripts.ViewModels
 {
     public class BaseViewModel : IBase
     {
-        public System.Action OnShow;
-        public System.Action OnHide;
+        public Action OnShow;
+        public Action OnHide;
 
         private readonly BaseModel _model;
-        private BaseViewModel _parent;
+        private readonly BaseViewModel _parent;
         protected BaseViewModel(BaseModel model, BaseViewModel parent)
         {
             _model = model;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Scripts.Components
     {
         private EnemyBaseViewModel _viewModel;
         private Animator _animator;
-        public Transform ProjectileRooTransform;
+        private Transform _projectileRooTransform;
 
         protected override void OnSetup()
         {
@@ -18,7 +19,7 @@ namespace Scripts.Components
             _viewModel = ViewModel as EnemyBaseViewModel;
             _animator = GetComponent<Animator>();
 
-            ProjectileRooTransform = transform.FindChild("ProjectileRoot");
+            _projectileRooTransform = transform.FindChildRecursivelyBreadthFirst("ProjectileRoot");
 
             StartCoroutine(Walking());
         }
@@ -50,10 +51,10 @@ namespace Scripts.Components
         private readonly List<ProjectileController> _projectiles = new List<ProjectileController>();
         public void AttachProjectile(ProjectileController projectile)
         {
-            if (ProjectileRooTransform != null)
+            if (_projectileRooTransform != null)
             {
                 var projectileTransform = projectile.transform;
-                projectileTransform.parent = ProjectileRooTransform;
+                projectileTransform.parent = _projectileRooTransform;
                 projectileTransform.localPosition = Vector3.zero;
             }
             _projectiles.Add(projectile);

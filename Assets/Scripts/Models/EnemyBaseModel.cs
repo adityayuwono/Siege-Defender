@@ -6,7 +6,6 @@ namespace Scripts.Models
     [Serializable]
     public class EnemyBaseModel : ObjectModel
     {
-        public string Type { get; set; }
         [XmlAttribute]
         public decimal Limit { get; set; }
 

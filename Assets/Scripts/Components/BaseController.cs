@@ -34,15 +34,6 @@ namespace Scripts.Components
             IsDead = true;
             OnKilled();
         }
-        public void KillImmediate()
-        {
-            if (IsDead) return;
-
-            IsDead = true;
-
-            ClearEvents();
-            DelayedDeath(0f);
-        }
 
 
         protected virtual void OnKilled()

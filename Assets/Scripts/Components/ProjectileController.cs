@@ -31,11 +31,17 @@ namespace Scripts.Components
             Debug.DrawLine(transform.position, target.position);
 
             var direction = new Vector3(Random.Range(-0.04f, 0.04f), Random.Range(-0.02f, 0.02f), 1);
-            var distanceToTarget = Vector3.Distance(target.position, transform.position);
             Rigidbody.AddRelativeForce(direction * 5000f, ForceMode.Acceleration);
-            Rigidbody.AddRelativeTorque(Vector3.right * (50f - distanceToTarget) * 0.05f, ForceMode.Impulse);
         }
 
+        private void Update()
+        {
+            if (_isHit || IsDead)
+                return;
+
+            if (transform.position.magnitude > 1000f)
+                OnDeath();
+        }
 
         private bool _isHit;
         private void OnCollisionEnter(Collision collisionInfo)

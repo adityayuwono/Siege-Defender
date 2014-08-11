@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Scripts.Models;
-using UnityEngine;
 
 namespace Scripts.ViewModels
 {

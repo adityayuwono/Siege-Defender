@@ -1,4 +1,5 @@
-﻿using Scripts.Helpers;
+﻿using System.Linq;
+using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 
@@ -38,23 +39,15 @@ namespace Scripts.Components
         {
             if (Input.touches.Length > 0)
             {
-                var isShooting = false;
-                for (var i = 0; i < Input.touches.Length; i++)
-                {
-                    var touch = Input.touches[i];
-                    if (_clickCheckArea.Contains(touch.position))
-                    {
-                        isShooting = true;
-                        _shooterView.StartShooting();
-                        break;
-                    }
-                }
-
-                if (!isShooting)
+                // If Android
+                if (Input.touches.Any(touch => _clickCheckArea.Contains(touch.position)))
+                    _shooterView.StartShooting();
+                else
                     _shooterView.StopShooting();
             }
             else
             {
+                // If Mouse, for testing purposes only
                 if (Input.GetMouseButton(0))
                     _shooterView.StartShooting();
                 else

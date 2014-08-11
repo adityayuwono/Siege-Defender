@@ -8,5 +8,7 @@
         {
             get { return GUI_CROSSHAIR_SIZE_F/2f; }
         }
+
+        public const int CROSSHAIR_LAYERMASK = ~(1 << 9);
     }
 }

@@ -5,7 +5,7 @@ namespace Scripts.Components
 {
     public class DamageEnemyController : RigidbodyController
     {
-        public Action<string> OnHit;
+        protected Action<string> OnHit;
 
         protected override void OnSetup()
         {
