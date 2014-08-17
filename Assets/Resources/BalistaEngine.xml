@@ -1,7 +1,9 @@
 <Engine>
 	<Projectiles>
-		<Projectile Id="WoodenBalista" Damage="4-5" AssetId="Projectiles/WoodenBalista" RoF="0.1" Ammunition="100" />
-		<Projectile Id="FireBall" Damage="8-11" AssetId="Projectiles/FireBall" RoF="0.5" Ammunition="0" AoE="20" />
+		<Projectile Id="WoodenBalista" Damage="4-5" AssetId="Projectiles/WoodenBalista" RoF="0.1" Ammunition="100" Accuracy="1" />
+		<Projectile Id="FireBall" Damage="8-11" AssetId="Projectiles/FireBall" RoF="0.5" Ammunition="0" Accuracy="1">
+			<AoE AssetId="AoE" Radius="20" Damage="5-7" />
+		</Projectile>
 
 		<Projectile Id="IronBall" Damage="100" AssetId="Projectiles/IronBall" RoF="2" />
 	</Projectiles>
@@ -9,11 +11,11 @@
 	<Enemies>
 		<Enemy Id="BoxDemon" 	AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" />
 		<Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1" />
-		<Enemy Id="Boss" 		AssetId="Enemies/BossBoxGoblin" 	Health="250" 	Speed="0.3" />
+		<Enemy Id="Boss" 		AssetId="Enemies/RedGoblin" 	Health="250" 	Speed="0.3" />
 	</Enemies>
 
 	<Levels>
-		<Level Id="Level1" Interval="1">
+		<Level Id="Level1" Interval="0.5">
 			<SpawnSequence>
 				<Spawn EnemyId="BoxDemon" />
 				<Spawn EnemyId="BoxDemon" />
@@ -110,6 +112,8 @@
 
 	<Scene Id="Limbo" AssetId="Scenes/Limbo">
 		<Elements>
+			<Element AssetId="Ground" />
+
 			<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" LevelId="Level1" />
 
 			<PlayerHitbox AssetId="PlayerHealth" />

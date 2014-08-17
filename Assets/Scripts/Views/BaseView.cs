@@ -5,12 +5,12 @@ namespace Scripts.Views
     public class BaseView : IBase
     {
         private readonly ViewModels.BaseViewModel _viewModel;
-        protected readonly BaseView Parent;
+        private readonly BaseView _parent;
 
         protected BaseView(ViewModels.BaseViewModel viewModel, BaseView parent)
         {
             _viewModel = viewModel;
-            Parent = parent;
+            _parent = parent;
 
             _viewModel.OnShow += OnShow;
             _viewModel.OnHide += OnHide;

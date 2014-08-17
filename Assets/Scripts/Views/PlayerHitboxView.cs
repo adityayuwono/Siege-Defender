@@ -1,4 +1,5 @@
 ﻿using Scripts.Components;
+using Scripts.Components.Debugs;
 using Scripts.ViewModels;
 
 namespace Scripts.Views
@@ -16,7 +17,7 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            AttachController<PlayerHealthController>();
+            GameObject.AddComponent<TriggerController>().OnCollision += _viewModel.CollideWithTarget;
         }
     }
 }

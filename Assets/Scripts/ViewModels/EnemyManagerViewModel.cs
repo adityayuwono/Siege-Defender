@@ -36,7 +36,7 @@ namespace Scripts.ViewModels
             var enemy = _spawnSequence[_spawnIndex].Spawn();
             _spawnIndex++;
 
-            enemy.OnDestroy += RemoveEnemy;
+            enemy.DoDestroy += RemoveEnemy;
             enemy.Activate();
 
             Root.RegisterEnemy(enemy);

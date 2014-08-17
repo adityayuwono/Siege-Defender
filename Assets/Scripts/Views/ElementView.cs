@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Views
 {
-    public class ElementView : ObjectView
+    public class ElementView : RigidbodyView
     {
         private readonly ElementViewModel _viewModel;
         private readonly ObjectView _parent;
@@ -16,7 +16,7 @@ namespace Scripts.Views
 
         protected override GameObject GetGameObject()
         {
-            return _parent.GameObject.transform.FindChild(_viewModel.AssetId).gameObject;
+            return _parent.Transform.FindChild(_viewModel.AssetId).gameObject;
         }
 
         protected override void SetPosition()

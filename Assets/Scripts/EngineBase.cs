@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
 using Scripts.ViewModels;
 using Scripts.Views;
+using UnityEngine;
 
 namespace Scripts
 {
@@ -73,6 +75,11 @@ namespace Scripts
         }
 
         public virtual void RemoveEnemy(ObjectViewModel enemy)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual Coroutine StartCoroutine(IEnumerator coroutine)
         {
             throw new System.NotImplementedException();
         }

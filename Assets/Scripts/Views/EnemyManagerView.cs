@@ -18,14 +18,14 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            AttachIntervalController<EnemyManagerController>();
-
             var colliders = GameObject.GetComponentsInChildren<Collider>();
             foreach (var collider in colliders)
             {
                 var minMaxRandom = new MinMaxRandom(collider.bounds);
                 _spawnPoints.Add(minMaxRandom);
             }
+
+            StartInterval();
         }
 
 

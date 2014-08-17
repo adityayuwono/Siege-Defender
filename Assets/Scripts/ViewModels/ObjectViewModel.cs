@@ -40,28 +40,29 @@ namespace Scripts.ViewModels
         {
             base.Hide();
 
-            foreach (var child in Children)
-                child.Hide();
+            //foreach (var child in Children)
+            //    child.Hide();
         }
 
         protected override void OnDeactivate()
         {
-            foreach (var child in Children)
-                child.Deactivate();
+            //foreach (var child in Children)
+            //    child.Deactivate();
 
             base.OnDeactivate();
         }
 
-        public Action<ObjectViewModel> OnDestroy;
-        public void Destroy()
+        public virtual float DeathDelay
         {
-            if (OnDestroy != null)
-                OnDestroy(this);
+            get { return 0f; }
+        }
+        public Action<ObjectViewModel> DoDestroy;
+        protected void Destroy()
+        {
+            if (DoDestroy != null)
+                DoDestroy(this);
 
-            OnDestroy = null;
-
-            Hide();
-            Deactivate();
+            DoDestroy = null;
         }
 
 

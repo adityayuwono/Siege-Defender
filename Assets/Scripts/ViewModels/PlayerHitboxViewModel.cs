@@ -3,7 +3,7 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class PlayerHitboxViewModel : ElementViewModel, IDamageEnemies
+    public class PlayerHitboxViewModel : ElementViewModel
     {
         private readonly PlayerHitboxModel _model;
 
@@ -12,9 +12,11 @@ namespace Scripts.ViewModels
             _model = model;
         }
 
-        public void DamageEnemy(string enemyId)
+        public void CollideWithTarget(ObjectViewModel obj)
         {
-            Root.DamageEnemy(enemyId, float.PositiveInfinity);
+            var enemyViewModel = obj as EnemyBaseViewModel;
+            if (enemyViewModel != null)
+                enemyViewModel.ApplyDamage(float.PositiveInfinity, null);
         }
     }
 }

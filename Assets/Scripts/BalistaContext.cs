@@ -15,7 +15,7 @@ namespace Scripts
 
             var engineModel = Deserializer<EngineModel>.GetObjectFromXML(EngineText.text);
 
-            var engine = new BalistaShooter(engineModel, null);
+            var engine = new BalistaShooter(engineModel, this);
             engine.MapInjections();
             engine.Activate();
             engine.Show();

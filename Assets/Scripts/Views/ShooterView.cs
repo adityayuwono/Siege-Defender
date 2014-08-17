@@ -19,12 +19,19 @@ namespace Scripts.Views
             _target = _viewModel.Root.GetView<ObjectView>(_viewModel.Target.Id);
             _source = _viewModel.Root.GetView<ObjectView>(_viewModel.Source.Id);
 
-            AttachIntervalController<ShootingController>();
+            _viewModel.IsShooting.OnChange += OnShootingChanged;
 
             var shootingUI = AttachController<ShootingGUI>();
             shootingUI.Setup(_viewModel);
         }
 
+        private void OnShootingChanged()
+        {
+            if (_viewModel.IsShooting.GetValue())
+                StartInterval();
+            else
+                StopInterval();
+        }
 
         private ObjectView _target;
         private ObjectView _source;

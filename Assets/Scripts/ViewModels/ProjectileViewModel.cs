@@ -1,38 +1,35 @@
-﻿using Scripts.Interfaces;
+﻿using System;
+using Scripts.Helpers;
 using Scripts.Models;
 using Scripts.Views;
-using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scripts.ViewModels
 {
-    public class ProjectileViewModel : ObjectViewModel, IDamageEnemies
+    public class ProjectileViewModel : ProjectileBaseViewModel
     {
         private readonly ProjectileModel _model;
-        private readonly ShooterViewModel _parent;
 
         public ProjectileViewModel(ProjectileModel model, ShooterViewModel parent) : base(model, parent)
         {
             _model = model;
-            _parent = parent;
         }
 
-        public System.Action<ObjectView, ObjectView> OnShootAction;
+        public Action<ObjectView, ObjectView> DoShooting;
+        public readonly Property<bool> IsKinematic = new Property<bool>(); 
 
         public void Shoot(ObjectView source, ObjectView target)
         {
-            if (OnShootAction != null)
-                OnShootAction(source, target);
+            if (DoShooting != null)
+                DoShooting(source, target);
         }
 
-        public void DamageEnemy(string enemyId)
+        public override float DeathDelay
         {
-            var damage = CalculateDamage();
-            
-            Root.DamageEnemy(enemyId, damage);
+            get { return 1f; }
         }
 
-
-        private float CalculateDamage()
+        protected override float CalculateDamage()
         {
             var splitDamage = _model.Damage.Split('-');
             var currentDamage = float.Parse(splitDamage[0]);
@@ -43,11 +40,31 @@ namespace Scripts.ViewModels
             return currentDamage;
         }
 
-
-
-        public float AoE
+        public override void CollideWithTarget(ObjectViewModel obj)
         {
-            get { return _model.AoE; }
+            IsKinematic.SetValue(true);
+
+            if (_model.AoE != null)
+            {
+                var aoeVM = new AoEViewModel(_model.AoE, this);
+                aoeVM.Activate();
+                aoeVM.Show();
+            }
+
+            var enemyViewModel = obj as EnemyBaseViewModel;
+            if (enemyViewModel != null)
+            {
+                enemyViewModel.ApplyDamage(CalculateDamage(), this);
+
+                Hide();
+                Deactivate();
+            }
+            else
+            {
+                Hide();
+                Destroy();
+                Deactivate();
+            }
         }
     }
 }

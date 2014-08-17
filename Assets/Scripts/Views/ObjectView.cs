@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using Scripts.Components;
 using Scripts.Helpers;
 using Scripts.ViewModels;
@@ -16,11 +16,10 @@ namespace Scripts.Views
             _viewModel = viewModel;
             _parent = parent;
 
-            _viewModel.OnDestroy += DestroyGameObject;
+            _viewModel.DoDestroy += DestroyGameObject;
         }
 
         private GameObject _gameObject;
-
         public GameObject GameObject
         {
             get
@@ -32,14 +31,15 @@ namespace Scripts.Views
             }
             private set { _gameObject = value; }
         }
+        public Transform Transform;
 
-        protected readonly List<BaseController> Controllers = new List<BaseController>();
 
         protected override void OnShow()
         {
             GameObject = GetGameObject();
-            
+            Transform = GameObject.transform;
 
+            GameObject.AddComponent<ViewModelController>().ViewModel = _viewModel;
             
             Transform parentTransform = null;
             if (_parent == null || _parent.GameObject == null)
@@ -64,32 +64,31 @@ namespace Scripts.Views
             GameObject.transform.localPosition = _viewModel.Position;
         }
 
-        protected override void OnHide()
-        {
-            foreach (var controller in Controllers)
-                controller.ClearEvents();
 
-            Controllers.Clear();
 
-            base.OnHide();
-        }
-
-        protected virtual T AttachController<T>() where T : BaseController
+        protected T AttachController<T>() where T : BaseController
         {
             var controller = GameObject.AddComponent<T>();
-            Controllers.Add(controller);
             controller.Setup(_viewModel);
 
             return controller;
         }
 
+
+
+        private IEnumerator DelayedDeath(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            Object.Destroy(GameObject);
+            GameObject = null;
+        }
         private void DestroyGameObject(ObjectViewModel viewModel)
         {
-            foreach (var baseController in Controllers)
-                baseController.Kill();
-            Controllers.Clear();
-
-            GameObject = null;
+            OnDestroyGameObject();
+        }
+        protected virtual void OnDestroyGameObject()
+        {
+            _viewModel.Root.StartCoroutine(DelayedDeath(_viewModel.DeathDelay));
         }
     }
 }

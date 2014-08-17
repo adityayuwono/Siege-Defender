@@ -1,4 +1,6 @@
-﻿using Scripts.Models;
+﻿using System;
+using System.Collections.Generic;
+using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
@@ -18,11 +20,23 @@ namespace Scripts.ViewModels
             Health = _model.Health;
         }
 
-        #region Health
-        public float Health { get; private set; }
-
-        public void ApplyDamage(float damage)
+        public override float DeathDelay
         {
+            get { return 2f; }
+        }
+
+        #region Actions
+        public Action<ProjectileBaseViewModel> DoAttach; 
+        #endregion
+
+        #region Health
+
+        private float Health { get; set; }
+        public void ApplyDamage(float damage, ProjectileBaseViewModel source)
+        {
+            if (source != null)
+                AttachProjectile(source);
+
             if (Health > 0)
             {
                 Health -= damage;
@@ -30,6 +44,15 @@ namespace Scripts.ViewModels
                     Destroy();
             }
         }
+
+        private readonly List<ProjectileBaseViewModel> _projectiles = new List<ProjectileBaseViewModel>();
+
+        private void AttachProjectile(ProjectileBaseViewModel source)
+        {
+            _projectiles.Add(source);
+            DoAttach(source);
+        }
+
         #endregion
 
         public float Speed { get { return _model.Speed; } }
