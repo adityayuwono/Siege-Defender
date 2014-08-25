@@ -1,5 +1,6 @@
 ﻿using Scripts.Components;
 using Scripts.ViewModels;
+using UnityEngine;
 
 namespace Scripts.Views
 {
@@ -39,7 +40,7 @@ namespace Scripts.Views
         protected override void IntervalInvoked()
         {
             var projectile = _viewModel.SpawnProjectile();
-            projectile.Show();
+
             projectile.Shoot(_source, _target);
         }
     }

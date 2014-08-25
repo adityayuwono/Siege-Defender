@@ -7,17 +7,13 @@ namespace Scripts.Models
     public class EngineModel : BaseModel
     {
         [XmlArray]
-        [XmlArrayItem(ElementName = "Projectile", Type = typeof(ProjectileModel))]
-        public List<ProjectileModel> Projectiles { get; set; }
-
-        [XmlArray]
         [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBaseModel))]
-        public List<EnemyBaseModel> Enemies { get; set; }
+        [XmlArrayItem(ElementName = "Projectile", Type = typeof(ProjectileModel))]
+        public List<ObjectModel> Objects { get; set; }
 
         [XmlArray]
         [XmlArrayItem(ElementName = "Level", Type = typeof(LevelModel))]
         public List<LevelModel> Levels { get; set; }
-
 
 
         [XmlElement]

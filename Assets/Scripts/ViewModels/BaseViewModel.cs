@@ -7,21 +7,21 @@ namespace Scripts.ViewModels
 {
     public class BaseViewModel : IBase
     {
-        public Action OnShow;
-        public Action OnHide;
-
         private readonly BaseModel _model;
-        private readonly BaseViewModel _parent;
+        public BaseViewModel Parent { get; protected set; }
         protected BaseViewModel(BaseModel model, BaseViewModel parent)
         {
             _model = model;
-            _parent = parent;
+            Parent = parent;
 
             if (string.IsNullOrEmpty(_model.Id))
                 _model.Id = Guid.NewGuid().ToString();
         }
 
-
+        #region Actions
+        public Action OnShow;
+        public Action OnHide;
+        #endregion
 
         #region Activation
         private bool _isActive;
@@ -51,7 +51,7 @@ namespace Scripts.ViewModels
         private Views.BaseView _view;
         protected virtual void OnLoad()
         {
-            _view = Root.IoCContainer.GetInstance<Views.BaseView>(GetType(), new object[] {this, _parent != null ? _parent._view : null});
+            _view = Root.IoCContainer.GetInstance<Views.BaseView>(GetType(), new object[] {this, Parent != null ? Parent._view : null});
             Root.RegisterView(this, _view);
         }
 
@@ -80,8 +80,13 @@ namespace Scripts.ViewModels
         #endregion
 
 
+        public T GetParent<T>() where T : BaseViewModel
+        {
+            var parent = Parent as T;
+            return parent ?? Parent.GetParent<T>();
+        }
 
-        public virtual EngineBase Root { get { return _parent.Root; } }
+        public virtual EngineBase Root { get { return Parent.Root; } }
 
         public string Id
         {

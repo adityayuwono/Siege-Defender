@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Views;
-using Scripts.Components;
-using Scripts.ViewModels;
+﻿using Scripts.ViewModels;
 using UnityEngine;
 
 namespace Scripts.Views
@@ -14,30 +12,32 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-        protected override void OnShow()
+        protected override void OnLoad()
         {
-            base.OnShow();
+            base.OnLoad();
 
             _viewModel.DoShooting += ShootProjectile;
             _viewModel.IsKinematic.OnChange += IsKinematic_OnChange;
         }
 
-        protected override void OnHide()
+        protected override void OnDestroy()
         {
-            _viewModel.DoShooting -= ShootProjectile;
             _viewModel.IsKinematic.OnChange -= IsKinematic_OnChange;
-            
-            base.OnHide();
+            _viewModel.DoShooting -= ShootProjectile;
+
+            base.OnDestroy();
         }
 
         private void ShootProjectile(ObjectView source, ObjectView target)
         {
+            Transform.position = source.Transform.position;
+
             var targetTransform = target.Transform;
             Transform.LookAt(targetTransform);
 
             // Randommize direction
-            var direction = new Vector3(Random.Range(-0.04f, 0.04f), Random.Range(-0.02f, 0.02f), 1);
-            Rigidbody.AddRelativeForce(direction*5000f, ForceMode.Acceleration);
+            var direction = new Vector3(Random.Range(-0.04f, 0.04f), Random.Range(-0.02f, 0.02f), 1f);
+            AddRelativeForce(direction*300f);
         }
 
         private void IsKinematic_OnChange()

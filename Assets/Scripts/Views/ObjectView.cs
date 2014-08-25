@@ -15,8 +15,6 @@ namespace Scripts.Views
         {
             _viewModel = viewModel;
             _parent = parent;
-
-            _viewModel.DoDestroy += DestroyGameObject;
         }
 
         private GameObject _gameObject;
@@ -36,29 +34,46 @@ namespace Scripts.Views
 
         protected override void OnShow()
         {
+            if (!_isLoaded)
+            {
+                _isLoaded = true;
+                OnLoad();
+            }
+            GameObject.SetActive(true);
+            SetPosition();
+        }
+
+        protected override void OnHide()
+        {
+            KillGameObject();
+
+            base.OnHide();
+        }
+
+        private bool _isLoaded;
+        protected virtual void OnLoad()
+        {
             GameObject = GetGameObject();
             Transform = GameObject.transform;
 
             GameObject.AddComponent<ViewModelController>().ViewModel = _viewModel;
-            
+
             Transform parentTransform = null;
             if (_parent == null || _parent.GameObject == null)
                 parentTransform = GameObject.Find("Context").transform;
             else
                 parentTransform = _parent.GameObject.transform;
 
-            
-            GameObject.transform.parent = parentTransform;
-            SetPosition();
-        }
 
+            GameObject.transform.parent = parentTransform;
+        }
+        protected virtual void OnDestroy() { }
         protected virtual GameObject GetGameObject()
         {
             var gameObject =_viewModel.Root.ResourceManager.GetGameObject(_viewModel.AssetId);
             gameObject.name += "_" + _viewModel.Id;
             return gameObject;
         }
-
         protected virtual void SetPosition()
         {
             GameObject.transform.localPosition = _viewModel.Position;
@@ -79,16 +94,16 @@ namespace Scripts.Views
         private IEnumerator DelayedDeath(float delay)
         {
             yield return new WaitForSeconds(delay);
-            Object.Destroy(GameObject);
-            GameObject = null;
+            OnDeath();
         }
-        private void DestroyGameObject(ObjectViewModel viewModel)
-        {
-            OnDestroyGameObject();
-        }
-        protected virtual void OnDestroyGameObject()
+        private void KillGameObject()
         {
             _viewModel.Root.StartCoroutine(DelayedDeath(_viewModel.DeathDelay));
+        }
+        protected virtual void OnDeath()
+        {
+            GameObject.SetActive(false);
+            _viewModel.InvokeOnObjectDeath();
         }
     }
 }

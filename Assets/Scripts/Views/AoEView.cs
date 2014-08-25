@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Views;
-using Scripts.ViewModels;
+﻿using Scripts.ViewModels;
 using UnityEngine;
 
 namespace Scripts.Views
@@ -18,8 +17,7 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            Rigidbody.isKinematic = false;
+            Freeze();
 
             GameObject.renderer.enabled = true;
             

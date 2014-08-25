@@ -6,7 +6,7 @@ namespace Scripts.ViewModels
     public class ProjectileBaseViewModel : ObjectViewModel
     {
         private readonly ProjectileModel _model;
-        public ProjectileBaseViewModel(ProjectileModel model, BaseViewModel parent) : base(model, parent)
+        public ProjectileBaseViewModel(ProjectileModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }
@@ -22,9 +22,6 @@ namespace Scripts.ViewModels
             return currentDamage;
         }
 
-        public virtual void CollideWithTarget(ObjectViewModel obj)
-        {
-            
-        }
+        public virtual void CollideWithTarget(ObjectViewModel obj) { }
     }
 }

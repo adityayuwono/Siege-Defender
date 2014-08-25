@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace Scripts.Helpers
@@ -41,6 +40,19 @@ namespace Scripts.Helpers
             }
 
             return null;
+        }
+
+        public static Vector3 ParseVector3(string string3)
+        {
+            var splitted = string3.Split(',');
+            var splitFloat = new float[splitted.Length];
+
+            for (var i = 0; i < splitted.Length; i++)
+            {
+                splitFloat[i] = float.Parse(splitted[i]);
+            }
+
+            return new Vector3(splitFloat[0], splitFloat[1], splitFloat[2]);
         }
     }
 }

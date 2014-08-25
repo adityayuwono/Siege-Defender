@@ -4,11 +4,11 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class ShooterViewModel : IntervalViewModel
+    public class ShooterViewModel : IntervalViewModel<ProjectileViewModel>
     {
         private readonly ShooterModel _model;
 
-        private readonly ProjectileModel _projectileModel;
+        private ProjectileModel _projectileModel;
 
         public ShooterViewModel(ShooterModel model, PlayerViewModel parent) : base(model, parent)
         {
@@ -22,9 +22,6 @@ namespace Scripts.ViewModels
                 throw new EngineException(this, "Target Model is null");
 
 
-
-            _projectileModel = Root.GetProjectileModel(_model.ProjectileId);
-            
             Source = new ObjectViewModel(_model.Source, this);
             Children.Add(Source);
 
@@ -46,13 +43,18 @@ namespace Scripts.ViewModels
         public ObjectViewModel Target { get; private set; }
 
 
+        protected override void OnLoad()
+        {
+            base.OnLoad();
+
+            _projectileModel = Root.GetObjectModel(_model.ProjectileId) as ProjectileModel;
+        }
+
         public ProjectileViewModel SpawnProjectile()
         {
-            var duplicateProjectile = Copier.CopyAs<ProjectileModel>(_projectileModel);
-            duplicateProjectile.Id = Guid.NewGuid().ToString();
-
-            var projectile = new ProjectileViewModel(duplicateProjectile, this);
+            var projectile = GetObject<ProjectileViewModel>(_model.ProjectileId);
             projectile.Activate();
+            projectile.Show();
 
             return projectile;
         }

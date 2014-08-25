@@ -7,6 +7,9 @@ namespace Scripts.Models
     [Serializable]
     public class ObjectModel : BaseModel
     {
+        // Not XML Property, this is set when we spawn it
+        public string Type;
+
         [XmlAttribute]
         public string AssetId { get; set; }
 

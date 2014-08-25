@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
@@ -18,18 +19,36 @@ namespace Scripts.Views
             _viewModel.DoAttach += AttachProjectileToSelf;
         }
 
-        private Animator Animator;
+
+
+        private Animator _animator;
+        
+        protected override void OnLoad()
+        {
+            base.OnLoad();
+            _projectileRooTransform = Transform.FindChildRecursivelyBreadthFirst("ProjectileRoot");
+            _animator = GameObject.GetComponent<Animator>();
+        }
         protected override void OnShow()
         {
             base.OnShow();
 
+            _isDead = false;
+            _animator.SetBool("IsDead", false);
+
             GameObject.transform.position = _parent.GetRandomSpawnPoint();
-            _projectileRooTransform = Transform.FindChildRecursivelyBreadthFirst("ProjectileRoot");
-
-            Animator = GameObject.GetComponent<Animator>();
-
             _viewModel.Root.StartCoroutine(Walking());
         }
+
+        protected override void OnHide()
+        {
+            _isDead = true;
+            _animator.SetBool("IsDead", true);
+
+            base.OnHide();
+        }
+
+
 
         private bool _isDead;
         private IEnumerator Walking()
@@ -51,14 +70,6 @@ namespace Scripts.Views
                 projectileTransform.parent = _projectileRooTransform;
                 projectileTransform.localPosition = Vector3.zero;
             }
-        }
-
-        protected override void OnDestroyGameObject()
-        {
-            Collider.enabled = false;
-            _isDead = true;
-            Animator.SetBool("IsDead", true);
-            base.OnDestroyGameObject();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Scripts.ViewModels
         {
             base.Show();
 
-            Destroy();
+            //Destroy();
         }
 
         public override void CollideWithTarget(ObjectViewModel obj)

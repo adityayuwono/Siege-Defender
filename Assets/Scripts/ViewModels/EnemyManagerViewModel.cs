@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Scripts.Models;
+﻿using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class EnemyManagerViewModel : IntervalViewModel
+    public class EnemyManagerViewModel : IntervalViewModel<EnemyBaseViewModel>
     {
         private readonly EnemyManagerModel _model;
 
@@ -12,41 +11,26 @@ namespace Scripts.ViewModels
             _model = model;
 
             _levelModel = Root.GetLevel(_model.LevelId);
-            foreach (var spawnModel in _levelModel.SpawnSequence)
-            {
-                var spawnVM = new SpawnViewModel(spawnModel, this);
-                _spawnSequence.Add(spawnVM);
-            }
         }
 
-        private LevelModel _levelModel;
+        private readonly LevelModel _levelModel;
         public override float Interval
         {
             get { return _levelModel.Interval; }
         }
 
         private int _spawnIndex;
-        private readonly List<SpawnViewModel> _spawnSequence = new List<SpawnViewModel>();
-
-        public EnemyBaseViewModel SpawnEnemy()
+        public void SpawnEnemy()
         {
-            if (_spawnIndex >= _spawnSequence.Count)
+            if (_spawnIndex >= _levelModel.SpawnSequence.Count)
                 _spawnIndex = 0;
 
-            var enemy = _spawnSequence[_spawnIndex].Spawn();
+            var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
             _spawnIndex++;
 
-            enemy.DoDestroy += RemoveEnemy;
+            var enemy = GetObject<EnemyBaseViewModel>(enemyId);
             enemy.Activate();
-
-            Root.RegisterEnemy(enemy);
-
-            return enemy;
-        }
-
-        private void RemoveEnemy(ObjectViewModel enemy)
-        {
-            Root.RemoveEnemy(enemy);
+            enemy.Show();
         }
     }
 }

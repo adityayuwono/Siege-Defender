@@ -24,6 +24,9 @@ namespace Scripts
             IoCContainer = new IoCContainer();
             ResourceManager = new ResourcePooler();
 
+            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<ProjectileViewModel>().To<ProjectileViewModel>();
+            IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<EnemyBaseViewModel>().To<EnemyBaseViewModel>();
+
             IoCContainer.RegisterFor<ObjectViewModel>().TypeOf<BaseView>().To<ObjectView>();
             IoCContainer.RegisterFor<ShooterViewModel>().TypeOf<BaseView>().To<ShooterView>();
             IoCContainer.RegisterFor<TargetViewModel>().TypeOf<BaseView>().To<TargetView>();
@@ -54,33 +57,12 @@ namespace Scripts
         {
             base.OnActivate();
 
-            foreach (var projectileModel in _model.Projectiles)
-            {
-                _projectiles.Add(projectileModel.Id, projectileModel);
-            }
-
             var scene = new SceneViewModel(_model.Scene, this);
             scene.Activate();
             scene.Show();
         }
 
-        private readonly Dictionary<string, ProjectileModel> _projectiles = new Dictionary<string, ProjectileModel>(); 
-        public override ProjectileModel GetProjectileModel(string projectileId)
-        {
-            return _projectiles[projectileId];
-        }
 
-
-
-        public override EnemyBaseModel GetEnemy(string enemyId)
-        {
-            foreach (var enemyBaseModel in _model.Enemies)
-            {
-                if (enemyBaseModel.Id == enemyId)
-                    return enemyBaseModel;
-            }
-            throw new EngineException(this, string.Format("Enemy not found: {0}", enemyId));
-        }
 
         private readonly Dictionary<string, EnemyBaseViewModel> _enemies = new Dictionary<string, EnemyBaseViewModel>();
         public override void RegisterEnemy(EnemyBaseViewModel enemy)
@@ -97,10 +79,6 @@ namespace Scripts
             }
         }
 
-        public override void RemoveEnemy(ObjectViewModel enemy)
-        {
-            _enemies.Remove(enemy.Id);
-        }
 
 
         public override LevelModel GetLevel(string levelId)

@@ -40,6 +40,13 @@ namespace Scripts.ViewModels
             return currentDamage;
         }
 
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            IsKinematic.SetValue(false);
+        }
+
         public override void CollideWithTarget(ObjectViewModel obj)
         {
             IsKinematic.SetValue(true);
@@ -55,15 +62,10 @@ namespace Scripts.ViewModels
             if (enemyViewModel != null)
             {
                 enemyViewModel.ApplyDamage(CalculateDamage(), this);
-
-                Hide();
-                Deactivate();
             }
             else
             {
                 Hide();
-                Destroy();
-                Deactivate();
             }
         }
     }

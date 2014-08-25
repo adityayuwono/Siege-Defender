@@ -6,7 +6,7 @@ namespace Scripts.ViewModels
     {
         private readonly TargetModel _model;
 
-        public TargetViewModel(TargetModel model, BaseViewModel parent) : base(model, parent)
+        public TargetViewModel(TargetModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }

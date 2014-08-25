@@ -18,6 +18,8 @@ namespace Scripts.ViewModels
                 throw new EngineException(this, "No Asset defined");
         }
 
+
+
         protected readonly List<ObjectViewModel> Children = new List<ObjectViewModel>();
 
         protected override void OnActivate()
@@ -40,31 +42,47 @@ namespace Scripts.ViewModels
         {
             base.Hide();
 
-            //foreach (var child in Children)
-            //    child.Hide();
+            foreach (var child in Children)
+                child.Hide();
         }
 
         protected override void OnDeactivate()
         {
-            //foreach (var child in Children)
-            //    child.Deactivate();
+            foreach (var child in Children)
+                child.Deactivate();
 
             base.OnDeactivate();
         }
 
+
+        #region Death
+        /// <summary>
+        /// All things die eventually, we can only delay the inevitable
+        /// </summary>
         public virtual float DeathDelay
         {
             get { return 0f; }
         }
-        public Action<ObjectViewModel> DoDestroy;
-        protected void Destroy()
+        
+        public Action<ObjectViewModel> OnObjectDeath;
+        
+        public void InvokeOnObjectDeath()
         {
-            if (DoDestroy != null)
-                DoDestroy(this);
+            if (OnObjectDeath != null)
+                OnObjectDeath(this);
 
-            DoDestroy = null;
+            OnObjectDeath = null;
+
+            Deactivate();
         }
+        #endregion
 
+
+        #region Model Properties
+        public string Type
+        {
+            get { return _model.Type; }
+        }
 
         public string AssetId
         {
@@ -73,20 +91,8 @@ namespace Scripts.ViewModels
 
         public Vector3 Position
         {
-            get { return StringToVector3(_model.Position); }
+            get { return UnityExtension.ParseVector3(_model.Position); }
         }
-
-        protected Vector3 StringToVector3(string string3)
-        {
-            var splitted = string3.Split(',');
-            var splitFloat = new float[splitted.Length];
-
-            for (var i = 0; i < splitted.Length; i++)
-            {
-                splitFloat[i] = float.Parse(splitted[i]);
-            }
-
-            return new Vector3(splitFloat[0], splitFloat[1], splitFloat[2]);
-        }
+        #endregion
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
@@ -8,22 +7,30 @@ namespace Scripts.ViewModels
     {
         private readonly EnemyBaseModel _model;
 
-        public EnemyBaseViewModel(EnemyBaseModel model, BaseViewModel parent) : base(model, parent)
+        public EnemyBaseViewModel(EnemyBaseModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }
 
-        protected override void OnLoad()
+        protected override void OnActivate()
         {
-            base.OnLoad();
+            base.OnActivate();
 
             Health = _model.Health;
+        }
+
+        public override void Hide()
+        {
+            base.Hide();
+
+            Children.Clear();
         }
 
         public override float DeathDelay
         {
             get { return 2f; }
         }
+
 
         #region Actions
         public Action<ProjectileBaseViewModel> DoAttach; 
@@ -41,20 +48,20 @@ namespace Scripts.ViewModels
             {
                 Health -= damage;
                 if (Health <= 0)
-                    Destroy();
+                    Hide();
             }
         }
 
-        private readonly List<ProjectileBaseViewModel> _projectiles = new List<ProjectileBaseViewModel>();
-
         private void AttachProjectile(ProjectileBaseViewModel source)
         {
-            _projectiles.Add(source);
+            Children.Add(source);
             DoAttach(source);
         }
 
         #endregion
 
+        #region Model Properties
         public float Speed { get { return _model.Speed; } }
+        #endregion
     }
 }

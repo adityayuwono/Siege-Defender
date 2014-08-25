@@ -41,8 +41,7 @@ namespace Scripts.Views
 
         protected override void IntervalInvoked()
         {
-            var enemy = _viewModel.SpawnEnemy();
-            enemy.Show();
+            _viewModel.SpawnEnemy();
         }
     }
 

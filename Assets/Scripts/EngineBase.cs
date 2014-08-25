@@ -13,7 +13,7 @@ namespace Scripts
     {
         private EngineModel _model;
         
-        public EngineBase(EngineModel model, BaseViewModel parent) : base(model, parent)
+        public EngineBase(EngineModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }
@@ -57,6 +57,16 @@ namespace Scripts
         public virtual void DamageEnemy(string enemyId, float damage)
         {
             throw new System.NotImplementedException();
+        }
+
+        public ObjectModel GetObjectModel(string id)
+        {
+            foreach (var objectModel in _model.Objects)
+            {
+                if (objectModel.Id == id)
+                    return objectModel;
+            }
+            throw new EngineException(this, string.Format("ObjectModel not found, Id: {0}", id));
         }
 
         public virtual EnemyBaseModel GetEnemy(string enemyId)
