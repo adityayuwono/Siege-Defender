@@ -32,7 +32,7 @@ namespace Scripts.ViewModels
         {
             var enemyViewModel = targetObject as EnemyBaseViewModel;
             if (enemyViewModel != null)
-                enemyViewModel.ApplyDamage(CalculateDamage(), null);
+                enemyViewModel.ApplyDamage(CalculateDamage());
         }
 
         private Vector3 _position;

@@ -1,5 +1,4 @@
-﻿using Scripts.Components;
-using Scripts.Components.Debugs;
+﻿using Scripts.Components.Debugs;
 using Scripts.ViewModels;
 
 namespace Scripts.Views

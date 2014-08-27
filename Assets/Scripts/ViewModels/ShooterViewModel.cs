@@ -1,5 +1,4 @@
-﻿using System;
-using Scripts.Helpers;
+﻿using Scripts.Helpers;
 using Scripts.Models;
 using UnityEngine;
 

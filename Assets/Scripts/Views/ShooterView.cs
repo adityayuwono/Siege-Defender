@@ -1,6 +1,5 @@
 ﻿using Scripts.Components;
 using Scripts.ViewModels;
-using UnityEngine;
 
 namespace Scripts.Views
 {
