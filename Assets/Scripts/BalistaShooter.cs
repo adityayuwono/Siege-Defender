@@ -24,7 +24,8 @@ namespace Scripts
             IoCContainer = new IoCContainer();
             ResourceManager = new ResourcePooler();
 
-            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<ProjectileViewModel>().To<ProjectileViewModel>();
+            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<ProjectileBaseViewModel>().To<ProjectileViewModel>();
+            IoCContainer.RegisterFor<AoEModel>().TypeOf<ProjectileBaseViewModel>().To<AoEViewModel>();
             IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<EnemyBaseViewModel>().To<EnemyBaseViewModel>();
 
             IoCContainer.RegisterFor<ObjectViewModel>().TypeOf<BaseView>().To<ObjectView>();

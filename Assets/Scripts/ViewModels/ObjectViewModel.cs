@@ -38,19 +38,16 @@ namespace Scripts.ViewModels
                 child.Show();
         }
 
-        public override void Hide()
+        public override void Hide(string reason)
         {
-            base.Hide();
+            base.Hide(reason);
 
             foreach (var child in Children)
-                child.Hide();
+                child.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
         }
 
         protected override void OnDeactivate()
         {
-            foreach (var child in Children)
-                child.Deactivate();
-
             base.OnDeactivate();
         }
 
@@ -66,14 +63,14 @@ namespace Scripts.ViewModels
         
         public Action<ObjectViewModel> OnObjectDeath;
         
-        public void InvokeOnObjectDeath()
+        public void InvokeOnObjectDeath(string reason)
         {
             if (OnObjectDeath != null)
                 OnObjectDeath(this);
 
             OnObjectDeath = null;
 
-            Deactivate();
+            Deactivate(reason);
         }
         #endregion
 
@@ -89,7 +86,7 @@ namespace Scripts.ViewModels
             get { return _model.AssetId; }
         }
 
-        public Vector3 Position
+        public virtual Vector3 Position
         {
             get { return UnityExtension.ParseVector3(_model.Position); }
         }

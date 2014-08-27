@@ -2,6 +2,7 @@
 using Scripts.Helpers;
 using Scripts.Models;
 using Scripts.Views;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Scripts.ViewModels
@@ -9,10 +10,12 @@ namespace Scripts.ViewModels
     public class ProjectileViewModel : ProjectileBaseViewModel
     {
         private readonly ProjectileModel _model;
+        private readonly ShooterViewModel _parent;
 
         public ProjectileViewModel(ProjectileModel model, ShooterViewModel parent) : base(model, parent)
         {
             _model = model;
+            _parent = parent;
         }
 
         public Action<ObjectView, ObjectView> DoShooting;
@@ -44,28 +47,36 @@ namespace Scripts.ViewModels
         {
             base.OnActivate();
 
+            _hasCollided = false;
             IsKinematic.SetValue(false);
         }
 
-        public override void CollideWithTarget(ObjectViewModel obj)
+        public override Vector3 Position
         {
+            get { return Vector3.zero; }
+        }
+
+        private bool _hasCollided;
+        public override void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition)
+        {
+            // Need checking here because sometimes two collisions can happen very quickly
+            if (_hasCollided) return;
+
             IsKinematic.SetValue(true);
 
-            if (_model.AoE != null)
-            {
-                var aoeVM = new AoEViewModel(_model.AoE, this);
-                aoeVM.Activate();
-                aoeVM.Show();
-            }
+            // Spawn AoE if there are any Id defined
+            if (!string.IsNullOrEmpty(_model.AoEId))
+                _parent.SpawnAoE(_model.AoEId, collisionPosition);
 
-            var enemyViewModel = obj as EnemyBaseViewModel;
+            _hasCollided = true;
+            var enemyViewModel = targetObject as EnemyBaseViewModel;
             if (enemyViewModel != null)
             {
                 enemyViewModel.ApplyDamage(CalculateDamage(), this);
             }
             else
             {
-                Hide();
+                Hide("Hit Nothing");
             }
         }
     }

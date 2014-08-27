@@ -1,4 +1,5 @@
-﻿using Scripts.ViewModels;
+﻿using System.Collections;
+using Scripts.ViewModels;
 using UnityEngine;
 
 namespace Scripts.Views
@@ -6,8 +7,8 @@ namespace Scripts.Views
     public class AoEView : ProjectileBaseView
     {
         private readonly AoEViewModel _viewModel;
-        private readonly ProjectileView _parent;
-        public AoEView(AoEViewModel viewModel, ProjectileView parent) : base(viewModel, parent)
+        private readonly ShooterView _parent;
+        public AoEView(AoEViewModel viewModel, ShooterView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
             _parent = parent;
@@ -17,27 +18,23 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            Freeze();
-
             GameObject.renderer.enabled = true;
-            
             Transform.localScale = Vector3.one*_viewModel.Radius/2f;
             Transform.parent = null;
+
+            SetPosition();
+            Freeze();
         }
 
-        protected override void OnHide()
+        protected override void OnHide(string reason)
         {
-            base.OnHide();
+            _viewModel.Root.StartCoroutine(DelayedHiding(reason));
         }
 
-        protected override GameObject GetGameObject()
+        private IEnumerator DelayedHiding(string reason)
         {
-            return _parent.Transform.FindChild("AoE").gameObject;
-        }
-
-        protected override void SetPosition()
-        {
-            GameObject.transform.localPosition = Vector3.zero;
+            yield return new WaitForSeconds(_viewModel.DeathDelay);
+            base.OnHide(reason);
         }
     }
 }

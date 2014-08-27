@@ -40,12 +40,12 @@ namespace Scripts.Views
             _viewModel.Root.StartCoroutine(Walking());
         }
 
-        protected override void OnHide()
+        protected override void OnHide(string reason)
         {
             _isDead = true;
             _animator.SetBool("IsDead", true);
 
-            base.OnHide();
+            base.OnHide(reason);
         }
 
 

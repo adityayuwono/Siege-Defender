@@ -23,6 +23,6 @@ namespace Scripts.Views
 
 
         protected virtual void OnShow() { }
-        protected virtual void OnHide() { }
+        protected virtual void OnHide(string reason) { }
     }
 }

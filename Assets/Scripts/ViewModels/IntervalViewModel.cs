@@ -28,17 +28,19 @@ namespace Scripts.ViewModels
             return objectResult as TU;
         }
 
+        private int _objectCount;
+        private int ObjectCount { get { return _objectCount++; } }
         private T SpawnNewObject(string id)
         {
-            var bjectModelToCopy = Root.GetObjectModel(id);
-            var objectModel = Copier.CopyAs<ObjectModel>(bjectModelToCopy);
-            objectModel.Id = Guid.NewGuid().ToString();
+            var modelToCopy = Root.GetObjectModel(id);
+            var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
+            objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, objectModel.GetType(), ObjectCount);
             objectModel.Type = id;
             var newObject = Root.IoCContainer.GetInstance<T>(objectModel.GetType(), new Object[] {objectModel, this});
 
             if (newObject == null)
                 throw new EngineException(this, string.Format("Failed to instantiate {0}, {1}", objectModel.GetType(), typeof(T)));
-
+            
             return newObject;
         }
 

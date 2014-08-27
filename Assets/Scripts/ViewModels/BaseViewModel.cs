@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -20,11 +21,12 @@ namespace Scripts.ViewModels
 
         #region Actions
         public Action OnShow;
-        public Action OnHide;
+        public Action<string> OnHide;
         #endregion
 
         #region Activation
-        private bool _isActive;
+
+        protected bool _isActive { get; private set; }
         private bool _isLoaded;
         public void Activate()
         {
@@ -60,20 +62,20 @@ namespace Scripts.ViewModels
 
         #region Deactivation
 
-        public void Deactivate()
+        public void Deactivate(string reason)
         {
             if (!_isActive)
-                throw new EngineException(this, "Failed to Deactivate");
+                throw new EngineException(this, "Failed to Deactivate, Reason for deactivation "+reason);
 
             _isActive = false;
 
             OnDeactivate();
         }
-
-        public virtual void Hide()
+        
+        public virtual void Hide(string reason)
         {
             if (OnHide != null)
-                OnHide();
+                OnHide(reason);
         }
 
         protected virtual void OnDeactivate() { }

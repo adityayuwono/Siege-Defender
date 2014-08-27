@@ -40,12 +40,12 @@ namespace Scripts.Views
                 _collider.enabled = true;
         }
 
-        protected override void OnHide()
+        protected override void OnHide(string reason)
         {
             if (_collider != null)
                 _collider.enabled = false;
 
-            base.OnHide();
+            base.OnHide(reason);
         }
 
         protected override void OnDestroy()
@@ -68,7 +68,6 @@ namespace Scripts.Views
         protected void Freeze()
         {
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            _rigidbody.isKinematic = true;
         }
     }
 }

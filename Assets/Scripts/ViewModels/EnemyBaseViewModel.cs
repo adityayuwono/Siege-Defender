@@ -1,4 +1,5 @@
 ﻿using System;
+using Scripts.Helpers;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
@@ -19,9 +20,9 @@ namespace Scripts.ViewModels
             Health = _model.Health;
         }
 
-        public override void Hide()
+        public override void Hide(string reason)
         {
-            base.Hide();
+            base.Hide(reason);
 
             Children.Clear();
         }
@@ -39,7 +40,13 @@ namespace Scripts.ViewModels
         #region Health
 
         private float Health { get; set; }
-        public void ApplyDamage(float damage, ProjectileBaseViewModel source)
+
+        /// <summary>
+        /// Reduce health by the amount specified
+        /// </summary>
+        /// <param name="damage">How many health we should reduce</param>
+        /// <param name="source">Set if we want to attach the object to the target</param>
+        public void ApplyDamage(float damage, ProjectileBaseViewModel source = null)
         {
             if (source != null)
                 AttachProjectile(source);
@@ -48,12 +55,15 @@ namespace Scripts.ViewModels
             {
                 Health -= damage;
                 if (Health <= 0)
-                    Hide();
+                    Hide("Killed");
             }
         }
 
         private void AttachProjectile(ProjectileBaseViewModel source)
         {
+            if (Children.Contains(source))
+                throw new EngineException(this, "Duplicate Projectile hit");
+
             Children.Add(source);
             DoAttach(source);
         }

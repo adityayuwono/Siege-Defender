@@ -28,7 +28,7 @@ namespace Scripts
         public void RegisterView(BaseViewModel viewModel, BaseView view)
         {
             if (_views.ContainsKey(viewModel.Id))
-                throw new EngineException(this, string.Format("Failed to register View, duplicate for Id: {0}", viewModel.Id));
+                throw new EngineException(this, string.Format("Failed to register View of Type: {1}, duplicate for Id: {0}", viewModel.Id, viewModel.GetType()));
 
             _views.Add(viewModel.Id, view);
         }

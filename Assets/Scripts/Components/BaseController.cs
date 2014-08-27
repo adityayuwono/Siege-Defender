@@ -21,7 +21,7 @@ namespace Scripts.Components
         private void Start()
         {
             if (!_isSet)
-                Debug.LogError(string.Format("{0} for {1} is not Set", GetType(), name));
+                Debug.Log(string.Format("{0} for {1} is not Set", GetType(), name));
         }
 
 

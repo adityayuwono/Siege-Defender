@@ -17,8 +17,8 @@ namespace Scripts.Models
         [XmlAttribute][DefaultValue(1f)]
         public float RoF { get; set; }
 
-        [XmlElement]
-        public AoEModel AoE { get; set; }
+        [XmlAttribute]
+        public string AoEId { get; set; }
 
         [XmlAttribute]
         [DefaultValue(-1)]

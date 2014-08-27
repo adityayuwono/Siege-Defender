@@ -1,5 +1,6 @@
 ﻿using Scripts.Models;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scripts.ViewModels
 {
@@ -22,6 +23,6 @@ namespace Scripts.ViewModels
             return currentDamage;
         }
 
-        public virtual void CollideWithTarget(ObjectViewModel obj) { }
+        public virtual void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition) { }
     }
 }

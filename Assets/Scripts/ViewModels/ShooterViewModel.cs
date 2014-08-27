@@ -1,10 +1,11 @@
 ﻿using System;
 using Scripts.Helpers;
 using Scripts.Models;
+using UnityEngine;
 
 namespace Scripts.ViewModels
 {
-    public class ShooterViewModel : IntervalViewModel<ProjectileViewModel>
+    public class ShooterViewModel : IntervalViewModel<ProjectileBaseViewModel>
     {
         private readonly ShooterModel _model;
 
@@ -57,6 +58,14 @@ namespace Scripts.ViewModels
             projectile.Show();
 
             return projectile;
+        }
+
+        public void SpawnAoE(string aoeModelId, Vector3 position)
+        {
+            var projectile = GetObject<AoEViewModel>(aoeModelId);
+            projectile.SetPosition(position);
+            projectile.Activate();
+            projectile.Show();
         }
 
         public readonly Property<bool> IsShooting = new Property<bool>();

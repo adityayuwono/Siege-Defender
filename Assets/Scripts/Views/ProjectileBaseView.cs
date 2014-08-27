@@ -20,36 +20,34 @@ namespace Scripts.Views
             base.OnLoad();
 
             _collisionController = GameObject.AddComponent<CollisionController>();
-            _collisionController.OnCollision += _viewModel.CollideWithTarget;
         }
 
         protected override void OnShow()
         {
             base.OnShow();
 
+            _collisionController.OnCollision += _viewModel.CollideWithTarget;
             _collisionController.enabled = true;
-
-            Transform.localPosition = Vector3.zero;
             Transform.parent = null;
         }
 
-        protected override void OnHide()
+        protected override void OnHide(string reason)
         {
+            _collisionController.OnCollision -= _viewModel.CollideWithTarget;
             _collisionController.enabled = false;
 
-            base.OnHide();
+            base.OnHide(reason);
         }
 
-        protected override void OnDeath()
+        protected override void OnDeath(string reason)
         {
             Transform.parent = null;
 
-            base.OnDeath();
+            base.OnDeath(reason);
         }
 
         protected override void OnDestroy()
         {
-            _collisionController.OnCollision -= _viewModel.CollideWithTarget;
 
             base.OnDestroy();
         }

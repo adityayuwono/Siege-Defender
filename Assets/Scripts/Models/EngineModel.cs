@@ -9,6 +9,7 @@ namespace Scripts.Models
         [XmlArray]
         [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBaseModel))]
         [XmlArrayItem(ElementName = "Projectile", Type = typeof(ProjectileModel))]
+        [XmlArrayItem(ElementName = "AoE", Type = typeof(AoEModel))]
         public List<ObjectModel> Objects { get; set; }
 
         [XmlArray]

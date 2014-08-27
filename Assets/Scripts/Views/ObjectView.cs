@@ -43,11 +43,11 @@ namespace Scripts.Views
             SetPosition();
         }
 
-        protected override void OnHide()
+        protected override void OnHide(string reason)
         {
-            KillGameObject();
+            KillGameObject(reason);
 
-            base.OnHide();
+            base.OnHide(reason);
         }
 
         private bool _isLoaded;
@@ -91,19 +91,19 @@ namespace Scripts.Views
 
 
 
-        private IEnumerator DelayedDeath(float delay)
+        private IEnumerator DelayedDeath(float delay, string reason)
         {
             yield return new WaitForSeconds(delay);
-            OnDeath();
+            OnDeath(reason);
         }
-        private void KillGameObject()
+        private void KillGameObject(string reason)
         {
-            _viewModel.Root.StartCoroutine(DelayedDeath(_viewModel.DeathDelay));
+            _viewModel.Root.StartCoroutine(DelayedDeath(_viewModel.DeathDelay, reason));
         }
-        protected virtual void OnDeath()
+        protected virtual void OnDeath(string reason)
         {
             GameObject.SetActive(false);
-            _viewModel.InvokeOnObjectDeath();
+            _viewModel.InvokeOnObjectDeath(reason);
         }
     }
 }
