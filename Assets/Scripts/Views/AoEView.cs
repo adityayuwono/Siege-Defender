@@ -14,16 +14,21 @@ namespace Scripts.Views
             _parent = parent;
         }
 
+        protected override void OnLoad()
+        {
+            base.OnLoad();
+
+            Freeze();
+        }
+
         protected override void OnShow()
         {
             base.OnShow();
 
-            GameObject.renderer.enabled = true;
             Transform.localScale = Vector3.one*_viewModel.Radius/2f;
             Transform.parent = null;
 
             SetPosition();
-            Freeze();
         }
 
         protected override void OnHide(string reason)
@@ -33,7 +38,12 @@ namespace Scripts.Views
 
         private IEnumerator DelayedHiding(string reason)
         {
-            yield return new WaitForSeconds(_viewModel.DeathDelay);
+            yield return new WaitForSeconds(_viewModel.HideDelay);
+            HideAoE(reason);
+        }
+
+        protected virtual void HideAoE(string reason)
+        {
             base.OnHide(reason);
         }
     }

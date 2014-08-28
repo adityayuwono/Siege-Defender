@@ -10,6 +10,7 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBaseModel))]
         [XmlArrayItem(ElementName = "Projectile", Type = typeof(ProjectileModel))]
         [XmlArrayItem(ElementName = "AoE", Type = typeof(AoEModel))]
+        [XmlArrayItem(ElementName = "ParticleAoE", Type = typeof(ParticleAoEModel))]
         public List<ObjectModel> Objects { get; set; }
 
         [XmlArray]

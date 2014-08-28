@@ -1,4 +1,5 @@
-﻿using Scripts.Interfaces;
+﻿using System.Diagnostics;
+using Scripts.Interfaces;
 
 namespace Scripts.Views
 {
@@ -23,6 +24,10 @@ namespace Scripts.Views
 
 
         protected virtual void OnShow() { }
-        protected virtual void OnHide(string reason) { }
+
+        protected virtual void OnHide(string reason)
+        {
+            UnityEngine.Debug.Log(Id+", Hiding "+reason);
+        }
     }
 }

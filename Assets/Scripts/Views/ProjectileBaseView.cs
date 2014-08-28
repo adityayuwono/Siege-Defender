@@ -47,7 +47,6 @@ namespace Scripts.Views
 
         protected override void OnDestroy()
         {
-
             base.OnDestroy();
         }
     }

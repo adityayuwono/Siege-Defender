@@ -19,13 +19,17 @@ namespace Scripts.ViewModels
 
         public override float DeathDelay
         {
-            get { return 0.5f; }
+            get { return 1f; }
+        }
+        public float HideDelay
+        {
+            get { return 0.2f; }
         }
 
         public override void Show()
         {
             base.Show();
-            Hide("AoEs are hidden immediatelly");
+            Hide("AoEs are hidden immediately");
         }
 
         public override void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition)
@@ -40,6 +44,7 @@ namespace Scripts.ViewModels
         {
             get { return _position; }
         }
+        
         public void SetPosition(Vector3 position)
         {
             _position = position;
