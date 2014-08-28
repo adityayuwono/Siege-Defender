@@ -21,9 +21,9 @@ namespace Scripts.ViewModels
         {
             get { return 1f; }
         }
-        public float HideDelay
+        public virtual float HideDelay
         {
-            get { return 0.2f; }
+            get { return 0.05f; }
         }
 
         public override void Show()
