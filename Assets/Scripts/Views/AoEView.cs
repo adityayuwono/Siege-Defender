@@ -7,11 +7,9 @@ namespace Scripts.Views
     public class AoEView : ProjectileBaseView
     {
         private readonly AoEViewModel _viewModel;
-        private readonly ShooterView _parent;
         public AoEView(AoEViewModel viewModel, ShooterView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
-            _parent = parent;
         }
 
         protected override void OnLoad()

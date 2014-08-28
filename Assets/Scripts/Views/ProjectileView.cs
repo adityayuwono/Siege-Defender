@@ -7,7 +7,7 @@ namespace Scripts.Views
     {
         private readonly ProjectileViewModel _viewModel;
 
-        public ProjectileView(ProjectileViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public ProjectileView(ProjectileViewModel viewModel, ShooterView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }
