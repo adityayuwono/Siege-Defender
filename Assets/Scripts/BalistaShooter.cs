@@ -65,25 +65,6 @@ namespace Scripts
             scene.Show();
         }
 
-
-
-        private readonly Dictionary<string, EnemyBaseViewModel> _enemies = new Dictionary<string, EnemyBaseViewModel>();
-        public override void RegisterEnemy(EnemyBaseViewModel enemy)
-        {
-            _enemies.Add(enemy.Id, enemy);
-        }
-
-        public override void DamageEnemy(string enemyId, float damage)
-        {
-            if (_enemies.ContainsKey(enemyId))
-            {
-                var enemy = _enemies[enemyId];
-                enemy.ApplyDamage(damage, null);
-            }
-        }
-
-
-
         public override LevelModel GetLevel(string levelId)
         {
             foreach (var levelModel in _model.Levels)
