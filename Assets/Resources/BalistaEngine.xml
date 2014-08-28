@@ -1,14 +1,18 @@
 <Engine>
 	<Objects>
-		<Projectile Id="WoodenBalista" Damage="4-5" AssetId="Projectiles/WoodenBalista" RoF="0.1" Ammunition="100" Accuracy="1" />
-		<Projectile Id="FireBall" Damage="8-11" AssetId="Projectiles/FireBall" RoF="0.5" Ammunition="0" Accuracy="1" AoEId="Explosion" />
-		<AoE 		Id="Explosion" AssetId="Projectiles/AoE" Radius="20" Damage="50" />
-		<Projectile Id="Fire" Damage="15-19" AssetId="Projectiles/Fire" RoF="0.5" Ammunition="0" Accuracy="1" />
-		<Projectile Id="IronBall" Damage="100" AssetId="Projectiles/IronBall" RoF="2" />
+		<Projectile 	Id="WoodenBalista" Damage="4-5" AssetId="Projectiles/WoodenBalista" RoF="0.1" Ammunition="100" Accuracy="1" />
+		<Projectile 	Id="FireBall" Damage="8-11" AssetId="Projectiles/FireBall" RoF="0.5" Ammunition="0" Accuracy="1" AoEId="FireDome" />
+		<Projectile 	Id="ExplosiveFireBall" Damage="8-11" AssetId="Projectiles/FireBall" RoF="0.5" Ammunition="0" Accuracy="1" AoEId="Explosion" />
+		<Projectile 	Id="Fire" Damage="15-19" AssetId="Projectiles/Fire" RoF="0.5" Ammunition="0" Accuracy="1" />
+		<Projectile 	Id="IronBall" Damage="100" AssetId="Projectiles/IronBall" RoF="2" />
+
+		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
+		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="10-15" />
+
 
 		<Enemy Id="BoxDemon" 	AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" />
 		<Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1" />
-		<Enemy Id="Boss" 		AssetId="Enemies/RedGoblin" 	Health="250" 	Speed="0.3" />
+		<Enemy Id="Boss" 		AssetId="Enemies/RedGoblin" 		Health="250" 	Speed="0.3" />
 	</Objects>
 
 	<Levels>
@@ -117,7 +121,7 @@
 			
 			<Player Id="Player" AssetId="Player" >
 				<Shooters>
-					<Shooter Id="LeftShooter" AssetId="LeftShooter" ProjectileId="FireBall" Index="0">
+					<Shooter Id="LeftShooter" AssetId="LeftShooter" ProjectileId="ExplosiveFireBall" Index="0">
 						<Source AssetId="Shooter"/>
 						<Target AssetId="Target" Index="0"/>
 					</Shooter>
