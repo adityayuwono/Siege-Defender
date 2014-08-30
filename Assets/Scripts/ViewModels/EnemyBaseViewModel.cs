@@ -34,11 +34,11 @@ namespace Scripts.ViewModels
 
 
         #region Actions
-        public Action<ProjectileBaseViewModel> DoAttach; 
+        public Action<ProjectileBaseViewModel> DoAttach;
+        public Action<float> OnDamaged; 
         #endregion
 
         #region Health
-
         private float Health { get; set; }
 
         /// <summary>
@@ -54,6 +54,7 @@ namespace Scripts.ViewModels
             if (Health > 0)
             {
                 Health -= damage;
+                OnDamaged(damage);
                 if (Health <= 0)
                     Hide("Killed");
             }
