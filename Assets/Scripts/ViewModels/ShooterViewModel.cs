@@ -1,4 +1,6 @@
-﻿using Scripts.Helpers;
+﻿using System;
+using System.Collections;
+using Scripts.Helpers;
 using Scripts.Models;
 using UnityEngine;
 
@@ -33,6 +35,10 @@ namespace Scripts.ViewModels
         {
             get { return _projectileModel.RoF; }
         }
+        public float ReloadDuration
+        {
+            get { return _projectileModel.ReloadTime; }
+        }
 
         public int Index
         {
@@ -48,15 +54,37 @@ namespace Scripts.ViewModels
             base.OnLoad();
 
             _projectileModel = Root.GetObjectModel(_model.ProjectileId) as ProjectileModel;
+            Ammunition = _projectileModel.Ammunition;
         }
 
+
+        public readonly Property<bool> IsReloading = new Property<bool>();
         public ProjectileViewModel SpawnProjectile()
         {
-            var projectile = GetObject<ProjectileViewModel>(_model.ProjectileId);
-            projectile.Activate();
-            projectile.Show();
+            if (Ammunition > 0)
+            {
+                Ammunition--;
+                var projectile = GetObject<ProjectileViewModel>(_model.ProjectileId);
+                projectile.Activate();
+                projectile.Show();
 
-            return projectile;
+                return projectile;
+            }
+
+            if (!IsReloading.GetValue())
+            {
+                IsReloading.SetValue(true);
+                Root.StartCoroutine(Reload());
+            }
+
+            return null;
+        }
+
+        private IEnumerator Reload()
+        {
+            yield return new WaitForSeconds(ReloadDuration);
+            Ammunition = _projectileModel.Ammunition;
+            IsReloading.SetValue(false);
         }
 
         public void SpawnAoE(string aoeModelId, Vector3 position)
@@ -67,6 +95,10 @@ namespace Scripts.ViewModels
             projectile.Show();
         }
 
+
+
+        public int Ammunition { get; private set; }
+        
         public readonly Property<bool> IsShooting = new Property<bool>();
         public void StartShooting()
         {

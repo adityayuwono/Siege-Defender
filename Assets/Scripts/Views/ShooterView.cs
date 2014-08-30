@@ -39,8 +39,9 @@ namespace Scripts.Views
         protected override void IntervalInvoked()
         {
             var projectile = _viewModel.SpawnProjectile();
-
-            projectile.Shoot(_source, _target);
+            
+            if (projectile!=null)
+                projectile.Shoot(_source, _target);
         }
     }
 }

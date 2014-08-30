@@ -1,19 +1,20 @@
 <Engine>
 	<Objects>
-		<Projectile 	Id="WoodenBalista" Damage="4-5" 
+		<Projectile 	Id="WoodenBalista" Damage="10-12" 
 			AssetId="Projectiles/WoodenBalista" 
-			RoF="0.1" Ammunition="100" Reload="2" Accuracy="1" />
+			RoF="0.1" Ammunition="1000" Reload="0.1" Accuracy="0.5" />
 		<Projectile 	Id="FireBall" Damage="8-11" 
 			AssetId="Projectiles/FireBall" AoEId="FireDome" 
-			RoF="0.5" Ammunition="0" Reload="2" Accuracy="1" />
+			RoF="0.5" Ammunition="25" Reload="2" Accuracy="0.9" />
 		<Projectile 	Id="ExplosiveFireBall" Damage="8-11" 
 			AssetId="Projectiles/FireBall" AoEId="Explosion"
-			RoF="0.5" Ammunition="0" Accuracy="1" />
+			RoF="0.5" Ammunition="25" ReloadTime="1" Accuracy="0.9" />
 		<Projectile 	Id="Fire" Damage="15-19" 
-			AssetId="Projectiles/Fire" RoF="0.5" 
-			Ammunition="0" Accuracy="1" />
+			AssetId="Projectiles/Fire" 
+			RoF="0.5" Ammunition="25" ReloadTime="1" Accuracy="0.9" />
 		<Projectile 	Id="IronBall" Damage="100" 
-			AssetId="Projectiles/IronBall" RoF="2" />
+			AssetId="Projectiles/IronBall"
+			RoF="2" Ammunition="1" ReloadTime="200" Accuracy="1" />
 
 		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
 		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="10-15" />
