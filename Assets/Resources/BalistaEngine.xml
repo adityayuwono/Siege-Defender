@@ -2,19 +2,29 @@
 	<Objects>
 		<Projectile 	Id="WoodenBalista" Damage="10-12" 
 			AssetId="Projectiles/WoodenBalista" 
-			RoF="0.1" Ammunition="1000" Reload="0.1" Accuracy="0.5" />
+			RoF="0.1" Ammunition="1000" Reload="0.1" 
+			Accuracy="0.9" Deviation="0.001" />
+		<Projectile 	Id="IronBalista" Damage="25-30" 
+			AssetId="Projectiles/WoodenBalista" 
+			RoF="0.25" Ammunition="500" Reload="0.2" 
+			Accuracy="0.7" Deviation="0.005" />
+
 		<Projectile 	Id="FireBall" Damage="8-11" 
 			AssetId="Projectiles/FireBall" AoEId="FireDome" 
-			RoF="0.5" Ammunition="25" Reload="2" Accuracy="0.9" />
+			RoF="0.5" Ammunition="25" Reload="2" 
+			Accuracy="0.9" Deviation="0.001" />
 		<Projectile 	Id="ExplosiveFireBall" Damage="8-11" 
 			AssetId="Projectiles/FireBall" AoEId="Explosion"
-			RoF="0.5" Ammunition="25" ReloadTime="1" Accuracy="0.9" />
+			RoF="0.5" Ammunition="25" ReloadTime="1" 
+			Accuracy="0.9" Deviation="0.001" />
 		<Projectile 	Id="Fire" Damage="15-19" 
 			AssetId="Projectiles/Fire" 
-			RoF="0.5" Ammunition="25" ReloadTime="1" Accuracy="0.9" />
+			RoF="0.5" Ammunition="25" ReloadTime="1" 
+			Accuracy="0.9" Deviation="0.001" />
 		<Projectile 	Id="IronBall" Damage="100" 
 			AssetId="Projectiles/IronBall"
-			RoF="2" Ammunition="1" ReloadTime="200" Accuracy="1" />
+			RoF="2" Ammunition="1" ReloadTime="200" 
+			Accuracy="1" Deviation="0" />
 
 		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
 		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="10-15" />
@@ -135,7 +145,7 @@
 						<Source AssetId="Shooter"/>
 						<Target AssetId="Target" Index="0"/>
 					</Shooter>
-					<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="WoodenBalista" Index="1">
+					<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="IronBalista" Index="1">
 						<Source AssetId="Shooter"/>
 						<Target AssetId="Target" Index="1"/>
 					</Shooter>

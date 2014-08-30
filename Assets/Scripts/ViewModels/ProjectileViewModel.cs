@@ -18,13 +18,13 @@ namespace Scripts.ViewModels
             _parent = parent;
         }
 
-        public Action<ObjectView, ObjectView> DoShooting;
+        public Action<ObjectView, ObjectView, float> DoShooting;
         public readonly Property<bool> IsKinematic = new Property<bool>(); 
 
-        public void Shoot(ObjectView source, ObjectView target)
+        public void Shoot(ObjectView source, ObjectView target, float accuracy)
         {
             if (DoShooting != null)
-                DoShooting(source, target);
+                DoShooting(source, target, accuracy);
         }
 
         public override float DeathDelay
@@ -78,6 +78,11 @@ namespace Scripts.ViewModels
             {
                 Hide("Hit Nothing");
             }
+        }
+
+        public float Accuracy
+        {
+            get { return 1-_model.Accuracy; }
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Scripts.Views
             var projectile = _viewModel.SpawnProjectile();
             
             if (projectile!=null)
-                projectile.Shoot(_source, _target);
+                projectile.Shoot(_source, _target, _viewModel.Accuracy);
         }
     }
 }

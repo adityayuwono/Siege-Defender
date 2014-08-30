@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Scripts.Helpers;
 using Scripts.Models;
 using UnityEngine;
@@ -40,6 +39,15 @@ namespace Scripts.ViewModels
             get { return _projectileModel.ReloadTime; }
         }
 
+
+
+        private float _accuracy;
+        public float Accuracy
+        {
+            get { return 1 - (_accuracy -= _projectileModel.Deviation); }
+            private set { _accuracy = value; }
+        }
+
         public int Index
         {
             get { return _model.Index; }
@@ -55,6 +63,7 @@ namespace Scripts.ViewModels
 
             _projectileModel = Root.GetObjectModel(_model.ProjectileId) as ProjectileModel;
             Ammunition = _projectileModel.Ammunition;
+            Accuracy = _projectileModel.Accuracy;
         }
 
 
@@ -83,6 +92,11 @@ namespace Scripts.ViewModels
         private IEnumerator Reload()
         {
             yield return new WaitForSeconds(ReloadDuration);
+            OnReload();
+        }
+
+        private void OnReload()
+        {
             Ammunition = _projectileModel.Ammunition;
             IsReloading.SetValue(false);
         }
@@ -108,6 +122,7 @@ namespace Scripts.ViewModels
         public void StopShooting()
         {
             IsShooting.SetValue(false);
+            Accuracy = _projectileModel.Accuracy;
         }
     }
 }
