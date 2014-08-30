@@ -29,10 +29,9 @@
 		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
 		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="10-15" />
 
-
-		<Enemy Id="BoxDemon" 	AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" />
-		<Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1" />
-		<Enemy Id="Boss" 		AssetId="Enemies/RedGoblin" 		Health="250" 	Speed="0.3" />
+		<Enemy Id="BoxDemon" 	AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" 	Rotation="10" />
+		<Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
+		<Enemy Id="Boss" 		AssetId="Enemies/RedGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 	</Objects>
 
 	<Levels>
@@ -127,10 +126,6 @@
 		</Level>
 	</Levels>
 
-
-
-	
-
 	<Scene Id="Limbo" AssetId="Scenes/Limbo">
 		<Elements>
 			<Element AssetId="Ground" />
@@ -149,9 +144,9 @@
 						<Source AssetId="Shooter"/>
 						<Target AssetId="Target" Index="1"/>
 					</Shooter>
-					<!-- <Shooter Id="MiddleShooter" AssetId="Shooter" Position="0,-2.5,0" ProjectileId="IronBall">
+					<!-- <Shooter Id="MiddleShooter" AssetId="Shooter" ProjectileId="IronBall">
 						<Source AssetId="Target"/>
-						<Target AssetId="Target" Position="0,0,15"/>
+						<Target AssetId="Target" />
 					</Shooter> -->
 				</Shooters>
 			</Player>
