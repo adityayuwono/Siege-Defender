@@ -97,6 +97,7 @@ namespace Scripts.ViewModels
 
         private void OnReload()
         {
+            Accuracy = _projectileModel.Accuracy;
             Ammunition = _projectileModel.Ammunition;
             IsReloading.SetValue(false);
         }
