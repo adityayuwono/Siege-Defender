@@ -23,7 +23,7 @@ namespace Scripts.ViewModels
 
         protected TU GetObject<TU>(string objectId) where TU : T
         {
-            var objectResult = (CheckInactiveEnemies(objectId) ?? SpawnNewObject(objectId));
+            var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId));
             objectResult.OnObjectDeath += Object_OnDeath;
             return objectResult as TU;
         }
@@ -34,7 +34,7 @@ namespace Scripts.ViewModels
         {
             var modelToCopy = Root.GetObjectModel(id);
             var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
-            objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, objectModel.GetType(), ObjectCount);
+            objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, Id, ObjectCount);
             objectModel.Type = id;
             var newObject = Root.IoCContainer.GetInstance<T>(objectModel.GetType(), new Object[] {objectModel, this});
 
@@ -59,7 +59,7 @@ namespace Scripts.ViewModels
         }
         
         private readonly Dictionary<string, List<T>> _inactiveObjects = new Dictionary<string, List<T>>();
-        private T CheckInactiveEnemies(string objectId)
+        private T CheckInactiveObjects(string objectId)
         {
             // Id is not registered yet
             if (!_inactiveObjects.ContainsKey(objectId)) return null;

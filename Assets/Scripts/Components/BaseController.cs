@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.ViewModels;
 using UnityEngine;
@@ -21,33 +21,9 @@ namespace Scripts.Components
         private void Start()
         {
             if (!_isSet)
-                Debug.Log(string.Format("{0} for {1} is not Set", GetType(), name));
+                throw new EngineException(this, "Failed to continue, need Setup first");
         }
-
-
-
-        protected bool IsDead { get; private set; }
-        public void Kill()
-        {
-            if (IsDead) return;
-
-            IsDead = true;
-            OnKilled();
-        }
-
-
-        protected virtual void OnKilled()
-        {
-            DelayedDeath(0f);
-        }
-        protected IEnumerator DelayedDeath(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            Destroy(gameObject);
-        }
-
-        public virtual void ClearEvents() { }
-
+        
         public string Id
         {
             get { return ViewModel.Id; }

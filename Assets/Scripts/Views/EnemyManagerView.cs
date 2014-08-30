@@ -27,6 +27,12 @@ namespace Scripts.Views
             StartInterval();
         }
 
+        protected override void OnHide(string reason)
+        {
+            StopInterval();
+
+            base.OnHide(reason);
+        }
 
 
         private readonly List<MinMaxRandom> _spawnPoints = new List<MinMaxRandom>();

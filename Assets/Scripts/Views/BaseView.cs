@@ -27,7 +27,7 @@ namespace Scripts.Views
 
         protected virtual void OnHide(string reason)
         {
-            UnityEngine.Debug.Log(Id+", Hiding "+reason);
+            //UnityEngine.Debug.Log(Id+", Hiding "+reason);
         }
     }
 }

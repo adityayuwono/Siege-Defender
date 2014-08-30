@@ -65,9 +65,10 @@ namespace Scripts.Views
             _rigidbody.AddRelativeTorque(Vector3.right*1.5f, ForceMode.Impulse);
         }
 
-        protected void Freeze()
+        protected void Freeze(bool isKinematic = false)
         {
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            _rigidbody.isKinematic = isKinematic;
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Scripts.Components
 
         private void OnCollisionEnter(Collision collisionInfo)
         {
-            //Debug.LogError(gameObject.name+":"+collisionInfo.gameObject.name);
             if (OnCollision != null)
             {
                 var viewModelController = collisionInfo.gameObject.GetComponent<ViewModelController>();

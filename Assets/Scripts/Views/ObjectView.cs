@@ -58,7 +58,7 @@ namespace Scripts.Views
 
             GameObject.AddComponent<ViewModelController>().ViewModel = _viewModel;
 
-            Transform parentTransform = null;
+            Transform parentTransform;
             if (_parent == null || _parent.GameObject == null)
                 parentTransform = GameObject.Find("Context").transform;
             else
@@ -71,7 +71,7 @@ namespace Scripts.Views
         protected virtual GameObject GetGameObject()
         {
             var gameObject =_viewModel.Root.ResourceManager.GetGameObject(_viewModel.AssetId);
-            gameObject.name += "_" + _viewModel.Id;
+            gameObject.name = string.Format("{0}({1})", _viewModel.AssetId, _viewModel.Id);
             return gameObject;
         }
         protected virtual void SetPosition()
