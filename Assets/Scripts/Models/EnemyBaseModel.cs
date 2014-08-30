@@ -23,5 +23,8 @@ namespace Scripts.Models
 
         [XmlElement]
         public ProjectileModel Projectile { get; set; }
+
+        [XmlAttribute]
+        public float Rotation { get; set; }
     }
 }

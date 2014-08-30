@@ -34,11 +34,14 @@ namespace Scripts.ViewModels
 
 
         #region Actions
+
         public Action<ProjectileBaseViewModel> DoAttach;
-        public Action<float> OnDamaged; 
+        public Action<float> OnDamaged;
+
         #endregion
 
         #region Health
+
         private float Health { get; set; }
 
         /// <summary>
@@ -72,7 +75,16 @@ namespace Scripts.ViewModels
         #endregion
 
         #region Model Properties
-        public float Speed { get { return _model.Speed; } }
+
+        public float Speed
+        {
+            get { return _model.Speed; }
+        }
+        public float Rotation
+        {
+            get { return _model.Rotation/2f; }
+        }
+
         #endregion
     }
 }

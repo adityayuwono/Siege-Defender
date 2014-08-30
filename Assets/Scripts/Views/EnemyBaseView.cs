@@ -37,7 +37,8 @@ namespace Scripts.Views
             _isDead = false;
             _animator.SetBool("IsDead", false);
 
-            GameObject.transform.position = _parent.GetRandomSpawnPoint();
+            Transform.position = _parent.GetRandomSpawnPoint();
+            Transform.localEulerAngles = new Vector3(0, 180f + Random.Range(-_viewModel.Rotation, _viewModel.Rotation), 0);
             _viewModel.Root.StartCoroutine(Walking());
         }
 
@@ -62,7 +63,7 @@ namespace Scripts.Views
         {
             while (!_isDead)
             {
-                Transform.localPosition += Vector3.back * Time.deltaTime * _viewModel.Speed;
+                Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
                 yield return null;
             }
         }
@@ -71,12 +72,9 @@ namespace Scripts.Views
         private void AttachProjectileToSelf(ProjectileBaseViewModel projectile)
         {
             var projectileView = _viewModel.Root.GetView<ProjectileView>(projectile.Id);
-            if (projectileView != null)
-            {
-                var projectileTransform = projectileView.Transform;
-                projectileTransform.parent = _projectileRooTransform;
-                projectileTransform.localPosition = Vector3.zero;
-            }
+            var projectileTransform = projectileView.Transform;
+            projectileTransform.parent = _projectileRooTransform;
+            projectileTransform.localPosition = Vector3.zero;
         }
     }
 }
