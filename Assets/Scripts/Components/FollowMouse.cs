@@ -16,9 +16,14 @@ namespace Scripts.Components
         private Texture2D _crosshairImage;
 
         private TargetViewModel _viewModel;
+
+        private static Vector2 _halfScreen;
+
         protected override void OnSetup()
         {
             base.OnSetup();
+
+            _halfScreen = new Vector2(Screen.width/2f, Screen.height/2f);
 
             _viewModel = ViewModel as TargetViewModel;
 
@@ -52,8 +57,8 @@ namespace Scripts.Components
             {
                 var relativeToCenter = (inputPosition - _circleCenter)*1.2f;
 
-                _crosshairRect.x = (Screen.width / 2f) + ((Screen.width / 2f) * (relativeToCenter.x / (_circleRect.width / 2f)));
-                _crosshairRect.y = (Screen.height / 2f) + ((Screen.height / 2f) * (relativeToCenter.y / (_circleRect.height/ 2f)));
+                _crosshairRect.x = _halfScreen.x + (_halfScreen.x * (relativeToCenter.x / (_circleRect.width / 2f)));
+                _crosshairRect.y = _halfScreen.y + (_halfScreen.y * (relativeToCenter.y / (_circleRect.height/ 2f)));
 
                 UpdateObjectPosition(new Vector3(
                 _crosshairRect.x + (Screen.height * Values.GUI_CROSSHAIR_HALFSIZE_F),
