@@ -48,7 +48,7 @@ namespace Scripts.Components
             else
             {
                 // If Mouse, for testing purposes only
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && _clickCheckArea.Contains(Input.mousePosition))
                     _shooterView.StartShooting();
                 else
                     _shooterView.StopShooting();
