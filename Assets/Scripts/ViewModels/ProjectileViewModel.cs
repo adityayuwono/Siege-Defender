@@ -1,4 +1,5 @@
 ﻿using System;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
 using Scripts.Views;
@@ -57,7 +58,7 @@ namespace Scripts.ViewModels
         }
 
         private bool _hasCollided;
-        public override void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition)
+        public override void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition, Vector3 contactPoint)
         {
             // Need checking here because sometimes two collisions can happen very quickly
             if (_hasCollided) return;
@@ -72,7 +73,7 @@ namespace Scripts.ViewModels
             var enemyViewModel = targetObject as EnemyBaseViewModel;
             if (enemyViewModel != null)
             {
-                enemyViewModel.ApplyDamage(CalculateDamage(), this);
+                DamageEnemy(enemyViewModel, contactPoint, true);
             }
             else
             {

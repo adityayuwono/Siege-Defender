@@ -6,7 +6,7 @@ namespace Scripts.Components
 {
     public class CollisionController : MonoBehaviour
     {
-        public Action<ObjectViewModel, Vector3> OnCollision;
+        public Action<ObjectViewModel, Vector3, Vector3> OnCollision;
 
         private void OnCollisionEnter(Collision collisionInfo)
         {
@@ -16,7 +16,7 @@ namespace Scripts.Components
                 if (viewModelController != null)
                 {
                     var viewModel = viewModelController.GetViewModel();
-                    OnCollision(viewModel, transform.position);
+                    OnCollision(viewModel, transform.position, collisionInfo.contacts[0].point);
                 }
             }
         }

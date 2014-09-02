@@ -23,6 +23,13 @@ namespace Scripts.ViewModels
             return currentDamage;
         }
 
-        public virtual void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition) { }
+        public virtual void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition, Vector3 contactPoint) { }
+
+        protected void DamageEnemy(EnemyBaseViewModel enemy, Vector3 contactPoint, bool attachToEnemy = false)
+        {
+            var damage = CalculateDamage();
+            Root.DamageDisplay.DisplayDamage(damage, contactPoint);
+            enemy.ApplyDamage(damage, attachToEnemy ? this : null);
+        }
     }
 }
