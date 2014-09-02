@@ -103,7 +103,7 @@ namespace Scripts.Views
         protected virtual void OnDeath(string reason)
         {
             GameObject.SetActive(false);
-            _viewModel.InvokeOnObjectDeath(reason);
+            _viewModel.Deactivate(reason);
         }
     }
 }

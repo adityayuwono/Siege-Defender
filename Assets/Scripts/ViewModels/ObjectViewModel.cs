@@ -51,10 +51,7 @@ namespace Scripts.ViewModels
                 element.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
         }
 
-        protected override void OnDeactivate()
-        {
-            base.OnDeactivate();
-        }
+        
 
 
         #region Death
@@ -68,14 +65,14 @@ namespace Scripts.ViewModels
         
         public Action<ObjectViewModel> OnObjectDeath;
         
-        public void InvokeOnObjectDeath(string reason)
+        protected override void OnDeactivate()
         {
+            base.OnDeactivate();
+
             if (OnObjectDeath != null)
                 OnObjectDeath(this);
 
             OnObjectDeath = null;
-
-            Deactivate(reason);
         }
         #endregion
 
