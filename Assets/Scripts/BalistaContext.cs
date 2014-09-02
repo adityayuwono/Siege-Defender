@@ -20,5 +20,19 @@ namespace Scripts
             engine.Activate();
             engine.Show();
         }
+
+        private string _lastErrorMessage;
+        public void ThrowError(string message)
+        {
+            _lastErrorMessage = message;
+        }
+
+        private void OnGUI()
+        {
+            if (!string.IsNullOrEmpty(_lastErrorMessage))
+            {
+                GUI.Label(new Rect(0,0,Screen.width, Screen.height), _lastErrorMessage);
+            }
+        }
     }
 }

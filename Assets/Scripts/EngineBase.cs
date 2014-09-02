@@ -4,6 +4,7 @@ using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
 using Scripts.ViewModels;
+using Scripts.ViewModels.GUIs;
 using Scripts.Views;
 using UnityEngine;
 
@@ -42,21 +43,11 @@ namespace Scripts
 
         public IIoCContainer IoCContainer;
         public IResource ResourceManager;
-
+        public DamageDisplayManager DamageDisplay;
 
         public override EngineBase Root
         {
             get { return this; }
-        }
-
-        public virtual ProjectileModel GetProjectileModel(string projectileId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual void DamageEnemy(string enemyId, float damage)
-        {
-            throw new System.NotImplementedException();
         }
 
         public ObjectModel GetObjectModel(string id)
@@ -90,6 +81,11 @@ namespace Scripts
         }
 
         public virtual Coroutine StartCoroutine(IEnumerator coroutine)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual void ThrowError(string message)
         {
             throw new System.NotImplementedException();
         }
