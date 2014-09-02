@@ -31,7 +31,7 @@ namespace Scripts
         {
             if (!string.IsNullOrEmpty(_lastErrorMessage))
             {
-                GUI.Label(new Rect(0,0,Screen.width, Screen.height), _lastErrorMessage);
+                GUI.Label(new Rect(0,50,Screen.width, Screen.height), _lastErrorMessage);
             }
         }
     }
