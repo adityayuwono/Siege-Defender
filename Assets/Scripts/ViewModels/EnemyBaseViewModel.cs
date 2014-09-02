@@ -24,7 +24,7 @@ namespace Scripts.ViewModels
         {
             base.Hide(reason);
 
-            Children.Clear();
+            Elements.Clear();
         }
 
         public override float DeathDelay
@@ -65,10 +65,18 @@ namespace Scripts.ViewModels
 
         private void AttachProjectile(ProjectileBaseViewModel source)
         {
-            if (Children.Contains(source))
+            if (Elements.Contains(source))
                 throw new EngineException(this, "Duplicate Projectile hit");
 
-            Children.Add(source);
+            Elements.Add(source);
+
+            while (Elements.Count > 3)
+            {
+                var elementToRemove = Elements[0];
+                Elements.Remove(elementToRemove);
+                elementToRemove.Hide("Hiding because we have too many already");
+            }
+
             DoAttach(source);
         }
 

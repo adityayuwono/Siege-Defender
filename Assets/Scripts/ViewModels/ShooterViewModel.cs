@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
 using UnityEngine;
@@ -24,10 +25,10 @@ namespace Scripts.ViewModels
 
 
             Source = new ObjectViewModel(_model.Source, this);
-            Children.Add(Source);
+            Elements.Add(Source);
 
             Target = new TargetViewModel(_model.Target, this);
-            Children.Add(Target);
+            Elements.Add(Target);
         }
 
         public override float Interval
@@ -64,6 +65,8 @@ namespace Scripts.ViewModels
             _projectileModel = Root.GetObjectModel(_model.ProjectileId) as ProjectileModel;
             Ammunition = _projectileModel.Ammunition;
             Accuracy = _projectileModel.Accuracy;
+
+            IsShooting.SetValue(false);
         }
 
 

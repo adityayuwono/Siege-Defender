@@ -15,7 +15,7 @@ namespace Scripts.ViewModels
             {
                 var shooterVM = new ShooterViewModel(shooterModel, this);
                 Shooters.Add(shooterVM);
-                Children.Add(shooterVM);
+                Elements.Add(shooterVM);
             }
         }
 

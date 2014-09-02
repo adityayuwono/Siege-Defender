@@ -16,34 +16,39 @@ namespace Scripts.ViewModels
 
             if (string.IsNullOrEmpty(_model.AssetId))
                 throw new EngineException(this, "No Asset defined");
+
+            foreach (var elementModel in _model.Elements)
+            {
+                var elementVM = Root.IoCContainer.GetInstance<ObjectViewModel>(elementModel.GetType(), new object[] { elementModel, this });
+
+                Elements.Add(elementVM);
+            }
         }
 
-
-
-        protected readonly List<ObjectViewModel> Children = new List<ObjectViewModel>();
+        protected readonly List<ObjectViewModel> Elements = new List<ObjectViewModel>(); 
 
         protected override void OnActivate()
         {
             base.OnActivate();
 
-            foreach (var child in Children)
-                child.Activate();
+            foreach (var element in Elements)
+                element.Activate();
         }
 
         public override void Show()
         {
             base.Show();
 
-            foreach (var child in Children)
-                child.Show();
+            foreach (var element in Elements)
+                element.Show();
         }
 
         public override void Hide(string reason)
         {
             base.Hide(reason);
 
-            foreach (var child in Children)
-                child.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
+            foreach (var element in Elements)
+                element.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
         }
 
         protected override void OnDeactivate()
