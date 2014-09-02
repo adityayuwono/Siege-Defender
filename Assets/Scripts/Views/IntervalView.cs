@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ namespace Scripts.Views
 
         private float _lastIntervalTime = float.NegativeInfinity;
 
+
+        private int _intervalCount;// BUG: To make sure there's only one interval running
         public void StartInterval()
         {
             if (!_isRunning)
@@ -40,6 +43,13 @@ namespace Scripts.Views
         private bool _isRunning;
         private IEnumerator DoInterval(float interval)
         {
+            _intervalCount++;
+            if (_intervalCount > 1)
+            {
+                _intervalCount--;
+                yield break;
+            }
+
             while (_isRunning)
             {
                 _lastIntervalTime = Time.realtimeSinceStartup;
@@ -48,6 +58,8 @@ namespace Scripts.Views
 
                 yield return new WaitForSeconds(interval);
             }
+
+            _intervalCount--;
         }
     }
 }
