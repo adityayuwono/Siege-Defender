@@ -1,12 +1,13 @@
 ﻿using System;
 
-namespace Scripts.Helpers
+namespace Scripts.Core
 {
     public class Property<T> : Property
     {
         public void SetValue(T newValue)
         {
-            if (_value.Equals(newValue)) return;
+            if (_value!=null && _value.Equals(newValue)) 
+                return;
             
             _value = newValue;
             
