@@ -30,7 +30,7 @@ namespace Scripts.ViewModels
         public void Activate()
         {
             if (_isActive)
-                throw new EngineException(this, "Failed to Activate");
+                throw new EngineException(this, "Failed to Activate.\n" + _lastDeactivationReason);
 
             _isActive = true;
 
@@ -61,8 +61,11 @@ namespace Scripts.ViewModels
 
         #region Deactivation
 
+        private string _lastDeactivationReason;
         public void Deactivate(string reason)
         {
+            _lastDeactivationReason = reason;
+
             if (!_isActive)
                 throw new EngineException(this, "Failed to Deactivate, Reason for deactivation "+reason);
 
