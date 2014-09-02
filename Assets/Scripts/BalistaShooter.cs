@@ -1,15 +1,19 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Scripts.Helpers;
 using Scripts.Models;
+using Scripts.Models.GUIs;
 using Scripts.ViewModels;
+using Scripts.ViewModels.GUIs;
 using Scripts.Views;
+using Scripts.Views.GUIs;
 using UnityEngine;
 
 namespace Scripts
 {
     public class BalistaShooter : EngineBase
     {
+        public static EngineBase Instance;
+
         private readonly EngineModel _model;
         private readonly BalistaContext _context;
 
@@ -17,6 +21,8 @@ namespace Scripts
         {
             _model = model;
             _context = parent;
+
+            Instance = this;
         }
 
         public override void MapInjections()
@@ -25,22 +31,30 @@ namespace Scripts
             ResourceManager = new ResourcePooler();
 
             #region Model to ViewModel
-            IoCContainer.RegisterFor<ElementModel>().TypeOf<ElementViewModel>().To<ElementViewModel>();
-            IoCContainer.RegisterFor<PlayerModel>().TypeOf<ElementViewModel>().To<PlayerViewModel>();
-            IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<ElementViewModel>().To<EnemyManagerViewModel>();
-            IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<ElementViewModel>().To<PlayerHitboxViewModel>();
+            IoCContainer.RegisterFor<ElementModel>().TypeOf<ObjectViewModel>().To<ElementViewModel>();
+            IoCContainer.RegisterFor<PlayerModel>().TypeOf<ObjectViewModel>().To<PlayerViewModel>();
+            IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<ObjectViewModel>().To<EnemyManagerViewModel>();
+            IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<ObjectViewModel>().To<PlayerHitboxViewModel>();
+            IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ObjectViewModel>().To<GUIRoot>();
+            IoCContainer.RegisterFor<DamageDisplayModel>().TypeOf<ObjectViewModel>().To<DamageDisplayManager>();
 
             IoCContainer.RegisterFor<ProjectileModel>().TypeOf<ProjectileBaseViewModel>().To<ProjectileViewModel>();
             IoCContainer.RegisterFor<AoEModel>().TypeOf<ProjectileBaseViewModel>().To<AoEViewModel>();
             IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<ProjectileBaseViewModel>().To<ParticleAoEViewModel>();
             IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<EnemyBaseViewModel>().To<EnemyBaseViewModel>();
+            IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
+
+            IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
             #endregion
 
-            #region ViewModel to View
+            #region ViewModel to View(BaseView)
             IoCContainer.RegisterFor<ProjectileViewModel>().TypeOf<BaseView>().To<ProjectileView>();
             IoCContainer.RegisterFor<AoEViewModel>().TypeOf<BaseView>().To<AoEView>();
             IoCContainer.RegisterFor<ParticleAoEViewModel>().TypeOf<BaseView>().To<ParticleAoEView>();
             IoCContainer.RegisterFor<EnemyBaseViewModel>().TypeOf<BaseView>().To<EnemyBaseView>();
+            IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
+            IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
+            IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
 
             IoCContainer.RegisterFor<ObjectViewModel>().TypeOf<BaseView>().To<ObjectView>();
             IoCContainer.RegisterFor<ShooterViewModel>().TypeOf<BaseView>().To<ShooterView>();
@@ -51,6 +65,8 @@ namespace Scripts
             IoCContainer.RegisterFor<PlayerViewModel>().TypeOf<BaseView>().To<PlayerView>();
             IoCContainer.RegisterFor<EnemyManagerViewModel>().TypeOf<BaseView>().To<EnemyManagerView>();
             IoCContainer.RegisterFor<PlayerHitboxViewModel>().TypeOf<BaseView>().To<PlayerHitboxView>();
+
+            IoCContainer.RegisterFor<GUIRoot>().TypeOf<BaseView>().To<GUIRootView>();
             #endregion
 
             base.MapInjections();
@@ -78,6 +94,11 @@ namespace Scripts
         public override Coroutine StartCoroutine(IEnumerator coroutine)
         {
             return _context.StartCoroutine(coroutine);
+        }
+
+        public override void ThrowError(string message)
+        {
+            _context.ThrowError(message);
         }
     }
 }
