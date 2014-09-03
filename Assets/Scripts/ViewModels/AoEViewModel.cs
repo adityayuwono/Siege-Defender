@@ -21,7 +21,7 @@ namespace Scripts.ViewModels
         {
             get { return 1f; }
         }
-        public virtual float HideDelay
+        public override float HideDelay
         {
             get { return 0.05f; }
         }
@@ -34,9 +34,7 @@ namespace Scripts.ViewModels
 
         public override void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition, Vector3 contactPoint)
         {
-            var enemyViewModel = targetObject as EnemyBaseViewModel;
-            if (enemyViewModel != null)
-                DamageEnemy(enemyViewModel, contactPoint);
+            DamageEnemy(targetObject, contactPoint);
         }
 
         private Vector3 _position;

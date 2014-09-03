@@ -1,5 +1,7 @@
-﻿using Scripts.Components;
+﻿using System.Collections;
+using Scripts.Components;
 using Scripts.ViewModels;
+using UnityEngine;
 
 namespace Scripts.Views
 {
@@ -34,6 +36,17 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
+            _viewModel.Root.StartCoroutine(DelayedHiding(reason));
+        }
+
+        private IEnumerator DelayedHiding(string reason)
+        {
+            yield return new WaitForSeconds(_viewModel.HideDelay);
+            HideProjectile(reason);
+        }
+
+        protected virtual void HideProjectile(string reason)
+        {
             _collisionController.OnCollision -= _viewModel.CollideWithTarget;
             _collisionController.enabled = false;
 
@@ -45,11 +58,6 @@ namespace Scripts.Views
             Transform.parent = null;
 
             base.OnDeath(reason);
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
         }
     }
 }

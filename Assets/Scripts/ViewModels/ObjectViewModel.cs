@@ -55,6 +55,12 @@ namespace Scripts.ViewModels
 
 
         #region Death
+
+        public virtual bool ApplyDamage(float damage, ProjectileBaseViewModel source = null)
+        {
+            return false;
+        }
+        
         /// <summary>
         /// All things die eventually, we can only delay the inevitable
         /// </summary>
@@ -63,16 +69,16 @@ namespace Scripts.ViewModels
             get { return 0f; }
         }
         
-        public Action<ObjectViewModel> OnObjectDeath;
+        public Action<ObjectViewModel> OnObjectDeactivated;
         
         protected override void OnDeactivate()
         {
             base.OnDeactivate();
 
-            if (OnObjectDeath != null)
-                OnObjectDeath(this);
+            if (OnObjectDeactivated != null)
+                OnObjectDeactivated(this);
 
-            OnObjectDeath = null;
+            OnObjectDeactivated = null;
         }
         #endregion
 

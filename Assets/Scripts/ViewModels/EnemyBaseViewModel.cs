@@ -49,7 +49,7 @@ namespace Scripts.ViewModels
         /// </summary>
         /// <param name="damage">How many health we should reduce</param>
         /// <param name="source">Set if we want to attach the object to the target</param>
-        public void ApplyDamage(float damage, ProjectileBaseViewModel source = null)
+        public override bool ApplyDamage(float damage, ProjectileBaseViewModel source = null)
         {
             if (source != null)
                 AttachProjectile(source);
@@ -61,6 +61,8 @@ namespace Scripts.ViewModels
                 if (Health <= 0)
                     Hide("Killed");
             }
+
+            return true;
         }
 
         private void AttachProjectile(ProjectileBaseViewModel source)

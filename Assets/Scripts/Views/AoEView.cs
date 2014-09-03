@@ -28,21 +28,5 @@ namespace Scripts.Views
 
             SetPosition();
         }
-
-        protected override void OnHide(string reason)
-        {
-            _viewModel.Root.StartCoroutine(DelayedHiding(reason));
-        }
-
-        private IEnumerator DelayedHiding(string reason)
-        {
-            yield return new WaitForSeconds(_viewModel.HideDelay);
-            HideAoE(reason);
-        }
-
-        protected virtual void HideAoE(string reason)
-        {
-            base.OnHide(reason);
-        }
     }
 }

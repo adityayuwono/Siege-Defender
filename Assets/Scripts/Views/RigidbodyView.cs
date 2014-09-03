@@ -58,11 +58,15 @@ namespace Scripts.Views
 
 
 
-        protected void AddRelativeForce(Vector3 direction)
+        protected virtual void AddRelativeForce(Vector3 direction, ForceMode forceMode = ForceMode.Impulse)
         {
+            // Reset parameters to makes sure we have a fresh RigidBody
             _rigidbody.isKinematic = false;
-            _rigidbody.AddRelativeForce(direction, ForceMode.Impulse);
-            _rigidbody.AddRelativeTorque(Vector3.right*1.5f, ForceMode.Impulse);
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
+
+            _rigidbody.AddRelativeForce(direction, forceMode);
+            _rigidbody.AddRelativeTorque(Vector3.right * 1.5f, forceMode);
         }
 
         protected void Freeze(bool isKinematic = false)

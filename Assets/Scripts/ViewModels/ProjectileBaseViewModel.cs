@@ -25,11 +25,18 @@ namespace Scripts.ViewModels
 
         public virtual void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition, Vector3 contactPoint) { }
 
-        protected void DamageEnemy(EnemyBaseViewModel enemy, Vector3 contactPoint, bool attachToEnemy = false)
+        protected bool DamageEnemy(ObjectViewModel enemy, Vector3 contactPoint, bool attachToEnemy = false)
         {
             var damage = CalculateDamage();
-            Root.DamageDisplay.DisplayDamage(damage, contactPoint);
-            enemy.ApplyDamage(damage, attachToEnemy ? this : null);
+            var isDamageApplied = enemy.ApplyDamage(damage, attachToEnemy ? this : null);
+            if (isDamageApplied)
+                Root.DamageDisplay.DisplayDamage(damage, contactPoint);
+            return isDamageApplied;
+        }
+
+        public virtual float HideDelay
+        {
+            get { return 0f; }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Scripts.ViewModels
         protected TU GetObject<TU>(string objectId) where TU : T
         {
             var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId));
-            objectResult.OnObjectDeath += Object_OnDeath;
+            objectResult.OnObjectDeactivated += Object_OnDeath;
             return objectResult as TU;
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using Scripts.Core;
-using Scripts.Helpers;
 using Scripts.Models;
 using Scripts.Views;
 using UnityEngine;
@@ -62,22 +61,17 @@ namespace Scripts.ViewModels
         {
             // Need checking here because sometimes two collisions can happen very quickly
             if (_hasCollided) return;
+            _hasCollided = true;
 
             IsKinematic.SetValue(true);
-
+            
             // Spawn AoE if there are any Id defined
             if (!string.IsNullOrEmpty(_model.AoEId))
                 _parent.SpawnAoE(_model.AoEId, collisionPosition);
-
-            _hasCollided = true;
-            var enemyViewModel = targetObject as EnemyBaseViewModel;
-            if (enemyViewModel != null)
+            
+            if (!DamageEnemy(targetObject, contactPoint, true))
             {
-                DamageEnemy(enemyViewModel, contactPoint, true);
-            }
-            else
-            {
-                Hide("Hit Nothing");
+                Hide("Hit Nothing");// If we don't hit an enemy, hide the projectile
             }
         }
 
