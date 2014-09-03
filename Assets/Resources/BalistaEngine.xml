@@ -21,9 +21,9 @@
 			AssetId="Projectiles/Fire" 
 			RoF="0.5" Ammunition="25" ReloadTime="1" 
 			Accuracy="0.9" Deviation="0.001" />
-		<Projectile 	Id="IronBall" Damage="100" 
+		<Piercing 	Id="IronBall" Damage="100-200" 
 			AssetId="Projectiles/IronBall"
-			RoF="2" Ammunition="1" ReloadTime="200" 
+			RoF="1" Ammunition="99" ReloadTime="1" 
 			Accuracy="1" Deviation="0" />
 
 		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
@@ -142,7 +142,7 @@
 						<Source AssetId="Shooter"/>
 						<Target AssetId="Target" Index="0"/>
 					</Shooter>
-					<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="WoodenBalista" Index="1">
+					<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="IronBall" Index="1">
 						<Source AssetId="Shooter"/>
 						<Target AssetId="Target" Index="1"/>
 					</Shooter>
