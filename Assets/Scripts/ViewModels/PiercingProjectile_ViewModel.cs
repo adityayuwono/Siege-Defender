@@ -16,17 +16,26 @@ namespace Scripts.ViewModels
         public override void Show()
         {
             base.Show();
-
+            _damageMultiplier = 1;
             Hide("Hide from show :D");
         }
 
+        protected override float CalculateDamage()
+        {
+            return base.CalculateDamage()*(_damageMultiplier);
+        }
+
+        private float _damageMultiplier;
         public override void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition, Vector3 contactPoint)
         {
             // Spawn AoE if there are any Id defined
             if (!string.IsNullOrEmpty(_model.AoEId))
                 _parent.SpawnAoE(_model.AoEId, collisionPosition);
 
-            DamageEnemy(targetObject, contactPoint, false);
+            if (DamageEnemy(targetObject, contactPoint, false))
+                _damageMultiplier *= 0.75f;
+            else
+                _damageMultiplier = 0.25f;
         }
 
         public override float HideDelay

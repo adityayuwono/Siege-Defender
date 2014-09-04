@@ -20,5 +20,18 @@ namespace Scripts.Components
                 }
             }
         }
+
+        private void OnTriggerEnter(Collider target)
+        {
+            if (OnCollision != null)
+            {
+                var viewModelController = target.gameObject.GetComponent<ViewModelController>();
+                if (viewModelController != null)
+                {
+                    var viewModel = viewModelController.GetViewModel();
+                    OnCollision(viewModel, transform.position, target.transform.position);
+                }
+            }
+        }
     }
 }

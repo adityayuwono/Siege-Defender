@@ -21,9 +21,9 @@
 			AssetId="Projectiles/Fire" 
 			RoF="0.5" Ammunition="25" ReloadTime="1" 
 			Accuracy="0.9" Deviation="0.001" />
-		<Piercing 	Id="IronBall" Damage="100-200" 
+		<Piercing 	Id="IronBall" Damage="50-80" 
 			AssetId="Projectiles/IronBall"
-			RoF="1" Ammunition="99" ReloadTime="1" 
+			RoF="4" Ammunition="3" ReloadTime="10" 
 			Accuracy="1" Deviation="0" />
 
 		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
