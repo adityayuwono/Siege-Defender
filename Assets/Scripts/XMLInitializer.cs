@@ -43,6 +43,10 @@ namespace Scripts
                 // Woohooo found the file
                 engineText = loader.text;
 
+#if UNITY_EDITOR
+            engineText = EngineText.text;
+#endif
+
             // Keep it for later, the rest of the scenes are going to need this cutie
             EngineXML = engineText;
 
