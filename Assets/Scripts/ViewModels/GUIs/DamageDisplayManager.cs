@@ -9,6 +9,11 @@ namespace Scripts.ViewModels.GUIs
         public DamageDisplayManager(DamageDisplayModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
+        }
+
+        protected override void OnLoad()
+        {
+            base.OnLoad();
 
             Root.DamageDisplay = this;
         }
