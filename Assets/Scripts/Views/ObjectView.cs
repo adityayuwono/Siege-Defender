@@ -45,9 +45,9 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
-            KillGameObject(reason);
-
             base.OnHide(reason);
+            
+            KillGameObject(reason);
         }
 
         private bool _isLoaded;
@@ -90,15 +90,14 @@ namespace Scripts.Views
         }
 
 
-
+        private void KillGameObject(string reason)
+        {
+            _viewModel.Root.StartCoroutine(DelayedDeath(_viewModel.DeathDelay, reason));
+        }
         private IEnumerator DelayedDeath(float delay, string reason)
         {
             yield return new WaitForSeconds(delay);
             OnDeath(reason);
-        }
-        private void KillGameObject(string reason)
-        {
-            _viewModel.Root.StartCoroutine(DelayedDeath(_viewModel.DeathDelay, reason));
         }
         protected virtual void OnDeath(string reason)
         {

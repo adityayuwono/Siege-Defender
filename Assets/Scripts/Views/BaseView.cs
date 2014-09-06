@@ -1,17 +1,15 @@
-﻿using System.Diagnostics;
-using Scripts.Interfaces;
+﻿using Scripts.Interfaces;
+using Scripts.ViewModels;
 
 namespace Scripts.Views
 {
     public class BaseView : IBase
     {
-        private readonly ViewModels.BaseViewModel _viewModel;
-        private readonly BaseView _parent;
+        private readonly BaseViewModel _viewModel;
 
-        protected BaseView(ViewModels.BaseViewModel viewModel, BaseView parent)
+        protected BaseView(BaseViewModel viewModel, BaseView parent)
         {
             _viewModel = viewModel;
-            _parent = parent;
 
             _viewModel.OnShow += OnShow;
             _viewModel.OnHide += OnHide;
@@ -22,12 +20,7 @@ namespace Scripts.Views
             get { return _viewModel.Id; }
         }
 
-
         protected virtual void OnShow() { }
-
-        protected virtual void OnHide(string reason)
-        {
-            //UnityEngine.Debug.Log(Id+", Hiding "+reason);
-        }
+        protected virtual void OnHide(string reason){ }
     }
 }

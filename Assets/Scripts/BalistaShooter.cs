@@ -89,12 +89,11 @@ namespace Scripts
         {
             base.OnActivate();
 
-            if (_model.Scenes.Count == 0)
-                throw new EngineException(this, string.Format("Failed to load any scenes"));
+            // Cache all scenes on the dictionary
             foreach (var sceneModel in _model.Scenes)
-                _scenes.Add(sceneModel.Id, sceneModel);
+                _scenes.Add(sceneModel.Id, new SceneViewModel(sceneModel, this));
 
-            ChangeScene("MainMenu");// Hack, not caring for now :)
+            ChangeScene(_model.Scenes[0].Id);// Load the first scene on the list
         }
 
         public override LevelModel GetLevel(string levelId)
@@ -118,7 +117,7 @@ namespace Scripts
         }
 
         private SceneViewModel _currentScene;
-        private readonly Dictionary<string, SceneModel> _scenes = new Dictionary<string, SceneModel>(); 
+        private readonly Dictionary<string, SceneViewModel> _scenes = new Dictionary<string, SceneViewModel>(); 
         public override void ChangeScene(string sceneId)
         {
             // Deactivate Current Active Scene, to avoid space time continuum
@@ -129,8 +128,7 @@ namespace Scripts
             }
 
             // I think it's save enough to show a new one, let's hope i'm right
-            var sceneModel = _scenes[sceneId];
-            _currentScene = new SceneViewModel(sceneModel, this);
+            _currentScene = _scenes[sceneId];
             _currentScene.Activate();
             _currentScene.Show();
         }
