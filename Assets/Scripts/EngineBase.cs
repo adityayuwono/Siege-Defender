@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -19,10 +20,7 @@ namespace Scripts
             _model = model;
         }
 
-        public virtual void MapInjections()
-        {
-            
-        }
+        public virtual void MapInjections() { }
 
 
         private readonly Dictionary<string, BaseView> _views = new Dictionary<string, BaseView>();
@@ -114,6 +112,8 @@ namespace Scripts
             return propertyDict[viewModelId];
         }
         #endregion
+
+        #region Virtual Methods
         public virtual EnemyBaseModel GetEnemy(string enemyId)
         {
             throw new System.NotImplementedException();
@@ -148,5 +148,9 @@ namespace Scripts
         {
             throw new System.NotImplementedException();
         }
+
+        #endregion
+
+        
     }
 }
