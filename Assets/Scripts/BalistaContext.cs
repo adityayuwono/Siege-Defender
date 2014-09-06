@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Scripts
 {
+    /// <summary>
+    /// Main Component as a bridge between the Engine to Unity
+    /// </summary>
     public class BalistaContext : BaseController
     {
         private void Start()
@@ -20,7 +23,13 @@ namespace Scripts
             engine.Show();
         }
 
+        #region Error Debug
+        // Used to display error to the user, not going to be included in the actual release
         private string _lastErrorMessage;
+        /// <summary>
+        /// Show error in-game Screen, for debugging purposes only!
+        /// </summary>
+        /// <param name="message"></param>
         public void ThrowError(string message)
         {
             _lastErrorMessage = message;
