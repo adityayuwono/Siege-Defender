@@ -37,7 +37,7 @@ namespace Scripts.Components
                     collisionPosition.x = targetPosition.x;
                     collisionPosition.z = targetPosition.z;
 
-                    OnCollision(viewModel, transform.position, transform.position);
+                    OnCollision(viewModel, transform.position, collisionPosition);
                 }
             }
         }
