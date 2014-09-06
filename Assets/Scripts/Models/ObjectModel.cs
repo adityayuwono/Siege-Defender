@@ -13,13 +13,16 @@ namespace Scripts.Models
         public string Type;
 
         [XmlArray]
+        // 3D Objects
         [XmlArrayItem(ElementName = "Element", Type = typeof(ElementModel))]
         [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
         [XmlArrayItem(ElementName = "Player", Type = typeof(PlayerModel))]
         [XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitboxModel))]
         [XmlArrayItem(ElementName = "GUIRoot", Type = typeof(GUIRootModel))]
         [XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplayModel))]
-        public List<ElementModel> Elements = new List<ElementModel>();
+        // GUIs
+        [XmlArrayItem(ElementName = "Button", Type = typeof(Button_Model))]
+        public List<ElementModel> Elements { get; set; }
 
         [XmlAttribute]
         public string AssetId { get; set; }

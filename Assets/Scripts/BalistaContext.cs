@@ -48,13 +48,18 @@ namespace Scripts
         {
             _lastErrorMessage = message;
         }
-
         private void OnGUI()
         {
             if (!string.IsNullOrEmpty(_lastErrorMessage))
             {
                 GUI.Label(new Rect(0,50,Screen.width, Screen.height), _lastErrorMessage);
             }
+        }
+        #endregion
+
+        public void OnClicked(string s)
+        {
+            Debug.LogError(s);
         }
     }
 }

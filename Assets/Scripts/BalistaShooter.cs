@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Scripts.Helpers;
 using Scripts.Models;
 using Scripts.Models.GUIs;
 using Scripts.ViewModels;
+using Scripts.ViewModels.Actions;
 using Scripts.ViewModels.GUIs;
 using Scripts.Views;
 using Scripts.Views.GUIs;
@@ -37,6 +39,8 @@ namespace Scripts
             IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<ObjectViewModel>().To<PlayerHitboxViewModel>();
             IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ObjectViewModel>().To<GUIRoot>();
             IoCContainer.RegisterFor<DamageDisplayModel>().TypeOf<ObjectViewModel>().To<DamageDisplayManager>();
+            // GUIs
+            IoCContainer.RegisterFor<Button_Model>().TypeOf<ObjectViewModel>().To<Button_ViewModel>();
 
             // ProjectileBaseViewModel
             IoCContainer.RegisterFor<ProjectileModel>().TypeOf<ProjectileBaseViewModel>().To<ProjectileViewModel>();
@@ -48,6 +52,9 @@ namespace Scripts
             IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
 
             IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
+
+            // Actions
+            IoCContainer.RegisterFor<LoadScene_ActionModel>().TypeOf<Action_ViewModel>().To<LoadScene_ActionViewModel>();
             #endregion
 
             #region ViewModel to View(BaseView)
@@ -59,6 +66,8 @@ namespace Scripts
             IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
             IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
             IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
+            // GUIs
+            IoCContainer.RegisterFor<Button_ViewModel>().TypeOf<BaseView>().To<Button_View>();
 
             IoCContainer.RegisterFor<ObjectViewModel>().TypeOf<BaseView>().To<ObjectView>();
             IoCContainer.RegisterFor<ShooterViewModel>().TypeOf<BaseView>().To<ShooterView>();
@@ -80,9 +89,12 @@ namespace Scripts
         {
             base.OnActivate();
 
-            var scene = new SceneViewModel(_model.Scene, this);
-            scene.Activate();
-            scene.Show();
+            if (_model.Scenes.Count == 0)
+                throw new EngineException(this, string.Format("Failed to load any scenes"));
+            foreach (var sceneModel in _model.Scenes)
+                _scenes.Add(sceneModel.Id, sceneModel);
+
+            ChangeScene("MainMenu");// Hack, not caring for now :)
         }
 
         public override LevelModel GetLevel(string levelId)
@@ -103,6 +115,24 @@ namespace Scripts
         public override void ThrowError(string message)
         {
             _context.ThrowError(message);
+        }
+
+        private SceneViewModel _currentScene;
+        private readonly Dictionary<string, SceneModel> _scenes = new Dictionary<string, SceneModel>(); 
+        public override void ChangeScene(string sceneId)
+        {
+            // Deactivate Current Active Scene, to avoid space time continuum
+            if (_currentScene != null)
+            {
+                var reason = "Change to scene: " + sceneId;
+                _currentScene.Hide(reason);
+            }
+
+            // I think it's save enough to show a new one, let's hope i'm right
+            var sceneModel = _scenes[sceneId];
+            _currentScene = new SceneViewModel(sceneModel, this);
+            _currentScene.Activate();
+            _currentScene.Show();
         }
     }
 }
