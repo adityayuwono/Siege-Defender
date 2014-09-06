@@ -59,12 +59,20 @@ namespace Scripts.Helpers
             if (instanceType == null)
                 return default(T);
 
-            var instance = Activator.CreateInstance(instanceType, parameters) as T;
+            object instance = null;
+            try
+            {
+                instance = Activator.CreateInstance(instanceType, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("{0}\nCheck the inheritance or encapsulation of the constructor", ex));
+            }
 
             if (instance == null)
                 throw new Exception(string.Format("Failed to create an Instance for {0} with parameters: {1}", key, parameters));
 
-            return instance;
+            return instance as T;
         }
     }
 
