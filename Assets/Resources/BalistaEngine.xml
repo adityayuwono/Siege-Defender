@@ -23,7 +23,7 @@
 			Accuracy="0.9" Deviation="0.001" />
 		<Piercing 	Id="IronBall" Damage="50-80" 
 			AssetId="Projectiles/IronBall"
-			RoF="4" Ammunition="3" ReloadTime="10" 
+			RoF="2" Ammunition="3" ReloadTime="1" 
 			Accuracy="1" Deviation="0" />
 
 		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
@@ -34,6 +34,17 @@
 		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
 		<DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" Font="ITCAvantGardePro-Bk" />
+
+		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
+			<Elements>
+				<Button AssetId="WeaponSelection">
+					<LoadScene SceneId="SkillTree" />
+				</Button>
+				<Button AssetId="StartGame">
+					<LoadScene SceneId="Limbo" />
+				</Button>
+			</Elements>
+		</Scene>
 	</Objects>
 
 	<Levels>
@@ -128,43 +139,49 @@
 		</Level>
 	</Levels>
 
-	<Scene Id="Limbo" AssetId="Scenes/Limbo">
-		<Elements>
-			<Element AssetId="Ground" />
+	<Scenes>
+		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
+			<Elements>
+				<Button AssetId="WeaponSelection">
+					<LoadScene SceneId="SkillTree" />
+				</Button>
+				<Button AssetId="StartGame">
+					<LoadScene SceneId="Limbo" />
+				</Button>
+			</Elements>
+		</Scene>
 
-			<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" LevelId="Level1" />
+		<Scene Id="SkillTree" AssetId="Scenes/SkillTree">
+		</Scene>
 
-			<PlayerHitbox AssetId="PlayerHealth" />
-			
-			<Player Id="Player" AssetId="Player" >
-				<Shooters>
-					<Shooter Id="LeftShooter" AssetId="LeftShooter" ProjectileId="WoodenBalista" Index="0">
-						<Source AssetId="Shooter"/>
-						<Target AssetId="Target" Index="0"/>
-					</Shooter>
-					<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="IronBall" Index="1">
-						<Source AssetId="Shooter"/>
-						<Target AssetId="Target" Index="1"/>
-					</Shooter>
-					<!-- <Shooter Id="MiddleShooter" AssetId="MiddleShooter" ProjectileId="IronBall">
-						<Source AssetId="Target"/>
-						<Target AssetId="Target" />
-					</Shooter> -->
-				</Shooters>
-			</Player>
+		<Scene Id="Limbo" AssetId="Scenes/Limbo">
+			<Elements>
+				<Element AssetId="Ground" />
 
-			<GUIRoot AssetId="UIRoot">
-				<Elements>
-					
-				</Elements>
-			</GUIRoot>
-			<DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
-		</Elements>
-	</Scene>
+				<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" LevelId="Level1" />
 
+				<PlayerHitbox AssetId="PlayerHealth" />
+				
+				<Player Id="Player" AssetId="Player" >
+					<Shooters>
+						<Shooter Id="LeftShooter" AssetId="LeftShooter" ProjectileId="WoodenBalista" Index="0">
+							<Source AssetId="Shooter"/>
+							<Target AssetId="Target" Index="0"/>
+						</Shooter>
+						<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="IronBall" Index="1">
+							<Source AssetId="Shooter"/>
+							<Target AssetId="Target" Index="1"/>
+						</Shooter>
+					</Shooters>
+				</Player>
 
+				<GUIRoot AssetId="UIRoot">
+					<Elements>
+						<DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
+					</Elements>
+				</GUIRoot>
 
-	<GUIs>
-
-	</GUIs>
+			</Elements>
+		</Scene>
+	</Scenes>
 </Engine>

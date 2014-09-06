@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Scripts.Models;
+﻿using Scripts.Models;
 
 namespace Scripts.ViewModels
 {

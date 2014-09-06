@@ -20,14 +20,8 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "Level", Type = typeof(LevelModel))]
         public List<LevelModel> Levels { get; set; }
 
-
-        [XmlElement]
-        public PlayerModel Player { get; set; }
-
-        [XmlElement]
-        public EnemyManagerModel EnemyManager { get; set; }
-
-        [XmlElement]
-        public SceneModel Scene { get; set; }
+        [XmlArray]
+        [XmlArrayItem(ElementName = "Scene", Type = typeof(SceneModel))]
+        public List<SceneModel> Scenes { get; set; }
     }
 }

@@ -89,5 +89,10 @@ namespace Scripts
         {
             throw new System.NotImplementedException();
         }
+
+        public virtual void ChangeScene(string sceneId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

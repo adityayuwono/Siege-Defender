@@ -29,7 +29,15 @@ namespace Scripts.Components
                 if (viewModelController != null)
                 {
                     var viewModel = viewModelController.GetViewModel();
-                    OnCollision(viewModel, transform.position, target.transform.position);
+                    
+                    // Crude calculation of collision point, need to improve later
+                    // TODO: Improve this
+                    var collisionPosition = transform.position;
+                    var targetPosition = target.transform.position;
+                    collisionPosition.x = targetPosition.x;
+                    collisionPosition.z = targetPosition.z;
+
+                    OnCollision(viewModel, transform.position, transform.position);
                 }
             }
         }
