@@ -12,7 +12,7 @@ namespace Scripts
 {
     public class EngineBase : BaseViewModel
     {
-        private EngineModel _model;
+        private readonly EngineModel _model;
         
         public EngineBase(EngineModel model, ObjectViewModel parent) : base(model, parent)
         {
