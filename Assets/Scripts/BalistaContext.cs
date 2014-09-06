@@ -7,13 +7,12 @@ namespace Scripts
 {
     public class BalistaContext : BaseController
     {
-        public TextAsset EngineText;
-
         private void Start()
         {
-            Physics.IgnoreLayerCollision(9,9);
+            Physics.IgnoreLayerCollision(9,9);// Layer 9 will not collide with layer 9
 
-            var engineModel = Deserializer<EngineModel>.GetObjectFromXML(EngineText.text);
+            var engineText = XMLInitializer.EngineXML;
+            var engineModel = Deserializer<EngineModel>.GetObjectFromXML(engineText);
 
             var engine = new BalistaShooter(engineModel, this);
             engine.MapInjections();
