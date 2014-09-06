@@ -57,7 +57,6 @@ namespace Scripts.ViewModels
             if (Health > 0)
             {
                 Health -= damage;
-                OnDamaged(damage);
                 if (Health <= 0)
                     Hide("Killed");
             }

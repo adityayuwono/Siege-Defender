@@ -16,7 +16,6 @@ namespace Scripts.Views
             _parent = parent;
 
             _viewModel.DoAttach += AttachProjectileToSelf;
-            _viewModel.OnDamaged += DisplayDamage;
         }
 
         
@@ -51,12 +50,6 @@ namespace Scripts.Views
         }
 
 
-
-        private void DisplayDamage(float damage)
-        {
-            // TODO: Display Damage
-            var damageToDisplay = Mathf.RoundToInt(damage);
-        }
 
         private bool _isDead;
         private IEnumerator Walking()

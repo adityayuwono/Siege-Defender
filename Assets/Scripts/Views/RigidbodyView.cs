@@ -56,8 +56,6 @@ namespace Scripts.Views
             base.OnDestroy();
         }
 
-
-
         protected virtual void AddRelativeForce(Vector3 direction, ForceMode forceMode = ForceMode.Impulse)
         {
             // Reset parameters to makes sure we have a fresh RigidBody
