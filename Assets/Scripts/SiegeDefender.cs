@@ -12,14 +12,14 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class BalistaShooter : EngineBase
+    public class SiegeDefender : EngineBase
     {
         public static EngineBase Instance;
 
         private readonly EngineModel _model;
         private readonly BalistaContext _context;
 
-        public BalistaShooter(EngineModel model, BalistaContext parent) : base(model, null)
+        public SiegeDefender(EngineModel model, BalistaContext parent) : base(model, null)
         {
             _model = model;
             _context = parent;

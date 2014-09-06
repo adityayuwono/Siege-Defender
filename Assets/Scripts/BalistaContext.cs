@@ -31,7 +31,7 @@ namespace Scripts
             var engineModel = Deserializer<EngineModel>.GetObjectFromXML(engineText);
             
             // Start ann instance of the Engine
-            var engine = new BalistaShooter(engineModel, Instance);
+            var engine = new SiegeDefender(engineModel, Instance);
             engine.MapInjections();
             engine.Activate();
             engine.Show();

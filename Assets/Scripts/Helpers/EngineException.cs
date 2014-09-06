@@ -9,7 +9,7 @@ namespace Scripts.Helpers
         public EngineException(IBase baseObject, string message) :
             base(string.Format("{0}({1}): {2}\nat: {3}", baseObject.GetType(), baseObject.Id, message, Time.realtimeSinceStartup))
         {
-            BalistaShooter.Instance.ThrowError(string.Format("{0}({1}): {2}\nat: {3}", baseObject.GetType(), baseObject.Id, message, Time.realtimeSinceStartup));
+            SiegeDefender.Instance.ThrowError(string.Format("{0}({1}): {2}\nat: {3}", baseObject.GetType(), baseObject.Id, message, Time.realtimeSinceStartup));
         }
     }
 }
