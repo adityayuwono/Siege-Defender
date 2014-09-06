@@ -10,6 +10,18 @@ namespace Scripts
     /// </summary>
     public class BalistaContext : BaseController
     {
+        /// <summary>
+        /// Singleton, YEAH!!!
+        /// </summary>
+        public static BalistaContext Instance { get { return _instance; } }
+        private static BalistaContext _instance;
+
+        private void Awake()
+        {
+            // Initialize singleton
+            _instance = this;
+        }
+
         private void Start()
         {
             Physics.IgnoreLayerCollision(9,9);// Layer 9 will not collide with layer 9
