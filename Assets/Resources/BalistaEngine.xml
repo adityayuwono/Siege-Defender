@@ -34,17 +34,6 @@
 		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
 		<DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" Font="ITCAvantGardePro-Bk" />
-
-		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
-			<Elements>
-				<Button AssetId="WeaponSelection">
-					<LoadScene SceneId="SkillTree" />
-				</Button>
-				<Button AssetId="StartGame">
-					<LoadScene SceneId="Limbo" />
-				</Button>
-			</Elements>
-		</Scene>
 	</Objects>
 
 	<Levels>

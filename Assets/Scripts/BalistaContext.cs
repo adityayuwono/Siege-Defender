@@ -24,7 +24,7 @@ namespace Scripts
 
         private void Start()
         {
-            Physics.IgnoreLayerCollision(9,9);// Layer 9 will not collide with layer 9
+            Physics.IgnoreLayerCollision(9,9);// Layer 9 will not collide with layer 9, this is the projectiles
 
             // Get XML from Splash, simple stuff
             var engineText = XMLInitializer.EngineXML;
