@@ -16,13 +16,14 @@ namespace Scripts.ViewModels
         public override void Show()
         {
             base.Show();
+
             _damageMultiplier = 1;
-            Hide("Hide from show :D");
+            Hide("Hide since show, this is weird, :D:D:D");
         }
 
         protected override float CalculateDamage()
         {
-            return base.CalculateDamage()*(_damageMultiplier);
+            return base.CalculateDamage()*_damageMultiplier;
         }
 
         private float _damageMultiplier;
@@ -33,9 +34,7 @@ namespace Scripts.ViewModels
                 _parent.SpawnAoE(_model.AoEId, collisionPosition);
 
             if (DamageEnemy(targetObject, contactPoint, false))
-                _damageMultiplier *= 0.75f;
-            else
-                _damageMultiplier = 0.25f;
+                _damageMultiplier *= _model.DamageReduction;// Every enemy hit by piercing will reduce it's effectiveness
         }
 
         public override float HideDelay
