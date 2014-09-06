@@ -26,10 +26,12 @@ namespace Scripts
         {
             Physics.IgnoreLayerCollision(9,9);// Layer 9 will not collide with layer 9
 
+            // Get XML from Splash, simple stuff
             var engineText = XMLInitializer.EngineXML;
             var engineModel = Deserializer<EngineModel>.GetObjectFromXML(engineText);
-
-            var engine = new BalistaShooter(engineModel, this);
+            
+            // Start ann instance of the Engine
+            var engine = new BalistaShooter(engineModel, Instance);
             engine.MapInjections();
             engine.Activate();
             engine.Show();
