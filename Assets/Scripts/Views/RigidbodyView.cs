@@ -27,6 +27,7 @@ namespace Scripts.Views
                 _rigidbody.isKinematic = true;
             }
 
+            // Recalculate center of mass
             var centerOfMass = Transform.FindChild("CenterOfMass");
             if (centerOfMass != null)
                 _rigidbody.centerOfMass = centerOfMass.localPosition;
@@ -67,6 +68,9 @@ namespace Scripts.Views
             _rigidbody.AddRelativeTorque(Vector3.right * 1.5f, forceMode);
         }
 
+        /// <summary>
+        /// FREEZE!!!
+        /// </summary>
         protected void Freeze(bool isKinematic = false)
         {
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
