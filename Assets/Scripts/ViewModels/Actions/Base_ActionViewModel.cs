@@ -2,9 +2,9 @@
 
 namespace Scripts.ViewModels.Actions
 {
-    public class Action_ViewModel : BaseViewModel
+    public class Base_ActionViewModel : BaseViewModel
     {
-        public Action_ViewModel(BaseModel model, BaseViewModel parent) : base(model, parent)
+        public Base_ActionViewModel(BaseModel model, BaseViewModel parent) : base(model, parent)
         {
         }
 
