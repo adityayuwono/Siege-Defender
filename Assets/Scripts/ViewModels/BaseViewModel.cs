@@ -14,8 +14,12 @@ namespace Scripts.ViewModels
             _model = model;
             Parent = parent;
 
+            // Generate a unique Id if there's none
             if (string.IsNullOrEmpty(_model.Id))
                 _model.Id = Guid.NewGuid().ToString();
+            
+            // Immediately register this to the main Engine
+            Root.RegisterViewModel(this);
         }
 
         #region Actions
