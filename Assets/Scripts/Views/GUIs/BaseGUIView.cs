@@ -2,7 +2,7 @@
 
 namespace Scripts.Views.GUIs
 {
-    public class BaseGUIView : ObjectView
+    public class BaseGUIView : ElementView
     {
         private BaseGUI _viewModel;
         public BaseGUIView(BaseGUI viewModel, ObjectView parent) : base(viewModel, parent)

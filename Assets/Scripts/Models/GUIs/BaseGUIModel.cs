@@ -1,6 +1,6 @@
 ﻿namespace Scripts.Models.GUIs
 {
-    public class BaseGUIModel : ObjectModel
+    public class BaseGUIModel : ElementModel
     {
     }
 }
