@@ -13,10 +13,12 @@ namespace Scripts.Views
             _viewModel = viewModel;
             _parent = parent;
         }
-
+        
         protected override GameObject GetGameObject()
         {
-            return _parent.Transform.FindChild(_viewModel.AssetId).gameObject;
+            // We try to find matching child, if there's none, we instantiate from prefabs
+            var tryFindChild = _parent.Transform.FindChild(_viewModel.AssetId);
+            return tryFindChild == null ? base.GetGameObject() : tryFindChild.gameObject;
         }
 
         protected override void SetPosition()
