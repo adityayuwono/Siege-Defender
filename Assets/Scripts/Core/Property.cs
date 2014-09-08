@@ -1,7 +1,16 @@
 ﻿using System;
+using Scripts.ViewModels;
 
 namespace Scripts.Core
 {
+    public class AdjustableProperty<T> : Property<T>
+    {
+        public AdjustableProperty(string id, BaseViewModel viewModel)
+        {
+            viewModel.Root.RegisterProperty(viewModel, id, this);
+        }
+    }
+
     public class Property<T> : Property
     {
         public void SetValue(T newValue)
