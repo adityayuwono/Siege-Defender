@@ -39,9 +39,14 @@ namespace Scripts
             return _views[id] as T;
         }
 
+
         public IIoCContainer IoCContainer;
+        public BindingManager Binding;
         public IResource ResourceManager;
+
         public DamageDisplayManager DamageDisplay;
+
+
 
         public override EngineBase Root
         {
