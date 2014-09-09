@@ -22,6 +22,7 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplayModel))]
         [XmlArrayItem(ElementName = "ObjectDisplay", Type = typeof(ObjectDisplay_Model))]
         // GUIs
+        [XmlArrayItem(ElementName = "Inventory", Type = typeof(Inventory_Model))]
         [XmlArrayItem(ElementName = "Button", Type = typeof(Button_Model))]
         public List<ElementModel> Elements { get; set; }
 
