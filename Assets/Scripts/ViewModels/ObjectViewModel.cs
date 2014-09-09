@@ -20,7 +20,8 @@ namespace Scripts.ViewModels
             foreach (var elementModel in _model.Elements)
             {
                 var elementVM = Root.IoCContainer.GetInstance<ObjectViewModel>(elementModel.GetType(), new object[] { elementModel, this });
-
+                if (elementVM == null)
+                    throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
                 Elements.Add(elementVM);
             }
         }
