@@ -20,6 +20,7 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitboxModel))]
         [XmlArrayItem(ElementName = "GUIRoot", Type = typeof(GUIRootModel))]
         [XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplayModel))]
+        [XmlArrayItem(ElementName = "ObjectDisplay", Type = typeof(ObjectDisplay_Model))]
         // GUIs
         [XmlArrayItem(ElementName = "Button", Type = typeof(Button_Model))]
         public List<ElementModel> Elements { get; set; }
