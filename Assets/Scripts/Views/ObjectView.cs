@@ -64,14 +64,17 @@ namespace Scripts.Views
 
             GameObject.AddComponent<ViewModelController>().ViewModel = _viewModel;
 
+            GameObject.transform.parent = GetParent();
+        }
+        protected virtual Transform GetParent()
+        {
             Transform parentTransform;
             if (_parent == null || _parent.GameObject == null)
                 parentTransform = GameObject.Find("Context").transform;
             else
                 parentTransform = _parent.GameObject.transform;
 
-
-            GameObject.transform.parent = parentTransform;
+            return parentTransform;
         }
         protected virtual void OnDestroy() { }
         protected virtual GameObject GetGameObject()
