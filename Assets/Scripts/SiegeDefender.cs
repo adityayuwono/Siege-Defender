@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
+using Scripts.Models.Actions;
 using Scripts.Models.GUIs;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Actions;
@@ -30,7 +32,8 @@ namespace Scripts
         public override void MapInjections()
         {
             IoCContainer = new IoCContainer();
-            ResourceManager = new ResourcePooler();
+            Binding = new BindingManager(this);
+            ResourceManager = new ResourcePooler(this);
 
             #region Model to ViewModel
             IoCContainer.RegisterFor<ElementModel>().TypeOf<ObjectViewModel>().To<ElementViewModel>();
@@ -39,7 +42,10 @@ namespace Scripts
             IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<ObjectViewModel>().To<PlayerHitboxViewModel>();
             IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ObjectViewModel>().To<GUIRoot>();
             IoCContainer.RegisterFor<DamageDisplayModel>().TypeOf<ObjectViewModel>().To<DamageDisplayManager>();
+            IoCContainer.RegisterFor<ObjectDisplay_Model>().TypeOf<ObjectViewModel>().To<ObjectDisplay_ViewModel>();
             // GUIs
+            IoCContainer.RegisterFor<Inventory_Model>().TypeOf<ObjectViewModel>().To<Inventory_ViewModel>();
+            IoCContainer.RegisterFor<Item_Model>().TypeOf<ObjectViewModel>().To<Item_ViewModel>();
             IoCContainer.RegisterFor<Button_Model>().TypeOf<ObjectViewModel>().To<Button_ViewModel>();
 
             // ProjectileBaseViewModel
@@ -53,8 +59,9 @@ namespace Scripts
 
             IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
 
-            // Actions
-            IoCContainer.RegisterFor<LoadScene_ActionModel>().TypeOf<Action_ViewModel>().To<LoadScene_ActionViewModel>();
+            // Actions, doesnt have a model
+            IoCContainer.RegisterFor<LoadScene_ActionModel>().TypeOf<Base_ActionViewModel>().To<LoadScene_ActionViewModel>();
+            IoCContainer.RegisterFor<Setter_ActionModel>().TypeOf<Base_ActionViewModel>().To<Setter_ActionViewModel>();
             #endregion
 
             #region ViewModel to View(BaseView)
@@ -66,10 +73,15 @@ namespace Scripts
             IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
             IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
             IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
+            IoCContainer.RegisterFor<ObjectDisplay_ViewModel>().TypeOf<BaseView>().To<ObjectDisplay_View>();
             // GUIs
+            IoCContainer.RegisterFor<Item_ViewModel>().TypeOf<BaseView>().To<Item_View>();
+            IoCContainer.RegisterFor<Inventory_ViewModel>().TypeOf<BaseView>().To<Inventory_View>();
+            IoCContainer.RegisterFor<EquipmentSlot_ViewModel>().TypeOf<BaseView>().To<EquipmentSlot_View>();
             IoCContainer.RegisterFor<Button_ViewModel>().TypeOf<BaseView>().To<Button_View>();
 
             IoCContainer.RegisterFor<ObjectViewModel>().TypeOf<BaseView>().To<ObjectView>();
+            IoCContainer.RegisterFor<StaticObject_ViewModel>().TypeOf<BaseView>().To<StaticObject_View>();
             IoCContainer.RegisterFor<ShooterViewModel>().TypeOf<BaseView>().To<ShooterView>();
             IoCContainer.RegisterFor<TargetViewModel>().TypeOf<BaseView>().To<TargetView>();
             IoCContainer.RegisterFor<SceneViewModel>().TypeOf<BaseView>().To<SceneView>();
@@ -95,6 +107,8 @@ namespace Scripts
 
             ChangeScene(_model.Scenes[0].Id);// Load the first scene on the list
         }
+        
+
 
         public override LevelModel GetLevel(string levelId)
         {
