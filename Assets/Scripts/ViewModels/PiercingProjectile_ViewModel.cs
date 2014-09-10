@@ -6,11 +6,9 @@ namespace Scripts.ViewModels
     public class PiercingProjectile_ViewModel : ProjectileViewModel
     {
         private readonly PiercingProjectile_Model _model;
-        private readonly ShooterViewModel _parent;
         public PiercingProjectile_ViewModel(PiercingProjectile_Model model, ShooterViewModel parent) : base(model, parent)
         {
             _model = model;
-            _parent = parent;
         }
 
         public override void Show()
@@ -31,7 +29,7 @@ namespace Scripts.ViewModels
         {
             // Spawn AoE if there are any Id defined
             if (!string.IsNullOrEmpty(_model.AoEId))
-                _parent.SpawnAoE(_model.AoEId, collisionPosition);
+                GetParent<ShooterViewModel>().SpawnAoE(_model.AoEId, collisionPosition);
 
             if (DamageEnemy(targetObject, contactPoint, false))
                 _damageMultiplier *= _model.DamageReduction;// Every enemy hit by piercing will reduce it's effectiveness

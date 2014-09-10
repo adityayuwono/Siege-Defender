@@ -10,12 +10,10 @@ namespace Scripts.ViewModels
     public class ProjectileViewModel : ProjectileBaseViewModel
     {
         private readonly Projectile_Model _model;
-        private readonly ShooterViewModel _parent;
 
         public ProjectileViewModel(Projectile_Model model, ShooterViewModel parent) : base(model, parent)
         {
             _model = model;
-            _parent = parent;
         }
 
         public Action<ObjectView, ObjectView, float> DoShooting;
@@ -67,7 +65,7 @@ namespace Scripts.ViewModels
             
             // Spawn AoE if there are any Id defined
             if (!string.IsNullOrEmpty(_model.AoEId))
-                _parent.SpawnAoE(_model.AoEId, collisionPosition);
+                GetParent<ShooterViewModel>().SpawnAoE(_model.AoEId, collisionPosition);
             
             if (!DamageEnemy(targetObject, contactPoint, true))
             {
