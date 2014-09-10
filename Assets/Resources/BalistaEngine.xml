@@ -1,10 +1,10 @@
-<Engine>
+<Engine Id="SiegeDefender">
 	<Objects>
-		<Projectile 	Id="WoodenBalista" Damage="8-12" 
+		<Projectile 	Id="WoodArrow" Damage="8-12" 
 			AssetId="Projectiles/WoodenBalista" 
 			RoF="0.2" Ammunition="1000" Reload="0.1" 
 			Accuracy="0.9" Deviation="0.001" />
-		<Projectile 	Id="IronBalista" Damage="10-30" 
+		<Projectile 	Id="IronArrow" Damage="10-30" 
 			AssetId="Projectiles/IronBalista" 
 			RoF="0.25" Ammunition="500" Reload="0.2" 
 			Accuracy="0.7" Deviation="0.005" />
@@ -17,10 +17,6 @@
 			AssetId="Projectiles/FireBall" AoEId="Explosion"
 			RoF="0.2" Ammunition="25" ReloadTime="1" 
 			Accuracy="0.5" Deviation="0.01" />
-		<Projectile 	Id="Fire" Damage="15-19" 
-			AssetId="Projectiles/Fire" 
-			RoF="0.5" Ammunition="25" ReloadTime="1" 
-			Accuracy="0.9" Deviation="0.001" />
 		<Piercing 	Id="IronBall" Damage="50-80" 
 			AssetId="Projectiles/IronBall"
 			RoF="2" Ammunition="3" ReloadTime="1" 
@@ -131,16 +127,41 @@
 	<Scenes>
 		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
 			<Elements>
-				<Button AssetId="WeaponSelection">
-					<LoadScene SceneId="SkillTree" />
+				<Button AssetId="WeaponSelection" >
+					<LoadScene Target="SkillTree" />
 				</Button>
 				<Button AssetId="StartGame">
-					<LoadScene SceneId="Limbo" />
+					<LoadScene Target="Limbo" />
 				</Button>
 			</Elements>
 		</Scene>
 
 		<Scene Id="SkillTree" AssetId="Scenes/SkillTree">
+			<Elements>
+				<Inventory AssetId="Inventory">
+					<Item AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" 			Level="0" />
+					<Item AssetId="GUIs/Buttons/ProjectileIcon" Base="IronArrow" 			Level="0" />
+					<Item AssetId="GUIs/Buttons/ProjectileIcon" Base="FireBall" 			Level="0" />
+					<Item AssetId="GUIs/Buttons/ProjectileIcon" Base="ExplosiveFireBall" 	Level="0" />
+				
+					<EquipmentSlot Id="LeftShooter" AssetId="LeftWeaponContainer" >
+						<Item AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" 			Level="0" />
+						<Elements>
+							<ObjectDisplay Id="LeftWeapon" AssetId="LeftWeaponDisplay" ObjectId="{LeftShooter.ProjectileId}" />
+						</Elements>
+					</EquipmentSlot>
+					<EquipmentSlot Id="RightShooter" AssetId="RightWeaponContainer" >
+						<Item AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" 			Level="0" />
+						<Elements>
+							<ObjectDisplay Id="RightWeapon" AssetId="RightWeaponDisplay" ObjectId="{RightShooter.ProjectileId}" />
+						</Elements>
+					</EquipmentSlot>
+				</Inventory>
+
+				<Button AssetId="BackToMainMenu" >
+					<LoadScene Target="MainMenu" />
+				</Button>
+			</Elements>
 		</Scene>
 
 		<Scene Id="Limbo" AssetId="Scenes/Limbo">
@@ -151,13 +172,13 @@
 
 				<PlayerHitbox AssetId="PlayerHealth" />
 				
-				<Player Id="Player" AssetId="Player" >
+				<Player AssetId="Player" >
 					<Shooters>
-						<Shooter Id="LeftShooter" AssetId="LeftShooter" ProjectileId="WoodenBalista" Index="0">
+						<Shooter AssetId="LeftShooter" ProjectileId="{LeftShooter.ProjectileId}" Index="0">
 							<Source AssetId="Shooter"/>
 							<Target AssetId="Target" Index="0"/>
 						</Shooter>
-						<Shooter Id="RightShooter" AssetId="RightShooter" ProjectileId="IronBall" Index="1">
+						<Shooter AssetId="RightShooter" ProjectileId="{RightShooter.ProjectileId}" Index="1">
 							<Source AssetId="Shooter"/>
 							<Target AssetId="Target" Index="1"/>
 						</Shooter>
@@ -167,6 +188,9 @@
 				<GUIRoot AssetId="UIRoot">
 					<Elements>
 						<DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
+						<Button AssetId="BackToMainMenu" >
+							<LoadScene Target="MainMenu" />
+						</Button>
 					</Elements>
 				</GUIRoot>
 
