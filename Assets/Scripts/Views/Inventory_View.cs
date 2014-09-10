@@ -33,6 +33,8 @@ namespace Scripts.Views
     {
         private readonly Item_ViewModel _viewModel;
         private ObjectView _parent;
+        private UISprite _uiSprite;
+
         public Item_View(Item_ViewModel viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
@@ -56,6 +58,14 @@ namespace Scripts.Views
                 parentTransform = parentItemTable;
 
             return parentTransform;
+        }
+
+        protected override void OnLoad()
+        {
+            base.OnLoad();
+
+            GameObject.GetComponent<UISprite>().spriteName = _viewModel.Base;
+            GameObject.GetComponent<UIButton>().normalSprite = _viewModel.Base;
         }
 
         protected override void OnShow()
