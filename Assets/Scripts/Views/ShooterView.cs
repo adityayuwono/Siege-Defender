@@ -16,8 +16,8 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            _target = _viewModel.Root.GetView<ObjectView>(_viewModel.Target.Id);
-            _source = _viewModel.Root.GetView<ObjectView>(_viewModel.Source.Id);
+            _target = _viewModel.Root.GetView<ObjectView>(_viewModel.Target);
+            _source = _viewModel.Root.GetView<ObjectView>(_viewModel.Source);
 
             _viewModel.IsShooting.OnChange += OnShootingChanged;
 

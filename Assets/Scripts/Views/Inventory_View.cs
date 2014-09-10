@@ -44,6 +44,7 @@ namespace Scripts.Views
         private void OnParentChanged(ObjectViewModel objectViewModel)
         {
             _parent = objectViewModel.Root.GetView<ObjectView>(objectViewModel.Id);
+            _parent = newParent.Root.GetView<ObjectView>(newParent);
 
             Transform.parent = GetParent();
 

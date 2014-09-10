@@ -31,8 +31,9 @@ namespace Scripts
 
             _views.Add(viewModel.Id, view);
         }
-        public T GetView<T>(string id) where T:BaseView
+        public T GetView<T>(BaseViewModel viewModel) where T:BaseView
         {
+            var id = viewModel.Id;
             if (!_views.ContainsKey(id))
                 throw new EngineException(this, string.Format("Failed to get view for Id: {0}", id));
 
