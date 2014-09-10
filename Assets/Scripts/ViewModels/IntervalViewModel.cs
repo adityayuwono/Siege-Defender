@@ -29,8 +29,8 @@ namespace Scripts.ViewModels
         }
 
         private int _objectCount;
-        private int ObjectCount { get { return _objectCount++; } }
-        private T SpawnNewObject(string id)
+        protected int ObjectCount { get { return _objectCount++; } }
+        protected virtual T SpawnNewObject(string id)
         {
             var modelToCopy = Root.GetObjectModel(id);
             var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
@@ -78,12 +78,9 @@ namespace Scripts.ViewModels
         #endregion
     }
 
-    public class IntervalViewModel : ElementViewModel
+    public abstract class IntervalViewModel : ElementViewModel
     {
-        public IntervalViewModel(IntervalModel model, ObjectViewModel parent) : base(model, parent)
-        {
-        }
-
-        public virtual float Interval { get; private set; }
+        protected IntervalViewModel(IntervalModel model, ObjectViewModel parent) : base(model, parent) { }
+        public abstract float Interval { get; }
     }
 }
