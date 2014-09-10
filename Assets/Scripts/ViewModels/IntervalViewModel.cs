@@ -7,9 +7,9 @@ namespace Scripts.ViewModels
 {
     public class IntervalViewModel<T> : IntervalViewModel where T : ObjectViewModel
     {
-        private readonly IntervalModel _model;
+        private readonly Interval_Model _model;
 
-        protected IntervalViewModel(IntervalModel model, ObjectViewModel parent) : base(model, parent)
+        protected IntervalViewModel(Interval_Model model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }
@@ -80,7 +80,7 @@ namespace Scripts.ViewModels
 
     public abstract class IntervalViewModel : ElementViewModel
     {
-        protected IntervalViewModel(IntervalModel model, ObjectViewModel parent) : base(model, parent) { }
+        protected IntervalViewModel(Interval_Model model, ObjectViewModel parent) : base(model, parent) { }
         public abstract float Interval { get; }
     }
 }

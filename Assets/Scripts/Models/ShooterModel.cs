@@ -5,7 +5,7 @@ namespace Scripts.Models
 {
     [Serializable]
     [XmlRoot("Shooter")]
-    public class ShooterModel : IntervalModel
+    public class ShooterModel : Interval_Model
     {
         [XmlAttribute]
         public string ProjectileId { get; set; }
