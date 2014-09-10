@@ -6,7 +6,7 @@ using Scripts.Models.Actions;
 namespace Scripts.Models.GUIs
 {
     [Serializable]
-    public class Button_Model : BaseGUIModel
+    public class Button_Model : Base_GUIModel
     {
         [XmlElement(ElementName = "LoadScene", Type = typeof(LoadScene_ActionModel))]
         [XmlElement(ElementName = "Setter", Type = typeof(Setter_ActionModel))]

@@ -4,8 +4,8 @@ namespace Scripts.ViewModels.GUIs
 {
     public class BaseGUI : ElementViewModel
     {
-        private BaseGUIModel _model;
-        public BaseGUI(BaseGUIModel model, ObjectViewModel parent) : base(model, parent)
+        private Base_GUIModel _model;
+        public BaseGUI(Base_GUIModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }
