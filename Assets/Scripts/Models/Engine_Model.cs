@@ -5,7 +5,7 @@ using Scripts.Models.GUIs;
 namespace Scripts.Models
 {
     [XmlRoot("Engine")]
-    public class EngineModel : Base_Model
+    public class Engine_Model : Base_Model
     {
         [XmlArray]
         [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBaseModel))]

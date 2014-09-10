@@ -18,10 +18,10 @@ namespace Scripts
     {
         public static EngineBase Instance;
 
-        private readonly EngineModel _model;
+        private readonly Engine_Model _model;
         private readonly BalistaContext _context;
 
-        public SiegeDefender(EngineModel model, BalistaContext parent) : base(model, null)
+        public SiegeDefender(Engine_Model model, BalistaContext parent) : base(model, null)
         {
             _model = model;
             _context = parent;

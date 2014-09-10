@@ -28,7 +28,7 @@ namespace Scripts
 
             // Get XML from Splash, simple stuff
             var engineText = XMLInitializer.EngineXML;
-            var engineModel = Deserializer<EngineModel>.GetObjectFromXML(engineText);
+            var engineModel = Deserializer<Engine_Model>.GetObjectFromXML(engineText);
             
             // Start ann instance of the Engine
             var engine = new SiegeDefender(engineModel, Instance);

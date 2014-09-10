@@ -13,9 +13,9 @@ namespace Scripts
 {
     public class EngineBase : BaseViewModel
     {
-        private readonly EngineModel _model;
+        private readonly Engine_Model _model;
         
-        public EngineBase(EngineModel model, ObjectViewModel parent) : base(model, parent)
+        public EngineBase(Engine_Model model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }
