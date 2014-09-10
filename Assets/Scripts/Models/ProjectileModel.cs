@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class ProjectileModel : ObjectModel
+    public class ProjectileModel : Object_Model
     {
         [XmlAttribute]
         public string BulletAssetId { get; set; }

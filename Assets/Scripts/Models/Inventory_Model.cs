@@ -21,7 +21,7 @@ namespace Scripts.Models
     }
 
     [Serializable]
-    public class Item_Model : ObjectModel
+    public class Item_Model : Object_Model
     {
         [XmlAttribute]
         public string Base { get; set; }

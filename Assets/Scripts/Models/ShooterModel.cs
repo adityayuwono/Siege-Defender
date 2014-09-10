@@ -11,7 +11,7 @@ namespace Scripts.Models
         public string ProjectileId { get; set; }
 
         [XmlElement]
-        public ObjectModel Source { get; set; }
+        public Object_Model Source { get; set; }
 
         [XmlElement]
         public TargetModel Target { get; set; }

@@ -54,7 +54,7 @@ namespace Scripts
             get { return this; }
         }
 
-        public ObjectModel GetObjectModel(string id)
+        public Object_Model GetObjectModel(string id)
         {
             foreach (var objectModel in _model.Objects)
             {

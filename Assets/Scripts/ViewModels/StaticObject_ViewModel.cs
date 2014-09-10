@@ -4,8 +4,8 @@ namespace Scripts.ViewModels
 {
     public class StaticObject_ViewModel : ObjectViewModel
     {
-        private readonly ObjectModel _model;
-        public StaticObject_ViewModel(ObjectModel model, BaseViewModel parent) : base(model, parent)
+        private readonly Object_Model _model;
+        public StaticObject_ViewModel(Object_Model model, BaseViewModel parent) : base(model, parent)
         {
             _model = model;
         }

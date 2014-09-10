@@ -7,7 +7,7 @@ using Scripts.Models.GUIs;
 namespace Scripts.Models
 {
     [Serializable]
-    public class ObjectModel : Base_Model
+    public class Object_Model : Base_Model
     {
         // Not XML Property, this is set when we spawn it
         public string Type;
@@ -33,7 +33,7 @@ namespace Scripts.Models
         [DefaultValue("0,0,0")]
         public string Position { get; set; }
 
-        public ObjectModel()
+        public Object_Model()
         {
             Position = "0,0,0";
         }

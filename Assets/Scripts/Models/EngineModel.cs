@@ -14,7 +14,7 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "AoE", Type = typeof(AoEModel))]
         [XmlArrayItem(ElementName = "ParticleAoE", Type = typeof(ParticleAoEModel))]
         [XmlArrayItem(ElementName = "DamageGUI", Type = typeof(DamageGUIModel))]
-        public List<ObjectModel> Objects { get; set; }
+        public List<Object_Model> Objects { get; set; }
 
         [XmlArray]
         [XmlArrayItem(ElementName = "Level", Type = typeof(LevelModel))]

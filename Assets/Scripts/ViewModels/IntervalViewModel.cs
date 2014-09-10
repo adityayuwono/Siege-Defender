@@ -33,7 +33,7 @@ namespace Scripts.ViewModels
         protected virtual T SpawnNewObject(string id)
         {
             var modelToCopy = Root.GetObjectModel(id);
-            var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
+            var objectModel = Copier.CopyAs<Object_Model>(modelToCopy);
             objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, Id, ObjectCount);
             objectModel.Type = id;
             var newObject = Root.IoCContainer.GetInstance<T>(objectModel.GetType(), new Object[] {objectModel, this});
