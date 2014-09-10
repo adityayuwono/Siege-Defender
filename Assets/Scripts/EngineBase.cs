@@ -129,7 +129,7 @@ namespace Scripts
             throw new System.NotImplementedException();
         }
 
-        public virtual LevelModel GetLevel(string levelId)
+        public virtual Level_Model GetLevel(string levelId)
         {
             throw new System.NotImplementedException();
         }

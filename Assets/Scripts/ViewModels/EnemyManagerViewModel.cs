@@ -13,7 +13,7 @@ namespace Scripts.ViewModels
             _levelModel = Root.GetLevel(_model.LevelId);
         }
 
-        private readonly LevelModel _levelModel;
+        private readonly Level_Model _levelModel;
         public override float Interval
         {
             get { return _levelModel.Interval; }

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class LevelModel : Base_Model
+    public class Level_Model : Base_Model
     {
         [XmlAttribute]
         public float Interval { get; set; }

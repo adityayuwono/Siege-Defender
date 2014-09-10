@@ -17,8 +17,8 @@ namespace Scripts.Models
         public List<Object_Model> Objects { get; set; }
 
         [XmlArray]
-        [XmlArrayItem(ElementName = "Level", Type = typeof(LevelModel))]
-        public List<LevelModel> Levels { get; set; }
+        [XmlArrayItem(ElementName = "Level", Type = typeof(Level_Model))]
+        public List<Level_Model> Levels { get; set; }
 
         [XmlArray]
         [XmlArrayItem(ElementName = "Scene", Type = typeof(SceneModel))]
