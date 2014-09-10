@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Scripts.Models;
 using Scripts.ViewModels.Actions;
+using Scripts.ViewModels.GUIs;
 
 namespace Scripts.ViewModels
 {
-    public class Button_ViewModel : ElementViewModel
+    public class Button_ViewModel : BaseGUI
     {
         private readonly Button_Model _model;
 
-        public Button_ViewModel(Button_Model model, SceneViewModel parent) : base(model, parent)
+        public Button_ViewModel(Button_Model model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }
@@ -20,14 +20,16 @@ namespace Scripts.ViewModels
 
             foreach (var actionModel in _model.Actions)
             {
-                var actionVM = Root.IoCContainer.GetInstance<Action_ViewModel>(actionModel.GetType(), new object[] {actionModel, this});
+                // Get new instance of ActionVM
+                var actionVM = Root.IoCContainer.GetInstance<Base_ActionViewModel>(actionModel.GetType(), new object[] {actionModel, this});
                 _actions.Add(actionVM);
             }
         }
 
-        private readonly List<Action_ViewModel> _actions = new List<Action_ViewModel>(); 
+        private readonly List<Base_ActionViewModel> _actions = new List<Base_ActionViewModel>(); 
         public void OnClicked()
         {
+            // Invoke all actions related to this button
             foreach (var action in _actions)
             {
                 action.Invoke();
