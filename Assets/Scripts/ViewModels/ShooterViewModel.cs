@@ -57,16 +57,23 @@ namespace Scripts.ViewModels
         public ObjectViewModel Source { get; private set; }
         public ObjectViewModel Target { get; private set; }
 
-
+        private Property<string> _projectileBinding;
         protected override void OnLoad()
         {
             base.OnLoad();
+            
+            _projectileBinding = Root.Binding.GetProperty<string>(_model.ProjectileId);
+            _projectileBinding.OnChange += Projectile_OnChange;
+            Projectile_OnChange();
+            
+            IsShooting.SetValue(false);
+        }
 
-            _projectileModel = Root.GetObjectModel(_model.ProjectileId) as ProjectileModel;
+        private void Projectile_OnChange()
+        {
+            _projectileModel = Root.GetObjectModel(_projectileBinding.GetValue()) as ProjectileModel;
             Ammunition = _projectileModel.Ammunition;
             Accuracy = _projectileModel.Accuracy;
-
-            IsShooting.SetValue(false);
         }
 
 
@@ -76,7 +83,7 @@ namespace Scripts.ViewModels
             if (Ammunition > 0)
             {
                 Ammunition--;
-                var projectile = GetObject<ProjectileViewModel>(_model.ProjectileId);
+                var projectile = GetObject<ProjectileViewModel>(_projectileModel.Id);
                 projectile.Activate();
                 projectile.Show();
 
