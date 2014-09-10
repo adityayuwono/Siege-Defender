@@ -36,7 +36,7 @@ namespace Scripts
             ResourceManager = new ResourcePooler(this);
 
             #region Model to ViewModel
-            IoCContainer.RegisterFor<ElementModel>().TypeOf<ObjectViewModel>().To<ElementViewModel>();
+            IoCContainer.RegisterFor<Element_Model>().TypeOf<ObjectViewModel>().To<ElementViewModel>();
             IoCContainer.RegisterFor<PlayerModel>().TypeOf<ObjectViewModel>().To<PlayerViewModel>();
             IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<ObjectViewModel>().To<EnemyManagerViewModel>();
             IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<ObjectViewModel>().To<PlayerHitboxViewModel>();

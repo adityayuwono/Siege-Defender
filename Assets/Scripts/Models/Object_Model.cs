@@ -14,7 +14,7 @@ namespace Scripts.Models
 
         [XmlArray]
         // 3D Objects
-        [XmlArrayItem(ElementName = "Element", Type = typeof(ElementModel))]
+        [XmlArrayItem(ElementName = "Element", Type = typeof(Element_Model))]
         [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
         [XmlArrayItem(ElementName = "Player", Type = typeof(PlayerModel))]
         [XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitboxModel))]
@@ -24,7 +24,7 @@ namespace Scripts.Models
         // GUIs
         [XmlArrayItem(ElementName = "Inventory", Type = typeof(Inventory_Model))]
         [XmlArrayItem(ElementName = "Button", Type = typeof(Button_Model))]
-        public List<ElementModel> Elements { get; set; }
+        public List<Element_Model> Elements { get; set; }
 
         [XmlAttribute]
         public string AssetId { get; set; }

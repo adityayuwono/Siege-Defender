@@ -3,7 +3,7 @@
 namespace Scripts.Models
 {
     [Serializable]
-    public class ElementModel : Object_Model
+    public class Element_Model : Object_Model
     {
         
     }

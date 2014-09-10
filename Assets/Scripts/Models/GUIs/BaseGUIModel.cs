@@ -3,7 +3,7 @@
 namespace Scripts.Models.GUIs
 {
     [Serializable]
-    public class BaseGUIModel : ElementModel
+    public class BaseGUIModel : Element_Model
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Scripts.Models
 {
-    public class PlayerHitboxModel : ElementModel
+    public class PlayerHitboxModel : Element_Model
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class Inventory_Model : ElementModel
+    public class Inventory_Model : Element_Model
     {
         [XmlElement(ElementName = "Item", Type = typeof(Item_Model))]
         public List<Item_Model> Items { get; set; }

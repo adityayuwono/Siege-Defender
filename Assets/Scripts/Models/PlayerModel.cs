@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class PlayerModel : ElementModel
+    public class PlayerModel : Element_Model
     {
         [XmlElement]
         public PlayerHitboxModel PlayerHitbox { get; set; }
