@@ -12,9 +12,9 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-        protected override void OnShow()
+        protected override void OnLoad()
         {
-            base.OnShow();
+            base.OnLoad();
 
             GameObject.AddComponent<ButtonController>().OnClicked = _viewModel.OnClicked;
         }
