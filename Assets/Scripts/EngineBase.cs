@@ -105,10 +105,14 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Get Property from list, will throw exception upon failure
+        /// </summary>
+        /// <returns>The Property asked, Does not return null</returns>
         public Property GetProperty(string viewModelId, string propertyId)
         {
             if (!_properties.ContainsKey(propertyId))
-                throw new EngineException(this, string.Format("Failed to find Property with Id: {0}", propertyId));
+                throw new EngineException(this, string.Format("Failed to find Property with Id: {0} of ViewModel: {1}, the property is not registered", propertyId, viewModelId));
 
             var propertyDict = _properties[propertyId];
             if (!propertyDict.ContainsKey(viewModelId))
