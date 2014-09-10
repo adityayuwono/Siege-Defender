@@ -18,12 +18,12 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManager_Model))]
         [XmlArrayItem(ElementName = "Player", Type = typeof(Player_Model))]
         [XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitbox_Model))]
-        [XmlArrayItem(ElementName = "GUIRoot", Type = typeof(GUIRootModel))]
-        [XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplayModel))]
+        [XmlArrayItem(ElementName = "GUIRoot", Type = typeof(Root_GUIModel))]
+        [XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplay_GUIModel))]
         [XmlArrayItem(ElementName = "ObjectDisplay", Type = typeof(ObjectDisplay_Model))]
         // GUIs
         [XmlArrayItem(ElementName = "Inventory", Type = typeof(Inventory_Model))]
-        [XmlArrayItem(ElementName = "Button", Type = typeof(Button_Model))]
+        [XmlArrayItem(ElementName = "Button", Type = typeof(Button_GUIModel))]
         public List<Element_Model> Elements { get; set; }
 
         [XmlAttribute]

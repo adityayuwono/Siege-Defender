@@ -13,7 +13,7 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "Piercing", Type = typeof(PiercingProjectile_Model))]
         [XmlArrayItem(ElementName = "AoE", Type = typeof(AoE_Model))]
         [XmlArrayItem(ElementName = "ParticleAoE", Type = typeof(ParticleAoE_Model))]
-        [XmlArrayItem(ElementName = "DamageGUI", Type = typeof(DamageGUIModel))]
+        [XmlArrayItem(ElementName = "DamageGUI", Type = typeof(Damage_GUIModel))]
         public List<Object_Model> Objects { get; set; }
 
         [XmlArray]

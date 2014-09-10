@@ -5,8 +5,8 @@ namespace Scripts.ViewModels.GUIs
 {
     public class LabelGUI : ObjectViewModel
     {
-        private LabelGUIModel _model;
-        public LabelGUI(LabelGUIModel model, BaseViewModel parent) : base(model, parent)
+        private Label_GUIModel _model;
+        public LabelGUI(Label_GUIModel model, BaseViewModel parent) : base(model, parent)
         {
             _model = model;
         }

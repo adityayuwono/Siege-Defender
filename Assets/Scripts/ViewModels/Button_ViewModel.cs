@@ -8,9 +8,9 @@ namespace Scripts.ViewModels
 {
     public class Button_ViewModel : BaseGUI
     {
-        private readonly Button_Model _model;
+        private readonly Button_GUIModel _model;
 
-        public Button_ViewModel(Button_Model model, ObjectViewModel parent) : base(model, parent)
+        public Button_ViewModel(Button_GUIModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }

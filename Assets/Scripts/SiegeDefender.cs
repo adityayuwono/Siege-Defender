@@ -40,13 +40,13 @@ namespace Scripts
             IoCContainer.RegisterFor<Player_Model>().TypeOf<ObjectViewModel>().To<PlayerViewModel>();
             IoCContainer.RegisterFor<EnemyManager_Model>().TypeOf<ObjectViewModel>().To<EnemyManagerViewModel>();
             IoCContainer.RegisterFor<PlayerHitbox_Model>().TypeOf<ObjectViewModel>().To<PlayerHitboxViewModel>();
-            IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ObjectViewModel>().To<GUIRoot>();
-            IoCContainer.RegisterFor<DamageDisplayModel>().TypeOf<ObjectViewModel>().To<DamageDisplayManager>();
+            IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<ObjectViewModel>().To<GUIRoot>();
+            IoCContainer.RegisterFor<DamageDisplay_GUIModel>().TypeOf<ObjectViewModel>().To<DamageDisplayManager>();
             IoCContainer.RegisterFor<ObjectDisplay_Model>().TypeOf<ObjectViewModel>().To<ObjectDisplay_ViewModel>();
             // GUIs
             IoCContainer.RegisterFor<Inventory_Model>().TypeOf<ObjectViewModel>().To<Inventory_ViewModel>();
             IoCContainer.RegisterFor<Item_Model>().TypeOf<ObjectViewModel>().To<Item_ViewModel>();
-            IoCContainer.RegisterFor<Button_Model>().TypeOf<ObjectViewModel>().To<Button_ViewModel>();
+            IoCContainer.RegisterFor<Button_GUIModel>().TypeOf<ObjectViewModel>().To<Button_ViewModel>();
 
             // ProjectileBaseViewModel
             IoCContainer.RegisterFor<Projectile_Model>().TypeOf<ProjectileBaseViewModel>().To<ProjectileViewModel>();
@@ -55,9 +55,9 @@ namespace Scripts
             IoCContainer.RegisterFor<ParticleAoE_Model>().TypeOf<ProjectileBaseViewModel>().To<ParticleAoEViewModel>();
 
             IoCContainer.RegisterFor<EnemyBase_Model>().TypeOf<EnemyBaseViewModel>().To<EnemyBaseViewModel>();
-            IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
+            IoCContainer.RegisterFor<Damage_GUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
 
-            IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
+            IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
 
             // Actions, doesnt have a model
             IoCContainer.RegisterFor<LoadScene_ActionModel>().TypeOf<Base_ActionViewModel>().To<LoadScene_ActionViewModel>();

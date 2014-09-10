@@ -5,8 +5,8 @@ namespace Scripts.ViewModels.GUIs
 {
     public class DamageDisplayManager : IntervalViewModel<DamageGUI>
     {
-        private DamageDisplayModel _model;
-        public DamageDisplayManager(DamageDisplayModel model, ObjectViewModel parent) : base(model, parent)
+        private DamageDisplay_GUIModel _model;
+        public DamageDisplayManager(DamageDisplay_GUIModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }

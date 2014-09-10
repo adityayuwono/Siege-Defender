@@ -3,7 +3,7 @@
 namespace Scripts.Models.GUIs
 {
     [Serializable]
-    public class DamageGUIModel : LabelGUIModel
+    public class Damage_GUIModel : Label_GUIModel
     {
     }
 }

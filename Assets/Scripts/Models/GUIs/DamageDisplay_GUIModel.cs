@@ -2,7 +2,7 @@
 
 namespace Scripts.Models
 {
-    public class DamageDisplayModel : Interval_Model
+    public class DamageDisplay_GUIModel : Interval_Model
     {
         [XmlAttribute]
         public string DamageGUI { get; set; }

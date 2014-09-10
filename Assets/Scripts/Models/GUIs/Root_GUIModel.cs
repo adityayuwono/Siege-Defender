@@ -1,6 +1,6 @@
 ﻿namespace Scripts.Models.GUIs
 {
-    public class GUIRootModel : Element_Model
+    public class Root_GUIModel : Element_Model
     {
     }
 }

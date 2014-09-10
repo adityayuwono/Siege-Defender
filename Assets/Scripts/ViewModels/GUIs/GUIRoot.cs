@@ -5,8 +5,8 @@ namespace Scripts.ViewModels.GUIs
 {
     public class GUIRoot : ElementViewModel
     {
-        private GUIRootModel _model;
-        public GUIRoot(GUIRootModel model, ObjectViewModel parent) : base(model, parent)
+        private Root_GUIModel _model;
+        public GUIRoot(Root_GUIModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }
