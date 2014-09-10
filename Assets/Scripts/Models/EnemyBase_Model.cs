@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class EnemyBaseModel : Object_Model
+    public class EnemyBase_Model : Object_Model
     {
         [XmlAttribute]
         public decimal Limit { get; set; }

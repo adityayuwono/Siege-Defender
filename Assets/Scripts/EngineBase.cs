@@ -124,7 +124,7 @@ namespace Scripts
         #endregion
 
         #region Virtual Methods
-        public virtual EnemyBaseModel GetEnemy(string enemyId)
+        public virtual EnemyBase_Model GetEnemy(string enemyId)
         {
             throw new System.NotImplementedException();
         }
