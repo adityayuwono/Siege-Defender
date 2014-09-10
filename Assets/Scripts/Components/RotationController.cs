@@ -8,7 +8,7 @@ namespace Scripts.Components
 
         private void Update()
         {
-            
+            transform.Rotate(AxisMultiplier);
         }
     }
 }
