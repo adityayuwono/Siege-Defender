@@ -3,7 +3,7 @@ using Scripts.ViewModels.Actions;
 
 namespace Scripts.ViewModels
 {
-    public class LoadScene_ActionViewModel : Action_ViewModel
+    public class LoadScene_ActionViewModel : Base_ActionViewModel
     {
         private readonly LoadScene_ActionModel _model;
         public LoadScene_ActionViewModel(LoadScene_ActionModel model, BaseViewModel parent) : base(model, parent)
@@ -13,7 +13,7 @@ namespace Scripts.ViewModels
 
         public override void Invoke()
         {
-            Root.ChangeScene(_model.SceneId);
+            Root.ChangeScene(_model.Target);
         }
     }
 }
