@@ -40,8 +40,10 @@ namespace Scripts.Helpers
         /// <returns>New instance of type bound to key</returns>
         public T GetInstance<T>(Type classType, object[] parameters = null) where T : class
         {
+            // The type we want it to be
             var key = typeof(T);
 
+            // Check if we have mapped the key type
             var interfaceContainer = Get(classType);
             if (interfaceContainer == null)
                 return default(T);
@@ -59,20 +61,38 @@ namespace Scripts.Helpers
             if (instanceType == null)
                 return default(T);
 
-            object instance = null;
+            // We have the instance type that we want, now we activate the constructor
+            var instance = CreateInstance(instanceType, parameters);
+            if (instance == null)
+                throw new Exception(string.Format("Failed to create an Instance for {0} with parameters: {1}", key, parameters));
+
+            return instance as T;
+        }
+
+        private static object CreateInstance(Type instanceType, object[] parameters)
+        {
+            object instance;
             try
             {
                 instance = Activator.CreateInstance(instanceType, parameters);
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("{0}\nCheck the inheritance or encapsulation of the constructor", ex));
+                // Go through extra effort to make sure we provide enough help
+                var possibleConstructors = "(";
+                var constructors = instanceType.GetConstructors();
+                foreach (var constructorInfo in constructors)
+                {
+                    foreach (var parameterInfo in constructorInfo.GetParameters())
+                    {
+                        possibleConstructors += parameterInfo.ParameterType + ", ";
+                    }
+                    possibleConstructors += ")\n";
+                }
+                throw new Exception(string.Format("{0}\nCheck the inheritance or encapsulation of the constructor\nPossible Parameters are:\n{1}", ex, possibleConstructors));
             }
 
-            if (instance == null)
-                throw new Exception(string.Format("Failed to create an Instance for {0} with parameters: {1}", key, parameters));
-
-            return instance as T;
+            return instance;
         }
     }
 
