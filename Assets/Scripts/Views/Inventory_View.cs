@@ -25,7 +25,7 @@ namespace Scripts.Views
         {
             base.OnLoad();
 
-            _uiTable = Transform.FindChild("ItemTable").GetComponent<UITable>();
+            _uiTable = Transform.FindChild("ItemSlot").GetComponent<UITable>();
         }
     }
 
@@ -41,29 +41,19 @@ namespace Scripts.Views
             _viewModel.OnParentChanged += OnParentChanged;
         }
 
-        private void OnParentChanged(ObjectViewModel objectViewModel)
+        private void OnParentChanged(ObjectViewModel newParent)
         {
-            _parent = objectViewModel.Root.GetView<ObjectView>(objectViewModel.Id);
             _parent = newParent.Root.GetView<ObjectView>(newParent);
 
             Transform.parent = GetParent();
-
-            Transform.localPosition = Vector3.zero;
-            Transform.localScale = Vector3.one;
         }
 
         protected override Transform GetParent()
         {
-            Transform parentTransform;
-            if (_parent == null || _parent.GameObject == null)
-                parentTransform = GameObject.Find("Context").transform;
-            else
-            {
-                parentTransform = _parent.Transform;
-                var parentItemTable = _parent.Transform.FindChild("ItemTable");
-                if (parentItemTable != null)
-                    parentTransform = parentItemTable;
-            }
+            Transform parentTransform = _parent.Transform;
+            var parentItemTable = _parent.Transform.FindChild("ItemSlot");
+            if (parentItemTable != null)
+                parentTransform = parentItemTable;
 
             return parentTransform;
         }
