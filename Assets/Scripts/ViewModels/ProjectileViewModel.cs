@@ -9,10 +9,10 @@ namespace Scripts.ViewModels
 {
     public class ProjectileViewModel : ProjectileBaseViewModel
     {
-        private readonly ProjectileModel _model;
+        private readonly Projectile_Model _model;
         private readonly ShooterViewModel _parent;
 
-        public ProjectileViewModel(ProjectileModel model, ShooterViewModel parent) : base(model, parent)
+        public ProjectileViewModel(Projectile_Model model, ShooterViewModel parent) : base(model, parent)
         {
             _model = model;
             _parent = parent;

@@ -22,7 +22,7 @@ namespace Scripts.Models
         public float Speed { get; set; }
 
         [XmlElement]
-        public ProjectileModel Projectile { get; set; }
+        public Projectile_Model Projectile { get; set; }
 
         [XmlAttribute]
         public float Rotation { get; set; }

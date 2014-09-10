@@ -4,9 +4,9 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class EnemyManagerModel : Interval_Model
+    public class Scene_Model : Object_Model
     {
         [XmlAttribute]
-        public string LevelId { get; set; }
+        public string Scene { get; set; }
     }
 }

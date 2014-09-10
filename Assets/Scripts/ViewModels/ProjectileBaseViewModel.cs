@@ -6,8 +6,8 @@ namespace Scripts.ViewModels
 {
     public class ProjectileBaseViewModel : ObjectViewModel
     {
-        private readonly ProjectileModel _model;
-        public ProjectileBaseViewModel(ProjectileModel model, ObjectViewModel parent) : base(model, parent)
+        private readonly Projectile_Model _model;
+        public ProjectileBaseViewModel(Projectile_Model model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
         }

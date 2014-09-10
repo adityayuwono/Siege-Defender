@@ -11,7 +11,7 @@ namespace Scripts.Models
         public float Interval { get; set; }
 
         [XmlArray]
-        [XmlArrayItem(ElementName = "Spawn", Type = typeof(SpawnModel))]
-        public List<SpawnModel> SpawnSequence { get; set; }
+        [XmlArrayItem(ElementName = "Spawn", Type = typeof(Spawn_Model))]
+        public List<Spawn_Model> SpawnSequence { get; set; }
     }
 }

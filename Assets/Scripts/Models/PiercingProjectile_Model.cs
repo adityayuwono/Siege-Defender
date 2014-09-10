@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class PiercingProjectile_Model : ProjectileModel
+    public class PiercingProjectile_Model : Projectile_Model
     {
         [XmlAttribute]
         [DefaultValue(0.75f)]

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class ProjectileModel : Object_Model
+    public class Projectile_Model : Object_Model
     {
         [XmlAttribute]
         public string BulletAssetId { get; set; }
@@ -36,7 +36,7 @@ namespace Scripts.Models
         [DefaultValue(0f)]
         public float Deviation { get; set; }
 
-        public ProjectileModel()
+        public Projectile_Model()
         {
             Ammunition = -1;
             ReloadTime = 3f;

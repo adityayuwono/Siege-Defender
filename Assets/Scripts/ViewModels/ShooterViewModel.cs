@@ -8,11 +8,11 @@ namespace Scripts.ViewModels
 {
     public class ShooterViewModel : IntervalViewModel<ProjectileBaseViewModel>
     {
-        private readonly ShooterModel _model;
+        private readonly Shooter_Model _model;
 
-        private ProjectileModel _projectileModel;
+        private Projectile_Model _projectileModel;
 
-        public ShooterViewModel(ShooterModel model, PlayerViewModel parent) : base(model, parent)
+        public ShooterViewModel(Shooter_Model model, PlayerViewModel parent) : base(model, parent)
         {
             _model = model;
 
@@ -71,7 +71,7 @@ namespace Scripts.ViewModels
 
         private void Projectile_OnChange()
         {
-            _projectileModel = Root.GetObjectModel(_projectileBinding.GetValue()) as ProjectileModel;
+            _projectileModel = Root.GetObjectModel(_projectileBinding.GetValue()) as Projectile_Model;
             Ammunition = _projectileModel.Ammunition;
             Accuracy = _projectileModel.Accuracy;
         }

@@ -4,9 +4,9 @@ namespace Scripts.ViewModels
 {
     public class EnemyManagerViewModel : IntervalViewModel<EnemyBaseViewModel>
     {
-        private readonly EnemyManagerModel _model;
+        private readonly EnemyManager_Model _model;
 
-        public EnemyManagerViewModel(EnemyManagerModel model, SceneViewModel parent) : base(model, parent)
+        public EnemyManagerViewModel(EnemyManager_Model model, SceneViewModel parent) : base(model, parent)
         {
             _model = model;
 

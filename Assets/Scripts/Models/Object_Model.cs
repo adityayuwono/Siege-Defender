@@ -15,9 +15,9 @@ namespace Scripts.Models
         [XmlArray]
         // 3D Objects
         [XmlArrayItem(ElementName = "Element", Type = typeof(Element_Model))]
-        [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
-        [XmlArrayItem(ElementName = "Player", Type = typeof(PlayerModel))]
-        [XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitboxModel))]
+        [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManager_Model))]
+        [XmlArrayItem(ElementName = "Player", Type = typeof(Player_Model))]
+        [XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitbox_Model))]
         [XmlArrayItem(ElementName = "GUIRoot", Type = typeof(GUIRootModel))]
         [XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplayModel))]
         [XmlArrayItem(ElementName = "ObjectDisplay", Type = typeof(ObjectDisplay_Model))]

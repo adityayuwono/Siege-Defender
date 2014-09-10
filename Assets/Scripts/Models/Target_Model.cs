@@ -4,9 +4,9 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class AoEModel : ProjectileModel
+    public class Target_Model : Object_Model
     {
         [XmlAttribute]
-        public float Radius { get; set; }
+        public int Index { get; set; }
     }
 }

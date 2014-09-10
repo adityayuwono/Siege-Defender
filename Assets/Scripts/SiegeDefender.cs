@@ -37,9 +37,9 @@ namespace Scripts
 
             #region Model to ViewModel
             IoCContainer.RegisterFor<Element_Model>().TypeOf<ObjectViewModel>().To<ElementViewModel>();
-            IoCContainer.RegisterFor<PlayerModel>().TypeOf<ObjectViewModel>().To<PlayerViewModel>();
-            IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<ObjectViewModel>().To<EnemyManagerViewModel>();
-            IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<ObjectViewModel>().To<PlayerHitboxViewModel>();
+            IoCContainer.RegisterFor<Player_Model>().TypeOf<ObjectViewModel>().To<PlayerViewModel>();
+            IoCContainer.RegisterFor<EnemyManager_Model>().TypeOf<ObjectViewModel>().To<EnemyManagerViewModel>();
+            IoCContainer.RegisterFor<PlayerHitbox_Model>().TypeOf<ObjectViewModel>().To<PlayerHitboxViewModel>();
             IoCContainer.RegisterFor<GUIRootModel>().TypeOf<ObjectViewModel>().To<GUIRoot>();
             IoCContainer.RegisterFor<DamageDisplayModel>().TypeOf<ObjectViewModel>().To<DamageDisplayManager>();
             IoCContainer.RegisterFor<ObjectDisplay_Model>().TypeOf<ObjectViewModel>().To<ObjectDisplay_ViewModel>();
@@ -49,10 +49,10 @@ namespace Scripts
             IoCContainer.RegisterFor<Button_Model>().TypeOf<ObjectViewModel>().To<Button_ViewModel>();
 
             // ProjectileBaseViewModel
-            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<ProjectileBaseViewModel>().To<ProjectileViewModel>();
+            IoCContainer.RegisterFor<Projectile_Model>().TypeOf<ProjectileBaseViewModel>().To<ProjectileViewModel>();
             IoCContainer.RegisterFor<PiercingProjectile_Model>().TypeOf<ProjectileBaseViewModel>().To<PiercingProjectile_ViewModel>();
-            IoCContainer.RegisterFor<AoEModel>().TypeOf<ProjectileBaseViewModel>().To<AoEViewModel>();
-            IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<ProjectileBaseViewModel>().To<ParticleAoEViewModel>();
+            IoCContainer.RegisterFor<AoE_Model>().TypeOf<ProjectileBaseViewModel>().To<AoEViewModel>();
+            IoCContainer.RegisterFor<ParticleAoE_Model>().TypeOf<ProjectileBaseViewModel>().To<ParticleAoEViewModel>();
 
             IoCContainer.RegisterFor<EnemyBase_Model>().TypeOf<EnemyBaseViewModel>().To<EnemyBaseViewModel>();
             IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();

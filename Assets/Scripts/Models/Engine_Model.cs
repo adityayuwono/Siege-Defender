@@ -9,10 +9,10 @@ namespace Scripts.Models
     {
         [XmlArray]
         [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBase_Model))]
-        [XmlArrayItem(ElementName = "Projectile", Type = typeof(ProjectileModel))]
+        [XmlArrayItem(ElementName = "Projectile", Type = typeof(Projectile_Model))]
         [XmlArrayItem(ElementName = "Piercing", Type = typeof(PiercingProjectile_Model))]
-        [XmlArrayItem(ElementName = "AoE", Type = typeof(AoEModel))]
-        [XmlArrayItem(ElementName = "ParticleAoE", Type = typeof(ParticleAoEModel))]
+        [XmlArrayItem(ElementName = "AoE", Type = typeof(AoE_Model))]
+        [XmlArrayItem(ElementName = "ParticleAoE", Type = typeof(ParticleAoE_Model))]
         [XmlArrayItem(ElementName = "DamageGUI", Type = typeof(DamageGUIModel))]
         public List<Object_Model> Objects { get; set; }
 
@@ -21,7 +21,7 @@ namespace Scripts.Models
         public List<Level_Model> Levels { get; set; }
 
         [XmlArray]
-        [XmlArrayItem(ElementName = "Scene", Type = typeof(SceneModel))]
-        public List<SceneModel> Scenes { get; set; }
+        [XmlArrayItem(ElementName = "Scene", Type = typeof(Scene_Model))]
+        public List<Scene_Model> Scenes { get; set; }
     }
 }

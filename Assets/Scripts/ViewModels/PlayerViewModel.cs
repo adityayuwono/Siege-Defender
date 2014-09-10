@@ -5,9 +5,9 @@ namespace Scripts.ViewModels
 {
     public class PlayerViewModel : ElementViewModel
     {
-        private readonly PlayerModel _model;
+        private readonly Player_Model _model;
 
-        public PlayerViewModel(PlayerModel model, SceneViewModel parent) : base(model, parent)
+        public PlayerViewModel(Player_Model model, SceneViewModel parent) : base(model, parent)
         {
             _model = model;
 

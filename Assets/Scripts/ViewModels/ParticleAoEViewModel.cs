@@ -4,8 +4,8 @@ namespace Scripts.ViewModels
 {
     public class ParticleAoEViewModel : AoEViewModel
     {
-        private readonly ParticleAoEModel _model;
-        public ParticleAoEViewModel(ParticleAoEModel model, ShooterViewModel parent) : base(model, parent)
+        private readonly ParticleAoE_Model _model;
+        public ParticleAoEViewModel(ParticleAoE_Model model, ShooterViewModel parent) : base(model, parent)
         {
             _model = model;
         }

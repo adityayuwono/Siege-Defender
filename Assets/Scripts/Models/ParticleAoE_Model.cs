@@ -3,7 +3,7 @@
 namespace Scripts.Models
 {
     [Serializable]
-    public class ParticleAoEModel : AoEModel
+    public class ParticleAoE_Model : AoE_Model
     {
     }
 }

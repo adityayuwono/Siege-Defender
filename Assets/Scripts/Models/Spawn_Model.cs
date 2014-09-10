@@ -2,7 +2,7 @@
 
 namespace Scripts.Models
 {
-    public class SpawnModel : Base_Model
+    public class Spawn_Model : Base_Model
     {
         [XmlAttribute]
         public string EnemyId { get; set; }

@@ -4,9 +4,9 @@ namespace Scripts.ViewModels
 {
     public class SceneViewModel : ObjectViewModel
     {
-        private readonly SceneModel _model;
+        private readonly Scene_Model _model;
 
-        public SceneViewModel(SceneModel model, BaseViewModel parent) : base(model, parent)
+        public SceneViewModel(Scene_Model model, BaseViewModel parent) : base(model, parent)
         {
             _model = model;
         }
