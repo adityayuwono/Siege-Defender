@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Scripts.Models;
+using Scripts.Models.GUIs;
 using Scripts.ViewModels.Actions;
 using Scripts.ViewModels.GUIs;
 

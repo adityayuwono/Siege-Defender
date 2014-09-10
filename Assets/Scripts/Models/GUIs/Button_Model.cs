@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Scripts.Models.Actions;
-using Scripts.Models.GUIs;
 
-namespace Scripts.Models
+namespace Scripts.Models.GUIs
 {
     [Serializable]
     public class Button_Model : BaseGUIModel
