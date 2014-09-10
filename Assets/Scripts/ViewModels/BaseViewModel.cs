@@ -7,9 +7,9 @@ namespace Scripts.ViewModels
 {
     public class BaseViewModel : IBase
     {
-        private readonly BaseModel _model;
+        private readonly Base_Model _model;
         public BaseViewModel Parent { get; protected set; }
-        protected BaseViewModel(BaseModel model, BaseViewModel parent)
+        protected BaseViewModel(Base_Model model, BaseViewModel parent)
         {
             _model = model;
             Parent = parent;

@@ -7,7 +7,7 @@ using Scripts.Models.GUIs;
 namespace Scripts.Models
 {
     [Serializable]
-    public class ObjectModel : BaseModel
+    public class ObjectModel : Base_Model
     {
         // Not XML Property, this is set when we spawn it
         public string Type;
