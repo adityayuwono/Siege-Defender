@@ -41,7 +41,7 @@ namespace Scripts.ViewModels
             foreach (var equipmentSlotViewModel in EquipmentSlots)
                 equipmentSlotViewModel.Show();
 
-            OnChildrenChanged();
+            InvokeChildrenChanged();
         }
 
         public override void Hide(string reason)
@@ -67,7 +67,7 @@ namespace Scripts.ViewModels
             _model.Items.Add(itemViewModel.Model);
             itemViewModel.ChangeParent(this);
 
-            OnChildrenChanged();
+            InvokeChildrenChanged();
         }
         public void ReleaseItem(Item_ViewModel itemViewModel)
         {
@@ -76,9 +76,17 @@ namespace Scripts.ViewModels
             _model.Items.Remove(itemViewModel.Model);
             Items.Remove(itemViewModel);
 
-            OnChildrenChanged();
+            InvokeChildrenChanged();
+        }
+
+        private void InvokeChildrenChanged()
+        {
+            if (OnChildrenChanged != null)
+                OnChildrenChanged();
         }
     }
+
+    
 
     public class Item_ViewModel : ObjectViewModel
     {

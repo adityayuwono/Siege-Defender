@@ -11,13 +11,12 @@ namespace Scripts.ViewModels
             _model = model;
 
             ProjectileId = new AdjustableProperty<string>("ProjectileId", this);
+            CurrentItem = new Item_ViewModel(_model.Item, this);
         }
 
         protected override void OnLoad()
         {
             base.OnLoad();
-
-            CurrentItem = new Item_ViewModel(_model.Item, this);
         }
 
         protected override void OnActivate()
