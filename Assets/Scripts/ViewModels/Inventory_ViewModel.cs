@@ -106,6 +106,8 @@ namespace Scripts.ViewModels
         public Action<ObjectViewModel> OnParentChanged;
         public void ChangeParent(ObjectViewModel newParent)
         {
+            Parent = newParent;
+
             if (OnParentChanged!=null)
                 OnParentChanged(newParent);
         }
