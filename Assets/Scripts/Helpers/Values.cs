@@ -1,4 +1,6 @@
-﻿namespace Scripts.Helpers
+﻿using UnityEngine;
+
+namespace Scripts.Helpers
 {
     public static class Values
     {
@@ -10,5 +12,18 @@
         }
 
         public const int CROSSHAIR_LAYERMASK = ~(1 << 9);
+    }
+
+    public static class FilePaths
+    {
+        public static string Loading
+        {
+            get { return "file://" + Application.dataPath; }
+        }
+
+        public static string Saving
+        {
+            get { return Application.dataPath; }
+        }
     }
 }

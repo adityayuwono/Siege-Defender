@@ -134,7 +134,7 @@ namespace Scripts
             throw new System.NotImplementedException();
         }
 
-        public virtual void RegisterEnemy(EnemyBaseViewModel enemy)
+        public virtual void Save()
         {
             throw new System.NotImplementedException();
         }

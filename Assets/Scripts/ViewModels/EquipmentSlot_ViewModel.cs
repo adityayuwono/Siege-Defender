@@ -62,6 +62,8 @@ namespace Scripts.ViewModels
             _currentItem.ChangeParent(this);
             _model.Item = _currentItem.Model;// Save the change to model
             ProjectileId.SetValue(_currentItem.Base);// Update projectile used
+
+            Root.Save();
         }
 
         public void Object_OnDropped(ObjectViewModel objectViewModel)

@@ -143,5 +143,10 @@ namespace Scripts
             _currentScene.Activate();
             _currentScene.Show();
         }
+
+        public override void Save()
+        {
+            Serializer.SaveObjectToXML(_model);
+        }
     }
 }

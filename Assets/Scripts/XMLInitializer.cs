@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.IO;
+using Scripts.Helpers;
 using UnityEngine;
 
 namespace Scripts
 {
+    /// <summary>
+    /// Deserialize XML then store it
+    /// </summary>
     public class XMLInitializer : MonoBehaviour
     {
         /// <summary>
@@ -18,8 +22,7 @@ namespace Scripts
 
         public void Start()
         {
-            var filePath = Application.persistentDataPath;
-            var loader = new WWW(filePath + "/Engine.xml");
+            var loader = new WWW(FilePaths.Loading + "/Engine.xml");
             
             // Start preparing XML
             StartCoroutine(InitializeEngine(loader));
@@ -31,21 +34,27 @@ namespace Scripts
             while (!loader.isDone)
                 yield return null;
 
+            var isUnityEditor = false;
+#if UNITY_EDITOR
+            isUnityEditor=false;
+#endif
+
             string engineText;
-            if (loader.error != null)
+            if (loader.error != null || isUnityEditor)
             {
                 // We don't have an XML yet, let's create one based on the template
                 engineText = EngineText.text;
                 using (var sw = new StreamWriter(loader.url))
+                {
                     sw.Write(engineText);
+                    sw.Close();
+                }
             }
             else
                 // Woohooo found the file
                 engineText = loader.text;
 
-#if UNITY_EDITOR
-            engineText = EngineText.text;
-#endif
+
 
             // Keep it for later, the rest of the scenes are going to need this cutie
             EngineXML = engineText;

@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using Scripts.Models;
+using UnityEngine;
 
 namespace Scripts.Helpers
 {
@@ -14,6 +17,18 @@ namespace Scripts.Helpers
             var obj = (T)deserializer.Deserialize(xmlFromText);
             reader.Close();
             return obj;
+        }
+    }
+
+    public static class Serializer
+    {
+        public static void SaveObjectToXML(Engine_Model model)
+        {
+            var serializer = new XmlSerializer(typeof(Engine_Model));
+
+            var sw = new StreamWriter(FilePaths.Saving + "/Engine.xml");
+            serializer.Serialize(sw, model);
+            sw.Close();
         }
     }
 }
