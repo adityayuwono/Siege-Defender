@@ -12,10 +12,10 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-        protected override void OnShow()
+        protected override void OnLoad()
         {
-            base.OnShow();
-
+            base.OnLoad();
+            
             _target = _viewModel.Root.GetView<ObjectView>(_viewModel.Target);
             _source = _viewModel.Root.GetView<ObjectView>(_viewModel.Source);
 
