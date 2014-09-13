@@ -3,11 +3,21 @@ using Scripts.ViewModels;
 
 namespace Scripts.Core
 {
-    public class AdjustableProperty<T> : Property<T>
+    public class AdjustableProperty<T> : Property<T> , IDisposable
     {
+        private string _id;
+        private BaseViewModel _viewModel;
         public AdjustableProperty(string id, BaseViewModel viewModel)
         {
-            viewModel.Root.RegisterProperty(viewModel, id, this);
+            _id = id;
+            _viewModel = viewModel;
+
+            viewModel.Root.RegisterProperty(_viewModel, _id, this);
+        }
+
+        public void Dispose()
+        {
+            _viewModel.Root.UnregisterProperty(_viewModel, _id);
         }
     }
 

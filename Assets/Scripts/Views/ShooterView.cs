@@ -43,5 +43,15 @@ namespace Scripts.Views
             if (projectile!=null)
                 projectile.Shoot(_source, _target, _viewModel.Accuracy);
         }
+
+        protected override void OnDestroy()
+        {
+            _target = null;
+            _source = null;
+
+            _viewModel.IsShooting.OnChange -= OnShootingChanged;
+
+            base.OnDestroy();
+        }
     }
 }

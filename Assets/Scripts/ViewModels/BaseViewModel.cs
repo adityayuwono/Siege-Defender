@@ -88,6 +88,23 @@ namespace Scripts.ViewModels
         #endregion
 
 
+        public Action OnDestroy;
+        public void Destroy()
+        {
+            OnDestroyed();
+
+            if (OnDestroy != null)
+                OnDestroy();
+
+            _isActive = false;
+            _isLoaded = false;// Finally we will reload a destroyed object
+        }
+        protected virtual void OnDestroyed()
+        {
+            _view = null;
+            Root.UnregisterView(this);
+        }
+
         public T GetParent<T>() where T : BaseViewModel
         {
             var parent = Parent as T;

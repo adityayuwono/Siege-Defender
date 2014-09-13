@@ -83,6 +83,13 @@ namespace Scripts.ViewModels
         }
         #endregion
 
+        protected override void OnDestroyed()
+        {
+            foreach (var element in Elements)
+                element.Destroy();
+
+            base.OnDestroyed();
+        }
 
         #region Model Properties
         public string Type

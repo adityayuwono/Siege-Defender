@@ -76,7 +76,17 @@ namespace Scripts.Views
 
             return parentTransform;
         }
-        protected virtual void OnDestroy() { }
+
+        protected override void OnDestroy()
+        {
+            _isLoaded = false;
+
+            Transform = null;
+            Object.Destroy(_gameObject);
+            _gameObject = null;
+
+            base.OnDestroy();
+        }
         protected virtual GameObject GetGameObject()
         {
             var gameObject =_viewModel.Root.ResourceManager.GetGameObject(_viewModel.AssetId);

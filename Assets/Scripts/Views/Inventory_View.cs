@@ -1,4 +1,5 @@
-﻿using Scripts.ViewModels;
+﻿using Scripts.Helpers;
+using Scripts.ViewModels;
 using UnityEngine;
 
 namespace Scripts.Views
@@ -27,6 +28,13 @@ namespace Scripts.Views
 
             _uiTable = Transform.FindChild("ItemSlot").GetComponent<UITable>();
         }
+
+        protected override void OnDestroy()
+        {
+            _viewModel.OnChildrenChanged -= Children_OnChanged;
+
+            base.OnDestroy();
+        }
     }
 
     public class Item_View : ObjectView
@@ -37,6 +45,9 @@ namespace Scripts.Views
 
         public Item_View(Item_ViewModel viewModel, ObjectView parent) : base(viewModel, parent)
         {
+            if (parent == null)
+                throw new EngineException(this, "Parent is null");
+
             _viewModel = viewModel;
             _parent = parent;
 
@@ -52,6 +63,9 @@ namespace Scripts.Views
 
         protected override Transform GetParent()
         {
+            if (_parent == null)
+                throw new EngineException(this, "Parent is null");
+
             Transform parentTransform = _parent.Transform;
             var parentItemTable = _parent.Transform.FindChild("ItemSlot");
             if (parentItemTable != null)
@@ -74,6 +88,13 @@ namespace Scripts.Views
 
             Transform.localPosition = Vector3.zero;
             Transform.localScale = Vector3.one;
+        }
+
+        protected override void OnDestroy()
+        {
+            _viewModel.OnParentChanged -= OnParentChanged;
+
+            base.OnDestroy();
         }
     }
 }

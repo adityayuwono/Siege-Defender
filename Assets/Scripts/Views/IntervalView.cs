@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 
@@ -38,6 +37,13 @@ namespace Scripts.Views
         public void StopInterval()
         {
             _isRunning = false;
+        }
+
+        protected override void OnDestroy()
+        {
+            StopInterval();
+
+            base.OnDestroy();
         }
 
         private bool _isRunning;

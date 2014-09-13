@@ -1,6 +1,7 @@
 ﻿using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
+using UnityEngine;
 
 namespace Scripts.ViewModels
 {
@@ -41,6 +42,16 @@ namespace Scripts.ViewModels
             newProjectile.Show();
 
             CurrentObject.SetValue(newProjectile);
+        }
+
+        protected override void OnDestroyed()
+        {
+            ObjectIdBinding.OnChange -= ObjectId_OnChange;
+            ObjectIdBinding = null;
+
+            CurrentObject.SetValue(null);
+
+            base.OnDestroyed();
         }
 
 

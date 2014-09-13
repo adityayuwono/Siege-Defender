@@ -55,6 +55,17 @@ namespace Scripts.ViewModels
             base.Hide(reason);
         }
 
+        protected override void OnDestroyed()
+        {
+            foreach (var itemViewModel in Items)
+                itemViewModel.Destroy();
+
+            foreach (var equipmentSlotViewModel in EquipmentSlots)
+                equipmentSlotViewModel.Destroy();
+
+            base.OnDestroyed();
+        }
+
         public readonly List<Item_ViewModel> Items = new List<Item_ViewModel>();
         public readonly List<EquipmentSlot_ViewModel> EquipmentSlots =  new List<EquipmentSlot_ViewModel>(); 
 

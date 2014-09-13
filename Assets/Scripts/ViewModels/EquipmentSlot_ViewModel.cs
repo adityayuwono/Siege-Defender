@@ -35,6 +35,12 @@ namespace Scripts.ViewModels
             base.Hide(reason);
         }
 
+        protected override void OnDestroyed()
+        {
+            _currentItem.Destroy();
+
+            base.OnDestroyed();
+        }
 
         public readonly AdjustableProperty<string> ProjectileId;
 

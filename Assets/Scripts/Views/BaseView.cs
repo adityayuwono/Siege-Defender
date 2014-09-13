@@ -13,6 +13,8 @@ namespace Scripts.Views
 
             _viewModel.OnShow += OnShow;
             _viewModel.OnHide += OnHide;
+
+            _viewModel.OnDestroy += OnDestroy;
         }
 
         public string Id
@@ -22,5 +24,11 @@ namespace Scripts.Views
 
         protected virtual void OnShow() { }
         protected virtual void OnHide(string reason){ }
+        protected virtual void OnDestroy()
+        {
+            _viewModel.OnShow -= OnShow;
+            _viewModel.OnHide -= OnHide;
+            _viewModel.OnDestroy -= OnDestroy;
+        }
     }
 }

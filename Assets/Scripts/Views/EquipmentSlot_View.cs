@@ -17,5 +17,12 @@ namespace Scripts.Views
 
             GameObject.AddComponent<DragDropContainerController>().OnDropped += _viewModel.Object_OnDropped;
         }
+
+        protected override void OnDestroy()
+        {
+            GameObject.GetComponent<DragDropContainerController>().OnDropped -= _viewModel.Object_OnDropped;
+
+            base.OnDestroy();
+        }
     }
 }

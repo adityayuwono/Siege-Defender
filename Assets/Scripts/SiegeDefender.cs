@@ -136,10 +136,7 @@ namespace Scripts
         {
             // Deactivate Current Active Scene, to avoid space time continuum
             if (_currentScene != null)
-            {
-                var reason = "Change to scene: " + sceneId;
-                _currentScene.Hide(reason);
-            }
+                _currentScene.Destroy();// Destroy scenes when they are not needed anymore to clear memory
 
             // I think it's save enough to show a new one, let's hope i'm right
             _currentScene = _scenes[sceneId];

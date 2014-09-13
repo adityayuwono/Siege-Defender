@@ -49,6 +49,12 @@ namespace Scripts.Views
             base.OnHide(reason);
         }
 
+        protected override void OnDestroy()
+        {
+            _isDead = true;
+
+            base.OnDestroy();
+        }
 
 
         private bool _isDead;

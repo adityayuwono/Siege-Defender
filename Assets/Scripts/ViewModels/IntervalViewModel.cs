@@ -89,6 +89,14 @@ namespace Scripts.ViewModels
             return foundObject;
         }
         #endregion
+
+        protected override void OnDestroyed()
+        {
+            foreach (var activeObject in _activeObjects)
+                activeObject.OnObjectDeactivated -= Object_OnDeath;
+
+            base.OnDestroyed();
+        }
     }
 
     public abstract class IntervalViewModel : ElementViewModel
