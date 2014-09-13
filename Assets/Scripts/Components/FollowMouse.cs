@@ -68,6 +68,10 @@ namespace Scripts.Components
 
         private void UpdateObjectPosition(Vector3 inputPosition)
         {
+            // Bug after destruction the MainCamera reference is not cleared, or maybe we fail to hook the new camera at Start
+            if (_mainCamera == null)
+                _mainCamera = GameObject.Find("Player").camera;
+
             var ray = _mainCamera.ScreenPointToRay(inputPosition);
             RaycastHit hitInfo;
 
