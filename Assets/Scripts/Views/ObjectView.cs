@@ -110,6 +110,9 @@ namespace Scripts.Views
         }
         protected virtual void OnDeath(string reason)
         {
+            if (_gameObject == null)
+                throw new EngineException(this, string.Format("Failed to deactivate GameObject, {0}", reason));
+
             GameObject.SetActive(false);
             _viewModel.Deactivate(reason);
         }
