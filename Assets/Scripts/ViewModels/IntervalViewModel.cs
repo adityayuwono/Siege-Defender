@@ -22,7 +22,7 @@ namespace Scripts.ViewModels
         public override void Hide(string reason)
         {
             foreach (var activeObject in _activeObjects)
-                activeObject.Hide("The Interval is hidden");
+                activeObject.Hide(reason);
 
             base.Hide(reason);
         }
@@ -94,6 +94,16 @@ namespace Scripts.ViewModels
         {
             foreach (var activeObject in _activeObjects)
                 activeObject.OnObjectDeactivated -= Object_OnDeath;
+
+            foreach (var activeObject in _activeObjects)
+                activeObject.Destroy();
+
+            foreach (var inactiveObjectKVP in _inactiveObjects)
+                foreach (var inactiveObject in inactiveObjectKVP.Value)
+                    inactiveObject.Destroy();
+
+            _activeObjects.Clear();
+            _inactiveObjects.Clear();
 
             base.OnDestroyed();
         }
