@@ -14,11 +14,6 @@ namespace Scripts.ViewModels
             CurrentItem = new Item_ViewModel(_model.Item, this);
         }
 
-        protected override void OnLoad()
-        {
-            base.OnLoad();
-        }
-
         protected override void OnActivate()
         {
             base.OnActivate();
