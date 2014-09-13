@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Scripts.ViewModels.GUIs;
+﻿using Scripts.ViewModels.GUIs;
 using UnityEngine;
 
 namespace Scripts.Views.GUIs
@@ -30,21 +29,16 @@ namespace Scripts.Views.GUIs
 
         protected override void OnHide(string reason)
         {
-            _viewModel.Root.StartCoroutine(DelayedHiding(reason));
-
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Hide, _viewModel.HideDelay, false);
+            
             iTween.ScaleTo(GameObject, Vector3.zero, _viewModel.HideDelay);
             iTween.MoveTo(GameObject, _viewModel.Position + (Vector3.up*2f), _viewModel.HideDelay);
         }
 
-        private IEnumerator DelayedHiding(string reason)
+        private void Hide()
         {
-            yield return new WaitForSeconds(_viewModel.HideDelay);
-            HideAoE(reason);
-        }
-
-        protected virtual void HideAoE(string reason)
-        {
-            base.OnHide(reason);
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Hide);
+            base.OnHide("Hiding DamageGUI");
         }
     }
 }

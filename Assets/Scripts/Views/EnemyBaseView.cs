@@ -14,11 +14,8 @@ namespace Scripts.Views
         {
             _viewModel = viewModel;
             _parent = parent;
-
-            _viewModel.DoAttach += AttachProjectileToSelf;
         }
 
-        
 
 
         private Animator _animator;
@@ -26,6 +23,9 @@ namespace Scripts.Views
         protected override void OnLoad()
         {
             base.OnLoad();
+
+            _viewModel.DoAttach += AttachProjectileToSelf;
+
             _projectileRooTransform = Transform.FindChildRecursivelyBreadthFirst("ProjectileRoot");
             _animator = GameObject.GetComponent<Animator>();
         }
@@ -33,17 +33,23 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            _isDead = false;
             _animator.SetBool("IsDead", false);
 
             Transform.position = _parent.GetRandomSpawnPoint();
             Transform.localEulerAngles = new Vector3(0, 180f + Random.Range(-_viewModel.Rotation, _viewModel.Rotation), 0);
-            _viewModel.Root.StartCoroutine(Walking());
+
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk,0f);
+        }
+
+        private void Walk()
+        {
+            Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
         }
 
         protected override void OnHide(string reason)
         {
-            _isDead = true;
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
+
             _animator.SetBool("IsDead", true);
 
             base.OnHide(reason);
@@ -51,22 +57,11 @@ namespace Scripts.Views
 
         protected override void OnDestroy()
         {
-            _isDead = true;
+            _viewModel.DoAttach -= AttachProjectileToSelf;
+            _animator = null;
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
             base.OnDestroy();
-        }
-
-
-        private bool _isDead;
-        private IEnumerator Walking()
-        {
-            while (!_isDead)
-            {
-                // Check here, as the Enemy may have been destroyed while we are waiting
-                if (Transform != null)
-                    Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
-                yield return null;
-            }
         }
 
         private Transform _projectileRooTransform;

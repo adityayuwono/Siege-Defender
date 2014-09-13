@@ -16,6 +16,8 @@ namespace Scripts
         public static BalistaContext Instance { get { return _instance; } }
         private static BalistaContext _instance;
 
+        public IntervalRunner IntervalRunner;
+
         private void Awake()
         {
             // Initialize singleton
@@ -24,6 +26,9 @@ namespace Scripts
 
         private void Start()
         {
+            // Prepare the IntervalRunner, this will manage all time based execution of this game
+            IntervalRunner = gameObject.AddComponent<IntervalRunner>();
+
             Physics.IgnoreLayerCollision(9,9);// Layer 9 will not collide with layer 9, this is the projectiles
 
             // Get XML from Splash, simple stuff

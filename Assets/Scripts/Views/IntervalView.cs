@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using Scripts.ViewModels;
-using UnityEngine;
 
 namespace Scripts.Views
 {
@@ -19,24 +17,14 @@ namespace Scripts.Views
             throw new NotImplementedException();
         }
 
-        private float _lastIntervalTime = float.NegativeInfinity;
-
-
-        private int _intervalCount;// BUG: To make sure there's only one interval running
         public void StartInterval()
         {
-            if (!_isRunning)
-            {
-                _isRunning = true;
-
-                if (Time.realtimeSinceStartup > _lastIntervalTime + _viewModel.Interval)
-                    _viewModel.Root.StartCoroutine(DoInterval(_viewModel.Interval));
-            }
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(IntervalInvoked, _viewModel.Interval);
         }
 
         public void StopInterval()
         {
-            _isRunning = false;
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(IntervalInvoked);
         }
 
         protected override void OnDestroy()
@@ -44,28 +32,6 @@ namespace Scripts.Views
             StopInterval();
 
             base.OnDestroy();
-        }
-
-        private bool _isRunning;
-        private IEnumerator DoInterval(float interval)
-        {
-            _intervalCount++;
-            if (_intervalCount > 1)
-            {
-                _intervalCount--;
-                yield break;
-            }
-
-            while (_isRunning)
-            {
-                _lastIntervalTime = Time.realtimeSinceStartup;
-
-                IntervalInvoked();
-
-                yield return new WaitForSeconds(interval);
-            }
-
-            _intervalCount--;
         }
     }
 }

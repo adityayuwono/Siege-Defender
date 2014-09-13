@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using Scripts.Components;
+﻿using Scripts.Components;
 using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Scripts.Views
 {
@@ -77,16 +77,6 @@ namespace Scripts.Views
             return parentTransform;
         }
 
-        protected override void OnDestroy()
-        {
-            _isLoaded = false;
-
-            Transform = null;
-            Object.Destroy(_gameObject);
-            _gameObject = null;
-
-            base.OnDestroy();
-        }
         protected virtual GameObject GetGameObject()
         {
             var gameObject =_viewModel.Root.ResourceManager.GetGameObject(_viewModel.AssetId);
@@ -111,20 +101,29 @@ namespace Scripts.Views
 
         private void KillGameObject(string reason)
         {
-            _viewModel.Root.StartCoroutine(DelayedDeath(_viewModel.DeathDelay, reason));
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(OnDeath, _viewModel.DeathDelay, false);
         }
-        private IEnumerator DelayedDeath(float delay, string reason)
+        private void OnDeath()
         {
-            yield return new WaitForSeconds(delay);
-            OnDeath(reason);
+            if (BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath) && _gameObject != null)
+                OnDeath("");
         }
         protected virtual void OnDeath(string reason)
         {
-            if (_gameObject == null)
-                throw new EngineException(this, string.Format("Failed to deactivate GameObject, {0}", reason));
-
             GameObject.SetActive(false);
             _viewModel.Deactivate(reason);
+        }
+        protected override void OnDestroy()
+        {
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath);
+
+            _isLoaded = false;
+
+            Transform = null;
+            Object.DestroyImmediate(_gameObject);
+            _gameObject = null;
+
+            base.OnDestroy();
         }
     }
 }
