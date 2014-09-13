@@ -13,9 +13,9 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-        protected override void OnShow()
+        protected override void OnLoad()
         {
-            base.OnShow();
+            base.OnLoad();
 
             var colliders = GameObject.GetComponentsInChildren<Collider>();
             foreach (var collider in colliders)
@@ -23,6 +23,11 @@ namespace Scripts.Views
                 var minMaxRandom = new MinMaxRandom(collider.bounds);
                 _spawnPoints.Add(minMaxRandom);
             }
+        }
+
+        protected override void OnShow()
+        {
+            base.OnShow();
 
             StartInterval();
         }

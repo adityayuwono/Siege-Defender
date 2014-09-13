@@ -31,6 +31,10 @@ namespace Scripts
 
             _views.Add(viewModel.Id, view);
         }
+        public void UnregisterView(BaseViewModel viewModel)
+        {
+            _views.Remove(viewModel.Id);
+        }
         public T GetView<T>(BaseViewModel viewModel) where T:BaseView
         {
             var id = viewModel.Id;
@@ -84,6 +88,11 @@ namespace Scripts
                 // No similar property registered yet, meaning this is the first of it's kind, momentous
                 _properties.Add(id, new Dictionary<string, Property> {{viewModel.Id, property}});
             }
+        }
+
+        public void UnregisterProperty(BaseViewModel viewModel, string id)
+        {
+            _properties[id].Remove(viewModel.Id);
         }
 
         /// <summary>
