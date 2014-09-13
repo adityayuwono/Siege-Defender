@@ -64,26 +64,6 @@ namespace Scripts
             throw new EngineException(this, string.Format("ObjectModel not found, Id: {0}", id));
         }
 
-        #region ViewModel Lookup
-        // I didn't expect i had to go this far, seriously
-        private readonly Dictionary<string, BaseViewModel> _viewModels = new Dictionary<string, BaseViewModel>();
-        public T GetViewModel<T>(string id) where T : BaseViewModel
-        {
-            if (!_viewModels.ContainsKey(id))
-                throw new EngineException(this, string.Format("Failed to find ViewModel with Id: {0}", id));
-
-            var vm = _viewModels[id] as T;
-            return vm;
-        }
-        public void RegisterViewModel(BaseViewModel viewModel)
-        {
-            if (_viewModels.ContainsKey(viewModel.Id))
-                throw new EngineException(this, string.Format("Duplicate Id: {0}", viewModel.Id));
-
-            _viewModels.Add(viewModel.Id, viewModel);
-        }
-        #endregion
-
         #region Property Lookup
         private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>(); 
         public void RegisterProperty(BaseViewModel viewModel, string id, Property property)
@@ -124,22 +104,13 @@ namespace Scripts
         #endregion
 
         #region Virtual Methods
-        public virtual EnemyBase_Model GetEnemy(string enemyId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual Level_Model GetLevel(string levelId)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public virtual void Save()
         {
             throw new System.NotImplementedException();
         }
 
-        public virtual void RemoveEnemy(ObjectViewModel enemy)
+        public virtual Level_Model GetLevel(string levelId)
         {
             throw new System.NotImplementedException();
         }
@@ -160,7 +131,5 @@ namespace Scripts
         }
 
         #endregion
-
-        
     }
 }
