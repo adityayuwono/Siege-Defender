@@ -19,11 +19,20 @@ namespace Scripts.ViewModels
             get { return _model.Interval; }
         }
 
+        public override void Hide(string reason)
+        {
+            foreach (var activeObject in _activeObjects)
+                activeObject.Hide("The Interval is hidden");
+
+            base.Hide(reason);
+        }
+
         #region Spawning Objects
 
         protected TU GetObject<TU>(string objectId) where TU : T
         {
             var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId));
+            _activeObjects.Add(objectResult);
             objectResult.OnObjectDeactivated += Object_OnDeath;
             return objectResult as TU;
         }
@@ -44,9 +53,13 @@ namespace Scripts.ViewModels
             return newObject;
         }
 
+        private readonly List<T> _activeObjects = new List<T>();
+
         private void Object_OnDeath(ObjectViewModel objectViewModel)
         {
-            AddToInactiveObjectList(objectViewModel as T);
+            var objectT = (T) objectViewModel;
+            _activeObjects.Remove(objectT);
+            AddToInactiveObjectList(objectT);
         }
         private void AddToInactiveObjectList(T inactiveObject)
         {
