@@ -56,7 +56,9 @@ namespace Scripts.Views
         {
             while (!_isDead)
             {
-                Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
+                // Check here, as the Enemy may have been destroyed while we are waiting
+                if (Transform != null)
+                    Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
                 yield return null;
             }
         }
