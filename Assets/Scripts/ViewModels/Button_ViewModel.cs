@@ -13,21 +13,17 @@ namespace Scripts.ViewModels
         public Button_ViewModel(Button_GUIModel model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
-        }
-
-        protected override void OnLoad()
-        {
-            base.OnLoad();
 
             foreach (var actionModel in _model.Actions)
             {
                 // Get new instance of ActionVM
-                var actionVM = Root.IoCContainer.GetInstance<Base_ActionViewModel>(actionModel.GetType(), new object[] {actionModel, this});
+                var actionVM = Root.IoCContainer.GetInstance<Base_ActionViewModel>(actionModel.GetType(), new object[] { actionModel, this });
                 _actions.Add(actionVM);
             }
         }
 
-        private readonly List<Base_ActionViewModel> _actions = new List<Base_ActionViewModel>(); 
+        private readonly List<Base_ActionViewModel> _actions = new List<Base_ActionViewModel>();
+
         public void OnClicked()
         {
             // Invoke all actions related to this button
