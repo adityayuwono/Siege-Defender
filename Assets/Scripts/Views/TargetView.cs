@@ -12,9 +12,9 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-        protected override void OnShow()
+        protected override void OnLoad()
         {
-            base.OnShow();
+            base.OnLoad();
 
             AttachController<FollowMouse>().Setup(_viewModel);
         }
