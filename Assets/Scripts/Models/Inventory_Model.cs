@@ -7,6 +7,9 @@ namespace Scripts.Models
     [Serializable]
     public class Inventory_Model : Element_Model
     {
+        [XmlAttribute]
+        public int Slots { get; set; }
+
         [XmlElement(ElementName = "Item", Type = typeof(Item_Model))]
         public List<Item_Model> Items { get; set; }
 
@@ -15,6 +18,7 @@ namespace Scripts.Models
 
         public Inventory_Model()
         {
+            Slots = 36;
             Items = new List<Item_Model>();
             EquipmentSlots = new List<EquipmentSlot_Model>();
         }
