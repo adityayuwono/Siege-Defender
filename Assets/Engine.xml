@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Engine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="SiegeDefender">
+  <Objects>
+    <Projectile Id="WoodArrow" AssetId="Projectiles/WoodenBalista" Damage="8-12" RoF="0.2" Ammunition="1000" Deviation="0.001">
+      <Elements />
+    </Projectile>
+    <Projectile Id="IronArrow" AssetId="Projectiles/IronBalista" Damage="10-30" RoF="0.25" Ammunition="500" Accuracy="0.7" Deviation="0.005">
+      <Elements />
+    </Projectile>
+    <Projectile Id="FireBall" AssetId="Projectiles/FireBall" Damage="8-11" RoF="0.5" AoEId="FireDome" Ammunition="25" Deviation="0.001">
+      <Elements />
+    </Projectile>
+    <Projectile Id="ExplosiveFireBall" AssetId="Projectiles/FireBall" Damage="15-20" RoF="0.2" AoEId="Explosion" Ammunition="25" ReloadTime="1" Accuracy="0.5" Deviation="0.01">
+      <Elements />
+    </Projectile>
+    <Piercing Id="IronBall" AssetId="Projectiles/IronBall" Damage="50-80" RoF="2" Ammunition="3" ReloadTime="1" Accuracy="1">
+      <Elements />
+    </Piercing>
+    <AoE Id="FireDome" AssetId="Projectiles/AoE" Damage="4-7" Radius="20">
+      <Elements />
+    </AoE>
+    <ParticleAoE Id="Explosion" AssetId="Projectiles/Explosion" Damage="3-7" Radius="20">
+      <Elements />
+    </ParticleAoE>
+    <Enemy Id="BoxDemon" AssetId="Enemies/RedGoblin" Limit="0" Chance="0" Health="11" Speed="1.5" Rotation="10">
+      <Elements />
+    </Enemy>
+    <Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" Limit="0" Chance="0" Health="30" Speed="1" Rotation="20">
+      <Elements />
+    </Enemy>
+    <Enemy Id="Boss" AssetId="Enemies/BigGoblin" Limit="0" Chance="0" Health="250" Speed="0.3" Rotation="0">
+      <Elements />
+    </Enemy>
+    <DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" Font="ITCAvantGardePro-Bk">
+      <Elements />
+    </DamageGUI>
+  </Objects>
+  <Levels>
+    <Level Id="Level1" Interval="1">
+      <SpawnSequence>
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="BoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="FatBoxDemon" />
+        <Spawn EnemyId="Boss" />
+      </SpawnSequence>
+    </Level>
+  </Levels>
+  <Scenes>
+    <Scene Id="MainMenu" AssetId="Scenes/MainMenu">
+      <Elements>
+        <Button Id="8c995ff7-9a2e-4b53-b11e-71d087ca67c3" AssetId="WeaponSelection">
+          <Elements />
+          <LoadScene Id="ef6248ac-c4f8-45dd-a89c-09ad0b4db3d2" Target="SkillTree" />
+        </Button>
+        <Button Id="28f9cb10-2113-4552-985f-36d61a243604" AssetId="StartGame">
+          <Elements />
+          <LoadScene Id="3d18543e-bae2-4f12-9189-de9a62a5a4bc" Target="Limbo" />
+        </Button>
+      </Elements>
+    </Scene>
+    <Scene Id="SkillTree" AssetId="Scenes/SkillTree">
+      <Elements>
+        <Inventory Id="5b574525-71ad-4991-a96b-b3e103b2f6af" AssetId="Inventory">
+          <Elements />
+          <Item Id="8853e5cc-d591-4d68-908d-b15a07e474b5" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0">
+            <Elements />
+          </Item>
+          <Item Id="32df22e2-5fc2-40dd-9b19-fca692a2b9d9" AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
+            <Elements />
+          </Item>
+          <Item Id="2fbb5748-17ca-4b18-95fb-77a1e404254c" AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
+            <Elements />
+          </Item>
+          <Item Id="1fd3ae2f-e576-4fe0-b6a1-7431de4ac66a" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronArrow" Level="0">
+            <Elements />
+          </Item>
+          <EquipmentSlot Id="LeftShooter" AssetId="LeftWeaponContainer">
+            <Elements>
+              <ObjectDisplay Id="LeftWeapon" AssetId="LeftWeaponDisplay" Interval="0" ObjectId="{LeftShooter.ProjectileId}">
+                <Elements />
+              </ObjectDisplay>
+            </Elements>
+            <Item Id="cdb6155c-1b9d-428b-aa81-09def0bbf70a" AssetId="GUIs/Buttons/ProjectileIcon" Base="ExplosiveFireBall" Level="0">
+              <Elements />
+            </Item>
+          </EquipmentSlot>
+          <EquipmentSlot Id="RightShooter" AssetId="RightWeaponContainer">
+            <Elements>
+              <ObjectDisplay Id="RightWeapon" AssetId="RightWeaponDisplay" Interval="0" ObjectId="{RightShooter.ProjectileId}">
+                <Elements />
+              </ObjectDisplay>
+            </Elements>
+            <Item Id="5d048411-deee-4d88-bb9f-d145652cccf5" AssetId="GUIs/Buttons/ProjectileIcon" Base="FireBall" Level="0">
+              <Elements />
+            </Item>
+          </EquipmentSlot>
+        </Inventory>
+        <Button Id="dde50774-37e0-4ed1-87b9-8a26ec97d328" AssetId="BackToMainMenu">
+          <Elements />
+          <LoadScene Id="8e404dd5-60f6-4e52-8a8c-bf7f55a04925" Target="MainMenu" />
+        </Button>
+      </Elements>
+    </Scene>
+    <Scene Id="Limbo" AssetId="Scenes/Limbo">
+      <Elements>
+        <Element Id="5959fc01-975c-42d1-aec2-0528cb009e89" AssetId="Ground">
+          <Elements />
+        </Element>
+        <EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" Interval="0" LevelId="Level1">
+          <Elements />
+        </EnemySpawn>
+        <PlayerHitbox Id="f8377400-0740-41b8-a9e7-eb6ec1878530" AssetId="PlayerHealth">
+          <Elements />
+        </PlayerHitbox>
+        <Player Id="b850ab8e-f2f5-4104-97ad-d9dec2326c2b" AssetId="Player">
+          <Elements />
+          <Shooters>
+            <Shooter Id="3c854182-8205-4ebe-a5ab-5cfbaf202638" AssetId="LeftShooter" Interval="0" ProjectileId="{LeftShooter.ProjectileId}" Index="0">
+              <Elements />
+              <Source Id="8504ff8a-98c7-4b31-b349-542b89fc7df9" AssetId="Shooter">
+                <Elements />
+              </Source>
+              <Target Id="bcc0ba2d-cc65-4843-9dce-4c917524f9ce" AssetId="Target" Index="0">
+                <Elements />
+              </Target>
+            </Shooter>
+            <Shooter Id="37ee752f-585a-4776-8fd0-fb1804400021" AssetId="RightShooter" Interval="0" ProjectileId="{RightShooter.ProjectileId}" Index="1">
+              <Elements />
+              <Source Id="029de57d-cb66-44f2-9d70-ee8808b70a5a" AssetId="Shooter">
+                <Elements />
+              </Source>
+              <Target Id="d06522a9-13b7-41f8-9159-82feaff316b6" AssetId="Target" Index="1">
+                <Elements />
+              </Target>
+            </Shooter>
+          </Shooters>
+        </Player>
+        <GUIRoot Id="5d1b77cd-b976-44c5-9011-86018f4fc85a" AssetId="UIRoot">
+          <Elements>
+            <DamageDisplay Id="86b9b8ae-256d-4fb9-b4d9-21032f7695d3" AssetId="DamageDisplayRoot" Interval="0" DamageGUI="StandardDamageGUI">
+              <Elements />
+            </DamageDisplay>
+            <Button Id="c4a04d8d-e5c1-4020-9912-4b11dd1f1a73" AssetId="BackToMainMenu">
+              <Elements />
+              <LoadScene Id="61aff8f3-fa4e-49ac-b22e-35836f1f1637" Target="MainMenu" />
+            </Button>
+          </Elements>
+        </GUIRoot>
+      </Elements>
+    </Scene>
+  </Scenes>
+</Engine>
