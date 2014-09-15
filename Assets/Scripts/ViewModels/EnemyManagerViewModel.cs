@@ -10,20 +10,31 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            _levelModel = Root.GetLevel(_model.LevelId);
+            LoadLevel(_model.LevelId);
         }
 
-        private readonly Level_Model _levelModel;
+        public void LoadLevel(string levelId)
+        {
+            _levelModel = Root.GetLevel(levelId);
+            _currentLoop = 0;
+        }
+
+        private Level_Model _levelModel;
         public override float Interval
         {
             get { return _levelModel.Interval; }
         }
 
+        private int _currentLoop;
+
         private int _spawnIndex;
         public void SpawnEnemy()
         {
-            if (_spawnIndex >= _levelModel.SpawnSequence.Count)
+            if (_spawnIndex >= _levelModel.SpawnSequence.Count && _currentLoop < _levelModel.LoopCount)
+            {
                 _spawnIndex = 0;
+                _currentLoop++;
+            }
 
             var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
             _spawnIndex++;
