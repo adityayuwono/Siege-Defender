@@ -59,9 +59,10 @@ namespace Scripts
 
             IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
 
-            // Actions, doesnt have a model
+            // Actions, doesnt have a view
             IoCContainer.RegisterFor<LoadScene_ActionModel>().TypeOf<Base_ActionViewModel>().To<LoadScene_ActionViewModel>();
             IoCContainer.RegisterFor<Setter_ActionModel>().TypeOf<Base_ActionViewModel>().To<Setter_ActionViewModel>();
+            IoCContainer.RegisterFor<Base_ConditionModel>().TypeOf<Base_ConditionViewModel>().To<Base_ConditionViewModel>();
             #endregion
 
             #region ViewModel to View(BaseView)
