@@ -85,7 +85,7 @@ namespace Scripts.ViewModels
 
         #region Model Properties
 
-        public float Speed
+        public virtual float Speed
         {
             get { return _model.Speed; }
         }
