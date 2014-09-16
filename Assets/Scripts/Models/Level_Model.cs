@@ -17,8 +17,7 @@ namespace Scripts.Models
 
 
 
-        [XmlArray]
-        [XmlArrayItem(ElementName = "Spawn", Type = typeof(Spawn_Model))]
+        [XmlElement(ElementName = "Spawn", Type = typeof(Spawn_Model))]
         public List<Spawn_Model> SpawnSequence { get; set; }
 
         public Level_Model()
