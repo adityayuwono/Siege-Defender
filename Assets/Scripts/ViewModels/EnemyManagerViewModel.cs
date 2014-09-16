@@ -1,4 +1,5 @@
-﻿using Scripts.Models;
+﻿using Scripts.Core;
+using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
@@ -10,12 +11,18 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            LoadLevel(_model.LevelId);
+            Level = new AdjustableProperty<string>("Level", this);
+            Level.OnChange += LoadLevel;
+
+            Level.SetValue(_model.LevelId);
         }
 
-        public void LoadLevel(string levelId)
+        public AdjustableProperty<string> Level;
+
+        private void LoadLevel()
         {
-            _levelModel = Root.GetLevel(levelId);
+            _spawnIndex = 0;
+            _levelModel = Root.GetLevel(Level.GetValue());
             _currentLoop = 0;
         }
 
@@ -30,18 +37,21 @@ namespace Scripts.ViewModels
         private int _spawnIndex;
         public void SpawnEnemy()
         {
-            if (_spawnIndex >= _levelModel.SpawnSequence.Count && _currentLoop < _levelModel.LoopCount)
+            if (_spawnIndex >= _levelModel.SpawnSequence.Count && (_levelModel.LoopCount < 0 || _currentLoop < _levelModel.LoopCount))
             {
                 _spawnIndex = 0;
                 _currentLoop++;
             }
 
-            var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
-            _spawnIndex++;
+            if (_spawnIndex < _levelModel.SpawnSequence.Count)
+            {
+                var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
+                _spawnIndex++;
 
-            var enemy = GetObject<EnemyBaseViewModel>(enemyId);
-            enemy.Activate();
-            enemy.Show();
+                var enemy = GetObject<EnemyBaseViewModel>(enemyId);
+                enemy.Activate();
+                enemy.Show();
+            }
         }
     }
 }
