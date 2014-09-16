@@ -41,7 +41,6 @@ namespace Scripts.Views
     {
         private readonly Item_ViewModel _viewModel;
         private ObjectView _parent;
-        private UISprite _uiSprite;
 
         public Item_View(Item_ViewModel viewModel, ObjectView parent) : base(viewModel, parent)
         {
