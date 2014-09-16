@@ -1,4 +1,5 @@
 ﻿using System;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
 
@@ -11,13 +12,15 @@ namespace Scripts.ViewModels
         public EnemyBaseViewModel(EnemyBase_Model model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
+
+            Health = new AdjustableProperty<float>("Health", this);
         }
 
         protected override void OnActivate()
         {
             base.OnActivate();
 
-            Health = _model.Health;
+            Health.SetValue(_model.Health);
         }
 
         public override void Hide(string reason)
@@ -42,7 +45,7 @@ namespace Scripts.ViewModels
 
         #region Health
 
-        private float Health { get; set; }
+        public AdjustableProperty<float> Health;
 
         /// <summary>
         /// Reduce health by the amount specified
@@ -54,11 +57,15 @@ namespace Scripts.ViewModels
             if (source != null)
                 AttachProjectile(source);
 
-            if (Health > 0)
+            var currentHealth = Health.GetValue();
+
+            if (currentHealth > 0)
             {
-                Health -= damage;
-                if (Health <= 0)
+                currentHealth -= damage;
+                if (currentHealth <= 0)
                     Hide("Killed");
+
+                Health.SetValue(currentHealth);
             }
 
             return true;
