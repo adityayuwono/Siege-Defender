@@ -6,7 +6,7 @@ namespace Scripts.Core
     public class AdjustableProperty<T> : Property<T> , IDisposable
     {
         private string _id;
-        private BaseViewModel _viewModel;
+        private readonly BaseViewModel _viewModel;
         public AdjustableProperty(string id, BaseViewModel viewModel)
         {
             _id = id;
@@ -23,6 +23,11 @@ namespace Scripts.Core
 
     public class Property<T> : Property
     {
+        public Property()
+        {
+            _value = default(T);
+        }
+
         public void SetValue(T newValue)
         {
             if (_value!=null && _value.Equals(newValue)) 
@@ -34,7 +39,7 @@ namespace Scripts.Core
                 OnChange();
         }
 
-        public T GetValue()
+        public new T GetValue()
         {
             return _value != null ? (T) _value : default(T);
         }
