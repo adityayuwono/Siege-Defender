@@ -4,9 +4,11 @@ using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
 using Scripts.Models.Actions;
+using Scripts.Models.Enemies;
 using Scripts.Models.GUIs;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Actions;
+using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;
 using Scripts.Views;
 using Scripts.Views.GUIs;
@@ -55,6 +57,7 @@ namespace Scripts
             IoCContainer.RegisterFor<ParticleAoE_Model>().TypeOf<ProjectileBaseViewModel>().To<ParticleAoEViewModel>();
 
             IoCContainer.RegisterFor<EnemyBase_Model>().TypeOf<EnemyBaseViewModel>().To<EnemyBaseViewModel>();
+            IoCContainer.RegisterFor<Boss_Model>().TypeOf<EnemyBaseViewModel>().To<Boss_ViewModel>();
             IoCContainer.RegisterFor<Damage_GUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
 
             IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
@@ -71,6 +74,7 @@ namespace Scripts
             IoCContainer.RegisterFor<AoEViewModel>().TypeOf<BaseView>().To<AoEView>();
             IoCContainer.RegisterFor<ParticleAoEViewModel>().TypeOf<BaseView>().To<ParticleAoEView>();
             IoCContainer.RegisterFor<EnemyBaseViewModel>().TypeOf<BaseView>().To<EnemyBaseView>();
+            IoCContainer.RegisterFor<Boss_ViewModel>().TypeOf<BaseView>().To<EnemyBaseView>();
             IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
             IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
             IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
