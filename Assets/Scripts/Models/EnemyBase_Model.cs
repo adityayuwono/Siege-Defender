@@ -7,15 +7,6 @@ namespace Scripts.Models
     public class EnemyBase_Model : Object_Model
     {
         [XmlAttribute]
-        public decimal Limit { get; set; }
-
-
-
-        [XmlAttribute]
-        public float Chance { get; set; }
-
-
-        [XmlAttribute]
         public int Health { get; set; }
 
         [XmlAttribute]
