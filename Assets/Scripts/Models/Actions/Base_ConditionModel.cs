@@ -3,8 +3,7 @@
 namespace Scripts.Models.Actions
 {
     [Serializable]
-    public class Setter_ActionModel : Base_ActionModel
+    public class Base_ConditionModel : TargetProperty_Model
     {
-        
     }
 }

@@ -2,10 +2,10 @@
 using System.Xml.Serialization;
 using Scripts.Models.Actions;
 
-namespace Scripts.Models.GUIs
+namespace Scripts.Models
 {
     [Serializable]
-    public class Button_GUIModel : Base_GUIModel
+    public class TriggerElement_Model : Base_Model
     {
         [XmlElement]
         public Triggered_Model Trigger { get; set; }

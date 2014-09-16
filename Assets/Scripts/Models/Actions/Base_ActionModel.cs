@@ -1,10 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System;
 
 namespace Scripts.Models.Actions
 {
-    public class Base_ActionModel : Base_Model
+    [Serializable]
+    public class Base_ActionModel : TargetProperty_Model
     {
-        [XmlAttribute]
-        public string Target { get; set; }
     }
 }

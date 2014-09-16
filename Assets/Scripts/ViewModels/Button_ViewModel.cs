@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Scripts.Models;
 using Scripts.Models.GUIs;
 using Scripts.ViewModels.Actions;
 using Scripts.ViewModels.GUIs;
@@ -14,7 +13,7 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            foreach (var actionModel in _model.Actions)
+            foreach (var actionModel in _model.Trigger.Actions)
             {
                 // Get new instance of ActionVM
                 var actionVM = Root.IoCContainer.GetInstance<Base_ActionViewModel>(actionModel.GetType(), new object[] { actionModel, this });

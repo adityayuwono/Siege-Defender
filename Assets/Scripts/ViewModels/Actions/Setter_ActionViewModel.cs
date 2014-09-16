@@ -13,7 +13,9 @@ namespace Scripts.ViewModels.Actions
 
         public override void Invoke()
         {
-            var property = Root.GetProperty(_model.Target, _model.Property);
+            base.Invoke();
+
+            var property = Property;
 
             if (property is Property<string>)
             {

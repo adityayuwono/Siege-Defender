@@ -1,16 +1,19 @@
 ﻿using Scripts.Models;
+using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
-    public class Base_ActionViewModel : BaseViewModel
+    public class Base_ActionViewModel : TargetProperty_ViewModel
     {
-        public Base_ActionViewModel(Base_Model model, BaseViewModel parent) : base(model, parent)
+        private readonly Base_ActionModel _model;
+        public Base_ActionViewModel(Base_ActionModel model, BaseViewModel parent) : base(model, parent)
         {
+            _model = model;
         }
 
         public virtual void Invoke()
         {
-            throw new System.NotImplementedException();
+            Activate();
         }
     }
 }
