@@ -13,7 +13,7 @@ namespace Scripts.Models
 
         [XmlAttribute]
         [DefaultValue(0)]
-        public float LoopCount { get; set; }
+        public int LoopCount { get; set; }
 
 
 
