@@ -31,10 +31,7 @@ namespace Scripts.ViewModels
             Elements.Add(Target);
         }
 
-        public override float Interval
-        {
-            get { return _projectileModel.RoF; }
-        }
+
         public float ReloadDuration
         {
             get { return _projectileModel.ReloadTime; }
@@ -74,6 +71,7 @@ namespace Scripts.ViewModels
             _projectileModel = Root.GetObjectModel(_projectileBinding.GetValue()) as Projectile_Model;
             Ammunition = _projectileModel.Ammunition;
             Accuracy = _projectileModel.Accuracy;
+            Interval.SetValue(_projectileModel.RoF);
         }
 
 

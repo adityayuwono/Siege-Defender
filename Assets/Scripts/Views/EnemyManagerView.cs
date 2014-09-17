@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Scripts.ViewModels;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scripts.Views
 {
@@ -29,11 +31,21 @@ namespace Scripts.Views
         {
             base.OnShow();
 
+            // Listen to interval changes
+            _viewModel.Interval.OnChange+= Interval_OnChange;
+            StartInterval();
+        }
+
+        private void Interval_OnChange()
+        {
+            // When the interval changes we stop it and start it again
+            StopInterval();
             StartInterval();
         }
 
         protected override void OnHide(string reason)
         {
+            _viewModel.Interval.OnChange -= Interval_OnChange;
             StopInterval();
 
             base.OnHide(reason);

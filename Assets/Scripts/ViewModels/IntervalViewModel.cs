@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
 
@@ -12,11 +13,7 @@ namespace Scripts.ViewModels
         protected IntervalViewModel(Interval_Model model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
-        }
-
-        public override float Interval
-        {
-            get { return _model.Interval; }
+            Interval.SetValue(_model.Interval);
         }
 
         public override void Hide(string reason)
@@ -112,6 +109,6 @@ namespace Scripts.ViewModels
     public abstract class IntervalViewModel : ElementViewModel
     {
         protected IntervalViewModel(Interval_Model model, ObjectViewModel parent) : base(model, parent) { }
-        public abstract float Interval { get; }
+        public Property<float> Interval = new Property<float>();
     }
 }
