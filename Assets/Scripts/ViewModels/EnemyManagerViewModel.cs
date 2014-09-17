@@ -7,7 +7,7 @@ namespace Scripts.ViewModels
     {
         private readonly EnemyManager_Model _model;
 
-        public EnemyManagerViewModel(EnemyManager_Model model, SceneViewModel parent) : base(model, parent)
+        public EnemyManagerViewModel(EnemyManager_Model model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
 
@@ -22,27 +22,28 @@ namespace Scripts.ViewModels
         private void LoadLevel()
         {
             _spawnIndex = 0;
-            _levelModel = Root.GetLevel(Level.GetValue());
             _currentLoop = 0;
+            _levelModel = Root.GetLevel(Level.GetValue());
+            // If Loop Count is -1, we just assign MaxValue, hoping the player will never reach it
+            _loopCount = _levelModel.LoopCount==-1?int.MaxValue:_levelModel.LoopCount;
+            Interval.SetValue(_levelModel.Interval);
         }
 
+        #region Spawning Enemies
         private Level_Model _levelModel;
-        public override float Interval
-        {
-            get { return _levelModel.Interval; }
-        }
-
+        private int _loopCount;
         private int _currentLoop;
-
         private int _spawnIndex;
         public void SpawnEnemy()
         {
-            if (_spawnIndex >= _levelModel.SpawnSequence.Count && (_levelModel.LoopCount < 0 || _currentLoop < _levelModel.LoopCount))
+            // Check if we are at the end of the sequence
+            if (_spawnIndex >= _levelModel.SpawnSequence.Count && _currentLoop < _loopCount)
             {
                 _spawnIndex = 0;
                 _currentLoop++;
             }
 
+            // If we are supposed to be spawning enemies still
             if (_spawnIndex < _levelModel.SpawnSequence.Count)
             {
                 var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
@@ -53,5 +54,6 @@ namespace Scripts.ViewModels
                 enemy.Show();
             }
         }
+        #endregion
     }
 }
