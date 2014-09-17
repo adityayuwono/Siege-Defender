@@ -33,11 +33,15 @@ namespace Scripts.Views
             base.OnShow();
 
             _animator.SetBool("IsDead", false);
-
-            Transform.position = _parent.GetRandomSpawnPoint();
+            
             Transform.localEulerAngles = new Vector3(0, 180f + Random.Range(-_viewModel.Rotation, _viewModel.Rotation), 0);
 
             BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk,0f);
+        }
+
+        protected override void SetPosition()
+        {
+            Transform.position = _parent.GetRandomSpawnPoint();
         }
 
         private void Walk()
