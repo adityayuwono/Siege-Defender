@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
@@ -25,9 +26,11 @@ namespace Scripts.ViewModels
 
         public override void Hide(string reason)
         {
-            base.Hide(reason);
+            foreach (var projectile in _projectiles)
+                projectile.Hide(reason);
+            _projectiles.Clear();
 
-            Elements.Clear();
+            base.Hide(reason);
         }
 
         public override float DeathDelay
@@ -71,17 +74,19 @@ namespace Scripts.ViewModels
             return true;
         }
 
+        private readonly List<ProjectileBaseViewModel> _projectiles = new List<ProjectileBaseViewModel>();
+
         private void AttachProjectile(ProjectileBaseViewModel source)
         {
-            if (Elements.Contains(source))
+            if (_projectiles.Contains(source))
                 throw new EngineException(this, "Duplicate Projectile hit");
 
-            Elements.Add(source);
+            _projectiles.Add(source);
 
-            while (Elements.Count > 3)
+            while (_projectiles.Count > 3)
             {
-                var elementToRemove = Elements[0];
-                Elements.Remove(elementToRemove);
+                var elementToRemove = _projectiles[0];
+                _projectiles.Remove(elementToRemove);
                 elementToRemove.Hide("Hiding because we have too many already");
             }
 
