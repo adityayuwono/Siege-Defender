@@ -85,9 +85,9 @@ namespace Scripts.ViewModels
 
             while (_projectiles.Count > 3)
             {
-                var elementToRemove = _projectiles[0];
-                _projectiles.Remove(elementToRemove);
-                elementToRemove.Hide("Hiding because we have too many already");
+                var projectileToRemove = _projectiles[0];
+                _projectiles.Remove(projectileToRemove);
+                projectileToRemove.Hide("Hiding because we have too many already");
             }
 
             DoAttach(source);
