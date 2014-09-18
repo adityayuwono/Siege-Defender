@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Inventory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" AssetId="Inventory" Slots="36">
+  <Elements />
+  <Item Id="2e57e67e-39a3-40e2-8953-34442bd81e02" AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
+    <Elements />
+  </Item>
+  <Item Id="b97c47d5-7b8c-4ede-8e60-cd61344dcd02" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronArrow" Level="0">
+    <Elements />
+  </Item>
+  <Item Id="c4f64c36-25b2-42b0-a94a-28de15dd737e" AssetId="GUIs/Buttons/ProjectileIcon" Base="FireBall" Level="0">
+    <Elements />
+  </Item>
+  <Item Id="2568bca0-1303-4499-bd5b-b96c5a81fe23" AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
+    <Elements />
+  </Item>
+  <EquipmentSlot Id="LeftShooter" AssetId="LeftWeaponContainer">
+    <Elements />
+    <Item Id="9affae69-dd96-4881-9064-ea89ab1a28b2" AssetId="GUIs/Buttons/ProjectileIcon" Base="ExplosiveFireBall" Level="0">
+      <Elements />
+    </Item>
+  </EquipmentSlot>
+  <EquipmentSlot Id="RightShooter" AssetId="RightWeaponContainer">
+    <Elements />
+    <Item Id="fdbf0008-d2eb-47d3-92ee-821b3ba418d9" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0">
+      <Elements />
+    </Item>
+  </EquipmentSlot>
+</Inventory>

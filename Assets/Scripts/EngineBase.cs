@@ -113,6 +113,10 @@ namespace Scripts
         #endregion
 
         #region Virtual Methods
+        public virtual Inventory_Model InventoryModel
+        {
+            get { throw new System.NotImplementedException(); }
+        }
 
         public virtual void Save()
         {

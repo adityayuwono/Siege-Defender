@@ -1,234 +1,172 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Engine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Id="SiegeDefender">
-  <Objects>
-    <Projectile Id="WoodArrow" AssetId="Projectiles/WoodenBalista" Damage="8-12" RoF="0.2" Ammunition="1000" Deviation="0.001">
-      <Elements />
-    </Projectile>
-    <Projectile Id="IronArrow" AssetId="Projectiles/IronBalista" Damage="10-30" RoF="0.25" Ammunition="500" Accuracy="0.7" Deviation="0.005">
-      <Elements />
-    </Projectile>
-    <Projectile Id="FireBall" AssetId="Projectiles/FireBall" Damage="8-11" RoF="0.5" AoEId="FireDome" Ammunition="25" Deviation="0.001">
-      <Elements />
-    </Projectile>
-    <Projectile Id="ExplosiveFireBall" AssetId="Projectiles/FireBall" Damage="15-20" RoF="0.2" AoEId="Explosion" Ammunition="25" ReloadTime="1" Accuracy="0.5" Deviation="0.01">
-      <Elements />
-    </Projectile>
-    <Piercing Id="IronBall" AssetId="Projectiles/IronBall" Damage="50-80" RoF="2" Ammunition="3" ReloadTime="1" Accuracy="1">
-      <Elements />
-    </Piercing>
-    <AoE Id="FireDome" AssetId="Projectiles/AoE" Damage="4-7" Radius="20">
-      <Elements />
-    </AoE>
-    <ParticleAoE Id="Explosion" AssetId="Projectiles/Explosion" Damage="3-7" Radius="20">
-      <Elements />
-    </ParticleAoE>
-    <Enemy Id="BoxDemon" AssetId="Enemies/RedGoblin" Health="11" Speed="1.5" Rotation="10">
-      <Elements />
-    </Enemy>
-    <Enemy Id="FastGoblin" AssetId="Enemies/RedGoblin" Health="1" Speed="4" Rotation="0">
-      <Elements />
-    </Enemy>
-    <Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" Health="30" Speed="1" Rotation="20">
-      <Elements />
-    </Enemy>
-    <Enemy Id="ShieldBearers" AssetId="Enemies/BlueGoblin" Health="50" Speed="0.001" Rotation="0">
-      <Elements />
-    </Enemy>
-    <Enemy Id="Boss" AssetId="Enemies/BigGoblin" Health="250" Speed="0.3" Rotation="0">
-      <Elements />
-    </Enemy>
-    <Boss Id="BigGoblin" AssetId="Enemies/BossGoblin" Health="2100" Speed="2" Rotation="0">
-      <Elements>
-        <EnemySpawn Id="WarpGates" AssetId="WarpGates" Interval="0" LevelId="BigGoblinLevel1">
-          <Elements />
-        </EnemySpawn>
-        <EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" Interval="0" LevelId="Level0">
-          <Elements />
-        </EnemySpawn>
-      </Elements>
-      <Limb Id="Head" Health="50" Speed="0" Rotation="0">
-        <Elements />
-        <Trigger>
-          <Condition Target="{This}" Property="Health" Value="\1" />
-        </Trigger>
-      </Limb>
-      <Limb Id="RightHand" Health="250" Speed="0" Rotation="0">
-        <Elements />
-        <Trigger>
-          <Condition Target="{This}" Property="Health" Value="\1" />
-        </Trigger>
-      </Limb>
-      <Limb Id="LeftHand" Health="250" Speed="0" Rotation="0">
-        <Elements />
-        <Trigger>
-          <Condition Target="{This}" Property="Health" Value="\1" />
-        </Trigger>
-      </Limb>
-      <Skill>
-        <Trigger>
-          <Condition Target="{This}" Property="Minions" Value="FatBoxDemon" />
-          <Setter Target="BigGoblin" Property="IsInvulnerable" Value="false" />
-        </Trigger>
-      </Skill>
-      <Phase>
-        <Trigger>
-          <Condition Target="{This}" Property="Health" Value="\1000" />
-          <Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel2" />
-        </Trigger>
-      </Phase>
-      <Phase>
-        <Trigger>
-          <Condition Target="{This}" Property="Health" Value="\700" />
-          <Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel3" />
-        </Trigger>
-      </Phase>
-      <Phase>
-        <Trigger>
-          <Condition Target="{This}" Property="Health" Value="\400" />
-          <Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel4" />
-        </Trigger>
-      </Phase>
-      <Phase>
-        <Trigger>
-          <Condition Target="{This}" Property="Health" Value="\200" />
-          <Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel5" />
-        </Trigger>
-      </Phase>
-    </Boss>
-    <DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" Font="ITCAvantGardePro-Bk">
-      <Elements />
-    </DamageGUI>
-  </Objects>
-  <Levels>
-    <Level Id="Level0" Interval="1" />
-    <Level Id="Level1" Interval="1">
-      <Spawn EnemyId="BoxDemon" />
-      <Spawn EnemyId="BoxDemon" />
-      <Spawn EnemyId="BigGoblin" />
-    </Level>
-    <Level Id="BigGoblinLevel1" Interval="2" LoopCount="-1">
-      <Spawn EnemyId="FastGoblin" />
-    </Level>
-    <Level Id="BigGoblinLevel2" Interval="1" LoopCount="-1">
-      <Spawn EnemyId="BoxDemon" />
-    </Level>
-    <Level Id="BigGoblinLevel3" Interval="0.001" LoopCount="15">
-      <Spawn EnemyId="ShieldBearers" />
-    </Level>
-    <Level Id="BigGoblinLevel4" Interval="0.001" LoopCount="25">
-      <Spawn EnemyId="ShieldBearers" />
-    </Level>
-  </Levels>
-  <Scenes>
-    <Scene Id="MainMenu" AssetId="Scenes/MainMenu">
-      <Elements>
-        <Button Id="8db46274-31bb-4814-9364-eae6eee7954a" AssetId="WeaponSelection">
-          <Elements />
-          <Trigger>
-            <LoadScene Id="295dbef2-d655-4805-a364-8d90341375e0" Target="SkillTree" />
-          </Trigger>
-        </Button>
-        <Button Id="bcbaca7c-b28f-4ec9-ab04-e8cedd6dc03a" AssetId="StartGame">
-          <Elements />
-          <Trigger>
-            <LoadScene Id="4b0c3eba-43d8-413a-b1b2-61a1c4736e72" Target="Limbo" />
-          </Trigger>
-        </Button>
-      </Elements>
-    </Scene>
-    <Scene Id="SkillTree" AssetId="Scenes/SkillTree">
-      <Elements>
-        <Inventory Id="9d21f158-2c0d-4e24-8544-cd71d5a6b5d2" AssetId="Inventory" Slots="36">
-          <Elements />
-          <Item Id="da49beb6-3480-426d-869f-647f3a705e26" AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
-            <Elements />
-          </Item>
-          <Item Id="6238504e-af9d-4bff-8eab-1130dc6e18e8" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronArrow" Level="0">
-            <Elements />
-          </Item>
-          <Item Id="9eb8dc05-7194-4bde-b63a-dcc2c2ac87fe" AssetId="GUIs/Buttons/ProjectileIcon" Base="FireBall" Level="0">
-            <Elements />
-          </Item>
-          <Item Id="7496b078-4f63-4095-8348-3672fb0a4f8f" AssetId="GUIs/Buttons/ProjectileIcon" Base="ExplosiveFireBall" Level="0">
-            <Elements />
-          </Item>
-          <EquipmentSlot Id="LeftShooter" AssetId="LeftWeaponContainer">
-            <Elements>
-              <ObjectDisplay Id="LeftWeapon" AssetId="LeftWeaponDisplay" Interval="0" ObjectId="{LeftShooter.ProjectileId}">
-                <Elements />
-              </ObjectDisplay>
-            </Elements>
-            <Item Id="47c8d95a-7fdd-42be-813e-a6808a233517" AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
-              <Elements />
-            </Item>
-          </EquipmentSlot>
-          <EquipmentSlot Id="RightShooter" AssetId="RightWeaponContainer">
-            <Elements>
-              <ObjectDisplay Id="RightWeapon" AssetId="RightWeaponDisplay" Interval="0" ObjectId="{RightShooter.ProjectileId}">
-                <Elements />
-              </ObjectDisplay>
-            </Elements>
-            <Item Id="09a73053-a207-4453-bed4-78de8a64d966" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0">
-              <Elements />
-            </Item>
-          </EquipmentSlot>
-        </Inventory>
-        <Button AssetId="BackToMainMenu">
-          <Elements />
-          <Trigger>
-            <LoadScene Target="MainMenu" />
-          </Trigger>
-        </Button>
-      </Elements>
-    </Scene>
-    <Scene Id="Limbo" AssetId="Scenes/Limbo">
-      <Elements>
-        <Element AssetId="Ground">
-          <Elements />
-        </Element>
-        <EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" Interval="0" LevelId="Level1">
-          <Elements />
-        </EnemySpawn>
-        <PlayerHitbox AssetId="PlayerHealth">
-          <Elements />
-        </PlayerHitbox>
-        <Player AssetId="Player">
-          <Elements />
-          <Shooters>
-            <Shooter AssetId="LeftShooter" Interval="0" ProjectileId="{LeftShooter.ProjectileId}" Index="0">
-              <Elements />
-              <Source AssetId="Shooter">
-                <Elements />
-              </Source>
-              <Target AssetId="Target" Index="0">
-                <Elements />
-              </Target>
-            </Shooter>
-            <Shooter AssetId="RightShooter" Interval="0" ProjectileId="{RightShooter.ProjectileId}" Index="1">
-              <Elements />
-              <Source AssetId="Shooter">
-                <Elements />
-              </Source>
-              <Target AssetId="Target" Index="1">
-                <Elements />
-              </Target>
-            </Shooter>
-          </Shooters>
-        </Player>
-        <GUIRoot AssetId="UIRoot">
-          <Elements>
-            <DamageDisplay AssetId="DamageDisplayRoot" Interval="0" DamageGUI="StandardDamageGUI">
-              <Elements />
-            </DamageDisplay>
-            <Button AssetId="BackToMainMenu">
-              <Elements />
-              <Trigger>
-                <LoadScene Target="MainMenu" />
-              </Trigger>
-            </Button>
-          </Elements>
-        </GUIRoot>
-      </Elements>
-    </Scene>
-  </Scenes>
+<Engine Id="SiegeDefender">
+	<Objects>
+		<Projectile 	Id="WoodArrow" Damage="8-12" 
+			AssetId="Projectiles/WoodenBalista" 
+			RoF="0.2" Ammunition="1000" Reload="0.1" 
+			Accuracy="0.9" Deviation="0.001" />
+		<Projectile 	Id="IronArrow" Damage="10-30" 
+			AssetId="Projectiles/IronBalista" 
+			RoF="0.25" Ammunition="500" Reload="0.2" 
+			Accuracy="0.7" Deviation="0.005" />
+
+		<Projectile 	Id="FireBall" Damage="8-11" 
+			AssetId="Projectiles/FireBall" AoEId="FireDome" 
+			RoF="0.5" Ammunition="25" Reload="2" 
+			Accuracy="0.9" Deviation="0.001" />
+		<Projectile 	Id="ExplosiveFireBall" Damage="15-20" 
+			AssetId="Projectiles/FireBall" AoEId="Explosion"
+			RoF="0.2" Ammunition="25" ReloadTime="1" 
+			Accuracy="0.5" Deviation="0.01" />
+		<Piercing 	Id="IronBall" Damage="50-80" 
+			AssetId="Projectiles/IronBall"
+			RoF="2" Ammunition="3" ReloadTime="1" 
+			Accuracy="1" Deviation="0" />
+
+		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
+		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="3-7" />
+
+		<Enemy Id="BoxDemon" 	AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" 	Rotation="10" />
+		<Enemy Id="FastGoblin" 	AssetId="Enemies/RedGoblin" 		Health="1" 		Speed="4" 		Rotation="0" />
+		<Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
+		<Enemy Id="ShieldBearers" AssetId="Enemies/BlueGoblin" 		Health="50" 	Speed="0.001"	Rotation="0" />
+		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
+
+		<Boss 	Id="BigGoblin" 	AssetId="Enemies/BossGoblin" Health="2100" Speed="2" >
+			<Elements>
+				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="BigGoblinLevel1" />
+				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="Level0" />
+			</Elements>
+			<Limb Id="Head" 		Health="50" >
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="Wood" Amount="3-10" />
+				</Trigger>
+			</Limb>
+			<Limb Id="RightHand" 	Health="250" >
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
+			</Limb>
+			<Limb Id="LeftHand" 	Health="250" >
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
+			</Limb>
+			
+			
+			<Skill >
+				<Trigger>
+					<Condition Target="{This}" Property="Minions" Comparison="NotContains" Value="FatBoxDemon" />
+					<Setter Target="BigGoblin" Property="IsInvulnerable" Value="false" />
+				</Trigger>
+			</Skill>
+
+			<Phase>
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1000" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel2" />
+				</Trigger>
+			</Phase>
+			<Phase>
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\700" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel3" />
+				</Trigger>
+			</Phase>
+			<Phase>
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\400" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel4" />
+				</Trigger>
+			</Phase>
+			<Phase>
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\200" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel5" />
+				</Trigger>
+			</Phase>
+
+		</Boss>
+
+
+		<DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" Font="ITCAvantGardePro-Bk" />
+	</Objects>
+
+	<Levels>
+		<Level Id="Level0" Interval="1" LoopCount="0" />
+		<Level Id="Level1" Interval="1" LoopCount="0">
+			<Spawn EnemyId="BoxDemon" />
+			<Spawn EnemyId="BoxDemon" />
+			<Spawn EnemyId="BigGoblin" />
+		</Level>
+		<Level Id="BigGoblinLevel1" Interval="2" LoopCount="-1">
+			<Spawn EnemyId="FastGoblin" />
+		</Level>
+		<Level Id="BigGoblinLevel2" Interval="1" LoopCount="-1">
+			<Spawn EnemyId="BoxDemon" />
+		</Level>
+		<Level Id="BigGoblinLevel3" Interval="0.001" LoopCount="15">
+			<Spawn EnemyId="ShieldBearers" />
+		</Level>
+		<Level Id="BigGoblinLevel4" Interval="0.001" LoopCount="25">
+			<Spawn EnemyId="ShieldBearers" />
+		</Level>
+	</Levels>
+
+	<Scenes>
+		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
+			<Elements>
+				<Button AssetId="WeaponSelection" >
+					<Trigger><LoadScene Target="SkillTree" /></Trigger>
+				</Button>
+				<Button AssetId="StartGame">
+					<Trigger><LoadScene Target="Limbo" /></Trigger>
+				</Button>
+			</Elements>
+		</Scene>
+
+		<Scene Id="SkillTree" AssetId="Scenes/SkillTree">
+			<Elements>
+				<Inventory AssetId="Inventory" />
+				<Button AssetId="BackToMainMenu" >
+					<Trigger><LoadScene Target="MainMenu" /></Trigger>
+				</Button>
+			</Elements>
+		</Scene>
+
+		<Scene Id="Limbo" AssetId="Scenes/Limbo">
+			<Elements>
+				<Element AssetId="Ground" />
+
+				<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" LevelId="Level1" />
+
+				<PlayerHitbox AssetId="PlayerHealth" />
+				
+				<Player AssetId="Player" >
+					<Shooters>
+						<Shooter AssetId="LeftShooter" ProjectileId="{LeftShooter.ProjectileId}" Index="0">
+							<Source AssetId="Shooter"/>
+							<Target AssetId="Target" Index="0"/>
+						</Shooter>
+						<Shooter AssetId="RightShooter" ProjectileId="{RightShooter.ProjectileId}" Index="1">
+							<Source AssetId="Shooter"/>
+							<Target AssetId="Target" Index="1"/>
+						</Shooter>
+					</Shooters>
+				</Player>
+
+				<GUIRoot AssetId="UIRoot">
+					<Elements>
+						<DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
+						<Button AssetId="BackToMainMenu" >
+							<Trigger><LoadScene Target="MainMenu" /></Trigger>
+						</Button>
+					</Elements>
+				</GUIRoot>
+
+			</Elements>
+		</Scene>
+	</Scenes>
 </Engine>

@@ -22,11 +22,11 @@ namespace Scripts.Helpers
 
     public static class Serializer
     {
-        public static void SaveObjectToXML(Engine_Model model)
+        public static void SaveObjectToXML(Inventory_Model model)
         {
-            var serializer = new XmlSerializer(typeof(Engine_Model));
+            var serializer = new XmlSerializer(typeof(Inventory_Model));
 
-            var sw = new StreamWriter(FilePaths.Saving + "/Engine.xml");
+            var sw = new StreamWriter(FilePaths.Saving + "/Inventory.xml");
             serializer.Serialize(sw, model);
             sw.Close();
         }

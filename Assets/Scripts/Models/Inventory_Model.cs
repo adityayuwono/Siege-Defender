@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 
 namespace Scripts.Models
 {
+    [XmlRoot("Inventory")]
     [Serializable]
     public class Inventory_Model : Element_Model
     {

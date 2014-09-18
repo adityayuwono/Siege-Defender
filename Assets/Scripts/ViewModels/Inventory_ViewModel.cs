@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
@@ -9,7 +8,7 @@ namespace Scripts.ViewModels
         private readonly Inventory_Model _model;
         public Inventory_ViewModel(Inventory_Model model, ObjectViewModel parent) : base(model, parent)
         {
-            _model = model;
+            _model = Root.InventoryModel;
 
             foreach (var itemModel in _model.Items)
                 Elements.Add(new Item_ViewModel(itemModel, this));

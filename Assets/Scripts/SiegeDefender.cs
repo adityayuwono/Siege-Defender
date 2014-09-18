@@ -21,12 +21,20 @@ namespace Scripts
         public static EngineBase Instance;
 
         private readonly Engine_Model _model;
+        private readonly Inventory_Model _inventoryModel;
+
+        public override Inventory_Model InventoryModel
+        {
+            get { return _inventoryModel; }
+        }
+
         private readonly BalistaContext _context;
 
-        public SiegeDefender(Engine_Model model, BalistaContext parent) : base(model, null)
+        public SiegeDefender(Engine_Model model, Inventory_Model inventoryModel, BalistaContext parent) : base(model, null)
         {
             _model = model;
             _context = parent;
+            _inventoryModel = inventoryModel;
 
             Instance = this;
         }
@@ -149,9 +157,10 @@ namespace Scripts
             _currentScene.Show();
         }
 
+
         public override void Save()
         {
-            Serializer.SaveObjectToXML(_model);
+            Serializer.SaveObjectToXML(_inventoryModel);
         }
     }
 }
