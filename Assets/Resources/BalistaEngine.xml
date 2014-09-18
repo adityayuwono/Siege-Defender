@@ -26,53 +26,65 @@
 		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="3-7" />
 
 		<Enemy Id="BoxDemon" 	AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" 	Rotation="10" />
-		<Enemy Id="FastGoblin" 	AssetId="Enemies/RedGoblin" 		Health="1" 	Speed="4" 		Rotation="0" />
+		<Enemy Id="FastGoblin" 	AssetId="Enemies/RedGoblin" 		Health="1" 		Speed="4" 		Rotation="0" />
 		<Enemy Id="FatBoxDemon" AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
+		<Enemy Id="ShieldBearers" AssetId="Enemies/BlueGoblin" 		Health="50" 	Speed="0.001"	Rotation="0" />
 		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
-		<Boss 	Id="BigGoblin" 	AssetId="Enemies/BigGoblin" Health="11000" Speed="2" >
+		<Boss 	Id="BigGoblin" 	AssetId="Enemies/BossGoblin" Health="2100" Speed="2" >
+			<Elements>
+				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="BigGoblinLevel1" />
+				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="Level0" />
+			</Elements>
 			<Limb Id="Head" 		Health="50" >
-				<Trigger><Drop Target="WoodArrow" Level="1-10" /></Trigger>
-			</Limb>
-			<Limb Id="Torso" 		Health="500" >
-				<Trigger><Setter Target="BigGoblin" Property="Speed" Value="5" /></Trigger>
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="Wood" Amount="3-10" />
+				</Trigger>
 			</Limb>
 			<Limb Id="RightHand" 	Health="250" >
-				<Trigger><Drop Target="WoodArrow" Level="1-7" /></Trigger>
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
 			</Limb>
 			<Limb Id="LeftHand" 	Health="250" >
-				<Trigger><Drop Target="WoodArrow" Level="1-7" /></Trigger>
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
 			</Limb>
 			
 			
 			<Skill >
 				<Trigger>
 					<Condition Target="{This}" Property="Minions" Comparison="NotContains" Value="FatBoxDemon" />
-					<Setter Target="BigGoblin" Property="Invulnerable" Value="false" />
+					<Setter Target="BigGoblin" Property="IsInvulnerable" Value="false" />
 				</Trigger>
 			</Skill>
 
-			<Phase >
+			<Phase>
 				<Trigger>
-					<Setter Target="EnemySpawn" Property="Level" Value="BigGoblinLevel1" />
+					<Condition Target="{This}" Property="Health" Value="\1000" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel2" />
 				</Trigger>
 			</Phase>
 			<Phase>
 				<Trigger>
-					<Condition Target="{This}" Property="Health" Value="<6000" />
-					<Setter Target="EnemySpawn" Property="Level" Value="BigGoblinLevel2" />
+					<Condition Target="{This}" Property="Health" Value="\700" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel3" />
 				</Trigger>
 			</Phase>
 			<Phase>
 				<Trigger>
-					<Condition Target="{This}" Property="Health" Value="<3000" />
-					<Setter Target="EnemySpawn" Property="Level" Value="BigGoblinLevel3" />
+					<Condition Target="{This}" Property="Health" Value="\400" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel4" />
 				</Trigger>
 			</Phase>
 			<Phase>
 				<Trigger>
-					<Condition Target="{This}" Property="Health" Value="<2000" />
-					<Setter Target="EnemySpawn" Property="Level" Value="BigGoblinLevel3" />
+					<Condition Target="{This}" Property="Health" Value="\200" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel5" />
 				</Trigger>
 			</Phase>
 
@@ -83,91 +95,11 @@
 	</Objects>
 
 	<Levels>
-		<Level Id="Level1" Interval="1" LoopCount="1">
+		<Level Id="Level0" Interval="1" LoopCount="0" />
+		<Level Id="Level1" Interval="1" LoopCount="0">
 			<Spawn EnemyId="BoxDemon" />
 			<Spawn EnemyId="BoxDemon" />
 			<Spawn EnemyId="BigGoblin" />
-
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="Boss" />
 		</Level>
 		<Level Id="BigGoblinLevel1" Interval="2" LoopCount="-1">
 			<Spawn EnemyId="FastGoblin" />
@@ -175,12 +107,11 @@
 		<Level Id="BigGoblinLevel2" Interval="1" LoopCount="-1">
 			<Spawn EnemyId="BoxDemon" />
 		</Level>
-		<Level Id="BigGoblinLevel3" Interval="0.01" LoopCount="1">
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
-			<Spawn EnemyId="FatBoxDemon" />
+		<Level Id="BigGoblinLevel3" Interval="0.001" LoopCount="15">
+			<Spawn EnemyId="ShieldBearers" />
+		</Level>
+		<Level Id="BigGoblinLevel4" Interval="0.001" LoopCount="25">
+			<Spawn EnemyId="ShieldBearers" />
 		</Level>
 	</Levels>
 
