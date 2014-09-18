@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using Scripts.Core;
 using Scripts.Models.Enemies;
-using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
