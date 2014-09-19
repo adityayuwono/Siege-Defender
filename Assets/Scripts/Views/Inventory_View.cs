@@ -40,10 +40,10 @@ namespace Scripts.Views
 
     public class Item_View : ObjectView
     {
-        private readonly Item_ViewModel _viewModel;
+        private readonly Item _viewModel;
         private ObjectView _parent;
 
-        public Item_View(Item_ViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public Item_View(Item viewModel, ObjectView parent) : base(viewModel, parent)
         {
             if (parent == null)
                 throw new EngineException(this, "Parent is null");

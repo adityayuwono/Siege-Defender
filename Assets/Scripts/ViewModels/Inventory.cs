@@ -12,7 +12,7 @@ namespace Scripts.ViewModels
             _model = Root.InventoryModel;
 
             foreach (var itemModel in _model.Items)
-                Elements.Add(new Item_ViewModel(itemModel, this));
+                Elements.Add(new Item(itemModel, this));
 
             foreach (var equipmentSlotModel in _model.EquipmentSlots)
                 Elements.Add(new EquipmentSlot(equipmentSlotModel, this));
@@ -27,7 +27,7 @@ namespace Scripts.ViewModels
             InvokeChildrenChanged();
         }
 
-        public void AddItem(Item_ViewModel itemViewModel)
+        public void AddItem(Item itemViewModel)
         {
             // Item was removed from inventory
 
@@ -37,7 +37,7 @@ namespace Scripts.ViewModels
 
             InvokeChildrenChanged();
         }
-        public void ReleaseItem(Item_ViewModel itemViewModel)
+        public void ReleaseItem(Item itemViewModel)
         {
             // Item was added to inventory
 
@@ -56,11 +56,11 @@ namespace Scripts.ViewModels
 
     
 
-    public class Item_ViewModel : Object
+    public class Item : Object
     {
         private readonly Item_Model _model;
         public Item_Model Model{get { return _model; }}
-        public Item_ViewModel(Item_Model model, Object parent) : base(model, parent)
+        public Item(Item_Model model, Object parent) : base(model, parent)
         {
             _model = model;
         }

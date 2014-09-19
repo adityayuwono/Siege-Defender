@@ -11,7 +11,7 @@ namespace Scripts.ViewModels
             _model = model;
 
             ProjectileId = new AdjustableProperty<string>("ProjectileId", this);
-            CurrentItem = new Item_ViewModel(_model.Item, this);
+            CurrentItem = new Item(_model.Item, this);
         }
 
         protected override void OnActivate()
@@ -44,13 +44,13 @@ namespace Scripts.ViewModels
 
         public readonly AdjustableProperty<string> ProjectileId;
 
-        private Item_ViewModel _currentItem;
-        private Item_ViewModel CurrentItem
+        private Item _currentItem;
+        private Item CurrentItem
         {
             set { OnItemUpdate(value); }
         }
 
-        private void OnItemUpdate(Item_ViewModel itemViewModel)
+        private void OnItemUpdate(Item itemViewModel)
         {
             var inventoryParent = GetParent<Inventory>();
             inventoryParent.ReleaseItem(itemViewModel);// Remove it from the inventory, do this first to make sure there's a spot left in the inventory
@@ -68,7 +68,7 @@ namespace Scripts.ViewModels
 
         public void Object_OnDropped(Object objectViewModel)
         {
-            CurrentItem = objectViewModel as Item_ViewModel;
+            CurrentItem = objectViewModel as Item;
         }
     }
 }
