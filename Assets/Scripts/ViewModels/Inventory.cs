@@ -3,10 +3,10 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class Inventory_ViewModel : ElementViewModel
+    public class Inventory : ElementViewModel
     {
         private readonly Inventory_Model _model;
-        public Inventory_ViewModel(Inventory_Model model, Object parent) : base(model, parent)
+        public Inventory(Inventory_Model model, Object parent) : base(model, parent)
         {
             // Grab reference to Player's Inventory loaded from XML
             _model = Root.InventoryModel;

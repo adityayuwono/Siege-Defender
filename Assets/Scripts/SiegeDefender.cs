@@ -56,7 +56,7 @@ namespace Scripts
             IoCContainer.RegisterFor<DamageDisplay_GUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
             IoCContainer.RegisterFor<ObjectDisplay_Model>().TypeOf<Object>().To<ObjectDisplay_ViewModel>();
             // GUIs
-            IoCContainer.RegisterFor<Inventory_Model>().TypeOf<Object>().To<Inventory_ViewModel>();
+            IoCContainer.RegisterFor<Inventory_Model>().TypeOf<Object>().To<Inventory>();
             IoCContainer.RegisterFor<Item_Model>().TypeOf<Object>().To<Item_ViewModel>();
             IoCContainer.RegisterFor<Button_GUIModel>().TypeOf<Object>().To<Button_ViewModel>();
 
@@ -91,7 +91,7 @@ namespace Scripts
             IoCContainer.RegisterFor<ObjectDisplay_ViewModel>().TypeOf<BaseView>().To<ObjectDisplay_View>();
             // GUIs
             IoCContainer.RegisterFor<Item_ViewModel>().TypeOf<BaseView>().To<Item_View>();
-            IoCContainer.RegisterFor<Inventory_ViewModel>().TypeOf<BaseView>().To<Inventory_View>();
+            IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<Inventory_View>();
             IoCContainer.RegisterFor<EquipmentSlot_ViewModel>().TypeOf<BaseView>().To<EquipmentSlot_View>();
             IoCContainer.RegisterFor<Button_ViewModel>().TypeOf<BaseView>().To<Button_View>();
 

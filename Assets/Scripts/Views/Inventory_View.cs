@@ -7,10 +7,10 @@ namespace Scripts.Views
 {
     public class Inventory_View : ElementView
     {
-        private readonly Inventory_ViewModel _viewModel;
+        private readonly Inventory _viewModel;
         private UITable _uiTable;
 
-        public Inventory_View(Inventory_ViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public Inventory_View(Inventory viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
 

@@ -6,7 +6,7 @@ namespace Scripts.ViewModels
     public class EquipmentSlot_ViewModel : ElementViewModel
     {
         private readonly EquipmentSlot_Model _model;
-        public EquipmentSlot_ViewModel(EquipmentSlot_Model model, Inventory_ViewModel parent) : base(model, parent)
+        public EquipmentSlot_ViewModel(EquipmentSlot_Model model, Inventory parent) : base(model, parent)
         {
             _model = model;
 
@@ -52,7 +52,7 @@ namespace Scripts.ViewModels
 
         private void OnItemUpdate(Item_ViewModel itemViewModel)
         {
-            var inventoryParent = GetParent<Inventory_ViewModel>();
+            var inventoryParent = GetParent<Inventory>();
             inventoryParent.ReleaseItem(itemViewModel);// Remove it from the inventory, do this first to make sure there's a spot left in the inventory
 
             if (_currentItem != null)
