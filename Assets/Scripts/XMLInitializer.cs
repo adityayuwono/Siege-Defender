@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.IO;
 using Scripts.Helpers;
 using UnityEngine;
@@ -32,39 +33,24 @@ namespace Scripts
 
         public void Start()
         {
-            var loader = new WWW(FilePaths.Loading + "/Inventory.xml");
             EngineXML = EngineTextAsset.text;
             // Start preparing XML
-            StartCoroutine(InitializeEngine(loader));
+            InitializeEngine();
         }
 
-        private IEnumerator InitializeEngine(WWW loader)
+        private void InitializeEngine()
         {
-            // Wait until it is done loading, poor thing the file is long
-            while (!loader.isDone)
-                yield return null;
-
-            var isUnityEditor = false;
-#if UNITY_EDITOR
-            isUnityEditor=false;
-#endif
-
-            string inventoryText;
-            if (loader.error != null || isUnityEditor)
+            var inventoryText = "";
+            try
             {
-                // We don't have an XML yet, let's create one based on the template
-                inventoryText = DefaultInventory.text;
-                using (var sw = new StreamWriter(loader.url))
-                {
-                    sw.Write(inventoryText);
-                    sw.Close();
-                }
+                var sr = new StreamReader(FilePaths.Loading + "/Inventory.xml");
+                inventoryText = sr.ReadToEnd();
+                sr.Close();
             }
-            else
-                // Woohooo found the file
-                inventoryText = loader.text;
-
-
+            catch (Exception ex)
+            {
+                inventoryText = DefaultInventory.text;
+            }
 
             // Keep it for later, the rest of the scenes are going to need this cutie
             InventoryXML = inventoryText;

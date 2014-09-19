@@ -18,12 +18,26 @@ namespace Scripts.Helpers
     {
         public static string Loading
         {
-            get { return "file://" + Application.dataPath; }
+            get
+            {
+#if UNITY_ANDROID
+                return Application.persistentDataPath;
+#else
+                return "file://" + Application.dataPath;
+#endif
+            }
         }
 
         public static string Saving
         {
-            get { return Application.dataPath; }
+            get
+            {
+#if UNITY_ANDROID
+                return Application.persistentDataPath;
+#else
+                return Application.dataPath;
+#endif
+            }
         }
     }
 }
