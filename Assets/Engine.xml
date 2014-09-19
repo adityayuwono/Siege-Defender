@@ -107,10 +107,13 @@
 		<Level Id="BigGoblinLevel2" Interval="1" LoopCount="-1">
 			<Spawn EnemyId="BoxDemon" />
 		</Level>
-		<Level Id="BigGoblinLevel3" Interval="0.001" LoopCount="15">
+		<Level Id="BigGoblinLevel3" Interval="0.001" LoopCount="3">
 			<Spawn EnemyId="ShieldBearers" />
 		</Level>
-		<Level Id="BigGoblinLevel4" Interval="0.001" LoopCount="25">
+		<Level Id="BigGoblinLevel4" Interval="0.001" LoopCount="5">
+			<Spawn EnemyId="ShieldBearers" />
+		</Level>
+		<Level Id="BigGoblinLevel5" Interval="0.001" LoopCount="5">
 			<Spawn EnemyId="ShieldBearers" />
 		</Level>
 	</Levels>
