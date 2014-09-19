@@ -5,8 +5,8 @@ namespace Scripts.ViewModels.Enemies
 {
     public class Boss : EnemyBaseViewModel
     {
-        private readonly Boss_Model _model;
-        public Boss(Boss_Model model, Object parent) : base(model, parent)
+        private readonly BossModel _model;
+        public Boss(BossModel model, Object parent) : base(model, parent)
         {
             _model = model;
 
