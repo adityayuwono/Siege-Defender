@@ -2,10 +2,10 @@
 
 namespace Scripts.ViewModels.Actions
 {
-    public class Base_ActionViewModel : TargetProperty_ViewModel
+    public class BaseActionViewModel : TargetProperty_ViewModel
     {
         private readonly Base_ActionModel _model;
-        public Base_ActionViewModel(Base_ActionModel model, BaseViewModel parent) : base(model, parent)
+        public BaseActionViewModel(Base_ActionModel model, BaseViewModel parent) : base(model, parent)
         {
             _model = model;
         }
