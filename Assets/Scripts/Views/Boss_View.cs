@@ -4,9 +4,9 @@ namespace Scripts.Views
 {
     public class Boss_View : EnemyBaseView
     {
-        private readonly Boss_ViewModel _viewModel;
+        private readonly Boss _viewModel;
         private readonly EnemyManagerView _parent;
-        public Boss_View(Boss_ViewModel viewModel, EnemyManagerView parent) : base(viewModel, parent)
+        public Boss_View(Boss viewModel, EnemyManagerView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
             _parent = parent;

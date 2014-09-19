@@ -66,7 +66,7 @@ namespace Scripts
             IoCContainer.RegisterFor<ParticleAoE_Model>().TypeOf<ProjectileBaseViewModel>().To<ParticleAoEViewModel>();
 
             IoCContainer.RegisterFor<EnemyBase_Model>().TypeOf<EnemyBaseViewModel>().To<EnemyBaseViewModel>();
-            IoCContainer.RegisterFor<Boss_Model>().TypeOf<EnemyBaseViewModel>().To<Boss_ViewModel>();
+            IoCContainer.RegisterFor<Boss_Model>().TypeOf<EnemyBaseViewModel>().To<Boss>();
             IoCContainer.RegisterFor<Damage_GUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
 
             IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
@@ -83,7 +83,7 @@ namespace Scripts
             IoCContainer.RegisterFor<AoEViewModel>().TypeOf<BaseView>().To<AoEView>();
             IoCContainer.RegisterFor<ParticleAoEViewModel>().TypeOf<BaseView>().To<ParticleAoEView>();
             IoCContainer.RegisterFor<EnemyBaseViewModel>().TypeOf<BaseView>().To<EnemyBaseView>();
-            IoCContainer.RegisterFor<Boss_ViewModel>().TypeOf<BaseView>().To<Boss_View>();
+            IoCContainer.RegisterFor<Boss>().TypeOf<BaseView>().To<Boss_View>();
             IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
             IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
             IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();

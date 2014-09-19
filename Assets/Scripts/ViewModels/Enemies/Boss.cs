@@ -3,18 +3,18 @@ using Scripts.Models.Enemies;
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class Boss_ViewModel : EnemyBaseViewModel
+    public class Boss : EnemyBaseViewModel
     {
         private readonly Boss_Model _model;
-        public Boss_ViewModel(Boss_Model model, ObjectViewModel parent) : base(model, parent)
+        public Boss(Boss_Model model, ObjectViewModel parent) : base(model, parent)
         {
             _model = model;
 
             foreach (var phaseModel in _model.Phases)
-                _phases.Add(new Phase_ViewModel(phaseModel, this));
+                _phases.Add(new Phase(phaseModel, this));
         }
 
-        private readonly List<Phase_ViewModel> _phases = new List<Phase_ViewModel>();
+        private readonly List<Phase> _phases = new List<Phase>();
 
         protected override void OnActivate()
         {
