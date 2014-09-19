@@ -6,8 +6,8 @@ namespace Scripts.Views
 {
     public class ParticleAoEView : AoEView
     {
-        private readonly ParticleAoEViewModel _viewModel;
-        public ParticleAoEView(ParticleAoEViewModel viewModel, ShooterView parent) : base(viewModel, parent)
+        private readonly ParticleAoE _viewModel;
+        public ParticleAoEView(ParticleAoE viewModel, ShooterView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }

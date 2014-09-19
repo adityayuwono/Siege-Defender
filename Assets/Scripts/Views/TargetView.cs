@@ -5,9 +5,9 @@ namespace Scripts.Views
 {
     public class TargetView : ObjectView
     {
-        private readonly TargetViewModel _viewModel;
+        private readonly Target _viewModel;
 
-        public TargetView(TargetViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public TargetView(Target viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }

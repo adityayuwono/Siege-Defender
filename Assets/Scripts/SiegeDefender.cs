@@ -22,17 +22,17 @@ namespace Scripts
     {
         public static EngineBase Instance;
 
-        private readonly Engine_Model _model;
-        private readonly Inventory_Model _inventoryModel;
+        private readonly EngineModel _model;
+        private readonly InventoryModel _inventoryModel;
 
-        public override Inventory_Model InventoryModel
+        public override InventoryModel InventoryModel
         {
             get { return _inventoryModel; }
         }
 
         private readonly BalistaContext _context;
 
-        public SiegeDefender(Engine_Model model, Inventory_Model inventoryModel, BalistaContext parent) : base(model, null)
+        public SiegeDefender(EngineModel model, InventoryModel inventoryModel, BalistaContext parent) : base(model, null)
         {
             _model = model;
             _context = parent;
@@ -48,63 +48,63 @@ namespace Scripts
             ResourceManager = new ResourcePooler(this);
 
             #region Model to ViewModel
-            IoCContainer.RegisterFor<Element_Model>().TypeOf<Object>().To<ElementViewModel>();
-            IoCContainer.RegisterFor<Player_Model>().TypeOf<Object>().To<PlayerViewModel>();
-            IoCContainer.RegisterFor<EnemyManager_Model>().TypeOf<Object>().To<EnemyManagerViewModel>();
-            IoCContainer.RegisterFor<PlayerHitbox_Model>().TypeOf<Object>().To<PlayerHitboxViewModel>();
-            IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<Object>().To<GUIRoot>();
-            IoCContainer.RegisterFor<DamageDisplay_GUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
-            IoCContainer.RegisterFor<ObjectDisplay_Model>().TypeOf<Object>().To<ObjectDisplay_ViewModel>();
+            IoCContainer.RegisterFor<ElementModel>().TypeOf<Object>().To<Element>();
+            IoCContainer.RegisterFor<PlayerModel>().TypeOf<Object>().To<Player>();
+            IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<Object>().To<EnemyManager>();
+            IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<Object>().To<PlayerHitbox>();
+            IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Object>().To<GUIRoot>();
+            IoCContainer.RegisterFor<DamageDisplayGUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
+            IoCContainer.RegisterFor<ObjectDisplayModel>().TypeOf<Object>().To<ObjectDisplay>();
             // GUIs
-            IoCContainer.RegisterFor<Inventory_Model>().TypeOf<Object>().To<Inventory>();
-            IoCContainer.RegisterFor<Item_Model>().TypeOf<Object>().To<Item>();
-            IoCContainer.RegisterFor<Button_GUIModel>().TypeOf<Object>().To<Button_ViewModel>();
+            IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
+            IoCContainer.RegisterFor<ItemModel>().TypeOf<Object>().To<Item>();
+            IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<Button>();
 
-            // ProjectileBaseViewModel
-            IoCContainer.RegisterFor<Projectile_Model>().TypeOf<ProjectileBaseViewModel>().To<ProjectileViewModel>();
-            IoCContainer.RegisterFor<PiercingProjectile_Model>().TypeOf<ProjectileBaseViewModel>().To<PiercingProjectile_ViewModel>();
-            IoCContainer.RegisterFor<AoE_Model>().TypeOf<ProjectileBaseViewModel>().To<AoEViewModel>();
-            IoCContainer.RegisterFor<ParticleAoE_Model>().TypeOf<ProjectileBaseViewModel>().To<ParticleAoEViewModel>();
+            // ProjectileBase
+            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<ProjectileBase>().To<Projectile>();
+            IoCContainer.RegisterFor<PiercingProjectileModel>().TypeOf<ProjectileBase>().To<PiercingProjectile>();
+            IoCContainer.RegisterFor<AoEModel>().TypeOf<ProjectileBase>().To<AoE>();
+            IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<ProjectileBase>().To<ParticleAoE>();
 
             IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<EnemyBase>().To<EnemyBase>();
             IoCContainer.RegisterFor<BossModel>().TypeOf<EnemyBase>().To<Boss>();
-            IoCContainer.RegisterFor<Damage_GUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
+            IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
 
-            IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<ElementViewModel>().To<GUIRoot>();
+            IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
 
             // Actions, doesnt have a view
-            IoCContainer.RegisterFor<LoadScene_ActionModel>().TypeOf<BaseActionViewModel>().To<LoadSceneActionViewModel>();
-            IoCContainer.RegisterFor<Setter_ActionModel>().TypeOf<BaseActionViewModel>().To<SetterActionViewModel>();
-            IoCContainer.RegisterFor<Base_ConditionModel>().TypeOf<Base_ConditionViewModel>().To<Base_ConditionViewModel>();
+            IoCContainer.RegisterFor<LoadSceneActionModel>().TypeOf<BaseAction>().To<LoadSceneAction>();
+            IoCContainer.RegisterFor<SetterActionModel>().TypeOf<BaseAction>().To<SetterAction>();
+            IoCContainer.RegisterFor<BaseConditionModel>().TypeOf<BaseCondition>().To<BaseCondition>();
             #endregion
 
             #region ViewModel to View(BaseView)
-            IoCContainer.RegisterFor<ProjectileViewModel>().TypeOf<BaseView>().To<ProjectileView>();
-            IoCContainer.RegisterFor<PiercingProjectile_ViewModel>().TypeOf<BaseView>().To<PiercingProjectile_View>();
-            IoCContainer.RegisterFor<AoEViewModel>().TypeOf<BaseView>().To<AoEView>();
-            IoCContainer.RegisterFor<ParticleAoEViewModel>().TypeOf<BaseView>().To<ParticleAoEView>();
+            IoCContainer.RegisterFor<Projectile>().TypeOf<BaseView>().To<ProjectileView>();
+            IoCContainer.RegisterFor<PiercingProjectile>().TypeOf<BaseView>().To<PiercingProjectileView>();
+            IoCContainer.RegisterFor<AoE>().TypeOf<BaseView>().To<AoEView>();
+            IoCContainer.RegisterFor<ParticleAoE>().TypeOf<BaseView>().To<ParticleAoEView>();
             IoCContainer.RegisterFor<EnemyBase>().TypeOf<BaseView>().To<EnemyBaseView>();
-            IoCContainer.RegisterFor<Boss>().TypeOf<BaseView>().To<Boss_View>();
+            IoCContainer.RegisterFor<Boss>().TypeOf<BaseView>().To<BossView>();
             IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
             IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
             IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
-            IoCContainer.RegisterFor<ObjectDisplay_ViewModel>().TypeOf<BaseView>().To<ObjectDisplay_View>();
+            IoCContainer.RegisterFor<ObjectDisplay>().TypeOf<BaseView>().To<ObjectDisplayView>();
             // GUIs
-            IoCContainer.RegisterFor<Item>().TypeOf<BaseView>().To<Item_View>();
-            IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<Inventory_View>();
-            IoCContainer.RegisterFor<EquipmentSlot>().TypeOf<BaseView>().To<EquipmentSlot_View>();
-            IoCContainer.RegisterFor<Button_ViewModel>().TypeOf<BaseView>().To<Button_View>();
+            IoCContainer.RegisterFor<Item>().TypeOf<BaseView>().To<ItemView>();
+            IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<InventoryView>();
+            IoCContainer.RegisterFor<EquipmentSlot>().TypeOf<BaseView>().To<EquipmentSlotView>();
+            IoCContainer.RegisterFor<Button>().TypeOf<BaseView>().To<ButtonView>();
 
             IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();
-            IoCContainer.RegisterFor<StaticObject_ViewModel>().TypeOf<BaseView>().To<StaticObject_View>();
-            IoCContainer.RegisterFor<ShooterViewModel>().TypeOf<BaseView>().To<ShooterView>();
-            IoCContainer.RegisterFor<TargetViewModel>().TypeOf<BaseView>().To<TargetView>();
-            IoCContainer.RegisterFor<SceneViewModel>().TypeOf<BaseView>().To<SceneView>();
+            IoCContainer.RegisterFor<StaticObject>().TypeOf<BaseView>().To<StaticObjectView>();
+            IoCContainer.RegisterFor<Shooter>().TypeOf<BaseView>().To<ShooterView>();
+            IoCContainer.RegisterFor<Target>().TypeOf<BaseView>().To<TargetView>();
+            IoCContainer.RegisterFor<Scene>().TypeOf<BaseView>().To<SceneView>();
             
-            IoCContainer.RegisterFor<ElementViewModel>().TypeOf<BaseView>().To<ElementView>();
-            IoCContainer.RegisterFor<PlayerViewModel>().TypeOf<BaseView>().To<PlayerView>();
-            IoCContainer.RegisterFor<EnemyManagerViewModel>().TypeOf<BaseView>().To<EnemyManagerView>();
-            IoCContainer.RegisterFor<PlayerHitboxViewModel>().TypeOf<BaseView>().To<PlayerHitboxView>();
+            IoCContainer.RegisterFor<Element>().TypeOf<BaseView>().To<ElementView>();
+            IoCContainer.RegisterFor<Player>().TypeOf<BaseView>().To<PlayerView>();
+            IoCContainer.RegisterFor<EnemyManager>().TypeOf<BaseView>().To<EnemyManagerView>();
+            IoCContainer.RegisterFor<PlayerHitbox>().TypeOf<BaseView>().To<PlayerHitboxView>();
 
             IoCContainer.RegisterFor<GUIRoot>().TypeOf<BaseView>().To<GUIRootView>();
             #endregion
@@ -118,14 +118,14 @@ namespace Scripts
 
             // Cache all scenes on the dictionary
             foreach (var sceneModel in _model.Scenes)
-                _scenes.Add(sceneModel.Id, new SceneViewModel(sceneModel, this));
+                _scenes.Add(sceneModel.Id, new Scene(sceneModel, this));
 
             ChangeScene(_model.Scenes[0].Id);// Load the first scene on the list
         }
         
 
 
-        public override Level_Model GetLevel(string levelId)
+        public override LevelModel GetLevel(string levelId)
         {
             foreach (var levelModel in _model.Levels.Where(levelModel => levelModel.Id == levelId))
             {
@@ -144,8 +144,8 @@ namespace Scripts
             _context.ThrowError(message);
         }
 
-        private SceneViewModel _currentScene;
-        private readonly Dictionary<string, SceneViewModel> _scenes = new Dictionary<string, SceneViewModel>(); 
+        private Scene _currentScene;
+        private readonly Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>(); 
         public override void ChangeScene(string sceneId)
         {
             // Deactivate Current Active Scene, to avoid space time continuum

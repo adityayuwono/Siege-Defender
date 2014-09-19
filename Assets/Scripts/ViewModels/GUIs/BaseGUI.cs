@@ -2,10 +2,10 @@
 
 namespace Scripts.ViewModels.GUIs
 {
-    public class BaseGUI : ElementViewModel
+    public class BaseGUI : Element
     {
-        private Base_GUIModel _model;
-        public BaseGUI(Base_GUIModel model, Object parent) : base(model, parent)
+        private BaseGUIModel _model;
+        public BaseGUI(BaseGUIModel model, Object parent) : base(model, parent)
         {
             _model = model;
         }

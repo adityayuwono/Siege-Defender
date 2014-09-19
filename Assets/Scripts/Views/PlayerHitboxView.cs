@@ -5,9 +5,9 @@ namespace Scripts.Views
 {
     public class PlayerHitboxView : ElementView
     {
-        private readonly PlayerHitboxViewModel _viewModel;
+        private readonly PlayerHitbox _viewModel;
 
-        public PlayerHitboxView(PlayerHitboxViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public PlayerHitboxView(PlayerHitbox viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }

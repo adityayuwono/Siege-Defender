@@ -5,9 +5,9 @@ namespace Scripts.Views
 {
     public class ShooterView : IntervalView
     {
-        private readonly ShooterViewModel _viewModel;
+        private readonly Shooter _viewModel;
 
-        public ShooterView(ShooterViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public ShooterView(Shooter viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }

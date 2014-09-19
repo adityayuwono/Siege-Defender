@@ -17,13 +17,13 @@ namespace Scripts.Components
         }
 
         private Texture2D _crosshairImage;
-        private TargetViewModel _viewModel;
+        private Target _viewModel;
         private static Vector2 _halfScreen;
 
         protected override void OnSetup()
         {
             base.OnSetup();
-            _viewModel = ViewModel as TargetViewModel;
+            _viewModel = ViewModel as Target;
             
             _halfScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
 

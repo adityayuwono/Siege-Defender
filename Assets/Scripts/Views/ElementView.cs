@@ -6,10 +6,10 @@ namespace Scripts.Views
 {
     public class ElementView : RigidbodyView
     {
-        private readonly ElementViewModel _viewModel;
+        private readonly Element _viewModel;
         private readonly ObjectView _parent;
 
-        public ElementView(ElementViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public ElementView(Element viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
             _parent = parent;

@@ -12,11 +12,11 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class EngineBase : BaseViewModel
+    public class EngineBase : Base
     {
-        private readonly Engine_Model _model;
+        private readonly EngineModel _model;
         
-        public EngineBase(Engine_Model model, BaseViewModel parent) : base(model, parent)
+        public EngineBase(EngineModel model, Base parent) : base(model, parent)
         {
             _model = model;
         }
@@ -25,18 +25,18 @@ namespace Scripts
 
 
         private readonly Dictionary<string, BaseView> _views = new Dictionary<string, BaseView>();
-        public void RegisterView(BaseViewModel viewModel, BaseView view)
+        public void RegisterView(Base viewModel, BaseView view)
         {
             if (_views.ContainsKey(viewModel.Id))
                 throw new EngineException(this, string.Format("Failed to register View of Type: {1}, duplicate for Id: {0}", viewModel.Id, viewModel.GetType()));
 
             _views.Add(viewModel.Id, view);
         }
-        public void UnregisterView(BaseViewModel viewModel)
+        public void UnregisterView(Base viewModel)
         {
             _views.Remove(viewModel.Id);
         }
-        public T GetView<T>(BaseViewModel viewModel) where T:BaseView
+        public T GetView<T>(Base viewModel) where T:BaseView
         {
             var id = viewModel.Id;
             if (!_views.ContainsKey(id))
@@ -59,7 +59,7 @@ namespace Scripts
             get { return this; }
         }
 
-        public Object_Model GetObjectModel(string id)
+        public ObjectModel GetObjectModel(string id)
         {
             foreach (var objectModel in _model.Objects.Where(objectModel => objectModel.Id == id))
             {
@@ -70,7 +70,7 @@ namespace Scripts
 
         #region Property Lookup
         private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>(); 
-        public void RegisterProperty(BaseViewModel viewModel, string id, Property property)
+        public void RegisterProperty(Base viewModel, string id, Property property)
         {
             if (_properties.ContainsKey(id))
             {
@@ -90,7 +90,7 @@ namespace Scripts
             }
         }
 
-        public void UnregisterProperty(BaseViewModel viewModel, string id)
+        public void UnregisterProperty(Base viewModel, string id)
         {
             _properties[id].Remove(viewModel.Id);
         }
@@ -113,7 +113,7 @@ namespace Scripts
         #endregion
 
         #region Virtual Methods
-        public virtual Inventory_Model InventoryModel
+        public virtual InventoryModel InventoryModel
         {
             get { throw new System.NotImplementedException(); }
         }
@@ -123,7 +123,7 @@ namespace Scripts
             throw new System.NotImplementedException();
         }
 
-        public virtual Level_Model GetLevel(string levelId)
+        public virtual LevelModel GetLevel(string levelId)
         {
             throw new System.NotImplementedException();
         }

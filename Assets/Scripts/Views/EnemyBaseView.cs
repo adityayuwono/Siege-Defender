@@ -68,7 +68,7 @@ namespace Scripts.Views
         }
 
         private Transform _projectileRooTransform;
-        private void AttachProjectileToSelf(ProjectileBaseViewModel projectile)
+        private void AttachProjectileToSelf(ProjectileBase projectile)
         {
             var projectileView = _viewModel.Root.GetView<ProjectileView>(projectile);
             var projectileTransform = projectileView.Transform;

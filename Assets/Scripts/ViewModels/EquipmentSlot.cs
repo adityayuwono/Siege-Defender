@@ -3,10 +3,10 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class EquipmentSlot : ElementViewModel
+    public class EquipmentSlot : Element
     {
-        private readonly EquipmentSlot_Model _model;
-        public EquipmentSlot(EquipmentSlot_Model model, Inventory parent) : base(model, parent)
+        private readonly EquipmentSlotModel _model;
+        public EquipmentSlot(EquipmentSlotModel model, Inventory parent) : base(model, parent)
         {
             _model = model;
 

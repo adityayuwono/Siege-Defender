@@ -7,12 +7,12 @@ namespace Scripts.Components
 {
     public class ShootingGUI : BaseController
     {
-        private ShooterViewModel _shooterView;
+        private Shooter _shooterView;
         protected override void OnSetup()
         {
             base.OnSetup();
 
-            _shooterView = ViewModel as ShooterViewModel;
+            _shooterView = ViewModel as Shooter;
             
             _clickArea = new Rect(
                 (Screen.width * _shooterView.Index) - (_shooterView.Index * Screen.height * Values.GUI_CIRCLE_SIZE_F),

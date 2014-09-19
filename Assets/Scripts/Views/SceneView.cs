@@ -4,9 +4,9 @@ namespace Scripts.Views
 {
     public class SceneView : ObjectView
     {
-        private readonly SceneViewModel _viewModel;
+        private readonly Scene _viewModel;
 
-        public SceneView(SceneViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public SceneView(Scene viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }

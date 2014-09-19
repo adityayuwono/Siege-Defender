@@ -7,9 +7,9 @@ namespace Scripts.Views
 {
     public class ProjectileBaseView : RigidbodyView
     {
-        private readonly ProjectileBaseViewModel _viewModel;
+        private readonly ProjectileBase _viewModel;
         protected readonly ShooterView ParentShooter;
-        protected ProjectileBaseView(ProjectileBaseViewModel viewModel, ShooterView parent) : base(viewModel, parent)
+        protected ProjectileBaseView(ProjectileBase viewModel, ShooterView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
             ParentShooter = parent;

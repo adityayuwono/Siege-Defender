@@ -5,9 +5,9 @@ namespace Scripts.Views
 {
     public class IntervalView : ElementView
     {
-        private readonly IntervalViewModel _viewModel;
+        private readonly IntervalVM _viewModel;
 
-        public IntervalView(IntervalViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public IntervalView(IntervalVM viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }

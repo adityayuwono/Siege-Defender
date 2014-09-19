@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Scripts.ViewModels
 {
-    public class Object : BaseViewModel
+    public class Object : Base
     {
-        private readonly Object_Model _model;
+        private readonly ObjectModel _model;
 
-        public Object(Object_Model model, BaseViewModel parent) : base(model, parent)
+        public Object(ObjectModel model, Base parent) : base(model, parent)
         {
             _model = model;
 
@@ -57,7 +57,7 @@ namespace Scripts.ViewModels
 
         #region Death
 
-        public virtual bool ApplyDamage(float damage, ProjectileBaseViewModel source = null)
+        public virtual bool ApplyDamage(float damage, ProjectileBase source = null)
         {
             return false;
         }

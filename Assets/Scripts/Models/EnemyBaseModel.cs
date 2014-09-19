@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class EnemyBaseModel : Object_Model
+    public class EnemyBaseModel : ObjectModel
     {
         [XmlAttribute]
         public int Health { get; set; }
@@ -13,7 +13,7 @@ namespace Scripts.Models
         public float Speed { get; set; }
 
         [XmlElement]
-        public Projectile_Model Projectile { get; set; }
+        public ProjectileModel Projectile { get; set; }
 
         [XmlAttribute]
         public float Rotation { get; set; }

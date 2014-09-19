@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace Scripts.ViewModels.GUIs
 {
-    public class DamageDisplayManager : IntervalViewModel<DamageGUI>
+    public class DamageDisplayManager : Interval<DamageGUI>
     {
-        private DamageDisplay_GUIModel _model;
-        public DamageDisplayManager(DamageDisplay_GUIModel model, Object parent) : base(model, parent)
+        private DamageDisplayGUIModel _model;
+        public DamageDisplayManager(DamageDisplayGUIModel model, Object parent) : base(model, parent)
         {
             _model = model;
         }

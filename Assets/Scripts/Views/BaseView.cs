@@ -5,9 +5,9 @@ namespace Scripts.Views
 {
     public class BaseView : IBase
     {
-        private readonly BaseViewModel _viewModel;
+        private readonly Base _viewModel;
 
-        protected BaseView(BaseViewModel viewModel, BaseView parent)
+        protected BaseView(Base viewModel, BaseView parent)
         {
             _viewModel = viewModel;
 

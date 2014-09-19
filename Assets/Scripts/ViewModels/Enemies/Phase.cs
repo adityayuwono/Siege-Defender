@@ -2,11 +2,11 @@
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class Phase : TriggerElement_ViewModel
+    public class Phase : TriggerElement
     {
-        private readonly Phase_Model _model;
+        private readonly PhaseModel _model;
 
-        public Phase(Phase_Model model, BaseViewModel parent) : base(model, parent)
+        public Phase(PhaseModel model, Base parent) : base(model, parent)
         {
             _model = model;
 

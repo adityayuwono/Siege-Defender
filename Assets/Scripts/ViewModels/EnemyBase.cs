@@ -41,7 +41,7 @@ namespace Scripts.ViewModels
 
         #region Actions
 
-        public Action<ProjectileBaseViewModel> DoAttach;
+        public Action<ProjectileBase> DoAttach;
         public Action<float> OnDamaged;
 
         #endregion
@@ -55,7 +55,7 @@ namespace Scripts.ViewModels
         /// </summary>
         /// <param name="damage">How many health we should reduce</param>
         /// <param name="source">Set if we want to attach the object to the target</param>
-        public override bool ApplyDamage(float damage, ProjectileBaseViewModel source = null)
+        public override bool ApplyDamage(float damage, ProjectileBase source = null)
         {
             if (source != null)
                 AttachProjectile(source);
@@ -74,9 +74,9 @@ namespace Scripts.ViewModels
             return true;
         }
 
-        private readonly List<ProjectileBaseViewModel> _projectiles = new List<ProjectileBaseViewModel>();
+        private readonly List<ProjectileBase> _projectiles = new List<ProjectileBase>();
 
-        private void AttachProjectile(ProjectileBaseViewModel source)
+        private void AttachProjectile(ProjectileBase source)
         {
             if (_projectiles.Contains(source))
                 throw new EngineException(this, "Duplicate Projectile hit");

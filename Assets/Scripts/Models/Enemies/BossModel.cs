@@ -7,15 +7,15 @@ namespace Scripts.Models.Enemies
     [Serializable]
     public class BossModel : EnemyBaseModel
     {
-        [XmlElement(ElementName = "Limb", Type = typeof(Limb_Model))]
-        public List<Limb_Model> Limbs { get; set; }
+        [XmlElement(ElementName = "Limb", Type = typeof(LimbModel))]
+        public List<LimbModel> Limbs { get; set; }
 
 
-        [XmlElement(ElementName = "Skill", Type = typeof(Skill_Model))]
-        public List<Skill_Model> Skills { get; set; }
+        [XmlElement(ElementName = "Skill", Type = typeof(SkillModel))]
+        public List<SkillModel> Skills { get; set; }
 
 
-        [XmlElement(ElementName = "Phase", Type = typeof(Phase_Model))]
-        public List<Phase_Model> Phases { get; set; } 
+        [XmlElement(ElementName = "Phase", Type = typeof(PhaseModel))]
+        public List<PhaseModel> Phases { get; set; } 
     }
 }

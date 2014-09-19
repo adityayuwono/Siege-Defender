@@ -7,7 +7,7 @@ namespace Scripts.Helpers
 {
     public static class Copier
     {
-        public static T CopyAs<T>(Base_Model original) where T : Base_Model
+        public static T CopyAs<T>(BaseModel original) where T : BaseModel
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new MemoryStream();

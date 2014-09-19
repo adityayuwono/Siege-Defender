@@ -7,8 +7,8 @@ namespace Scripts.ViewModels.GUIs
 {
     public class DamageGUI : LabelGUI
     {
-        private Damage_GUIModel _model;
-        public DamageGUI(Damage_GUIModel model, BaseViewModel parent) : base(model, parent)
+        private DamageGUIModel _model;
+        public DamageGUI(DamageGUIModel model, Base parent) : base(model, parent)
         {
             _model = model;
         }

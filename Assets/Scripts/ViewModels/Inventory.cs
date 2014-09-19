@@ -3,10 +3,10 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class Inventory : ElementViewModel
+    public class Inventory : Element
     {
-        private readonly Inventory_Model _model;
-        public Inventory(Inventory_Model model, Object parent) : base(model, parent)
+        private readonly InventoryModel _model;
+        public Inventory(InventoryModel model, Object parent) : base(model, parent)
         {
             // Grab reference to Player's Inventory loaded from XML
             _model = Root.InventoryModel;
@@ -27,13 +27,13 @@ namespace Scripts.ViewModels
             InvokeChildrenChanged();
         }
 
-        public void AddItem(Item itemViewModel)
+        public void AddItem(Item item)
         {
             // Item was removed from inventory
 
-            Elements.Add(itemViewModel);
-            _model.Items.Add(itemViewModel.Model);
-            itemViewModel.ChangeParent(this);
+            Elements.Add(item);
+            _model.Items.Add(item.Model);
+            item.ChangeParent(this);
 
             InvokeChildrenChanged();
         }
@@ -58,9 +58,9 @@ namespace Scripts.ViewModels
 
     public class Item : Object
     {
-        private readonly Item_Model _model;
-        public Item_Model Model{get { return _model; }}
-        public Item(Item_Model model, Object parent) : base(model, parent)
+        private readonly ItemModel _model;
+        public ItemModel Model{get { return _model; }}
+        public Item(ItemModel model, Object parent) : base(model, parent)
         {
             _model = model;
         }

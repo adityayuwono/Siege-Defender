@@ -6,8 +6,8 @@ namespace Scripts.Core
     public class AdjustableProperty<T> : Property<T> , IDisposable
     {
         private string _id;
-        private readonly BaseViewModel _viewModel;
-        public AdjustableProperty(string id, BaseViewModel viewModel)
+        private readonly Base _viewModel;
+        public AdjustableProperty(string id, Base viewModel)
         {
             _id = id;
             _viewModel = viewModel;

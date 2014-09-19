@@ -7,9 +7,9 @@ namespace Scripts.Views
 {
     public class EnemyManagerView : IntervalView
     {
-        private readonly EnemyManagerViewModel _viewModel;
+        private readonly EnemyManager _viewModel;
 
-        public EnemyManagerView(EnemyManagerViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public EnemyManagerView(EnemyManager viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }
