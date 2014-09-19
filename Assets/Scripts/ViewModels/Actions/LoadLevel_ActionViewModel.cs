@@ -2,7 +2,7 @@
 
 namespace Scripts.ViewModels.Actions
 {
-    public class LoadLevel_ActionViewModel : Base_ActionViewModel
+    public class LoadLevel_ActionViewModel : BaseActionViewModel
     {
         private readonly LoadScene_ActionModel _model;
 

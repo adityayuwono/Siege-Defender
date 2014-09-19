@@ -16,12 +16,12 @@ namespace Scripts.ViewModels
             foreach (var actionModel in _model.Trigger.Actions)
             {
                 // Get new instance of ActionVM
-                var actionVM = Root.IoCContainer.GetInstance<Base_ActionViewModel>(actionModel.GetType(), new object[] { actionModel, this });
+                var actionVM = Root.IoCContainer.GetInstance<BaseActionViewModel>(actionModel.GetType(), new object[] { actionModel, this });
                 _actions.Add(actionVM);
             }
         }
 
-        private readonly List<Base_ActionViewModel> _actions = new List<Base_ActionViewModel>();
+        private readonly List<BaseActionViewModel> _actions = new List<BaseActionViewModel>();
 
         public void OnClicked()
         {

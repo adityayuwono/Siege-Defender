@@ -21,14 +21,14 @@ namespace Scripts.ViewModels.Enemies
             foreach (var actionModel in _model.Actions)
             {
                 // Get new instance of ActionVM
-                var actionVM = Root.IoCContainer.GetInstance<Base_ActionViewModel>(actionModel.GetType(), new object[] { actionModel, this });
+                var actionVM = Root.IoCContainer.GetInstance<BaseActionViewModel>(actionModel.GetType(), new object[] { actionModel, this });
                 _actions.Add(actionVM);
             }
         }
 
         private readonly List<Base_ConditionViewModel> _conditions = new List<Base_ConditionViewModel>();
 
-        private readonly List<Base_ActionViewModel> _actions = new List<Base_ActionViewModel>();
+        private readonly List<BaseActionViewModel> _actions = new List<BaseActionViewModel>();
 
         protected override void OnActivate()
         {
