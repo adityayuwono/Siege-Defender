@@ -13,9 +13,11 @@ namespace Scripts.Views
         {
             _viewModel = viewModel;
             _parent = parent;
+
+            _viewModel.AnimationId.OnChange += Animation_OnChange;
         }
 
-
+        
 
         private Animator _animator;
         
@@ -65,6 +67,11 @@ namespace Scripts.Views
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
             base.OnDestroy();
+        }
+
+        private void Animation_OnChange()
+        {
+            _animator.SetBool(_viewModel.AnimationId.GetValue(), true);
         }
 
         private Transform _projectileRooTransform;

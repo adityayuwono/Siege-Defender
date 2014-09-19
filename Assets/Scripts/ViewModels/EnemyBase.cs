@@ -15,6 +15,7 @@ namespace Scripts.ViewModels
             _model = model;
 
             Health = new AdjustableProperty<float>("Health", this);
+            AnimationId = new AdjustableProperty<string>("AnimationId", this);
         }
 
         protected override void OnActivate()
@@ -47,8 +48,6 @@ namespace Scripts.ViewModels
         #endregion
 
         #region Health
-
-        public AdjustableProperty<float> Health;
 
         /// <summary>
         /// Reduce health by the amount specified
@@ -94,6 +93,10 @@ namespace Scripts.ViewModels
         }
 
         #endregion
+
+        public AdjustableProperty<float> Health;
+
+        public AdjustableProperty<string> AnimationId; 
 
         #region Model Properties
 
