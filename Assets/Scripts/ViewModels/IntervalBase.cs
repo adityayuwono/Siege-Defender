@@ -6,7 +6,7 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class Interval<T> : IntervalVM where T : Object
+    public class Interval<T> : IntervalBase where T : Object
     {
         private readonly IntervalModel _model;
 
@@ -106,9 +106,9 @@ namespace Scripts.ViewModels
         }
     }
 
-    public abstract class IntervalVM : Element
+    public abstract class IntervalBase : Element
     {
-        protected IntervalVM(IntervalModel model, Object parent) : base(model, parent) { }
+        protected IntervalBase(IntervalModel model, Object parent) : base(model, parent) { }
         public Property<float> Interval = new Property<float>();
     }
 }
