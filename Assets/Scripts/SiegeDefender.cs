@@ -66,7 +66,7 @@ namespace Scripts
             IoCContainer.RegisterFor<AoE_Model>().TypeOf<ProjectileBaseViewModel>().To<AoEViewModel>();
             IoCContainer.RegisterFor<ParticleAoE_Model>().TypeOf<ProjectileBaseViewModel>().To<ParticleAoEViewModel>();
 
-            IoCContainer.RegisterFor<EnemyBase_Model>().TypeOf<EnemyBase>().To<EnemyBase>();
+            IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<EnemyBase>().To<EnemyBase>();
             IoCContainer.RegisterFor<BossModel>().TypeOf<EnemyBase>().To<Boss>();
             IoCContainer.RegisterFor<Damage_GUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
 

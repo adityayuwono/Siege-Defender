@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models.Enemies
 {
     [Serializable]
-    public class BossModel : EnemyBase_Model
+    public class BossModel : EnemyBaseModel
     {
         [XmlElement(ElementName = "Limb", Type = typeof(Limb_Model))]
         public List<Limb_Model> Limbs { get; set; }

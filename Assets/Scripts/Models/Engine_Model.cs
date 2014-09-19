@@ -9,7 +9,7 @@ namespace Scripts.Models
     public class Engine_Model : Base_Model
     {
         [XmlArray]
-        [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBase_Model))]
+        [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBaseModel))]
         [XmlArrayItem(ElementName = "Boss", Type = typeof(BossModel))]
         [XmlArrayItem(ElementName = "Projectile", Type = typeof(Projectile_Model))]
         [XmlArrayItem(ElementName = "Piercing", Type = typeof(PiercingProjectile_Model))]

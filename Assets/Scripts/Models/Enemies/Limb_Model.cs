@@ -5,7 +5,7 @@ using Scripts.Models.Actions;
 namespace Scripts.Models.Enemies
 {
     [Serializable]
-    public class Limb_Model : EnemyBase_Model
+    public class Limb_Model : EnemyBaseModel
     {
         [XmlElement]
         public Triggered_Model Trigger { get; set; }
