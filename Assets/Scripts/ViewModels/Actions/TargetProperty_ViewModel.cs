@@ -20,7 +20,7 @@ namespace Scripts.ViewModels.Actions
 
             var target = _model.Target;
             if (_model.Target == "{This}")
-                target = GetParent<ObjectViewModel>().Id;
+                target = GetParent<Object>().Id;
 
             Property = Root.GetProperty(target, _model.Property);
         }

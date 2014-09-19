@@ -32,7 +32,7 @@ namespace Scripts.ViewModels
             Hide("AoEs are hidden immediately");
         }
 
-        public override void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition, Vector3 contactPoint)
+        public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
         {
             DamageEnemy(targetObject, contactPoint);
         }

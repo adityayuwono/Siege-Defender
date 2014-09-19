@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Scripts.ViewModels
 {
-    public class ObjectViewModel : BaseViewModel
+    public class Object : BaseViewModel
     {
         private readonly Object_Model _model;
 
-        public ObjectViewModel(Object_Model model, BaseViewModel parent) : base(model, parent)
+        public Object(Object_Model model, BaseViewModel parent) : base(model, parent)
         {
             _model = model;
 
@@ -19,14 +19,14 @@ namespace Scripts.ViewModels
 
             foreach (var elementModel in _model.Elements)
             {
-                var elementVM = Root.IoCContainer.GetInstance<ObjectViewModel>(elementModel.GetType(), new object[] { elementModel, this });
+                var elementVM = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] { elementModel, this });
                 if (elementVM == null)
                     throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
                 Elements.Add(elementVM);
             }
         }
 
-        protected readonly List<ObjectViewModel> Elements = new List<ObjectViewModel>(); 
+        protected readonly List<Object> Elements = new List<Object>(); 
 
         protected override void OnActivate()
         {
@@ -70,7 +70,7 @@ namespace Scripts.ViewModels
             get { return 0f; }
         }
         
-        public Action<ObjectViewModel> OnObjectDeactivated;
+        public Action<Object> OnObjectDeactivated;
         
         protected override void OnDeactivate()
         {

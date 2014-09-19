@@ -1,11 +1,12 @@
 ﻿using Scripts.ViewModels;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Views
 {
     public class RigidbodyView : ObjectView
     {
-        protected RigidbodyView(ObjectViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        protected RigidbodyView(Object viewModel, ObjectView parent) : base(viewModel, parent)
         {
         }
 

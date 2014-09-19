@@ -6,7 +6,7 @@ namespace Scripts.ViewModels
     public class Inventory_ViewModel : ElementViewModel
     {
         private readonly Inventory_Model _model;
-        public Inventory_ViewModel(Inventory_Model model, ObjectViewModel parent) : base(model, parent)
+        public Inventory_ViewModel(Inventory_Model model, Object parent) : base(model, parent)
         {
             // Grab reference to Player's Inventory loaded from XML
             _model = Root.InventoryModel;
@@ -56,11 +56,11 @@ namespace Scripts.ViewModels
 
     
 
-    public class Item_ViewModel : ObjectViewModel
+    public class Item_ViewModel : Object
     {
         private readonly Item_Model _model;
         public Item_Model Model{get { return _model; }}
-        public Item_ViewModel(Item_Model model, ObjectViewModel parent) : base(model, parent)
+        public Item_ViewModel(Item_Model model, Object parent) : base(model, parent)
         {
             _model = model;
         }
@@ -71,8 +71,8 @@ namespace Scripts.ViewModels
 
 
 
-        public Action<ObjectViewModel> OnParentChanged;
-        public void ChangeParent(ObjectViewModel newParent)
+        public Action<Object> OnParentChanged;
+        public void ChangeParent(Object newParent)
         {
             Parent = newParent;
 

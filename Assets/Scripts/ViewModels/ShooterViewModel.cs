@@ -24,7 +24,7 @@ namespace Scripts.ViewModels
                 throw new EngineException(this, "Target Model is null");
 
 
-            Source = new ObjectViewModel(_model.Source, this);
+            Source = new Object(_model.Source, this);
             Elements.Add(Source);
 
             Target = new TargetViewModel(_model.Target, this);
@@ -51,8 +51,8 @@ namespace Scripts.ViewModels
             get { return _model.Index; }
         }
 
-        public ObjectViewModel Source { get; private set; }
-        public ObjectViewModel Target { get; private set; }
+        public Object Source { get; private set; }
+        public Object Target { get; private set; }
 
         private Property<string> _projectileBinding;
         protected override void OnLoad()

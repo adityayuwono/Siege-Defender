@@ -2,15 +2,16 @@
 using Scripts.Interfaces;
 using Scripts.ViewModels;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Components
 {
     public class BaseController : MonoBehaviour, IBase
     {
-        protected ObjectViewModel ViewModel { get; private set; }
+        protected Object ViewModel { get; private set; }
 
         private bool _isSet;
-        public void Setup(ObjectViewModel viewModel)
+        public void Setup(Object viewModel)
         {
             _isSet = true;
             ViewModel = viewModel;

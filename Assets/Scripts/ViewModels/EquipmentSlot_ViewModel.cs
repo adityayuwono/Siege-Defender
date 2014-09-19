@@ -66,7 +66,7 @@ namespace Scripts.ViewModels
             Root.Save();
         }
 
-        public void Object_OnDropped(ObjectViewModel objectViewModel)
+        public void Object_OnDropped(Object objectViewModel)
         {
             CurrentItem = objectViewModel as Item_ViewModel;
         }

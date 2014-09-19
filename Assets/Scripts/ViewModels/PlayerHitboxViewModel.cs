@@ -6,12 +6,12 @@ namespace Scripts.ViewModels
     {
         private readonly PlayerHitbox_Model _model;
 
-        public PlayerHitboxViewModel(PlayerHitbox_Model model, ObjectViewModel parent) : base(model, parent)
+        public PlayerHitboxViewModel(PlayerHitbox_Model model, Object parent) : base(model, parent)
         {
             _model = model;
         }
 
-        public void CollideWithTarget(ObjectViewModel obj)
+        public void CollideWithTarget(Object obj)
         {
             var enemyViewModel = obj as EnemyBaseViewModel;
             if (enemyViewModel != null)

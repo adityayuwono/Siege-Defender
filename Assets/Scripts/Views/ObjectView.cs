@@ -8,10 +8,10 @@ namespace Scripts.Views
 {
     public class ObjectView : BaseView
     {
-        private readonly ObjectViewModel _viewModel;
+        private readonly ViewModels.Object _viewModel;
         private readonly ObjectView _parent;
 
-        public ObjectView(ObjectViewModel viewModel, ObjectView parent) : base(viewModel, parent)
+        public ObjectView(ViewModels.Object viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
             _parent = parent;

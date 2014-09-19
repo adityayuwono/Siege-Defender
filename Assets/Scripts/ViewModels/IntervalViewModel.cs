@@ -6,11 +6,11 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class IntervalViewModel<T> : IntervalViewModel where T : ObjectViewModel
+    public class IntervalViewModel<T> : IntervalViewModel where T : Object
     {
         private readonly Interval_Model _model;
 
-        protected IntervalViewModel(Interval_Model model, ObjectViewModel parent) : base(model, parent)
+        protected IntervalViewModel(Interval_Model model, Object parent) : base(model, parent)
         {
             _model = model;
             Interval.SetValue(_model.Interval);
@@ -42,7 +42,7 @@ namespace Scripts.ViewModels
             var objectModel = Copier.CopyAs<Object_Model>(modelToCopy);
             objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, Id, ObjectCount);
             objectModel.Type = id;
-            var newObject = Root.IoCContainer.GetInstance<T>(objectModel.GetType(), new Object[] {objectModel, this});
+            var newObject = Root.IoCContainer.GetInstance<T>(objectModel.GetType(), new System.Object[] {objectModel, this});
 
             if (newObject == null)
                 throw new EngineException(this, string.Format("Failed to instantiate {0}, {1}", objectModel.GetType(), typeof(T)));
@@ -52,7 +52,7 @@ namespace Scripts.ViewModels
 
         private readonly List<T> _activeObjects = new List<T>();
 
-        private void Object_OnDeath(ObjectViewModel objectViewModel)
+        private void Object_OnDeath(Object objectViewModel)
         {
             var objectT = (T) objectViewModel;
             _activeObjects.Remove(objectT);
@@ -108,7 +108,7 @@ namespace Scripts.ViewModels
 
     public abstract class IntervalViewModel : ElementViewModel
     {
-        protected IntervalViewModel(Interval_Model model, ObjectViewModel parent) : base(model, parent) { }
+        protected IntervalViewModel(Interval_Model model, Object parent) : base(model, parent) { }
         public Property<float> Interval = new Property<float>();
     }
 }

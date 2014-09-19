@@ -1,12 +1,13 @@
 ﻿using System;
 using Scripts.ViewModels;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Components
 {
     public class CollisionController : MonoBehaviour
     {
-        public Action<ObjectViewModel, Vector3, Vector3> OnCollision;
+        public Action<Object, Vector3, Vector3> OnCollision;
 
         private void OnCollisionEnter(Collision collisionInfo)
         {

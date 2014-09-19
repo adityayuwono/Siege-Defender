@@ -3,7 +3,7 @@ using Scripts.Models.GUIs;
 
 namespace Scripts.ViewModels.GUIs
 {
-    public class LabelGUI : ObjectViewModel
+    public class LabelGUI : Object
     {
         private Label_GUIModel _model;
         public LabelGUI(Label_GUIModel model, BaseViewModel parent) : base(model, parent)

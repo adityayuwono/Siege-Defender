@@ -25,7 +25,7 @@ namespace Scripts.ViewModels
         }
 
         private float _damageMultiplier;
-        public override void CollideWithTarget(ObjectViewModel targetObject, Vector3 collisionPosition, Vector3 contactPoint)
+        public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
         {
             // Spawn AoE if there are any Id defined
             if (!string.IsNullOrEmpty(_model.AoEId))

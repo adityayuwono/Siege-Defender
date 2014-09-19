@@ -1,6 +1,7 @@
 ﻿using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Views
 {
@@ -53,7 +54,7 @@ namespace Scripts.Views
             _viewModel.OnParentChanged += OnParentChanged;
         }
 
-        private void OnParentChanged(ObjectViewModel newParent)
+        private void OnParentChanged(Object newParent)
         {
             _parent = newParent.Root.GetView<ObjectView>(newParent);
 

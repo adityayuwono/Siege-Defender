@@ -2,7 +2,7 @@
 
 namespace Scripts.ViewModels
 {
-    public class SceneViewModel : ObjectViewModel
+    public class SceneViewModel : Object
     {
         private readonly Scene_Model _model;
 

@@ -2,11 +2,11 @@
 
 namespace Scripts.ViewModels
 {
-    public class TargetViewModel : ObjectViewModel
+    public class TargetViewModel : Object
     {
         private readonly Target_Model _model;
 
-        public TargetViewModel(Target_Model model, ObjectViewModel parent) : base(model, parent)
+        public TargetViewModel(Target_Model model, Object parent) : base(model, parent)
         {
             _model = model;
         }

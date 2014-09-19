@@ -7,7 +7,7 @@ namespace Scripts.ViewModels
     {
         private readonly EnemyManager_Model _model;
 
-        public EnemyManagerViewModel(EnemyManager_Model model, ObjectViewModel parent) : base(model, parent)
+        public EnemyManagerViewModel(EnemyManager_Model model, Object parent) : base(model, parent)
         {
             _model = model;
 

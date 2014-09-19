@@ -1,12 +1,13 @@
 ﻿using System;
 using Scripts.ViewModels;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Components
 {
     public class DragDropContainerController : UIDragDropContainer
     {
-        public Action<ObjectViewModel> OnDropped;
+        public Action<Object> OnDropped;
 
         public void OnDrop(GameObject droppedGameObject)
         {

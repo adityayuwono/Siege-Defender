@@ -4,16 +4,16 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class ObjectDisplay_ViewModel : IntervalViewModel<ObjectViewModel>
+    public class ObjectDisplay_ViewModel : IntervalViewModel<Object>
     {
         private readonly ObjectDisplay_Model _model;
-        public ObjectDisplay_ViewModel(ObjectDisplay_Model model, ObjectViewModel parent) : base(model, parent)
+        public ObjectDisplay_ViewModel(ObjectDisplay_Model model, Object parent) : base(model, parent)
         {
             _model = model;
         }
 
         public Property<string> ObjectIdBinding;
-        public readonly Property<ObjectViewModel> CurrentObject = new Property<ObjectViewModel>(); 
+        public readonly Property<Object> CurrentObject = new Property<Object>(); 
         protected override void OnLoad()
         {
             base.OnLoad();
@@ -36,7 +36,7 @@ namespace Scripts.ViewModels
             if (currentObjectVM != null)
                 currentObjectVM.Hide("Changing displayed object");
 
-            var newProjectile = GetObject<ObjectViewModel>(ObjectIdBinding.GetValue());
+            var newProjectile = GetObject<Object>(ObjectIdBinding.GetValue());
             newProjectile.Activate();
             newProjectile.Show();
 
@@ -54,7 +54,7 @@ namespace Scripts.ViewModels
         }
 
 
-        protected override ObjectViewModel SpawnNewObject(string id)
+        protected override Object SpawnNewObject(string id)
         {
             var modelToCopy = Root.GetObjectModel(id);
             var objectModel = Copier.CopyAs<Object_Model>(modelToCopy);

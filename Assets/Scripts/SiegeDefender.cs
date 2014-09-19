@@ -14,6 +14,7 @@ using Scripts.ViewModels.GUIs;
 using Scripts.Views;
 using Scripts.Views.GUIs;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts
 {
@@ -47,17 +48,17 @@ namespace Scripts
             ResourceManager = new ResourcePooler(this);
 
             #region Model to ViewModel
-            IoCContainer.RegisterFor<Element_Model>().TypeOf<ObjectViewModel>().To<ElementViewModel>();
-            IoCContainer.RegisterFor<Player_Model>().TypeOf<ObjectViewModel>().To<PlayerViewModel>();
-            IoCContainer.RegisterFor<EnemyManager_Model>().TypeOf<ObjectViewModel>().To<EnemyManagerViewModel>();
-            IoCContainer.RegisterFor<PlayerHitbox_Model>().TypeOf<ObjectViewModel>().To<PlayerHitboxViewModel>();
-            IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<ObjectViewModel>().To<GUIRoot>();
-            IoCContainer.RegisterFor<DamageDisplay_GUIModel>().TypeOf<ObjectViewModel>().To<DamageDisplayManager>();
-            IoCContainer.RegisterFor<ObjectDisplay_Model>().TypeOf<ObjectViewModel>().To<ObjectDisplay_ViewModel>();
+            IoCContainer.RegisterFor<Element_Model>().TypeOf<Object>().To<ElementViewModel>();
+            IoCContainer.RegisterFor<Player_Model>().TypeOf<Object>().To<PlayerViewModel>();
+            IoCContainer.RegisterFor<EnemyManager_Model>().TypeOf<Object>().To<EnemyManagerViewModel>();
+            IoCContainer.RegisterFor<PlayerHitbox_Model>().TypeOf<Object>().To<PlayerHitboxViewModel>();
+            IoCContainer.RegisterFor<Root_GUIModel>().TypeOf<Object>().To<GUIRoot>();
+            IoCContainer.RegisterFor<DamageDisplay_GUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
+            IoCContainer.RegisterFor<ObjectDisplay_Model>().TypeOf<Object>().To<ObjectDisplay_ViewModel>();
             // GUIs
-            IoCContainer.RegisterFor<Inventory_Model>().TypeOf<ObjectViewModel>().To<Inventory_ViewModel>();
-            IoCContainer.RegisterFor<Item_Model>().TypeOf<ObjectViewModel>().To<Item_ViewModel>();
-            IoCContainer.RegisterFor<Button_GUIModel>().TypeOf<ObjectViewModel>().To<Button_ViewModel>();
+            IoCContainer.RegisterFor<Inventory_Model>().TypeOf<Object>().To<Inventory_ViewModel>();
+            IoCContainer.RegisterFor<Item_Model>().TypeOf<Object>().To<Item_ViewModel>();
+            IoCContainer.RegisterFor<Button_GUIModel>().TypeOf<Object>().To<Button_ViewModel>();
 
             // ProjectileBaseViewModel
             IoCContainer.RegisterFor<Projectile_Model>().TypeOf<ProjectileBaseViewModel>().To<ProjectileViewModel>();
@@ -94,7 +95,7 @@ namespace Scripts
             IoCContainer.RegisterFor<EquipmentSlot_ViewModel>().TypeOf<BaseView>().To<EquipmentSlot_View>();
             IoCContainer.RegisterFor<Button_ViewModel>().TypeOf<BaseView>().To<Button_View>();
 
-            IoCContainer.RegisterFor<ObjectViewModel>().TypeOf<BaseView>().To<ObjectView>();
+            IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();
             IoCContainer.RegisterFor<StaticObject_ViewModel>().TypeOf<BaseView>().To<StaticObject_View>();
             IoCContainer.RegisterFor<ShooterViewModel>().TypeOf<BaseView>().To<ShooterView>();
             IoCContainer.RegisterFor<TargetViewModel>().TypeOf<BaseView>().To<TargetView>();

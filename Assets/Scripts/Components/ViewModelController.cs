@@ -1,13 +1,14 @@
 ﻿using Scripts.ViewModels;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Components
 {
     public class ViewModelController : MonoBehaviour
     {
-        public ObjectViewModel ViewModel;
+        public Object ViewModel;
 
-        public ObjectViewModel GetViewModel()
+        public Object GetViewModel()
         {
             return ViewModel;
         }
