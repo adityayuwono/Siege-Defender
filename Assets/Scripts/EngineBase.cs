@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
@@ -15,7 +16,7 @@ namespace Scripts
     {
         private readonly Engine_Model _model;
         
-        public EngineBase(Engine_Model model, ObjectViewModel parent) : base(model, parent)
+        public EngineBase(Engine_Model model, BaseViewModel parent) : base(model, parent)
         {
             _model = model;
         }
@@ -60,10 +61,9 @@ namespace Scripts
 
         public Object_Model GetObjectModel(string id)
         {
-            foreach (var objectModel in _model.Objects)
+            foreach (var objectModel in _model.Objects.Where(objectModel => objectModel.Id == id))
             {
-                if (objectModel.Id == id)
-                    return objectModel;
+                return objectModel;
             }
             throw new EngineException(this, string.Format("ObjectModel not found, Id: {0}", id));
         }

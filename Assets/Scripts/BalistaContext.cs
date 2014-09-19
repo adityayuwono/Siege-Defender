@@ -64,10 +64,5 @@ namespace Scripts
             }
         }
         #endregion
-
-        public void OnClicked(string s)
-        {
-            Debug.LogError(s);
-        }
     }
 }

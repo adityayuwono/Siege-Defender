@@ -13,6 +13,7 @@ namespace Scripts.Models
         public string Type;
 
         [XmlArray]
+        [DefaultValue(default(List<Element_Model>))]
         // 3D Objects
         [XmlArrayItem(ElementName = "Element", Type = typeof(Element_Model))]
         [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManager_Model))]

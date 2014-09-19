@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
@@ -125,10 +126,9 @@ namespace Scripts
 
         public override Level_Model GetLevel(string levelId)
         {
-            foreach (var levelModel in _model.Levels)
+            foreach (var levelModel in _model.Levels.Where(levelModel => levelModel.Id == levelId))
             {
-                if (levelModel.Id == levelId)
-                    return levelModel;
+                return levelModel;
             }
             throw new EngineException(this, string.Format("Enemy not found: {0}", levelId));
         }

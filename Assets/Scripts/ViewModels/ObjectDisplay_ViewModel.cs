@@ -1,7 +1,6 @@
 ﻿using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
-using UnityEngine;
 
 namespace Scripts.ViewModels
 {

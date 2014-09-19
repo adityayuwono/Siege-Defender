@@ -1,7 +1,4 @@
-﻿using Scripts.Helpers;
-using Scripts.ViewModels;
-
-namespace Scripts.Core
+﻿namespace Scripts.Core
 {
     public class BindingManager
     {

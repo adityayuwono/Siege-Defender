@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Scripts.ViewModels;
+﻿using Scripts.ViewModels;
 using UnityEngine;
 
 namespace Scripts.Views

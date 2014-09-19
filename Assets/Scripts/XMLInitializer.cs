@@ -53,7 +53,7 @@ namespace Scripts
             if (loader.error != null || isUnityEditor)
             {
                 // We don't have an XML yet, let's create one based on the template
-                inventoryText = EngineTextAsset.text;
+                inventoryText = DefaultInventory.text;
                 using (var sw = new StreamWriter(loader.url))
                 {
                     sw.Write(inventoryText);

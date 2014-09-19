@@ -8,6 +8,7 @@ namespace Scripts.ViewModels
         private readonly Inventory_Model _model;
         public Inventory_ViewModel(Inventory_Model model, ObjectViewModel parent) : base(model, parent)
         {
+            // Grab reference to Player's Inventory loaded from XML
             _model = Root.InventoryModel;
 
             foreach (var itemModel in _model.Items)
