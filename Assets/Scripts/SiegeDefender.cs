@@ -73,7 +73,7 @@ namespace Scripts
 
             // Actions, doesnt have a view
             IoCContainer.RegisterFor<LoadScene_ActionModel>().TypeOf<BaseActionViewModel>().To<LoadSceneActionViewModel>();
-            IoCContainer.RegisterFor<Setter_ActionModel>().TypeOf<BaseActionViewModel>().To<Setter_ActionViewModel>();
+            IoCContainer.RegisterFor<Setter_ActionModel>().TypeOf<BaseActionViewModel>().To<SetterActionViewModel>();
             IoCContainer.RegisterFor<Base_ConditionModel>().TypeOf<Base_ConditionViewModel>().To<Base_ConditionViewModel>();
             #endregion
 

@@ -3,10 +3,10 @@ using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
-    public class Setter_ActionViewModel : BaseActionViewModel
+    public class SetterActionViewModel : BaseActionViewModel
     {
         private readonly Setter_ActionModel _model;
-        public Setter_ActionViewModel(Setter_ActionModel model, BaseViewModel parent) : base(model, parent)
+        public SetterActionViewModel(Setter_ActionModel model, BaseViewModel parent) : base(model, parent)
         {
             _model = model;
         }
