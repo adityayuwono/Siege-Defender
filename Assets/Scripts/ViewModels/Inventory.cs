@@ -15,7 +15,7 @@ namespace Scripts.ViewModels
                 Elements.Add(new Item_ViewModel(itemModel, this));
 
             foreach (var equipmentSlotModel in _model.EquipmentSlots)
-                Elements.Add(new EquipmentSlot_ViewModel(equipmentSlotModel, this));
+                Elements.Add(new EquipmentSlot(equipmentSlotModel, this));
         }
 
         public Action OnChildrenChanged;

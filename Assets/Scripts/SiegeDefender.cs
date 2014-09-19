@@ -92,7 +92,7 @@ namespace Scripts
             // GUIs
             IoCContainer.RegisterFor<Item_ViewModel>().TypeOf<BaseView>().To<Item_View>();
             IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<Inventory_View>();
-            IoCContainer.RegisterFor<EquipmentSlot_ViewModel>().TypeOf<BaseView>().To<EquipmentSlot_View>();
+            IoCContainer.RegisterFor<EquipmentSlot>().TypeOf<BaseView>().To<EquipmentSlot_View>();
             IoCContainer.RegisterFor<Button_ViewModel>().TypeOf<BaseView>().To<Button_View>();
 
             IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();
