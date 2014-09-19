@@ -3,7 +3,7 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class EnemyManagerViewModel : IntervalViewModel<EnemyBaseViewModel>
+    public class EnemyManagerViewModel : IntervalViewModel<EnemyBase>
     {
         private readonly EnemyManager_Model _model;
 
@@ -49,7 +49,7 @@ namespace Scripts.ViewModels
                 var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
                 _spawnIndex++;
 
-                var enemy = GetObject<EnemyBaseViewModel>(enemyId);
+                var enemy = GetObject<EnemyBase>(enemyId);
                 enemy.Activate();
                 enemy.Show();
             }

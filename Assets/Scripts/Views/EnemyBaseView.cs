@@ -6,10 +6,10 @@ namespace Scripts.Views
 {
     public class EnemyBaseView : RigidbodyView
     {
-        private readonly EnemyBaseViewModel _viewModel;
+        private readonly EnemyBase _viewModel;
         private readonly EnemyManagerView _parent;
 
-        public EnemyBaseView(EnemyBaseViewModel viewModel, EnemyManagerView parent) : base(viewModel, parent)
+        public EnemyBaseView(EnemyBase viewModel, EnemyManagerView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
             _parent = parent;

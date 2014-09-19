@@ -3,7 +3,7 @@ using Scripts.Models.Enemies;
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class Boss : EnemyBaseViewModel
+    public class Boss : EnemyBase
     {
         private readonly BossModel _model;
         public Boss(BossModel model, Object parent) : base(model, parent)
