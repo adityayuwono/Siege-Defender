@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.IO;
 using Scripts.Helpers;
 using UnityEngine;
@@ -41,14 +40,17 @@ namespace Scripts
         private void InitializeEngine()
         {
             var inventoryText = "";
+            // TODO: improve to cloud saving
             try
             {
+                // Try to load save file, if any
                 var sr = new StreamReader(FilePaths.Loading + "/Inventory.xml");
                 inventoryText = sr.ReadToEnd();
                 sr.Close();
             }
             catch (Exception ex)
             {
+                // No save file yet, just create a default one
                 inventoryText = DefaultInventory.text;
             }
 
