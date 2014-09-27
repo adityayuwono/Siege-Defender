@@ -1,5 +1,4 @@
-﻿using Scripts.ViewModels;
-using UnityEngine;
+﻿using UnityEngine;
 using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Views
