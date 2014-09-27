@@ -67,6 +67,8 @@ ModelImporter:
     100122: Breakable 3
     100124: Breakable 4
     100126: Breakable 5
+    100128: Object006
+    100130: Breakable 6
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 HeadNub
@@ -131,6 +133,8 @@ ModelImporter:
     400122: Breakable 3
     400124: Breakable 4
     400126: Breakable 5
+    400128: Object006
+    400130: Breakable 6
     2300000: Box005
     2300002: Box006
     2300004: Box008
@@ -144,6 +148,8 @@ ModelImporter:
     2300020: Breakable 3
     2300022: Breakable 4
     2300024: Breakable 5
+    2300026: Object006
+    2300028: Breakable 6
     3300000: Box005
     3300002: Box006
     3300004: Box008
@@ -157,6 +163,8 @@ ModelImporter:
     3300020: Breakable 3
     3300022: Breakable 4
     3300024: Breakable 5
+    3300026: Object006
+    3300028: Breakable 6
     4300000: Object010
     4300002: Object008
     4300004: Box008
@@ -171,6 +179,8 @@ ModelImporter:
     4300022: Breakable
     4300024: Breakable
     4300026: Breakable
+    4300028: Object006
+    4300030: Breakable
     7400000: Idle
     9500000: //RootNode
     13700000: Object005
