@@ -1,10 +1,9 @@
-﻿using Scripts.Helpers;
-using Scripts.ViewModels;
+﻿using Scripts.ViewModels;
 using UnityEngine;
 
 namespace Scripts.Views
 {
-    public class EnemyBaseView : RigidbodyView
+    public class EnemyBaseView : LivingObjectView
     {
         private readonly EnemyBase _viewModel;
         private readonly EnemyManagerView _parent;
@@ -17,17 +16,12 @@ namespace Scripts.Views
             _viewModel.AnimationId.OnChange += Animation_OnChange;
         }
 
-        
-
         private Animator _animator;
         
         protected override void OnLoad()
         {
             base.OnLoad();
 
-            _viewModel.DoAttach += AttachProjectileToSelf;
-
-            _projectileRooTransform = Transform.FindChildRecursivelyBreadthFirst("ProjectileRoot");
             _animator = GameObject.GetComponent<Animator>();
         }
         protected override void OnShow()
@@ -62,7 +56,6 @@ namespace Scripts.Views
 
         protected override void OnDestroy()
         {
-            _viewModel.DoAttach -= AttachProjectileToSelf;
             _animator = null;
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
@@ -72,15 +65,6 @@ namespace Scripts.Views
         private void Animation_OnChange()
         {
             _animator.SetBool(_viewModel.AnimationId.GetValue(), true);
-        }
-
-        private Transform _projectileRooTransform;
-        private void AttachProjectileToSelf(ProjectileBase projectile)
-        {
-            var projectileView = _viewModel.Root.GetView<ProjectileView>(projectile);
-            var projectileTransform = projectileView.Transform;
-            projectileTransform.parent = _projectileRooTransform;
-            projectileTransform.localPosition = Vector3.zero;
         }
     }
 }

@@ -4,11 +4,8 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class EnemyBaseModel : ObjectModel
+    public class EnemyBaseModel : LivingObjectModel
     {
-        [XmlAttribute]
-        public int Health { get; set; }
-
         [XmlAttribute]
         public float Speed { get; set; }
 
