@@ -31,7 +31,6 @@ namespace Scripts.Views.GUIs
         {
             BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Hide, _viewModel.HideDelay, false);
             
-            iTween.ScaleTo(GameObject, Vector3.zero, _viewModel.HideDelay);
             iTween.MoveTo(GameObject, _viewModel.Position + (Vector3.up*2f), _viewModel.HideDelay);
         }
 
