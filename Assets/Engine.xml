@@ -31,31 +31,60 @@
 		<Enemy Id="ShieldBearers" AssetId="Enemies/BlueGoblin" 		Health="50" 	Speed="0.001"	Rotation="0" />
 		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
-		<Boss 	Id="BigGoblin" 	AssetId="Enemies/BossGoblin" Health="2100" Speed="2" >
+		<Boss 	Id="BigGoblin" 	AssetId="Enemies/StoneGolemBoss" Health="5325" Speed="2" >
 			<Elements>
 				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="BigGoblinLevel1" />
 				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="Level0" />
 			</Elements>
-			<Limb Id="Head" 		Health="50" >
+			<Limb Id="Head" 		Health="50" 	AssetId="Head">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="Wood" Amount="3-10" />
 				</Trigger>
 			</Limb>
-			<Limb Id="RightHand" 	Health="250" >
+			<Limb Id="RightHand" 	Health="250" 	AssetId="RightHand" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="LeftHand" 	Health="250" >
+			<Limb Id="LeftHand" 	Health="250" 	AssetId="LeftHand" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			
-			
+			<Limb Id="RightLeg" 	Health="250" 	AssetId="RightLeg">
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
+			</Limb>
+			<Limb Id="LeftLeg" 		Health="250" 	AssetId="LeftLeg">
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
+			</Limb>
+			<Limb Id="RightFoot" 	Health="250" 	AssetId="Bip001 R Foot">
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
+			</Limb>
+			<Limb Id="LeftFoot" 	Health="250" 	AssetId="Bip001 L Foot">
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
+			</Limb>
+			<Limb Id="Crystal" 		Health="250" 	AssetId="Bip001 Spine2">
+				<Trigger>
+					<Condition Target="{This}" Property="Health" Value="\1" />
+					<Drop Target="LightWood" Amount="1-6" />
+				</Trigger>
+			</Limb>
+						
 			<Skill >
 				<Trigger>
 					<Condition Target="{This}" Property="Minions" Comparison="NotContains" Value="FatBoxDemon" />
@@ -87,7 +116,6 @@
 					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel5" />
 				</Trigger>
 			</Phase>
-
 		</Boss>
 
 
