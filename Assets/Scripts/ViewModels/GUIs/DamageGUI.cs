@@ -21,7 +21,7 @@ namespace Scripts.ViewModels.GUIs
 
         public float HideDelay
         {
-            get { return 1f; }
+            get { return 0.5f; }
         }
 
         public void ShowDamage(float damage, Vector3 position)
