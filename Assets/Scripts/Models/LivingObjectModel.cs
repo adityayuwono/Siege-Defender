@@ -8,5 +8,12 @@ namespace Scripts.Models
     {
         [XmlAttribute]
         public int Health { get; set; }
+
+        public int ProjectileLimit { get; protected set; }
+
+        public LivingObjectModel()
+        {
+            ProjectileLimit = 3;
+        }
     }
 }

@@ -9,5 +9,10 @@ namespace Scripts.Models.Enemies
     {
         [XmlElement]
         public TriggeredModel Trigger { get; set; }
+
+        public LimbModel()
+        {
+            ProjectileLimit = 5;
+        }
     }
 }

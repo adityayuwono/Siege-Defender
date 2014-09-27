@@ -68,7 +68,7 @@ namespace Scripts.ViewModels.Enemies
 
             _projectiles.Add(source);
 
-            while (_projectiles.Count > 3)
+            while (_projectiles.Count > _model.ProjectileLimit)
             {
                 var projectileToRemove = _projectiles[0];
                 _projectiles.Remove(projectileToRemove);
