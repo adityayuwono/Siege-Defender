@@ -26,7 +26,6 @@ namespace Scripts.Views
             var projectileRoot = Transform.FindChildRecursivelyBreadthFirst("ProjectileRoot");
             if (projectileRoot == null)
             {
-                _projectileRooTransform.Add(Transform);
             }
             else
             {
@@ -54,8 +53,16 @@ namespace Scripts.Views
         {
             var projectileView = _viewModel.Root.GetView<ProjectileView>(projectile);
             var projectileTransform = projectileView.Transform;
-            projectileTransform.parent = _projectileRooTransform[ProjectileRootIndexRandomizer.Next(_projectileRooTransform.Count)];
-            projectileTransform.localPosition = Vector3.zero;
+
+            if (_projectileRooTransform.Count > 0)
+            {
+                projectileTransform.parent = _projectileRooTransform[ProjectileRootIndexRandomizer.Next(_projectileRooTransform.Count)];
+                projectileTransform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                projectileTransform.parent = Transform;
+            }
         }
     }
 }
