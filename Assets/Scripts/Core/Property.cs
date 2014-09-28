@@ -5,32 +5,34 @@ namespace Scripts.Core
 {
     public class AdjustableProperty<T> : Property<T> , IDisposable
     {
-        private readonly string _id;
+        private readonly string _propertyId;
         private readonly Base _viewModel;
-        public AdjustableProperty(string id, Base viewModel)
+        public AdjustableProperty(string propertyId, Base viewModel, bool isAlwaysChanging = false) : base (isAlwaysChanging)
         {
-            _id = id;
+            _propertyId = propertyId;
             _viewModel = viewModel;
 
-            viewModel.Root.RegisterProperty(_viewModel, _id, this);
+            viewModel.Root.RegisterProperty(_viewModel, _propertyId, this);
         }
 
         public void Dispose()
         {
-            _viewModel.Root.UnregisterProperty(_viewModel, _id);
+            _viewModel.Root.UnregisterProperty(_viewModel, _propertyId);
         }
     }
 
     public class Property<T> : Property
     {
-        public Property()
+        private readonly bool _isAlwaysChanging;
+        public Property(bool isAlwaysChanging = false)
         {
+            _isAlwaysChanging = isAlwaysChanging;
             _value = default(T);
         }
 
         public void SetValue(T newValue)
         {
-            if (_value!=null && _value.Equals(newValue)) 
+            if (_value!=null && _value.Equals(newValue) && !_isAlwaysChanging) 
                 return;
             
             _value = newValue;
