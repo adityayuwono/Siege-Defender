@@ -58,6 +58,7 @@ namespace Scripts
             InventoryXML = inventoryText;
 
             // Done, we simply load the next scene
+            // it clears everything we put on scene, if for example we are editing a prefab
             Application.LoadLevel(1);
         }
     }

@@ -41,7 +41,7 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
-            _viewModel.DoBreakParts -= BreakBrekables;
+            _viewModel.DoBreakParts -= BreakBrekables;// :D
 
             base.OnHide(reason);
         }
