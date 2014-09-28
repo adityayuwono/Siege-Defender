@@ -87,31 +87,28 @@
 				</Trigger>
 			</Limb>
 						
-			<Skill >
+			<Skill Id="CrystalShield">
+				<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
+				<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+				<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
 			</Skill>
 
 			<Phase>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\4000" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
-					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel3" />
+					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 			</Phase>
 			<Phase>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\2000" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
-					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel4" />
+					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 			</Phase>
 			<Phase>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\1000" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
-					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel5" />
+					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 			</Phase>
 		</Boss>
@@ -134,13 +131,7 @@
 			<Spawn EnemyId="BoxDemon" />
 		</Level>
 
-		<Level Id="BigGoblinLevel3" Interval="0.1" LoopCount="0">
-			<Spawn EnemyId="StoneShield" />
-		</Level>
-		<Level Id="BigGoblinLevel4" Interval="0.1" LoopCount="0">
-			<Spawn EnemyId="StoneShield" />
-		</Level>
-		<Level Id="BigGoblinLevel5" Interval="0.1" LoopCount="0">
+		<Level Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
 			<Spawn EnemyId="StoneShield" />
 		</Level>
 	</Levels>
