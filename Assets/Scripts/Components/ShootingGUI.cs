@@ -37,22 +37,19 @@ namespace Scripts.Components
 
         private void Update()
         {
-            if (Input.touches.Length > 0)
-            {
+#if !UNITY_EDITOR
                 // If Android
                 if (Input.touches.Any(touch => _clickCheckArea.Contains(touch.position)))
                     _shooterView.StartShooting();
                 else
                     _shooterView.StopShooting();
-            }
-            else
-            {
+#else
                 // If Mouse, for testing purposes only
                 if (Input.GetMouseButton(0) && _clickCheckArea.Contains(Input.mousePosition))
                     _shooterView.StartShooting();
                 else
                     _shooterView.StopShooting();
-            }
+#endif
         }
     }
 }
