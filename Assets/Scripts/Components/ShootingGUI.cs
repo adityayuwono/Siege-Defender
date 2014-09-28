@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Scripts.Helpers;
+﻿using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 

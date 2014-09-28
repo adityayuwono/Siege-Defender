@@ -17,7 +17,7 @@ namespace Scripts.Views
 
             Freeze();
 
-            Transform.localScale = _assetScale;
+            Transform.localScale = AssetScale;
             Transform.localRotation = Quaternion.identity;
         }
     }

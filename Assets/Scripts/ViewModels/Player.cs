@@ -14,11 +14,11 @@ namespace Scripts.ViewModels
             foreach (var shooterModel in _model.Shooters)
             {
                 var shooterVM = new Shooter(shooterModel, this);
-                Shooters.Add(shooterVM);
+                _shooters.Add(shooterVM);
                 Elements.Add(shooterVM);
             }
         }
 
-        public readonly List<Shooter> Shooters = new List<Shooter>();
+        private readonly List<Shooter> _shooters = new List<Shooter>();
     }
 }

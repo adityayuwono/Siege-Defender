@@ -26,7 +26,7 @@ namespace Scripts.ViewModels
 
         #region Activation
 
-        protected bool _isActive { get; private set; }
+        private bool _isActive;
         private bool _isLoaded;
         public void Activate()
         {

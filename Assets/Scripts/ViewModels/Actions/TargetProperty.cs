@@ -5,7 +5,7 @@ namespace Scripts.ViewModels.Actions
 {
     public class TargetProperty : Base
     {
-        private TargetPropertyModel _model;
+        private readonly TargetPropertyModel _model;
 
         protected TargetProperty(TargetPropertyModel model, Base parent) : base(model, parent)
         {

@@ -17,7 +17,7 @@ namespace Scripts.ViewModels
             Level.SetValue(_model.LevelId);
         }
 
-        public AdjustableProperty<string> Level;
+        public readonly AdjustableProperty<string> Level;
 
         private void LoadLevel()
         {

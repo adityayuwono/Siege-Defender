@@ -13,7 +13,7 @@
         /// </summary>
         /// <param name="path">string </param>
         /// <returns>May return null</returns>
-        public Property GetProperty(string path)
+        private Property GetProperty(string path)
         {
             if (path.StartsWith("{") && path.EndsWith("}"))
             {

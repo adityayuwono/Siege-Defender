@@ -80,6 +80,6 @@ namespace Scripts.ViewModels.Enemies
 
         public Action<ProjectileBase> DoAttach;
         private readonly List<ProjectileBase> _projectiles = new List<ProjectileBase>();
-        public AdjustableProperty<float> Health;
+        public readonly AdjustableProperty<float> Health;
     }
 }

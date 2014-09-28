@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
@@ -109,6 +108,6 @@ namespace Scripts.ViewModels
     public abstract class IntervalBase : Element
     {
         protected IntervalBase(IntervalModel model, Object parent) : base(model, parent) { }
-        public Property<float> Interval = new Property<float>();
+        public readonly Property<float> Interval = new Property<float>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 
@@ -38,10 +39,7 @@ namespace Scripts.Components
 
         private IntervalSubscriber GetInterval(Action action)
         {
-            var actionId = action.GetHashCode().ToString();
-            foreach (var interval in _intervals.Where(interval => interval.Id == actionId))
-                return interval;
-            return null;
+            return _intervals.FirstOrDefault(interval => interval.ActionHash == action.GetHashCode());
         }
 
         private void Update()
@@ -52,14 +50,14 @@ namespace Scripts.Components
 
         private class IntervalSubscriber
         {
-            public readonly string Id; 
+            public readonly int ActionHash; 
             private readonly Action _onInvokedAction;
             private readonly float _delay;
             private float _currentDelay;
 
             public IntervalSubscriber(Action action, float delay, bool startImmediatelly)
             {
-                Id = action.GetHashCode().ToString();
+                ActionHash = action.GetHashCode();
 
                 _onInvokedAction = action;
                 _delay = delay;

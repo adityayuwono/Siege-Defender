@@ -14,7 +14,7 @@ namespace Scripts.Helpers
         /// <returns></returns>
         public static Transform FindChildRecursivelyBreadthFirst(this Transform value, string name, bool includeInactive = true)
         {
-            string[] splitNames = name.Split('/');
+            var splitNames = name.Split('/');
 
             var queue = new List<Transform>();
             var child = value;
@@ -27,10 +27,9 @@ namespace Scripts.Helpers
                 child = queue[0];
                 queue.RemoveAt(0);
 
-                bool isFound;
                 var childSearchPattern = splitNames[splitNames.Length - 1];
                 
-                isFound = child.name == childSearchPattern;
+                var isFound = child.name == childSearchPattern;
                 isFound &= includeInactive || child.gameObject.activeInHierarchy;
 
                 if (isFound) return child;

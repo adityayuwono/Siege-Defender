@@ -21,7 +21,7 @@ namespace Scripts.ViewModels
             Hide("Killed");// Start the hiding process when the enemy is killed
         }
 
-        public AdjustableProperty<string> AnimationId; 
+        public readonly AdjustableProperty<string> AnimationId; 
 
         #region Model Properties
 

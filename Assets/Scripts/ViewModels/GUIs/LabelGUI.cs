@@ -5,7 +5,7 @@ namespace Scripts.ViewModels.GUIs
 {
     public class LabelGUI : Object
     {
-        private LabelGUIModel _model;
+        private readonly LabelGUIModel _model;
         public LabelGUI(LabelGUIModel model, Base parent) : base(model, parent)
         {
             _model = model;

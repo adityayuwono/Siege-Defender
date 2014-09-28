@@ -5,7 +5,7 @@ namespace Scripts.Views.GUIs
 {
     public class DamageGUIView : LabelGUIView
     {
-        private DamageGUI _viewModel;
+        private readonly DamageGUI _viewModel;
         public DamageGUIView(DamageGUI viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
