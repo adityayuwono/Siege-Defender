@@ -66,9 +66,13 @@ namespace Scripts.Views
             base.OnDestroy();
         }
 
+        private string _lastAnimationValue;
         private void Animation_OnChange()
         {
+            if (!string.IsNullOrEmpty(_lastAnimationValue))
+                _animator.SetBool(_lastAnimationValue, false);
             _animator.SetBool(_viewModel.AnimationId.GetValue(), true);
+            _lastAnimationValue = _viewModel.AnimationId.GetValue();
         }
     }
 }
