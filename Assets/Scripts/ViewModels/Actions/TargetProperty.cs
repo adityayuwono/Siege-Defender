@@ -1,4 +1,5 @@
-﻿using Scripts.Core;
+﻿using System;
+using Scripts.Core;
 using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
@@ -12,19 +13,23 @@ namespace Scripts.ViewModels.Actions
             _model = model;
         }
 
+        protected Object Target { get; private set; }
         protected Property Property { get; private set; }
 
-        protected override void OnActivate()
+        protected override void OnLoad()
         {
-            base.OnActivate();
+            base.OnLoad();
 
-            var target = _model.Target;
-            if (_model.Target == "{This}")
-                target = GetParent<Object>().Id;
-            else if (_model.Target == "{Monster}")
-                target = GetParent<EnemyBase>().Id;
+            if (!string.IsNullOrEmpty(_model.Property))
+            {
+                var target = _model.Target;
+                if (_model.Target == "{This}")
+                    target = GetParent<Object>().Id;
+                else if (_model.Target == "{Monster}")
+                    target = GetParent<EnemyBase>().Id;
 
-            Property = Root.GetProperty(target, _model.Property);
+                Property = Root.GetProperty(target, _model.Property);
+            }
         }
     }
 }
