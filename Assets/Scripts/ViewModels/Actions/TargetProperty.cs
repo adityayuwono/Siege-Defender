@@ -21,6 +21,8 @@ namespace Scripts.ViewModels.Actions
             var target = _model.Target;
             if (_model.Target == "{This}")
                 target = GetParent<Object>().Id;
+            else if (_model.Target == "{Monster}")
+                target = GetParent<EnemyBase>().Id;
 
             Property = Root.GetProperty(target, _model.Property);
         }
