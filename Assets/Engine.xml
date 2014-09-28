@@ -1,6 +1,6 @@
 <Engine Id="SiegeDefender">
 	<Objects>
-		<Projectile 	Id="WoodArrow" Damage="8-12" 
+		<Projectile 	Id="WoodArrow" Damage="80-120" 
 			AssetId="Projectiles/WoodenBalista" 
 			RoF="0.2" Ammunition="1000" Reload="0.1" 
 			Accuracy="0.9" Deviation="0.001" />
@@ -31,24 +31,26 @@
 		<Enemy Id="ShieldBearers" AssetId="Enemies/BlueGoblin" 		Health="50" 	Speed="0.001"	Rotation="0" />
 		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
-		<Boss 	Id="BigGoblin" 	AssetId="Enemies/StoneGolemBoss" Health="5325" Speed="2" >
+		<Enemy Id="StoneShield" AssetId="Enemies/StoneShield" 	 Health="400"  Speed="0" DeathDelay="0.4" />
+		<Boss  Id="BigGoblin" 	AssetId="Enemies/StoneGolemBoss" Health="5325" Speed="2" >
 			<Elements>
 				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="BigGoblinLevel1" />
-				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="Level0" />
+				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="" />
 			</Elements>
-			<Limb Id="Head" 		Health="50" 	AssetId="Head">
+			
+			<Limb Id="Head" 		Health="500" 	AssetId="Head">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="Wood" Amount="3-10" />
 				</Trigger>
 			</Limb>
-			<Limb Id="RightHand" 	Health="250" 	AssetId="RightHand" >
+			<Limb Id="RightHand" 	Health="1000" 	AssetId="RightHand" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="LeftHand" 	Health="250" 	AssetId="LeftHand" >
+			<Limb Id="LeftHand" 	Health="1000" 	AssetId="LeftHand" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
@@ -78,7 +80,7 @@
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="Crystal" 		Health="250" 	AssetId="Bip001 Spine2">
+			<Limb Id="Crystal" 		Health="700" 	AssetId="Bip001 Spine2">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
@@ -86,33 +88,29 @@
 			</Limb>
 						
 			<Skill >
-				<Trigger>
-					<Condition Target="{This}" Property="Minions" Comparison="NotContains" Value="FatBoxDemon" />
-					<Setter Target="BigGoblin" Property="IsInvulnerable" Value="false" />
-				</Trigger>
 			</Skill>
 
 			<Phase>
 				<Trigger>
-					<Condition Target="{This}" Property="Health" Value="\1000" />
-					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel2" />
-				</Trigger>
-			</Phase>
-			<Phase>
-				<Trigger>
-					<Condition Target="{This}" Property="Health" Value="\700" />
+					<Condition Target="{Monster}" Property="Health" Value="\4000" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel3" />
 				</Trigger>
 			</Phase>
 			<Phase>
 				<Trigger>
-					<Condition Target="{This}" Property="Health" Value="\400" />
+					<Condition Target="{Monster}" Property="Health" Value="\2000" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel4" />
 				</Trigger>
 			</Phase>
 			<Phase>
 				<Trigger>
-					<Condition Target="{This}" Property="Health" Value="\200" />
+					<Condition Target="{Monster}" Property="Health" Value="\1000" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 					<Setter Target="ShieldSpawn" Property="Level" Value="BigGoblinLevel5" />
 				</Trigger>
 			</Phase>
@@ -135,14 +133,15 @@
 		<Level Id="BigGoblinLevel2" Interval="1" LoopCount="-1">
 			<Spawn EnemyId="BoxDemon" />
 		</Level>
-		<Level Id="BigGoblinLevel3" Interval="0.001" LoopCount="3">
-			<Spawn EnemyId="ShieldBearers" />
+
+		<Level Id="BigGoblinLevel3" Interval="0.1" LoopCount="0">
+			<Spawn EnemyId="StoneShield" />
 		</Level>
-		<Level Id="BigGoblinLevel4" Interval="0.001" LoopCount="5">
-			<Spawn EnemyId="ShieldBearers" />
+		<Level Id="BigGoblinLevel4" Interval="0.1" LoopCount="0">
+			<Spawn EnemyId="StoneShield" />
 		</Level>
-		<Level Id="BigGoblinLevel5" Interval="0.001" LoopCount="5">
-			<Spawn EnemyId="ShieldBearers" />
+		<Level Id="BigGoblinLevel5" Interval="0.1" LoopCount="0">
+			<Spawn EnemyId="StoneShield" />
 		</Level>
 	</Levels>
 
