@@ -3,60 +3,208 @@ guid: 87249544caa84fa4fb2da16e75767bdd
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Box001
-    100004: Object001
-    100006: Object002
-    100008: Object003
-    100010: Object004
-    100012: Object005
-    100014: Object006
-    100016: Object007
-    100018: Particle View 001
-    100020: Plane001
-    100022: Point001
-    400000: //RootNode
-    400002: Box001
-    400004: Object001
-    400006: Object002
-    400008: Object003
-    400010: Object004
-    400012: Object005
-    400014: Object006
-    400016: Object007
-    400018: Particle View 001
-    400020: Plane001
-    400022: Point001
-    2300000: //RootNode
-    2300002: Box001
-    2300004: Object001
-    2300006: Object002
-    2300008: Object003
-    2300010: Object004
-    2300012: Object005
-    2300014: Object006
-    2300016: Object007
-    2300018: Plane001
-    3300000: //RootNode
-    3300002: Box001
-    3300004: Object001
-    3300006: Object002
-    3300008: Object003
-    3300010: Object004
-    3300012: Object005
-    3300014: Object006
-    3300016: Object007
-    3300018: Plane001
-    4300000: Box001
-    4300002: Plane001
-    4300004: Object001
-    4300006: Object002
-    4300008: Object003
-    4300010: Object004
-    4300012: Object005
-    4300014: Object007
-    4300016: Object006
+    100000: Box001
+    100002: Box002_Part_004
+    100004: Box002_Part_005
+    100006: Box002_Part_1
+    100008: MeshBomb001
+    100010: Object001
+    100012: Object002
+    100014: Object003
+    100016: Object004
+    100018: Object005
+    100020: Object006
+    100022: Object007
+    100024: Object008_Part_004
+    100026: Object008_Part_1
+    100028: Object008_Part_2_Part_004
+    100030: Object008_Part_2_Part_005
+    100032: Object008_Part_2_Part_006
+    100034: Object009_Part_003
+    100036: Object009_Part_2
+    100038: Object010_Part_003
+    100040: Object010_Part_2
+    100042: Object010_Part_3_Part_004
+    100044: Object010_Part_3_Part_005
+    100046: Object010_Part_3_Part_006
+    100048: Object011_Part_004
+    100050: Object011_Part_005
+    100052: Object011_Part_2
+    100054: Object012_Part_004
+    100056: Object012_Part_005
+    100058: Object012_Part_2_Part_004
+    100060: Object012_Part_2_Part_005
+    100062: Object012_Part_2_Part_2
+    100064: Object014_Part_003
+    100066: Object014_Part_1_Part_004
+    100068: Object014_Part_1_Part_005
+    100070: Object014_Part_1_Part_006
+    100072: Object014_Part_3_Part_004
+    100074: Object014_Part_3_Part_005
+    100076: Object014_Part_3_Part_1
+    100078: Particle View 001
+    100080: Plane001
+    100082: Point001
+    100084: //RootNode
+    400000: Box001
+    400002: Box002_Part_004
+    400004: Box002_Part_005
+    400006: Box002_Part_1
+    400008: MeshBomb001
+    400010: Object001
+    400012: Object002
+    400014: Object003
+    400016: Object004
+    400018: Object005
+    400020: Object006
+    400022: Object007
+    400024: Object008_Part_004
+    400026: Object008_Part_1
+    400028: Object008_Part_2_Part_004
+    400030: Object008_Part_2_Part_005
+    400032: Object008_Part_2_Part_006
+    400034: Object009_Part_003
+    400036: Object009_Part_2
+    400038: Object010_Part_003
+    400040: Object010_Part_2
+    400042: Object010_Part_3_Part_004
+    400044: Object010_Part_3_Part_005
+    400046: Object010_Part_3_Part_006
+    400048: Object011_Part_004
+    400050: Object011_Part_005
+    400052: Object011_Part_2
+    400054: Object012_Part_004
+    400056: Object012_Part_005
+    400058: Object012_Part_2_Part_004
+    400060: Object012_Part_2_Part_005
+    400062: Object012_Part_2_Part_2
+    400064: Object014_Part_003
+    400066: Object014_Part_1_Part_004
+    400068: Object014_Part_1_Part_005
+    400070: Object014_Part_1_Part_006
+    400072: Object014_Part_3_Part_004
+    400074: Object014_Part_3_Part_005
+    400076: Object014_Part_3_Part_1
+    400078: Particle View 001
+    400080: Plane001
+    400082: Point001
+    400084: //RootNode
+    2300000: Box001
+    2300002: Box002_Part_004
+    2300004: Box002_Part_005
+    2300006: Box002_Part_1
+    2300008: Object001
+    2300010: Object002
+    2300012: Object003
+    2300014: Object004
+    2300016: Object005
+    2300018: Object006
+    2300020: Object007
+    2300022: Object008_Part_004
+    2300024: Object008_Part_1
+    2300026: Object008_Part_2_Part_004
+    2300028: Object008_Part_2_Part_005
+    2300030: Object008_Part_2_Part_006
+    2300032: Object009_Part_003
+    2300034: Object009_Part_2
+    2300036: Object010_Part_003
+    2300038: Object010_Part_2
+    2300040: Object010_Part_3_Part_004
+    2300042: Object010_Part_3_Part_005
+    2300044: Object010_Part_3_Part_006
+    2300046: Object011_Part_004
+    2300048: Object011_Part_005
+    2300050: Object011_Part_2
+    2300052: Object012_Part_004
+    2300054: Object012_Part_005
+    2300056: Object012_Part_2_Part_004
+    2300058: Object012_Part_2_Part_005
+    2300060: Object012_Part_2_Part_2
+    2300062: Object014_Part_003
+    2300064: Object014_Part_1_Part_004
+    2300066: Object014_Part_1_Part_005
+    2300068: Object014_Part_1_Part_006
+    2300070: Object014_Part_3_Part_004
+    2300072: Object014_Part_3_Part_005
+    2300074: Object014_Part_3_Part_1
+    3300000: Box001
+    3300002: Box002_Part_004
+    3300004: Box002_Part_005
+    3300006: Box002_Part_1
+    3300008: Object001
+    3300010: Object002
+    3300012: Object003
+    3300014: Object004
+    3300016: Object005
+    3300018: Object006
+    3300020: Object007
+    3300022: Object008_Part_004
+    3300024: Object008_Part_1
+    3300026: Object008_Part_2_Part_004
+    3300028: Object008_Part_2_Part_005
+    3300030: Object008_Part_2_Part_006
+    3300032: Object009_Part_003
+    3300034: Object009_Part_2
+    3300036: Object010_Part_003
+    3300038: Object010_Part_2
+    3300040: Object010_Part_3_Part_004
+    3300042: Object010_Part_3_Part_005
+    3300044: Object010_Part_3_Part_006
+    3300046: Object011_Part_004
+    3300048: Object011_Part_005
+    3300050: Object011_Part_2
+    3300052: Object012_Part_004
+    3300054: Object012_Part_005
+    3300056: Object012_Part_2_Part_004
+    3300058: Object012_Part_2_Part_005
+    3300060: Object012_Part_2_Part_2
+    3300062: Object014_Part_003
+    3300064: Object014_Part_1_Part_004
+    3300066: Object014_Part_1_Part_005
+    3300068: Object014_Part_1_Part_006
+    3300070: Object014_Part_3_Part_004
+    3300072: Object014_Part_3_Part_005
+    3300074: Object014_Part_3_Part_1
+    4300000: Object001
+    4300002: Object002
+    4300004: Object003
+    4300006: Object004
+    4300008: Object005
+    4300010: Object007
+    4300012: Box001
+    4300014: Object006
+    4300016: Box002_Part_1
+    4300018: Object010_Part_2
+    4300020: Object011_Part_2
+    4300022: Object008_Part_1
+    4300024: Object009_Part_2
+    4300026: Object014_Part_3_Part_1
+    4300028: Object012_Part_2_Part_2
+    4300030: Object010_Part_003
+    4300032: Object011_Part_004
+    4300034: Object011_Part_005
+    4300036: Box002_Part_004
+    4300038: Box002_Part_005
+    4300040: Object012_Part_2_Part_004
+    4300042: Object012_Part_2_Part_005
+    4300044: Object012_Part_004
+    4300046: Object012_Part_005
+    4300048: Object010_Part_3_Part_004
+    4300050: Object010_Part_3_Part_005
+    4300052: Object010_Part_3_Part_006
+    4300054: Object008_Part_2_Part_004
+    4300056: Object008_Part_2_Part_005
+    4300058: Object008_Part_2_Part_006
+    4300060: Object014_Part_1_Part_004
+    4300062: Object014_Part_3_Part_004
+    4300064: Object014_Part_1_Part_005
+    4300066: Object014_Part_003
+    4300068: Object008_Part_004
+    4300070: Object009_Part_003
+    4300072: Object014_Part_3_Part_005
+    4300074: Object014_Part_1_Part_006
     7400000: Spawn
+    7400002: Death
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -99,6 +247,180 @@ ModelImporter:
       events: []
       transformMask:
       - path: 
+        weight: 1
+      - path: Box002_Part_1
+        weight: 1
+      - path: Box002_Part_004
+        weight: 1
+      - path: Box002_Part_005
+        weight: 1
+      - path: MeshBomb001
+        weight: 1
+      - path: Object008_Part_1
+        weight: 1
+      - path: Object008_Part_2_Part_004
+        weight: 1
+      - path: Object008_Part_2_Part_005
+        weight: 1
+      - path: Object008_Part_2_Part_006
+        weight: 1
+      - path: Object008_Part_004
+        weight: 1
+      - path: Object009_Part_2
+        weight: 1
+      - path: Object009_Part_003
+        weight: 1
+      - path: Object010_Part_2
+        weight: 1
+      - path: Object010_Part_003
+        weight: 1
+      - path: Object010_Part_3_Part_004
+        weight: 1
+      - path: Object010_Part_3_Part_005
+        weight: 1
+      - path: Object010_Part_3_Part_006
+        weight: 1
+      - path: Object011_Part_2
+        weight: 1
+      - path: Object011_Part_004
+        weight: 1
+      - path: Object011_Part_005
+        weight: 1
+      - path: Object012_Part_2_Part_2
+        weight: 1
+      - path: Object012_Part_2_Part_004
+        weight: 1
+      - path: Object012_Part_2_Part_005
+        weight: 1
+      - path: Object012_Part_004
+        weight: 1
+      - path: Object012_Part_005
+        weight: 1
+      - path: Object014_Part_1_Part_004
+        weight: 1
+      - path: Object014_Part_1_Part_005
+        weight: 1
+      - path: Object014_Part_1_Part_006
+        weight: 1
+      - path: Object014_Part_003
+        weight: 1
+      - path: Object014_Part_3_Part_1
+        weight: 1
+      - path: Object014_Part_3_Part_004
+        weight: 1
+      - path: Object014_Part_3_Part_005
+        weight: 1
+      - path: Particle View 001
+        weight: 1
+      - path: Plane001
+        weight: 1
+      - path: Plane001/Box001
+        weight: 1
+      - path: Plane001/Object001
+        weight: 1
+      - path: Plane001/Object002
+        weight: 1
+      - path: Plane001/Object003
+        weight: 1
+      - path: Plane001/Object004
+        weight: 1
+      - path: Plane001/Object005
+        weight: 1
+      - path: Plane001/Object006
+        weight: 1
+      - path: Plane001/Object007
+        weight: 1
+      - path: Point001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 21
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box002_Part_1
+        weight: 1
+      - path: Box002_Part_004
+        weight: 1
+      - path: Box002_Part_005
+        weight: 1
+      - path: MeshBomb001
+        weight: 1
+      - path: Object008_Part_1
+        weight: 1
+      - path: Object008_Part_2_Part_004
+        weight: 1
+      - path: Object008_Part_2_Part_005
+        weight: 1
+      - path: Object008_Part_2_Part_006
+        weight: 1
+      - path: Object008_Part_004
+        weight: 1
+      - path: Object009_Part_2
+        weight: 1
+      - path: Object009_Part_003
+        weight: 1
+      - path: Object010_Part_2
+        weight: 1
+      - path: Object010_Part_003
+        weight: 1
+      - path: Object010_Part_3_Part_004
+        weight: 1
+      - path: Object010_Part_3_Part_005
+        weight: 1
+      - path: Object010_Part_3_Part_006
+        weight: 1
+      - path: Object011_Part_2
+        weight: 1
+      - path: Object011_Part_004
+        weight: 1
+      - path: Object011_Part_005
+        weight: 1
+      - path: Object012_Part_2_Part_2
+        weight: 1
+      - path: Object012_Part_2_Part_004
+        weight: 1
+      - path: Object012_Part_2_Part_005
+        weight: 1
+      - path: Object012_Part_004
+        weight: 1
+      - path: Object012_Part_005
+        weight: 1
+      - path: Object014_Part_1_Part_004
+        weight: 1
+      - path: Object014_Part_1_Part_005
+        weight: 1
+      - path: Object014_Part_1_Part_006
+        weight: 1
+      - path: Object014_Part_003
+        weight: 1
+      - path: Object014_Part_3_Part_1
+        weight: 1
+      - path: Object014_Part_3_Part_004
+        weight: 1
+      - path: Object014_Part_3_Part_005
         weight: 1
       - path: Particle View 001
         weight: 1
