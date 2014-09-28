@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Scripts.Core;
 using Scripts.Models.Enemies;
 
 namespace Scripts.ViewModels.Enemies
@@ -15,7 +16,25 @@ namespace Scripts.ViewModels.Enemies
 
             foreach (var phaseModel in _model.Phases)
                 _phases.Add(new Phase(phaseModel, this));
+
+            foreach (var skillModel in _model.Skills)
+                _skills.Add(skillModel.Id, new Skill(skillModel, this));
+
+            ActiveSkill = new AdjustableProperty<string>("ActiveSkill", this, true);
+            ActiveSkill.OnChange += ActivateSkill;
         }
+
+        #region Skill
+        private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
+        public readonly AdjustableProperty<string> ActiveSkill;
+        private void ActivateSkill()
+        {
+            var skillIdToActivate = ActiveSkill.GetValue();
+            var skillToActivate = _skills[skillIdToActivate];
+            skillToActivate.Activate();
+        }
+        #endregion
+
 
         private readonly List<Limb> _limbs = new List<Limb>();
         private readonly List<Phase> _phases = new List<Phase>();

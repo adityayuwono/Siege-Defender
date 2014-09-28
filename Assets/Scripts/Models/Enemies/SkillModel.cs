@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+using Scripts.Models.Actions;
 
 namespace Scripts.Models.Enemies
 {
     [Serializable]
-    public class SkillModel : TriggerElementModel
+    public class SkillModel : BaseModel
     {
+        [XmlElement(ElementName = "LoadScene", Type = typeof(LoadSceneActionModel))]
+        [XmlElement(ElementName = "Setter", Type = typeof(SetterActionModel))]
+        public List<BaseActionModel> Actions { get; set; }
     }
 }
