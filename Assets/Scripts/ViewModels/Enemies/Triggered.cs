@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Scripts.Models.Actions;
 using Scripts.ViewModels.Actions;
-using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
@@ -20,17 +18,12 @@ namespace Scripts.ViewModels.Enemies
                 _conditions.Add(conditionViewModel);
             }
 
-            foreach (var actionModel in _model.Actions)
-            {
-                // Get new instance of ActionVM
-                var actionVM = Root.IoCContainer.GetInstance<BaseAction>(actionModel.GetType(), new object[] { actionModel, this });
-                _actions.Add(actionVM);
-            }
+            _actions = new ActionCollection(_model.Actions, this);
         }
 
         private readonly List<BaseCondition> _conditions = new List<BaseCondition>();
 
-        private readonly List<BaseAction> _actions = new List<BaseAction>();
+        private readonly ActionCollection _actions;
 
         protected override void OnActivate()
         {
@@ -62,24 +55,10 @@ namespace Scripts.ViewModels.Enemies
                 isMatch &= condition.IsMatch.GetValue();
 
             if (isMatch)
-                Root.StartCoroutine(ActivateActionAsync());
+                _actions.Activate();
         }
 
 
-        // Activate Async, incase an action needs to wait
-        private IEnumerator ActivateActionAsync()
-        {
-            for (int i = 0; i < _actions.Count; i++)
-            {
-                var action = _actions[i];
-                if (action.WaitDuration>0.1f)
-                {
-                    action.Invoke();
-                    yield return new WaitForSeconds(action.WaitDuration);
-                }
-                else
-                    action.Invoke();
-            }
-        }
+        
     }
 }

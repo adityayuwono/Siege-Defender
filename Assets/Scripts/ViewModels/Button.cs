@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Scripts.Models.GUIs;
+﻿using Scripts.Models.GUIs;
 using Scripts.ViewModels.Actions;
 using Scripts.ViewModels.GUIs;
 
@@ -13,23 +12,15 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            foreach (var actionModel in _model.Trigger.Actions)
-            {
-                // Get new instance of ActionVM
-                var actionVM = Root.IoCContainer.GetInstance<BaseAction>(actionModel.GetType(), new object[] { actionModel, this });
-                _actions.Add(actionVM);
-            }
+            _actions = new ActionCollection(_model.Trigger.Actions, this);
         }
 
-        private readonly List<BaseAction> _actions = new List<BaseAction>();
+        private readonly ActionCollection _actions;
 
         public void OnClicked()
         {
             // Invoke all actions related to this button
-            foreach (var action in _actions)
-            {
-                action.Invoke();
-            }
+            _actions.Activate();
         }
     }
 }
