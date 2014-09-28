@@ -31,7 +31,8 @@ namespace Scripts.Views
             if (_animator != null)
                 _animator.SetBool("IsDead", false);
             
-            Transform.localEulerAngles = new Vector3(0, 180f + Random.Range(-_viewModel.Rotation, _viewModel.Rotation), 0);
+            // Make the enemy face the player
+            Transform.localEulerAngles = new Vector3(0, 180f + (Random.Range(-1, 1)*_viewModel.Rotation), 0);
 
             BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk,0f);
         }
