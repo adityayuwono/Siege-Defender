@@ -28,7 +28,8 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            _animator.SetBool("IsDead", false);
+            if (_animator != null)
+                _animator.SetBool("IsDead", false);
             
             Transform.localEulerAngles = new Vector3(0, 180f + Random.Range(-_viewModel.Rotation, _viewModel.Rotation), 0);
 
@@ -49,7 +50,9 @@ namespace Scripts.Views
         {
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
-            _animator.SetBool("IsDead", true);
+            // Start the death animation, if any
+            if (_animator != null)
+                _animator.SetBool("IsDead", true);
 
             base.OnHide(reason);
         }
