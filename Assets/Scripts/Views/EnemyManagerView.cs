@@ -32,6 +32,9 @@ namespace Scripts.Views
 
             // Listen to interval changes
             _viewModel.Interval.OnChange+= Interval_OnChange;
+            
+            if (string.IsNullOrEmpty(_viewModel.Level.GetValue())) return;
+            
             StartInterval();
         }
 
