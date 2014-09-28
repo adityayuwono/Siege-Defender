@@ -21,11 +21,6 @@ namespace Scripts.ViewModels
             Hide("Killed");// Start the hiding process when the enemy is killed
         }
 
-        public override float DeathDelay
-        {
-            get { return 2f; }
-        }
-
         public AdjustableProperty<string> AnimationId; 
 
         #region Model Properties

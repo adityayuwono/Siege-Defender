@@ -25,11 +25,6 @@ namespace Scripts.ViewModels
                 DoShooting(source, target, accuracy);
         }
 
-        public override float DeathDelay
-        {
-            get { return 1f; }
-        }
-
         protected override float CalculateDamage()
         {
             var splitDamage = _model.Damage.Split('-');

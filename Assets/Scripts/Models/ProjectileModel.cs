@@ -38,6 +38,8 @@ namespace Scripts.Models
 
         public ProjectileModel()
         {
+            DeathDelay = 1f;
+
             Ammunition = -1;
             ReloadTime = 3f;
             Accuracy = 0.9f;

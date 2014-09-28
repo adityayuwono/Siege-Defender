@@ -8,5 +8,10 @@ namespace Scripts.Models
     {
         [XmlAttribute]
         public float Radius { get; set; }
+
+        public AoEModel()
+        {
+            DeathDelay = 1f;
+        }
     }
 }

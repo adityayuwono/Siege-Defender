@@ -17,10 +17,6 @@ namespace Scripts.ViewModels
             get { return _model.Radius; }
         }
 
-        public override float DeathDelay
-        {
-            get { return 1f; }
-        }
         public override float HideDelay
         {
             get { return 0.05f; }

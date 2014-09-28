@@ -14,5 +14,10 @@ namespace Scripts.Models
 
         [XmlAttribute]
         public float Rotation { get; set; }
+
+        public EnemyBaseModel()
+        {
+            DeathDelay = 2f;
+        }
     }
 }

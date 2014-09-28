@@ -65,9 +65,9 @@ namespace Scripts.ViewModels
         /// <summary>
         /// All things die eventually, we can only delay the inevitable
         /// </summary>
-        public virtual float DeathDelay
+        public float DeathDelay
         {
-            get { return 0f; }
+            get { return _model.DeathDelay; }
         }
         
         public Action<Object> OnObjectDeactivated;
