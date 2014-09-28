@@ -13,6 +13,8 @@ namespace Scripts.ViewModels
 
         public override void Invoke()
         {
+            base.Invoke();
+
             Root.ChangeScene(_model.Target);
         }
     }
