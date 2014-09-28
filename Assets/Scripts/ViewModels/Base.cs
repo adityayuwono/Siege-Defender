@@ -65,10 +65,14 @@ namespace Scripts.ViewModels
         private string _lastDeactivationReason;
         public void Deactivate(string reason)
         {
+            var lastDeactivationReason = _lastDeactivationReason;
             _lastDeactivationReason = reason;
-
+            
             if (!_isActive)
-                throw new EngineException(this, "Failed to Deactivate, Reason for deactivation "+reason);
+                throw new EngineException(this,
+                    string.Format("Failed to Deactivate\n" +
+                                  "Reason for deactivation: {0}\n" +
+                                  "Last Deactivation reason was: {1}", reason, lastDeactivationReason));
 
             _isActive = false;
 
