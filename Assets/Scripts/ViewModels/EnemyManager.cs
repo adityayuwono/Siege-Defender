@@ -11,7 +11,7 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            Level = new AdjustableProperty<string>("Level", this);
+            Level = new AdjustableProperty<string>("Level", this, true);
             Level.OnChange += LoadLevel;
 
             Level.SetValue(_model.LevelId);
