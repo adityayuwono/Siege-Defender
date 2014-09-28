@@ -1,4 +1,5 @@
-﻿using Scripts.Helpers;
+﻿using System.Linq; // ReSharper disable once RedundantUsingDirective, this is used when iterating Inputs
+using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 
