@@ -12,3 +12,4 @@ Library/*
 *.unityproj
 *.DotSettings
 *.unitypackage
+*Inventory.xml
