@@ -14,5 +14,10 @@ namespace Scripts.ViewModels.Actions
         {
             Activate();
         }
+
+        public float WaitDuration
+        {
+            get { return _model.WaitDuration; }
+        }
     }
 }

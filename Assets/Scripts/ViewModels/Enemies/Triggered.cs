@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Scripts.Models.Actions;
 using Scripts.ViewModels.Actions;
+using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
@@ -60,8 +63,24 @@ namespace Scripts.ViewModels.Enemies
                 isMatch &= condition.IsMatch.GetValue();
 
             if (isMatch)
-                foreach (var action in _actions)
+                Root.StartCoroutine(ActivateActionAsync());
+        }
+
+
+        // Activate Async, incase an action needs to wait
+        private IEnumerator ActivateActionAsync()
+        {
+            for (int i = 0; i < _actions.Count; i++)
+            {
+                var action = _actions[i];
+                if (action.WaitDuration>0.1f)
+                {
                     action.Invoke();
+                    yield return new WaitForSeconds(action.WaitDuration);
+                }
+                else
+                    action.Invoke();
+            }
         }
     }
 }
