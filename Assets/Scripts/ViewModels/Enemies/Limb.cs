@@ -12,7 +12,25 @@ namespace Scripts.ViewModels.Enemies
         {
             _model = model;
             _parent = parent;
+
+            Trigger = new Triggered(_model.Trigger, this);
         }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            Trigger.Activate();
+        }
+
+        protected override void OnDeactivate()
+        {
+            Trigger.Deactivate("Limb is deactivated");
+
+            base.OnDeactivate();
+        }
+
+        private Triggered Trigger;
 
         public override bool ApplyDamage(float damage, ProjectileBase source = null)
         {
