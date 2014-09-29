@@ -14,14 +14,14 @@ namespace Scripts.ViewModels.Enemies
             foreach (var conditionModel in _model.Conditions)
             {
                 // Get new instance of ActionVM
-                var conditionViewModel = Root.IoCContainer.GetInstance<BaseCondition>(conditionModel.GetType(), new object[] { conditionModel, this });
+                var conditionViewModel = Root.IoCContainer.GetInstance<ValueCondition>(conditionModel.GetType(), new object[] { conditionModel, this });
                 _conditions.Add(conditionViewModel);
             }
 
             _actions = new ActionCollection(_model.Actions, this);
         }
 
-        private readonly List<BaseCondition> _conditions = new List<BaseCondition>();
+        private readonly List<ValueCondition> _conditions = new List<ValueCondition>();
 
         private readonly ActionCollection _actions;
 
