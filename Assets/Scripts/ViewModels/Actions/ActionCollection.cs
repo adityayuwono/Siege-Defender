@@ -28,8 +28,14 @@ namespace Scripts.ViewModels.Actions
             _parent.Root.StartCoroutine(ActivateActionAsync());
         }
 
+        /// <summary>
+        /// Invoked by the Enumerator when the action sequence has finished Activated
+        /// </summary>
         public Action OnActivationFinished;
-        // Activate Async, incase an action needs to wait
+        /// <summary>
+        /// Activate the Actions in sequence and async, if an action have a wait duration defined, it will for that duration before proceeding with the next action
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator ActivateActionAsync()
         {
             for (var i = 0; i < Count; i++)
@@ -49,8 +55,6 @@ namespace Scripts.ViewModels.Actions
 
             if (OnActivationFinished != null)
                 OnActivationFinished();
-
-            yield break;
         }
     }
 }
