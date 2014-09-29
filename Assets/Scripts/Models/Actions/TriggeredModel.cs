@@ -9,6 +9,7 @@ namespace Scripts.Models.Actions
     {
         [XmlElement(ElementName = "Condition", Type = typeof(ValueConditionModel))]
         public List<ValueConditionModel> Conditions { get; set; }
+        public List<BaseConditionModel> Conditions { get; set; }
 
         [XmlElement(ElementName = "LoadScene", Type = typeof(LoadSceneActionModel))]
         [XmlElement(ElementName = "Setter", Type = typeof(SetterActionModel))]

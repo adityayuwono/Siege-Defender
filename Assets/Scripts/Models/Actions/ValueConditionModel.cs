@@ -3,7 +3,7 @@
 namespace Scripts.Models.Actions
 {
     [Serializable]
-    public class ValueConditionModel : TargetPropertyModel
+    public class ValueConditionModel : BaseConditionModel
     {
     }
 }
