@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Components;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
@@ -124,8 +125,11 @@ namespace Scripts
 
             ChangeScene(_model.Scenes[0].Id);// Load the first scene on the list
         }
-        
 
+        public override IntervalRunner IntervalRunner
+        {
+            get { return _context.IntervalRunner; }
+        }
 
         public override LevelModel GetLevel(string levelId)
         {

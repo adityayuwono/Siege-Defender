@@ -12,20 +12,24 @@ namespace Scripts.ViewModels.Actions
             _model = model;
         }
 
-        protected Object Target { get; private set; }
         protected Property Property { get; private set; }
 
         protected override void OnLoad()
         {
             base.OnLoad();
 
+            Property = FindProperty();
+        }
+
+        protected virtual Property FindProperty()
+        {
             var target = _model.Target;
             if (_model.Target == "{This}")
                 target = GetParent<Object>().Id;
             else if (_model.Target == "{Monster}")
                 target = GetParent<EnemyBase>().Id;
 
-            Property = Root.GetProperty(target, _model.Property);
+            return Root.GetProperty(target, _model.Property);
         }
     }
 }

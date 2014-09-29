@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts.Components;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
@@ -11,7 +12,7 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class EngineBase : Base
+    public abstract class EngineBase : Base
     {
         private readonly EngineModel _model;
         
@@ -53,7 +54,7 @@ namespace Scripts
             return _views[id] as T;
         }
 
-
+        public abstract IntervalRunner IntervalRunner { get; }
         public IIoCContainer IoCContainer;
         public BindingManager Binding;
         public IResource ResourceManager;

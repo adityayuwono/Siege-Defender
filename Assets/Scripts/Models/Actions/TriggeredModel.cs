@@ -8,7 +8,7 @@ namespace Scripts.Models.Actions
     public class TriggeredModel : BaseModel
     {
         [XmlElement(ElementName = "Condition", Type = typeof(ValueConditionModel))]
-        public List<ValueConditionModel> Conditions { get; set; }
+        [XmlElement(ElementName = "RandomCondition", Type = typeof(RandomConditionModel))]
         public List<BaseConditionModel> Conditions { get; set; }
 
         [XmlElement(ElementName = "LoadScene", Type = typeof(LoadSceneActionModel))]

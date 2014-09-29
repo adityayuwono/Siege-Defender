@@ -1,9 +1,8 @@
-﻿using Scripts.Core;
-using Scripts.Models.Actions;
+﻿using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
-    public class ValueCondition : TargetProperty
+    public class ValueCondition : BaseCondition
     {
         private readonly ValueConditionModel _model;
         public ValueCondition(ValueConditionModel model, Base parent) : base(model, parent)
@@ -24,22 +23,7 @@ namespace Scripts.ViewModels.Actions
         private readonly char _comparisonSign;
         private readonly string _comparisonValue;
 
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-            Property.OnChange += Property_OnChange;
-        }
-
-        protected override void OnDeactivate()
-        {
-            Property.OnChange -= Property_OnChange;
-
-            base.OnDeactivate();
-        }
-
-        private void Property_OnChange()
+        protected override void Property_OnChange()
         {
             var isMatch = CompareProperty();
             IsMatch.SetValue(isMatch);
@@ -60,7 +44,5 @@ namespace Scripts.ViewModels.Actions
 
             return false;
         }
-
-        public readonly Property<bool> IsMatch = new Property<bool>();
     }
 }
