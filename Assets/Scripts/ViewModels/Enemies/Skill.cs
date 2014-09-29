@@ -17,18 +17,23 @@ namespace Scripts.ViewModels.Enemies
 
         private readonly ActionCollection _actions;
 
+        public Action<Skill> OnSkillActivationFinished;
+
         protected override void OnActivate()
         {
             base.OnActivate();
 
-            _actions.OnActivationFinished += OnActivationFinished;
+            _actions.OnActivationFinished += Action_OnActivationFinished;
             _actions.Activate();
         }
 
-        private void OnActivationFinished()
+        private void Action_OnActivationFinished()
         {
-            _actions.OnActivationFinished -= OnActivationFinished;
+            _actions.OnActivationFinished -= Action_OnActivationFinished;
             Deactivate("Done activating Skill");
+
+            if (OnSkillActivationFinished != null)
+                OnSkillActivationFinished(this);
         }
     }
 }
