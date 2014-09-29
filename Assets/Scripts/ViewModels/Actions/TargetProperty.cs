@@ -23,6 +23,8 @@ namespace Scripts.ViewModels.Actions
 
         protected virtual Property FindProperty()
         {
+            if (string.IsNullOrEmpty(_model.Property)) return null;
+
             var target = _model.Target;
             if (_model.Target == "{This}")
                 target = GetParent<Object>().Id;

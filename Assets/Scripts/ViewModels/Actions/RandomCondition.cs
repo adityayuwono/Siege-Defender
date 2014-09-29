@@ -2,6 +2,7 @@
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
+using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {

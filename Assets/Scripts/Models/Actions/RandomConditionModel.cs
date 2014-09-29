@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using Scripts.Models.Actions;
 
-namespace Scripts.Models
+namespace Scripts.Models.Actions
 {
     [Serializable]
     public class RandomConditionModel : ValueConditionModel
