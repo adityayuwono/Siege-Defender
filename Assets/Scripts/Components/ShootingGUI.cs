@@ -1,4 +1,6 @@
-﻿using System.Linq; // ReSharper disable once RedundantUsingDirective, this is used when iterating Inputs
+﻿// ReSharper disable RedundantUsingDirective
+using System.Linq;// This is used when iterating inputs, but it's only in Android
+// ReSharper restore RedundantUsingDirective
 using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
