@@ -3,10 +3,10 @@ using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
-    public class BaseCondition : TargetProperty
+    public class ValueCondition : TargetProperty
     {
-        private readonly BaseConditionModel _model;
-        public BaseCondition(BaseConditionModel model, Base parent) : base(model, parent)
+        private readonly ValueConditionModel _model;
+        public ValueCondition(ValueConditionModel model, Base parent) : base(model, parent)
         {
             _model = model;
 

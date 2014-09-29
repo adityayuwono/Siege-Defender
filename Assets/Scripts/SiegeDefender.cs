@@ -75,7 +75,7 @@ namespace Scripts
             // Actions, doesnt have a view
             IoCContainer.RegisterFor<LoadSceneActionModel>().TypeOf<BaseAction>().To<LoadSceneAction>();
             IoCContainer.RegisterFor<SetterActionModel>().TypeOf<BaseAction>().To<SetterAction>();
-            IoCContainer.RegisterFor<BaseConditionModel>().TypeOf<BaseCondition>().To<BaseCondition>();
+            IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<ValueCondition>().To<ValueCondition>();
             #endregion
 
             #region ViewModel to View(BaseView)
@@ -159,7 +159,6 @@ namespace Scripts
             _currentScene.Activate();
             _currentScene.Show();
         }
-
 
         public override void Save()
         {

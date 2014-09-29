@@ -7,8 +7,8 @@ namespace Scripts.Models.Actions
     [Serializable]
     public class TriggeredModel : BaseModel
     {
-        [XmlElement(ElementName = "Condition", Type = typeof(BaseConditionModel))]
-        public List<BaseConditionModel> Conditions { get; set; }
+        [XmlElement(ElementName = "Condition", Type = typeof(ValueConditionModel))]
+        public List<ValueConditionModel> Conditions { get; set; }
 
         [XmlElement(ElementName = "LoadScene", Type = typeof(LoadSceneActionModel))]
         [XmlElement(ElementName = "Setter", Type = typeof(SetterActionModel))]
