@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
@@ -22,6 +21,15 @@ namespace Scripts
         }
 
         public virtual void MapInjections() { }
+
+        protected override void OnLoad()
+        {
+            base.OnLoad();
+
+            // Keep reference of every ObjectModel in a Dictionary for faster lookup
+            foreach (var objectModel in _model.Objects)
+                _objectModels.Add(objectModel.Id, objectModel);
+        }
 
 
         private readonly Dictionary<string, BaseView> _views = new Dictionary<string, BaseView>();
@@ -59,12 +67,12 @@ namespace Scripts
             get { return this; }
         }
 
+        private readonly Dictionary<string, ObjectModel> _objectModels = new Dictionary<string, ObjectModel>(); 
         public ObjectModel GetObjectModel(string id)
         {
-            foreach (var objectModel in _model.Objects.Where(objectModel => objectModel.Id == id))
-            {
-                return objectModel;
-            }
+            if (_objectModels.ContainsKey(id))
+                return _objectModels[id];
+
             throw new EngineException(this, string.Format("ObjectModel not found, Id: {0}", id));
         }
 
