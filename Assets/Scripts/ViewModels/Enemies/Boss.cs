@@ -16,11 +16,15 @@ namespace Scripts.ViewModels.Enemies
             foreach (var limbModel in _model.Limbs)
                 _limbs.Add(new Limb(limbModel, this));
 
-            foreach (var phaseModel in _model.Phases)
-                _phases.Add(new Phase(phaseModel, this));
+            foreach (var triggeredModel in _model.Triggers)
+                _triggers.Add(new Triggered(triggeredModel, this));
 
             foreach (var skillModel in _model.Skills)
+            {
+                if (string.IsNullOrEmpty(skillModel.Id))
+                    throw new EngineException(this, "Skills need Id, please provide a unique Id");
                 _skills.Add(skillModel.Id, new Skill(skillModel, this));
+            }
 
             ActiveSkill = new AdjustableProperty<string>("ActiveSkill", this);
             ActiveSkill.OnChange += ActivateSkill;
@@ -28,6 +32,9 @@ namespace Scripts.ViewModels.Enemies
 
         #region Skill
         private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
+        /// <summary>
+        /// Only one skill may be active at one time
+        /// </summary>
         public readonly AdjustableProperty<string> ActiveSkill;
         private void ActivateSkill()
         {
@@ -38,7 +45,7 @@ namespace Scripts.ViewModels.Enemies
             {
                 var skillIds = _skills.Aggregate("", (current, skill) => current + (skill.Key + ", "));
                 throw new EngineException(this, 
-                    string.Format("Failed to find skill with Id: {0} on Boss: {1}.\nAvailable Skills are: {2}", skillIdToActivate, Id, skillIds));
+                    string.Format("Failed to find skill with Id: {0}.\nAvailable Skills are: {1}", skillIdToActivate, skillIds));
             }
             
             var skillToActivate = _skills[skillIdToActivate];
@@ -49,14 +56,14 @@ namespace Scripts.ViewModels.Enemies
         private void Skill_OnActivationFinished(Skill skill)
         {
             skill.OnSkillActivationFinished -= Skill_OnActivationFinished;
-            ActiveSkill.SetValue("");
+            ActiveSkill.SetValue("");// Set the active skill back to empty
         }
 
         #endregion
 
 
         private readonly List<Limb> _limbs = new List<Limb>();
-        private readonly List<Phase> _phases = new List<Phase>();
+        private readonly List<Triggered> _triggers = new List<Triggered>();
 
         protected override void OnActivate()
         {
@@ -65,7 +72,7 @@ namespace Scripts.ViewModels.Enemies
             foreach (var limb in _limbs)
                 limb.Activate();
 
-            foreach (var phase in _phases)
+            foreach (var phase in _triggers)
                 phase.Activate();
         }
 

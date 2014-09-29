@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Scripts.Models.Actions;
 
 namespace Scripts.Models.Enemies
 {
@@ -15,7 +16,7 @@ namespace Scripts.Models.Enemies
         public List<SkillModel> Skills { get; set; }
 
 
-        [XmlElement(ElementName = "Phase", Type = typeof(PhaseModel))]
-        public List<PhaseModel> Phases { get; set; } 
+        [XmlElement(ElementName = "Trigger", Type = typeof(TriggeredModel))]
+        public List<TriggeredModel> Triggers { get; set; } 
     }
 }

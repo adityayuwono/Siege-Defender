@@ -93,24 +93,18 @@
 				<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
 			</Skill>
 
-			<Phase>
-				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\4000" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
-				</Trigger>
-			</Phase>
-			<Phase>
-				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\2000" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
-				</Trigger>
-			</Phase>
-			<Phase>
-				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\1000" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
-				</Trigger>
-			</Phase>
+			<Trigger>
+				<Condition Target="{Monster}" Property="Health" Value="\4000" />
+				<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
+			</Trigger>
+			<Trigger>
+				<Condition Target="{Monster}" Property="Health" Value="\2000" />
+				<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
+			</Trigger>
+			<Trigger>
+				<Condition Target="{Monster}" Property="Health" Value="\1000" />
+				<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
+			</Trigger>
 		</Boss>
 
 
