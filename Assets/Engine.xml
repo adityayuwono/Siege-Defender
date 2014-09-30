@@ -32,7 +32,7 @@
 		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
 		<Enemy Id="StoneShield" AssetId="Enemies/StoneShield" 	 Health="400"  Speed="0" DeathDelay="0.4" />
-		<Boss  Id="BigGoblin" 	AssetId="Enemies/StoneGolemBoss" Health="5325" Speed="2" >
+		<Boss  Id="BigGoblin" 	AssetId="Enemies/StoneGolemBoss" Health="5325" Speed="1.25" >
 			<Elements>
 				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="BigGoblinLevel1" />
 				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="" />
@@ -92,7 +92,14 @@
 				<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
 			</Skill>
+			<Skill Id="RandomMovement">
+				<Setter Target="{Monster}" Property="MoveToARandomWaypoint" Value="true" />
+			</Skill>
 
+			<Trigger>
+				<RandomCondition Frequency="1" Value="20" /> <!-- Percentage -->
+				<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement" />
+			</Trigger>
 			<Trigger>
 				<Condition Target="{Monster}" Property="Health" Value="\4000" />
 				<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
