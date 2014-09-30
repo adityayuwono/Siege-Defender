@@ -21,8 +21,13 @@ namespace Scripts.Views
             if (_parent == null)
                 throw new EngineException(this, string.Format("Failed to find parent's Transform, parent is supposed to be: {0}", _viewModel.Parent.Id));
 
-            var tryFindChild = _parent.Transform.FindChild(_viewModel.AssetId);
+            var tryFindChild = _parent.Transform.FindChildRecursivelyBreadthFirst(_viewModel.AssetId);
             return tryFindChild == null ? base.GetGameObject() : tryFindChild.gameObject;
+        }
+
+        protected override Transform GetParent()
+        {
+            return GameObject.transform.parent != null ? GameObject.transform.parent: base.GetParent();
         }
 
         protected override void SetPosition()
