@@ -61,7 +61,7 @@ namespace Scripts.Views
 
         protected override Animator GetAnimator()
         {
-            return _characterTransform.GetComponent<Animator>();
+            return Transform.FindChild("Character").GetComponent<Animator>();
         }
 
         private void MoveToARandomWaypoint()
