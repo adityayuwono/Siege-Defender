@@ -21,7 +21,7 @@ namespace Scripts.Views
             var colliders = GameObject.GetComponentsInChildren<Collider>();
             foreach (var collider in colliders)
             {
-                var minMaxRandom = new MinMaxRandom(collider.bounds);
+                var minMaxRandom = new MinMaxRandom(collider);
                 _spawnPoints.Add(minMaxRandom);
             }
         }
@@ -71,19 +71,19 @@ namespace Scripts.Views
 
     public class MinMaxRandom
     {
-        private Vector3 _min;
-        private Vector3 _max;
+        private readonly Collider _collider;
 
-        public MinMaxRandom(Bounds bound)
+        public MinMaxRandom(Collider collider)
         {
-            _min = bound.min;
-            _max = bound.max;
+            _collider = collider;
         }
 
         public Vector3 GetRandomSpot()
         {
-            var rX = Random.Range(_min.x, _max.x);
-            var rZ = Random.Range(_min.z, _max.z);
+            var min = _collider.bounds.min;
+            var max = _collider.bounds.max;
+            var rX = Random.Range(min.x, max.x);
+            var rZ = Random.Range(min.z, max.z);
 
             return new Vector3(rX, 0, rZ);
         }
