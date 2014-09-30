@@ -89,5 +89,10 @@ namespace Scripts.ViewModels.Enemies
         {
             get { return 0; }
         }
+
+        public float BossSpeed
+        {
+            get { return _model.Speed; }
+        }
     }
 }
