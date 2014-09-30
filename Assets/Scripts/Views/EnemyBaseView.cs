@@ -22,8 +22,9 @@ namespace Scripts.Views
         {
             base.OnLoad();
 
-            _animator = GameObject.GetComponent<Animator>();
+            _animator = GetAnimator();
         }
+
         protected override void OnShow()
         {
             base.OnShow();
@@ -40,6 +41,16 @@ namespace Scripts.Views
         protected override void SetPosition()
         {
             Transform.position = _parent.GetRandomSpawnPoint();
+        }
+
+        protected virtual Animator GetAnimator()
+        {
+            return GameObject.GetComponent<Animator>();
+        }
+
+        protected void Animate_SetBool(string name, bool value)
+        {
+            _animator.SetBool(name, value);
         }
 
         private void Walk()
