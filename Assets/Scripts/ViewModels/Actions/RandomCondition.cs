@@ -19,7 +19,7 @@ namespace Scripts.ViewModels.Actions
                 if (valueAsDouble > 100)
                     throw new EngineException(this, string.Format("Value provided should be a percentage of success between 0-100, other than those is kinda pointless"));
 
-                _threshold = 100d/valueAsDouble;
+                _threshold = valueAsDouble/100d;
             }
             else
                 throw new EngineException(this, string.Format("Value provided is not a double, it should be only number like: 50 or 3.141592"));
