@@ -32,9 +32,12 @@ namespace Scripts.ViewModels.Enemies
             MoveToARandomWaypoint = new AdjustableProperty<bool>("MoveToARandomWaypoint", this);
         }
 
-        public AdjustableProperty<bool> MoveToARandomWaypoint;
+        public readonly AdjustableProperty<bool> MoveToARandomWaypoint;
 
         #region Skill
+
+        private bool _isASkillActive;
+        private string QueuedSkillId;
         private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
         /// <summary>
         /// Only one skill may be active at one time
@@ -44,7 +47,11 @@ namespace Scripts.ViewModels.Enemies
         {
             var skillIdToActivate = ActiveSkill.GetValue();
             if (string.IsNullOrEmpty(skillIdToActivate)) return;// Id is empty, meaning we have just finished activating a skill
-            
+
+            // A Skill is currently active, we queue, only queue 1 skill at one time, for now...
+            if (_isASkillActive)
+
+            _isASkillActive = true;
             if (!_skills.ContainsKey(skillIdToActivate))
             {
                 var skillIds = _skills.Aggregate("", (current, skill) => current + (skill.Key + ", "));
@@ -61,6 +68,12 @@ namespace Scripts.ViewModels.Enemies
         {
             skill.OnSkillActivationFinished -= Skill_OnActivationFinished;
             ActiveSkill.SetValue("");// Set the active skill back to empty
+            _isASkillActive = false;
+            if (!string.IsNullOrEmpty(QueuedSkillId))
+            {
+                QueuedSkillId = "";
+                ActiveSkill.SetValue(QueuedSkillId);
+            }
         }
 
         #endregion
