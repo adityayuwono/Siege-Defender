@@ -1,11 +1,14 @@
 ﻿using System;
 using Scripts.Core;
 using Scripts.Helpers;
-using Scripts.Models;
 using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
+    /// <summary>
+    /// Randomly sets itself to true, sounds dirty...
+    /// The Value represent the percentage for success
+    /// </summary>
     public class RandomCondition : BaseCondition
     {
         private readonly RandomConditionModel _model;
@@ -58,6 +61,8 @@ namespace Scripts.ViewModels.Actions
         protected override void Property_OnChange()
         {
             IsMatch.SetValue(_randomizedValue.GetValue() <= _threshold);
+            // Immediatelly set to false to allow 2 consecutive Matches when in luck, if there's such a thing in coding
+            IsMatch.SetValue(false);
         }
     }
 }
