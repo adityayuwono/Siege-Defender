@@ -28,7 +28,11 @@ namespace Scripts.ViewModels.Enemies
 
             ActiveSkill = new AdjustableProperty<string>("ActiveSkill", this);
             ActiveSkill.OnChange += ActivateSkill;
+
+            MoveToARandomWaypoint = new AdjustableProperty<bool>("MoveToARandomWaypoint", this);
         }
+
+        public AdjustableProperty<bool> MoveToARandomWaypoint;
 
         #region Skill
         private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
