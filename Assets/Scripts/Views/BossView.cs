@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts.Components;
 using Scripts.ViewModels.Enemies;
 using UnityEngine;
 
@@ -30,6 +31,7 @@ namespace Scripts.Views
             {
                 _characterTransform = characterRoot;
                 _character = characterRoot.gameObject;
+                _character.AddComponent<ViewModelController>().ViewModel = _viewModel;
             }
 
             _viewModel.MoveToARandomWaypoint.OnChange += MoveToARandomWaypoint;
