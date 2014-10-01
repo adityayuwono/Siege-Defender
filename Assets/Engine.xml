@@ -87,7 +87,7 @@
 				</Trigger>
 			</Limb>
 						
-			<Skill Id="CrystalShield">
+			<Skill Id="CrystalShield" IsQueuedable="true" >
 				<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
 				<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
@@ -97,19 +97,24 @@
 			</Skill>
 
 			<Trigger>
-				<RandomCondition Frequency="1" Value="20" /> <!-- Percentage -->
+				<RandomCondition Frequency="1" Value="15" /> <!-- Percentage -->
+				<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
+				<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 				<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement" />
 			</Trigger>
 			<Trigger>
 				<Condition Target="{Monster}" Property="Health" Value="\4000" />
+				<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 				<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 			</Trigger>
 			<Trigger>
 				<Condition Target="{Monster}" Property="Health" Value="\2000" />
+				<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 				<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 			</Trigger>
 			<Trigger>
 				<Condition Target="{Monster}" Property="Health" Value="\1000" />
+				<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 				<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 			</Trigger>
 		</Boss>
