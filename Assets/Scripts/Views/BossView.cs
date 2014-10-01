@@ -89,7 +89,7 @@ namespace Scripts.Views
             var walkDuration = Vector3.Distance(waypoint.localPosition, _characterTransform.localPosition)/_viewModel.BossSpeed;
             var lookToDuration = Vector3.Angle(waypoint.localEulerAngles, _characterTransform.localEulerAngles)/24f/_viewModel.BossSpeed;
             iTween.LookTo(_character, iTween.Hash("looktarget", waypoint, "easetype", "linear", "time", lookToDuration));
-            yield return new WaitForSeconds(lookToDuration);
+            yield return new WaitForSeconds(lookToDuration*0.75f);
             
             // Walk to reach the destination
             iTween.MoveTo(_character, iTween.Hash("position", waypoint, "easetype", "linear", "time", walkDuration));
