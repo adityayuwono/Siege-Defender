@@ -1,5 +1,6 @@
 ﻿using System;
 using Scripts.Models.Enemies;
+using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
@@ -32,10 +33,12 @@ namespace Scripts.ViewModels.Enemies
 
         private readonly Triggered _trigger;
 
-        public override bool ApplyDamage(float damage, ProjectileBase source = null)
+        public override bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
         {
-            base.ApplyDamage(damage, source);
-            return _parent.ApplyDamage(damage, null);
+            var damageMultiplied = damage*_model.DamageMultiplier;
+
+            base.ApplyDamage(damageMultiplied, contactPoint, source);
+            return _parent.ApplyDamage(damageMultiplied, contactPoint, null);
         }
 
         public Action DoBreakParts;
