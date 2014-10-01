@@ -38,49 +38,49 @@
 				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="" />
 			</Elements>
 			
-			<Limb Id="Head" 		Health="500" 	AssetId="Head">
+			<Limb Id="Head" 		Health="500" 	AssetId="Head" DamageMultiplier="1.2">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="Wood" Amount="3-10" />
 				</Trigger>
 			</Limb>
-			<Limb Id="RightHand" 	Health="1000" 	AssetId="RightHand" >
+			<Limb Id="RightHand" 	Health="1000" 	AssetId="RightHand" DamageMultiplier="0.75">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="LeftHand" 	Health="1000" 	AssetId="LeftHand" >
+			<Limb Id="LeftHand" 	Health="1000" 	AssetId="LeftHand" DamageMultiplier="0.75">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="RightLeg" 	Health="250" 	AssetId="RightLeg">
+			<Limb Id="RightLeg" 	Health="250" 	AssetId="RightLeg" DamageMultiplier="0.75">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="LeftLeg" 		Health="250" 	AssetId="LeftLeg">
+			<Limb Id="LeftLeg" 		Health="250" 	AssetId="LeftLeg" DamageMultiplier="0.75">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="RightFoot" 	Health="250" 	AssetId="Bip001 R Foot">
+			<Limb Id="RightFoot" 	Health="250" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="LeftFoot" 	Health="250" 	AssetId="Bip001 L Foot">
+			<Limb Id="LeftFoot" 	Health="250" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="Crystal" 		Health="700" 	AssetId="Bip001 Spine2">
+			<Limb Id="Crystal" 		Health="700" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25">
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
@@ -97,7 +97,7 @@
 			</Skill>
 
 			<Trigger>
-				<RandomCondition Frequency="1" Value="15" /> <!-- Percentage -->
+				<RandomCondition Frequency="1" Value="25" /> <!-- Percentage -->
 				<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
 				<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 				<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement" />
