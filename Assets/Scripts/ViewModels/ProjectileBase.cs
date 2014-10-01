@@ -28,9 +28,7 @@ namespace Scripts.ViewModels
         protected bool DamageEnemy(Object enemy, Vector3 contactPoint, bool attachToEnemy = false)
         {
             var damage = CalculateDamage();
-            var isDamageApplied = enemy.ApplyDamage(damage, attachToEnemy ? this : null);
-            if (isDamageApplied)
-                Root.DamageDisplay.DisplayDamage(damage, contactPoint);
+            var isDamageApplied = enemy.ApplyDamage(damage, contactPoint, attachToEnemy ? this : null);
             return isDamageApplied;
         }
 

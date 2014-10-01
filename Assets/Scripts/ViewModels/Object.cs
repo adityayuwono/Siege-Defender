@@ -57,7 +57,7 @@ namespace Scripts.ViewModels
 
         #region Death
 
-        public virtual bool ApplyDamage(float damage, ProjectileBase source = null)
+        public virtual bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
         {
             return false;
         }

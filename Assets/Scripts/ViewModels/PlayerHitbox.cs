@@ -1,4 +1,5 @@
 ﻿using Scripts.Models;
+using UnityEngine;
 
 namespace Scripts.ViewModels
 {
@@ -15,7 +16,7 @@ namespace Scripts.ViewModels
         {
             var enemyViewModel = obj as EnemyBase;
             if (enemyViewModel != null)
-                enemyViewModel.ApplyDamage(float.PositiveInfinity, null);
+                enemyViewModel.ApplyDamage(float.PositiveInfinity, Vector3.zero, null);
         }
     }
 }
