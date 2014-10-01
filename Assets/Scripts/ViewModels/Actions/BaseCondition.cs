@@ -17,6 +17,7 @@ namespace Scripts.ViewModels.Actions
             base.OnActivate();
 
             Property.OnChange += Property_OnChange;
+            Property_OnChange();
         }
 
         protected override void OnDeactivate()
