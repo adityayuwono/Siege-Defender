@@ -48,10 +48,6 @@ namespace Scripts.ViewModels.Enemies
             var skillIdToActivate = ActiveSkill.GetValue();
             if (string.IsNullOrEmpty(skillIdToActivate)) return;// Id is empty, meaning we have just finished activating a skill
 
-            // A Skill is currently active, we queue, only queue 1 skill at one time, for now...
-            if (_isASkillActive)
-
-            _isASkillActive = true;
             if (!_skills.ContainsKey(skillIdToActivate))
             {
                 var skillIds = _skills.Aggregate("", (current, skill) => current + (skill.Key + ", "));
@@ -60,6 +56,19 @@ namespace Scripts.ViewModels.Enemies
             }
             
             var skillToActivate = _skills[skillIdToActivate];
+            // A Skill is currently active, we queue, only queue 1 skill at one time, for now...
+            if (_isASkillActive)
+            {
+                if (skillToActivate.IsQueuedable)
+                {
+                    QueuedSkillId = skillIdToActivate;
+                    UnityEngine.Debug.LogError("Queued "+skillIdToActivate);
+                }
+                ActiveSkill.SetValue("");
+                return;
+            }
+
+            _isASkillActive = true;
             skillToActivate.OnSkillActivationFinished += Skill_OnActivationFinished;
             skillToActivate.Activate();
         }
@@ -69,10 +78,12 @@ namespace Scripts.ViewModels.Enemies
             skill.OnSkillActivationFinished -= Skill_OnActivationFinished;
             ActiveSkill.SetValue("");// Set the active skill back to empty
             _isASkillActive = false;
+
             if (!string.IsNullOrEmpty(QueuedSkillId))
             {
+                var queuedSkillId = QueuedSkillId;
                 QueuedSkillId = "";
-                ActiveSkill.SetValue(QueuedSkillId);
+                ActiveSkill.SetValue(queuedSkillId);
             }
         }
 

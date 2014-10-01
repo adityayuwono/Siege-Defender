@@ -19,6 +19,11 @@ namespace Scripts.ViewModels.Enemies
 
         public Action<Skill> OnSkillActivationFinished;
 
+        public bool IsQueuedable
+        {
+            get { return _model.IsQueuedable; }
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();
