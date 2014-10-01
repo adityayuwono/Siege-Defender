@@ -12,7 +12,7 @@ namespace Scripts.Models.Enemies
 
         public LimbModel()
         {
-            ProjectileLimit = 5;
+            ProjectileLimit = 2;
         }
     }
 }
