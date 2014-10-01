@@ -12,6 +12,10 @@ namespace Scripts.ViewModels
         protected Interval(IntervalModel model, Object parent) : base(model, parent)
         {
             _model = model;
+
+            ActiveObjects = new AdjustableProperty<int>("ActiveObjects", this);
+            ActiveObjects.SetValue(0);
+
             Interval.SetValue(_model.Interval);
         }
 
@@ -29,6 +33,7 @@ namespace Scripts.ViewModels
         {
             var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId));
             _activeObjects.Add(objectResult);
+            ActiveObjects.SetValue(ActiveObjects.GetValue() + 1);
             objectResult.OnObjectDeactivated += Object_OnDeath;
             return objectResult as TU;
         }
@@ -49,12 +54,14 @@ namespace Scripts.ViewModels
             return newObject;
         }
 
+        public readonly AdjustableProperty<int> ActiveObjects;
         private readonly List<T> _activeObjects = new List<T>();
 
         private void Object_OnDeath(Object objectViewModel)
         {
             var objectT = (T) objectViewModel;
             _activeObjects.Remove(objectT);
+            ActiveObjects.SetValue(ActiveObjects.GetValue() - 1);
             AddToInactiveObjectList(objectT);
         }
         private void AddToInactiveObjectList(T inactiveObject)
