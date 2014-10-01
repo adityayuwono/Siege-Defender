@@ -85,7 +85,7 @@ namespace Scripts.Views
 
             // Turn to face the destination
             var walkDuration = Vector3.Distance(waypoint.localPosition, _characterTransform.localPosition)/_viewModel.BossSpeed;
-            var lookToDuration = Vector3.Angle(waypoint.localEulerAngles, _characterTransform.localEulerAngles)/24/_viewModel.BossSpeed;
+            var lookToDuration = Vector3.Angle(waypoint.localEulerAngles, _characterTransform.localEulerAngles)/24f/_viewModel.BossSpeed;
             iTween.LookTo(_character, iTween.Hash("looktarget", waypoint, "easetype", "linear", "time", lookToDuration));
             yield return new WaitForSeconds(lookToDuration);
             
@@ -94,7 +94,7 @@ namespace Scripts.Views
             yield return new WaitForSeconds(walkDuration);
 
             // Turn to match the destination's rotation
-            var rotateDuration = Quaternion.Angle(waypoint.localRotation, _characterTransform.localRotation)/24/_viewModel.BossSpeed;
+            var rotateDuration = Quaternion.Angle(waypoint.localRotation, _characterTransform.localRotation)/24f/_viewModel.BossSpeed;
             iTween.RotateTo(_character, iTween.Hash("rotation", waypoint, "easetype", "linear", "time", rotateDuration));
             yield return new WaitForSeconds(rotateDuration);
 

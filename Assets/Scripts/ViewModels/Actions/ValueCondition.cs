@@ -40,14 +40,10 @@ namespace Scripts.ViewModels.Actions
 
                 switch (_comparisonSign)
                 {
-                    case '<':
-                        return v1 < v2;
-                    case '>':
-                        return v1 > v2;
-                    case '=':
-                        return Property.GetValue().ToString() == _comparisonValue;
-                    case '!':
-                        return Property.GetValue().ToString() != _comparisonValue;
+                    case '<':return v1 < v2;
+                    case '>':return v1 > v2;
+                    case '=':return Property.GetValue().ToString() == _comparisonValue;
+                    case '!':return Property.GetValue().ToString() != _comparisonValue;
                 }
             }
             else if (propertyValue is bool)
