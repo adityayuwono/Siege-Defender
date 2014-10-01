@@ -31,15 +31,31 @@ namespace Scripts.ViewModels.Actions
 
         private bool CompareProperty()
         {
-            var v1 = double.Parse(Property.GetValue().ToString());
-            var v2 = double.Parse(_comparisonValue);
+            var propertyValue = Property.GetValue();
 
-            switch (_comparisonSign)
+            if (propertyValue is double || propertyValue is int || propertyValue is float)
             {
-                case '<': return v1 < v2;
-                case '>': return v1 > v2;
-                case '=': return Property.GetValue().ToString() == _comparisonValue;
-                case '!': return Property.GetValue().ToString() != _comparisonValue;
+                var v1 = double.Parse(propertyValue.ToString());
+                var v2 = double.Parse(_comparisonValue);
+
+                switch (_comparisonSign)
+                {
+                    case '<':
+                        return v1 < v2;
+                    case '>':
+                        return v1 > v2;
+                    case '=':
+                        return Property.GetValue().ToString() == _comparisonValue;
+                    case '!':
+                        return Property.GetValue().ToString() != _comparisonValue;
+                }
+            }
+            else if (propertyValue is bool)
+            {
+                var v1 = bool.Parse(propertyValue.ToString());
+                var v2 = bool.Parse(_comparisonValue);
+
+                return v1 == v2;
             }
 
             return false;
