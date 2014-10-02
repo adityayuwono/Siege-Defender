@@ -49,7 +49,7 @@ namespace Scripts.ViewModels
             var newObject = Root.IoCContainer.GetInstance<T>(objectModel.GetType(), new System.Object[] {objectModel, this});
 
             if (newObject == null)
-                throw new EngineException(this, string.Format("Failed to instantiate {0}, {1}", objectModel.GetType(), typeof(T)));
+                throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(T)));
             
             return newObject;
         }
