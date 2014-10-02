@@ -25,6 +25,8 @@ namespace Scripts.Models
         // GUIs
         [XmlArrayItem(ElementName = "Inventory", Type = typeof(InventoryModel))]
         [XmlArrayItem(ElementName = "Button", Type = typeof(ButtonGUIModel))]
+
+        [XmlArrayItem(ElementName = "SpecialEffectManager", Type = typeof(SpecialEffectManagerModel))]
         public List<ElementModel> Elements { get; set; }
 
         [XmlAttribute]

@@ -49,12 +49,15 @@ namespace Scripts
             ResourceManager = new ResourcePooler(this);
 
             #region Model to ViewModel
+            IoCContainer.RegisterFor<ObjectModel>().TypeOf<Object>().To<Object>();
+            IoCContainer.RegisterFor<SpecialEffectModel>().TypeOf<SpecialEffect>().To<SpecialEffect>();
             IoCContainer.RegisterFor<ElementModel>().TypeOf<Object>().To<Element>();
             IoCContainer.RegisterFor<PlayerModel>().TypeOf<Object>().To<Player>();
             IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<Object>().To<EnemyManager>();
             IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<Object>().To<PlayerHitbox>();
             IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Object>().To<GUIRoot>();
             IoCContainer.RegisterFor<DamageDisplayGUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
+            IoCContainer.RegisterFor<SpecialEffectManagerModel>().TypeOf<Object>().To<SpecialEffectManager>();
             IoCContainer.RegisterFor<ObjectDisplayModel>().TypeOf<Object>().To<ObjectDisplay>();
             // GUIs
             IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
@@ -92,6 +95,7 @@ namespace Scripts
             IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
             IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
             IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
+            IoCContainer.RegisterFor<SpecialEffectManager>().TypeOf<BaseView>().To<SpecialEffectManagerView>();
             IoCContainer.RegisterFor<ObjectDisplay>().TypeOf<BaseView>().To<ObjectDisplayView>();
             // GUIs
             IoCContainer.RegisterFor<Item>().TypeOf<BaseView>().To<ItemView>();
@@ -100,6 +104,7 @@ namespace Scripts
             IoCContainer.RegisterFor<Button>().TypeOf<BaseView>().To<ButtonView>();
 
             IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();
+            IoCContainer.RegisterFor<SpecialEffect>().TypeOf<BaseView>().To<SpecialEffectView>();
             IoCContainer.RegisterFor<StaticObject>().TypeOf<BaseView>().To<StaticObjectView>();
             IoCContainer.RegisterFor<Shooter>().TypeOf<BaseView>().To<ShooterView>();
             IoCContainer.RegisterFor<Target>().TypeOf<BaseView>().To<TargetView>();

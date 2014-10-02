@@ -10,6 +10,8 @@ namespace Scripts.Models
     {
         [XmlArray]
         [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBaseModel))]
+        [XmlArrayItem(ElementName = "Object", Type = typeof(ObjectModel))]
+        [XmlArrayItem(ElementName = "SpecialEffect", Type = typeof(SpecialEffectModel))]
         [XmlArrayItem(ElementName = "Boss", Type = typeof(BossModel))]
         [XmlArrayItem(ElementName = "Projectile", Type = typeof(ProjectileModel))]
         [XmlArrayItem(ElementName = "Piercing", Type = typeof(PiercingProjectileModel))]

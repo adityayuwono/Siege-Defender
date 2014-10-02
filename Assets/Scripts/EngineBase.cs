@@ -60,7 +60,7 @@ namespace Scripts
         public IResource ResourceManager;
 
         public DamageDisplayManager DamageDisplay;
-
+        public SpecialEffectManager SpecialEffectManager;
 
 
         public override EngineBase Root
