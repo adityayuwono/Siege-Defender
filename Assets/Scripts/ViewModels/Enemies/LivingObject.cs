@@ -56,7 +56,13 @@ namespace Scripts.ViewModels.Enemies
             }
 
             if (Vector3.zero != contactPoint)
+            {
                 Root.DamageDisplay.DisplayDamage(damage, contactPoint);
+
+                if (!string.IsNullOrEmpty(CollisionEffectNormal))
+                    Root.SpecialEffectManager.DisplaySpecialEffect(CollisionEffectNormal, contactPoint);
+            }
+
 
             return true;
         }
@@ -86,5 +92,10 @@ namespace Scripts.ViewModels.Enemies
         public Action<ProjectileBase> DoAttach;
         private readonly List<ProjectileBase> _projectiles = new List<ProjectileBase>();
         public readonly AdjustableProperty<float> Health;
+
+        public string CollisionEffectNormal
+        {
+            get { return _model.CollisionEffectNormal; }
+        }
     }
 }

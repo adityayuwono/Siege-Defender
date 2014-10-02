@@ -9,6 +9,9 @@ namespace Scripts.Models
         [XmlAttribute]
         public int Health { get; set; }
 
+        [XmlAttribute]
+        public string CollisionEffectNormal { get; set; }
+
         public int ProjectileLimit { get; protected set; }
 
         public LivingObjectModel()

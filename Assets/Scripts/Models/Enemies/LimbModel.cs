@@ -12,6 +12,9 @@ namespace Scripts.Models.Enemies
         public TriggeredModel Trigger { get; set; }
 
         [XmlAttribute]
+        public string CollisionEffectBroken { get; set; }
+
+        [XmlAttribute]
         [DefaultValue(1f)]
         public float DamageMultiplier { get; set; }
 

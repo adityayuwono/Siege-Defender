@@ -38,7 +38,7 @@ namespace Scripts.ViewModels.Enemies
             var damageMultiplied = damage*_model.DamageMultiplier;
 
             base.ApplyDamage(damageMultiplied, contactPoint, source);
-            return _parent.ApplyDamage(damageMultiplied, contactPoint, null);
+            return _parent.ApplyDamage(damageMultiplied, Vector3.zero, null);
         }
 
         public Action DoBreakParts;
@@ -46,6 +46,11 @@ namespace Scripts.ViewModels.Enemies
         {
             if (DoBreakParts != null)
                 DoBreakParts();
+        }
+
+        public string CollisionEffectBroken
+        {
+            get { return string.IsNullOrEmpty(_model.CollisionEffectBroken) ? CollisionEffectNormal : _model.CollisionEffectBroken; }
         }
     }
 }

@@ -24,6 +24,8 @@ namespace Scripts.ViewModels
                     throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
                 Elements.Add(elementVM);
             }
+
+            _position = UnityExtension.ParseVector3(_model.Position);
         }
 
         protected readonly List<Object> Elements = new List<Object>(); 
@@ -102,9 +104,11 @@ namespace Scripts.ViewModels
             get { return _model.AssetId; }
         }
 
+        private Vector3 _position;
         public virtual Vector3 Position
         {
-            get { return UnityExtension.ParseVector3(_model.Position); }
+            get { return _position; }
+            set { _position = value; }
         }
         #endregion
     }
