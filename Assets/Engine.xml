@@ -31,63 +31,78 @@
 		<Enemy Id="ShieldBearers" AssetId="Enemies/BlueGoblin" 		Health="50" 	Speed="0.001"	Rotation="0" />
 		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
-		<Enemy Id="StoneShield" AssetId="Enemies/StoneShield" 	 Health="400"  Speed="0" DeathDelay="0.4" />
-		<Boss  Id="BigGoblin" 	AssetId="Enemies/StoneGolemBoss" Health="5325" Speed="1.25" >
+		<Enemy Id="StoneShield" AssetId="Enemies/StoneShield" 	 Health="400"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
+		<Boss  Id="StoneGolem" 	AssetId="Enemies/StoneGolemBoss" Health="5325" Speed="1.25" 
+			CollisionEffectNormal="StoneBreak" >
 			<Elements>
 				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="BigGoblinLevel1" />
 				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="" />
 			</Elements>
 			
-			<Limb Id="Head" 		Health="500" 	AssetId="Head" DamageMultiplier="1.2">
+			<Limb Id="Head" 		Health="500" 	AssetId="Head" DamageMultiplier="1.2" 
+				CollisionEffectNormal="StoneBreak" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="Wood" Amount="3-10" />
 				</Trigger>
 			</Limb>
-			<Limb Id="RightHand" 	Health="1000" 	AssetId="RightHand" DamageMultiplier="0.75">
+			<Limb Id="RightHand" 	Health="1000" 	AssetId="RightHand" DamageMultiplier="0.75" 
+				CollisionEffectNormal="CrystalBreak_Small"
+				CollisionEffectBroken="StoneBreak" > 
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="LeftHand" 	Health="1000" 	AssetId="LeftHand" DamageMultiplier="0.75">
+			<Limb Id="LeftHand" 	Health="1000" 	AssetId="LeftHand" DamageMultiplier="0.75"
+				CollisionEffectNormal="CrystalBreak_Small"
+				CollisionEffectBroken="StoneBreak" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="RightLeg" 	Health="250" 	AssetId="RightLeg" DamageMultiplier="0.75">
+			<Limb Id="RightLeg" 	Health="250" 	AssetId="RightLeg" DamageMultiplier="0.75"
+				CollisionEffectNormal="CrystalBreak_Small"
+				CollisionEffectBroken="StoneBreak" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="LeftLeg" 		Health="250" 	AssetId="LeftLeg" DamageMultiplier="0.75">
+			<Limb Id="LeftLeg" 		Health="250" 	AssetId="LeftLeg" DamageMultiplier="0.75" 
+				CollisionEffectNormal="CrystalBreak_Small"
+				CollisionEffectBroken="StoneBreak" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="RightFoot" 	Health="250" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75">
+			<Limb Id="RightFoot" 	Health="250" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75"
+				CollisionEffectNormal="CrystalBreak_Small"
+				CollisionEffectBroken="StoneBreak" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="LeftFoot" 	Health="250" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75">
+			<Limb Id="LeftFoot" 	Health="250" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75" 
+				CollisionEffectNormal="CrystalBreak_Small"
+				CollisionEffectBroken="StoneBreak" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
-			<Limb Id="Crystal" 		Health="700" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25">
+			<Limb Id="Crystal" 		Health="700" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25" 
+				CollisionEffectNormal="CrystalBreak_Small" >
 				<Trigger>
 					<Condition Target="{This}" Property="Health" Value="\1" />
 					<Drop Target="LightWood" Amount="1-6" />
 				</Trigger>
 			</Limb>
 						
-			<Skill Id="CrystalShield" IsQueuedable="true" >
+			<Skill Id="CrystalShield" IsQueuedable="true" CollisionEffectNormal="CrystalBroken" >
 				<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
 				<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
@@ -97,7 +112,7 @@
 			</Skill>
 
 			<Trigger>
-				<RandomCondition Frequency="1" Value="25" /> <!-- Percentage -->
+				<RandomCondition Frequency="1" Value="5" /> <!-- Percentage -->
 				<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
 				<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 				<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement" />
@@ -121,6 +136,9 @@
 
 
 		<DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" Font="ITCAvantGardePro-Bk" />
+
+		<SpecialEffect Id="CrystalBreak_Small" AssetId="SpecialEffects/CrystalBreak_Small" />
+		<SpecialEffect Id="StoneBreak" AssetId="SpecialEffects/StoneBreak" />
 	</Objects>
 
 	<Levels>
@@ -128,7 +146,7 @@
 		<Level Id="Level1" Interval="1" LoopCount="0">
 			<Spawn EnemyId="BoxDemon" />
 			<Spawn EnemyId="BoxDemon" />
-			<Spawn EnemyId="BigGoblin" />
+			<Spawn EnemyId="StoneGolem" />
 		</Level>
 		<Level Id="BigGoblinLevel1" Interval="2" LoopCount="-1">
 			<Spawn EnemyId="FastGoblin" />
@@ -170,6 +188,7 @@
 				<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" LevelId="Level1" />
 
 				<PlayerHitbox AssetId="PlayerHealth" />
+				<SpecialEffectManager AssetId="SpecialEffectRoot" />
 				
 				<Player AssetId="Player" >
 					<Shooters>
