@@ -15,6 +15,7 @@ namespace Scripts.ViewModels.Enemies
             _model = model;
 
             Health = new AdjustableProperty<float>("Health", this);
+            CollisionEffectNormal = _model.CollisionEffectNormal;
         }
 
         protected override void OnActivate()
@@ -95,10 +96,6 @@ namespace Scripts.ViewModels.Enemies
         public Action<ProjectileBase> DoAttach;
         private readonly List<ProjectileBase> _projectiles = new List<ProjectileBase>();
         public readonly AdjustableProperty<float> Health;
-
-        public string CollisionEffectNormal
-        {
-            get { return _model.CollisionEffectNormal; }
-        }
+        protected string CollisionEffectNormal { private get; set; }
     }
 }
