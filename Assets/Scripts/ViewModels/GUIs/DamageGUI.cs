@@ -13,12 +13,6 @@ namespace Scripts.ViewModels.GUIs
             _model = model;
         }
 
-        private Vector3 _position;
-        public override Vector3 Position
-        {
-            get { return _position; }
-        }
-
         public float HideDelay
         {
             get { return 0.5f; }
@@ -27,7 +21,7 @@ namespace Scripts.ViewModels.GUIs
         public void ShowDamage(float damage, Vector3 position)
         {
             Text.SetValue(Math.Round(damage).ToString(CultureInfo.InvariantCulture));
-            _position = position;
+            Position = position;
 
             Activate();
             Show();

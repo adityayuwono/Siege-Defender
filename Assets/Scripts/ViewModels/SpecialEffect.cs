@@ -13,19 +13,13 @@ namespace Scripts.ViewModels
 
         public void ShowSpecialEffect(Vector3 position)
         {
-            _position = position;
+            Position = position;
             
             Activate();
             Show();
             Hide("Only Display for a short time");
         }
-
-        private Vector3 _position;
-        public override Vector3 Position
-        {
-            get { return _position; }
-        }
-
+        
         public void SetDeathDelay(float delay)
         {
             _model.DeathDelay = delay;

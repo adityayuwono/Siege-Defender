@@ -108,7 +108,7 @@ namespace Scripts.ViewModels
         public virtual Vector3 Position
         {
             get { return _position; }
-            set { _position = value; }
+            protected set { _position = value; }
         }
         #endregion
     }

@@ -32,16 +32,10 @@ namespace Scripts.ViewModels
         {
             DamageEnemy(targetObject, contactPoint);
         }
-
-        private Vector3 _position;
-        public override Vector3 Position
-        {
-            get { return _position; }
-        }
         
         public void SetPosition(Vector3 position)
         {
-            _position = position;
+            Position = position;
         }
     }
 }

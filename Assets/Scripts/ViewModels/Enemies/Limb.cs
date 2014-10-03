@@ -38,7 +38,7 @@ namespace Scripts.ViewModels.Enemies
             var damageMultiplied = damage*_model.DamageMultiplier;
 
             base.ApplyDamage(damageMultiplied, contactPoint, source);
-            return _parent.ApplyDamage(damageMultiplied, Vector3.zero, null);
+            return _parent.ApplyDamage(damageMultiplied, Vector3.zero);
         }
 
         public Action DoBreakParts;
