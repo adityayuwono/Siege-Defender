@@ -75,6 +75,20 @@ namespace Scripts.ViewModels
         }
 
         private static readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
+        private static bool _isDestructionInProgress;
+        private static void DestroyInactiveObjects()
+        {
+            if (_isDestructionInProgress) return;
+
+            _isDestructionInProgress = true;
+            foreach (var inactiveObjects in InactiveObjects.Values)
+                foreach (var inactiveObject in inactiveObjects)
+                    inactiveObject.Destroy();
+
+            InactiveObjects.Clear();
+            _isDestructionInProgress = false;
+        }
+
         private Object CheckInactiveObjects(string objectId)
         {
             // Id is not registered yet
@@ -101,12 +115,9 @@ namespace Scripts.ViewModels
             foreach (var activeObject in _activeObjects)
                 activeObject.Destroy();
 
-            foreach (var inactiveObjectKVP in InactiveObjects)
-                foreach (var inactiveObject in inactiveObjectKVP.Value)
-                    inactiveObject.Destroy();
-
             _activeObjects.Clear();
-            InactiveObjects.Clear();
+
+            DestroyInactiveObjects();
 
             base.OnDestroyed();
         }
