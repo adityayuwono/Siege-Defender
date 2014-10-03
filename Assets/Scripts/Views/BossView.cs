@@ -82,12 +82,13 @@ namespace Scripts.Views
 
         private IEnumerator MoveToWaypoint(Transform waypoint)
         {
+            var walkDuration = Vector3.Distance(waypoint.localPosition, _characterTransform.localPosition) / _viewModel.BossSpeed;
+            var lookToDuration = Quaternion.Angle(waypoint.rotation, _characterTransform.rotation) / 24f / _viewModel.BossSpeed;
+
             // Initiate walking sequence
             Animate_SetBool("IsWalking", true);
 
             // Turn to face the destination
-            var walkDuration = Vector3.Distance(waypoint.localPosition, _characterTransform.localPosition)/_viewModel.BossSpeed;
-            var lookToDuration = Quaternion.Angle(waypoint.rotation, _characterTransform.rotation) / 24f / _viewModel.BossSpeed;
             iTween.LookTo(_character, iTween.Hash("looktarget", waypoint, "easetype", "linear", "time", lookToDuration));
             yield return new WaitForSeconds(lookToDuration);
             
