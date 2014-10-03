@@ -11,22 +11,6 @@ namespace Scripts.Views.GUIs
             _viewModel = viewModel;
         }
 
-        private Vector3 _localScale;
-        protected override void OnLoad()
-        {
-            base.OnLoad();
-
-            // Need to cache because we are going to animate this
-            _localScale = Transform.localScale;
-        }
-
-        protected override void OnShow()
-        {
-            base.OnShow();
-
-            Transform.localScale = _localScale;
-        }
-
         protected override void OnHide(string reason)
         {
             BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Hide, _viewModel.HideDelay, false);
