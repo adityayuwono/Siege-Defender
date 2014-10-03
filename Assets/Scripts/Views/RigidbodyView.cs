@@ -65,7 +65,7 @@ namespace Scripts.Views
             _rigidbody.angularVelocity = Vector3.zero;
 
             _rigidbody.AddRelativeForce(direction, forceMode);
-            _rigidbody.AddRelativeTorque(Vector3.right * 1.5f, forceMode);
+            //_rigidbody.AddRelativeTorque(Vector3.right, forceMode);
         }
 
         /// <summary>
