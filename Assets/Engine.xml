@@ -134,9 +134,7 @@
 			</Trigger>
 		</Boss>
 
-
-		<DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" Font="ITCAvantGardePro-Bk" />
-
+		<DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" />
 		<SpecialEffect Id="CrystalBreak_Small" AssetId="SpecialEffects/CrystalBreak_Small" />
 		<SpecialEffect Id="StoneBreak" AssetId="SpecialEffects/StoneBreak" />
 	</Objects>
