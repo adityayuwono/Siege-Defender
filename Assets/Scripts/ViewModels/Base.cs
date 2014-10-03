@@ -88,7 +88,7 @@ namespace Scripts.ViewModels
         protected virtual void OnDeactivate() { }
         #endregion
 
-
+        #region Destruction
         public Action OnDestroy;
         public void Destroy()
         {
@@ -105,8 +105,9 @@ namespace Scripts.ViewModels
             _view = null;
             Root.UnregisterView(this);
         }
+        #endregion
 
-        public T GetParent<T>() where T : Base
+        protected T GetParent<T>() where T : Base
         {
             var parent = Parent as T;
             return parent ?? Parent.GetParent<T>();
