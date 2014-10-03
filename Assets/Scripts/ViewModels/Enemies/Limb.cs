@@ -46,11 +46,9 @@ namespace Scripts.ViewModels.Enemies
         {
             if (DoBreakParts != null)
                 DoBreakParts();
-        }
 
-        public string CollisionEffectBroken
-        {
-            get { return string.IsNullOrEmpty(_model.CollisionEffectBroken) ? CollisionEffectNormal : _model.CollisionEffectBroken; }
+            if (!string.IsNullOrEmpty(_model.CollisionEffectBroken))
+                CollisionEffectNormal = _model.CollisionEffectBroken;
         }
     }
 }
