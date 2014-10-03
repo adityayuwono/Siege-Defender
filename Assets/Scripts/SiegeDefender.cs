@@ -50,7 +50,7 @@ namespace Scripts
 
             #region Model to ViewModel
             IoCContainer.RegisterFor<ObjectModel>().TypeOf<Object>().To<Object>();
-            IoCContainer.RegisterFor<SpecialEffectModel>().TypeOf<SpecialEffect>().To<SpecialEffect>();
+            IoCContainer.RegisterFor<SpecialEffectModel>().TypeOf<Object>().To<SpecialEffect>();
             IoCContainer.RegisterFor<ElementModel>().TypeOf<Object>().To<Element>();
             IoCContainer.RegisterFor<PlayerModel>().TypeOf<Object>().To<Player>();
             IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<Object>().To<EnemyManager>();
@@ -65,14 +65,14 @@ namespace Scripts
             IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<Button>();
 
             // ProjectileBase
-            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<ProjectileBase>().To<Projectile>();
-            IoCContainer.RegisterFor<PiercingProjectileModel>().TypeOf<ProjectileBase>().To<PiercingProjectile>();
-            IoCContainer.RegisterFor<AoEModel>().TypeOf<ProjectileBase>().To<AoE>();
-            IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<ProjectileBase>().To<ParticleAoE>();
+            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<Object>().To<Projectile>();
+            IoCContainer.RegisterFor<PiercingProjectileModel>().TypeOf<Object>().To<PiercingProjectile>();
+            IoCContainer.RegisterFor<AoEModel>().TypeOf<Object>().To<AoE>();
+            IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<Object>().To<ParticleAoE>();
 
-            IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<EnemyBase>().To<EnemyBase>();
-            IoCContainer.RegisterFor<BossModel>().TypeOf<EnemyBase>().To<Boss>();
-            IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<DamageGUI>().To<DamageGUI>();
+            IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<Object>().To<EnemyBase>();
+            IoCContainer.RegisterFor<BossModel>().TypeOf<Object>().To<Boss>();
+            IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<Object>().To<DamageGUI>();
 
             IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
 

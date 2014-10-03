@@ -32,7 +32,7 @@ namespace Scripts.ViewModels
         protected TU GetObject<TU>(string objectId) where TU : T
         {
             var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId));
-            _activeObjects.Add(objectResult);
+            _activeObjects.Add(objectResult as T);
             ActiveObjects.SetValue(ActiveObjects.GetValue() + 1);
             objectResult.OnObjectDeactivated += Object_OnDeath;
             return objectResult as TU;
@@ -46,12 +46,12 @@ namespace Scripts.ViewModels
             var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
             objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, Id, ObjectCount);
             objectModel.Type = id;
-            var newObject = Root.IoCContainer.GetInstance<T>(objectModel.GetType(), new System.Object[] {objectModel, this});
+            var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, this});
 
             if (newObject == null)
-                throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(T)));
+                throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(Object)));
             
-            return newObject;
+            return newObject as T;
         }
 
         public readonly AdjustableProperty<int> ActiveObjects;
@@ -68,19 +68,19 @@ namespace Scripts.ViewModels
         {
             var objectType = inactiveObject.Type;
 
-            if (_inactiveObjects.ContainsKey(objectType))
-                _inactiveObjects[objectType].Add(inactiveObject);
+            if (InactiveObjects.ContainsKey(objectType))
+                InactiveObjects[objectType].Add(inactiveObject);
             else
-                _inactiveObjects.Add(objectType, new List<T> { inactiveObject });
+                InactiveObjects.Add(objectType, new List<Object> { inactiveObject });
         }
-        
-        private readonly Dictionary<string, List<T>> _inactiveObjects = new Dictionary<string, List<T>>();
-        private T CheckInactiveObjects(string objectId)
+
+        private static readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
+        private Object CheckInactiveObjects(string objectId)
         {
             // Id is not registered yet
-            if (!_inactiveObjects.ContainsKey(objectId)) return null;
+            if (!InactiveObjects.ContainsKey(objectId)) return null;
 
-            var objectList = _inactiveObjects[objectId];
+            var objectList = InactiveObjects[objectId];
 
             // Id is registered, but we don't have any copies of that inactiveObject
             if (objectList.Count == 0) return null;
@@ -101,12 +101,12 @@ namespace Scripts.ViewModels
             foreach (var activeObject in _activeObjects)
                 activeObject.Destroy();
 
-            foreach (var inactiveObjectKVP in _inactiveObjects)
+            foreach (var inactiveObjectKVP in InactiveObjects)
                 foreach (var inactiveObject in inactiveObjectKVP.Value)
                     inactiveObject.Destroy();
 
             _activeObjects.Clear();
-            _inactiveObjects.Clear();
+            InactiveObjects.Clear();
 
             base.OnDestroyed();
         }
