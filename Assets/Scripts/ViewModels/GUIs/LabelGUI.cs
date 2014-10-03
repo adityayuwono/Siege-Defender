@@ -12,10 +12,5 @@ namespace Scripts.ViewModels.GUIs
         }
 
         public readonly Property<string> Text = new Property<string>();
-
-        public string Font
-        {
-            get { return _model.Font; }
-        }
     }
 }
