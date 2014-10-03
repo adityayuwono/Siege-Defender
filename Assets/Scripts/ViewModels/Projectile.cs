@@ -1,5 +1,6 @@
 ﻿using System;
 using Scripts.Core;
+using Scripts.Helpers;
 using Scripts.Models;
 using Scripts.Views;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace Scripts.ViewModels
 
         protected override float CalculateDamage()
         {
-            var splitDamage = _model.Damage.Split('-');
+            var splitDamage = _model.Damage.Split(Values.DAMAGE_DELIMITER);
             var currentDamage = float.Parse(splitDamage[0]);
 
             foreach (var damage in splitDamage)

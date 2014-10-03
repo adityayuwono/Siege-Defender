@@ -12,6 +12,8 @@ namespace Scripts.Helpers
         }
 
         public const int CROSSHAIR_LAYERMASK = ~(1 << 9);
+
+        public const char DAMAGE_DELIMITER = '-';
     }
 
     public static class FilePaths
