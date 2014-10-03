@@ -14,14 +14,20 @@ namespace Scripts
 {
     public abstract class EngineBase : Base
     {
+        /// <summary>
+        /// The root of all classes
+        /// </summary>
+        public override EngineBase Root
+        {
+            get { return this; }
+        }
+
         private readonly EngineModel _model;
         
         public EngineBase(EngineModel model, Base parent) : base(model, parent)
         {
             _model = model;
         }
-
-        public virtual void MapInjections() { }
 
         protected override void OnLoad()
         {
@@ -32,7 +38,7 @@ namespace Scripts
                 _objectModels.Add(objectModel.Id, objectModel);
         }
 
-
+        #region View Lookup Pool
         private readonly Dictionary<string, BaseView> _views = new Dictionary<string, BaseView>();
         public void RegisterView(Base viewModel, BaseView view)
         {
@@ -53,21 +59,19 @@ namespace Scripts
 
             return _views[id] as T;
         }
+        #endregion
 
+        #region Singletons
+        // Singletons, meaning there should be only one instance of these
         public abstract IntervalRunner IntervalRunner { get; }
         public IIoCContainer IoCContainer;
         public BindingManager Binding;
         public IResource ResourceManager;
-
         public DamageDisplayManager DamageDisplay;
         public SpecialEffectManager SpecialEffectManager;
+        #endregion
 
-
-        public override EngineBase Root
-        {
-            get { return this; }
-        }
-
+        #region Object Models
         private readonly Dictionary<string, ObjectModel> _objectModels = new Dictionary<string, ObjectModel>(); 
         public ObjectModel GetObjectModel(string id)
         {
@@ -76,6 +80,7 @@ namespace Scripts
 
             throw new EngineException(this, string.Format("ObjectModel not found, Id: {0}", id));
         }
+        #endregion
 
         #region Property Lookup
         private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>(); 
@@ -122,6 +127,8 @@ namespace Scripts
         #endregion
 
         #region Virtual Methods
+        public virtual void MapInjections() { }
+
         public virtual InventoryModel InventoryModel
         {
             get { throw new System.NotImplementedException(); }
