@@ -35,6 +35,7 @@ namespace Scripts.ViewModels.Enemies
 
         /// <summary>
         /// Reduce health by the amount specified
+        /// Health is only reduced if it is above 0
         /// </summary>
         /// <param name="damage">How many health we should reduce</param>
         /// <param name="contactPoint">Impact coordinate for displaying damage</param>
@@ -46,6 +47,7 @@ namespace Scripts.ViewModels.Enemies
 
             var currentHealth = Health.GetValue();
 
+            // To avoid killing the enemy more than once
             if (currentHealth > 0)
             {
                 currentHealth -= damage;
@@ -55,6 +57,7 @@ namespace Scripts.ViewModels.Enemies
                 Health.SetValue(currentHealth);
             }
 
+            // Because Vector3 is a struct and structs can't be null
             if (Vector3.zero != contactPoint)
             {
                 Root.DamageDisplay.DisplayDamage(damage, contactPoint);
