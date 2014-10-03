@@ -53,7 +53,7 @@ namespace Scripts.ViewModels
         private bool _hasCollided;
         public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
         {
-            // Need checking here because sometimes two collisions can happen very quickly
+            // BUG: Need checking here because sometimes two collisions can happen very quickly
             if (_hasCollided) return;
             _hasCollided = true;
 
