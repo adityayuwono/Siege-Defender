@@ -14,6 +14,13 @@ namespace Scripts.Helpers
         public const int CROSSHAIR_LAYERMASK = ~(1 << 9);
 
         public const char DAMAGE_DELIMITER = '-';
+
+        public static class Defaults
+        {
+            public const string BOSS_CHARACTER_ROOT_TAG = "Character";
+            public const string WAYPOINT_TRANSFORM_TAG = "Waypoint";
+            public const string WALKING_ANIMATION_BOOL_TAG = "IsWalking";
+        }
     }
 
     public static class FilePaths
