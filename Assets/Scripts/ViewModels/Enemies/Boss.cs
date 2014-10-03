@@ -37,7 +37,7 @@ namespace Scripts.ViewModels.Enemies
         #region Skill
 
         private bool _isASkillActive;
-        private string QueuedSkillId;
+        private string _queuedSkillId;
         private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
         /// <summary>
         /// Only one skill may be active at one time
@@ -60,10 +60,8 @@ namespace Scripts.ViewModels.Enemies
             if (_isASkillActive)
             {
                 if (skillToActivate.IsQueuedable)
-                {
-                    QueuedSkillId = skillIdToActivate;
-                    UnityEngine.Debug.LogError("Queued "+skillIdToActivate);
-                }
+                    _queuedSkillId = skillIdToActivate;
+
                 ActiveSkill.SetValue("");
                 return;
             }
@@ -79,10 +77,10 @@ namespace Scripts.ViewModels.Enemies
             ActiveSkill.SetValue("");// Set the active skill back to empty
             _isASkillActive = false;
 
-            if (!string.IsNullOrEmpty(QueuedSkillId))
+            if (!string.IsNullOrEmpty(_queuedSkillId))
             {
-                var queuedSkillId = QueuedSkillId;
-                QueuedSkillId = "";
+                var queuedSkillId = _queuedSkillId;
+                _queuedSkillId = "";// Reset the queued skill id parameter first to avoid infinite loop
                 ActiveSkill.SetValue(queuedSkillId);
             }
         }
@@ -110,6 +108,22 @@ namespace Scripts.ViewModels.Enemies
 
             foreach (var limb in _limbs)
                 limb.Show();
+        }
+
+        public override void Hide(string reason)
+        {
+            foreach (var limb in _limbs)
+                limb.Hide("Boss is hidden");
+
+            base.Hide(reason);
+        }
+
+        protected override void OnDeactivate()
+        {
+            foreach (var phase in _triggers)
+                phase.Deactivate("Boss is deactivated");
+
+            base.OnDeactivate();
         }
 
 
