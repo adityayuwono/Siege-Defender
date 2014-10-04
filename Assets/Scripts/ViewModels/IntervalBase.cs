@@ -9,7 +9,7 @@ namespace Scripts.ViewModels
     {
         private readonly IntervalModel _model;
 
-        protected Interval(IntervalModel model, Object parent) : base(model, parent)
+        protected Interval(IntervalModel model, Base parent) : base(model, parent)
         {
             _model = model;
 
