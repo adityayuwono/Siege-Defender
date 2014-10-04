@@ -40,13 +40,13 @@ namespace Scripts.ViewModels
 
         private int _objectCount;
         protected int ObjectCount { get { return _objectCount++; } }
-        protected virtual T SpawnNewObject(string id)
+        protected virtual T SpawnNewObject(string id, Base overrideParent = null)
         {
             var modelToCopy = Root.GetObjectModel(id);
             var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
             objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, Id, ObjectCount);
             objectModel.Type = id;
-            var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, this});
+            var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, overrideParent??this});
 
             if (newObject == null)
                 throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(Object)));
