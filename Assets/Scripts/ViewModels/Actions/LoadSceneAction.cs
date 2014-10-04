@@ -15,7 +15,7 @@ namespace Scripts.ViewModels
         {
             base.Invoke();
 
-            Root.ChangeScene(_model.Target);
+            Root.ChangeScene(_model.Target, _model.LevelId);
         }
     }
 }

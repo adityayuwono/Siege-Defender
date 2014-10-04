@@ -20,6 +20,9 @@ namespace Scripts.Models
         [XmlElement(ElementName = "Spawn", Type = typeof(SpawnModel))]
         public List<SpawnModel> SpawnSequence { get; set; }
 
+        [XmlElement(ElementName = "Cache", Type = typeof(SpawnModel))]
+        public List<SpawnModel> CacheList { get; set; }
+
         public LevelModel()
         {
             LoopCount = 0;

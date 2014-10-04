@@ -11,6 +11,11 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
+            // Tell the parent Scene that it has an EnemyManager
+            var parentScene = parent as Scene;
+            if (parentScene != null)
+                parentScene.EnemyManager = this;
+
             Level = new AdjustableProperty<string>("Level", this, true);
             Level.OnChange += LoadLevel;
 

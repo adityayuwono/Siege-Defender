@@ -29,9 +29,9 @@ namespace Scripts.ViewModels
 
         #region Spawning Objects
 
-        protected TU GetObject<TU>(string objectId) where TU : T
+        protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : T
         {
-            var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId));
+            var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, overrideParent));
             _activeObjects.Add(objectResult as T);
             ActiveObjects.SetValue(ActiveObjects.GetValue() + 1);
             objectResult.OnObjectDeactivated += Object_OnDeath;
@@ -125,7 +125,7 @@ namespace Scripts.ViewModels
 
     public abstract class IntervalBase : Element
     {
-        protected IntervalBase(IntervalModel model, Object parent) : base(model, parent) { }
+        protected IntervalBase(IntervalModel model, Base parent) : base(model, parent) { }
         public readonly Property<float> Interval = new Property<float>();
     }
 }
