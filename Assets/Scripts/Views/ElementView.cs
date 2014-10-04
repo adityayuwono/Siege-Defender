@@ -14,7 +14,19 @@ namespace Scripts.Views
             _viewModel = viewModel;
             _parent = parent;
         }
-        
+
+        protected override void OnLoad()
+        {
+            base.OnLoad();
+
+            _viewModel.VisibilityBinding.OnChange += UpdateVisibility;
+        }
+
+        private void UpdateVisibility()
+        {
+            GameObject.SetActive(_viewModel.VisibilityBinding.GetValue());
+        }
+
         protected override GameObject GetGameObject()
         {
             // We try to find matching child, if there's none, we instantiate from prefabs
