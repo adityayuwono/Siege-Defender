@@ -1,0 +1,21 @@
+V:\Personal Projects\Siege Defender Tests\bin\Debug\SiegeDefenderTests.dll
+V:\Personal Projects\Siege Defender Tests\bin\Debug\SiegeDefenderTests.pdb
+V:\Personal Projects\Siege Defender Tests\obj\Debug\SiegeDefenderTests.csprojResolveAssemblyReference.cache
+V:\Personal Projects\Siege Defender Tests\obj\Debug\SiegeDefenderTests.dll
+V:\Personal Projects\Siege Defender Tests\obj\Debug\SiegeDefenderTests.pdb
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\SiegeDefenderTests.dll
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\SiegeDefenderTests.pdb
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\Assembly-CSharp.dll
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\UnityEngine.dll
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\Assembly-CSharp-firstpass.dll
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\UnityEditor.dll
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\Assembly-CSharp.pdb
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\UnityEngine.xml
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\Assembly-CSharp-firstpass.pdb
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\UnityEditor.xml
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\obj\Debug\SiegeDefenderTests.csprojResolveAssemblyReference.cache
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\obj\Debug\SiegeDefenderTests.dll
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\obj\Debug\SiegeDefenderTests.pdb
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\nunit.framework.dll
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\nunit.mocks.dll
+V:\Personal Projects\Balista Shooter\Siege Defender Tests\bin\Debug\nunit.framework.xml
