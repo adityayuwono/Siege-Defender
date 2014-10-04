@@ -23,15 +23,6 @@ namespace Scripts.Components
                 Screen.height * Values.GUI_CIRCLE_SIZE_F);
             _clickCheckArea = _clickArea;
             _clickCheckArea.y = 0f;
-
-            _image = Resources.Load<Texture2D>("GUIs/Circle");
-        }
-
-        private Texture2D _image;
-
-        private void OnGUI()
-        {
-            GUI.DrawTexture(_clickArea, _image);
         }
 
         private Rect _clickArea;
