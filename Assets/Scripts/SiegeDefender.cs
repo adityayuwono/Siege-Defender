@@ -1,28 +1,19 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Scripts.Components;
-using Scripts.Core;
 using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.Models;
-using Scripts.Models.Actions;
-using Scripts.Models.Enemies;
-using Scripts.Models.GUIs;
 using Scripts.ViewModels;
-using Scripts.ViewModels.Actions;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;
 using Scripts.Views;
 using Scripts.Views.GUIs;
-using UnityEngine;
 using Object = Scripts.ViewModels.Object;
 
 namespace Scripts
 {
     public class SiegeDefender : EngineBase
     {
-        public static EngineBase Instance;
-
         private readonly EngineModel _model;
         private readonly InventoryModel _inventoryModel;
 
@@ -38,50 +29,11 @@ namespace Scripts
             _model = model;
             _context = parent;
             _inventoryModel = inventoryModel;
-
-            Instance = this;
         }
 
         public override void MapInjections()
         {
-            IoCContainer = new IoCContainer();
-            Binding = new BindingManager(this);
-            ResourceManager = new ResourcePooler(this);
-
-            #region Model to ViewModel
-            IoCContainer.RegisterFor<ObjectModel>().TypeOf<Object>().To<Object>();
-            IoCContainer.RegisterFor<SpecialEffectModel>().TypeOf<Object>().To<SpecialEffect>();
-            IoCContainer.RegisterFor<ElementModel>().TypeOf<Object>().To<Element>();
-            IoCContainer.RegisterFor<PlayerModel>().TypeOf<Object>().To<Player>();
-            IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<Object>().To<EnemyManager>();
-            IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<Object>().To<PlayerHitbox>();
-            IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Object>().To<GUIRoot>();
-            IoCContainer.RegisterFor<DamageDisplayGUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
-            IoCContainer.RegisterFor<SpecialEffectManagerModel>().TypeOf<Object>().To<SpecialEffectManager>();
-            IoCContainer.RegisterFor<ObjectDisplayModel>().TypeOf<Object>().To<ObjectDisplay>();
-            // GUIs
-            IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
-            IoCContainer.RegisterFor<ItemModel>().TypeOf<Object>().To<Item>();
-            IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<Button>();
-
-            // ProjectileBase
-            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<Object>().To<Projectile>();
-            IoCContainer.RegisterFor<PiercingProjectileModel>().TypeOf<Object>().To<PiercingProjectile>();
-            IoCContainer.RegisterFor<AoEModel>().TypeOf<Object>().To<AoE>();
-            IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<Object>().To<ParticleAoE>();
-
-            IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<Object>().To<EnemyBase>();
-            IoCContainer.RegisterFor<BossModel>().TypeOf<Object>().To<Boss>();
-            IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<Object>().To<DamageGUI>();
-
-            IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
-
-            // Actions, doesnt have a view
-            IoCContainer.RegisterFor<LoadSceneActionModel>().TypeOf<BaseAction>().To<LoadSceneAction>();
-            IoCContainer.RegisterFor<SetterActionModel>().TypeOf<BaseAction>().To<SetterAction>();
-            IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<BaseCondition>().To<ValueCondition>();
-            IoCContainer.RegisterFor<RandomConditionModel>().TypeOf<BaseCondition>().To<RandomCondition>();
-            #endregion
+            base.MapInjections();
 
             #region ViewModel to View(BaseView)
             IoCContainer.RegisterFor<Projectile>().TypeOf<BaseView>().To<ProjectileView>();
@@ -117,18 +69,12 @@ namespace Scripts
 
             IoCContainer.RegisterFor<GUIRoot>().TypeOf<BaseView>().To<GUIRootView>();
             #endregion
-
-            base.MapInjections();
         }
 
         protected override void OnActivate()
         {
             base.OnActivate();
-
-            // Cache all scenes on the dictionary
-            foreach (var sceneModel in _model.Scenes)
-                _scenes.Add(sceneModel.Id, new Scene(sceneModel, this));
-
+            
             ChangeScene(_model.Scenes[0].Id);// Load the first scene on the list
         }
 
@@ -137,37 +83,14 @@ namespace Scripts
             get { return _context.IntervalRunner; }
         }
 
-        public override LevelModel GetLevel(string levelId)
+        public override void StartCoroutine(IEnumerator coroutine)
         {
-            foreach (var levelModel in _model.Levels.Where(levelModel => levelModel.Id == levelId))
-            {
-                return levelModel;
-            }
-            throw new EngineException(this, string.Format("Enemy not found: {0}", levelId));
-        }
-
-        public override Coroutine StartCoroutine(IEnumerator coroutine)
-        {
-            return _context.StartCoroutine(coroutine);
+            _context.StartCoroutine(coroutine);
         }
 
         public override void ThrowError(string message)
         {
             _context.ThrowError(message);
-        }
-
-        private Scene _currentScene;
-        private readonly Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>(); 
-        public override void ChangeScene(string sceneId)
-        {
-            // Deactivate Current Active Scene, to avoid space time continuum
-            if (_currentScene != null)
-                _currentScene.Destroy();// Destroy scenes when they are not needed anymore to clear memory
-
-            // I think it's save enough to show a new one, let's hope i'm right
-            _currentScene = _scenes[sceneId];
-            _currentScene.Activate();
-            _currentScene.Show();
         }
 
         public override void Save()

@@ -2,11 +2,12 @@
 using System.Linq;
 using Scripts.Core;
 using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.Models.Enemies;
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class Boss : EnemyBase
+    public class Boss : EnemyBase, IContext
     {
         private readonly BossModel _model;
         public Boss(BossModel model, Object parent) : base(model, parent)
@@ -31,6 +32,18 @@ namespace Scripts.ViewModels.Enemies
 
             MoveToARandomWaypoint = new AdjustableProperty<bool>("MoveToARandomWaypoint", this);
         }
+
+        public PropertyLookup PropertyLookup
+        {
+            get
+            {
+                if (_propertyLookup == null)
+                    _propertyLookup = new PropertyLookup(Root, this);
+
+                return _propertyLookup;
+            }
+        }
+        private PropertyLookup _propertyLookup;
 
         public readonly AdjustableProperty<bool> MoveToARandomWaypoint;
 

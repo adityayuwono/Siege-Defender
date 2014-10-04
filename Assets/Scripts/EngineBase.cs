@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Components;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Actions;
+using Scripts.Models.Enemies;
+using Scripts.Models.GUIs;
 using Scripts.ViewModels;
+using Scripts.ViewModels.Actions;
+using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;
 using Scripts.Views;
-using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts
 {
-    public abstract class EngineBase : Base
+    public abstract class EngineBase : Base, IContext
     {
         /// <summary>
         /// The root of all classes
@@ -27,6 +33,15 @@ namespace Scripts
         public EngineBase(EngineModel model, Base parent) : base(model, parent)
         {
             _model = model;
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            // Cache all scenes on the dictionary
+            foreach (var sceneModel in _model.Scenes)
+                _scenes.Add(sceneModel.Id, new Scene(sceneModel, this));
         }
 
         protected override void OnLoad()
@@ -68,6 +83,7 @@ namespace Scripts
         public IResource ResourceManager;
         public DamageDisplayManager DamageDisplay;
         public SpecialEffectManager SpecialEffectManager;
+        public PropertyLookup PropertyLookup { get; private set; }
         #endregion
 
         #region Object Models
@@ -81,52 +97,49 @@ namespace Scripts
         }
         #endregion
 
-        #region Property Lookup
-        private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>(); 
-        public void RegisterProperty(Base viewModel, string id, Property property)
-        {
-            if (_properties.ContainsKey(id))
-            {
-                // We already register that type of property, let's add to the list
-                var propertyDict = _properties[id];
-                if (propertyDict.ContainsKey(viewModel.Id))
-                    // Woops, duplicate
-                    throw new EngineException(this, string.Format("Failed to register property: {0} for ViewModel: {1}, Duplicate is found", id, viewModel.Id));
-
-                // OK, everything is good, add a new property
-                propertyDict.Add(viewModel.Id, property);
-            }
-            else
-            {
-                // No similar property registered yet, meaning this is the first of it's kind, momentous
-                _properties.Add(id, new Dictionary<string, Property> {{viewModel.Id, property}});
-            }
-        }
-
-        public void UnregisterProperty(Base viewModel, string id)
-        {
-            _properties[id].Remove(viewModel.Id);
-        }
-
-        /// <summary>
-        /// Get Property from list, will throw exception upon failure
-        /// </summary>
-        /// <returns>The Property asked, Does not return null</returns>
-        public Property GetProperty(string viewModelId, string propertyId)
-        {
-            if (!_properties.ContainsKey(propertyId))
-                throw new EngineException(this, string.Format("Failed to find Property with Id: {0} of ViewModel: {1}, the property is not registered", propertyId, viewModelId));
-
-            var propertyDict = _properties[propertyId];
-            if (!propertyDict.ContainsKey(viewModelId))
-                throw new EngineException(this, string.Format("Failed to find Property with Id: {0} of ViewModel: {1}", propertyId, viewModelId));
-
-            return propertyDict[viewModelId];
-        }
-        #endregion
-
         #region Virtual Methods
-        public virtual void MapInjections() { }
+
+        public virtual void MapInjections()
+        {
+            IoCContainer = new IoCContainer();
+            ResourceManager = new ResourcePooler(this);
+            PropertyLookup = new PropertyLookup(this, this);// This is the root
+
+            #region Model to ViewModel
+            IoCContainer.RegisterFor<ObjectModel>().TypeOf<Object>().To<Object>();
+            IoCContainer.RegisterFor<SpecialEffectModel>().TypeOf<Object>().To<SpecialEffect>();
+            IoCContainer.RegisterFor<ElementModel>().TypeOf<Object>().To<Element>();
+            IoCContainer.RegisterFor<PlayerModel>().TypeOf<Object>().To<Player>();
+            IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<Object>().To<EnemyManager>();
+            IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<Object>().To<PlayerHitbox>();
+            IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Object>().To<GUIRoot>();
+            IoCContainer.RegisterFor<DamageDisplayGUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
+            IoCContainer.RegisterFor<SpecialEffectManagerModel>().TypeOf<Object>().To<SpecialEffectManager>();
+            IoCContainer.RegisterFor<ObjectDisplayModel>().TypeOf<Object>().To<ObjectDisplay>();
+            // GUIs
+            IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
+            IoCContainer.RegisterFor<ItemModel>().TypeOf<Object>().To<Item>();
+            IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<Button>();
+
+            // ProjectileBase
+            IoCContainer.RegisterFor<ProjectileModel>().TypeOf<Object>().To<Projectile>();
+            IoCContainer.RegisterFor<PiercingProjectileModel>().TypeOf<Object>().To<PiercingProjectile>();
+            IoCContainer.RegisterFor<AoEModel>().TypeOf<Object>().To<AoE>();
+            IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<Object>().To<ParticleAoE>();
+
+            IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<Object>().To<EnemyBase>();
+            IoCContainer.RegisterFor<BossModel>().TypeOf<Object>().To<Boss>();
+            IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<Object>().To<DamageGUI>();
+
+            IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
+
+            // Actions, doesnt have a view
+            IoCContainer.RegisterFor<LoadSceneActionModel>().TypeOf<BaseAction>().To<LoadSceneAction>();
+            IoCContainer.RegisterFor<SetterActionModel>().TypeOf<BaseAction>().To<SetterAction>();
+            IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<BaseCondition>().To<ValueCondition>();
+            IoCContainer.RegisterFor<RandomConditionModel>().TypeOf<BaseCondition>().To<RandomCondition>();
+            #endregion
+        }
 
         public virtual InventoryModel InventoryModel
         {
@@ -138,26 +151,41 @@ namespace Scripts
             throw new System.NotImplementedException();
         }
 
-        public virtual LevelModel GetLevel(string levelId)
+        public LevelModel GetLevel(string levelId)
         {
-            throw new System.NotImplementedException();
+            foreach (var levelModel in _model.Levels.Where(levelModel => levelModel.Id == levelId))
+            {
+                return levelModel;
+            }
+            throw new EngineException(this, string.Format("Level not found: {0}", levelId));
         }
 
-        public virtual Coroutine StartCoroutine(IEnumerator coroutine)
+        public virtual void StartCoroutine(IEnumerator coroutine)
         {
-            throw new System.NotImplementedException();
+            coroutine.MoveNext();
         }
 
         public virtual void ThrowError(string message)
         {
             throw new System.NotImplementedException();
         }
-
-        public virtual void ChangeScene(string sceneId)
-        {
-            throw new System.NotImplementedException();
-        }
-
+        
         #endregion
+
+        private Scene _currentScene;
+        protected readonly Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
+        public Scene ChangeScene(string sceneId, string levelId = "")
+        {
+            // Deactivate Current Active Scene, to avoid space time continuum
+            if (_currentScene != null)
+                _currentScene.Destroy();// Destroy scenes when they are not needed anymore to clear memory
+
+            // I think it's save enough to show a new one, let's hope i'm right
+            _currentScene = _scenes[sceneId];
+            _currentScene.Activate(levelId);
+            _currentScene.Show();
+
+            return _currentScene;
+        }
     }
 }

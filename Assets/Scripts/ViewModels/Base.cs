@@ -107,7 +107,7 @@ namespace Scripts.ViewModels
         }
         #endregion
 
-        protected T GetParent<T>() where T : Base
+        public T GetParent<T>() where T : class, IBase
         {
             var parent = Parent as T;
             return parent ?? Parent.GetParent<T>();

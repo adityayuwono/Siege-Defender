@@ -1,4 +1,6 @@
 ﻿using Scripts.Core;
+using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
@@ -31,7 +33,11 @@ namespace Scripts.ViewModels.Actions
             else if (_model.Target == "{Monster}")
                 target = GetParent<EnemyBase>().Id;
 
-            return Root.GetProperty(target, _model.Property);
+            var parentContext = GetParent<IContext>();
+            if (parentContext == null)
+                throw new EngineException(this, "Failed to find parent Context");
+
+            return parentContext.PropertyLookup.GetProperty(target, _model.Property);
         }
     }
 }

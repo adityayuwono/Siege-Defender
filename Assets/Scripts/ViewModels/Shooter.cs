@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Scripts.Core;
 using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.Models;
 using UnityEngine;
 
@@ -46,6 +47,11 @@ namespace Scripts.ViewModels
             private set { _accuracy = value; }
         }
 
+        public int Scatters
+        {
+            get { return _projectileModel.Scatters; }
+        }
+
         public int Index
         {
             get { return _model.Index; }
@@ -58,8 +64,8 @@ namespace Scripts.ViewModels
         protected override void OnLoad()
         {
             base.OnLoad();
-            
-            _projectileBinding = Root.Binding.GetProperty<string>(_model.ProjectileId);
+
+            _projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.ProjectileId);
             _projectileBinding.OnChange += Projectile_OnChange;
             Projectile_OnChange();
             

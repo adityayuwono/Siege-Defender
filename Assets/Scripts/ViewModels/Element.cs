@@ -1,4 +1,6 @@
-﻿using Scripts.Models;
+﻿using Scripts.Core;
+using Scripts.Interfaces;
+using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
@@ -6,9 +8,23 @@ namespace Scripts.ViewModels
     {
         private readonly ElementModel _model;
 
-        public Element(ElementModel model, Object parent) : base(model, parent)
+        public Element(ElementModel model, Base parent) : base(model, parent)
         {
             _model = model;
         }
+
+        protected override void OnLoad()
+        {
+            base.OnLoad();
+
+            if (string.IsNullOrEmpty(_model.IsVisible))
+            {
+                VisibilityBinding = new Property<bool>();
+                VisibilityBinding.SetValue(true);
+            }
+            else
+                VisibilityBinding = GetParent<IContext>().PropertyLookup.GetProperty<bool>(_model.IsVisible);
+        }
+        public Property<bool> VisibilityBinding;
     }
 }
