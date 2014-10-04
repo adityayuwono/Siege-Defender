@@ -65,7 +65,6 @@ namespace Scripts
         // Singletons, meaning there should be only one instance of these
         public abstract IntervalRunner IntervalRunner { get; }
         public IIoCContainer IoCContainer;
-        public BindingManager Binding;
         public IResource ResourceManager;
         public DamageDisplayManager DamageDisplay;
         public SpecialEffectManager SpecialEffectManager;
