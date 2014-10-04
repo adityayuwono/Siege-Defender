@@ -28,5 +28,10 @@ namespace Scripts.Models
         [XmlArray]
         [XmlArrayItem(ElementName = "Scene", Type = typeof(SceneModel))]
         public List<SceneModel> Scenes { get; set; }
+
+        public EngineModel()
+        {
+            Objects = new List<ObjectModel>();
+        }
     }
 }

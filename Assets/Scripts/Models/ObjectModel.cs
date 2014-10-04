@@ -42,7 +42,7 @@ namespace Scripts.Models
         public ObjectModel()
         {
             DeathDelay = 0;
-
+            Elements = new List<ElementModel>();
             Position = "0,0,0";
         }
     }
