@@ -119,5 +119,10 @@ namespace Scripts.ViewModels
         {
             get { return _model.Id; }
         }
+
+        public string FullId
+        {
+            get { return Parent != null ? Parent.FullId + Id : Id; }
+        }
     }
 }

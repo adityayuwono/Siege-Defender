@@ -42,18 +42,18 @@ namespace Scripts
         private readonly Dictionary<string, BaseView> _views = new Dictionary<string, BaseView>();
         public void RegisterView(Base viewModel, BaseView view)
         {
-            if (_views.ContainsKey(viewModel.Id))
+            if (_views.ContainsKey(viewModel.FullId))
                 throw new EngineException(this, string.Format("Failed to register View of Type: {1}, duplicate for Id: {0}", viewModel.Id, viewModel.GetType()));
 
-            _views.Add(viewModel.Id, view);
+            _views.Add(viewModel.FullId, view);
         }
         public void UnregisterView(Base viewModel)
         {
-            _views.Remove(viewModel.Id);
+            _views.Remove(viewModel.FullId);
         }
         public T GetView<T>(Base viewModel) where T:BaseView
         {
-            var id = viewModel.Id;
+            var id = viewModel.FullId;
             if (!_views.ContainsKey(id))
                 throw new EngineException(this, string.Format("Failed to get view for Id: {0}", id));
 
