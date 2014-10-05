@@ -16,7 +16,6 @@ namespace Scripts.Models
         [DefaultValue(default(List<ElementModel>))]
         // 3D Objects
         [XmlArrayItem(ElementName = "Element", Type = typeof(ElementModel))]
-        [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
         [XmlArrayItem(ElementName = "Player", Type = typeof(PlayerModel))]
         [XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitboxModel))]
         [XmlArrayItem(ElementName = "GUIRoot", Type = typeof(RootGUIModel))]
@@ -25,7 +24,8 @@ namespace Scripts.Models
         // GUIs
         [XmlArrayItem(ElementName = "Inventory", Type = typeof(InventoryModel))]
         [XmlArrayItem(ElementName = "Button", Type = typeof(ButtonGUIModel))]
-
+        // Intervals
+        [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
         [XmlArrayItem(ElementName = "SpecialEffectManager", Type = typeof(SpecialEffectManagerModel))]
         public List<ElementModel> Elements { get; set; }
 

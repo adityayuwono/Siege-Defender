@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Scripts.Components
 {
+    /// <summary>
+    /// Drag to aim, stay to shoot repeatedly
+    /// </summary>
     public class ShootingGUI : BaseController
     {
         private Shooter _shooterView;
