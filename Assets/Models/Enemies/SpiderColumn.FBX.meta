@@ -1,0 +1,192 @@
+fileFormatVersion: 2
+guid: 494f43898e8ef4248ba98876236fa6fc
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Object004
+    100002: Object010_Part_003
+    100004: Object010_Part_2
+    100006: Object010_Part_3_Part_004
+    100008: Object010_Part_3_Part_005
+    100010: Object010_Part_3_Part_006
+    100012: Particle View 001
+    100014: Plane001
+    100016: Point001
+    100018: //RootNode
+    400000: Object004
+    400002: Object010_Part_003
+    400004: Object010_Part_2
+    400006: Object010_Part_3_Part_004
+    400008: Object010_Part_3_Part_005
+    400010: Object010_Part_3_Part_006
+    400012: Particle View 001
+    400014: Plane001
+    400016: Point001
+    400018: //RootNode
+    2300000: Object004
+    2300002: Object010_Part_003
+    2300004: Object010_Part_2
+    2300006: Object010_Part_3_Part_004
+    2300008: Object010_Part_3_Part_005
+    2300010: Object010_Part_3_Part_006
+    3300000: Object004
+    3300002: Object010_Part_003
+    3300004: Object010_Part_2
+    3300006: Object010_Part_3_Part_004
+    3300008: Object010_Part_3_Part_005
+    3300010: Object010_Part_3_Part_006
+    4300000: Object004
+    4300002: Object010_Part_2
+    4300004: Object010_Part_003
+    4300006: Object010_Part_3_Part_004
+    4300008: Object010_Part_3_Part_005
+    4300010: Object010_Part_3_Part_006
+    7400000: Spawn
+    7400002: Die
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Spawn
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Object010_Part_2
+        weight: 1
+      - path: Object010_Part_003
+        weight: 1
+      - path: Object010_Part_3_Part_004
+        weight: 1
+      - path: Object010_Part_3_Part_005
+        weight: 1
+      - path: Object010_Part_3_Part_006
+        weight: 1
+      - path: Particle View 001
+        weight: 1
+      - path: Plane001
+        weight: 1
+      - path: Plane001/Object004
+        weight: 1
+      - path: Point001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Die
+      takeName: Take 001
+      firstFrame: 21
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Object010_Part_2
+        weight: 1
+      - path: Object010_Part_003
+        weight: 1
+      - path: Object010_Part_3_Part_004
+        weight: 1
+      - path: Object010_Part_3_Part_005
+        weight: 1
+      - path: Object010_Part_3_Part_006
+        weight: 1
+      - path: Particle View 001
+        weight: 1
+      - path: Plane001
+        weight: 1
+      - path: Plane001/Object004
+        weight: 1
+      - path: Point001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
