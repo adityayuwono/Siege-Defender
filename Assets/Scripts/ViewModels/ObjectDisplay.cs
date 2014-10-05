@@ -1,5 +1,6 @@
 ﻿using Scripts.Core;
 using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
@@ -18,7 +19,7 @@ namespace Scripts.ViewModels
         {
             base.OnLoad();
 
-            ObjectIdBinding = Root.Binding.GetProperty<string>(_model.ObjectId);
+            ObjectIdBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.ObjectId);
             ObjectIdBinding.OnChange += ObjectId_OnChange;
         }
 
@@ -54,7 +55,7 @@ namespace Scripts.ViewModels
         }
 
 
-        protected override Object SpawnNewObject(string id)
+        protected override Object SpawnNewObject(string id, Base overrideParent = null)
         {
             var modelToCopy = Root.GetObjectModel(id);
             var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
