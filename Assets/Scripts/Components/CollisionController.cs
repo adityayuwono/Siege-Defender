@@ -34,8 +34,8 @@ namespace Scripts.Components
                     // TODO: Improve this
                     var collisionPosition = transform.position;
                     var targetPosition = target.transform.position;
-                    collisionPosition.x = targetPosition.x;
-                    collisionPosition.z = targetPosition.z;
+                    //collisionPosition.x = targetPosition.x;
+                    //collisionPosition.z = targetPosition.z;
 
                     OnCollision(viewModel, transform.position, collisionPosition);
                 }
