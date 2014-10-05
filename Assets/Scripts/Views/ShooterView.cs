@@ -1,9 +1,10 @@
 ﻿using Scripts.Components;
+using Scripts.Interfaces;
 using Scripts.ViewModels;
 
 namespace Scripts.Views
 {
-    public class ShooterView : IntervalView
+    public class ShooterView : IntervalView, IShooter
     {
         private readonly Shooter _viewModel;
 
@@ -38,10 +39,13 @@ namespace Scripts.Views
 
         protected override void IntervalInvoked()
         {
-            var projectile = _viewModel.SpawnProjectile();
-            
-            if (projectile!=null)
-                projectile.Shoot(_source, _target, _viewModel.Accuracy);
+            for (var i = 0; i < _viewModel.Scatters; i++)
+            {
+                var projectile = _viewModel.SpawnProjectile();
+
+                if (projectile != null)
+                    projectile.Shoot(_source, _target, _viewModel.Accuracy);
+            }
         }
 
         protected override void OnDestroy()

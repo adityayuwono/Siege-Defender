@@ -36,6 +36,10 @@ namespace Scripts.Models
         [DefaultValue(0f)]
         public float Deviation { get; set; }
 
+        [XmlAttribute]
+        [DefaultValue(1)]
+        public int Scatters { get; set; }
+
         public ProjectileModel()
         {
             DeathDelay = 1f;
@@ -43,6 +47,7 @@ namespace Scripts.Models
             Ammunition = -1;
             ReloadTime = 3f;
             Accuracy = 0.9f;
+            Scatters = 1;
             Deviation = 0f;
             Damage = "1";
             RoF = 1f;
