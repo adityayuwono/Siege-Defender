@@ -6,6 +6,7 @@ Library/*
 /raw assets
 /build
 /Assets/UnityVS*
+*Debug/
 *.suo
 *.csproj
 *.sln
