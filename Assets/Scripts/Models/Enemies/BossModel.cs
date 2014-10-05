@@ -8,15 +8,16 @@ namespace Scripts.Models.Enemies
     [Serializable]
     public class BossModel : EnemyBaseModel
     {
-        [XmlElement(ElementName = "Limb", Type = typeof(LimbModel))]
+        [XmlArray]
+        [XmlArrayItem(ElementName = "Limb", Type = typeof(LimbModel))]
         public List<LimbModel> Limbs { get; set; }
 
-
-        [XmlElement(ElementName = "Skill", Type = typeof(SkillModel))]
+        [XmlArray]
+        [XmlArrayItem(ElementName = "Skill", Type = typeof(SkillModel))]
         public List<SkillModel> Skills { get; set; }
 
-
-        [XmlElement(ElementName = "Trigger", Type = typeof(TriggeredModel))]
+        [XmlArray]
+        [XmlArrayItem(ElementName = "Trigger", Type = typeof(TriggeredModel))]
         public List<TriggeredModel> Triggers { get; set; } 
     }
 }
