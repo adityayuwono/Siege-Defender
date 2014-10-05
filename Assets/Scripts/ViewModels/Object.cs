@@ -17,6 +17,7 @@ namespace Scripts.ViewModels
             if (string.IsNullOrEmpty(_model.AssetId))
                 throw new EngineException(this, "No Asset defined");
 
+            // Instantiate children elements
             foreach (var elementModel in _model.Elements)
             {
                 var elementVM = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] { elementModel, this });
@@ -34,6 +35,8 @@ namespace Scripts.ViewModels
         {
             base.OnActivate();
 
+            _isDelaysIgnored = false;
+            
             foreach (var element in Elements)
                 element.Activate();
         }
@@ -63,15 +66,16 @@ namespace Scripts.ViewModels
         {
             return false;
         }
-        
+
         /// <summary>
         /// All things die eventually, we can only delay the inevitable
+        /// This will delay the deactivation to show death animation, unless it is ignored (e.g. for caching)
         /// </summary>
         public float DeathDelay
         {
-            get { return _model.DeathDelay; }
+            get { return _isDelaysIgnored ? 0 : _model.DeathDelay; }
         }
-        
+
         public Action<Object> OnObjectDeactivated;
         
         protected override void OnDeactivate()
@@ -111,5 +115,11 @@ namespace Scripts.ViewModels
             protected set { _position = value; }
         }
         #endregion
+
+        private bool _isDelaysIgnored;
+        public void TriggerIgnoreDelays()
+        {
+            _isDelaysIgnored = true;
+        }
     }
 }
