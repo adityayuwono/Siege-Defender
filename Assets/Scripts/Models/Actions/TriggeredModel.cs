@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace Scripts.Models.Actions
@@ -14,5 +15,14 @@ namespace Scripts.Models.Actions
         [XmlElement(ElementName = "LoadScene", Type = typeof(LoadSceneActionModel))]
         [XmlElement(ElementName = "Setter", Type = typeof(SetterActionModel))]
         public List<BaseActionModel> Actions { get; set; }
+
+        [XmlAttribute]
+        [DefaultValue(true)]
+        public bool TriggerOnce;
+
+        public TriggeredModel()
+        {
+            TriggerOnce = true;
+        }
     }
 }

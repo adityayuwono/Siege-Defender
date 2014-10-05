@@ -55,10 +55,18 @@ namespace Scripts.ViewModels.Enemies
                 isMatch &= condition.IsMatch.GetValue();
 
             if (isMatch)
+            {
+                if (_model.TriggerOnce)
+                {
+                    foreach (var condition in _conditions)
+                    {
+                        condition.IsMatch.OnChange -= Conditions_OnChange;
+                        condition.Deactivate("Triggered is deactivated");
+                    }
+                }
+
                 _actions.Activate();
+            }
         }
-
-
-        
     }
 }
