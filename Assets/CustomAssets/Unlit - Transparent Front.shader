@@ -19,9 +19,9 @@ Shader "Unlit/Transparent Front"
 		
 		Cull Off
 		Lighting Off
-		ZWrite Off
+		ZWrite On
 		Fog { Mode Off }
-		Offset -500000, -500000
+		Offset -5000000, -5000000
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
