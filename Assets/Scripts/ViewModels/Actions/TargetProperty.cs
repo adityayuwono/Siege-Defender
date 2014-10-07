@@ -12,6 +12,9 @@ namespace Scripts.ViewModels.Actions
         protected TargetProperty(TargetPropertyModel model, Base parent) : base(model, parent)
         {
             _model = model;
+
+            if (string.IsNullOrEmpty(_model.Target))
+                throw new EngineException(this, string.Format("{0} does not have a Target defined", FullId));
         }
 
         protected Property Property { get; private set; }
