@@ -22,6 +22,11 @@ namespace Scripts.ViewModels
             Level.SetValue(_model.LevelId);
         }
 
+        public override void Hide(string reason)
+        {
+            Hide(reason, false);
+        }
+
         public readonly AdjustableProperty<string> Level;
 
         private void LoadLevel()
@@ -57,8 +62,8 @@ namespace Scripts.ViewModels
                 var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
                 _spawnIndex++;
 
-                var enemy = GetObject<EnemyBase>(enemyId);
-                enemy.Activate();
+                var enemy = GetObject<EnemyBase>(enemyId, GetParent<Scene>());
+                enemy.Activate(this);
                 enemy.Show();
             }
         }

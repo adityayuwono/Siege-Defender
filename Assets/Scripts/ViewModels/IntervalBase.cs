@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
@@ -21,15 +22,29 @@ namespace Scripts.ViewModels
 
         public override void Hide(string reason)
         {
-            foreach (var activeObject in _activeObjects)
-                activeObject.Hide(reason);
+            Hide(reason, true);
+        }
+
+        protected void Hide(string reason, bool hideChildren)
+        {
+            if (hideChildren)
+            {
+                foreach (var activeObject in _activeObjects)
+                {
+                    activeObject.Hide(reason);
+                }
+            }
+            else
+            {
+                _activeObjects.Clear();
+            }
 
             base.Hide(reason);
         }
 
         #region Spawning Objects
 
-        protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : T
+        protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : Object
         {
             var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, overrideParent));
             _activeObjects.Add(objectResult as T);
@@ -44,9 +59,9 @@ namespace Scripts.ViewModels
         {
             var modelToCopy = Root.GetObjectModel(id);
             var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
-            objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, Id, ObjectCount);
+            objectModel.Id = string.Format("{0}_{1}_{2}_{3}", objectModel.Id, Id, ObjectCount, Guid.NewGuid());
             objectModel.Type = id;
-            var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, overrideParent??this});
+            var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, overrideParent ?? this});
 
             if (newObject == null)
                 throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(Object)));

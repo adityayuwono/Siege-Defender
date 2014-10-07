@@ -71,7 +71,7 @@ namespace Scripts.ViewModels
 
             foreach (var objectId in objectsToCache)
             {
-                var enemy = GetObject<Object>(objectId, EnemyManager);
+                var enemy = GetObject<Object>(objectId, this);
                 enemy.Activate();
                 enemy.Show(); // Have to show to cache, in order to prepare the prefabs
                 enemy.TriggerIgnoreDelays();
