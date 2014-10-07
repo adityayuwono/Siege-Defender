@@ -1,10 +1,9 @@
 ﻿using Scripts.Components;
-using Scripts.Interfaces;
 using Scripts.ViewModels;
 
 namespace Scripts.Views
 {
-    public class ShooterView : IntervalView, IShooter
+    public class ShooterView : IntervalView
     {
         private readonly Shooter _viewModel;
 
