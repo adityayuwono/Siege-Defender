@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
+using Scripts.Models.Actions;
 
 namespace Scripts.Models
 {
@@ -8,6 +9,9 @@ namespace Scripts.Models
     {
         [XmlAttribute]
         public int Health { get; set; }
+
+        [XmlElement]
+        public TriggeredModel Trigger { get; set; }
 
         [XmlAttribute]
         public string CollisionEffectNormal { get; set; }

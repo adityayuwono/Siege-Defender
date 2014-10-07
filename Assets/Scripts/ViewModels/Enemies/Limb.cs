@@ -14,24 +14,8 @@ namespace Scripts.ViewModels.Enemies
             _model = model;
             _parent = parent;
 
-            _trigger = new Triggered(_model.Trigger, this);
+            _model.DeathDelay = parent.DeathDelay;
         }
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-            _trigger.Activate();
-        }
-
-        protected override void OnDeactivate()
-        {
-            _trigger.Deactivate("Limb is deactivated");
-
-            base.OnDeactivate();
-        }
-
-        private readonly Triggered _trigger;
 
         public override bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
         {
@@ -40,6 +24,7 @@ namespace Scripts.ViewModels.Enemies
             base.ApplyDamage(damageMultiplied, contactPoint, source);
             return _parent.ApplyDamage(damageMultiplied, Vector3.zero);
         }
+
 
         public Action DoBreakParts;
         protected override void OnKilled()
