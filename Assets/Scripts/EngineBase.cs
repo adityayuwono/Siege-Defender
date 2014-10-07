@@ -136,6 +136,7 @@ namespace Scripts
             // Actions, doesnt have a view
             IoCContainer.RegisterFor<LoadSceneActionModel>().TypeOf<BaseAction>().To<LoadSceneAction>();
             IoCContainer.RegisterFor<SetterActionModel>().TypeOf<BaseAction>().To<SetterAction>();
+            IoCContainer.RegisterFor<MoveActionModel>().TypeOf<BaseAction>().To<MoveAction>();
             IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<BaseCondition>().To<ValueCondition>();
             IoCContainer.RegisterFor<RandomConditionModel>().TypeOf<BaseCondition>().To<RandomCondition>();
             #endregion

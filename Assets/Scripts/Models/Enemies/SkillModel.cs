@@ -11,8 +11,11 @@ namespace Scripts.Models.Enemies
         [XmlAttribute]
         public bool IsQueuedable { get; set; }
 
-        [XmlElement(ElementName = "LoadScene", Type = typeof(LoadSceneActionModel))]
+        [XmlAttribute]
+        public bool IsInterrupt { get; set; }
+
         [XmlElement(ElementName = "Setter", Type = typeof(SetterActionModel))]
+        [XmlElement(ElementName = "MoveAction", Type = typeof(MoveActionModel))]
         public List<BaseActionModel> Actions { get; set; }
     }
 }

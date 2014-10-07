@@ -14,6 +14,7 @@ namespace Scripts.Models.Actions
 
         [XmlElement(ElementName = "LoadScene", Type = typeof(LoadSceneActionModel))]
         [XmlElement(ElementName = "Setter", Type = typeof(SetterActionModel))]
+        [XmlElement(ElementName = "MoveAction", Type = typeof(MoveActionModel))]
         public List<BaseActionModel> Actions { get; set; }
 
         [XmlAttribute]
