@@ -26,7 +26,7 @@ namespace Scripts.Models
 
         [XmlAttribute]
         [DefaultValue(3f)]
-        public float ReloadTime { get; set; }
+        public float Reload { get; set; }
 
         [XmlAttribute]
         [DefaultValue(0.9f)]
@@ -45,7 +45,7 @@ namespace Scripts.Models
             DeathDelay = 1f;
 
             Ammunition = -1;
-            ReloadTime = 3f;
+            Reload = 3f;
             Accuracy = 0.9f;
             Scatters = 1;
             Deviation = 0f;
