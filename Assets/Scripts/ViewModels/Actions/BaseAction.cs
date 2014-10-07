@@ -12,12 +12,22 @@ namespace Scripts.ViewModels.Actions
 
         public virtual void Invoke()
         {
+            IsActive = true;
             Activate();
         }
 
-        public float WaitDuration
+        protected override void OnDeactivate()
         {
-            get { return _model.WaitDuration; }
+            base.OnDeactivate();
+
+            IsActive = false;
         }
+
+        public float Wait
+        {
+            get { return _model.Wait; }
+        }
+
+        public bool IsActive { get; private set; }
     }
 }

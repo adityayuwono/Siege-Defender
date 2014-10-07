@@ -24,6 +24,11 @@ namespace Scripts.ViewModels.Enemies
             get { return _model.IsQueuedable; }
         }
 
+        public bool IsInterrupt
+        {
+            get { return _model.IsInterrupt; }
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();
@@ -39,6 +44,13 @@ namespace Scripts.ViewModels.Enemies
 
             if (OnSkillActivationFinished != null)
                 OnSkillActivationFinished(this);
+        }
+
+        public void Interrupt()
+        {
+            _actions.Interrupt();
+            OnSkillActivationFinished = null;
+            Action_OnActivationFinished();
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Scripts.ViewModels.Enemies
                 condition.Activate();
                 condition.IsMatch.OnChange += Conditions_OnChange;
             }
+
             Conditions_OnChange();
         }
 
@@ -42,7 +43,7 @@ namespace Scripts.ViewModels.Enemies
             foreach (var condition in _conditions)
             {
                 condition.IsMatch.OnChange -= Conditions_OnChange;
-                condition.Deactivate("Triggered is deactivated");
+                condition.Deactivate(string.Format("Triggered on ({0}) is deactivated", FullId));
             }
 
             base.OnDeactivate();
@@ -57,13 +58,8 @@ namespace Scripts.ViewModels.Enemies
             if (isMatch)
             {
                 if (_model.TriggerOnce)
-                {
                     foreach (var condition in _conditions)
-                    {
                         condition.IsMatch.OnChange -= Conditions_OnChange;
-                        condition.Deactivate("Triggered is deactivated");
-                    }
-                }
 
                 _actions.Activate();
             }

@@ -1,10 +1,11 @@
 ﻿using Scripts.Core;
+using Scripts.Interfaces;
 using Scripts.Models;
 using Scripts.ViewModels.Enemies;
 
 namespace Scripts.ViewModels
 {
-    public class EnemyBase : LivingObject
+    public class EnemyBase : LivingObject, IContext
     {
         private readonly EnemyBaseModel _model;
 
@@ -21,7 +22,15 @@ namespace Scripts.ViewModels
             Hide("Killed");// Start the hiding process when the enemy is killed
         }
 
-        public readonly AdjustableProperty<string> AnimationId; 
+        public readonly AdjustableProperty<string> AnimationId;
+
+        public EnemyManager EnemyManager { get; private set; }
+        public void Activate(EnemyManager manager)
+        {
+            EnemyManager = manager;
+
+            Activate();
+        }
 
         #region Model Properties
 
@@ -35,5 +44,17 @@ namespace Scripts.ViewModels
         }
 
         #endregion
+
+        public PropertyLookup PropertyLookup
+        {
+            get
+            {
+                if (_propertyLookup == null)
+                    _propertyLookup = new PropertyLookup(Root, this);
+
+                return _propertyLookup;
+            }
+        }
+        private PropertyLookup _propertyLookup;
     }
 }

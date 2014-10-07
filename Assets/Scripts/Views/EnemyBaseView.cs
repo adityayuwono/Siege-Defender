@@ -6,13 +6,10 @@ namespace Scripts.Views
     public class EnemyBaseView : LivingObjectView
     {
         private readonly EnemyBase _viewModel;
-        private readonly EnemyManagerView _parent;
 
-        public EnemyBaseView(EnemyBase viewModel, EnemyManagerView parent) : base(viewModel, parent)
+        public EnemyBaseView(EnemyBase viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
-            _parent = parent;
-
             _viewModel.AnimationId.OnChange += Animation_OnChange;
         }
 
@@ -37,10 +34,14 @@ namespace Scripts.Views
 
             BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk,0f);
         }
-
+        
         protected override void SetPosition()
         {
-            Transform.position = _parent.GetRandomSpawnPoint();
+            if (_viewModel.EnemyManager != null)
+            {
+                var enemyManagerView = _viewModel.Root.GetView<EnemyManagerView>(_viewModel.EnemyManager);
+                Transform.position = enemyManagerView.GetRandomSpawnPoint();
+            }
         }
 
         protected virtual Animator GetAnimator()
@@ -79,6 +80,11 @@ namespace Scripts.Views
 
         private string _lastAnimationValue;
         private void Animation_OnChange()
+        {
+            OnAnimationChanged();
+        }
+
+        protected virtual void OnAnimationChanged()
         {
             if (!string.IsNullOrEmpty(_lastAnimationValue))
                 _animator.SetBool(_lastAnimationValue, false);

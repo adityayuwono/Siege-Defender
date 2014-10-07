@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Scripts.Core;
 using Scripts.Helpers;
-using Scripts.Interfaces;
 using Scripts.Models.Enemies;
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class Boss : EnemyBase, IContext
+    public class Boss : EnemyBase
     {
         private readonly BossModel _model;
         public Boss(BossModel model, Object parent) : base(model, parent)
@@ -29,27 +29,12 @@ namespace Scripts.ViewModels.Enemies
 
             ActiveSkill = new AdjustableProperty<string>("ActiveSkill", this);
             ActiveSkill.OnChange += ActivateSkill;
-
-            MoveToARandomWaypoint = new AdjustableProperty<bool>("MoveToARandomWaypoint", this);
         }
-
-        public PropertyLookup PropertyLookup
-        {
-            get
-            {
-                if (_propertyLookup == null)
-                    _propertyLookup = new PropertyLookup(Root, this);
-
-                return _propertyLookup;
-            }
-        }
-        private PropertyLookup _propertyLookup;
-
-        public readonly AdjustableProperty<bool> MoveToARandomWaypoint;
 
         #region Skill
 
-        private bool _isASkillActive;
+        public Action OnInterrupted;
+        private Skill _currentSkill;
         private string _queuedSkillId;
         private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
         /// <summary>
@@ -59,8 +44,12 @@ namespace Scripts.ViewModels.Enemies
         private void ActivateSkill()
         {
             var skillIdToActivate = ActiveSkill.GetValue();
+            var skillSplit = skillIdToActivate.Split('|');// Check for Skill Queue definition, only support 1 at queue for now
+            skillIdToActivate = skillSplit[0];// The first value defined is the one we want active now
+            
             if (string.IsNullOrEmpty(skillIdToActivate)) return;// Id is empty, meaning we have just finished activating a skill
 
+            // Display all existing skills when failing to find a skill
             if (!_skills.ContainsKey(skillIdToActivate))
             {
                 var skillIds = _skills.Aggregate("", (current, skill) => current + (skill.Key + ", "));
@@ -68,31 +57,52 @@ namespace Scripts.ViewModels.Enemies
                     string.Format("Failed to find skill with Id: {0}.\nAvailable Skills are: {1}", skillIdToActivate, skillIds));
             }
             
+            // Get the skill that we want
             var skillToActivate = _skills[skillIdToActivate];
-            // A Skill is currently active, we queue, only queue 1 skill at one time, for now...
-            if (_isASkillActive)
+            if (skillToActivate.IsInterrupt)
             {
-                if (skillToActivate.IsQueuedable)
-                    _queuedSkillId = skillIdToActivate;
-
-                ActiveSkill.SetValue("");
-                return;
+                if (OnInterrupted != null)
+                    OnInterrupted();
+                // Interrupt Skill is active
+                // Cancel everything that is currently happening, and Activate this skill
+                if (_currentSkill != null)
+                {
+                    _currentSkill.Interrupt();
+                    _currentSkill = null;
+                }
+            }
+            else
+            {
+                // A Skill is currently active, we queue, only queue 1 skill at one time, for now...
+                if (_currentSkill != null)
+                {
+                    // Only put one on queue at one time, fitting for interrupt mechanism... i think
+                    if (skillToActivate.IsQueuedable && string.IsNullOrEmpty(_queuedSkillId))
+                        _queuedSkillId = skillIdToActivate;
+                    return;
+                }
             }
 
-            _isASkillActive = true;
+            // Only update the queued skill when we are sure that the main skill is actually activated
+            if (skillSplit.Length == 2)
+                _queuedSkillId = skillSplit[1];
+
+            // Activate the lucky skill
+            _currentSkill = skillToActivate;
             skillToActivate.OnSkillActivationFinished += Skill_OnActivationFinished;
             skillToActivate.Activate();
         }
 
         private void Skill_OnActivationFinished(Skill skill)
         {
+            _currentSkill = null;
             skill.OnSkillActivationFinished -= Skill_OnActivationFinished;
-            ActiveSkill.SetValue("");// Set the active skill back to empty
-            _isASkillActive = false;
+            ActiveSkill.SetValue("");// Set the active skill back to empty, to make sure the next one's OnChange is invoked
 
+            // Activate skill in queue, if any
             if (!string.IsNullOrEmpty(_queuedSkillId))
             {
-                var queuedSkillId = _queuedSkillId;
+                var queuedSkillId = _queuedSkillId;// Cache the skill id, we need to clear it before calling the skill, otherwise it's going to loop
                 _queuedSkillId = "";// Reset the queued skill id parameter first to avoid infinite loop
                 ActiveSkill.SetValue(queuedSkillId);
             }
@@ -148,6 +158,21 @@ namespace Scripts.ViewModels.Enemies
         public float BossSpeed
         {
             get { return _model.Speed; }
+        }
+
+        public Action OnMoveStart;
+        public Action OnMovementFinished;
+
+        public void Move()
+        {
+            if (OnMoveStart != null)
+                OnMoveStart();
+        }
+
+        public void FinishedMovement()
+        {
+            if (OnMovementFinished != null)
+                OnMovementFinished();
         }
     }
 }
