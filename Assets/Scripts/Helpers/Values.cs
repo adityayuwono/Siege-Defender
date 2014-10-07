@@ -19,7 +19,7 @@ namespace Scripts.Helpers
         {
             public const string BOSS_CHARACTER_ROOT_TAG = "Character";
             public const string WAYPOINT_TRANSFORM_TAG = "Waypoint";
-            public const string WALKING_ANIMATION_BOOL_TAG = "IsWalking";
+            public const string WALKING_ANIMATION_BOOL_TAG = "Walk";
         }
     }
 
