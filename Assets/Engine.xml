@@ -6,7 +6,7 @@
 			Accuracy="0.9" Deviation="0.001" />
 		<Projectile 	Id="ScatterArrow" Damage="1-5" 
 			AssetId="Projectiles/WoodenBalista" 
-			RoF="0.3" Ammunition="1000" Reload="0.1" 
+			RoF="0.3" Ammunition="100" Reload="0.001" 
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
 
 		<Projectile 	Id="IronArrow" Damage="10-30" 
@@ -36,8 +36,16 @@
 		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
 		<Enemy Id="CrystalShield" AssetId="Enemies/CrystalShield" 	 Health="600"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
-		<Enemy Id="SpiderColumn" AssetId="Enemies/SpiderColumn" 	 Health="100"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" Rotation="360" />
-		<Boss  Id="StoneGolem" 	AssetId="Enemies/StoneGolemBoss" Health="5325" Speed="1.25" DeathDelay="5"
+		<Enemy Id="SpiderColumn" AssetId="Enemies/SpiderColumn" 	 Health="35"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" Rotation="0" >
+			<Elements>
+				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
+			</Elements>
+			<Trigger TriggerOnce="false" >
+				<RandomCondition Target="{Monster}" Frequency="2" Value="50" /> <!-- Percentage -->
+				<Setter Target="SpiderSpawn" Property="Level" Value="SpawnSpiders" />
+			</Trigger>
+		</Enemy>
+		<Boss  Id="StoneGolem" 	AssetId="Enemies/StoneGolemBoss" Health="7325" Speed="1.3" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
 			<Elements>
 				<EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -46,113 +54,143 @@
 			</Elements>
 			
 			<Limbs>
-				<Limb Id="Head" 		Health="500" 	AssetId="Head" DamageMultiplier="1.2" 
+				<Limb Id="Head" 		Health="666" 	AssetId="Head" 			DamageMultiplier="1.2" 
 					CollisionEffectNormal="StoneBreak" >
-					<Trigger>
+					<Trigger TriggerOnce="true" >
 						<Condition Target="{This}" Property="Health" Value="\1" />
 						<Drop Target="Wood" Amount="3-10" />
+						<Setter Target="{Monster}" Property="ActiveSkill" Value="HeadBroken|RandomMovement" />
 					</Trigger>
 				</Limb>
-				<Limb Id="RightHand" 	Health="1000" 	AssetId="RightHand" DamageMultiplier="0.75" 
+				<Limb Id="RightHand" 	Health="750" 	AssetId="RightHand" 	DamageMultiplier="0.75" 
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" > 
-					<Trigger>
+					<Trigger TriggerOnce="true" >
 						<Condition Target="{This}" Property="Health" Value="\1" />
 						<Drop Target="LightWood" Amount="1-6" />
+						<Setter Target="{Monster}" Property="ActiveSkill" Value="RightHandBroken|RandomMovement" />
 					</Trigger>
 				</Limb>
-				<Limb Id="LeftHand" 	Health="1000" 	AssetId="LeftHand" DamageMultiplier="0.75"
+				<Limb Id="LeftHand" 	Health="750" 	AssetId="LeftHand" 		DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger>
+					<Trigger TriggerOnce="true" >
 						<Condition Target="{This}" Property="Health" Value="\1" />
 						<Drop Target="LightWood" Amount="1-6" />
+						<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|RandomMovement" />
 					</Trigger>
 				</Limb>
-				<Limb Id="RightLeg" 	Health="250" 	AssetId="RightLeg" DamageMultiplier="0.75"
+				<Limb Id="RightLeg" 	Health="500" 	AssetId="RightLeg" 		DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger>
+					<Trigger TriggerOnce="true" >
 						<Condition Target="{This}" Property="Health" Value="\1" />
 						<Drop Target="LightWood" Amount="1-6" />
 					</Trigger>
 				</Limb>
-				<Limb Id="LeftLeg" 		Health="250" 	AssetId="LeftLeg" DamageMultiplier="0.75" 
+				<Limb Id="LeftLeg" 		Health="500" 	AssetId="LeftLeg" 		DamageMultiplier="0.75" 
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger>
+					<Trigger TriggerOnce="true" >
 						<Condition Target="{This}" Property="Health" Value="\1" />
 						<Drop Target="LightWood" Amount="1-6" />
 					</Trigger>
 				</Limb>
-				<Limb Id="RightFoot" 	Health="250" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75"
+				<Limb Id="RightFoot" 	Health="750" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger>
+					<Trigger TriggerOnce="true" >
 						<Condition Target="{This}" Property="Health" Value="\1" />
 						<Drop Target="LightWood" Amount="1-6" />
+						<Setter Target="{Monster}" Property="ActiveSkill" Value="RightFootBroken|RandomMovement" />
 					</Trigger>
 				</Limb>
-				<Limb Id="LeftFoot" 	Health="250" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75" 
+				<Limb Id="LeftFoot" 	Health="750" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75" 
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger>
+					<Trigger TriggerOnce="true" >
 						<Condition Target="{This}" Property="Health" Value="\1" />
 						<Drop Target="LightWood" Amount="1-6" />
+						<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftFootBroken|RandomMovement" />
 					</Trigger>
 				</Limb>
-				<Limb Id="Crystal" 		Health="700" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25" 
+				<Limb Id="Crystal" 		Health="1000" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25" 
 					CollisionEffectNormal="CrystalBreak_Small" >
-					<Trigger>
+					<Trigger TriggerOnce="true" >
 						<Condition Target="{This}" Property="Health" Value="\1" />
 						<Drop Target="LightWood" Amount="1-6" />
+						<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalBroken|RandomMovement" />
 					</Trigger>
 				</Limb>
 			</Limbs>
 
 			<Skills>
+				<Skill Id="Idle"> <!-- Default Skill -->
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" Wait="4" />
+				</Skill>
 				<Skill Id="CrystalShield" IsQueuedable="true" >
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" WaitDuration="2.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" Wait="2.6" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 					<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
 				</Skill>
 				<Skill Id="SpiderColumn">
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnPillar" WaitDuration="2" />
-					<Setter Target="SpiderColumns" Property="Level" Value="SpawnSpiderColumn" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnPillar" WaitDuration="1.5" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnPillar" Wait="2.3" />
+					<Setter Target="SpiderColumns" Property="Level" Value="SpawnSpiderColumn" Wait="2" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 				<Skill Id="RandomMovement">
-					<Setter Target="{Monster}" Property="MoveToARandomWaypoint" Value="true" />
+					<MoveAction Id="RandomMovementAction" Target="{Monster}" />
+				</Skill>
+				<!-- When Broken -->
+				<!-- These are also defined as skills, interrupt skills, meaning they will interrupt any currently charged skill -->
+				<Skill Id="HeadBroken" IsInterrupt="true">
+					<Setter Id="HeadBrokenAnimation1" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+				</Skill>
+				<Skill Id="RightHandBroken" IsInterrupt="true">
+					<Setter Id="HeadBrokenAnimation2" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+				</Skill>
+				<Skill Id="LeftHandBroken" IsInterrupt="true">
+					<Setter Id="HeadBrokenAnimation3" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+				</Skill>
+				<Skill Id="RightFootBroken" IsInterrupt="true">
+					<Setter Id="HeadBrokenAnimation4" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+				</Skill>
+				<Skill Id="LeftFootBroken" IsInterrupt="true">
+					<Setter Id="HeadBrokenAnimation5" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+				</Skill>
+				<Skill Id="CrystalBroken" IsInterrupt="true">
+					<Setter Id="HeadBrokenAnimation6" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 			</Skills>
 
 			<Triggers>
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Frequency="1" Value="5" /> <!-- Percentage -->
+					<RandomCondition Target="{Monster}" Frequency="1" Value="65" />
 					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
-					<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement" />
+					<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement|Idle" />
 				</Trigger>
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Frequency="1" Value="25" /> <!-- Percentage -->
+					<RandomCondition Target="{Monster}" Frequency="1" Value="25" />
 					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
-					<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
+					<Condition Target="SpiderColumns" Property="ActiveObjects" Value="\3" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="SpiderColumn" />
 				</Trigger>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\4000" />
-					<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\2000" />
-					<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\1000" />
-					<Condition Target="{Monster}" Property="MoveToARandomWaypoint" Value="false" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 			</Triggers>
@@ -184,6 +222,9 @@
 		</SubLevel>
 		<SubLevel Id="SpawnSpiderColumn" Interval="0.1" LoopCount="0">
 			<Spawn EnemyId="SpiderColumn" />
+		</SubLevel>
+		<SubLevel Id="SpawnSpiders" Interval="0.1" LoopCount="3">
+			<Spawn EnemyId="FastGoblin" />
 		</SubLevel>
 	</Levels>
 
