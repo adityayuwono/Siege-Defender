@@ -7,11 +7,11 @@ namespace Scripts.Models.Actions
     public class BaseActionModel : TargetPropertyModel
     {
         [XmlAttribute]
-        public float WaitDuration { get; set; }
+        public float Wait { get; set; }
 
         public BaseActionModel()
         {
-            WaitDuration = 0;
+            Wait = 0;
         }
     }
 }
