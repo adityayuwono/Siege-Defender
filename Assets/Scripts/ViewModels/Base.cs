@@ -122,7 +122,7 @@ namespace Scripts.ViewModels
 
         public string FullId
         {
-            get { return Parent != null ? Parent.FullId + Id : Id; }
+            get { return Parent != null ? Parent.FullId +"/"+ Id : Id; }
         }
     }
 }
