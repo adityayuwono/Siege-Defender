@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
@@ -8,9 +9,11 @@ namespace Scripts.ViewModels
     public class PropertyLookup
     {
         private EngineBase _engine;
+        private IContext _context;
         public PropertyLookup(EngineBase engine, IContext context)
         {
             _engine = engine;
+            _context = context;
 
             if (engine != context)
                 _engine.PropertyLookup.RegisterContext(context);
@@ -19,7 +22,9 @@ namespace Scripts.ViewModels
         private readonly Dictionary<string, IContext> _contexts = new Dictionary<string, IContext>();
         private void RegisterContext(IContext context)
         {
-            // TODO: validate
+            if (_contexts.ContainsKey(context.Id))
+                throw new Exception(string.Format("Failed to register {0} to {1}, a duplicate is found", context.Id, _context.Id));
+
             _contexts.Add(context.Id, context);
         }
 
