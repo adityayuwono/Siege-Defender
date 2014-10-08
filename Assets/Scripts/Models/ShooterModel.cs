@@ -17,6 +17,6 @@ namespace Scripts.Models
         public TargetModel Target { get; set; }
 
         [XmlAttribute]
-        public int Index { get; set; }
+        public string Index { get; set; }
     }
 }

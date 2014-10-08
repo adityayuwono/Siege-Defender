@@ -9,6 +9,9 @@ namespace Scripts.Models
     public class InventoryModel : ElementModel
     {
         [XmlAttribute]
+        public string Source { get; set; }
+
+        [XmlAttribute]
         public int Slots { get; set; }
 
         [XmlElement(ElementName = "Item", Type = typeof(ItemModel))]

@@ -13,8 +13,12 @@ namespace Scripts.ViewModels
 
         private ProjectileModel _projectileModel;
 
-        public Shooter(ShooterModel model, Player parent) : base(model, parent)
+        private readonly int _index;
+
+        public Shooter(int index, ShooterModel model, Player parent) : base(model, parent)
         {
+            _index = index;
+
             _model = model;
 
             if (_model.ProjectileId == null)
@@ -28,7 +32,7 @@ namespace Scripts.ViewModels
             Source = new Object(_model.Source, this);
             Elements.Add(Source);
 
-            Target = new Target(_model.Target, this);
+            Target = new Target(index, _model.Target, this);
             Elements.Add(Target);
         }
 
@@ -54,13 +58,14 @@ namespace Scripts.ViewModels
 
         public int Index
         {
-            get { return _model.Index; }
+            get { return _indexBinding.GetValue()=="ControlStyle1"? _index:1; }
         }
 
         public Object Source { get; private set; }
         public Object Target { get; private set; }
 
         private Property<string> _projectileBinding;
+        private Property<string> _indexBinding;
         protected override void OnLoad()
         {
             base.OnLoad();
@@ -68,8 +73,16 @@ namespace Scripts.ViewModels
             _projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.ProjectileId);
             _projectileBinding.OnChange += Projectile_OnChange;
             Projectile_OnChange();
+            _indexBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.Index);
             
             IsShooting.SetValue(false);
+        }
+
+        protected override void OnDestroyed()
+        {
+            _projectileBinding.OnChange -= Projectile_OnChange;
+
+            base.OnDestroyed();
         }
 
         private void Projectile_OnChange()
@@ -79,7 +92,6 @@ namespace Scripts.ViewModels
             Accuracy = _projectileModel.Accuracy;
             Interval.SetValue(_projectileModel.RoF);
         }
-
 
         public readonly Property<bool> IsReloading = new Property<bool>();
         public Projectile SpawnProjectile()

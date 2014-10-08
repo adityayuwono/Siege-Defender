@@ -7,6 +7,6 @@ namespace Scripts.Models
     public class TargetModel : ObjectModel
     {
         [XmlAttribute]
-        public int Index { get; set; }
+        public string Index { get; set; }
     }
 }

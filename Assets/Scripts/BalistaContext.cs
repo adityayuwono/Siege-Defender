@@ -35,8 +35,8 @@ namespace Scripts
             var engineText = XMLInitializer.EngineXML;
             var engineModel = Deserializer<EngineModel>.GetObjectFromXML(engineText);
 
-            var inventoryXML = XMLInitializer.InventoryXML;
-            var inventoryModel = Deserializer<InventoryModel>.GetObjectFromXML(inventoryXML);
+            var inventoryXML = XMLInitializer.PlayerSettingsXML;
+            var inventoryModel = Deserializer<PlayerSettingsModel>.GetObjectFromXML(inventoryXML);
 
             // Start an instance of the Engine
             var engine = new SiegeDefender(engineModel, inventoryModel, Instance);

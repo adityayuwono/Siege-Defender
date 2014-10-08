@@ -14,7 +14,7 @@ namespace Scripts
         /// Default Engine this is a fresh game
         /// </summary>
         public TextAsset EngineTextAsset;
-        public TextAsset DefaultInventory;
+        public TextAsset DefaultPlayerSettings;
 
 
 
@@ -26,7 +26,7 @@ namespace Scripts
         /// <summary>
         /// Text file that holds all the player's progress
         /// </summary>
-        public static string InventoryXML;
+        public static string PlayerSettingsXML;
 
 
 
@@ -39,23 +39,23 @@ namespace Scripts
 
         private void InitializeEngine()
         {
-            var inventoryText = "";
+            var playerSettingsXML = "";
             // TODO: improve to cloud saving
             try
             {
                 // Try to load save file, if any
-                var sr = new StreamReader(FilePaths.Loading + "/Inventory.xml");
-                inventoryText = sr.ReadToEnd();
+                var sr = new StreamReader(FilePaths.Loading + Values.Defaults.PLAYER_PROGRESS_FILE_NAME);
+                playerSettingsXML = sr.ReadToEnd();
                 sr.Close();
             }
             catch (Exception ex)
             {
                 // No save file yet, just create a default one
-                inventoryText = DefaultInventory.text;
+                playerSettingsXML = DefaultPlayerSettings.text;
             }
 
             // Keep it for later, the rest of the scenes are going to need this cutie
-            InventoryXML = inventoryText;
+            PlayerSettingsXML = playerSettingsXML;
 
             // Done, we simply load the next scene
             // it clears everything we put on scene, if for example we are editing a prefab

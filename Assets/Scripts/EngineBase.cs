@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Scripts.Components;
-using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -142,7 +141,7 @@ namespace Scripts
             #endregion
         }
 
-        public virtual InventoryModel InventoryModel
+        public virtual PlayerSettingsModel PlayerSettingsModel
         {
             get { throw new System.NotImplementedException(); }
         }

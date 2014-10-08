@@ -17,6 +17,8 @@ namespace Scripts.Helpers
 
         public static class Defaults
         {
+            public const string PLAYER_PROGRESS_FILE_NAME = "/PlayerSettings.xml";
+
             public const string BOSS_CHARACTER_ROOT_TAG = "Character";
             public const string WAYPOINT_TRANSFORM_TAG = "Waypoint";
             public const string WALKING_ANIMATION_BOOL_TAG = "Walk";

@@ -22,11 +22,11 @@ namespace Scripts.Helpers
 
     public static class Serializer
     {
-        public static void SaveObjectToXML(InventoryModel model)
+        public static void SaveObjectToXML(PlayerSettingsModel model)
         {
-            var serializer = new XmlSerializer(typeof(InventoryModel));
+            var serializer = new XmlSerializer(typeof(PlayerSettingsModel));
 
-            var sw = new StreamWriter(FilePaths.Saving + "/Inventory.xml");
+            var sw = new StreamWriter(FilePaths.Saving + Values.Defaults.PLAYER_PROGRESS_FILE_NAME);
             serializer.Serialize(sw, model);
             sw.Close();
         }

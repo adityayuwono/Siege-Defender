@@ -240,12 +240,24 @@
 				<Button AssetId="StartGame">
 					<Trigger><LoadScene Target="Limbo" LevelId="Level1" /></Trigger>
 				</Button>
+				<Button AssetId="Options">
+					<Trigger><LoadScene Target="OptionsMenu" /></Trigger>
+				</Button>
+			</Elements>
+		</Scene>
+
+		<Scene Id="OptionsMenu" AssetId="Scenes/OptionsMenu">
+			<Elements>
+				<Inventory Source="PlayerOptions" AssetId="OptionsInventory" />
+				<Button AssetId="BackToMainMenu" >
+					<Trigger><LoadScene Target="MainMenu" /></Trigger>
+				</Button>
 			</Elements>
 		</Scene>
 
 		<Scene Id="SkillTree" AssetId="Scenes/SkillTree">
 			<Elements>
-				<Inventory AssetId="Inventory" />
+				<Inventory Source="PlayerInventory" AssetId="Inventory" />
 				<Button AssetId="BackToMainMenu" >
 					<Trigger><LoadScene Target="MainMenu" /></Trigger>
 				</Button>
@@ -261,13 +273,13 @@
 				
 				<Player AssetId="Player" >
 					<Shooters>
-						<Shooter AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.ProjectileId}" Index="0">
+						<Shooter AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.ItemId}" Index="{Root.OptionsMenu.ControlStyle.ItemId}">
 							<Source AssetId="Shooter"/>
-							<Target AssetId="Target" Index="0"/>
+							<Target AssetId="Target" Index="{Root.OptionsMenu.ControlStyle.ItemId}"/>
 						</Shooter>
-						<Shooter AssetId="RightShooter" ProjectileId="{Root.SkillTree.RightShooter.ProjectileId}" Index="1">
+						<Shooter AssetId="RightShooter" ProjectileId="{Root.SkillTree.RightShooter.ItemId}" Index="{Root.OptionsMenu.ControlStyle.ItemId}">
 							<Source AssetId="Shooter"/>
-							<Target AssetId="Target" Index="1"/>
+							<Target AssetId="Target" Index="{Root.OptionsMenu.ControlStyle.ItemId}"/>
 						</Shooter>
 					</Shooters>
 				</Player>

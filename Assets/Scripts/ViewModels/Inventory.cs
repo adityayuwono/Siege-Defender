@@ -9,7 +9,11 @@ namespace Scripts.ViewModels
         public Inventory(InventoryModel model, Object parent) : base(model, parent)
         {
             // Grab reference to Player's Inventory loaded from XML
-            _model = Root.InventoryModel;
+            foreach (var inventoryModel in Root.PlayerSettingsModel.Inventories)
+            {
+                if (inventoryModel.Id == model.Source)
+                    _model = inventoryModel;
+            }
 
             foreach (var itemModel in _model.Items)
                 Elements.Add(new Item(itemModel, this));

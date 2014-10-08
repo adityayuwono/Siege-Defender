@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Scripts.Components;
 using Scripts.Helpers;
-using Scripts.Interfaces;
 using Scripts.Models;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Enemies;
@@ -15,20 +14,20 @@ namespace Scripts
     public class SiegeDefender : EngineBase
     {
         private readonly EngineModel _model;
-        private readonly InventoryModel _inventoryModel;
+        private readonly PlayerSettingsModel _playerSettingsModel;
 
-        public override InventoryModel InventoryModel
+        public override PlayerSettingsModel PlayerSettingsModel
         {
-            get { return _inventoryModel; }
+            get { return _playerSettingsModel; }
         }
 
         private readonly BalistaContext _context;
 
-        public SiegeDefender(EngineModel model, InventoryModel inventoryModel, BalistaContext parent) : base(model, null)
+        public SiegeDefender(EngineModel model, PlayerSettingsModel playerSettingsModel, BalistaContext parent) : base(model, null)
         {
             _model = model;
             _context = parent;
-            _inventoryModel = inventoryModel;
+            _playerSettingsModel = playerSettingsModel;
         }
 
         public override void MapInjections()
@@ -95,7 +94,7 @@ namespace Scripts
 
         public override void Save()
         {
-            Serializer.SaveObjectToXML(_inventoryModel);
+            Serializer.SaveObjectToXML(_playerSettingsModel);
         }
     }
 }

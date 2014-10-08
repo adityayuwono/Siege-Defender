@@ -10,7 +10,7 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            ProjectileId = new AdjustableProperty<string>("ProjectileId", this);
+            ItemId = new AdjustableProperty<string>("ItemId", this);
             CurrentItem = new Item(_model.Item, this);
         }
 
@@ -42,7 +42,7 @@ namespace Scripts.ViewModels
             base.OnDestroyed();
         }
 
-        public readonly AdjustableProperty<string> ProjectileId;
+        public readonly AdjustableProperty<string> ItemId;
 
         private Item _currentItem;
         private Item CurrentItem
@@ -61,7 +61,7 @@ namespace Scripts.ViewModels
             _currentItem = itemViewModel;// Swap the current item
             _currentItem.ChangeParent(this);
             _model.Item = _currentItem.Model;// Save the change to model
-            ProjectileId.SetValue(_currentItem.Base);// Update projectile used
+            ItemId.SetValue(_currentItem.Base);// Update projectile used
 
             Root.Save();
         }
