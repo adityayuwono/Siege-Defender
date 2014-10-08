@@ -37,6 +37,7 @@ namespace Scripts.Models
         public string Position { get; set; }
 
         [XmlAttribute]
+        [DefaultValue(0)]
         public float DeathDelay { get; set; }
 
         public ObjectModel()
