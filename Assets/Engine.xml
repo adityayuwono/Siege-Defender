@@ -2,11 +2,11 @@
 	<Objects>
 		<Projectile 	Id="WoodArrow" Damage="8-12" 
 			AssetId="Projectiles/WoodenBalista" 
-			RoF="0.2" Ammunition="1000" Reload="0.1" 
+			RoF="0.2" Ammunition="1000" Reload="1" 
 			Accuracy="0.9" Deviation="0.001" />
 		<Projectile 	Id="ScatterArrow" Damage="1-5" 
 			AssetId="Projectiles/WoodenBalista" 
-			RoF="0.3" Ammunition="100" Reload="0.001" 
+			RoF="0.3" Ammunition="100" Reload="1" 
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
 
 		<Projectile 	Id="IronArrow" Damage="10-30" 
@@ -42,10 +42,11 @@
 			</Elements>
 			<Trigger TriggerOnce="false" >
 				<RandomCondition Target="{Monster}" Frequency="2" Value="50" /> <!-- Percentage -->
+				<Condition Target="SpiderSpawn" Property="ActiveObjects" Value="\1" />
 				<Setter Target="SpiderSpawn" Property="Level" Value="SpawnSpiders" />
 			</Trigger>
 		</Enemy>
-		<Boss  Id="StoneGolem" 	AssetId="Enemies/StoneGolemBoss" Health="7325" Speed="1.3" DeathDelay="5"
+		<Boss  Id="StoneGolem" 	AssetId="Enemies/StoneGolemBoss" Health="7325" Speed="1.1" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
 			<Elements>
 				<EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -144,34 +145,34 @@
 				<!-- When Broken -->
 				<!-- These are also defined as skills, interrupt skills, meaning they will interrupt any currently charged skill -->
 				<Skill Id="HeadBroken" IsInterrupt="true">
-					<Setter Id="HeadBrokenAnimation1" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 				<Skill Id="RightHandBroken" IsInterrupt="true">
-					<Setter Id="HeadBrokenAnimation2" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 				<Skill Id="LeftHandBroken" IsInterrupt="true">
-					<Setter Id="HeadBrokenAnimation3" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="LeftHandBroken" Wait="1.6" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 				<Skill Id="RightFootBroken" IsInterrupt="true">
-					<Setter Id="HeadBrokenAnimation4" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 				<Skill Id="LeftFootBroken" IsInterrupt="true">
-					<Setter Id="HeadBrokenAnimation5" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 				<Skill Id="CrystalBroken" IsInterrupt="true">
-					<Setter Id="HeadBrokenAnimation6" Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 			</Skills>
 
 			<Triggers>
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{Monster}" Frequency="1" Value="65" />
+					<RandomCondition Target="{Monster}" Frequency="1" Value="5" />
 					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement|Idle" />
 				</Trigger>
@@ -209,6 +210,8 @@
 			<Cache EnemyId="StandardDamageGUI" />
 			<Cache EnemyId="CrystalBreak_Small" />
 			<Cache EnemyId="StoneBreak" />
+			<Cache EnemyId="SpiderColumn" />
+			<Cache EnemyId="CrystalShield" />
 
 			<Spawn EnemyId="RedGoblin" />
 			<Spawn EnemyId="RedGoblin" />
