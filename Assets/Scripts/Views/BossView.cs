@@ -60,7 +60,12 @@ namespace Scripts.Views
 
         protected override void OnDestroy()
         {
+            _viewModel.OnInterrupted -= InterruptMovement;
+            _viewModel.OnMoveStart -= MoveToARandomWaypoint;
+            
             _waypoints.Clear();
+            
+            InterruptMovement();// Cancel current movements, just to be safe
 
             base.OnDestroy();
         }
@@ -76,6 +81,9 @@ namespace Scripts.Views
 
         private Transform GetRandomWaypoint()
         {
+            if (_waypoints.Count == 0)
+                throw new EngineException(this, "No Waypoints defined");
+
             var randomWaypointIndex = _randomizer.Next(_waypoints.Count - 1);// Avoid randomizing the last on the list
             var randomWaypoint = _waypoints[randomWaypointIndex];
 
@@ -99,7 +107,7 @@ namespace Scripts.Views
             iTween.LookTo(CharacterRoot, iTween.Hash("looktarget", randomWaypoint, "easetype", easeType, "time", lookToDuration));
             var walkDuration = Vector3.Distance(randomWaypoint.localPosition, _characterTransform.localPosition) / _viewModel.BossSpeed;
             iTween.MoveTo(CharacterRoot, iTween.Hash("position", randomWaypoint, "easetype", easeType, "time", walkDuration, "delay", lookToDuration));
-            var rotateDuration = Quaternion.Angle(randomWaypoint.localRotation, _characterTransform.localRotation) / 24f / _viewModel.BossSpeed;
+            var rotateDuration = (lookToAngle + Quaternion.Angle(randomWaypoint.localRotation, _characterTransform.localRotation))/24f/_viewModel.BossSpeed;
             iTween.RotateTo(CharacterRoot, iTween.Hash("rotation", randomWaypoint, "easetype", easeType, "time", rotateDuration, "delay", walkDuration + lookToDuration));
 
             _viewModel.Root.IntervalRunner.SubscribeToInterval(FinishedWalking, walkDuration + lookToDuration + rotateDuration, false);

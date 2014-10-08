@@ -22,6 +22,13 @@ namespace Scripts.Views
             _viewModel.VisibilityBinding.OnChange += UpdateVisibility;
         }
 
+        protected override void OnDestroy()
+        {
+            _viewModel.VisibilityBinding.OnChange -= UpdateVisibility;
+
+            base.OnDestroy();
+        }
+
         private void UpdateVisibility()
         {
             GameObject.SetActive(_viewModel.VisibilityBinding.GetValue());

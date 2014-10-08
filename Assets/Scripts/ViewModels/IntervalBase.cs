@@ -34,10 +34,6 @@ namespace Scripts.ViewModels
                     activeObject.Hide(reason);
                 }
             }
-            else
-            {
-                _activeObjects.Clear();
-            }
 
             base.Hide(reason);
         }

@@ -10,7 +10,6 @@ namespace Scripts.Views
         public EnemyBaseView(EnemyBase viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
-            _viewModel.AnimationId.OnChange += Animation_OnChange;
         }
 
         private Animator _animator;
@@ -18,6 +17,8 @@ namespace Scripts.Views
         protected override void OnLoad()
         {
             base.OnLoad();
+
+            _viewModel.AnimationId.OnChange += Animation_OnChange;
 
             _animator = GetAnimator();
         }
@@ -48,12 +49,7 @@ namespace Scripts.Views
         {
             return GameObject.GetComponent<Animator>();
         }
-
-        protected void Animate_SetBool(string name, bool value)
-        {
-            _animator.SetBool(name, value);
-        }
-
+        
         private void Walk()
         {
             Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
@@ -72,6 +68,7 @@ namespace Scripts.Views
 
         protected override void OnDestroy()
         {
+            _viewModel.AnimationId.OnChange -= Animation_OnChange;
             _animator = null;
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
