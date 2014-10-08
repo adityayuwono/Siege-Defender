@@ -12,16 +12,16 @@ Shader "Unlit/Transparent Front"
 
 		Tags
 		{
-			"Queue" = "Overlay"
+			"Queue" = "Overlay+1"
 			"IgnoreProjector" = "True"
 			"RenderType" = "Transparent"
 		}
 		
 		Cull Off
 		Lighting Off
-		ZWrite On
+		ZWrite Off
+		ZTest Always
 		Fog { Mode Off }
-		Offset -5000000, -5000000
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
@@ -63,9 +63,7 @@ Shader "Unlit/Transparent Front"
 				fixed4 frag (v2f i) : COLOR
 				{
 					fixed4 col = tex2D(_MainTex, i.texcoord) * _Color;
-					col.r = _Color.r;
-					col.g = _Color.g;
-					col.b = _Color.b;
+					col.rgb = _Color.rgb;
 					return col;
 				}
 			ENDCG
