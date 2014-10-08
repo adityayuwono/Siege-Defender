@@ -70,89 +70,50 @@ namespace Scripts.Views
             return CharacterRoot.GetComponent<Animator>();
         }
 
+
+
         #region Move to Waypoint
-        private void MoveToARandomWaypoint()
+
+        private Transform GetRandomWaypoint()
         {
-            _isMovementInterrupted = false;
-            var randomWaypointIndex = _randomizer.Next(_waypoints.Count-1);// Avoid randomizing the last on the list
+            var randomWaypointIndex = _randomizer.Next(_waypoints.Count - 1);// Avoid randomizing the last on the list
             var randomWaypoint = _waypoints[randomWaypointIndex];
+
             // Funky algo to let the used waypoint to be last on the list, to avoid going to the same waypoint, it looks stupid, seriously
             _waypoints.Remove(randomWaypoint);
             _waypoints.Add(randomWaypoint);
-            // Ok, start moving
-            _viewModel.Root.StartCoroutine(LookToWayPoint(randomWaypoint));
+
+            return randomWaypoint;
         }
-        private bool _isMovementInterrupted;
+
+        private void MoveToARandomWaypoint()
+        {
+            var randomWaypoint = GetRandomWaypoint();
+
+            _viewModel.AnimationId.SetValue(Values.Defaults.WALKING_ANIMATION_BOOL_TAG);
+            // Register everything here
+            // Starting with the very first motion in the pattern
+            var lookToAngle = Quaternion.Angle(randomWaypoint.rotation, _characterTransform.rotation);
+            var lookToDuration = lookToAngle / 24f / _viewModel.BossSpeed;
+            const string easeType = "linear";
+            iTween.LookTo(CharacterRoot, iTween.Hash("looktarget", randomWaypoint, "easetype", easeType, "time", lookToDuration));
+            var walkDuration = Vector3.Distance(randomWaypoint.localPosition, _characterTransform.localPosition) / _viewModel.BossSpeed;
+            iTween.MoveTo(CharacterRoot, iTween.Hash("position", randomWaypoint, "easetype", easeType, "time", walkDuration, "delay", lookToDuration));
+            var rotateDuration = Quaternion.Angle(randomWaypoint.localRotation, _characterTransform.localRotation) / 24f / _viewModel.BossSpeed;
+            iTween.RotateTo(CharacterRoot, iTween.Hash("rotation", randomWaypoint, "easetype", easeType, "time", rotateDuration, "delay", walkDuration + lookToDuration));
+
+            _viewModel.Root.IntervalRunner.SubscribeToInterval(FinishedWalking, walkDuration + lookToDuration + rotateDuration, false);
+        }
         private void InterruptMovement()
         {
-            // TODO: Try Interval runner feature, may be cleaner
-            _isMovementInterrupted = true;
             iTween.Stop(CharacterRoot);
-            _onMoveContinue = null;
             FinishedWalking();
         }
 
-        private const string EASE_TYPE = "linear";
-        private Action _onMoveContinue;
-
-        private IEnumerator LookToWayPoint(Transform waypoint)
-        {
-            // Initiate walking sequence
-            _viewModel.AnimationId.SetValue(Values.Defaults.WALKING_ANIMATION_BOOL_TAG);
-
-            // Turn to face the destination
-            var lookToDuration = Quaternion.Angle(waypoint.rotation, _characterTransform.rotation) / 24f / _viewModel.BossSpeed;
-            if (!_isMovementInterrupted)
-            {
-                iTween.LookTo(CharacterRoot, iTween.Hash("looktarget", waypoint, "easetype", EASE_TYPE, "time", lookToDuration));
-                _onMoveContinue += () =>
-                {
-                    _onMoveContinue = null;
-                    _viewModel.Root.StartCoroutine(MoveToWaypoint(waypoint));
-                };
-
-                yield return new WaitForSeconds(lookToDuration);
-                if (_onMoveContinue != null)
-                    _onMoveContinue();
-            }
-        }
-        private IEnumerator MoveToWaypoint(Transform waypoint)
-        {
-            var walkDuration = Vector3.Distance(waypoint.localPosition, _characterTransform.localPosition)/_viewModel.BossSpeed;
-            // Walk to reach the destination
-            if (!_isMovementInterrupted)
-            {
-                iTween.MoveTo(CharacterRoot, iTween.Hash("position", waypoint, "easetype", EASE_TYPE, "time", walkDuration));
-                _onMoveContinue += () =>
-                {
-                    _onMoveContinue = null;
-                    _viewModel.Root.StartCoroutine(LookFromWaypoint(waypoint));
-                };
-                yield return new WaitForSeconds(walkDuration);
-                if (_onMoveContinue != null)
-                    _onMoveContinue();
-            }
-        }
-        private IEnumerator LookFromWaypoint(Transform waypoint)
-        {
-            // Turn to match the destination's rotation
-            var rotateDuration = Quaternion.Angle(waypoint.localRotation, _characterTransform.localRotation)/24f/_viewModel.BossSpeed;
-            if (!_isMovementInterrupted)
-            {
-                iTween.RotateTo(CharacterRoot, iTween.Hash("rotation", waypoint, "easetype", EASE_TYPE, "time", rotateDuration));
-                _onMoveContinue += () =>
-                {
-                    _onMoveContinue = null;
-                    FinishedWalking();
-                };
-                yield return new WaitForSeconds(rotateDuration);
-                if (_onMoveContinue != null)
-                    _onMoveContinue();
-            }
-        }
         private void FinishedWalking()
         {
             // Finished walking sequence
+            _viewModel.Root.IntervalRunner.UnsubscribeFromInterval(FinishedWalking);
             _viewModel.AnimationId.SetValue("Idle");
             _viewModel.FinishedMovement();
         }
