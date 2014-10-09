@@ -62,8 +62,8 @@ namespace Scripts.ViewModels
             // Spawn AoE if there are any Id defined
             if (!string.IsNullOrEmpty(_model.AoEId))
                 GetParent<Shooter>().SpawnAoE(_model.AoEId, collisionPosition);
-            
-            if (!DamageEnemy(targetObject, contactPoint, true))
+
+            if (!DamageEnemy(targetObject, collisionPosition, true))
             {
                 Hide("Hit Nothing");// If we don't hit an enemy, hide the projectile
             }
