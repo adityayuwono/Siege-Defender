@@ -17,12 +17,12 @@ namespace Scripts.Views
             throw new NotImplementedException();
         }
 
-        public void StartInterval()
+        protected void StartInterval()
         {
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(IntervalInvoked, _viewModel.Interval.GetValue());
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(IntervalInvoked, _viewModel.Interval.GetValue(), false);
         }
 
-        public void StopInterval()
+        protected void StopInterval()
         {
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(IntervalInvoked);
         }
