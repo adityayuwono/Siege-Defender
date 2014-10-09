@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace Scripts.Models.Actions
@@ -7,6 +8,7 @@ namespace Scripts.Models.Actions
     public class TargetPropertyModel : BaseModel
     {
         [XmlAttribute]
+        [DefaultValue("{Monster}")]
         public string Target { get; set; }
 
         [XmlAttribute]
@@ -14,5 +16,10 @@ namespace Scripts.Models.Actions
 
         [XmlAttribute]
         public string Value { get; set; }
+
+        public TargetPropertyModel()
+        {
+            Target = "{Monster}";
+        }
     }
 }
