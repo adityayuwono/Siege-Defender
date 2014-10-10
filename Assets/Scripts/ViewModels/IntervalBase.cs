@@ -84,22 +84,7 @@ namespace Scripts.ViewModels
             else
                 InactiveObjects.Add(objectType, new List<Object> { inactiveObject });
         }
-
-        private static readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
-        private static bool _isDestructionInProgress;
-        private static void DestroyInactiveObjects()
-        {
-            if (_isDestructionInProgress) return;
-
-            _isDestructionInProgress = true;
-            foreach (var inactiveObjects in InactiveObjects.Values)
-                foreach (var inactiveObject in inactiveObjects)
-                    inactiveObject.Destroy();
-
-            InactiveObjects.Clear();
-            _isDestructionInProgress = false;
-        }
-
+        
         private Object CheckInactiveObjects(string objectId)
         {
             // Id is not registered yet
@@ -138,5 +123,20 @@ namespace Scripts.ViewModels
     {
         protected IntervalBase(IntervalModel model, Base parent) : base(model, parent) { }
         public readonly Property<float> Interval = new Property<float>();
+
+        protected static readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
+        private static bool _isDestructionInProgress;
+        protected static void DestroyInactiveObjects()
+        {
+            if (_isDestructionInProgress) return;
+
+            _isDestructionInProgress = true;
+            foreach (var inactiveObjects in InactiveObjects.Values)
+                foreach (var inactiveObject in inactiveObjects)
+                    inactiveObject.Destroy();
+
+            InactiveObjects.Clear();
+            _isDestructionInProgress = false;
+        }
     }
 }
