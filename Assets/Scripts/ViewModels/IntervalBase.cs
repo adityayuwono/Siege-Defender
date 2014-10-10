@@ -55,7 +55,7 @@ namespace Scripts.ViewModels
         {
             var modelToCopy = Root.GetObjectModel(id);
             var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
-            objectModel.Id = string.Format("{0}_{1}_{2}_{3}", objectModel.Id, Id, ObjectCount, Guid.NewGuid());
+            objectModel.Id = string.Format("{0}_{1}", objectModel.Id, Guid.NewGuid());
             objectModel.Type = id;
             var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, overrideParent ?? this});
 
