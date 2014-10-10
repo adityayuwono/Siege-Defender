@@ -2,48 +2,48 @@
 <PlayerSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
   <Inventory Id="PlayerInventory" AssetId="Inventory" Slots="36">
     <Elements />
-    <Item Id="dbf7c8e1-f093-43e3-8150-ef1bc4a151c0" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0">
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0">
       <Elements />
     </Item>
-    <Item Id="c4f64c36-25b2-42b0-a94a-28de15dd737e" AssetId="GUIs/Buttons/ProjectileIcon" Base="FireBall" Level="0">
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="FireBall" Level="0">
       <Elements />
     </Item>
-    <Item Id="fdbf0008-d2eb-47d3-92ee-821b3ba418d9" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0">
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0">
       <Elements />
     </Item>
-    <Item Id="9affae69-dd96-4881-9064-ea89ab1a28b2" AssetId="GUIs/Buttons/ProjectileIcon" Base="ExplosiveFireBall" Level="0">
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="ExplosiveFireBall" Level="0">
       <Elements />
     </Item>
-    <Item Id="b97c47d5-7b8c-4ede-8e60-cd61344dcd02" AssetId="GUIs/Buttons/ProjectileIcon" Base="IronArrow" Level="0">
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="IronArrow" Level="0">
       <Elements />
     </Item>
-    <Item Id="9498b03d-c792-4022-b89a-1bee34a37ff5" AssetId="GUIs/Buttons/ProjectileIcon" Base="ScatterArrow" Level="0">
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="ScatterArrow" Level="0">
       <Elements />
     </Item>
-    <Item Id="46a67d17-8251-4b72-945d-46cfc88e5be2" AssetId="GUIs/Buttons/ProjectileIcon" Base="ScatterArrow" Level="0">
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="ScatterArrow" Level="0">
       <Elements />
     </Item>
     <EquipmentSlot Id="LeftShooter" AssetId="LeftWeaponContainer" DeathDelay="0">
       <Elements />
-      <Item Id="2568bca0-1303-4499-bd5b-b96c5a81fe23" AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
+      <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
         <Elements />
       </Item>
     </EquipmentSlot>
     <EquipmentSlot Id="RightShooter" AssetId="RightWeaponContainer" DeathDelay="0">
       <Elements />
-      <Item Id="2e57e67e-39a3-40e2-8953-34442bd81e02" AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
+      <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0">
         <Elements />
       </Item>
     </EquipmentSlot>
   </Inventory>
   <Inventory Id="PlayerOptions" AssetId="OptionsInventory" Slots="36">
     <Elements />
-    <Item Id="c4f64c36-25b2-42b0-a94a-28de15dd737e" AssetId="GUIs/Buttons/ProjectileIcon" Base="Style2" Level="0">
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="ControlStyle1" Level="0">
       <Elements />
     </Item>
     <EquipmentSlot Id="ControlStyle" AssetId="ControlStyleContainer" DeathDelay="0">
       <Elements />
-      <Item Id="2568bca0-1303-4499-bd5b-b96c5a81fe23" AssetId="GUIs/Buttons/ProjectileIcon" Base="Style1" Level="0">
+      <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="ControlStyle2" Level="0">
         <Elements />
       </Item>
     </EquipmentSlot>
