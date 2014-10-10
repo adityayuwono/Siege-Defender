@@ -25,7 +25,8 @@ namespace Scripts.Components
             base.OnChange();
 
             _clickCheckArea = TextureScreenArea;
-            _clickCheckArea.y = 0f;
+            // Reverse the height, because Mouse position is 0 when at bottom
+            _clickCheckArea.y = Screen.height-_clickCheckArea.y-TextureScreenArea.height;
         }
 
         private Rect _clickCheckArea;
