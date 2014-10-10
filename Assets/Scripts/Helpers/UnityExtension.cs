@@ -53,5 +53,15 @@ namespace Scripts.Helpers
 
             return new Vector3(splitFloat[0], splitFloat[1], splitFloat[2]);
         }
+
+        public static bool ContainsIfThisIsACircle(this Rect rect, Vector2 point)
+        {
+            var center = rect.center;
+            var radius = (rect.width + rect.height)/4f;
+
+            var distanceFromPointToCenter = Vector2.Distance(point, center);
+
+            return distanceFromPointToCenter <= radius;
+        }
     }
 }

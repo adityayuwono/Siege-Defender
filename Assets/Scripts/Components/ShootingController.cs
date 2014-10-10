@@ -1,4 +1,5 @@
-﻿// ReSharper disable RedundantUsingDirective
+﻿using Scripts.Helpers;
+// ReSharper disable RedundantUsingDirective
 using System.Linq;// This is used when iterating inputs, but it's only in Android
 // ReSharper restore RedundantUsingDirective
 using Scripts.ViewModels;
@@ -41,7 +42,7 @@ namespace Scripts.Components
                     _shooterView.StopShooting();
 #else
                 // If Mouse, for testing purposes only
-                if (Input.GetMouseButton(0) && _clickCheckArea.Contains(Input.mousePosition))
+                if (Input.GetMouseButton(0) && _clickCheckArea.ContainsIfThisIsACircle(Input.mousePosition))
                     _shooterView.StartShooting();
                 else
                     _shooterView.StopShooting();
