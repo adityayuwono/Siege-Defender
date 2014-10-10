@@ -17,8 +17,6 @@ namespace Scripts.ViewModels
             // Generate a unique Id if there's none
             if (string.IsNullOrEmpty(_model.Id))
                 _model.Id = Guid.NewGuid().ToString();
-
-            Root.RegisterToLookup(this);
         }
 
         #region Actions
@@ -55,6 +53,8 @@ namespace Scripts.ViewModels
         private Views.BaseView _view;
         protected virtual void OnLoad()
         {
+            Root.RegisterToLookup(this);
+
             _view = Root.IoCContainer.GetInstance<Views.BaseView>(GetType(), new object[] {this, Parent != null ? Parent._view : null});
             Root.RegisterView(this, _view);
         }
