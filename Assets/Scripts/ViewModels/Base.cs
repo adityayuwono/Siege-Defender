@@ -17,6 +17,8 @@ namespace Scripts.ViewModels
             // Generate a unique Id if there's none
             if (string.IsNullOrEmpty(_model.Id))
                 _model.Id = Guid.NewGuid().ToString();
+
+            Root.RegisterToLookup(this);
         }
 
         #region Actions
@@ -104,6 +106,7 @@ namespace Scripts.ViewModels
         {
             _view = null;
             Root.UnregisterView(this);
+            Root.UnregisterFromLookup(this);
         }
         #endregion
 

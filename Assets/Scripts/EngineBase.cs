@@ -172,6 +172,43 @@ namespace Scripts
         
         #endregion
 
+        #region View Model Lookup
+
+        public void RegisterToLookup(Base viewModel)
+        {
+            // TODO: Also register child elements
+            if (_vmLookup.ContainsKey(viewModel.Id))
+                return;
+
+            _vmLookup.Add(viewModel.Id, viewModel);
+        }
+
+        public void UnregisterFromLookup(Base viewModel)
+        {
+            // TODO: Also register child elements
+            if (!_vmLookup.ContainsKey(viewModel.Id))
+                return;
+
+            _vmLookup.Remove(viewModel.Id);
+        }
+        private readonly Dictionary<string, Base> _vmLookup = new Dictionary<string, Base>();
+
+        public T GetViewModelAsType<T>(string id) where T : Base
+        {
+            if (!_vmLookup.ContainsKey(id))
+                throw new EngineException(this, string.Format("ViewModel {0} is not registered", id));
+
+            var foundViewModel = _vmLookup[id];
+            if (foundViewModel == null)
+                throw new EngineException(this, string.Format("ViewModel {0} is not convertable to {1}", id, typeof(T)));
+
+            var foundViewModelAsT = foundViewModel as T;
+
+            return foundViewModelAsT;
+        }
+
+        #endregion
+
         private Scene _currentScene;
         protected readonly Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
         public Scene ChangeScene(string sceneId, string levelId = "")
