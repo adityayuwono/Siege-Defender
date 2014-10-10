@@ -1,7 +1,6 @@
 ﻿// ReSharper disable RedundantUsingDirective
 using System.Linq;// This is used when iterating inputs, but it's only in Android
 // ReSharper restore RedundantUsingDirective
-using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 
@@ -10,25 +9,25 @@ namespace Scripts.Components
     /// <summary>
     /// Drag to aim, stay to shoot repeatedly
     /// </summary>
-    public class ShootingGUI : BaseController
+    public class ShootingGUI : BaseTexturedController
     {
         private Shooter _shooterView;
+
         protected override void OnSetup()
         {
             base.OnSetup();
 
             _shooterView = ViewModel as Shooter;
-            
-            _clickArea = new Rect(
-                (Screen.width * _shooterView.Index) - (_shooterView.Index * Screen.height * Values.GUI_CIRCLE_SIZE_F),
-                Screen.height * (1 - Values.GUI_CIRCLE_SIZE_F),
-                Screen.height * Values.GUI_CIRCLE_SIZE_F,
-                Screen.height * Values.GUI_CIRCLE_SIZE_F);
-            _clickCheckArea = _clickArea;
+        }
+
+        protected override void OnChange()
+        {
+            base.OnChange();
+
+            _clickCheckArea = TextureScreenArea;
             _clickCheckArea.y = 0f;
         }
 
-        private Rect _clickArea;
         private Rect _clickCheckArea;
 
         private void Update()
