@@ -27,6 +27,7 @@ namespace Scripts.ViewModels
                 VisibilityBinding = GetParent<IContext>().PropertyLookup.GetProperty<bool>(_model.IsVisible);
             }
         }
+
         public Property<bool> VisibilityBinding;
     }
 }

@@ -14,7 +14,7 @@ namespace Scripts.Views
 
         public void SetupController(UITexture uiSprite)
         {
-            var followMouseController = GameObject.AddComponent<FollowMouse>();
+            var followMouseController = GameObject.AddComponent<AimingController>();
             followMouseController.MainTexture = uiSprite;
             followMouseController.Setup(_viewModel);
         }

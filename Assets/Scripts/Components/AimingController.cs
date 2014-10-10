@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Components
 {
-    public class FollowMouse : BaseTexturedController
+    public class AimingController : BaseTexturedController
     {
         private const float TOUCH_DEVIATION = 1.2f;
         private const string CROSSHAIR_ASSET_PATH = "GUIs/Crosshair";

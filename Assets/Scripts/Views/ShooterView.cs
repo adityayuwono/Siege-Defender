@@ -1,5 +1,6 @@
 ﻿using Scripts.Components;
 using Scripts.ViewModels;
+using UnityEngine;
 
 namespace Scripts.Views
 {
@@ -22,12 +23,19 @@ namespace Scripts.Views
             _viewModel.IsShooting.OnChange += OnShootingChanged;
         }
 
+        private float _lastInvocationTime;
         private void OnShootingChanged()
         {
             if (_viewModel.IsShooting.GetValue())
-                StartInterval();
+            {
+                if (Time.time - _lastInvocationTime < _viewModel.Interval.GetValue())
+                    StartInterval();
+                _lastInvocationTime = Time.time;
+            }
             else
+            {
                 StopInterval();
+            }
         }
 
         private ObjectView _target;
@@ -35,6 +43,7 @@ namespace Scripts.Views
 
         protected override void IntervalInvoked()
         {
+            // Shoot once for each scatter value
             for (var i = 0; i < _viewModel.Scatters; i++)
             {
                 var projectile = _viewModel.SpawnProjectile();
@@ -56,7 +65,7 @@ namespace Scripts.Views
 
         public void SetupController(UITexture uiSprite)
         {
-            var shootingUI = GameObject.AddComponent<ShootingGUI>();
+            var shootingUI = GameObject.AddComponent<ShootingController>();
             shootingUI.MainTexture = uiSprite;
             shootingUI.Setup(_viewModel);
         }

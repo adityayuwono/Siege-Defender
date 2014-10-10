@@ -9,7 +9,7 @@ namespace Scripts.Components
     /// <summary>
     /// Drag to aim, stay to shoot repeatedly
     /// </summary>
-    public class ShootingGUI : BaseTexturedController
+    public class ShootingController : BaseTexturedController
     {
         private Shooter _shooterView;
 
