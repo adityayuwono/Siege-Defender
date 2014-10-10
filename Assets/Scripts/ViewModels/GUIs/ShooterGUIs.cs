@@ -12,9 +12,7 @@ namespace Scripts.ViewModels.GUIs
             _model = model;
 
             foreach (var shooterGUIModel in _model.ShooterGUIs)
-            {
                 _shooterGUIs.Add(new ShooterGUI(shooterGUIModel, this));
-            }
         }
 
         private readonly List<ShooterGUI> _shooterGUIs = new List<ShooterGUI>();
@@ -73,6 +71,13 @@ namespace Scripts.ViewModels.GUIs
             base.OnLoad();
 
             Shooter = Root.GetViewModelAsType<Shooter>(_model.ShooterTarget);
+        }
+
+        protected override void OnDestroyed()
+        {
+            Shooter = null;
+            
+            base.OnDestroyed();
         }
     }
 }
