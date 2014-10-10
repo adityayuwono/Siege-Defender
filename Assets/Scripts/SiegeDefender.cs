@@ -53,6 +53,8 @@ namespace Scripts
             IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<InventoryView>();
             IoCContainer.RegisterFor<EquipmentSlot>().TypeOf<BaseView>().To<EquipmentSlotView>();
             IoCContainer.RegisterFor<Button>().TypeOf<BaseView>().To<ButtonView>();
+            IoCContainer.RegisterFor<ShooterGUIs>().TypeOf<BaseView>().To<ShooterGUIsView>();
+            IoCContainer.RegisterFor<ShooterGUI>().TypeOf<BaseView>().To<ShooterGUIView>();
 
             IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();
             IoCContainer.RegisterFor<SpecialEffect>().TypeOf<BaseView>().To<SpecialEffectView>();

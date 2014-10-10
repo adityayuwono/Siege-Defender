@@ -20,9 +20,6 @@ namespace Scripts.Views
             _source = _viewModel.Root.GetView<ObjectView>(_viewModel.Source);
 
             _viewModel.IsShooting.OnChange += OnShootingChanged;
-
-            var shootingUI = AttachController<ShootingGUI>();
-            shootingUI.Setup(_viewModel);
         }
 
         private void OnShootingChanged()
@@ -55,6 +52,13 @@ namespace Scripts.Views
             _viewModel.IsShooting.OnChange -= OnShootingChanged;
 
             base.OnDestroy();
+        }
+
+        public void SetupController(UITexture uiSprite)
+        {
+            var shootingUI = GameObject.AddComponent<ShootingGUI>();
+            shootingUI.MainTexture = uiSprite;
+            shootingUI.Setup(_viewModel);
         }
     }
 }

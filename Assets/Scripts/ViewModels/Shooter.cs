@@ -13,12 +13,8 @@ namespace Scripts.ViewModels
 
         private ProjectileModel _projectileModel;
 
-        private readonly int _index;
-
-        public Shooter(int index, ShooterModel model, Player parent) : base(model, parent)
+        public Shooter(ShooterModel model, Player parent) : base(model, parent)
         {
-            _index = index;
-
             _model = model;
 
             if (_model.ProjectileId == null)
@@ -32,7 +28,7 @@ namespace Scripts.ViewModels
             Source = new Object(_model.Source, this);
             Elements.Add(Source);
 
-            Target = new Target(index, _model.Target, this);
+            Target = new Target(_model.Target, this);
             Elements.Add(Target);
         }
 
@@ -56,16 +52,10 @@ namespace Scripts.ViewModels
             get { return _projectileModel.Scatters; }
         }
 
-        public int Index
-        {
-            get { return _indexBinding.GetValue()=="ControlStyle1"? _index:1; }
-        }
-
         public Object Source { get; private set; }
         public Object Target { get; private set; }
 
         private Property<string> _projectileBinding;
-        private Property<string> _indexBinding;
         protected override void OnLoad()
         {
             base.OnLoad();
@@ -73,7 +63,6 @@ namespace Scripts.ViewModels
             _projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.ProjectileId);
             _projectileBinding.OnChange += Projectile_OnChange;
             Projectile_OnChange();
-            _indexBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.Index);
             
             IsShooting.SetValue(false);
         }

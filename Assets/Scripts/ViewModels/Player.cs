@@ -11,13 +11,11 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            var index = 0;
             foreach (var shooterModel in _model.Shooters)
             {
-                var shooterVM = new Shooter(index, shooterModel, this);
+                var shooterVM = new Shooter(shooterModel, this);
                 _shooters.Add(shooterVM);
                 Elements.Add(shooterVM);
-                index++;
             }
         }
 

@@ -12,11 +12,11 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-        protected override void OnLoad()
+        public void SetupController(UITexture uiSprite)
         {
-            base.OnLoad();
-
-            AttachController<FollowMouse>().Setup(_viewModel);
+            var followMouseController = GameObject.AddComponent<FollowMouse>();
+            followMouseController.MainTexture = uiSprite;
+            followMouseController.Setup(_viewModel);
         }
     }
 }

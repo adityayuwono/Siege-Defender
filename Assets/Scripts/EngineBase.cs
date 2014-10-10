@@ -119,6 +119,8 @@ namespace Scripts
             IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
             IoCContainer.RegisterFor<ItemModel>().TypeOf<Object>().To<Item>();
             IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<Button>();
+            IoCContainer.RegisterFor<ShooterGUIsModel>().TypeOf<Object>().To<ShooterGUIs>();
+            IoCContainer.RegisterFor<ShooterGUIModel>().TypeOf<Object>().To<ShooterGUI>();
 
             // ProjectileBase
             IoCContainer.RegisterFor<ProjectileModel>().TypeOf<Object>().To<Projectile>();
@@ -154,9 +156,7 @@ namespace Scripts
         public LevelModel GetLevel(string levelId)
         {
             foreach (var levelModel in _model.Levels.Where(levelModel => levelModel.Id == levelId))
-            {
                 return levelModel;
-            }
             throw new EngineException(this, string.Format("Level not found: {0}", levelId));
         }
 
