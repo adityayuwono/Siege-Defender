@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.Models;
 using UnityEngine;
 
@@ -105,7 +106,11 @@ namespace Scripts.ViewModels
 
         public string AssetId
         {
-            get { return _model.AssetId; }
+            get
+            {
+                var binding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.AssetId);
+                return binding == null ? _model.AssetId : binding.GetValue();
+            }
         }
 
         private Vector3 _position;
