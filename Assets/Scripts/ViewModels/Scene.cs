@@ -67,16 +67,22 @@ namespace Scripts.ViewModels
 
         private IEnumerator CacheObjects(List<string> objectsToCache)
         {
-            ActiveObjects.OnChange += CheckIfAllObjectsAreDeactivated;
-
+            var activeObjects = new List<Object>();
             foreach (var objectId in objectsToCache)
             {
-                var enemy = GetObject<Object>(objectId, this);
-                enemy.Activate();
-                enemy.Show(); // Have to show to cache, in order to prepare the prefabs
-                enemy.TriggerIgnoreDelays();
-                enemy.Hide("Just for caching");
+                var objectToCache = GetObject<Object>(objectId, this);
+                objectToCache.Activate();
+                objectToCache.Show(); // Have to show to cache, in order to prepare the prefabs
+                objectToCache.TriggerIgnoreDelays();
+                activeObjects.Add(objectToCache);
                 yield return null;
+            }
+            
+            ActiveObjects.OnChange += CheckIfAllObjectsAreDeactivated;
+
+            foreach (var activeObject in activeObjects)
+            {
+                activeObject.Hide("Just for caching");
             }
         }
 
