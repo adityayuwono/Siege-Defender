@@ -28,9 +28,11 @@ namespace Scripts.Views
         {
             if (_viewModel.IsShooting.GetValue())
             {
-                if (Time.time - _lastInvocationTime < _viewModel.Interval.GetValue())
+                if (Time.time - _lastInvocationTime > _viewModel.Interval.GetValue())
+                {
+                    _lastInvocationTime = Time.time;
                     StartInterval();
-                _lastInvocationTime = Time.time;
+                }
             }
             else
             {

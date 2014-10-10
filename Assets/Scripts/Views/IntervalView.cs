@@ -19,7 +19,7 @@ namespace Scripts.Views
 
         protected void StartInterval()
         {
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(IntervalInvoked, _viewModel.Interval.GetValue(), false);
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(IntervalInvoked, _viewModel.Interval.GetValue());
         }
 
         protected void StopInterval()
