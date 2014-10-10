@@ -122,7 +122,7 @@ namespace Scripts.ViewModels
         #endregion
 
         private bool _isDelaysIgnored;
-        public void TriggerIgnoreDelays()
+        public virtual void TriggerIgnoreDelays()
         {
             _isDelaysIgnored = true;
         }

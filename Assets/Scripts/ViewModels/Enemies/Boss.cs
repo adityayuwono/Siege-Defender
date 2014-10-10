@@ -174,5 +174,15 @@ namespace Scripts.ViewModels.Enemies
             if (OnMovementFinished != null)
                 OnMovementFinished();
         }
+
+        public override void TriggerIgnoreDelays()
+        {
+            base.TriggerIgnoreDelays();
+
+            foreach (var limb in _limbs)
+            {
+                limb.TriggerIgnoreDelays();
+            }
+        }
     }
 }
