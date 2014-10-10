@@ -23,7 +23,11 @@ namespace Scripts.Views
 
             var tryFindBreakableParts = Transform.FindChild("Breakable");
             if (tryFindBreakableParts != null)
+            {
                 _breakable = tryFindBreakableParts.gameObject;
+                if (_breakable != null)
+                    _breakable.SetActive(true);
+            }
         }
 
         protected override void OnShow()
@@ -44,6 +48,13 @@ namespace Scripts.Views
             _viewModel.DoBreakParts -= BreakBrekables;// :D
 
             base.OnHide(reason);
+        }
+
+        protected override void OnDestroy()
+        {
+            _breakable = null;
+
+            base.OnDestroy();
         }
 
         protected override GameObject GetGameObject()
