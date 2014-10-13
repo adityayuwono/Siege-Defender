@@ -29,6 +29,10 @@ namespace Scripts.ViewModels.Actions
 
         public void Activate()
         {
+            if (_isActionInvoking)
+                return;
+
+            _isActionInvoking = true;
             _isInterrupted = false;
             ActivateActions(0);
         }
@@ -86,6 +90,8 @@ namespace Scripts.ViewModels.Actions
         }
 
         private bool _isInterrupted;
+        private bool _isActionInvoking;
+
         public void Interrupt()
         {
             // Mark as interrupted to stop the very next action from being invoked 
@@ -100,6 +106,8 @@ namespace Scripts.ViewModels.Actions
             // Deactivate only activated actions, this is way easier than checking the index, and have similar result
             foreach (var action in this.Where(action => action.IsActive))
                 action.Deactivate("Done Invoking actions");
+
+            _isActionInvoking = false;
         }
     }
 }
