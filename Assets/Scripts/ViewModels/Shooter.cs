@@ -17,6 +17,8 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
+            Ammunition = new AdjustableProperty<int>("Ammunition", this);
+
             if (_model.ProjectileId == null)
                 throw new EngineException(this, "Projectile Model is null");
             if (_model.Source == null)
@@ -77,17 +79,16 @@ namespace Scripts.ViewModels
         private void Projectile_OnChange()
         {
             _projectileModel = Root.GetObjectModel(_projectileBinding.GetValue()) as ProjectileModel;
-            Ammunition = _projectileModel.Ammunition;
-            Accuracy = _projectileModel.Accuracy;
             Interval.SetValue(_projectileModel.RoF);
+            OnReload();
         }
 
         public readonly Property<bool> IsReloading = new Property<bool>();
         public Projectile SpawnProjectile()
         {
-            if (Ammunition > 0)
+            if (_ammunition > 0)
             {
-                Ammunition--;
+                _ammunition--;
                 var projectile = GetObject<Projectile>(_projectileModel.Id);
                 projectile.Activate();
                 projectile.Show();
@@ -113,7 +114,7 @@ namespace Scripts.ViewModels
         private void OnReload()
         {
             Accuracy = _projectileModel.Accuracy;
-            Ammunition = _projectileModel.Ammunition;
+            _ammunition = _projectileModel.Ammunition;
             IsReloading.SetValue(false);
         }
 
@@ -126,9 +127,13 @@ namespace Scripts.ViewModels
         }
 
 
+        public AdjustableProperty<int> Ammunition;
+        private int _ammunition
+        {
+            get { return Ammunition.GetValue(); }
+            set { Ammunition.SetValue(value); }
+        }
 
-        public int Ammunition { get; private set; }
-        
         public readonly Property<bool> IsShooting = new Property<bool>();
         public void StartShooting()
         {
