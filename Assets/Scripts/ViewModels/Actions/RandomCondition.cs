@@ -49,12 +49,12 @@ namespace Scripts.ViewModels.Actions
             return _randomizedValue;
         }
 
-        private static readonly Random Randomizer = new Random();
+        private readonly Random _randomizer = new Random();
         private readonly double _threshold;
 
         private void Randomize()
         {
-            var randomValue = Randomizer.NextDouble();
+            var randomValue = _randomizer.NextDouble();
             _randomizedValue.SetValue(randomValue);
         }
 
