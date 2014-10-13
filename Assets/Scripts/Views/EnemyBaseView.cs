@@ -27,15 +27,36 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            if (_animator != null)
-                _animator.SetBool("IsDead", false);
-            
+            // TODO: Find more elegant solution, if possible
             // Make the enemy face the player
-            Transform.localEulerAngles = new Vector3(0, 180f + (Random.Range(-1, 1)*_viewModel.Rotation), 0);
+            var randomRotation = 180f + (Random.value*Random.Range(-1, 2)*_viewModel.Rotation);
+            Transform.localEulerAngles = new Vector3(0, randomRotation, 0);
 
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk,0f);
+            // TODO: This is checking for both Legacy and Mecanim
+            if (_animator != null)
+            {
+                _animator.SetBool("IsDead", false);
+                BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk, 0f);
+            }
+            else
+            {
+                var animation = GameObject.GetComponent<Animation>();
+                if (animation != null)
+                {
+                    animation.Play("Spawn");
+                    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
+                }
+            }
         }
-        
+
+        private void StartWalkAnimationSubscription()
+        {
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
+            var animation = GameObject.GetComponent<Animation>();
+            animation.Play("Walk");
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk, 0f);
+        }
+
         protected override void SetPosition()
         {
             if (_viewModel.EnemyManager != null)
@@ -62,12 +83,21 @@ namespace Scripts.Views
             // Start the death animation, if any
             if (_animator != null)
                 _animator.SetBool("IsDead", true);
+            else
+            {
+                var animation = GameObject.GetComponent<Animation>();
+                if (animation != null)
+                    animation.Play("Death");
+            }
 
             base.OnHide(reason);
         }
 
         protected override void OnDestroy()
         {
+            // We may still be subscribed to this
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
+
             _viewModel.AnimationId.OnChange -= Animation_OnChange;
             _animator = null;
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
