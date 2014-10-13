@@ -39,6 +39,14 @@ namespace Scripts.ViewModels.Enemies
             base.OnDeactivate();
         }
 
+        protected override void OnDestroyed()
+        {
+            if (_trigger != null)
+                _trigger.Deactivate(string.Format("{0} is deactivated", GetType()));
+
+            base.OnDestroyed();
+        }
+
         public override void Hide(string reason)
         {
             foreach (var projectile in _projectiles)
