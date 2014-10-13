@@ -1,0 +1,661 @@
+fileFormatVersion: 2
+guid: 01360adf4404aa845a33181a6e76545e
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Body
+    100002: Bone009
+    100004: Bone010
+    100006: Bone011
+    100008: Bone013
+    100010: Bone014
+    100012: Bone015
+    100014: Bone017
+    100016: Bone018
+    100018: Bone019
+    100020: Bone020
+    100022: Bone021
+    100024: Bone022
+    100026: Bone023
+    100028: Bone024
+    100030: Bone025
+    100032: Bone026
+    100034: Bone028
+    100036: Bone029
+    100038: Bone030
+    100040: Bone032
+    100042: Bone033
+    100044: Bone034
+    100046: Bone036
+    100048: Bone037
+    100050: Bone038
+    100052: Box001
+    100054: Circle001
+    100056: Circle002
+    100058: Circle003
+    100060: Circle004
+    100062: Circle005
+    100064: Circle006
+    100066: Circle007
+    100068: Circle008
+    100070: //RootNode
+    100072: IK Chain003
+    100074: IK Chain004
+    100076: IK Chain007
+    100078: IK Chain008
+    100080: IK Chain010
+    100082: IK Chain011
+    100084: IK Chain012
+    100086: IK Chain013
+    100088: IK Chain017
+    100090: IK Chain018
+    100092: IK Chain019
+    100094: IK Chain020
+    100096: IK Chain021
+    100098: IK Chain022
+    100100: IK Chain023
+    100102: IK Chain024
+    100104: LegTip00
+    100106: LegTip00 1
+    100108: LegTip01
+    100110: LegTip01 1
+    100112: LegTip02
+    100114: LegTip03
+    100116: LegTip07
+    100118: Particle View 001
+    100120: Particle View 002
+    100122: Point001
+    100124: Point002
+    100126: Tail
+    100128: Plane001
+    400000: Body
+    400002: Bone009
+    400004: Bone010
+    400006: Bone011
+    400008: Bone013
+    400010: Bone014
+    400012: Bone015
+    400014: Bone017
+    400016: Bone018
+    400018: Bone019
+    400020: Bone020
+    400022: Bone021
+    400024: Bone022
+    400026: Bone023
+    400028: Bone024
+    400030: Bone025
+    400032: Bone026
+    400034: Bone028
+    400036: Bone029
+    400038: Bone030
+    400040: Bone032
+    400042: Bone033
+    400044: Bone034
+    400046: Bone036
+    400048: Bone037
+    400050: Bone038
+    400052: Box001
+    400054: Circle001
+    400056: Circle002
+    400058: Circle003
+    400060: Circle004
+    400062: Circle005
+    400064: Circle006
+    400066: Circle007
+    400068: Circle008
+    400070: //RootNode
+    400072: IK Chain003
+    400074: IK Chain004
+    400076: IK Chain007
+    400078: IK Chain008
+    400080: IK Chain010
+    400082: IK Chain011
+    400084: IK Chain012
+    400086: IK Chain013
+    400088: IK Chain017
+    400090: IK Chain018
+    400092: IK Chain019
+    400094: IK Chain020
+    400096: IK Chain021
+    400098: IK Chain022
+    400100: IK Chain023
+    400102: IK Chain024
+    400104: LegTip00
+    400106: LegTip00 1
+    400108: LegTip01
+    400110: LegTip01 1
+    400112: LegTip02
+    400114: LegTip03
+    400116: LegTip07
+    400118: Particle View 001
+    400120: Particle View 002
+    400122: Point001
+    400124: Point002
+    400126: Tail
+    400128: Plane001
+    2300000: Plane001
+    3300000: Plane001
+    4300000: Box001
+    4300002: Plane001
+    7400000: Walk
+    7400002: Death
+    7400004: Spawn
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Box001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Body/Bone009
+        weight: 1
+      - path: Body/Bone009/Bone010
+        weight: 1
+      - path: Body/Bone009/Bone010/Bone011
+        weight: 1
+      - path: Body/Bone009/Bone010/Bone011/LegTip07
+        weight: 1
+      - path: Body/Bone013
+        weight: 1
+      - path: Body/Bone013/Bone014
+        weight: 1
+      - path: Body/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Body/Bone013/Bone014/Bone015/LegTip00
+        weight: 1
+      - path: Body/Bone017
+        weight: 1
+      - path: Body/Bone017/Bone018
+        weight: 1
+      - path: Body/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Body/Bone017/Bone018/Bone019/LegTip01
+        weight: 1
+      - path: Body/Bone028
+        weight: 1
+      - path: Body/Bone028/Bone029
+        weight: 1
+      - path: Body/Bone028/Bone029/Bone030
+        weight: 1
+      - path: Body/Bone028/Bone029/Bone030/LegTip03
+        weight: 1
+      - path: Body/Bone032
+        weight: 1
+      - path: Body/Bone032/Bone033
+        weight: 1
+      - path: Body/Bone032/Bone033/Bone034
+        weight: 1
+      - path: Body/Bone032/Bone033/Bone034/LegTip02
+        weight: 1
+      - path: Body/Bone036
+        weight: 1
+      - path: Body/Bone036/Bone037
+        weight: 1
+      - path: Body/Bone036/Bone037/Bone038
+        weight: 1
+      - path: Body/Bone036/Bone037/Bone038/LegTip01 1
+        weight: 1
+      - path: Body/Point001
+        weight: 1
+      - path: Body/Point001/Bone020
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021/Bone022
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: Body/Point002
+        weight: 1
+      - path: Body/Point002/Bone024
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025/Bone026
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025/Bone026/LegTip00 1
+        weight: 1
+      - path: Body/Tail
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: Circle001
+        weight: 1
+      - path: Circle001/IK Chain013
+        weight: 1
+      - path: Circle001/IK Chain013/IK Chain012
+        weight: 1
+      - path: Circle002
+        weight: 1
+      - path: Circle002/IK Chain004
+        weight: 1
+      - path: Circle002/IK Chain004/IK Chain003
+        weight: 1
+      - path: Circle003
+        weight: 1
+      - path: Circle003/IK Chain011
+        weight: 1
+      - path: Circle003/IK Chain011/IK Chain007
+        weight: 1
+      - path: Circle004
+        weight: 1
+      - path: Circle004/IK Chain010
+        weight: 1
+      - path: Circle004/IK Chain010/IK Chain008
+        weight: 1
+      - path: Circle005
+        weight: 1
+      - path: Circle005/IK Chain018
+        weight: 1
+      - path: Circle005/IK Chain018/IK Chain017
+        weight: 1
+      - path: Circle006
+        weight: 1
+      - path: Circle006/IK Chain024
+        weight: 1
+      - path: Circle006/IK Chain024/IK Chain019
+        weight: 1
+      - path: Circle007
+        weight: 1
+      - path: Circle007/IK Chain023
+        weight: 1
+      - path: Circle007/IK Chain023/IK Chain020
+        weight: 1
+      - path: Circle008
+        weight: 1
+      - path: Circle008/IK Chain022
+        weight: 1
+      - path: Circle008/IK Chain022/IK Chain021
+        weight: 1
+      - path: Particle View 001
+        weight: 1
+      - path: Particle View 002
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 21
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Body/Bone009
+        weight: 1
+      - path: Body/Bone009/Bone010
+        weight: 1
+      - path: Body/Bone009/Bone010/Bone011
+        weight: 1
+      - path: Body/Bone009/Bone010/Bone011/LegTip07
+        weight: 1
+      - path: Body/Bone013
+        weight: 1
+      - path: Body/Bone013/Bone014
+        weight: 1
+      - path: Body/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Body/Bone013/Bone014/Bone015/LegTip00
+        weight: 1
+      - path: Body/Bone017
+        weight: 1
+      - path: Body/Bone017/Bone018
+        weight: 1
+      - path: Body/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Body/Bone017/Bone018/Bone019/LegTip01
+        weight: 1
+      - path: Body/Bone028
+        weight: 1
+      - path: Body/Bone028/Bone029
+        weight: 1
+      - path: Body/Bone028/Bone029/Bone030
+        weight: 1
+      - path: Body/Bone028/Bone029/Bone030/LegTip03
+        weight: 1
+      - path: Body/Bone032
+        weight: 1
+      - path: Body/Bone032/Bone033
+        weight: 1
+      - path: Body/Bone032/Bone033/Bone034
+        weight: 1
+      - path: Body/Bone032/Bone033/Bone034/LegTip02
+        weight: 1
+      - path: Body/Bone036
+        weight: 1
+      - path: Body/Bone036/Bone037
+        weight: 1
+      - path: Body/Bone036/Bone037/Bone038
+        weight: 1
+      - path: Body/Bone036/Bone037/Bone038/LegTip01 1
+        weight: 1
+      - path: Body/Point001
+        weight: 1
+      - path: Body/Point001/Bone020
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021/Bone022
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: Body/Point002
+        weight: 1
+      - path: Body/Point002/Bone024
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025/Bone026
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025/Bone026/LegTip00 1
+        weight: 1
+      - path: Body/Tail
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: Circle001
+        weight: 1
+      - path: Circle001/IK Chain013
+        weight: 1
+      - path: Circle001/IK Chain013/IK Chain012
+        weight: 1
+      - path: Circle002
+        weight: 1
+      - path: Circle002/IK Chain004
+        weight: 1
+      - path: Circle002/IK Chain004/IK Chain003
+        weight: 1
+      - path: Circle003
+        weight: 1
+      - path: Circle003/IK Chain011
+        weight: 1
+      - path: Circle003/IK Chain011/IK Chain007
+        weight: 1
+      - path: Circle004
+        weight: 1
+      - path: Circle004/IK Chain010
+        weight: 1
+      - path: Circle004/IK Chain010/IK Chain008
+        weight: 1
+      - path: Circle005
+        weight: 1
+      - path: Circle005/IK Chain018
+        weight: 1
+      - path: Circle005/IK Chain018/IK Chain017
+        weight: 1
+      - path: Circle006
+        weight: 1
+      - path: Circle006/IK Chain024
+        weight: 1
+      - path: Circle006/IK Chain024/IK Chain019
+        weight: 1
+      - path: Circle007
+        weight: 1
+      - path: Circle007/IK Chain023
+        weight: 1
+      - path: Circle007/IK Chain023/IK Chain020
+        weight: 1
+      - path: Circle008
+        weight: 1
+      - path: Circle008/IK Chain022
+        weight: 1
+      - path: Circle008/IK Chain022/IK Chain021
+        weight: 1
+      - path: Particle View 001
+        weight: 1
+      - path: Particle View 002
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Spawn
+      takeName: Take 001
+      firstFrame: 61
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: Body/Bone009
+        weight: 1
+      - path: Body/Bone009/Bone010
+        weight: 1
+      - path: Body/Bone009/Bone010/Bone011
+        weight: 1
+      - path: Body/Bone009/Bone010/Bone011/LegTip07
+        weight: 1
+      - path: Body/Bone013
+        weight: 1
+      - path: Body/Bone013/Bone014
+        weight: 1
+      - path: Body/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Body/Bone013/Bone014/Bone015/LegTip00
+        weight: 1
+      - path: Body/Bone017
+        weight: 1
+      - path: Body/Bone017/Bone018
+        weight: 1
+      - path: Body/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Body/Bone017/Bone018/Bone019/LegTip01
+        weight: 1
+      - path: Body/Bone028
+        weight: 1
+      - path: Body/Bone028/Bone029
+        weight: 1
+      - path: Body/Bone028/Bone029/Bone030
+        weight: 1
+      - path: Body/Bone028/Bone029/Bone030/LegTip03
+        weight: 1
+      - path: Body/Bone032
+        weight: 1
+      - path: Body/Bone032/Bone033
+        weight: 1
+      - path: Body/Bone032/Bone033/Bone034
+        weight: 1
+      - path: Body/Bone032/Bone033/Bone034/LegTip02
+        weight: 1
+      - path: Body/Bone036
+        weight: 1
+      - path: Body/Bone036/Bone037
+        weight: 1
+      - path: Body/Bone036/Bone037/Bone038
+        weight: 1
+      - path: Body/Bone036/Bone037/Bone038/LegTip01 1
+        weight: 1
+      - path: Body/Point001
+        weight: 1
+      - path: Body/Point001/Bone020
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021/Bone022
+        weight: 1
+      - path: Body/Point001/Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: Body/Point002
+        weight: 1
+      - path: Body/Point002/Bone024
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025/Bone026
+        weight: 1
+      - path: Body/Point002/Bone024/Bone025/Bone026/LegTip00 1
+        weight: 1
+      - path: Body/Tail
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: Circle001
+        weight: 1
+      - path: Circle001/IK Chain013
+        weight: 1
+      - path: Circle001/IK Chain013/IK Chain012
+        weight: 1
+      - path: Circle002
+        weight: 1
+      - path: Circle002/IK Chain004
+        weight: 1
+      - path: Circle002/IK Chain004/IK Chain003
+        weight: 1
+      - path: Circle003
+        weight: 1
+      - path: Circle003/IK Chain011
+        weight: 1
+      - path: Circle003/IK Chain011/IK Chain007
+        weight: 1
+      - path: Circle004
+        weight: 1
+      - path: Circle004/IK Chain010
+        weight: 1
+      - path: Circle004/IK Chain010/IK Chain008
+        weight: 1
+      - path: Circle005
+        weight: 1
+      - path: Circle005/IK Chain018
+        weight: 1
+      - path: Circle005/IK Chain018/IK Chain017
+        weight: 1
+      - path: Circle006
+        weight: 1
+      - path: Circle006/IK Chain024
+        weight: 1
+      - path: Circle006/IK Chain024/IK Chain019
+        weight: 1
+      - path: Circle007
+        weight: 1
+      - path: Circle007/IK Chain023
+        weight: 1
+      - path: Circle007/IK Chain023/IK Chain020
+        weight: 1
+      - path: Circle008
+        weight: 1
+      - path: Circle008/IK Chain022
+        weight: 1
+      - path: Circle008/IK Chain022/IK Chain021
+        weight: 1
+      - path: Particle View 001
+        weight: 1
+      - path: Particle View 002
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

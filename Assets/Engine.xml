@@ -18,9 +18,9 @@
 			AssetId="Projectiles/FireBall" AoEId="FireDome" 
 			RoF="0.5" Ammunition="25" Reload="2" 
 			Accuracy="0.9" Deviation="0.001" />
-		<Projectile 	Id="ExplosiveFireBall" Damage="15-20" 
+		<Projectile 	Id="ExplosiveFireBall" Damage="4-7" 
 			AssetId="Projectiles/FireBall" AoEId="Explosion"
-			RoF="0.2" Ammunition="25" ReloadTime="1" 
+			RoF="0.2" Ammunition="2500" ReloadTime="0" 
 			Accuracy="0.5" Deviation="0.01" />
 		<Piercing 	Id="IronBall" Damage="50-80" 
 			AssetId="Projectiles/IronBall"
@@ -28,12 +28,12 @@
 			Accuracy="1" Deviation="0" />
 
 		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
-		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="3-7" />
+		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="2-3" />
 
-		<Enemy Id="RedGoblin" 	AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" 	Rotation="10" />
-		<Enemy Id="FastGoblin" 	AssetId="Enemies/RedGoblin" 		Health="1" 		Speed="2.5" 	Rotation="0" />
-		<Enemy Id="BlueGoblin"  AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
-		<Enemy Id="Boss" 		AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
+		<Enemy Id="RedGoblin" 		AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" 	Rotation="10" />
+		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="2" 		Rotation="60" CollisionEffectNormal="CrystalBreak_Small" />
+		<Enemy Id="BlueGoblin"  	AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
+		<Enemy Id="Boss" 			AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
 		<Enemy Id="CrystalShield" AssetId="Enemies/CrystalShield" 	 Health="600"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
 		<Enemy Id="SpiderColumn" AssetId="Enemies/SpiderColumn" 	 Health="35"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" Rotation="0" >
@@ -41,16 +41,21 @@
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
 			</Elements>
 			<Trigger TriggerOnce="false" >
-				<RandomCondition Target="{Monster}" Frequency="2" Value="50" /> <!-- Percentage -->
+				<RandomCondition Target="{Monster}" Frequency="4" Value="50" /> <!-- Percentage -->
 				<Condition Target="SpiderSpawn" Property="ActiveObjects" Value="\1" />
 				<Setter Target="SpiderSpawn" Property="Level" Value="SpawnSpiders" />
 			</Trigger>
+		</Enemy>
+		<Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	 Health="150"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" Rotation="0" >
+			<Elements>
+				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
+			</Elements>
 		</Enemy>
 		<Boss  Id="StoneGolem" 	AssetId="Enemies/StoneGolemBoss" Health="7325" Speed="1.1" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
 			<Elements>
 				<EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
-				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="StoneGolemLevel1" />
+				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="" />
 				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="" />
 			</Elements>
 			
@@ -130,7 +135,7 @@
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" Wait="4" />
 				</Skill>
 				<Skill Id="CrystalShield" IsQueuedable="true" >
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" Wait="2.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" Wait="2.65" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 					<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
 				</Skill>
@@ -183,15 +188,19 @@
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="SpiderColumn" />
 				</Trigger>
 				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\4000" />
+					<Condition Target="{Monster}" Property="Health" Value="\6660" />
+					<Setter Target="WarpGates" Property="Level" Value="SpiderColumnSwarm" />
+				</Trigger>
+				<Trigger>
+					<Condition Target="{Monster}" Property="Health" Value="\4440" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\2000" />
+					<Condition Target="{Monster}" Property="Health" Value="\2220" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\1000" />
+					<Condition Target="{Monster}" Property="Health" Value="\1110" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
 			</Triggers>
@@ -204,9 +213,9 @@
 
 	<Levels>
 		<Level Id="Level1" Interval="1.12345" LoopCount="0">
-			<Cache EnemyId="RedGoblin" />
 			<Cache EnemyId="StoneGolem" />
-			<Cache EnemyId="FastGoblin" />
+			<Cache EnemyId="RedGoblin" />
+			<Cache EnemyId="CrystalSpider" />
 			<Cache EnemyId="StandardDamageGUI" />
 			<Cache EnemyId="CrystalBreak_Small" />
 			<Cache EnemyId="StoneBreak" />
@@ -217,17 +226,20 @@
 			<Spawn EnemyId="RedGoblin" />
 			<Spawn EnemyId="StoneGolem" />
 		</Level>
-		<SubLevel Id="StoneGolemLevel1" Interval="2" LoopCount="-1">
-			<Spawn EnemyId="FastGoblin" />
-		</SubLevel>
 		<SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
 			<Spawn EnemyId="CrystalShield" />
+		</SubLevel>
+		<SubLevel Id="SpiderColumnSwarm" Interval="15" LoopCount="-1">
+			<Spawn EnemyId="StrongSpiderColumn" />
 		</SubLevel>
 		<SubLevel Id="SpawnSpiderColumn" Interval="0.1" LoopCount="0">
 			<Spawn EnemyId="SpiderColumn" />
 		</SubLevel>
-		<SubLevel Id="SpawnSpiders" Interval="0.1" LoopCount="3">
-			<Spawn EnemyId="FastGoblin" />
+		<SubLevel Id="SpawnSpiders" Interval="3" LoopCount="1">
+			<Spawn EnemyId="CrystalSpider" />
+		</SubLevel>
+		<SubLevel Id="SpawnSpidersInfinite" Interval="10" LoopCount="-1">
+			<Spawn EnemyId="CrystalSpider" />
 		</SubLevel>
 	</Levels>
 
