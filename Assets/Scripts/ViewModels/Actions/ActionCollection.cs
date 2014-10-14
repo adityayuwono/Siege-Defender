@@ -45,6 +45,7 @@ namespace Scripts.ViewModels.Actions
         {
             _parent.Root.StartCoroutine(ActivateActionAsync(startIndex));
         }
+
         /// <summary>
         /// Invoked by the Enumerator when the action sequence has finished Activated
         /// </summary>
@@ -103,7 +104,7 @@ namespace Scripts.ViewModels.Actions
 
         public void Deactivate()
         {
-            DeactivateActions();
+            Interrupt();
         }
 
         private void DeactivateActions()
