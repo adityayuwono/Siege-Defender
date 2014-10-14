@@ -94,12 +94,14 @@ namespace Scripts.ViewModels
         public Action OnDestroy;
         public void Destroy()
         {
+            if (_isActive)
+                Deactivate("Destroyed");
+
             OnDestroyed();
 
             if (OnDestroy != null)
                 OnDestroy();
-
-            _isActive = false;
+            
             _isLoaded = false;// Finally we will reload a destroyed object
         }
         protected virtual void OnDestroyed()
