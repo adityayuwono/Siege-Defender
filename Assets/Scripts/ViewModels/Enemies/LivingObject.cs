@@ -39,11 +39,6 @@ namespace Scripts.ViewModels.Enemies
             base.OnDeactivate();
         }
 
-        protected override void OnDestroyed()
-        {
-            base.OnDestroyed();
-        }
-
         public override void Hide(string reason)
         {
             foreach (var projectile in _projectiles)
