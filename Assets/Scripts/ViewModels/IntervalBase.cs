@@ -43,6 +43,9 @@ namespace Scripts.ViewModels
         protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : Object
         {
             var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, overrideParent));
+            if (objectResult as T == null)
+                throw new EngineException(this, string.Format("Failed to cast '{0}'\ntype of ({1}) to ({2})", objectResult.Id, objectResult.GetType(), typeof (T)));
+
             _activeObjects.Add(objectResult as T);
             ActiveObjects.SetValue(ActiveObjects.GetValue() + 1);
             objectResult.OnObjectDeactivated += Object_OnDeath;
