@@ -41,9 +41,6 @@ namespace Scripts.ViewModels.Enemies
 
         protected override void OnDestroyed()
         {
-            if (_trigger != null)
-                _trigger.Deactivate(string.Format("{0} is deactivated", GetType()));
-
             base.OnDestroyed();
         }
 

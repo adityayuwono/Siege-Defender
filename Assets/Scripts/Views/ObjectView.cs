@@ -50,7 +50,6 @@ namespace Scripts.Views
         }
 
         protected Vector3 AssetScale;
-        protected Vector3 AssetRotation;
         private bool _isLoaded;
         protected virtual void OnLoad()
         {
@@ -59,7 +58,6 @@ namespace Scripts.Views
 
             // Cache initial setting of the transforms
             AssetScale = Transform.localScale;
-            AssetRotation = Transform.localEulerAngles;
 
             GameObject.AddComponent<ViewModelController>().ViewModel = _viewModel;
 

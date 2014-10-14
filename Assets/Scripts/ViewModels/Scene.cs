@@ -36,7 +36,7 @@ namespace Scripts.ViewModels
         }
         private PropertyLookup _propertyLookup;
 
-        public AdjustableProperty<bool> IsLoadingInProgress;
+        public readonly AdjustableProperty<bool> IsLoadingInProgress;
         private string _levelId;
         public override void Show()
         {
