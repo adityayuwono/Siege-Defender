@@ -31,27 +31,28 @@
 		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="2-3" />
 
 		<Enemy Id="RedGoblin" 		AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" 	Rotation="10" />
-		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="2" 		Rotation="60" CollisionEffectNormal="CrystalBreak_Small" />
 		<Enemy Id="BlueGoblin"  	AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
 		<Enemy Id="Boss" 			AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
-		<Enemy Id="CrystalShield" AssetId="Enemies/CrystalShield" 	 Health="600"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
-		<Enemy Id="SpiderColumn" AssetId="Enemies/SpiderColumn" 	 Health="35"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" Rotation="0" >
+
+		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="2" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Rotation="60" />
+		<Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="600"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
+		<Enemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
 			<Elements>
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
 			</Elements>
-			<Trigger TriggerOnce="false" >
+			<Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
 				<RandomCondition Target="{Monster}" Frequency="4" Value="50" /> <!-- Percentage -->
 				<Condition Target="SpiderSpawn" Property="ActiveObjects" Value="\1" />
 				<Setter Target="SpiderSpawn" Property="Level" Value="SpawnSpiders" />
 			</Trigger>
 		</Enemy>
-		<Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	 Health="150"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" Rotation="0" >
+		<Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	Health="150"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
 			<Elements>
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
 			</Elements>
 		</Enemy>
-		<Boss  Id="StoneGolem" 	AssetId="Enemies/StoneGolemBoss" Health="7325" Speed="1.1" DeathDelay="5"
+		<Boss  Id="StoneGolem" 		AssetId="Enemies/StoneGolemBoss" 	Health="7325" 	Speed="1.1" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
 			<Elements>
 				<EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -206,9 +207,9 @@
 			</Triggers>
 		</Boss>
 
-		<DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" />
-		<SpecialEffect Id="CrystalBreak_Small" AssetId="SpecialEffects/CrystalBreak_Small" />
-		<SpecialEffect Id="StoneBreak" AssetId="SpecialEffects/StoneBreak" />
+		<DamageGUI Id="StandardDamageGUI" 		AssetId="GUIs/DamageDisplay" />
+		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
+		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
 	</Objects>
 
 	<Levels>
