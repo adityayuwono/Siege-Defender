@@ -39,11 +39,18 @@ namespace Scripts.ViewModels.Enemies
 
         private void Action_OnActivationFinished()
         {
-            _actions.OnActivationFinished -= Action_OnActivationFinished;
             Deactivate("Done activating Skill");
 
             if (OnSkillActivationFinished != null)
                 OnSkillActivationFinished(this);
+        }
+
+        protected override void OnDeactivate()
+        {
+            _actions.OnActivationFinished -= Action_OnActivationFinished;
+            _actions.Deactivate();
+
+            base.OnDeactivate();
         }
 
         public void Interrupt()

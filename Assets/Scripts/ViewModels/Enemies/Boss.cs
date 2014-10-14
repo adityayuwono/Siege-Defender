@@ -146,6 +146,9 @@ namespace Scripts.ViewModels.Enemies
             foreach (var phase in _triggers)
                 phase.Deactivate("Boss is deactivated");
 
+            if (_currentSkill != null)
+                _currentSkill.Deactivate("Boss is deactivated");
+
             base.OnDeactivate();
         }
 
