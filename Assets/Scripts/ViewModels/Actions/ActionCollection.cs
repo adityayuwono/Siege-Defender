@@ -101,6 +101,11 @@ namespace Scripts.ViewModels.Actions
             DeactivateActions();
         }
 
+        public void Deactivate()
+        {
+            DeactivateActions();
+        }
+
         private void DeactivateActions()
         {
             // Deactivate only activated actions, this is way easier than checking the index, and have similar result

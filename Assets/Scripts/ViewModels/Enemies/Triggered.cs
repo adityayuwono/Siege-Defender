@@ -22,7 +22,6 @@ namespace Scripts.ViewModels.Enemies
         }
 
         private readonly List<BaseCondition> _conditions = new List<BaseCondition>();
-
         private readonly ActionCollection _actions;
 
         protected override void OnActivate()
@@ -37,7 +36,7 @@ namespace Scripts.ViewModels.Enemies
 
             Conditions_OnChange();
         }
-
+        
         protected override void OnDeactivate()
         {
             foreach (var condition in _conditions)
@@ -45,6 +44,8 @@ namespace Scripts.ViewModels.Enemies
                 condition.IsMatch.OnChange -= Conditions_OnChange;
                 condition.Deactivate(string.Format("Triggered on ({0}) is deactivated", FullId));
             }
+
+            _actions.Deactivate();
 
             base.OnDeactivate();
         }
@@ -60,7 +61,7 @@ namespace Scripts.ViewModels.Enemies
                 if (_model.TriggerOnce)
                     foreach (var condition in _conditions)
                         condition.IsMatch.OnChange -= Conditions_OnChange;
-
+                
                 _actions.Activate();
             }
         }
