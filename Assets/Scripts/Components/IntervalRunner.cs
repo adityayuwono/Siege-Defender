@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Helpers;
 using UnityEngine;
 
 namespace Scripts.Components
@@ -15,6 +16,8 @@ namespace Scripts.Components
         {
             if (!IsContainInterval(action))
                 _intervals.Add(new IntervalSubscriber(action, delay, startImmediately));
+            else
+                throw new Exception(string.Format("Multiple registration of {0}", action));
         }
 
         public bool UnsubscribeFromInterval(Action action)
