@@ -78,6 +78,8 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
+            // We may still be subscribed to this
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
             // Start the death animation, if any
