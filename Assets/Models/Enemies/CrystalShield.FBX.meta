@@ -205,7 +205,9 @@ ModelImporter:
     4300074: Object014_Part_1_Part_006
     7400000: Spawn
     7400002: Death
+    7400004: Walk
     9500000: //RootNode
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -227,7 +229,7 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 0
       lastFrame: 20
-      wrapMode: 0
+      wrapMode: 1
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
@@ -446,6 +448,116 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 19.8999996
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box002_Part_1
+        weight: 1
+      - path: Box002_Part_004
+        weight: 1
+      - path: Box002_Part_005
+        weight: 1
+      - path: Object008_Part_1
+        weight: 1
+      - path: Object008_Part_2_Part_004
+        weight: 1
+      - path: Object008_Part_2_Part_005
+        weight: 1
+      - path: Object008_Part_2_Part_006
+        weight: 1
+      - path: Object008_Part_004
+        weight: 1
+      - path: Object009_Part_2
+        weight: 1
+      - path: Object009_Part_003
+        weight: 1
+      - path: Object010_Part_2
+        weight: 1
+      - path: Object010_Part_003
+        weight: 1
+      - path: Object010_Part_3_Part_004
+        weight: 1
+      - path: Object010_Part_3_Part_005
+        weight: 1
+      - path: Object010_Part_3_Part_006
+        weight: 1
+      - path: Object011_Part_2
+        weight: 1
+      - path: Object011_Part_004
+        weight: 1
+      - path: Object011_Part_005
+        weight: 1
+      - path: Object012_Part_2_Part_2
+        weight: 1
+      - path: Object012_Part_2_Part_004
+        weight: 1
+      - path: Object012_Part_2_Part_005
+        weight: 1
+      - path: Object012_Part_004
+        weight: 1
+      - path: Object012_Part_005
+        weight: 1
+      - path: Object014_Part_1_Part_004
+        weight: 1
+      - path: Object014_Part_1_Part_005
+        weight: 1
+      - path: Object014_Part_1_Part_006
+        weight: 1
+      - path: Object014_Part_003
+        weight: 1
+      - path: Object014_Part_3_Part_1
+        weight: 1
+      - path: Object014_Part_3_Part_004
+        weight: 1
+      - path: Object014_Part_3_Part_005
+        weight: 1
+      - path: Particle View 001
+        weight: 1
+      - path: Plane001
+        weight: 1
+      - path: Plane001/Box001
+        weight: 1
+      - path: Plane001/Object001
+        weight: 1
+      - path: Plane001/Object002
+        weight: 1
+      - path: Plane001/Object003
+        weight: 1
+      - path: Plane001/Object004
+        weight: 1
+      - path: Plane001/Object005
+        weight: 1
+      - path: Plane001/Object006
+        weight: 1
+      - path: Plane001/Object007
+        weight: 1
+      - path: Point001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -481,6 +593,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 
