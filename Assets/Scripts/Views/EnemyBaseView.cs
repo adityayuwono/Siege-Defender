@@ -36,7 +36,7 @@ namespace Scripts.Views
             if (_animator != null)
             {
                 _animator.SetBool("IsDead", false);
-                BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk, 0f);
+                BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace Scripts.Views
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             var animation = GameObject.GetComponent<Animation>();
             animation.Play("Walk");
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk, 0f);
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
         }
 
         protected override void SetPosition()
@@ -78,7 +78,7 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
-            // We may still be subscribed to this
+            // We may still be subscribed to these
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
@@ -112,7 +112,6 @@ namespace Scripts.Views
         {
             OnAnimationChanged();
         }
-
         protected virtual void OnAnimationChanged()
         {
             if (!string.IsNullOrEmpty(_lastAnimationValue))

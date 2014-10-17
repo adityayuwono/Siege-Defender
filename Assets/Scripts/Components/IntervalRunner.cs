@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Scripts.Helpers;
 using UnityEngine;
 
 namespace Scripts.Components
@@ -12,7 +11,7 @@ namespace Scripts.Components
     public class IntervalRunner : MonoBehaviour
     {
         private readonly List<IntervalSubscriber> _intervals = new List<IntervalSubscriber>();
-        public void SubscribeToInterval(Action action, float delay, bool startImmediately = true)
+        public void SubscribeToInterval(Action action, float delay = 0f, bool startImmediately = true)
         {
             if (!IsContainInterval(action))
                 _intervals.Add(new IntervalSubscriber(action, delay, startImmediately));
