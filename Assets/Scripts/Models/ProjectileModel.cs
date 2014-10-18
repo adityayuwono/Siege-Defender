@@ -37,6 +37,13 @@ namespace Scripts.Models
         public float Deviation { get; set; }
 
         [XmlAttribute]
+        [DefaultValue("400-400")]
+        public string SpeedDeviation { get; set; }
+
+        [XmlAttribute]
+        public bool IsRotationRandomized { get; set; }
+
+        [XmlAttribute]
         [DefaultValue(1)]
         public int Scatters { get; set; }
 
@@ -49,8 +56,11 @@ namespace Scripts.Models
             Accuracy = 0.9f;
             Scatters = 1;
             Deviation = 0f;
+            SpeedDeviation = "400-400";
             Damage = "1";
             RoF = 1f;
+
+            IsRotationRandomized = false;
         }
     }
 }

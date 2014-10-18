@@ -15,6 +15,17 @@ namespace Scripts.ViewModels
         public Projectile(ProjectileModel model, Shooter parent) : base(model, parent)
         {
             _model = model;
+
+            CalculateSpeed();
+        }
+
+        private void CalculateSpeed()
+        {
+            var splitSpeed = _model.SpeedDeviation.Split('-');
+            var speed0 = float.Parse(splitSpeed[0]);
+            var speed1 = float.Parse(splitSpeed[1]);
+
+            SpeedDeviations = new[] {speed0, speed1};
         }
 
         public Action<ObjectView, ObjectView, float> DoShooting;
@@ -73,5 +84,12 @@ namespace Scripts.ViewModels
         {
             get { return 1-_model.Accuracy; }
         }
+
+        public bool IsRotationRandomized
+        {
+            get { return _model.IsRotationRandomized; }
+        }
+
+        public float[] SpeedDeviations;
     }
 }
