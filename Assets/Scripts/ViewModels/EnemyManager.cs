@@ -60,11 +60,15 @@ namespace Scripts.ViewModels
             if (_spawnIndex < _levelModel.SpawnSequence.Count)
             {
                 var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
+                var count = _levelModel.SpawnSequence[_spawnIndex].Count;
                 _spawnIndex++;
 
-                var enemy = GetObject<EnemyBase>(enemyId, GetParent<Scene>());
-                enemy.Activate(this);
-                enemy.Show();
+                for (var i = 0; i < count; i++)
+                {
+                    var enemy = GetObject<EnemyBase>(enemyId, GetParent<Scene>());
+                    enemy.Activate(this);
+                    enemy.Show();
+                }
             }
         }
         #endregion
