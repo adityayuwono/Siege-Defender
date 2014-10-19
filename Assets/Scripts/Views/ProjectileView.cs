@@ -33,16 +33,18 @@ namespace Scripts.Views
             Transform.position = source.Transform.position;
 
             var targetTransform = target.Transform;
-            Transform.LookAt(targetTransform);
 
             // Randomize direction
             var direction = new Vector3(
-                Random.Range(-0.2f, 0.2f) * accuracy,
-                (Random.Range(-0.1f, 0.3f) * accuracy), 
+                Random.Range(-5f, 5f) * accuracy,
+                (Random.Range(-5f, 5f) * accuracy), 
                 1f);
+            targetTransform.position = targetTransform.position + direction;
+
+            Transform.LookAt(targetTransform);
 
             var randomForce = Random.Range(_viewModel.SpeedDeviations[0], _viewModel.SpeedDeviations[1]);
-            AddRelativeForce(direction * randomForce);
+            AddRelativeForce(new Vector3(0,0,1) * randomForce);
 
             if (_viewModel.IsRotationRandomized)
             {
