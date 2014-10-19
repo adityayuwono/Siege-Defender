@@ -4,6 +4,14 @@
 			AssetId="Projectiles/WoodenBalista" 
 			RoF="0.2" Ammunition="1000" Reload="1" 
 			Accuracy="0.9" Deviation="0.001" />
+		<Projectile 	Id="Rock" Damage="0-6" 
+			AssetId="Projectiles/Rock" 
+			RoF="0.1" Ammunition="10000" Reload="0.5" 
+			Accuracy="0.65" Deviation="0.001" 
+			SpeedDeviation="500-1500"
+			IsRotationRandomized="true"
+			DeathDelay="0.5"
+			Scatters="3" />
 		<Projectile 	Id="ScatterArrow" Damage="1-5" 
 			AssetId="Projectiles/WoodenBalista" 
 			RoF="0.3" Ammunition="100" Reload="1" 
@@ -20,11 +28,11 @@
 			Accuracy="0.9" Deviation="0.001" />
 		<Projectile 	Id="ExplosiveFireBall" Damage="4-7" 
 			AssetId="Projectiles/FireBall" AoEId="Explosion"
-			RoF="0.2" Ammunition="2500" ReloadTime="0" 
+			RoF="0.2" Ammunition="2500" Reload="0" 
 			Accuracy="0.5" Deviation="0.01" />
 		<Piercing 	Id="IronBall" Damage="50-80" 
 			AssetId="Projectiles/IronBall"
-			RoF="2" Ammunition="3" ReloadTime="1" 
+			RoF="1" Ammunition="3000" Reload="1" 
 			Accuracy="1" Deviation="0" />
 
 		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
@@ -34,9 +42,8 @@
 		<Enemy Id="BlueGoblin"  	AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
 		<Enemy Id="Boss" 			AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
-
-		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="2" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Rotation="60" />
-		<Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="600"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
+		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3.5" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Rotation="60" />
+		<Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
 		<Enemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
 			<Elements>
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
@@ -193,6 +200,10 @@
 					<Setter Target="WarpGates" Property="Level" Value="SpiderColumnSwarm" />
 				</Trigger>
 				<Trigger>
+					<Condition Target="{Monster}" Property="Health" Value="\7200" />
+					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
+				</Trigger>
+				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\4440" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
 				</Trigger>
@@ -215,16 +226,13 @@
 	<Levels>
 		<Level Id="Level1" Interval="1.12345" LoopCount="0">
 			<Cache EnemyId="StoneGolem" />
-			<Cache EnemyId="RedGoblin" />
-			<Cache EnemyId="CrystalSpider" />
-			<Cache EnemyId="StandardDamageGUI" />
-			<Cache EnemyId="CrystalBreak_Small" />
-			<Cache EnemyId="StoneBreak" />
-			<Cache EnemyId="SpiderColumn" />
+			<Cache EnemyId="CrystalSpider" Count="5" />
+			<Cache EnemyId="StandardDamageGUI" Count="20" />
+			<Cache EnemyId="CrystalBreak_Small" Count="10" />
+			<Cache EnemyId="StoneBreak" Count="10" />
+			<Cache EnemyId="SpiderColumn" Count="5" />
 			<Cache EnemyId="CrystalShield" />
 
-			<Spawn EnemyId="RedGoblin" />
-			<Spawn EnemyId="RedGoblin" />
 			<Spawn EnemyId="StoneGolem" />
 		</Level>
 		<SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
@@ -277,7 +285,7 @@
 			</Elements>
 		</Scene>
 
-		<Scene Id="Limbo" AssetId="Scenes/Limbo">
+		<Scene Id="Limbo" AssetId="Scenes/LimboLower">
 			<Elements>
 				<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" />
 
