@@ -1,4 +1,5 @@
-﻿using Scripts.ViewModels;
+﻿using System.Collections;
+using Scripts.ViewModels;
 using UnityEngine;
 
 namespace Scripts.Views
@@ -27,12 +28,24 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            // TODO: Find more elegant solution, if possible
-            // Make the enemy face the player
-            var randomRotation = 180f + (Random.value*Random.Range(-1, 2)*_viewModel.Rotation);
-            Transform.localEulerAngles = new Vector3(0, randomRotation, 0);
+            if (_viewModel.Target != null)
+            {
+                // make the enemy go towards the player
+                var targetTransform = _viewModel.Root.GetView<ObjectView>(_viewModel.Target).Transform;
+                Transform.LookAt(targetTransform);
+                _targetTransform = targetTransform;
+                // Need to reset x rotation to make sure we are walking straight
+                var currentRotation = Transform.localEulerAngles;
+                currentRotation.x = 0;
+                Transform.localEulerAngles = currentRotation;
+            }
+            else
+            {
+                var randomRotation = 180f + (Random.value*Random.Range(-1, 2)*_viewModel.Rotation);
+                Transform.localEulerAngles = new Vector3(0, randomRotation, 0);
+            }
 
-            // TODO: This is checking for both Legacy and Mecanim
+            // TODO: This is checking for both Legacy and Mecanim, it should not
             if (_animator != null)
             {
                 _animator.SetBool("IsDead", false);
@@ -48,6 +61,8 @@ namespace Scripts.Views
                 }
             }
         }
+
+        private Transform _targetTransform;
 
         private void StartWalkAnimationSubscription()
         {

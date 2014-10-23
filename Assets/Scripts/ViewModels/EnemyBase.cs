@@ -16,6 +16,15 @@ namespace Scripts.ViewModels
             AnimationId = new AdjustableProperty<string>("AnimationId", this);
         }
 
+        protected override void OnLoad()
+        {
+            base.OnLoad();
+
+            if (!string.IsNullOrEmpty(_model.Target))
+                Target = Root.GetViewModelAsType<Object>(_model.Target);
+        }
+
+        public Object Target { get; private set; }
 
         protected override void OnKilled()
         {

@@ -7,6 +7,9 @@ namespace Scripts.Models
     public class EnemyBaseModel : LivingObjectModel
     {
         [XmlAttribute]
+        public string Target { get; set; }
+
+        [XmlAttribute]
         public float Speed { get; set; }
 
         [XmlElement]

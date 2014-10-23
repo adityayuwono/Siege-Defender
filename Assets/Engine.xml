@@ -47,7 +47,7 @@
 		<Enemy Id="BlueGoblin"  	AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
 		<Enemy Id="Boss" 			AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
-		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3.5" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Rotation="60" />
+		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="1" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" />
 		<Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
 		<Enemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
 			<Elements>
