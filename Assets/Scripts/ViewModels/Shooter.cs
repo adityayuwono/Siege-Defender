@@ -57,12 +57,12 @@ namespace Scripts.ViewModels
         public Object Source { get; private set; }
         public Object Target { get; private set; }
 
-        private Property<string> _projectileBinding;
+        private Property<ObjectModel> _projectileBinding;
         protected override void OnLoad()
         {
             base.OnLoad();
 
-            _projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.ProjectileId);
+            _projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<ObjectModel>(_model.ProjectileId);
             _projectileBinding.OnChange += Projectile_OnChange;
             Projectile_OnChange();
             
@@ -78,7 +78,7 @@ namespace Scripts.ViewModels
 
         private void Projectile_OnChange()
         {
-            _projectileModel = Root.GetObjectModel(_projectileBinding.GetValue()) as ProjectileModel;
+            _projectileModel = _projectileBinding.GetValue() as ProjectileModel;
             Interval.SetValue(_projectileModel.RoF);
             OnReload();
         }

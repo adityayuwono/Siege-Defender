@@ -50,6 +50,7 @@ namespace Scripts
             IoCContainer.RegisterFor<ObjectDisplay>().TypeOf<BaseView>().To<ObjectDisplayView>();
             // GUIs
             IoCContainer.RegisterFor<Item>().TypeOf<BaseView>().To<ItemView>();
+            IoCContainer.RegisterFor<ProjectileItem>().TypeOf<BaseView>().To<ItemView>();
             IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<InventoryView>();
             IoCContainer.RegisterFor<EquipmentSlot>().TypeOf<BaseView>().To<EquipmentSlotView>();
             IoCContainer.RegisterFor<Button>().TypeOf<BaseView>().To<ButtonView>();

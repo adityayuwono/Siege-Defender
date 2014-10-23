@@ -11,7 +11,9 @@ namespace Scripts.ViewModels
             _model = model;
 
             ItemId = new AdjustableProperty<string>("ItemId", this);
-            CurrentItem = new Item(_model.Item, this);
+            Item = new AdjustableProperty<ObjectModel>("Item", this);
+
+            CurrentItem = Root.IoCContainer.GetInstance<Item>(_model.Item.GetType(), new object[] {_model.Item, this});
         }
 
         protected override void OnActivate()
@@ -43,6 +45,7 @@ namespace Scripts.ViewModels
         }
 
         public readonly AdjustableProperty<string> ItemId;
+        public readonly AdjustableProperty<ObjectModel> Item;
 
         private Item _currentItem;
         private Item CurrentItem
@@ -63,6 +66,9 @@ namespace Scripts.ViewModels
             _model.Item = _currentItem.Model;// Save the change to model
             ItemId.SetValue(_currentItem.Base);// Update projectile used
 
+            var currentProjectileItem = _currentItem as ProjectileItem;
+            Item.SetValue(currentProjectileItem == null ? null : currentProjectileItem.GetProjectileModel());// Update actual object model
+            
             Root.Save();
         }
 

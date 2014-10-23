@@ -15,6 +15,7 @@ namespace Scripts.Models
         public int Slots { get; set; }
 
         [XmlElement(ElementName = "Item", Type = typeof(ItemModel))]
+        [XmlElement(ElementName = "Projectile", Type = typeof(ProjectileItemModel))]
         public List<ItemModel> Items { get; set; }
 
         [XmlElement(ElementName = "EquipmentSlot", Type = typeof(EquipmentSlotModel))]
@@ -36,5 +37,22 @@ namespace Scripts.Models
 
         [XmlAttribute]
         public int Level { get; set; }
+    }
+
+    [Serializable]
+    public class ProjectileItemModel : ItemModel
+    {
+        [XmlElement]
+        public ProjectileOverrides Overrides { get; set; }
+
+        public ProjectileItemModel()
+        {
+            Overrides = new ProjectileOverrides();
+        }
+    }
+
+    [Serializable]
+    public class ProjectileOverrides : ProjectileModel
+    {
     }
 }

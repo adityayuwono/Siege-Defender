@@ -86,7 +86,11 @@ namespace Scripts
         #endregion
 
         #region Object Models
-        private readonly Dictionary<string, ObjectModel> _objectModels = new Dictionary<string, ObjectModel>(); 
+        private readonly Dictionary<string, ObjectModel> _objectModels = new Dictionary<string, ObjectModel>();
+        public void AddNewObjectModel(ObjectModel newModel)
+        {
+            _objectModels.Add(newModel.Id, newModel);
+        }
         public ObjectModel GetObjectModel(string id)
         {
             if (_objectModels.ContainsKey(id))
@@ -133,6 +137,9 @@ namespace Scripts
             IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<Object>().To<DamageGUI>();
 
             IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
+
+            IoCContainer.RegisterFor<ItemModel>().TypeOf<Item>().To<Item>();
+            IoCContainer.RegisterFor<ProjectileItemModel>().TypeOf<Item>().To<ProjectileItem>();
 
             // Actions, doesnt have a view
             IoCContainer.RegisterFor<LoadSceneActionModel>().TypeOf<BaseAction>().To<LoadSceneAction>();
