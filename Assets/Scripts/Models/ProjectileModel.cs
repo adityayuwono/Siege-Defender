@@ -11,7 +11,7 @@ namespace Scripts.Models
         public string BulletAssetId { get; set; }
 
 
-        [XmlAttribute][DefaultValue("1")]
+        [XmlAttribute][DefaultValue("1-1")]
         public string Damage { get; set; }
 
         [XmlAttribute][DefaultValue(1f)]
@@ -41,6 +41,7 @@ namespace Scripts.Models
         public string SpeedDeviation { get; set; }
 
         [XmlAttribute]
+        [DefaultValue(false)]
         public bool IsRotationRandomized { get; set; }
 
         [XmlAttribute]
@@ -54,10 +55,10 @@ namespace Scripts.Models
             Ammunition = -1;
             Reload = 3f;
             Accuracy = 0.9f;
-            Scatters = 1;
+            Scatters = 0;
             Deviation = 0f;
             SpeedDeviation = "400-400";
-            Damage = "1";
+            Damage = "1-1";
             RoF = 1f;
 
             IsRotationRandomized = false;

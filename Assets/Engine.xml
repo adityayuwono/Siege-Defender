@@ -3,6 +3,7 @@
 		<Projectile 	Id="WoodArrow" Damage="8-12" 
 			AssetId="Projectiles/WoodenBalista" 
 			RoF="0.2" Ammunition="1000" Reload="1" 
+			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" />
 		<Projectile 	Id="Rock" Damage="0-6" 
 			AssetId="Projectiles/Rock" 
@@ -20,23 +21,27 @@
 		<Projectile 	Id="IronArrow" Damage="10-30" 
 			AssetId="Projectiles/IronBalista" 
 			RoF="0.25" Ammunition="500" Reload="0.2" 
+			Scatters="1"
 			Accuracy="0.7" Deviation="0.005" />
 
 		<Projectile 	Id="FireBall" Damage="8-11" 
 			AssetId="Projectiles/FireBall" AoEId="FireDome" 
 			RoF="0.5" Ammunition="25" Reload="2" 
+			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" />
 		<Projectile 	Id="ExplosiveFireBall" Damage="4-7" 
 			AssetId="Projectiles/FireBall" AoEId="Explosion"
 			RoF="0.2" Ammunition="2500" Reload="0" 
+			Scatters="1"
 			Accuracy="0.5" Deviation="0.01" />
 		<Piercing 	Id="IronBall" Damage="50-80" 
 			AssetId="Projectiles/IronBall"
 			RoF="1" Ammunition="3000" Reload="1" 
+			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
-		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" />
-		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="2-3" />
+		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" Scatters="1" />
+		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="2-3" Scatters="1" />
 
 		<Enemy Id="RedGoblin" 		AssetId="Enemies/RedGoblin" 		Health="11" 	Speed="1.5" 	Rotation="10" />
 		<Enemy Id="BlueGoblin"  	AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
@@ -292,13 +297,13 @@
 				<PlayerHitbox AssetId="PlayerHealth" />
 				<SpecialEffectManager AssetId="SpecialEffectRoot" />
 				
-				<Player AssetId="Player" >
+				<Player Id="Player" AssetId="Player" >
 					<Shooters>
-						<Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.ItemId}" >
+						<Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.Item}" >
 							<Source AssetId="Shooter"/>
 							<Target AssetId="Target" />
 						</Shooter>
-						<Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{Root.SkillTree.RightShooter.ItemId}" >
+						<Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{Root.SkillTree.RightShooter.Item}" >
 							<Source AssetId="Shooter"/>
 							<Target AssetId="Target" />
 						</Shooter>
