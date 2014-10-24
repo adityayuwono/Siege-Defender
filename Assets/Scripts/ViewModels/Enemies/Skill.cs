@@ -17,7 +17,7 @@ namespace Scripts.ViewModels.Enemies
 
         private readonly ActionCollection _actions;
 
-        public Action<Skill> OnSkillActivationFinished;
+        public event Action<Skill> OnSkillActivationFinished;
 
         public bool IsQueuedable
         {

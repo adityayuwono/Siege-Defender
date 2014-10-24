@@ -49,7 +49,7 @@ namespace Scripts.ViewModels.Actions
         /// <summary>
         /// Invoked by the Enumerator when the action sequence has finished Activated
         /// </summary>
-        public Action OnActivationFinished;
+        public event Action OnActivationFinished;
         /// <summary>
         /// Activate the Actions in sequence and async, if an action have a wait duration defined, it will wait for that duration before proceeding with the next action
         /// </summary>
