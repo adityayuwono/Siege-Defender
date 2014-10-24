@@ -19,7 +19,7 @@ namespace Scripts.ViewModels.Actions
             if (target != null)
             {
                 target.OnMovementFinished += OnMovementFinished;
-                target.Move();
+                target.Move(_model.MoveTarget, _model.SpeedMultiplier);
             }
         }
 

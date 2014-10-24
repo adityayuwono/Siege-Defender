@@ -163,13 +163,19 @@ namespace Scripts.ViewModels.Enemies
             get { return _model.Speed; }
         }
 
-        public Action OnMoveStart;
-        public Action OnMovementFinished;
+        public event Action<Object, float> OnMoveStart;
+        public event Action OnMovementFinished;
 
-        public void Move()
+        public void Move(string moveTarget, float speedMultiplier)
         {
             if (OnMoveStart != null)
-                OnMoveStart();
+            {
+                Object targetObject = null;
+                if (!string.IsNullOrEmpty(moveTarget))
+                    targetObject = Root.GetViewModelAsType<Object>(moveTarget);
+
+                OnMoveStart(targetObject, speedMultiplier);
+            }
         }
 
         public void FinishedMovement()

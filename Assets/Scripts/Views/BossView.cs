@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Scripts.Components;
 using Scripts.Helpers;
 using Scripts.ViewModels.Enemies;
@@ -94,21 +92,35 @@ namespace Scripts.Views
             return randomWaypoint;
         }
 
-        private void MoveToARandomWaypoint()
+        private void MoveToARandomWaypoint(ViewModels.Object targetObject, float speedMultiplier)
         {
-            var randomWaypoint = GetRandomWaypoint();
+            // Multiply the speed, in case the normal walk and this Walk "Skill" is different
+            var speed = _viewModel.BossSpeed*speedMultiplier;
 
-            _viewModel.AnimationId.SetValue(Values.Defaults.WALKING_ANIMATION_BOOL_TAG);
+            Transform moveTargetPosition = null;
+            if (targetObject == null)
+                moveTargetPosition = GetRandomWaypoint();
+            else
+                moveTargetPosition = _viewModel.Root.GetView<ObjectView>(targetObject).Transform;
+
+            var targetLookatRotation = Quaternion.LookRotation(moveTargetPosition.position - _characterTransform.position);
+
             // Register everything here
             // Starting with the very first motion in the pattern
-            var lookToAngle = Quaternion.Angle(randomWaypoint.rotation, _characterTransform.rotation);
-            var lookToDuration = lookToAngle / 24f / _viewModel.BossSpeed;
+            var lookToAngle = Quaternion.Angle(targetLookatRotation, _characterTransform.rotation);
+            var lookToDuration = lookToAngle / 24f / speed;
+            
             const string easeType = "linear";
-            iTween.LookTo(CharacterRoot, iTween.Hash("looktarget", randomWaypoint, "easetype", easeType, "time", lookToDuration));
-            var walkDuration = Vector3.Distance(randomWaypoint.localPosition, _characterTransform.localPosition) / _viewModel.BossSpeed;
-            iTween.MoveTo(CharacterRoot, iTween.Hash("position", randomWaypoint, "easetype", easeType, "time", walkDuration, "delay", lookToDuration));
-            var rotateDuration = (lookToAngle + Quaternion.Angle(randomWaypoint.localRotation, _characterTransform.localRotation))/24f/_viewModel.BossSpeed;
-            iTween.RotateTo(CharacterRoot, iTween.Hash("rotation", randomWaypoint, "easetype", easeType, "time", rotateDuration, "delay", walkDuration + lookToDuration));
+            iTween.LookTo(CharacterRoot, iTween.Hash("looktarget", moveTargetPosition, "easetype", easeType, "time", lookToDuration));
+            var walkDuration = Vector3.Distance(moveTargetPosition.localPosition, _characterTransform.localPosition) / speed;
+            iTween.MoveTo(CharacterRoot, iTween.Hash("position", moveTargetPosition, "easetype", easeType, "time", walkDuration, "delay", lookToDuration));
+
+            var rotateDuration = 0f;
+            if (targetObject == null)
+            {
+                rotateDuration = (lookToAngle + Quaternion.Angle(moveTargetPosition.localRotation, _characterTransform.localRotation))/24f/speed;
+                iTween.RotateTo(CharacterRoot, iTween.Hash("rotation", moveTargetPosition, "easetype", easeType, "time", rotateDuration, "delay", walkDuration + lookToDuration));
+            }
 
             _viewModel.Root.IntervalRunner.SubscribeToInterval(FinishedWalking, walkDuration + lookToDuration + rotateDuration, false);
         }
