@@ -43,9 +43,8 @@ namespace Scripts.Core
                 return;
             
             _value = newValue;
-            
-            if (OnChange!=null)
-                OnChange();
+
+            InvokeChangedEvent();
         }
 
         public new T GetValue()
@@ -61,11 +60,18 @@ namespace Scripts.Core
         {
             return _value;
         }
-        public Action OnChange { get; set; }
+
+        protected void InvokeChangedEvent()
+        {
+            if (OnChange != null)
+                OnChange();
+        }
+
+        public event Action OnChange;
     }
 
     public interface IChangeProperty
     {
-        Action OnChange { get; set; }
+        event Action OnChange;
     }
 }
