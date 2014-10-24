@@ -14,6 +14,7 @@ namespace Scripts.Views
         }
 
         private Animator _animator;
+        private Animation _animation;
         
         protected override void OnLoad()
         {
@@ -22,18 +23,23 @@ namespace Scripts.Views
             _viewModel.AnimationId.OnChange += Animation_OnChange;
 
             _animator = GetAnimator();
+
+            if (_viewModel.Target != null)
+            {
+                var targetTransform = _viewModel.Root.GetView<ObjectView>(_viewModel.Target).Transform;
+                _targetTransform = targetTransform;
+            }
         }
 
         protected override void OnShow()
         {
             base.OnShow();
 
-            if (_viewModel.Target != null)
+            if (_targetTransform != null)
             {
-                // make the enemy go towards the player
-                var targetTransform = _viewModel.Root.GetView<ObjectView>(_viewModel.Target).Transform;
-                Transform.LookAt(targetTransform);
-                _targetTransform = targetTransform;
+                // make the enemy look directly at the player
+                Transform.LookAt(_targetTransform);
+
                 // Need to reset x rotation to make sure we are walking straight
                 var currentRotation = Transform.localEulerAngles;
                 currentRotation.x = 0;
@@ -53,10 +59,10 @@ namespace Scripts.Views
             }
             else
             {
-                var animation = GameObject.GetComponent<Animation>();
-                if (animation != null)
+                _animation = GameObject.GetComponent<Animation>();
+                if (_animation != null)
                 {
-                    animation.Play("Spawn");
+                    _animation.Play("Spawn");
                     BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
                 }
             }
@@ -67,9 +73,36 @@ namespace Scripts.Views
         private void StartWalkAnimationSubscription()
         {
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
-            var animation = GameObject.GetComponent<Animation>();
-            animation.Play("Walk");
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
+            _animation.CrossFade("Walk");
+
+            if (_targetTransform != null)
+            {
+                var distance = Vector3.Distance(Transform.position, _targetTransform.position);
+                var duration = distance/_viewModel.Speed;
+
+                var targetMovement = _targetTransform.position;
+                targetMovement.x += Random.Range(-3f, 3f);
+
+                iTween.MoveTo(GameObject, iTween.Hash("position", targetMovement, "time", duration, "easetype", "linear"));
+                iTween.RotateTo(GameObject, iTween.Hash("y", 180d, "time", duration, "easetype", "linear"));
+
+                BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartAttackAnimation, duration, false);
+            }
+            else
+            {
+                BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
+            }
+        }
+
+        private void StartAttackAnimation()
+        {
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
+            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(AttackAnimation, _viewModel.AttackSpeed);
+        }
+
+        private void AttackAnimation()
+        {
+            _animation.Play("Attack");
         }
 
         protected override void SetPosition()
@@ -94,6 +127,9 @@ namespace Scripts.Views
         protected override void OnHide(string reason)
         {
             // We may still be subscribed to these
+            iTween.Stop(GameObject);
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(AttackAnimation);
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
@@ -104,7 +140,7 @@ namespace Scripts.Views
             {
                 var animation = GameObject.GetComponent<Animation>();
                 if (animation != null)
-                    animation.Play("Death");
+                    animation.CrossFade("Death");
             }
 
             base.OnHide(reason);
