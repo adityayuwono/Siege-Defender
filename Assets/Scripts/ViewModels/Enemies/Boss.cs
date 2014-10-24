@@ -4,6 +4,7 @@ using System.Linq;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models.Enemies;
+using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
@@ -33,7 +34,7 @@ namespace Scripts.ViewModels.Enemies
 
         #region Skill
 
-        public Action OnInterrupted;
+        public event Action OnInterrupted;
         private Skill _currentSkill;
         private string _queuedSkillId;
         private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
@@ -90,6 +91,7 @@ namespace Scripts.ViewModels.Enemies
             // Activate the lucky skill
             _currentSkill = skillToActivate;
             skillToActivate.OnSkillActivationFinished += Skill_OnActivationFinished;
+            _skillInterruptThreshold = skillToActivate.InterruptThreshold;
             skillToActivate.Activate();
         }
 
@@ -110,6 +112,28 @@ namespace Scripts.ViewModels.Enemies
 
         #endregion
 
+        public event Action OnInterrupt;
+        private float _skillInterruptThreshold;
+        public override bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
+        {
+            if (_skillInterruptThreshold > 0)
+            {
+                _skillInterruptThreshold -= damage;
+                if (_skillInterruptThreshold <= 0)
+                {
+                    if (_currentSkill != null)
+                    {
+                        _currentSkill.Interrupt();
+                        _currentSkill = null;
+
+                        if (OnInterrupt != null)
+                            OnInterrupt();
+                    }
+                }
+            }
+
+            return base.ApplyDamage(damage, contactPoint, source);
+        }
 
         private readonly List<Limb> _limbs = new List<Limb>();
         private readonly List<Triggered> _triggers = new List<Triggered>();

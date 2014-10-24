@@ -29,6 +29,11 @@ namespace Scripts.ViewModels.Enemies
             get { return _model.IsInterrupt; }
         }
 
+        public float InterruptThreshold
+        {
+            get { return _model.InterruptThreshold; }
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();
