@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Scripts.ViewModels.Actions
 {
     /// <summary>
-    /// Collection of actions, managed it's own activation and deactivation
+    /// Collection of actions, manages it's own activation and deactivation
     /// </summary>
     public class ActionCollection : List<BaseAction>
     {
