@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Scripts.Helpers;
 using Scripts.Models.Actions;
 using Scripts.ViewModels.Actions;
 
@@ -64,6 +65,38 @@ namespace Scripts.ViewModels.Enemies
                 
                 _actions.Activate();
             }
+        }
+    }
+
+    public class EventTriggered : Triggered
+    {
+        private readonly EventTriggeredModel _model;
+        public EventTriggered(EventTriggeredModel model, Base parent) : base(model, parent)
+        {
+            _model = model;
+
+            if (_model.Event == Event.None)
+                throw new EngineException(this, "EventTrigger doesn't have an event specified");
+        }
+
+        private Boss _parentBoss;
+        protected override void OnActivate()
+        {
+            _parentBoss = GetParent<Boss>();
+            if (_parentBoss == null)
+                throw new EngineException(this, "Failed to find Parent Boss");
+
+            _parentBoss.OnInterrupt += Boss_OnInterrupt;
+        }
+
+        private void Boss_OnInterrupt()
+        {
+            base.OnActivate();
+        }
+
+        protected override void OnDeactivate()
+        {
+            _parentBoss.OnInterrupt -= Boss_OnInterrupt;
         }
     }
 }

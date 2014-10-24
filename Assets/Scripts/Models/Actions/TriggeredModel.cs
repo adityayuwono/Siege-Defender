@@ -26,4 +26,16 @@ namespace Scripts.Models.Actions
             TriggerOnce = true;
         }
     }
+
+    public class EventTriggeredModel : TriggeredModel
+    {
+        [XmlAttribute]
+        public Event Event { get; set; }
+    }
+
+    public enum Event
+    {
+        None,
+        Interrupt
+    }
 }
