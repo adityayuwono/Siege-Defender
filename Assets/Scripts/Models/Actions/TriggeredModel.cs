@@ -27,6 +27,7 @@ namespace Scripts.Models.Actions
         }
     }
 
+    [Serializable]
     public class EventTriggeredModel : TriggeredModel
     {
         [XmlAttribute]
@@ -36,6 +37,7 @@ namespace Scripts.Models.Actions
     public enum Event
     {
         None,
-        Interrupt
+        Interrupt,
+        Click
     }
 }

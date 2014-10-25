@@ -79,24 +79,46 @@ namespace Scripts.ViewModels.Enemies
                 throw new EngineException(this, "EventTrigger doesn't have an event specified");
         }
 
-        private Boss _parentBoss;
+        private Object _parentObject;
         protected override void OnActivate()
         {
-            _parentBoss = GetParent<Boss>();
-            if (_parentBoss == null)
-                throw new EngineException(this, "Failed to find Parent Boss");
+            _parentObject = GetParent<Object>();
+            if (_parentObject == null)
+                throw new EngineException(this, "Failed to find Parent Object");
 
-            _parentBoss.OnInterrupt += Boss_OnInterrupt;
+            if (_model.Event == Event.Interrupt)
+            {
+                var parentBoss = _parentObject as Boss;
+                if (parentBoss != null)
+                    parentBoss.OnInterrupt += InvokeEvent;
+            }
+            else if (_model.Event == Event.Click)
+            {
+                var parentButton = _parentObject as Button;
+                if (parentButton != null)
+                    parentButton.OnClick += InvokeEvent;
+            }
         }
 
-        private void Boss_OnInterrupt()
+        private void InvokeEvent()
         {
             base.OnActivate();
         }
 
         protected override void OnDeactivate()
         {
-            _parentBoss.OnInterrupt -= Boss_OnInterrupt;
+            if (_model.Event == Event.Interrupt)
+            {
+                var parentBoss = _parentObject as Boss;
+                if (parentBoss != null)
+                    parentBoss.OnInterrupt -= InvokeEvent;
+            }
+            else if (_model.Event == Event.Click)
+            {
+                var parentButton = _parentObject as Button;
+                if (parentButton != null)
+                    parentButton.OnClick -= InvokeEvent;
+            }
         }
     }
 }

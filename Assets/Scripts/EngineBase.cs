@@ -147,6 +147,9 @@ namespace Scripts
             IoCContainer.RegisterFor<MoveActionModel>().TypeOf<BaseAction>().To<MoveAction>();
             IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<BaseCondition>().To<ValueCondition>();
             IoCContainer.RegisterFor<RandomConditionModel>().TypeOf<BaseCondition>().To<RandomCondition>();
+            // Triggers
+            IoCContainer.RegisterFor<TriggeredModel>().TypeOf<Triggered>().To<Triggered>();
+            IoCContainer.RegisterFor<EventTriggeredModel>().TypeOf<Triggered>().To<EventTriggered>();
             #endregion
         }
 

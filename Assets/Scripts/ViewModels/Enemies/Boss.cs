@@ -19,7 +19,10 @@ namespace Scripts.ViewModels.Enemies
                 _limbs.Add(new Limb(limbModel, this));
 
             foreach (var triggeredModel in _model.Triggers)
-                _triggers.Add(new Triggered(triggeredModel, this));
+            {
+                var triggered = Root.IoCContainer.GetInstance<Triggered>(triggeredModel.GetType(), new object[] {triggeredModel, this});
+                _triggers.Add(triggered);
+            }
 
             foreach (var skillModel in _model.Skills)
             {
@@ -123,11 +126,16 @@ namespace Scripts.ViewModels.Enemies
                 {
                     if (_currentSkill != null)
                     {
-                        _currentSkill.Interrupt();
-                        _currentSkill = null;
+                        // Cache the interrupt events
+                        var interruptEvents = OnInterrupt;
 
-                        if (OnInterrupt != null)
-                            OnInterrupt();
+                        if (_currentSkill.Interrupt(false))
+                        {
+                            _currentSkill = null;
+
+                            if (interruptEvents != null)
+                                interruptEvents();
+                        }
                     }
                 }
             }
