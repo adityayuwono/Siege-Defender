@@ -16,29 +16,15 @@ namespace Scripts.ViewModels.Enemies
 
             Health = new AdjustableProperty<float>("Health", this);
             CollisionEffectNormal = _model.CollisionEffectNormal;
-
-            if (_model.Trigger != null)
-                _trigger = new Triggered(_model.Trigger, this);
         }
 
         protected override void OnActivate()
         {
-            base.OnActivate();
-
             Health.SetValue(_model.Health);
 
-            if (_trigger != null)
-                _trigger.Activate();
+            base.OnActivate();
         }
-
-        protected override void OnDeactivate()
-        {
-            if (_trigger != null)
-                _trigger.Deactivate(string.Format("{0} is deactivated", GetType()));
-
-            base.OnDeactivate();
-        }
-
+        
         public override void Hide(string reason)
         {
             foreach (var projectile in _projectiles)
@@ -47,8 +33,6 @@ namespace Scripts.ViewModels.Enemies
 
             base.Hide(reason);
         }
-
-        private readonly Triggered _trigger;
 
         /// <summary>
         /// Reduce health by the amount specified

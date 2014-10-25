@@ -12,8 +12,6 @@ namespace Scripts.ViewModels
         public Button(ButtonGUIModel model, Object parent) : base(model, parent)
         {
             _model = model;
-
-            _actions = new ActionCollection(_model.Trigger.Actions, this);
         }
 
         private readonly ActionCollection _actions;
@@ -23,7 +21,7 @@ namespace Scripts.ViewModels
         public void OnClicked()
         {
             // Invoke all actions related to this button
-            _actions.Activate();
+            if (OnClick != null) OnClick();
         }
     }
 }

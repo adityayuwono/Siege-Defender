@@ -18,12 +18,6 @@ namespace Scripts.ViewModels.Enemies
             foreach (var limbModel in _model.Limbs)
                 _limbs.Add(new Limb(limbModel, this));
 
-            foreach (var triggeredModel in _model.Triggers)
-            {
-                var triggered = Root.IoCContainer.GetInstance<Triggered>(triggeredModel.GetType(), new object[] {triggeredModel, this});
-                _triggers.Add(triggered);
-            }
-
             foreach (var skillModel in _model.Skills)
             {
                 if (string.IsNullOrEmpty(skillModel.Id))
@@ -127,6 +121,7 @@ namespace Scripts.ViewModels.Enemies
                     if (_currentSkill != null)
                     {
                         // Cache the interrupt events
+                        // This is need to be done before: _currentSkill.Interrupt(false)
                         var interruptEvents = OnInterrupt;
 
                         if (_currentSkill.Interrupt(false))
@@ -144,7 +139,6 @@ namespace Scripts.ViewModels.Enemies
         }
 
         private readonly List<Limb> _limbs = new List<Limb>();
-        private readonly List<Triggered> _triggers = new List<Triggered>();
 
         protected override void OnActivate()
         {
@@ -152,9 +146,6 @@ namespace Scripts.ViewModels.Enemies
 
             foreach (var limb in _limbs)
                 limb.Activate();
-
-            foreach (var phase in _triggers)
-                phase.Activate();
         }
 
         public override void Show()
@@ -175,9 +166,6 @@ namespace Scripts.ViewModels.Enemies
 
         protected override void OnDeactivate()
         {
-            foreach (var phase in _triggers)
-                phase.Deactivate("Boss is deactivated");
-
             if (_currentSkill != null)
                 _currentSkill.Deactivate("Boss is deactivated");
 

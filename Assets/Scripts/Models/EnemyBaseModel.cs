@@ -18,6 +18,16 @@ namespace Scripts.Models
         [XmlAttribute]
         public float Rotation { get; set; }
 
+
+
+        [XmlAttribute]
+        public string Damage { get; set; }
+
+        [XmlAttribute]
+        public float AttackSpeed { get; set; }
+
+
+
         public EnemyBaseModel()
         {
             DeathDelay = 2f;

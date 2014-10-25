@@ -15,10 +15,5 @@ namespace Scripts.Models.Enemies
         [XmlArray]
         [XmlArrayItem(ElementName = "Skill", Type = typeof(SkillModel))]
         public List<SkillModel> Skills { get; set; }
-
-        [XmlArray]
-        [XmlArrayItem(ElementName = "Trigger", Type = typeof(TriggeredModel))]
-        [XmlArrayItem(ElementName = "EventTrigger", Type = typeof(EventTriggeredModel))]
-        public List<TriggeredModel> Triggers { get; set; }
     }
 }

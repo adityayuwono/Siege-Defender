@@ -64,6 +64,12 @@ namespace Scripts.ViewModels
                 return _propertyLookup;
             }
         }
+
+        public float AttackSpeed
+        {
+            get { return _model.AttackSpeed; }
+        }
+
         private PropertyLookup _propertyLookup;
     }
 }

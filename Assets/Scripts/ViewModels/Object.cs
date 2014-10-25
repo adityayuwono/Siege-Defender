@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Scripts.ViewModels
 {
-    public class Object : Base
+    public class Object : Triggerable
     {
         private readonly ObjectModel _model;
 
