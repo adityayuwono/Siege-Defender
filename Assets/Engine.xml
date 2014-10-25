@@ -154,8 +154,11 @@
 			</Limbs>
 
 			<Skills>
-				<Skill Id="Idle"> <!-- Default Skill -->
+				<Skill Id="Idle"> <!-- Default Skill, this skill is always active -->
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" Wait="4" />
+				</Skill>
+				<Skill Id="Scream"> <!-- Default Skill, this skill is always active -->
+					<Setter Target="{Monster}" Property="AnimationId" Value="Scream" Wait="1.5" />
 				</Skill>
 				<Skill Id="CrystalShield" IsQueuedable="true" >
 					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" Wait="2.65" />
@@ -224,7 +227,7 @@
 
 			<Triggers>
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{Monster}" Frequency="1" Value="10" />
+					<RandomCondition Target="{Monster}" Frequency="1" Value="30" />
 					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="Slam|RandomMovement" />
 				</Trigger>
@@ -242,7 +245,7 @@
 				</Trigger>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\6660" />
-					<Setter Target="WarpGates" Property="Level" Value="SpiderColumnSwarm" />
+					<Setter Target="WarpGates" Property="Level" Value="Scream|SpiderColumnSwarm" />
 				</Trigger>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\7200" />
