@@ -47,7 +47,7 @@
 		<Enemy Id="BlueGoblin"  	AssetId="Enemies/BlueGoblin" 		Health="30" 	Speed="1"		Rotation="20" />
 		<Enemy Id="Boss" 			AssetId="Enemies/BigGoblin" 		Health="250" 	Speed="0.3" 	Rotation="0" />
 
-		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="1" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" />
+		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" />
 		<Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
 		<Enemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
 			<Elements>
@@ -157,7 +157,20 @@
 					<Setter Target="SpiderColumns" Property="Level" Value="SpawnSpiderColumn" Wait="2" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
+				<Skill Id="Slam" InterruptThreshold="200" >
+					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Start" Wait="2.1" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Charge" Wait="8" IsInterruptable="true" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Run" />
+					<MoveAction Target="{Monster}" Id="RandomMovementAction" MoveTarget="Player" SpeedMultiplier="10" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_End" Wait="0.8" />
+					<Triggers>
+						<EventTrigger Event="Interrupt">
+							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|CrystalShield" />
+						</EventTrigger>
+					</Triggers>
+				</Skill>
 				<Skill Id="RandomMovement">
+					<Setter Target="{Monster}" Property="AnimationId" Value="Walk" />
 					<MoveAction Id="RandomMovementAction" Target="{Monster}" />
 				</Skill>
 				<!-- When Broken -->
@@ -189,6 +202,12 @@
 			</Skills>
 
 			<Triggers>
+				<Trigger TriggerOnce="false" >
+					<RandomCondition Target="{Monster}" Frequency="1" Value="90" />
+					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
+					<Setter Target="{Monster}" Property="ActiveSkill" Value="Slam|RandomMovement" />
+				</Trigger>
+
 				<Trigger TriggerOnce="false" >
 					<RandomCondition Target="{Monster}" Frequency="1" Value="5" />
 					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
@@ -297,7 +316,9 @@
 				<PlayerHitbox AssetId="PlayerHealth" />
 				<SpecialEffectManager AssetId="SpecialEffectRoot" />
 				
-				<Player Id="Player" AssetId="Player" >
+				<Element Id="Player" AssetId="EnemyTarget" />
+
+				<Player Id="PlayerCamera" AssetId="Player" >
 					<Shooters>
 						<Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.Item}" >
 							<Source AssetId="Shooter"/>
