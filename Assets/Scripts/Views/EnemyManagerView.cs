@@ -57,13 +57,13 @@ namespace Scripts.Views
         private readonly List<MinMaxRandom> _spawnPoints = new List<MinMaxRandom>();
         public Vector3 GetRandomSpawnPoint()
         {
-            var spawnPointIncex = _viewModel.SpawnIndexOverride;
-            if (spawnPointIncex >= _spawnPoints.Count)
+            var spawnIndexOverride = _viewModel.SpawnIndexOverride;
+            if (spawnIndexOverride >= _spawnPoints.Count)
                 Debug.LogError(string.Format("{0} is more than the available Spawning Points of {1}", _viewModel.SpawnIndexOverride, Id));
 
-            if (spawnPointIncex > -1)
-                spawnPointIncex = Random.Range(0, _spawnPoints.Count);
-            return _spawnPoints[spawnPointIncex].GetRandomSpot();
+            if (spawnIndexOverride == -1)
+                spawnIndexOverride = Random.Range(0, _spawnPoints.Count);
+            return _spawnPoints[spawnIndexOverride].GetRandomSpot();
         }
 
 
