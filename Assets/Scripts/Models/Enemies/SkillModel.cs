@@ -7,7 +7,7 @@ using Scripts.Models.Actions;
 namespace Scripts.Models.Enemies
 {
     [Serializable]
-    public class SkillModel : BaseModel
+    public class SkillModel : TriggerableModel
     {
         [XmlAttribute]
         [DefaultValue(false)]

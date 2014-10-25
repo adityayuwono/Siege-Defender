@@ -4,7 +4,7 @@ using Scripts.ViewModels.Actions;
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class Skill : Base
+    public class Skill : Triggerable
     {
         private readonly SkillModel _model;
  
@@ -58,11 +58,15 @@ namespace Scripts.ViewModels.Enemies
             base.OnDeactivate();
         }
 
-        public void Interrupt()
+        public bool Interrupt(bool absolute = true)
         {
-            _actions.Interrupt();
-            OnSkillActivationFinished = null;
-            Action_OnActivationFinished();
+            var isInterruptSuccessful = _actions.Interrupt(absolute);
+            if (isInterruptSuccessful)
+            {
+                OnSkillActivationFinished = null;
+                Action_OnActivationFinished();
+            }
+            return isInterruptSuccessful;
         }
     }
 }

@@ -50,6 +50,8 @@ namespace Scripts.ViewModels.Actions
         /// Invoked by the Enumerator when the action sequence has finished Activated
         /// </summary>
         public event Action OnActivationFinished;
+
+        private bool _isInterruptable;
         /// <summary>
         /// Activate the Actions in sequence and async, if an action have a wait duration defined, it will wait for that duration before proceeding with the next action
         /// </summary>
@@ -58,6 +60,8 @@ namespace Scripts.ViewModels.Actions
             for (var i = startIndex; i < Count; i++)
             {
                 var action = this[i];
+
+                _isInterruptable = action.IsInterruptable;
 
                 if (_isInterrupted)
                     yield break;
@@ -93,13 +97,18 @@ namespace Scripts.ViewModels.Actions
         private bool _isInterrupted;
         private bool _isActionInvoking;
 
-        public void Interrupt()
+        public bool Interrupt(bool absolute = true)
         {
-            // Mark as interrupted to stop the very next action from being invoked 
-            _isInterrupted = true;
-            OnActivationFinished = null;
-            // Deactivate everything immediately
-            DeactivateActions();
+            if (absolute || _isInterruptable)
+            {
+                // Mark as interrupted to stop the very next action from being invoked 
+                _isInterrupted = true;
+                OnActivationFinished = null;
+                // Deactivate everything immediately
+                DeactivateActions();
+            }
+
+            return _isInterruptable;
         }
 
         public void Deactivate()

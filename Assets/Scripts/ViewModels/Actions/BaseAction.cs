@@ -28,6 +28,11 @@ namespace Scripts.ViewModels.Actions
             get { return _model.Wait; }
         }
 
+        public bool IsInterruptable
+        {
+            get { return _model.IsInterruptable; }
+        }
+
         public bool IsActive { get; private set; }
     }
 }
