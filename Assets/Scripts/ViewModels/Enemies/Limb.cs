@@ -25,12 +25,11 @@ namespace Scripts.ViewModels.Enemies
             return _parent.ApplyDamage(damageMultiplied, Vector3.zero);
         }
 
-
-        public Action DoBreakParts;
+        public event Action OnBreak;
         protected override void OnKilled()
         {
-            if (DoBreakParts != null)
-                DoBreakParts();
+            if (OnBreak != null)
+                OnBreak();
 
             if (!string.IsNullOrEmpty(_model.CollisionEffectBroken))
                 CollisionEffectNormal = _model.CollisionEffectBroken;

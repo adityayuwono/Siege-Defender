@@ -38,6 +38,7 @@ namespace Scripts.Models.Actions
     {
         None,
         Interrupt,
-        Click
+        Click,
+        Break
     }
 }

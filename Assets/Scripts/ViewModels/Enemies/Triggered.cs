@@ -98,6 +98,12 @@ namespace Scripts.ViewModels.Enemies
                 if (parentButton != null)
                     parentButton.OnClick += InvokeEvent;
             }
+            else if (_model.Event == Event.Break)
+            {
+                var parentButton = _parentObject as Limb;
+                if (parentButton != null)
+                    parentButton.OnBreak += InvokeEvent;
+            }
         }
 
         private void InvokeEvent()
@@ -118,6 +124,12 @@ namespace Scripts.ViewModels.Enemies
                 var parentButton = _parentObject as Button;
                 if (parentButton != null)
                     parentButton.OnClick -= InvokeEvent;
+            }
+            else if (_model.Event == Event.Break)
+            {
+                var parentButton = _parentObject as Limb;
+                if (parentButton != null)
+                    parentButton.OnBreak -= InvokeEvent;
             }
         }
     }

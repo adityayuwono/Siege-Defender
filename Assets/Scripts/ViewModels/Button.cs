@@ -1,6 +1,5 @@
 ﻿using System;
 using Scripts.Models.GUIs;
-using Scripts.ViewModels.Actions;
 using Scripts.ViewModels.GUIs;
 
 namespace Scripts.ViewModels
@@ -13,8 +12,6 @@ namespace Scripts.ViewModels
         {
             _model = model;
         }
-
-        private readonly ActionCollection _actions;
 
         public event Action OnClick;
 

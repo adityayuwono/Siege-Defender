@@ -34,7 +34,7 @@ namespace Scripts.Views
         {
             base.OnShow();
 
-            _viewModel.DoBreakParts += BreakBrekables;
+            _viewModel.OnBreak += BreakBrekables;
         }
 
         private void BreakBrekables()
@@ -45,7 +45,7 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
-            _viewModel.DoBreakParts -= BreakBrekables;// :D
+            _viewModel.OnBreak -= BreakBrekables;// :D
 
             base.OnHide(reason);
         }
