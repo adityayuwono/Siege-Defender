@@ -1,4 +1,6 @@
-﻿using Scripts.Core;
+﻿using System;
+using Scripts.Core;
+using Scripts.Helpers;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
@@ -56,21 +58,33 @@ namespace Scripts.ViewModels
                 _currentLoop++;
             }
 
-            // If we are supposed to be spawning enemies still
-            if (_spawnIndex < _levelModel.SpawnSequence.Count)
-            {
-                var enemyId = _levelModel.SpawnSequence[_spawnIndex].EnemyId;
-                var count = _levelModel.SpawnSequence[_spawnIndex].Count;
-                _spawnIndex++;
+            // Ignore if we have reaced the end of the sequence
+            if (_spawnIndex >= _levelModel.SpawnSequence.Count) return;
 
-                for (var i = 0; i < count; i++)
-                {
-                    var enemy = GetObject<EnemyBase>(enemyId, GetParent<Scene>());
-                    enemy.Activate(this);
-                    enemy.Show();
-                }
+            var spawnModel = _levelModel.SpawnSequence[_spawnIndex];
+            var enemyId = spawnModel.EnemyId;
+
+            // Empty enemyId mean that we want to skip some spawn iterations
+            if (string.IsNullOrEmpty(enemyId)) return;
+
+            var count = spawnModel.Count;
+            SpawnIndexOverride = spawnModel.SpawnIndexOverride;
+            _spawnIndex++;
+
+            for (var i = 0; i < count; i++)
+            {
+                var enemy = GetObject<EnemyBase>(enemyId, GetParent<Scene>());
+                enemy.Activate(this);
+                enemy.Show();
             }
+            SpawnIndexOverride = -1;
         }
+
+        /// <summary>
+        /// Overrides the nex spawn index used, -1 means no override
+        /// </summary>
+        public int SpawnIndexOverride { get; private set; }
+
         #endregion
     }
 }
