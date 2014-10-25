@@ -20,6 +20,7 @@ namespace Scripts.ViewModels.Enemies
 
         protected override void OnActivate()
         {
+            // Need to be set first because some conditions rely on this
             Health.SetValue(_model.Health);
 
             base.OnActivate();
@@ -27,9 +28,10 @@ namespace Scripts.ViewModels.Enemies
         
         public override void Hide(string reason)
         {
-            foreach (var projectile in _projectiles)
+            // Cleanup attached projectiles
+            foreach (var projectile in _attachedProjectiles)
                 projectile.Hide(reason);
-            _projectiles.Clear();
+            _attachedProjectiles.Clear();
 
             base.Hide(reason);
         }
@@ -59,14 +61,13 @@ namespace Scripts.ViewModels.Enemies
             }
 
             // Because Vector3 is a struct and structs can't be null
-            if (Vector3.zero != contactPoint)
+            if (contactPoint != Vector3.zero)
             {
                 Root.DamageDisplay.DisplayDamage(damage, contactPoint);
 
                 if (!string.IsNullOrEmpty(CollisionEffectNormal))
                     Root.SpecialEffectManager.DisplaySpecialEffect(CollisionEffectNormal, contactPoint);
             }
-
 
             return true;
         }
@@ -78,15 +79,15 @@ namespace Scripts.ViewModels.Enemies
 
         private void AttachProjectile(ProjectileBase source)
         {
-            if (_projectiles.Contains(source))
+            if (_attachedProjectiles.Contains(source))
                 throw new EngineException(this, "Duplicate Projectile hit");
 
-            _projectiles.Add(source);
+            _attachedProjectiles.Add(source);
 
-            while (_projectiles.Count > _model.ProjectileLimit)
+            while (_attachedProjectiles.Count > _model.ProjectileLimit)
             {
-                var projectileToRemove = _projectiles[0];
-                _projectiles.Remove(projectileToRemove);
+                var projectileToRemove = _attachedProjectiles[0];
+                _attachedProjectiles.Remove(projectileToRemove);
                 projectileToRemove.Hide("Hiding because we have too many already");
             }
 
@@ -94,7 +95,7 @@ namespace Scripts.ViewModels.Enemies
         }
 
         public Action<ProjectileBase> DoAttach;
-        private readonly List<ProjectileBase> _projectiles = new List<ProjectileBase>();
+        private readonly List<ProjectileBase> _attachedProjectiles = new List<ProjectileBase>();
         public readonly AdjustableProperty<float> Health;
         protected string CollisionEffectNormal { private get; set; }
     }
