@@ -241,7 +241,7 @@
 				</Trigger>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\6660" />
-					<Setter Target="WarpGates" Property="Level" Value="Scream|SpiderColumnSwarm" />
+					<Setter Target="WarpGates" Property="Level" Value="SpiderColumnSwarm" />
 				</Trigger>
 				<Trigger>
 					<Condition Target="{Monster}" Property="Health" Value="\7200" />
