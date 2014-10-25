@@ -73,23 +73,25 @@ namespace Scripts.Views
         {
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             _animation.CrossFade("Walk");
-
-            if (_targetTransform != null)
+            if (_viewModel.Speed > 0)
             {
-                var distance = Vector3.Distance(Transform.position, _targetTransform.position);
-                var duration = distance/_viewModel.Speed;
+                if (_targetTransform != null)
+                {
+                    var distance = Vector3.Distance(Transform.position, _targetTransform.position);
+                    var duration = distance/_viewModel.Speed;
 
-                var targetMovement = _targetTransform.position;
-                targetMovement.x += Random.Range(-3f, 3f);
+                    var targetMovement = _targetTransform.position;
+                    targetMovement.x += Random.Range(-3f, 3f);
 
-                iTween.MoveTo(GameObject, iTween.Hash("position", targetMovement, "time", duration, "easetype", "linear"));
-                iTween.RotateTo(GameObject, iTween.Hash("y", 180d, "time", duration, "easetype", "linear"));
+                    iTween.MoveTo(GameObject, iTween.Hash("position", targetMovement, "time", duration, "easetype", "linear"));
+                    iTween.RotateTo(GameObject, iTween.Hash("y", 180d, "time", duration, "easetype", "linear"));
 
-                BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartAttackAnimation, duration, false);
-            }
-            else
-            {
-                BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
+                    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartAttackAnimation, duration, false);
+                }
+                else
+                {
+                    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
+                }
             }
         }
 
