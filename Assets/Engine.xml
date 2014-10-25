@@ -53,18 +53,20 @@
 			<Elements>
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
 			</Elements>
-			<Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
-				<RandomCondition Target="{Monster}" Frequency="4" Value="50" /> <!-- Percentage -->
-				<Condition Target="SpiderSpawn" Property="ActiveObjects" Value="\1" />
-				<Setter Target="SpiderSpawn" Property="Level" Value="SpawnSpiders" />
-			</Trigger>
+			<Triggers>
+				<Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
+					<RandomCondition Target="{Monster}" Frequency="4" Value="50" /> <!-- Percentage -->
+					<Condition Target="SpiderSpawn" Property="ActiveObjects" Value="\1" />
+					<Setter Target="SpiderSpawn" Property="Level" Value="SpawnSpiders" />
+				</Trigger>
+			</Triggers>
 		</Enemy>
 		<Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	Health="150"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
 			<Elements>
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
 			</Elements>
 		</Enemy>
-		<Boss  Id="StoneGolem" 		AssetId="Enemies/StoneGolemBoss" 	Health="7325" 	Speed="1.1" DeathDelay="5"
+		<Boss  Id="StoneGolem" 		AssetId="Enemies/StoneGolemBoss" 	Health="9325" 	Speed="1.1" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
 			<Elements>
 				<EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -75,71 +77,79 @@
 			<Limbs>
 				<Limb Id="Head" 		Health="666" 	AssetId="Head" 			DamageMultiplier="1.2" 
 					CollisionEffectNormal="StoneBreak" >
-					<Trigger TriggerOnce="true" >
-						<Condition Target="{This}" Property="Health" Value="\1" />
-						<Drop Target="Wood" Amount="3-10" />
-						<Setter Target="{Monster}" Property="ActiveSkill" Value="HeadBroken|RandomMovement" />
-					</Trigger>
+					<Triggers>
+						<EventTrigger Event="Break" >
+							<Drop Target="Wood" Amount="3-10" />
+							<Setter Target="{Monster}" Property="ActiveSkill" Value="HeadBroken|ScreamingRandomMovement" />
+						</EventTrigger>
+					</Triggers>
 				</Limb>
 				<Limb Id="RightHand" 	Health="750" 	AssetId="RightHand" 	DamageMultiplier="0.75" 
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" > 
-					<Trigger TriggerOnce="true" >
-						<Condition Target="{This}" Property="Health" Value="\1" />
-						<Drop Target="LightWood" Amount="1-6" />
-						<Setter Target="{Monster}" Property="ActiveSkill" Value="RightHandBroken|RandomMovement" />
-					</Trigger>
+					<Triggers>
+						<EventTrigger Event="Break" >							
+							<Drop Target="LightWood" Amount="1-6" />
+							<Setter Target="{Monster}" Property="ActiveSkill" Value="RightHandBroken|ScreamingRandomMovement" />
+						</EventTrigger>
+					</Triggers>
 				</Limb>
 				<Limb Id="LeftHand" 	Health="750" 	AssetId="LeftHand" 		DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger TriggerOnce="true" >
-						<Condition Target="{This}" Property="Health" Value="\1" />
-						<Drop Target="LightWood" Amount="1-6" />
-						<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|RandomMovement" />
-					</Trigger>
+					<Triggers>
+						<EventTrigger Event="Break" >
+							<Drop Target="LightWood" Amount="1-6" />
+							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|ScreamingRandomMovement" />
+						</EventTrigger>
+					</Triggers>
 				</Limb>
 				<Limb Id="RightLeg" 	Health="500" 	AssetId="RightLeg" 		DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger TriggerOnce="true" >
-						<Condition Target="{This}" Property="Health" Value="\1" />
-						<Drop Target="LightWood" Amount="1-6" />
-					</Trigger>
+					<Triggers>
+						<EventTrigger Event="Break" >
+							<Drop Target="LightWood" Amount="1-6" />
+						</EventTrigger>
+					</Triggers>
 				</Limb>
 				<Limb Id="LeftLeg" 		Health="500" 	AssetId="LeftLeg" 		DamageMultiplier="0.75" 
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger TriggerOnce="true" >
-						<Condition Target="{This}" Property="Health" Value="\1" />
-						<Drop Target="LightWood" Amount="1-6" />
-					</Trigger>
+					<Triggers>
+						<EventTrigger Event="Break" >
+							<Drop Target="LightWood" Amount="1-6" />
+						</EventTrigger>
+					</Triggers>
 				</Limb>
 				<Limb Id="RightFoot" 	Health="750" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger TriggerOnce="true" >
-						<Condition Target="{This}" Property="Health" Value="\1" />
-						<Drop Target="LightWood" Amount="1-6" />
-						<Setter Target="{Monster}" Property="ActiveSkill" Value="RightFootBroken|RandomMovement" />
-					</Trigger>
+					<Triggers>
+						<EventTrigger Event="Break" >
+							<Drop Target="LightWood" Amount="1-6" />
+							<Setter Target="{Monster}" Property="ActiveSkill" Value="RightFootBroken|ScreamingRandomMovement" />
+						</EventTrigger>
+					</Triggers>
 				</Limb>
 				<Limb Id="LeftFoot" 	Health="750" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75" 
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Trigger TriggerOnce="true" >
-						<Condition Target="{This}" Property="Health" Value="\1" />
-						<Drop Target="LightWood" Amount="1-6" />
-						<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftFootBroken|RandomMovement" />
-					</Trigger>
+					<Triggers>
+						<EventTrigger Event="Break" >
+							<Drop Target="LightWood" Amount="1-6" />
+							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftFootBroken|ScreamingRandomMovement" />
+						</EventTrigger>
+					</Triggers>
 				</Limb>
 				<Limb Id="Crystal" 		Health="1000" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25" 
 					CollisionEffectNormal="CrystalBreak_Small" >
-					<Trigger TriggerOnce="true" >
-						<Condition Target="{This}" Property="Health" Value="\1" />
-						<Drop Target="LightWood" Amount="1-6" />
-						<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalBroken|RandomMovement" />
-					</Trigger>
+					<Triggers>
+						<EventTrigger Event="Break" >
+							<Drop Target="LightWood" Amount="1-6" />
+							<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalBroken|RandomMovement" />
+						</EventTrigger>
+					</Triggers>
 				</Limb>
 			</Limbs>
 
@@ -148,6 +158,12 @@
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" Wait="4" />
 				</Skill>
 				<Skill Id="CrystalShield" IsQueuedable="true" >
+					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" Wait="2.65" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+					<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
+				</Skill>
+				<Skill Id="ScreamingCrystalShield" IsQueuedable="true" >
+					<Setter Target="{Monster}" Property="AnimationId" Value="Scream" Wait="1.5" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" Wait="2.65" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 					<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
@@ -165,11 +181,16 @@
 					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_End" Wait="0.8" />
 					<Triggers>
 						<EventTrigger Event="Interrupt">
-							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|CrystalShield" />
+							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|ScreamingCrystalShield" />
 						</EventTrigger>
 					</Triggers>
 				</Skill>
 				<Skill Id="RandomMovement">
+					<Setter Target="{Monster}" Property="AnimationId" Value="Walk" />
+					<MoveAction Id="RandomMovementAction" Target="{Monster}" />
+				</Skill>
+				<Skill Id="ScreamingRandomMovement">
+					<Setter Target="{Monster}" Property="AnimationId" Value="Scream" Wait="1.5" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Walk" />
 					<MoveAction Id="RandomMovementAction" Target="{Monster}" />
 				</Skill>
@@ -180,7 +201,7 @@
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 				<Skill Id="RightHandBroken" IsInterrupt="true">
-					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="RightHandBroken" Wait="1.6" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
 				</Skill>
 				<Skill Id="LeftHandBroken" IsInterrupt="true">
@@ -203,13 +224,13 @@
 
 			<Triggers>
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{Monster}" Frequency="1" Value="90" />
+					<RandomCondition Target="{Monster}" Frequency="1" Value="10" />
 					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="Slam|RandomMovement" />
 				</Trigger>
 
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{Monster}" Frequency="1" Value="5" />
+					<RandomCondition Target="{Monster}" Frequency="2" Value="5" />
 					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
 					<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement|Idle" />
 				</Trigger>
@@ -280,13 +301,13 @@
 		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
 			<Elements>
 				<Button AssetId="WeaponSelection" >
-					<Trigger><LoadScene Target="SkillTree" /></Trigger>
+					<Triggers><EventTrigger Event="Click"><LoadScene Target="SkillTree" /></EventTrigger></Triggers>
 				</Button>
 				<Button AssetId="StartGame">
-					<Trigger><LoadScene Target="Limbo" LevelId="Level1" /></Trigger>
+					<Triggers><EventTrigger Event="Click"><LoadScene Target="Limbo" LevelId="Level1" /></EventTrigger></Triggers>
 				</Button>
 				<Button AssetId="Options">
-					<Trigger><LoadScene Target="OptionsMenu" /></Trigger>
+					<Triggers><EventTrigger Event="Click"><LoadScene Target="OptionsMenu" /></EventTrigger></Triggers>
 				</Button>
 			</Elements>
 		</Scene>
@@ -295,7 +316,7 @@
 			<Elements>
 				<Inventory Source="PlayerOptions" AssetId="OptionsInventory" />
 				<Button AssetId="BackToMainMenu" >
-					<Trigger><LoadScene Target="MainMenu" /></Trigger>
+					<Triggers><EventTrigger Event="Click"><LoadScene Target="MainMenu" /></EventTrigger></Triggers>
 				</Button>
 			</Elements>
 		</Scene>
@@ -304,7 +325,7 @@
 			<Elements>
 				<Inventory Source="PlayerInventory" AssetId="Inventory" />
 				<Button AssetId="BackToMainMenu" >
-					<Trigger><LoadScene Target="MainMenu" /></Trigger>
+					<Triggers><EventTrigger Event="Click"><LoadScene Target="MainMenu" /></EventTrigger></Triggers>
 				</Button>
 			</Elements>
 		</Scene>
@@ -335,7 +356,7 @@
 					<Elements>
 						<DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
 						<Button AssetId="BackToMainMenu" >
-							<Trigger><LoadScene Target="MainMenu" /></Trigger>
+							<Triggers><EventTrigger Event="Click"><LoadScene Target="MainMenu" /></EventTrigger></Triggers>
 						</Button>
 						<Element AssetId="LoadingCover" IsVisible="{Limbo.IsLoadingInProgress}" />
 
