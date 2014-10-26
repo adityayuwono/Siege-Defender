@@ -80,12 +80,28 @@ namespace Scripts.Views
             gameObject.name = string.Format("{0}({1})", _viewModel.AssetId, _viewModel.Id);
             return gameObject;
         }
+
         protected virtual void SetPosition()
         {
-            GameObject.transform.localPosition = _viewModel.Position;
+            if (_viewModel.RandomPositionManager != null)
+            {
+                var enemyManagerView = _viewModel.Root.GetView<RandomPositionManagerView>(_viewModel.RandomPositionManager);
+                Transform.position = enemyManagerView.GetRandomSpawnPoint();
+            }
+            else
+            {
+                Transform.localPosition = _viewModel.Position;
+            }
         }
 
-
+        protected void SetRandomPosition()
+        {
+            if (_viewModel.RandomPositionManager != null)
+            {
+                var enemyManagerView = _viewModel.Root.GetView<RandomPositionManagerView>(_viewModel.RandomPositionManager);
+                Transform.position = enemyManagerView.GetRandomSpawnPoint(false);
+            }
+        }
 
         protected T AttachController<T>() where T : BaseController
         {
@@ -103,7 +119,7 @@ namespace Scripts.Views
         private void OnDeath()
         {
             if (BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath) && _gameObject != null)
-                OnDeath("");
+                OnDeath(string.Format("{0}:{1}'s Death", GetType(), Id));
         }
         protected virtual void OnDeath(string reason)
         {

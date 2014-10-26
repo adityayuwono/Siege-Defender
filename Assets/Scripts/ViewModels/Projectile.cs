@@ -28,13 +28,13 @@ namespace Scripts.ViewModels
             SpeedDeviations = new[] {speed0, speed1};
         }
 
-        public Action<ObjectView, ObjectView, float> DoShooting;
+        public event Action<ObjectView, float> DoShooting;
         public readonly Property<bool> IsKinematic = new Property<bool>(); 
 
-        public void Shoot(ObjectView source, ObjectView target, float accuracy)
+        public void Shoot(ObjectView target, float accuracy)
         {
             if (DoShooting != null)
-                DoShooting(source, target, accuracy);
+                DoShooting(target, accuracy);
         }
 
         protected override float CalculateDamage()

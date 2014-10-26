@@ -18,7 +18,6 @@ namespace Scripts.Views
             base.OnLoad();
             
             _target = _viewModel.Root.GetView<ObjectView>(_viewModel.Target);
-            _source = _viewModel.Root.GetView<ObjectView>(_viewModel.Source);
 
             _viewModel.IsShooting.OnChange += OnShootingChanged;
         }
@@ -41,7 +40,6 @@ namespace Scripts.Views
         }
 
         private ObjectView _target;
-        private ObjectView _source;
 
         protected override void IntervalInvoked()
         {
@@ -51,14 +49,13 @@ namespace Scripts.Views
                 var projectile = _viewModel.SpawnProjectile();
 
                 if (projectile != null)
-                    projectile.Shoot(_source, _target, _viewModel.Accuracy);
+                    projectile.Shoot(_target, _viewModel.Accuracy);
             }
         }
 
         protected override void OnDestroy()
         {
             _target = null;
-            _source = null;
 
             _viewModel.IsShooting.OnChange -= OnShootingChanged;
 

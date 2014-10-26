@@ -28,20 +28,18 @@ namespace Scripts.Views
             base.OnDestroy();
         }
 
-        private void ShootProjectile(ObjectView source, ObjectView target, float accuracy)
+        private void ShootProjectile(ObjectView target, float accuracy)
         {
-            Transform.position = source.Transform.position;
+            SetRandomPosition();
 
-            var targetTransform = target.Transform;
-
-            // Randomize direction
+            #region Randomize direction
             var direction = new Vector3(
                 Random.Range(-5f, 5f) * accuracy,
                 (Random.Range(-5f, 5f) * accuracy), 
-                1f);
-            targetTransform.position = targetTransform.position + direction;
-
-            Transform.LookAt(targetTransform);
+                0f);// Z is the distance to the target, we don't randomize this, we randomize speed below instead
+            var targetPosition = target.Transform.position + direction;
+            Transform.rotation = Quaternion.LookRotation(targetPosition - Transform.position);
+            #endregion
 
             var randomForce = Random.Range(_viewModel.SpeedDeviations[0], _viewModel.SpeedDeviations[1]);
             AddRelativeForce(new Vector3(0,0,1) * randomForce);

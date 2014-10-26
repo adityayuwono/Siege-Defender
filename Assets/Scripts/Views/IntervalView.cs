@@ -3,7 +3,7 @@ using Scripts.ViewModels;
 
 namespace Scripts.Views
 {
-    public class IntervalView : ElementView
+    public class IntervalView : RandomPositionManagerView
     {
         private readonly IntervalBase _viewModel;
 

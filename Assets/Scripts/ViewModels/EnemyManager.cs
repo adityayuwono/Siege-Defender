@@ -1,6 +1,4 @@
-﻿using System;
-using Scripts.Core;
-using Scripts.Helpers;
+﻿using Scripts.Core;
 using Scripts.Models;
 
 namespace Scripts.ViewModels

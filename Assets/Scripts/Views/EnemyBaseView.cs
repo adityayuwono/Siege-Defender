@@ -106,15 +106,6 @@ namespace Scripts.Views
             _animation.Play("Attack");
         }
 
-        protected override void SetPosition()
-        {
-            if (_viewModel.EnemyManager != null)
-            {
-                var enemyManagerView = _viewModel.Root.GetView<EnemyManagerView>(_viewModel.EnemyManager);
-                Transform.position = enemyManagerView.GetRandomSpawnPoint();
-            }
-        }
-
         protected virtual Animator GetAnimator()
         {
             return GameObject.GetComponent<Animator>();

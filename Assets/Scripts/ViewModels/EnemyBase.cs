@@ -33,14 +33,6 @@ namespace Scripts.ViewModels
 
         public readonly AdjustableProperty<string> AnimationId;
 
-        public EnemyManager EnemyManager { get; private set; }
-        public void Activate(EnemyManager manager)
-        {
-            EnemyManager = manager;
-
-            Activate();
-        }
-
         #region Model Properties
 
         public virtual float Speed

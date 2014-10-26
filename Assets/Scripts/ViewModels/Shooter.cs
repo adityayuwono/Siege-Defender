@@ -21,14 +21,8 @@ namespace Scripts.ViewModels
 
             if (_model.ProjectileId == null)
                 throw new EngineException(this, "Projectile Model is null");
-            if (_model.Source == null)
-                throw new EngineException(this, "Source Model is null");
             if (_model.Target == null)
                 throw new EngineException(this, "Target Model is null");
-
-
-            Source = new Object(_model.Source, this);
-            Elements.Add(Source);
 
             Target = new Target(_model.Target, this);
             Elements.Add(Target);
@@ -54,7 +48,6 @@ namespace Scripts.ViewModels
             get { return _projectileModel.Scatters; }
         }
 
-        public Object Source { get; private set; }
         public Object Target { get; private set; }
 
         private Property<ObjectModel> _projectileBinding;
@@ -90,7 +83,7 @@ namespace Scripts.ViewModels
             {
                 _ammunition--;
                 var projectile = GetObject<Projectile>(_projectileModel.Id);
-                projectile.Activate();
+                projectile.Activate(this);
                 projectile.Show();
 
                 return projectile;
@@ -121,8 +114,7 @@ namespace Scripts.ViewModels
         public void SpawnAoE(string aoeModelId, Vector3 position)
         {
             var projectile = GetObject<AoE>(aoeModelId);
-            projectile.SetPosition(position);
-            projectile.Activate();
+            projectile.Activate(this);
             projectile.Show();
         }
 

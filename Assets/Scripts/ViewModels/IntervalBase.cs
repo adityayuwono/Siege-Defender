@@ -122,7 +122,7 @@ namespace Scripts.ViewModels
         }
     }
 
-    public abstract class IntervalBase : Element
+    public abstract class IntervalBase : RandomPositionManager
     {
         protected IntervalBase(IntervalModel model, Base parent) : base(model, parent) { }
         public readonly Property<float> Interval = new Property<float>();

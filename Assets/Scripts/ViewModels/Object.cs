@@ -30,6 +30,18 @@ namespace Scripts.ViewModels
             _position = UnityExtension.ParseVector3(_model.Position);
         }
 
+        public RandomPositionManager RandomPositionManager { get; private set; }
+        /// <summary>
+        /// Activate and Assign a position manager
+        /// </summary>
+        /// <param name="manager">Position Manager</param>
+        public void Activate(RandomPositionManager manager)
+        {
+            RandomPositionManager = manager;
+
+            Activate();
+        }
+
         protected readonly List<Object> Elements = new List<Object>(); 
 
         protected override void OnActivate()

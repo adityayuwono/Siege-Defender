@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Scripts.ViewModels;
+﻿using Scripts.ViewModels;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,18 +11,6 @@ namespace Scripts.Views
         public EnemyManagerView(EnemyManager viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
-        }
-
-        protected override void OnLoad()
-        {
-            base.OnLoad();
-
-            var colliders = GameObject.GetComponentsInChildren<Collider>();
-            foreach (var collider in colliders)
-            {
-                var minMaxRandom = new MinMaxRandom(collider);
-                _spawnPoints.Add(minMaxRandom);
-            }
         }
 
         protected override void OnShow()
@@ -53,44 +40,18 @@ namespace Scripts.Views
             base.OnHide(reason);
         }
 
-
-        private readonly List<MinMaxRandom> _spawnPoints = new List<MinMaxRandom>();
-        public Vector3 GetRandomSpawnPoint()
+        public override Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = 0)
         {
             var spawnIndexOverride = _viewModel.SpawnIndexOverride;
-            if (spawnIndexOverride >= _spawnPoints.Count)
+            if (spawnIndexOverride >= SpawnPoints)
                 Debug.LogError(string.Format("{0} is more than the available Spawning Points of {1}", _viewModel.SpawnIndexOverride, Id));
-
-            if (spawnIndexOverride == -1)
-                spawnIndexOverride = Random.Range(0, _spawnPoints.Count);
-            return _spawnPoints[spawnIndexOverride].GetRandomSpot();
+            
+            return base.GetRandomSpawnPoint(ignoreY, spawnIndexOverride);
         }
-
-
 
         protected override void IntervalInvoked()
         {
             _viewModel.SpawnEnemy();
-        }
-    }
-
-    public class MinMaxRandom
-    {
-        private readonly Collider _collider;
-
-        public MinMaxRandom(Collider collider)
-        {
-            _collider = collider;
-        }
-
-        public Vector3 GetRandomSpot()
-        {
-            var min = _collider.bounds.min;
-            var max = _collider.bounds.max;
-            var rX = Random.Range(min.x, max.x);
-            var rZ = Random.Range(min.z, max.z);
-
-            return new Vector3(rX, 0, rZ);
         }
     }
 }

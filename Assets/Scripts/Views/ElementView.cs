@@ -51,6 +51,7 @@ namespace Scripts.Views
 
         protected override void SetPosition()
         {
+            // Assume asset's position
         }
     }
 }
