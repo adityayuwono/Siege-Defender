@@ -1,8 +1,13 @@
-﻿using Scripts.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using Scripts.Helpers;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
+    /// <summary>
+    /// Will spawn one of the SpawnModel on each SpawnPoint defined
+    /// </summary>
     public class ObjectSpawn : Interval<Object>
     {
         private readonly ObjectSpawnModel _model;
@@ -15,18 +20,25 @@ namespace Scripts.ViewModels
                 throw new EngineException(this, "An ObjectSpawn need a LevelId");
         }
 
-        public override void Show()
+        private readonly List<string> _objectIds = new List<string>();
+        protected override void OnLoad()
         {
-            base.Show();
-        
+            base.OnLoad();
+
             var levelModel = Root.GetLevel(_model.LevelId);
-            
             foreach (var spawnModel in levelModel.SpawnSequence)
-            {
-                var objectToCache = GetObject<Object>(spawnModel.EnemyId, this);
-                objectToCache.Activate(this);
-                objectToCache.Show();
-            }
+                _objectIds.Add(spawnModel.EnemyId);
+        }
+        
+        public void SpawnObject()
+        {
+            var randomIndex = UnityEngine.Random.Range(0, _objectIds.Count);
+
+            var randomId = _objectIds[randomIndex];
+
+            var objectVM = GetObject<Object>(randomId, GetParent<Scene>());
+            objectVM.Activate(this);
+            objectVM.Show();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Scripts.Views
         public override Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = 0)
         {
             var spawnIndexOverride = _viewModel.SpawnIndexOverride;
-            if (spawnIndexOverride >= SpawnPoints)
+            if (spawnIndexOverride >= SpawnPointCount)
                 Debug.LogError(string.Format("{0} is more than the available Spawning Points of {1}", _viewModel.SpawnIndexOverride, Id));
             
             return base.GetRandomSpawnPoint(ignoreY, spawnIndexOverride);

@@ -18,18 +18,18 @@ namespace Scripts.Views
             foreach (var collider in colliders)
             {
                 var minMaxRandom = new MinMaxRandom(collider);
-                _spawnPoints.Add(minMaxRandom);
+                SpawnPoints.Add(minMaxRandom);
             }
         }
 
-        private readonly List<MinMaxRandom> _spawnPoints = new List<MinMaxRandom>();
-        protected int SpawnPoints { get { return _spawnPoints.Count; } }
+        protected readonly List<MinMaxRandom> SpawnPoints = new List<MinMaxRandom>();
+        protected int SpawnPointCount { get { return SpawnPoints.Count; } }
         public virtual Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex=-1)
         {
             if (spawnIndex == -1)
-                spawnIndex = Random.Range(0, SpawnPoints);
+                spawnIndex = Random.Range(0, SpawnPointCount);
 
-            return _spawnPoints[spawnIndex].GetRandomSpot(ignoreY); ;
+            return SpawnPoints[spawnIndex].GetRandomSpot(ignoreY); ;
         }
     }
 
