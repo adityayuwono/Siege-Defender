@@ -16,6 +16,7 @@
 		<Projectile 	Id="ScatterArrow" Damage="1-5" 
 			AssetId="Projectiles/WoodenBalista" 
 			RoF="0.3" Ammunition="100" Reload="1" 
+			SpeedDeviation="300-600"
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
 
 		<Projectile 	Id="IronArrow" Damage="10-30" 
