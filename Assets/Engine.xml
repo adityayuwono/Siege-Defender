@@ -269,7 +269,7 @@
 		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
 		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
 
-		<Object Id="Tree" AssetId="Projectiles/Rock"/>
+		<Object Id="Tree" AssetId="Environtments/House1"/>
 	</Objects>
 
 	<Levels>
@@ -350,7 +350,7 @@
 
 		<Scene Id="Limbo" AssetId="Scenes/LimboLower">
 			<Elements>
-				<!-- <ObjectSpawn AssetId="Environtment" LevelId="Trees"/> -->
+				<ObjectSpawn AssetId="Environtment" LevelId="Trees"/>
 
 				<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" />
 
