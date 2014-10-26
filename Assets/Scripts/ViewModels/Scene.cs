@@ -44,7 +44,7 @@ namespace Scripts.ViewModels
 
             if (EnemyManager == null && !string.IsNullOrEmpty(_levelId))
                 throw new EngineException(this,
-                    string.Format("You does not provide an EnemyManager yet there's a LevelId specified, there may have been a mistake"));
+                    string.Format("No EnemyManager provided but there's a LevelId specified, there may have been a mistake"));
 
             if (EnemyManager != null && !string.IsNullOrEmpty(_levelId))
             {
