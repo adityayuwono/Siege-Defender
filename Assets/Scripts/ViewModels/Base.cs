@@ -67,7 +67,7 @@ namespace Scripts.ViewModels
         private string _lastDeactivationReason;
         public void Deactivate(string reason)
         {
-            UnityEngine.Debug.Log(reason);
+            //UnityEngine.Debug.Log(reason);
 
             var lastDeactivationReason = _lastDeactivationReason;
             _lastDeactivationReason = reason;
