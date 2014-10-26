@@ -271,6 +271,7 @@
 
 		<Object Id="House1" AssetId="Environtments/House1"/>
 		<Object Id="House2" AssetId="Environtments/House2"/>
+		<Object Id="House3" AssetId="Environtments/House3"/>
 	</Objects>
 
 	<Levels>
@@ -305,6 +306,7 @@
 		<SubLevel Id="Houses">
 			<Spawn EnemyId="House1"/>
 			<Spawn EnemyId="House2"/>
+			<Spawn EnemyId="House3"/>
 		</SubLevel>
 	</Levels>
 
