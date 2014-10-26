@@ -65,13 +65,36 @@ namespace Scripts.ViewModels
         /// <returns>The Property asked, Does not return null</returns>
         public Property GetProperty(string viewModelId, string propertyId)
         {
+            // Check if it is a root override, no support for going to parent for now
+            if (viewModelId.StartsWith(".."))
+                return _engine.PropertyLookup.GetProperty(viewModelId.Replace("..", ""), propertyId);
+
+            // Get the first in view model path
+            var contextIds = viewModelId.Split('.');// The Context ids, split by .
+            var contextId = contextIds[0];// The first context
+            var isLastContext = contextIds.Length == 1;// If it is the only member of the array
+
+            // If it is not the last view model, get it, and go to the next on the list
+            if (!isLastContext)
+            {
+                // Check if that context does exist
+                if (!_contexts.ContainsKey(contextId))
+                    throw new EngineException(_engine, string.Format("PropertyLookup: Failed to find Property with Id: '{0}' of ViewModel: '{1}'", propertyId, viewModelId));
+
+                // Found it, go to the next on the list
+                return _contexts[contextId].PropertyLookup.GetProperty(viewModelId.Replace(contextId + ".", ""), propertyId);
+            }
+            
+            // This is the last context, we simply get the property
             if (!_properties.ContainsKey(propertyId))
                 throw new EngineException(_engine, string.Format("PropertyLookup: Failed to find Property with Id: '{0}' of ViewModel: '{1}', the property is not registered", propertyId, viewModelId));
 
+            // We got the properties, return the property owned by the viewmodel that we want
             var propertyDict = _properties[propertyId];
             if (!propertyDict.ContainsKey(viewModelId))
                 throw new EngineException(_engine, string.Format("PropertyLookup: Failed to find Property with Id: '{0}' of ViewModel: '{1}'", propertyId, viewModelId));
 
+            // This means we found the property, return it
             return propertyDict[viewModelId];
         }
 
