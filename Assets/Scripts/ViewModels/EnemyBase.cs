@@ -1,4 +1,5 @@
-﻿using Scripts.Core;
+﻿using System;
+using Scripts.Core;
 using Scripts.Interfaces;
 using Scripts.Models;
 using Scripts.ViewModels.Enemies;
@@ -63,5 +64,21 @@ namespace Scripts.ViewModels
         }
 
         private PropertyLookup _propertyLookup;
+
+        #region Events
+
+        public event Action OnSpawn;
+        public void InvokeOnSpawn()
+        {
+            if (OnSpawn != null) OnSpawn();
+        }
+        
+        public event Action OnAttack;
+        public void InvokeOnAttack()
+        {
+            if (OnAttack != null) OnAttack();
+        }
+
+        #endregion
     }
 }

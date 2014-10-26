@@ -39,6 +39,9 @@ namespace Scripts.Models.Actions
         None,
         Interrupt,
         Click,
-        Break
+        Break,
+        Spawn,
+        Attack,
+        GameOver
     }
 }

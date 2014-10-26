@@ -86,23 +86,50 @@ namespace Scripts.ViewModels.Enemies
             if (_parentObject == null)
                 throw new EngineException(this, "Failed to find Parent Object");
 
-            if (_model.Event == Event.Interrupt)
+            switch (_model.Event)
             {
-                var parentBoss = _parentObject as Boss;
-                if (parentBoss != null)
-                    parentBoss.OnInterrupt += InvokeEvent;
-            }
-            else if (_model.Event == Event.Click)
-            {
-                var parentButton = _parentObject as Button;
-                if (parentButton != null)
-                    parentButton.OnClick += InvokeEvent;
-            }
-            else if (_model.Event == Event.Break)
-            {
-                var parentButton = _parentObject as Limb;
-                if (parentButton != null)
-                    parentButton.OnBreak += InvokeEvent;
+                case Event.Interrupt:
+                {
+                    var parentBoss = _parentObject as Boss;
+                    if (parentBoss != null)
+                        parentBoss.OnInterrupt += InvokeEvent;
+                }
+                    break;
+                case Event.Click:
+                {
+                    var parentButton = _parentObject as Button;
+                    if (parentButton != null)
+                        parentButton.OnClick += InvokeEvent;
+                }
+                    break;
+                case Event.Break:
+                {
+                    var parentButton = _parentObject as Limb;
+                    if (parentButton != null)
+                        parentButton.OnBreak += InvokeEvent;
+                }
+                    break;
+                case Event.Spawn:
+                {
+                    var parentButton = _parentObject as EnemyBase;
+                    if (parentButton != null)
+                        parentButton.OnSpawn += InvokeEvent;
+                }
+                    break;
+                case Event.Attack:
+                {
+                    var parentButton = _parentObject as EnemyBase;
+                    if (parentButton != null)
+                        parentButton.OnAttack += InvokeEvent;
+                }
+                    break;
+                case Event.GameOver:
+                    {
+                        var parentButton = _parentObject as Player;
+                        if (parentButton != null)
+                            parentButton.OnGameOver += InvokeEvent;
+                    }
+                    break;
             }
         }
 
@@ -113,23 +140,50 @@ namespace Scripts.ViewModels.Enemies
 
         protected override void OnDeactivate()
         {
-            if (_model.Event == Event.Interrupt)
+            switch (_model.Event)
             {
-                var parentBoss = _parentObject as Boss;
-                if (parentBoss != null)
-                    parentBoss.OnInterrupt -= InvokeEvent;
-            }
-            else if (_model.Event == Event.Click)
-            {
-                var parentButton = _parentObject as Button;
-                if (parentButton != null)
-                    parentButton.OnClick -= InvokeEvent;
-            }
-            else if (_model.Event == Event.Break)
-            {
-                var parentButton = _parentObject as Limb;
-                if (parentButton != null)
-                    parentButton.OnBreak -= InvokeEvent;
+                case Event.Interrupt:
+                {
+                    var parentBoss = _parentObject as Boss;
+                    if (parentBoss != null)
+                        parentBoss.OnInterrupt -= InvokeEvent;
+                }
+                    break;
+                case Event.Click:
+                {
+                    var parentButton = _parentObject as Button;
+                    if (parentButton != null)
+                        parentButton.OnClick -= InvokeEvent;
+                }
+                    break;
+                case Event.Break:
+                {
+                    var parentButton = _parentObject as Limb;
+                    if (parentButton != null)
+                        parentButton.OnBreak -= InvokeEvent;
+                }
+                    break;
+                case Event.Spawn:
+                {
+                    var parentButton = _parentObject as EnemyBase;
+                    if (parentButton != null)
+                        parentButton.OnSpawn -= InvokeEvent;
+                }
+                    break;
+                case Event.Attack:
+                {
+                    var parentButton = _parentObject as EnemyBase;
+                    if (parentButton != null)
+                        parentButton.OnAttack -= InvokeEvent;
+                }
+                    break;
+                case Event.GameOver:
+                    {
+                        var parentButton = _parentObject as Player;
+                        if (parentButton != null)
+                            parentButton.OnGameOver -= InvokeEvent;
+                    }
+                    break;
             }
         }
     }

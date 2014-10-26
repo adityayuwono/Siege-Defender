@@ -71,6 +71,8 @@ namespace Scripts.Views
 
         private void StartWalkAnimationSubscription()
         {
+            _viewModel.InvokeOnSpawn();
+
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             _animation.CrossFade("Walk");
             if (_viewModel.Speed > 0)
@@ -104,6 +106,7 @@ namespace Scripts.Views
         private void AttackAnimation()
         {
             _animation.Play("Attack");
+            _viewModel.InvokeOnAttack();
         }
 
         protected virtual Animator GetAnimator()
