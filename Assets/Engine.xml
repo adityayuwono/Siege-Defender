@@ -269,7 +269,8 @@
 		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
 		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
 
-		<Object Id="Tree" AssetId="Environtments/House1"/>
+		<Object Id="House1" AssetId="Environtments/House1"/>
+		<Object Id="House2" AssetId="Environtments/House2"/>
 	</Objects>
 
 	<Levels>
@@ -301,17 +302,9 @@
 		</SubLevel>
 
 		<!-- Environtments -->
-		<SubLevel Id="Trees">
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
-			<Spawn EnemyId="Tree"/>
+		<SubLevel Id="Houses">
+			<Spawn EnemyId="House1"/>
+			<Spawn EnemyId="House2"/>
 		</SubLevel>
 	</Levels>
 
@@ -350,7 +343,7 @@
 
 		<Scene Id="Limbo" AssetId="Scenes/LimboLower">
 			<Elements>
-				<ObjectSpawn AssetId="Environtment" LevelId="Trees"/>
+				<ObjectSpawn AssetId="Environtment" LevelId="Houses"/>
 
 				<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" />
 
