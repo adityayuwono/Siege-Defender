@@ -27,6 +27,24 @@ namespace Scripts.ViewModels.Actions
                 var boolProperty = property as AdjustableProperty<bool>;
                 boolProperty.SetValue(bool.Parse(_model.Value));
             }
+            else if (property is Property<float>)
+            {
+                var floatProperty = property as AdjustableProperty<float>;
+                var propertyValue = floatProperty.GetValue();
+                var newValue = 0f;
+                if (_model.Value.StartsWith("["))
+                {
+                    if (_model.Value.StartsWith("[+]"))
+                        newValue = propertyValue + float.Parse(_model.Value.Replace("[+]", ""));
+                    else if (_model.Value.StartsWith("[-]"))
+                        newValue = propertyValue - float.Parse(_model.Value.Replace("[-]", ""));
+                }
+                else
+                {
+                    newValue = float.Parse(_model.Value);
+                }
+                floatProperty.SetValue(newValue);
+            }
         }
     }
 }
