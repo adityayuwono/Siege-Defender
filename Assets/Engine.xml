@@ -45,7 +45,13 @@
 		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="2-3" Scatters="1" />
 
 		<!-- Enemies -->
-		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" />
+		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
+			<Triggers>
+				<EventTrigger Event="Attack">
+					<Setter Target="..Limbo.PlayerCamera" Property="Health" Value="[-]1" />
+				</EventTrigger>
+			</Triggers>
+		</Enemy>
 		<Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
 		<Enemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
 			<Elements>
@@ -180,6 +186,7 @@
 					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Run" />
 					<MoveAction Target="{Monster}" Id="RandomMovementAction" MoveTarget="Player" SpeedMultiplier="10" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_End" Wait="0.8" />
+					<Setter Target="..Limbo.PlayerCamera" Property="Health" Value="[-]5" />
 					<Triggers>
 						<EventTrigger Event="Interrupt">
 							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|ScreamingCrystalShield" />
@@ -354,7 +361,7 @@
 				
 				<Element Id="Player" AssetId="EnemyTarget" />
 
-				<Player Id="PlayerCamera" AssetId="Player" >
+				<Player Id="PlayerCamera" AssetId="Player" Health="6" >
 					<Shooters>
 						<Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.Item}" >
 							<Target AssetId="Target" />
@@ -363,6 +370,11 @@
 							<Target AssetId="Target" />
 						</Shooter>
 					</Shooters>
+					<Triggers>
+						<EventTrigger Event="GameOver">
+							<LoadScene Target="MainMenu" />
+						</EventTrigger>
+					</Triggers>
 				</Player>
 
 				<GUIRoot AssetId="UIRoot">
