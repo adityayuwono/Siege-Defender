@@ -64,7 +64,7 @@
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
 			</Elements>
 		</Enemy>
-		<Boss  Id="StoneGolem" 		AssetId="Enemies/StoneGolemBoss" 	Health="9325" 	Speed="2" DeathDelay="5"
+		<Boss  Id="ZombieAbomination" 		AssetId="Enemies/ZombieAbomination" 	Health="9325" 	Speed="2" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
 			<Elements>
 				<EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -274,7 +274,7 @@
 
 	<Levels>
 		<Level Id="Level1" Interval="1.12345" LoopCount="0">
-			<Cache EnemyId="StoneGolem" />
+			<Cache EnemyId="ZombieAbomination" />
 			<Cache EnemyId="CrystalSpider" Count="5" />
 			<Cache EnemyId="StandardDamageGUI" Count="20" />
 			<Cache EnemyId="CrystalBreak_Small" Count="10" />
@@ -282,7 +282,7 @@
 			<Cache EnemyId="SpiderColumn" Count="5" />
 			<Cache EnemyId="CrystalShield" />
 
-			<Spawn EnemyId="StoneGolem" />
+			<Spawn EnemyId="ZombieAbomination" />
 		</Level>
 		<SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
 			<Spawn EnemyId="CrystalShield" />
