@@ -343,11 +343,9 @@
 				<Player Id="PlayerCamera" AssetId="Player" >
 					<Shooters>
 						<Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.Item}" >
-							<Source AssetId="Shooter"/>
 							<Target AssetId="Target" />
 						</Shooter>
 						<Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{Root.SkillTree.RightShooter.Item}" >
-							<Source AssetId="Shooter"/>
 							<Target AssetId="Target" />
 						</Shooter>
 					</Shooters>
