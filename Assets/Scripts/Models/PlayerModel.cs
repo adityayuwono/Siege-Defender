@@ -14,6 +14,9 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "Shooter", Type = typeof(ShooterModel))]
         public List<ShooterModel> Shooters { get; set; }
 
+        [XmlAttribute]
+        public float Health { get; set; }
+
         public PlayerModel()
         {
             Shooters = new List<ShooterModel>();
