@@ -4,7 +4,6 @@ namespace Scripts.Helpers
 {
     public static class Values
     {
-        public const float GUI_CIRCLE_SIZE_F = 0.4f;
         public const float GUI_CROSSHAIR_SIZE_F = 0.08f;
         public static float GUI_CROSSHAIR_HALFSIZE_F
         {
@@ -21,7 +20,6 @@ namespace Scripts.Helpers
 
             public const string BOSS_CHARACTER_ROOT_TAG = "Character";
             public const string WAYPOINT_TRANSFORM_TAG = "Waypoint";
-            public const string WALKING_ANIMATION_BOOL_TAG = "Walk";
         }
     }
 
