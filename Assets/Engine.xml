@@ -267,6 +267,8 @@
 		<DamageGUI Id="StandardDamageGUI" 		AssetId="GUIs/DamageDisplay" />
 		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
 		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
+
+		<Object Id="Tree" AssetId="Projectiles/Rock"/>
 	</Objects>
 
 	<Levels>
@@ -295,6 +297,20 @@
 		</SubLevel>
 		<SubLevel Id="SpawnSpidersInfinite" Interval="10" LoopCount="-1">
 			<Spawn EnemyId="CrystalSpider" />
+		</SubLevel>
+
+		<!-- Environtments -->
+		<SubLevel Id="Trees">
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
+			<Spawn EnemyId="Tree"/>
 		</SubLevel>
 	</Levels>
 
@@ -333,6 +349,8 @@
 
 		<Scene Id="Limbo" AssetId="Scenes/LimboLower">
 			<Elements>
+				<!-- <ObjectSpawn AssetId="Environtment" LevelId="Trees"/> -->
+
 				<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" />
 
 				<PlayerHitbox AssetId="PlayerHealth" />

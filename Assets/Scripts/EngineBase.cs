@@ -100,8 +100,6 @@ namespace Scripts
         }
         #endregion
 
-        #region Virtual Methods
-
         public virtual void MapInjections()
         {
             IoCContainer = new IoCContainer();
@@ -114,6 +112,7 @@ namespace Scripts
             IoCContainer.RegisterFor<ElementModel>().TypeOf<Object>().To<Element>();
             IoCContainer.RegisterFor<PlayerModel>().TypeOf<Object>().To<Player>();
             IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<Object>().To<EnemyManager>();
+            IoCContainer.RegisterFor<ObjectSpawnModel>().TypeOf<Object>().To<ObjectSpawn>();
             IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<Object>().To<PlayerHitbox>();
             IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Object>().To<GUIRoot>();
             IoCContainer.RegisterFor<DamageDisplayGUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
@@ -152,6 +151,8 @@ namespace Scripts
             IoCContainer.RegisterFor<EventTriggeredModel>().TypeOf<Triggered>().To<EventTriggered>();
             #endregion
         }
+
+        #region Virtual Methods
 
         public virtual PlayerSettingsModel PlayerSettingsModel
         {

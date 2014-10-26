@@ -67,6 +67,7 @@ namespace Scripts
             IoCContainer.RegisterFor<Element>().TypeOf<BaseView>().To<ElementView>();
             IoCContainer.RegisterFor<Player>().TypeOf<BaseView>().To<PlayerView>();
             IoCContainer.RegisterFor<EnemyManager>().TypeOf<BaseView>().To<EnemyManagerView>();
+            IoCContainer.RegisterFor<ObjectSpawn>().TypeOf<BaseView>().To<ObjectSpawnView>();
             IoCContainer.RegisterFor<PlayerHitbox>().TypeOf<BaseView>().To<PlayerHitboxView>();
 
             IoCContainer.RegisterFor<GUIRoot>().TypeOf<BaseView>().To<GUIRootView>();

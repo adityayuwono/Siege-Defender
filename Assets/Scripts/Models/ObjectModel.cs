@@ -27,6 +27,7 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "ShooterGUIs", Type = typeof(ShooterGUIsModel))]
         // Intervals
         [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
+        [XmlArrayItem(ElementName = "ObjectSpawn", Type = typeof(ObjectSpawnModel))]
         [XmlArrayItem(ElementName = "SpecialEffectManager", Type = typeof(SpecialEffectManagerModel))]
         public List<ElementModel> Elements { get; set; }
 
