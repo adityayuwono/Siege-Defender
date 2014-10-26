@@ -72,10 +72,7 @@ namespace Scripts.ViewModels.Enemies
             return true;
         }
 
-        protected virtual void OnKilled()
-        {
-            
-        }
+        protected virtual void OnKilled() { }
 
         private void AttachProjectile(ProjectileBase source)
         {

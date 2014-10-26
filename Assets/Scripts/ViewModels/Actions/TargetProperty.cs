@@ -1,4 +1,5 @@
-﻿using Scripts.Core;
+﻿using System.Diagnostics;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models.Actions;
@@ -39,7 +40,7 @@ namespace Scripts.ViewModels.Actions
             var parentContext = GetParent<IContext>();
             if (parentContext == null)
                 throw new EngineException(this, "Failed to find parent Context");
-
+            
             return parentContext.PropertyLookup.GetProperty(target, _model.Property);
         }
     }
