@@ -1,0 +1,67 @@
+<Engine Id="SiegeDefender">
+	<Objects>
+		<Projectile 	Id="WoodArrow" Damage="8-12" 
+			AssetId="Projectiles/WoodenBalista" 
+			RoF="0.2" Ammunition="1000" Reload="1" 
+			Scatters="1"
+			Accuracy="0.9" Deviation="0.001" />
+		
+		<!-- Enemies -->
+		<Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="20" Speed="3" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" />
+
+		<!-- Structures -->
+		<Object Id="HouseBlock1" AssetId="Enemies/StoneGolemBoss">
+			<Elements>
+				<Element AssetId=""/>
+			</Elements>
+		</Object>
+		<Object Id="HouseBlock2" AssetId="Enemies/StoneGolemBoss">
+			<Elements>
+				<Element AssetId=""/>
+			</Elements>
+		</Object>
+		<Object Id="HouseBlock2" AssetId="Enemies/StoneGolemBoss">
+			<Elements>
+				<Element AssetId=""/>
+			</Elements>
+		</Object>
+	</Objects>
+
+	<Levels>
+		<Level Id="Level1" Interval="1.12345" LoopCount="-1">
+			<Spawn EnemyId="CrystalSpider" />
+		</Level>
+
+		<Level Id="Houses" >
+			<Spawn EnemyId="HouseBlock1"/>
+			<Spawn EnemyId="HouseBlock2"/>
+			<Spawn EnemyId="HouseBlock3"/>
+		</Level>
+	</Levels>
+
+	<Scenes>
+		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
+			<Elements>
+				<Button AssetId="StartGame">
+					<Triggers><EventTrigger Event="Click"><LoadScene Target="RandomCity" LevelId="Level1" /></EventTrigger></Triggers>
+				</Button>
+			</Elements>
+		</Scene>
+
+		<Scene Id="RandomCity" AssetId="Scenes/RandomCity">
+			<Elements>
+				<ObjectSpawn Id="HouseDistricts" AssetId="HouseDistricts" LevelId="Houses"/>
+
+
+				<GUIRoot AssetId="UIRoot">
+					<Elements>
+						<Button AssetId="BackToMainMenu" >
+							<Triggers><EventTrigger Event="Click"><LoadScene Target="MainMenu" /></EventTrigger></Triggers>
+						</Button>
+						<Element AssetId="LoadingCover" IsVisible="{Limbo.IsLoadingInProgress}" />
+					</Elements>
+				</GUIRoot>
+			</Elements>
+		</Scene>
+	</Scenes>
+</Engine>
