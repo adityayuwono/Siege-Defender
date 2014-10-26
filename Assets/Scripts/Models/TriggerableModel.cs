@@ -12,5 +12,10 @@ namespace Scripts.Models
         [XmlArrayItem(Type = typeof(TriggeredModel), ElementName = "Trigger")]
         [XmlArrayItem(Type = typeof(EventTriggeredModel), ElementName = "EventTrigger")]
         public List<TriggeredModel> Triggers { get; set; }
+
+        public TriggerableModel()
+        {
+            Triggers = new List<TriggeredModel>();
+        }
     }
 }
