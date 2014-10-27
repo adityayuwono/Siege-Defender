@@ -29,7 +29,7 @@ namespace Scripts.Views
             if (spawnIndex == -1)
                 spawnIndex = Random.Range(0, SpawnPointCount);
 
-            return SpawnPoints[spawnIndex].GetRandomSpot(ignoreY); ;
+            return SpawnPoints[spawnIndex].GetRandomSpot(ignoreY);
         }
     }
 

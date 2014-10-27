@@ -8,8 +8,8 @@ namespace Scripts.ViewModels
 {
     public class PropertyLookup
     {
-        private EngineBase _engine;
-        private IContext _context;
+        private readonly EngineBase _engine;
+        private readonly IContext _context;
         public PropertyLookup(EngineBase engine, IContext context)
         {
             _engine = engine;
@@ -28,7 +28,7 @@ namespace Scripts.ViewModels
             _contexts.Add(context.Id, context);
         }
 
-        public IContext GetContext(string contextId)
+        private IContext GetContext(string contextId)
         {
             return _contexts[contextId];
         }
@@ -59,6 +59,7 @@ namespace Scripts.ViewModels
             _properties[id].Remove(viewModel.Id);
         }
 
+        #region Get Property
         /// <summary>
         /// Get Property from list, will throw exception upon failure
         /// </summary>
@@ -132,5 +133,6 @@ namespace Scripts.ViewModels
         {
             return GetProperty(path) as Property<T>;
         }
+        #endregion
     }
 }

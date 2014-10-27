@@ -6,7 +6,7 @@ namespace Scripts.Components
 {
     public class DragDropContainerController : UIDragDropContainer
     {
-        public Action<Object> OnDropped;
+        public event Action<Object> OnDropped;
 
         public void OnDrop(GameObject droppedGameObject)
         {

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Scripts.Core;
+﻿using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models.Actions;

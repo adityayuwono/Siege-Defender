@@ -55,7 +55,7 @@ namespace Scripts.ViewModels
             }
         }
 
-        public void StartCaching(List<SpawnModel> objectsToCache)
+        private void StartCaching(List<SpawnModel> objectsToCache)
         {
             IsLoadingInProgress.SetValue(true);
             var objectIds = new List<string>();
@@ -98,7 +98,14 @@ namespace Scripts.ViewModels
 
         private void ActuallyShowTheScene()
         {
+            EnemyManager.ActiveObjects.OnChange += ActiveObjects_OnChange;
+
             EnemyManager.Level.SetValue(_levelId);
+        }
+
+        private void ActiveObjects_OnChange()
+        {
+            
         }
 
         public EnemyManager EnemyManager;

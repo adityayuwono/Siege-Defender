@@ -188,7 +188,6 @@ namespace Scripts
 
         public void RegisterToLookup(Base viewModel)
         {
-            // TODO: Also register child elements
             if (_vmLookup.ContainsKey(viewModel.Id))
                 return;
 
@@ -197,7 +196,6 @@ namespace Scripts
 
         public void UnregisterFromLookup(Base viewModel)
         {
-            // TODO: Also register child elements
             if (!_vmLookup.ContainsKey(viewModel.Id))
                 return;
 
@@ -222,7 +220,7 @@ namespace Scripts
         #endregion
 
         private Scene _currentScene;
-        protected readonly Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
+        private readonly Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
         public Scene ChangeScene(string sceneId, string levelId = "")
         {
             // Deactivate Current Active Scene, to avoid space time continuum

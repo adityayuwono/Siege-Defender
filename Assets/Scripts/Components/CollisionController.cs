@@ -6,7 +6,7 @@ namespace Scripts.Components
 {
     public class CollisionController : MonoBehaviour
     {
-        public Action<Object, Vector3, Vector3> OnCollision;
+        public event Action<Object, Vector3, Vector3> OnCollision;
 
         private void OnCollisionEnter(Collision collisionInfo)
         {

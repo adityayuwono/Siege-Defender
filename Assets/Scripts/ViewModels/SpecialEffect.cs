@@ -5,7 +5,8 @@ namespace Scripts.ViewModels
 {
     public class SpecialEffect : Object
     {
-        private SpecialEffectModel _model;
+        private readonly SpecialEffectModel _model;
+
         public SpecialEffect(SpecialEffectModel model, Base parent) : base(model, parent)
         {
             _model = model;

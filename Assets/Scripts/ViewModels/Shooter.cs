@@ -119,7 +119,7 @@ namespace Scripts.ViewModels
         }
 
 
-        public AdjustableProperty<int> Ammunition;
+        public readonly AdjustableProperty<int> Ammunition;
         private int _ammunition
         {
             get { return Ammunition.GetValue(); }

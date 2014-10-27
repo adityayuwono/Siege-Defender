@@ -78,7 +78,7 @@ namespace Scripts.ViewModels
             ActiveObjects.SetValue(ActiveObjects.GetValue() - 1);
             AddToInactiveObjectList(objectT);
         }
-        private void AddToInactiveObjectList(T inactiveObject)
+        private static void AddToInactiveObjectList(T inactiveObject)
         {
             var objectType = inactiveObject.Type;
 
@@ -88,7 +88,7 @@ namespace Scripts.ViewModels
                 InactiveObjects.Add(objectType, new List<Object> { inactiveObject });
         }
         
-        private Object CheckInactiveObjects(string objectId)
+        private static Object CheckInactiveObjects(string objectId)
         {
             // Id is not registered yet
             if (!InactiveObjects.ContainsKey(objectId)) return null;
