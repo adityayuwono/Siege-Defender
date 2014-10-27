@@ -228,7 +228,7 @@ ModelImporter:
       name: Spawn
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 10
       wrapMode: 1
       orientationOffsetY: 0
       level: 0
@@ -451,8 +451,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk
       takeName: Take 001
-      firstFrame: 19.8999996
-      lastFrame: 20
+      firstFrame: 9.89999962
+      lastFrame: 10
       wrapMode: 1
       orientationOffsetY: 0
       level: 0
