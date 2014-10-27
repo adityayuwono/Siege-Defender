@@ -79,7 +79,7 @@ namespace Scripts.ViewModels
         }
 
         /// <summary>
-        /// Overrides the nex spawn index used, -1 means no override
+        /// Overrides the next spawn index used, -1 means no override
         /// </summary>
         public int SpawnIndexOverride { get; private set; }
 
