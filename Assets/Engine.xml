@@ -185,8 +185,9 @@
 					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Charge" Wait="8" IsInterruptable="true" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Run" />
 					<MoveAction Target="{Monster}" Id="RandomMovementAction" MoveTarget="Player" SpeedMultiplier="10" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_End" Wait="0.8" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_End" Wait="0.2" />
 					<Setter Target="..Limbo.PlayerCamera" Property="Health" Value="[-]5" />
+					<SpecialEvent Target="PlayerCamera" Wait="0.6" />
 					<Triggers>
 						<EventTrigger Event="Interrupt">
 							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|ScreamingCrystalShield" />

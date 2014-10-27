@@ -1,4 +1,6 @@
-﻿using Scripts.Components;
+﻿using System;
+using Scripts.Components;
+using Scripts.Components.SpecialEvents;
 using Scripts.Helpers;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -39,13 +41,20 @@ namespace Scripts.Views
                 OnLoad();
             }
             GameObject.SetActive(true);
+            
             SetPosition();
+        }
+
+        private void Object_OnStartSpecialEvent()
+        {
+            var specialEventControllers = GameObject.GetComponents<BaseSpecialEventController>();
+            foreach (var specialEventController in specialEventControllers)
+                specialEventController.StartSpecialEvent(_viewModel.Root);
         }
 
         protected override void OnHide(string reason)
         {
             base.OnHide(reason);
-            
             KillGameObject(reason);
         }
 
@@ -62,6 +71,8 @@ namespace Scripts.Views
             GameObject.AddComponent<ViewModelController>().ViewModel = _viewModel;
 
             GameObject.transform.parent = GetParent();
+
+            _viewModel.OnStartSpecialEvent += Object_OnStartSpecialEvent;
         }
         protected virtual Transform GetParent()
         {
@@ -128,6 +139,8 @@ namespace Scripts.Views
         }
         protected override void OnDestroy()
         {
+            _viewModel.OnStartSpecialEvent -= Object_OnStartSpecialEvent;
+
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath);
 
             _isLoaded = false;

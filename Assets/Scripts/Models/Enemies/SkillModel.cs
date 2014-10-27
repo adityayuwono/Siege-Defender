@@ -23,6 +23,7 @@ namespace Scripts.Models.Enemies
 
         [XmlElement(ElementName = "Setter", Type = typeof(SetterActionModel))]
         [XmlElement(ElementName = "MoveAction", Type = typeof(MoveActionModel))]
+        [XmlElement(ElementName = "SpecialEvent", Type = typeof(StartSpecialEventModel))]
         public List<BaseActionModel> Actions { get; set; }
     }
 }

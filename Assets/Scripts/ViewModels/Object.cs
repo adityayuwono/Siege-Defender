@@ -70,7 +70,12 @@ namespace Scripts.ViewModels
                 element.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
         }
 
-        
+        public event Action OnStartSpecialEvent;
+        public void StartSpecialEvent()
+        {
+            if (OnStartSpecialEvent != null)
+                OnStartSpecialEvent();
+        }
 
 
         #region Death

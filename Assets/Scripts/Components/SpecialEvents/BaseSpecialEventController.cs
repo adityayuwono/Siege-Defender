@@ -6,7 +6,8 @@ namespace Scripts.Components.SpecialEvents
 {
     public class BaseSpecialEventController : MonoBehaviour
     {
-        public Action OnSpecialEventFinished;
+        public event Action OnEventStart;
+        public event Action OnEventFinished;
 
         public void StartSpecialEvent(EngineBase engine)
         {
@@ -16,6 +17,18 @@ namespace Scripts.Components.SpecialEvents
         protected virtual IEnumerator EnumerateSpecialEvent()
         {
             yield return null;
+        }
+
+        protected void InvokeEventStart()
+        {
+            if (OnEventStart != null)
+                OnEventStart();
+        }
+
+        protected void InvokeEventFinished()
+        {
+            if (OnEventFinished != null)
+                OnEventFinished();
         }
     }
 }
