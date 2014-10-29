@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Xml.Serialization;
-using Scripts.Models.Actions;
 
 namespace Scripts.Models.GUIs
 {
