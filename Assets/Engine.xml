@@ -182,7 +182,7 @@
 				</Skill>
 				<Skill Id="Slam" InterruptThreshold="200" >
 					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Start" Wait="2.1" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Charge" Wait="8" IsInterruptable="true" />
+					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Run" />
 					<MoveAction Target="{Monster}" Id="RandomMovementAction" MoveTarget="Player" SpeedMultiplier="10" />
 					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_End" Wait="0.2" />
@@ -362,7 +362,7 @@
 				
 				<Element Id="Player" AssetId="EnemyTarget" />
 
-				<Player Id="PlayerCamera" AssetId="Player" Health="6" >
+				<Player Id="PlayerCamera" AssetId="Player" Health="66" >
 					<Shooters>
 						<Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.Item}" >
 							<Target AssetId="Target" />
