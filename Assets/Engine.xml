@@ -48,7 +48,7 @@
 		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
 			<Triggers>
 				<EventTrigger Event="Attack">
-					<Setter Target="..Limbo.PlayerCamera" Property="Health" Value="[-]1" />
+					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]1" />
 				</EventTrigger>
 			</Triggers>
 		</Enemy>
@@ -60,8 +60,8 @@
 			<Triggers>
 				<Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
 					<RandomCondition Target="{Monster}" Frequency="4" Value="50" /> <!-- Percentage -->
-					<Condition Target="SpiderSpawn" Property="ActiveObjects" Value="\1" />
-					<Setter Target="SpiderSpawn" Property="Level" Value="SpawnSpiders" />
+					<Condition Target="{SpiderSpawn.ActiveObjects}" Value="\1" />
+					<Setter Target="{SpiderSpawn.Level}" Value="SpawnSpiders" />
 				</Trigger>
 			</Triggers>
 		</Enemy>
@@ -84,7 +84,7 @@
 					<Triggers>
 						<EventTrigger Event="Break" >
 							<Drop Target="Wood" Amount="3-10" />
-							<Setter Target="{Monster}" Property="ActiveSkill" Value="HeadBroken|ScreamingRandomMovement" />
+							<Setter Target="{This.ActiveSkill}" Value="HeadBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
 				</Limb>
@@ -94,7 +94,7 @@
 					<Triggers>
 						<EventTrigger Event="Break" >							
 							<Drop Target="LightWood" Amount="1-6" />
-							<Setter Target="{Monster}" Property="ActiveSkill" Value="RightHandBroken|ScreamingRandomMovement" />
+							<Setter Target="{This.ActiveSkill}" Value="RightHandBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
 				</Limb>
@@ -104,7 +104,7 @@
 					<Triggers>
 						<EventTrigger Event="Break" >
 							<Drop Target="LightWood" Amount="1-6" />
-							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|ScreamingRandomMovement" />
+							<Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
 				</Limb>
@@ -132,7 +132,7 @@
 					<Triggers>
 						<EventTrigger Event="Break" >
 							<Drop Target="LightWood" Amount="1-6" />
-							<Setter Target="{Monster}" Property="ActiveSkill" Value="RightFootBroken|ScreamingRandomMovement" />
+							<Setter Target="{This.ActiveSkill}" Value="RightFootBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
 				</Limb>
@@ -142,7 +142,7 @@
 					<Triggers>
 						<EventTrigger Event="Break" >
 							<Drop Target="LightWood" Amount="1-6" />
-							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftFootBroken|ScreamingRandomMovement" />
+							<Setter Target="{This.ActiveSkill}" Value="LeftFootBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
 				</Limb>
@@ -151,7 +151,7 @@
 					<Triggers>
 						<EventTrigger Event="Break" >
 							<Drop Target="LightWood" Amount="1-6" />
-							<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalBroken|RandomMovement" />
+							<Setter Target="{This.ActiveSkill}" Value="CrystalBroken|RandomMovement" />
 						</EventTrigger>
 					</Triggers>
 				</Limb>
@@ -159,115 +159,115 @@
 
 			<Skills>
 				<Skill Id="Idle"> <!-- Default Skill, this skill is always active -->
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" Wait="4" />
+					<Setter Target="{This.AnimationId}" Value="Idle" Wait="4" />
 				</Skill>
 				<Skill Id="Scream"> <!-- Default Skill, this skill is always active -->
-					<Setter Target="{Monster}" Property="AnimationId" Value="Scream" Wait="1.5" />
+					<Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
 				</Skill>
 				<Skill Id="CrystalShield" IsQueuedable="true" >
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" Wait="2.65" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
-					<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
+					<Setter Target="{This.AnimationId}" Value="SmashSpawnShield" Wait="2.65" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
+					<Setter Target="{ShieldSpawn.Level}" Value="SpawnCrystalShield" />
 				</Skill>
 				<Skill Id="ScreamingCrystalShield" IsQueuedable="true" >
-					<Setter Target="{Monster}" Property="AnimationId" Value="Scream" Wait="1.5" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnShield" Wait="2.65" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
-					<Setter Target="ShieldSpawn" Property="Level" Value="SpawnCrystalShield" />
+					<Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
+					<Setter Target="{This.AnimationId}" Value="SmashSpawnShield" Wait="2.65" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
+					<Setter Target="{ShieldSpawn.Level}" Value="SpawnCrystalShield" />
 				</Skill>
 				<Skill Id="SpiderColumn">
-					<Setter Target="{Monster}" Property="AnimationId" Value="SmashSpawnPillar" Wait="2.3" />
-					<Setter Target="SpiderColumns" Property="Level" Value="SpawnSpiderColumn" Wait="2" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+					<Setter Target="{This.AnimationId}" Value="SmashSpawnPillar" Wait="2.3" />
+					<Setter Target="{SpiderColumns.Level}" Value="SpawnSpiderColumn" Wait="2" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
 				</Skill>
 				<Skill Id="Slam" InterruptThreshold="200" >
-					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Start" Wait="2.1" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_Run" />
-					<MoveAction Target="{Monster}" Id="RandomMovementAction" MoveTarget="Player" SpeedMultiplier="10" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Slam_End" Wait="0.2" />
-					<Setter Target="..Limbo.PlayerCamera" Property="Health" Value="[-]5" />
+					<Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2.1" />
+					<Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
+					<Setter Target="{This.AnimationId}" Value="Slam_Run" />
+					<MoveAction Target="{Monster}" MoveTarget="Player" SpeedMultiplier="10" />
+					<Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
+					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]5" />
 					<SpecialEvent Target="PlayerCamera" Wait="0.6" />
 					<Triggers>
 						<EventTrigger Event="Interrupt">
-							<Setter Target="{Monster}" Property="ActiveSkill" Value="LeftHandBroken|ScreamingCrystalShield" />
+							<Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingCrystalShield" />
 						</EventTrigger>
 					</Triggers>
 				</Skill>
 				<Skill Id="RandomMovement">
-					<Setter Target="{Monster}" Property="AnimationId" Value="Walk" />
+					<Setter Target="{This.AnimationId}" Value="Walk" />
 					<MoveAction Id="RandomMovementAction" Target="{Monster}" />
 				</Skill>
 				<Skill Id="ScreamingRandomMovement">
-					<Setter Target="{Monster}" Property="AnimationId" Value="Scream" Wait="1.5" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Walk" />
+					<Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
+					<Setter Target="{This.AnimationId}" Value="Walk" />
 					<MoveAction Id="RandomMovementAction" Target="{Monster}" />
 				</Skill>
 				<!-- When Broken -->
 				<!-- These are also defined as skills, interrupt skills, meaning they will interrupt any currently charged skill -->
 				<Skill Id="HeadBroken" IsInterrupt="true">
-					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+					<Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
 				</Skill>
 				<Skill Id="RightHandBroken" IsInterrupt="true">
-					<Setter Target="{Monster}" Property="AnimationId" Value="RightHandBroken" Wait="1.6" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+					<Setter Target="{This.AnimationId}" Value="RightHandBroken" Wait="1.6" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
 				</Skill>
 				<Skill Id="LeftHandBroken" IsInterrupt="true">
-					<Setter Target="{Monster}" Property="AnimationId" Value="LeftHandBroken" Wait="1.3" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+					<Setter Target="{This.AnimationId}" Value="LeftHandBroken" Wait="1.3" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
 				</Skill>
 				<Skill Id="RightFootBroken" IsInterrupt="true">
-					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+					<Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
 				</Skill>
 				<Skill Id="LeftFootBroken" IsInterrupt="true">
-					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+					<Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
 				</Skill>
 				<Skill Id="CrystalBroken" IsInterrupt="true">
-					<Setter Target="{Monster}" Property="AnimationId" Value="HeadBroken" Wait="1.6" />
-					<Setter Target="{Monster}" Property="AnimationId" Value="Idle" />
+					<Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
+					<Setter Target="{This.AnimationId}" Value="Idle" />
 				</Skill>
 			</Skills>
 
 			<Triggers>
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{Monster}" Frequency="1" Value="30" />
-					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="Slam|RandomMovement" />
+					<RandomCondition Target="{This}" Frequency="1" Value="30" />
+					<Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
+					<Setter Target="{This.ActiveSkill}" Value="Slam|RandomMovement" />
 				</Trigger>
 
 				<Trigger TriggerOnce="false" >
 					<RandomCondition Target="{Monster}" Frequency="2" Value="5" />
-					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="RandomMovement|Idle" />
+					<Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
+					<Setter Target="{This.ActiveSkill}" Value="RandomMovement|Idle" />
 				</Trigger>
 				<Trigger TriggerOnce="false" >
 					<RandomCondition Target="{Monster}" Frequency="1" Value="25" />
-					<Condition Target="ShieldSpawn" Property="ActiveObjects" Value="\1" />
-					<Condition Target="SpiderColumns" Property="ActiveObjects" Value="\3" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="SpiderColumn" />
+					<Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
+					<Condition Target="{SpiderColumns.ActiveObjects}" Value="\3" />
+					<Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
 				</Trigger>
 				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\6660" />
-					<Setter Target="WarpGates" Property="Level" Value="SpiderColumnSwarm" />
+					<Condition Target="{This.Health}" Value="\6660" />
+					<Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
 				</Trigger>
 				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\7200" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
+					<Condition Target="{This.Health}" Value="\7200" />
+					<Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
 				</Trigger>
 				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\4440" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
+					<Condition Target="{This.Health}" Value="\4440" />
+					<Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
 				</Trigger>
 				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\2220" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
+					<Condition Target="{This.Health}" Value="\2220" />
+					<Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
 				</Trigger>
 				<Trigger>
-					<Condition Target="{Monster}" Property="Health" Value="\1110" />
-					<Setter Target="{Monster}" Property="ActiveSkill" Value="CrystalShield" />
+					<Condition Target="{This.Health}" Value="\1110" />
+					<Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
 				</Trigger>
 			</Triggers>
 		</Boss>
