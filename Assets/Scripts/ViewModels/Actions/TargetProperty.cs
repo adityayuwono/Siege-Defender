@@ -28,19 +28,11 @@ namespace Scripts.ViewModels.Actions
 
         protected virtual Property FindProperty()
         {
-            if (string.IsNullOrEmpty(_model.Property)) return null;
-
-            var target = _model.Target;
-            if (_model.Target == "{This}")
-                target = GetParent<Object>().Id;
-            else if (_model.Target == "{Monster}")
-                target = GetParent<EnemyBase>().Id;
-
             var parentContext = GetParent<IContext>();
             if (parentContext == null)
                 throw new EngineException(this, "Failed to find parent Context");
             
-            return parentContext.PropertyLookup.GetProperty(target, _model.Property);
+            return parentContext.PropertyLookup.GetProperty(_model.Target.Replace("This", parentContext.Id));
         }
     }
 }
