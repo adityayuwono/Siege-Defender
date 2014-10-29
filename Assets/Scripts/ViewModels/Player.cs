@@ -1,7 +1,6 @@
 ﻿using System;
 using Scripts.Core;
 using Scripts.Models;
-using UnityEngine;
 
 namespace Scripts.ViewModels
 {
@@ -14,6 +13,8 @@ namespace Scripts.ViewModels
             _model = model;
 
             Health = new AdjustableProperty<float>("Health", this);
+            MaxHealth = new AdjustableProperty<float>("MaxHealth", this);
+            MaxHealth.SetValue(_model.Health);
 
             foreach (var shooterModel in _model.Shooters)
                 Elements.Add(new Shooter(shooterModel, this));
@@ -21,7 +22,7 @@ namespace Scripts.ViewModels
 
         protected override void OnActivate()
         {
-            Health.SetValue(_model.Health);
+            Health.SetValue(MaxHealth.GetValue());
 
             Health.OnChange += OnDamaged;
 
@@ -38,14 +39,13 @@ namespace Scripts.ViewModels
         private void OnDamaged()
         {
             var currentHealth = Health.GetValue();
-            Debug.LogError(currentHealth);
             if (currentHealth <= 0)
                 if (OnGameOver != null)
-                    OnGameOver();// Player's health is 0, this means game over :(
-
+                    OnGameOver();// Player's health is 0, this means game over :( (
         }
 
         public readonly AdjustableProperty<float> Health;
+        public readonly AdjustableProperty<float> MaxHealth;
 
         public event Action OnGameOver;
     }
