@@ -1,5 +1,6 @@
 ﻿using System;
 using Scripts.Core;
+using Scripts.Interfaces;
 using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
@@ -11,7 +12,7 @@ namespace Scripts.ViewModels.Actions
         {
             _model = model;
         }
-
+        
         protected override void OnActivate()
         {
             base.OnActivate();
