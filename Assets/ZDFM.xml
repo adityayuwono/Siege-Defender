@@ -10,11 +10,11 @@
 		<Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="20" Speed="3" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" />
 
 		<!-- Structures -->
-		<Object Id="House1" AssetId="Environtments/House1">
+		<Object Id="House1" AssetId="Environtments/Block1">
 		</Object>
-		<Object Id="House2" AssetId="Environtments/House2">
+		<Object Id="House2" AssetId="Environtments/Block1">
 		</Object>
-		<Object Id="House3" AssetId="Environtments/House3">
+		<Object Id="House3" AssetId="Environtments/Block1">
 		</Object>
 	</Objects>
 
