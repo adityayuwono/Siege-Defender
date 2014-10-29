@@ -10,10 +10,7 @@ namespace Scripts.Models.Actions
         [XmlAttribute]
         [DefaultValue("{Monster}")]
         public string Target { get; set; }
-
-        [XmlAttribute]
-        public string Property { get; set; }
-
+        
         [XmlAttribute]
         public string Value { get; set; }
 
