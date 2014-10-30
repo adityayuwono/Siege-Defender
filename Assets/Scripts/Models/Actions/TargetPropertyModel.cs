@@ -8,7 +8,7 @@ namespace Scripts.Models.Actions
     public class TargetPropertyModel : BaseModel
     {
         [XmlAttribute]
-        [DefaultValue("{Monster}")]
+        [DefaultValue("{This}")]
         public string Target { get; set; }
         
         [XmlAttribute]
@@ -16,7 +16,7 @@ namespace Scripts.Models.Actions
 
         public TargetPropertyModel()
         {
-            Target = "{Monster}";
+            Target = "{This}";
         }
     }
 }

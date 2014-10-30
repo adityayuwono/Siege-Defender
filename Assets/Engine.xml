@@ -59,7 +59,7 @@
 			</Elements>
 			<Triggers>
 				<Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
-					<RandomCondition Target="{Monster}" Frequency="4" Value="50" /> <!-- Percentage -->
+					<RandomCondition Target="{This}" Frequency="4" Value="50" /> <!-- Percentage -->
 					<Condition Target="{SpiderSpawn.ActiveObjects}" Value="\1" />
 					<Setter Target="{SpiderSpawn.Level}" Value="SpawnSpiders" />
 				</Trigger>
@@ -184,7 +184,7 @@
 					<Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2.1" />
 					<Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
 					<Setter Target="{This.AnimationId}" Value="Slam_Run" />
-					<MoveAction Target="{Monster}" MoveTarget="Player" SpeedMultiplier="10" />
+					<MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
 					<Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
 					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]5" />
 					<SpecialEvent Target="PlayerCamera" Wait="0.6" />
@@ -196,12 +196,12 @@
 				</Skill>
 				<Skill Id="RandomMovement">
 					<Setter Target="{This.AnimationId}" Value="Walk" />
-					<MoveAction Id="RandomMovementAction" Target="{Monster}" />
+					<MoveAction Id="RandomMovementAction" Target="{This}" />
 				</Skill>
 				<Skill Id="ScreamingRandomMovement">
 					<Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
 					<Setter Target="{This.AnimationId}" Value="Walk" />
-					<MoveAction Id="RandomMovementAction" Target="{Monster}" />
+					<MoveAction Id="RandomMovementAction" Target="{This}" />
 				</Skill>
 				<!-- When Broken -->
 				<!-- These are also defined as skills, interrupt skills, meaning they will interrupt any currently charged skill -->
@@ -239,12 +239,12 @@
 				</Trigger>
 
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{Monster}" Frequency="2" Value="5" />
+					<RandomCondition Target="{This}" Frequency="2" Value="5" />
 					<Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
 					<Setter Target="{This.ActiveSkill}" Value="RandomMovement|Idle" />
 				</Trigger>
 				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{Monster}" Frequency="1" Value="25" />
+					<RandomCondition Target="{This}" Frequency="1" Value="25" />
 					<Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
 					<Condition Target="{SpiderColumns.ActiveObjects}" Value="\3" />
 					<Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
