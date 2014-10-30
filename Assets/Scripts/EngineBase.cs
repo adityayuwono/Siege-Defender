@@ -124,6 +124,7 @@ namespace Scripts
             IoCContainer.RegisterFor<ItemModel>().TypeOf<Object>().To<Item>();
             IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<Button>();
             IoCContainer.RegisterFor<ProgressBarGUIModel>().TypeOf<Object>().To<ProgressBarGUI>();
+            IoCContainer.RegisterFor<CooldownGUIModel>().TypeOf<Object>().To<CooldownGUI>();
             IoCContainer.RegisterFor<ShooterGUIsModel>().TypeOf<Object>().To<ShooterGUIs>();
             IoCContainer.RegisterFor<ShooterGUIModel>().TypeOf<Object>().To<ShooterGUI>();
 
