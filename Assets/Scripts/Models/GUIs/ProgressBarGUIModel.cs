@@ -1,13 +1,10 @@
-﻿using System.Xml.Serialization;
+﻿using System;
 
 namespace Scripts.Models.GUIs
 {
-    public class ProgressBarGUIModel : BaseGUIModel
+    [Serializable]
+    public class ProgressBarGUIModel : ValueDisplayGUIModel
     {
-        [XmlAttribute]
-        public string Progress { get; set; }
-
-        [XmlAttribute]
-        public string MaxProgress { get; set; }
+        
     }
 }

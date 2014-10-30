@@ -2,7 +2,7 @@
 
 namespace Scripts.Views.GUIs
 {
-    public class ProgressBarGUIView : BaseGUIView
+    public class ProgressBarGUIView : ValueDisplayGUIView
     {
         private readonly ProgressBarGUI _viewModel;
 
@@ -11,30 +11,18 @@ namespace Scripts.Views.GUIs
             _viewModel = viewModel;
         }
 
+        private UIProgressBar _uiProgressBar;
+        
         protected override void OnLoad()
         {
             base.OnLoad();
 
-            _viewModel.ProgressProperty.OnChange += ProgressProperty_OnChange;
-
             _uiProgressBar = GameObject.GetComponent<UIProgressBar>();
         }
 
-        private UIProgressBar _uiProgressBar;
-
-        private void ProgressProperty_OnChange()
+        protected override void UpdateValueDisplay(float value, float maxValue)
         {
-            var value = _viewModel.ProgressProperty.GetValue();
-            var maxValue = _viewModel.MaxProgressProperty.GetValue();
-
-            _uiProgressBar.value = value/maxValue;
-        }
-
-        protected override void OnDestroy()
-        {
-            _viewModel.ProgressProperty.OnChange -= ProgressProperty_OnChange;
-
-            base.OnDestroy();
+            _uiProgressBar.value = value / maxValue;
         }
     }
 }

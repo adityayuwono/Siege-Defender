@@ -1,10 +1,8 @@
-﻿using Scripts.Core;
-using Scripts.Interfaces;
-using Scripts.Models.GUIs;
+﻿using Scripts.Models.GUIs;
 
 namespace Scripts.ViewModels.GUIs
 {
-    public class ProgressBarGUI : BaseGUI
+    public class ProgressBarGUI : ValueDisplayGUI
     {
         private readonly ProgressBarGUIModel _model;
 
@@ -12,16 +10,5 @@ namespace Scripts.ViewModels.GUIs
         {
             _model = model;
         }
-
-        protected override void OnLoad()
-        {
-            base.OnLoad();
-
-            ProgressProperty = GetParent<IContext>().PropertyLookup.GetProperty<float>(_model.Progress);
-            MaxProgressProperty = GetParent<IContext>().PropertyLookup.GetProperty<float>(_model.MaxProgress);
-        }
-
-        public Property<float> ProgressProperty;
-        public Property<float> MaxProgressProperty;
     }
 }
