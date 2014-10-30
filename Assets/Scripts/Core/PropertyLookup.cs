@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
+using Scripts.ViewModels;
 
-namespace Scripts.ViewModels
+namespace Scripts.Core
 {
     public class PropertyLookup
     {
