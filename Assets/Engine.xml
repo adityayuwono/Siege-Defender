@@ -388,6 +388,10 @@
 						<Element AssetId="LoadingCover" IsVisible="{Limbo.IsLoadingInProgress}" />
 
 						<ShooterGUIs AssetId="{Root.OptionsMenu.ControlStyle.ItemId}" >
+							<Elements>
+								<CooldownGUI AssetId="AmmunitionLeft" Value="{ShooterWeaponLeft.Ammunition}" MaxValue="{ShooterWeaponLeft.MaxAmmunition}" />
+								<CooldownGUI AssetId="AmmunitionRight" Value="{ShooterWeaponRight.Ammunition}" MaxValue="{ShooterWeaponRight.MaxAmmunition}" />
+							</Elements>
 							<ShooterGUI ShooterTarget="ShooterWeaponLeft" AssetId="ShootingGUILeft" AimingAssetId="AimingGUILeft" />
 							<ShooterGUI ShooterTarget="ShooterWeaponRight" AssetId="ShootingGUIRight" AimingAssetId="AimingGUIRight" />
 						</ShooterGUIs>
