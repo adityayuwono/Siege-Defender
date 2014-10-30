@@ -4,7 +4,8 @@ namespace Scripts.Views.GUIs
 {
     public class BaseGUIView : ElementView
     {
-        private BaseGUI _viewModel;
+        private readonly BaseGUI _viewModel;
+
         public BaseGUIView(BaseGUI viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;

@@ -1,5 +1,4 @@
-﻿using System;
-using Scripts.Components;
+﻿using Scripts.Components;
 using Scripts.Components.SpecialEvents;
 using Scripts.Helpers;
 using UnityEngine;

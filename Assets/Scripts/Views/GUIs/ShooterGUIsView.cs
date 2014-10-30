@@ -25,16 +25,16 @@ namespace Scripts.Views.GUIs
             _parent = parent;
         }
 
-        private GameObject AimingGameObject;
+        private GameObject _aimingGameObject;
         
         protected override void OnLoad()
         {
             base.OnLoad();
 
-            AimingGameObject = _parent.Transform.FindChildRecursivelyBreadthFirst(_viewModel.AimingAssetId).gameObject;
+            _aimingGameObject = _parent.Transform.FindChildRecursivelyBreadthFirst(_viewModel.AimingAssetId).gameObject;
 
             var targetView = _viewModel.Root.GetView<TargetView>(_viewModel.Shooter.Target);
-            targetView.SetupController(AimingGameObject.GetComponent<UITexture>());
+            targetView.SetupController(_aimingGameObject.GetComponent<UITexture>());
 
             var sourceView = _viewModel.Root.GetView<ShooterView>(_viewModel.Shooter);
             sourceView.SetupController(GameObject.GetComponent<UITexture>());
