@@ -17,7 +17,8 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            Ammunition = new AdjustableProperty<int>("Ammunition", this);
+            Ammunition = new AdjustableProperty<float>("Ammunition", this);
+            MaxAmmunition = new AdjustableProperty<float>("MaxAmmunition", this);
 
             if (_model.ProjectileId == null)
                 throw new EngineException(this, "Projectile Model is null");
@@ -108,6 +109,7 @@ namespace Scripts.ViewModels
         {
             Accuracy = _projectileModel.Accuracy;
             _ammunition = _projectileModel.Ammunition;
+            MaxAmmunition.SetValue(_projectileModel.Ammunition);
             IsReloading.SetValue(false);
         }
 
@@ -119,8 +121,9 @@ namespace Scripts.ViewModels
         }
 
 
-        public readonly AdjustableProperty<int> Ammunition;
-        private int _ammunition
+        public readonly AdjustableProperty<float> Ammunition;
+        public readonly AdjustableProperty<float> MaxAmmunition;
+        private float _ammunition
         {
             get { return Ammunition.GetValue(); }
             set { Ammunition.SetValue(value); }
