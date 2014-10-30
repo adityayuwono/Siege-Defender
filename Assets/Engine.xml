@@ -380,7 +380,7 @@
 
 				<GUIRoot AssetId="UIRoot">
 					<Elements>
-						<ProgressBar AssetId="HealthBar" Progress="{PlayerCamera.Health}" MaxProgress="{PlayerCamera.MaxHealth}" />
+						<ProgressBar AssetId="HealthBar" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
 						<DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
 						<Button AssetId="BackToMainMenu" >
 							<Triggers><EventTrigger Event="Click"><LoadScene Target="MainMenu" /></EventTrigger></Triggers>
