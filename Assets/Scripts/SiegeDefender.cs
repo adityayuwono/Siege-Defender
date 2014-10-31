@@ -56,7 +56,6 @@ namespace Scripts
             IoCContainer.RegisterFor<Button>().TypeOf<BaseView>().To<ButtonView>();
             IoCContainer.RegisterFor<ProgressBarGUI>().TypeOf<BaseView>().To<ProgressBarGUIView>();
             IoCContainer.RegisterFor<CooldownGUI>().TypeOf<BaseView>().To<CooldownGUIView>();
-            IoCContainer.RegisterFor<ShooterGUIs>().TypeOf<BaseView>().To<ShooterGUIsView>();
             IoCContainer.RegisterFor<ShooterGUI>().TypeOf<BaseView>().To<ShooterGUIView>();
 
             IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();

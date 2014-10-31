@@ -26,7 +26,7 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "Button", Type = typeof(ButtonGUIModel))]
         [XmlArrayItem(ElementName = "ProgressBar", Type = typeof(ProgressBarGUIModel))]
         [XmlArrayItem(ElementName = "CooldownGUI", Type = typeof(CooldownGUIModel))]
-        [XmlArrayItem(ElementName = "ShooterGUIs", Type = typeof(ShooterGUIsModel))]
+        [XmlArrayItem(ElementName = "ShooterGUI", Type = typeof(ShooterGUIModel))]
         // Intervals
         [XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
         [XmlArrayItem(ElementName = "ObjectSpawn", Type = typeof(ObjectSpawnModel))]

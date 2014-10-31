@@ -4,16 +4,6 @@ using UnityEngine;
 
 namespace Scripts.Views.GUIs
 {
-    public class ShooterGUIsView : BaseGUIView
-    {
-        private readonly ShooterGUIs _viewModel;
-
-        public ShooterGUIsView(ShooterGUIs viewModel, ObjectView parent) : base(viewModel, parent)
-        {
-            _viewModel = viewModel;
-        }
-    }
-
     public class ShooterGUIView : BaseGUIView
     {
         private readonly ShooterGUI _viewModel;

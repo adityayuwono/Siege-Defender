@@ -125,8 +125,9 @@ namespace Scripts.ViewModels
         {
             get
             {
-                var binding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.AssetId);
-                return binding == null ? _model.AssetId : binding.GetValue();
+                if (_model.AssetId.StartsWith("{"))
+                    return GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.AssetId).GetValue();
+                return _model.AssetId;
             }
         }
 

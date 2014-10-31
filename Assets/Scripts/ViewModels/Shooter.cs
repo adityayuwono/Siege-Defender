@@ -21,9 +21,9 @@ namespace Scripts.ViewModels
             MaxAmmunition = new AdjustableProperty<float>("MaxAmmunition", this);
 
             if (_model.ProjectileId == null)
-                throw new EngineException(this, "Projectile Model is null");
+                throw new EngineException(this, "Failed to find ProjectileId");
             if (_model.Target == null)
-                throw new EngineException(this, "Target Model is null");
+                throw new EngineException(this, "Failed to find Target");
 
             Target = new Target(_model.Target, this);
             Elements.Add(Target);
@@ -57,6 +57,9 @@ namespace Scripts.ViewModels
             base.OnLoad();
 
             _projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<ObjectModel>(_model.ProjectileId);
+            if (_projectileBinding == null)
+                throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", _model.ProjectileId));
+
             _projectileBinding.OnChange += Projectile_OnChange;
             Projectile_OnChange();
             
@@ -80,9 +83,9 @@ namespace Scripts.ViewModels
         public readonly Property<bool> IsReloading = new Property<bool>();
         public Projectile SpawnProjectile()
         {
-            if (_ammunition > 0)
+            if (AmmunitionProperty > 0)
             {
-                _ammunition--;
+                AmmunitionProperty--;
                 var projectile = GetObject<Projectile>(_projectileModel.Id);
                 projectile.Activate(this);
                 projectile.Show();
@@ -108,7 +111,7 @@ namespace Scripts.ViewModels
         private void OnReload()
         {
             Accuracy = _projectileModel.Accuracy;
-            _ammunition = _projectileModel.Ammunition;
+            AmmunitionProperty = _projectileModel.Ammunition;
             MaxAmmunition.SetValue(_projectileModel.Ammunition);
             IsReloading.SetValue(false);
         }
@@ -120,14 +123,15 @@ namespace Scripts.ViewModels
             projectile.Show();
         }
 
-
+        #region Ammunition
         public readonly AdjustableProperty<float> Ammunition;
         public readonly AdjustableProperty<float> MaxAmmunition;
-        private float _ammunition
+        private float AmmunitionProperty
         {
             get { return Ammunition.GetValue(); }
             set { Ammunition.SetValue(value); }
         }
+        #endregion
 
         public readonly Property<bool> IsShooting = new Property<bool>();
         public void StartShooting()
