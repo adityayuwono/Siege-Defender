@@ -65,13 +65,15 @@ namespace Scripts.Views
                     BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
                 }
             }
+
+            _viewModel.InvokeOnSpawn();
         }
 
         private Transform _targetTransform;
 
         private void StartWalkAnimationSubscription()
         {
-            _viewModel.InvokeOnSpawn();
+            _viewModel.InvokeOnWalk();
 
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             _animation.CrossFade("Walk");

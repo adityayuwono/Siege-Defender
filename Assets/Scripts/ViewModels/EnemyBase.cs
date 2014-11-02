@@ -76,13 +76,22 @@ namespace Scripts.ViewModels
         public event Action OnSpawn;
         public void InvokeOnSpawn()
         {
-            if (OnSpawn != null) OnSpawn();
+            if (OnSpawn != null) 
+                OnSpawn();
+        }
+
+        public event Action OnWalk;
+        public void InvokeOnWalk()
+        {
+            if (OnWalk != null) 
+                OnWalk();
         }
         
         public event Action OnAttack;
         public void InvokeOnAttack()
         {
-            if (OnAttack != null) OnAttack();
+            if (OnAttack != null) 
+                OnAttack();
         }
 
         #endregion
