@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -28,6 +29,8 @@ namespace Scripts.ViewModels
             }
 
             _position = UnityExtension.ParseVector3(_model.Position);
+
+            SpecialEffect = new AdjustableProperty<string>("SpecialEffect", this, true);
         }
 
         public RandomPositionManager RandomPositionManager { get; private set; }
@@ -77,6 +80,7 @@ namespace Scripts.ViewModels
                 OnStartSpecialEvent();
         }
 
+        public readonly AdjustableProperty<string> SpecialEffect;
 
         #region Death
 

@@ -16,6 +16,7 @@ namespace Scripts.Models.Actions
         [XmlElement(ElementName = "Setter", Type = typeof(SetterActionModel))]
         [XmlElement(ElementName = "MoveAction", Type = typeof(MoveActionModel))]
         [XmlElement(ElementName = "SpecialEvent", Type = typeof(StartSpecialEventModel))]
+        [XmlElement(ElementName = "SpecialEffect", Type = typeof(SpecialEffectActionModel))]
         public List<BaseActionModel> Actions { get; set; }
 
         [XmlAttribute]
@@ -42,6 +43,7 @@ namespace Scripts.Models.Actions
         Click,
         Break,
         Spawn,
+        Walk,
         Attack,
         GameOver
     }

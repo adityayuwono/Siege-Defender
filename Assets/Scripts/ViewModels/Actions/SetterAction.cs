@@ -15,7 +15,7 @@ namespace Scripts.ViewModels.Actions
         {
             base.Invoke();
 
-            var property = Property;
+            var property = Target;
 
             if (property is Property<string>)
             {

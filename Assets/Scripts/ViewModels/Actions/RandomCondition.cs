@@ -44,7 +44,7 @@ namespace Scripts.ViewModels.Actions
             base.OnDeactivate();
         }
 
-        protected override Property FindProperty()
+        protected override Property FindTarget()
         {
             return _randomizedValue;
         }
@@ -58,7 +58,7 @@ namespace Scripts.ViewModels.Actions
             _randomizedValue.SetValue(randomValue);
         }
 
-        protected override void Property_OnChange()
+        protected override void Target_OnChanged()
         {
             IsMatch.SetValue(_randomizedValue.GetValue() <= _threshold);
             // Immediatelly set to false to allow 2 consecutive Matches when in luck, if there's such a thing in coding

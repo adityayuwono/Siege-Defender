@@ -1,6 +1,8 @@
-﻿using Scripts.Helpers;
+﻿using System;
+using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Views
 {
@@ -15,6 +17,8 @@ namespace Scripts.Views
         private ParticleSystem _particleSystem;
         protected override void OnLoad()
         {
+            _viewModel.UpdateParent += UpdateParent;
+
             base.OnLoad();
 
             _particleSystem = GameObject.GetComponent<ParticleSystem>();
@@ -27,6 +31,16 @@ namespace Scripts.Views
                     particleDuration = particleSystem.startLifetime + particleSystem.duration;
 
             _viewModel.SetDeathDelay(particleDuration);
+        }
+
+        private void UpdateParent(Object o)
+        {
+            var view = _viewModel.Root.GetView<ObjectView>(o);
+            if (view != null)
+            {
+                Transform.parent = view.Transform;
+                Transform.localPosition = Vector3.zero;
+            }
         }
 
         protected override void OnShow()

@@ -1,6 +1,5 @@
 ﻿using System;
 using Scripts.Core;
-using Scripts.Interfaces;
 using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
@@ -17,18 +16,18 @@ namespace Scripts.ViewModels.Actions
         {
             base.OnActivate();
 
-            Property.OnChange += Property_OnChange;
-            Property_OnChange();
+            Target.OnChange += Target_OnChanged;
+            Target_OnChanged();
         }
 
         protected override void OnDeactivate()
         {
-            Property.OnChange -= Property_OnChange;
+            Target.OnChange -= Target_OnChanged;
 
             base.OnDeactivate();
         }
 
-        protected virtual void Property_OnChange()
+        protected virtual void Target_OnChanged()
         {
             throw new NotImplementedException();
         }

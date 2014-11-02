@@ -23,5 +23,11 @@ namespace Scripts.ViewModels
             var specialEffect = GetObject<SpecialEffect>(id);
             specialEffect.ShowSpecialEffect(position);
         }
+
+        public void DisplaySpecialEffect(string id, Object parent)
+        {
+            var specialEffect = GetObject<SpecialEffect>(id);
+            specialEffect.ShowSpecialEffect(parent);
+        }
     }
 }

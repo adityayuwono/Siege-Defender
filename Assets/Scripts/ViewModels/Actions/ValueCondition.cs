@@ -23,7 +23,7 @@ namespace Scripts.ViewModels.Actions
         private readonly char _comparisonSign;
         private readonly string _comparisonValue;
 
-        protected override void Property_OnChange()
+        protected override void Target_OnChanged()
         {
             var isMatch = CompareProperty();
             IsMatch.SetValue(isMatch);
@@ -31,7 +31,7 @@ namespace Scripts.ViewModels.Actions
 
         private bool CompareProperty()
         {
-            var propertyValue = Property.GetValue();
+            var propertyValue = Target.GetValue();
 
             if (propertyValue is double || propertyValue is int || propertyValue is float)
             {
@@ -42,8 +42,8 @@ namespace Scripts.ViewModels.Actions
                 {
                     case '<':return v1 < v2;
                     case '>':return v1 > v2;
-                    case '=':return Property.GetValue().ToString() == _comparisonValue;
-                    case '!':return Property.GetValue().ToString() != _comparisonValue;
+                    case '=':return Target.GetValue().ToString() == _comparisonValue;
+                    case '!':return Target.GetValue().ToString() != _comparisonValue;
                 }
             }
             else if (propertyValue is bool)

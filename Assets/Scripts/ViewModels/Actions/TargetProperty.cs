@@ -17,16 +17,16 @@ namespace Scripts.ViewModels.Actions
                 throw new EngineException(this, string.Format("{0} does not have a Target defined", FullId));
         }
 
-        protected Property Property { get; private set; }
+        protected Property Target { get; private set; }
 
         protected override void OnLoad()
         {
             base.OnLoad();
 
-            Property = FindProperty();
+            Target = FindTarget();
         }
 
-        protected virtual Property FindProperty()
+        protected virtual Property FindTarget()
         {
             var parentContext = GetParent<IContext>();
             if (parentContext == null)
