@@ -14,5 +14,11 @@ namespace Scripts.Models.Enemies
         [XmlArray]
         [XmlArrayItem(ElementName = "Skill", Type = typeof(SkillModel))]
         public List<SkillModel> Skills { get; set; }
+
+        public BossModel()
+        {
+            Limbs = new List<LimbModel>();
+            Skills = new List<SkillModel>();
+        }
     }
 }
