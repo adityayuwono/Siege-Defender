@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using Scripts.Models.Actions;
 
 namespace Scripts.Models.Enemies
 {

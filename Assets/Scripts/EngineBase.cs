@@ -40,8 +40,9 @@ namespace Scripts
             base.OnActivate();
 
             // Cache all scenes on the dictionary
-            foreach (var sceneModel in _model.Scenes)
-                _scenes.Add(sceneModel.Id, new Scene(sceneModel, this));
+            if (_model.Scenes!=null)
+                foreach (var sceneModel in _model.Scenes)
+                    _scenes.Add(sceneModel.Id, new Scene(sceneModel, this));
         }
 
         protected override void OnLoad()

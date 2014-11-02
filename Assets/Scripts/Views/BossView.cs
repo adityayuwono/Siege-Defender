@@ -121,13 +121,13 @@ namespace Scripts.Views
                 rotateDuration = (lookToAngle + Quaternion.Angle(moveTargetPosition.localRotation, _characterTransform.localRotation))/24f/speed;
                 iTween.RotateTo(CharacterRoot, iTween.Hash("rotation", moveTargetPosition, "easetype", easeType, "time", rotateDuration, "delay", walkDuration + lookToDuration));
             }
-
+            
             _viewModel.Root.IntervalRunner.SubscribeToInterval(FinishedWalking, walkDuration + lookToDuration + rotateDuration, false);
         }
         private void InterruptMovement()
         {
-            iTween.Stop(CharacterRoot);
             FinishedWalking();
+            iTween.Stop(CharacterRoot);
         }
 
         private void FinishedWalking()

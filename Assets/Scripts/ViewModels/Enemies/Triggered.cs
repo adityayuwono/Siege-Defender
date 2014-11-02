@@ -124,11 +124,11 @@ namespace Scripts.ViewModels.Enemies
                 }
                     break;
                 case Event.GameOver:
-                    {
-                        var parentButton = _parentObject as Player;
-                        if (parentButton != null)
-                            parentButton.OnGameOver += InvokeEvent;
-                    }
+                {
+                    var parentButton = _parentObject as Player;
+                    if (parentButton != null)
+                        parentButton.OnGameOver += InvokeEvent;
+                }
                     break;
             }
         }

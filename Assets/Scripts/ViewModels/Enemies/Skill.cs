@@ -16,8 +16,7 @@ namespace Scripts.ViewModels.Enemies
         }
 
         private readonly ActionCollection _actions;
-
-        public event Action<Skill> OnSkillActivationFinished;
+        public event Action<Skill> ActivationFinished;
 
         public bool IsQueuedable
         {
@@ -46,15 +45,20 @@ namespace Scripts.ViewModels.Enemies
         {
             Deactivate("Done activating Skill");
 
-            if (OnSkillActivationFinished != null)
-                OnSkillActivationFinished(this);
+            OnActivationFinished();
+        }
+
+        private void OnActivationFinished()
+        {
+            if (ActivationFinished != null)
+                ActivationFinished(this);
         }
 
         protected override void OnDeactivate()
         {
             _actions.OnActivationFinished -= Action_OnActivationFinished;
             _actions.Deactivate();
-
+            
             base.OnDeactivate();
         }
 
@@ -63,7 +67,7 @@ namespace Scripts.ViewModels.Enemies
             var isInterruptSuccessful = _actions.Interrupt(absolute);
             if (isInterruptSuccessful)
             {
-                OnSkillActivationFinished = null;
+                ActivationFinished = null;
                 Action_OnActivationFinished();
             }
             return isInterruptSuccessful;

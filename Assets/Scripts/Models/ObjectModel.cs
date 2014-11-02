@@ -9,7 +9,10 @@ namespace Scripts.Models
     [Serializable]
     public class ObjectModel : TriggerableModel
     {
-        // Not XML Property, this is set when we spawn it
+        /// <summary>
+        /// Grouping Identifier
+        /// Not XML Attribute, this is auto-set from Id when we spawn it
+        /// </summary>
         public string Type;
 
         [XmlArray]
