@@ -20,6 +20,17 @@ namespace Scripts.ViewModels
             Interval.SetValue(_model.Interval);
         }
 
+        public override void Show()
+        {
+            if (_activeObjects.Count > 0)
+                throw new Exception(string.Format("Found active objects while showing {0}", GetType()));
+
+            base.Show();
+
+            // Reset the active objects count
+            ActiveObjects.SetValue(0);
+        }
+
         public override void Hide(string reason)
         {
             Hide(reason, true);
