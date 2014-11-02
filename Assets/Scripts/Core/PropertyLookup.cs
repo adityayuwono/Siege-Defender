@@ -30,6 +30,9 @@ namespace Scripts.Core
 
         private IContext GetContext(string contextId)
         {
+            if (!_contexts.ContainsKey(contextId))
+                throw new EngineException(_context, string.Format("Failed to find context: {0}", contextId));
+
             return _contexts[contextId];
         }
 
