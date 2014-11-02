@@ -274,8 +274,8 @@
 
 		<!-- Special Effects -->
 		<DamageGUI Id="StandardDamageGUI" 		AssetId="GUIs/DamageDisplay" />
-		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
-		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
+		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/M_3D_Guard_01" />
+		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/M_3D_Hit_01" />
 
 		<Object Id="House1" AssetId="Environtments/House1"/>
 		<Object Id="House2" AssetId="Environtments/House2"/>
