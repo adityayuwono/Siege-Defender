@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using Scripts.Models.Actions;
 
@@ -8,6 +9,7 @@ namespace Scripts.Models
     public class LivingObjectModel : ObjectModel
     {
         [XmlAttribute]
+        [DefaultValue(1)]
         public int Health { get; set; }
 
         [XmlElement]
@@ -20,6 +22,7 @@ namespace Scripts.Models
 
         public LivingObjectModel()
         {
+            Health = 1;
             ProjectileLimit = 3;
         }
     }
