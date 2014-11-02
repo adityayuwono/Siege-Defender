@@ -37,5 +37,10 @@ namespace Scripts.ViewModels.Actions
         public Action OnActionFinished;
 
         public bool IsActive { get; private set; }
+
+        public override string Id
+        {
+            get { return base.Id+":"+_model.Target+":"+_model.Value; }
+        }
     }
 }

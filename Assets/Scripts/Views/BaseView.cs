@@ -22,6 +22,11 @@ namespace Scripts.Views
             get { return _viewModel.Id; }
         }
 
+        public string FullId
+        {
+            get { return _viewModel.FullId; }
+        }
+
         protected virtual void OnShow() { }
         protected virtual void OnHide(string reason){ }
         protected virtual void OnDestroy()

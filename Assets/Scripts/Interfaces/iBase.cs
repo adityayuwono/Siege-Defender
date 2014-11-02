@@ -3,5 +3,6 @@
     public interface IBase
     {
         string Id { get; }
+        string FullId { get; }
     }
 }

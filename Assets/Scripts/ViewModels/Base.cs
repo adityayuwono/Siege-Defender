@@ -67,7 +67,7 @@ namespace Scripts.ViewModels
         private string _lastDeactivationReason;
         public void Deactivate(string reason)
         {
-            //UnityEngine.Debug.Log(reason);
+            //UnityEngine.Debug.Log(FullId+":"+reason);
 
             var lastDeactivationReason = _lastDeactivationReason;
             _lastDeactivationReason = reason;
@@ -122,14 +122,19 @@ namespace Scripts.ViewModels
 
         public virtual EngineBase Root { get { return Parent.Root; } }
 
-        public string Id
+        public virtual string Id
         {
             get { return _model.Id; }
         }
 
-        public string FullId
+        public virtual string FullId
         {
             get { return Parent != null ? Parent.FullId +"/"+ Id : Id; }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}:{1}", GetType(), Id);
         }
     }
 }
