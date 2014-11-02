@@ -33,6 +33,12 @@ namespace Scripts.ViewModels
         }
 
         public readonly AdjustableProperty<string> AnimationId;
+        protected override void OnDeactivate()
+        {
+            AnimationId.SetValue("");
+
+            base.OnDeactivate();
+        }
 
         #region Model Properties
 

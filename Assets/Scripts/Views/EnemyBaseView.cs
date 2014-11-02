@@ -19,8 +19,6 @@ namespace Scripts.Views
         {
             base.OnLoad();
 
-            _viewModel.AnimationId.OnChange += Animation_OnChange;
-
             _animator = GetAnimator();
 
             if (_viewModel.Target != null)
@@ -51,8 +49,10 @@ namespace Scripts.Views
             }
 
             // TODO: This is checking for both Legacy and Mecanim, it should not
+            // Mecanim is only used in bosses
             if (_animator != null)
             {
+                _viewModel.AnimationId.OnChange += Animation_OnChange;
                 _animator.SetBool("IsDead", false);
                 BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
             }
@@ -111,7 +111,8 @@ namespace Scripts.Views
 
         protected virtual Animator GetAnimator()
         {
-            return GameObject.GetComponent<Animator>();
+            var animator = GameObject.GetComponent<Animator>();
+            return animator;
         }
         
         private void Walk()
@@ -145,9 +146,7 @@ namespace Scripts.Views
         {
             // We may still be subscribed to this
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
-
             _viewModel.AnimationId.OnChange -= Animation_OnChange;
-            _animator = null;
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
             base.OnDestroy();
@@ -155,10 +154,6 @@ namespace Scripts.Views
 
         private string _lastAnimationValue;
         private void Animation_OnChange()
-        {
-            OnAnimationChanged();
-        }
-        protected virtual void OnAnimationChanged()
         {
             if (!string.IsNullOrEmpty(_lastAnimationValue))
                 _animator.SetBool(_lastAnimationValue, false);

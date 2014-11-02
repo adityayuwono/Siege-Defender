@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Helpers;
 using Scripts.Models.Actions;
+using Scripts.ViewModels.Enemies;
 using UnityEngine;
 
 namespace Scripts.ViewModels.Actions
@@ -26,24 +28,70 @@ namespace Scripts.ViewModels.Actions
                 Add(actionVM);
             }
         }
-
+        
         public void Activate()
         {
             if (_isActionInvoking)
                 return;
+            
+            foreach (var action in this)
+            {
+                if (action.IsActive)
+                    throw new EngineException(_parent, string.Format("Failed to activate, action {0} is still active"));
+            }
 
+            _isInterruptable = false;
             _isActionInvoking = true;
-            _isInterrupted = false;
-            ActivateActions(0);
+            _currentIndex = 0;
+            ActivateActions();
         }
 
+        private int _currentIndex = 0;
+        private BaseAction _currentAction;
         /// <summary>
         /// Activate actions in this collection starting from startIndex
         /// </summary>
         /// <param name="startIndex">The index of action we want to start with</param>
-        private void ActivateActions(int startIndex)
+        private void ActivateActions()
         {
-            _parent.Root.StartCoroutine(ActivateActionAsync(startIndex));
+            // Unsubsribe the interval first
+            _parent.Root.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
+
+            if (_currentIndex < Count)
+            {
+                _currentAction = this[_currentIndex];
+                _isInterruptable = _currentAction.IsInterruptable;
+                _currentIndex++;
+                if (_currentAction is MoveAction)
+                {
+                    // Move action have special treatment, we cannot be sure when it will finish
+                    var moveAction = (MoveAction) _currentAction;
+                    // So we need to wait for the finish event to be invoked from the target
+                    moveAction.OnActionFinished += () =>
+                    {
+                        // If it is a move action we wait until the finish event is invoked, then continue the routine
+                        moveAction.OnActionFinished = null;
+                        // Call the next index
+                        ActivateActions();
+                    };
+                    // Invoke the move action
+                    moveAction.Invoke();
+                }
+                else
+                {
+                    _currentAction.Invoke();
+                    // Edge case where the action is Load Scene Action
+                    if (_currentAction != null)
+                        _parent.Root.IntervalRunner.SubscribeToInterval(ActivateActions, _currentAction.Wait, !(_currentAction.Wait > 0));
+                }
+            }
+            else
+            {
+                DeactivateActions();
+
+                if (OnActivationFinished != null)
+                    OnActivationFinished();
+            }
         }
 
         /// <summary>
@@ -52,57 +100,13 @@ namespace Scripts.ViewModels.Actions
         public event Action OnActivationFinished;
 
         private bool _isInterruptable;
-        /// <summary>
-        /// Activate the Actions in sequence and async, if an action have a wait duration defined, it will wait for that duration before proceeding with the next action
-        /// </summary>
-        private IEnumerator ActivateActionAsync(int startIndex)
-        {
-            for (var i = startIndex; i < Count; i++)
-            {
-                var action = this[i];
-
-                _isInterruptable = action.IsInterruptable;
-
-                if (_isInterrupted)
-                    yield break;
-
-                if (action is MoveAction)
-                {
-                    // Move action have special treatment, we cannot be sure when it will finish
-                    var moveAction = (MoveAction) action;
-                    // So we need to wait for the finish event to be invoked from the target
-                    moveAction.OnActionFinished += () =>
-                    {
-                        // If it is a move action we wait until the finish event is invoked, then continue the routine
-                        moveAction.OnActionFinished = null;
-                        // Call the next index
-                        ActivateActions(i + 1);
-                    };
-                    // Invoke the move action
-                    moveAction.Invoke();
-                    // Break this routine, we no longer need this, as we already queue a new one after the move is finished
-                    yield break;
-                }
-                action.Invoke();
-                // Wait before invoking the next action
-                yield return new WaitForSeconds(action.Wait);
-            }
-
-            DeactivateActions();
-            
-            if (OnActivationFinished != null)
-                OnActivationFinished();
-        }
-
-        private bool _isInterrupted;
         private bool _isActionInvoking;
 
         public bool Interrupt(bool absolute = true)
         {
             if (absolute || _isInterruptable)
             {
-                // Mark as interrupted to stop the very next action from being invoked 
-                _isInterrupted = true;
+                _parent.Root.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
                 OnActivationFinished = null;
                 // Deactivate everything immediately
                 DeactivateActions();
@@ -121,6 +125,12 @@ namespace Scripts.ViewModels.Actions
             // Deactivate only activated actions, this is way easier than checking the index, and have similar result
             foreach (var action in this.Where(action => action.IsActive))
                 action.Deactivate("Done Invoking actions");
+
+            if (_currentAction!=null)
+                _currentAction.OnActionFinished = null;
+            
+            _currentAction = null;
+            _currentIndex = 0;
 
             _isActionInvoking = false;
         }

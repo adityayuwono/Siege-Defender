@@ -11,6 +11,7 @@ namespace Scripts.ViewModels.Enemies
     public class Boss : EnemyBase
     {
         private readonly BossModel _model;
+
         public Boss(BossModel model, Object parent) : base(model, parent)
         {
             _model = model;
@@ -32,6 +33,7 @@ namespace Scripts.ViewModels.Enemies
         #region Skill
 
         public event Action OnInterrupted;
+
         private Skill _currentSkill;
         private string _queuedSkillId;
         private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
@@ -45,8 +47,9 @@ namespace Scripts.ViewModels.Enemies
             var skillSplit = skillIdToActivate.Split('|');// Check for Skill Queue definition, only support 1 at queue for now
             skillIdToActivate = skillSplit[0];// The first value defined is the one we want active now
             
-            if (string.IsNullOrEmpty(skillIdToActivate)) return;// Id is empty, meaning we have just finished activating a skill
-
+            if (string.IsNullOrEmpty(skillIdToActivate))
+                return;// Id is empty, meaning we have just finished activating a skill
+            
             // Display all existing skills when failing to find a skill
             if (!_skills.ContainsKey(skillIdToActivate))
             {
@@ -87,7 +90,7 @@ namespace Scripts.ViewModels.Enemies
 
             // Activate the lucky skill
             _currentSkill = skillToActivate;
-            skillToActivate.OnSkillActivationFinished += Skill_OnActivationFinished;
+            skillToActivate.ActivationFinished += Skill_OnActivationFinished;
             _skillInterruptThreshold = skillToActivate.InterruptThreshold;
             skillToActivate.Activate();
         }
@@ -95,7 +98,7 @@ namespace Scripts.ViewModels.Enemies
         private void Skill_OnActivationFinished(Skill skill)
         {
             _currentSkill = null;
-            skill.OnSkillActivationFinished -= Skill_OnActivationFinished;
+            skill.ActivationFinished -= Skill_OnActivationFinished;
             ActiveSkill.SetValue("");// Set the active skill back to empty, to make sure the next one's OnChange is invoked
 
             // Activate skill in queue, if any
@@ -167,9 +170,16 @@ namespace Scripts.ViewModels.Enemies
         protected override void OnDeactivate()
         {
             if (_currentSkill != null)
-                _currentSkill.Deactivate("Boss is deactivated");
+                _currentSkill.Deactivate(string.Format("Boss is deactivated, so we deactivate '{0}'", _currentSkill.Id));
 
             base.OnDeactivate();
+
+            // Cleanup when deactivating
+            ActiveSkill.SetValue("");
+            if (_currentSkill != null)
+                _currentSkill.ActivationFinished -= Skill_OnActivationFinished;
+            _currentSkill = null;
+            _queuedSkillId = "";
         }
 
 
