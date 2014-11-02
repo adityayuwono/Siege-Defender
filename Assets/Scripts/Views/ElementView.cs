@@ -20,6 +20,7 @@ namespace Scripts.Views
             base.OnLoad();
 
             _viewModel.VisibilityBinding.OnChange += UpdateVisibility;
+            UpdateVisibility();
         }
 
         protected override void OnDestroy()
