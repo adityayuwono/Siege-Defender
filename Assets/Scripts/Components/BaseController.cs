@@ -28,5 +28,10 @@ namespace Scripts.Components
         {
             get { return ViewModel.Id; }
         }
+
+        public string FullId
+        {
+            get { return ViewModel.Id; }
+        }
     }
 }
