@@ -1,4 +1,5 @@
-﻿using Scripts.Models.Actions;
+﻿using System;
+using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
@@ -32,6 +33,8 @@ namespace Scripts.ViewModels.Actions
         {
             get { return _model.IsInterruptable; }
         }
+
+        public Action OnActionFinished;
 
         public bool IsActive { get; private set; }
     }

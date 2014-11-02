@@ -23,7 +23,6 @@ namespace Scripts.ViewModels.Actions
             }
         }
 
-        public Action OnActionFinished;
         private void OnMovementFinished()
         {
             if (OnActionFinished != null)
