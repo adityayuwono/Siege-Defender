@@ -15,7 +15,7 @@
 			Scatters="3" />
 		<Projectile 	Id="ScatterArrow" Damage="1-5" 
 			AssetId="Projectiles/WoodenBalista" 
-			RoF="0.3" Ammunition="100" Reload="1" 
+			RoF="0.3" Ammunition="1000" Reload="1" 
 			SpeedDeviation="300-600"
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
 
@@ -37,7 +37,7 @@
 			Accuracy="0.5" Deviation="0.01" />
 		<Piercing 	Id="IronBall" Damage="50-80" 
 			AssetId="Projectiles/IronBall"
-			RoF="1" Ammunition="3000" Reload="1" 
+			RoF="1" Ammunition="8" Reload="2" 
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
@@ -45,7 +45,7 @@
 		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="2-3" Scatters="1" />
 
 		<!-- Enemies -->
-		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" 	DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
+		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" AttackSpeed="1" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
 			<Triggers>
 				<EventTrigger Event="Attack">
 					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]1" />
@@ -186,8 +186,8 @@
 					<Setter Target="{This.AnimationId}" Value="Slam_Run" />
 					<MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
 					<Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
-					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]5" />
-					<SpecialEvent Target="PlayerCamera" Wait="0.6" />
+					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]4" />
+					<SpecialEvent Target="PlayerCamera" Wait="0.5" />
 					<Triggers>
 						<EventTrigger Event="Interrupt">
 							<Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingCrystalShield" />
@@ -362,7 +362,7 @@
 				
 				<Element Id="Player" AssetId="EnemyTarget" />
 
-				<Player Id="PlayerCamera" AssetId="Player" Health="66" >
+				<Player Id="PlayerCamera" AssetId="Player" Health="15" >
 					<Shooters>
 						<Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.Item}" >
 							<Target AssetId="Target" />
