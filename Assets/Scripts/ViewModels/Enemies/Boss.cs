@@ -119,6 +119,7 @@ namespace Scripts.ViewModels.Enemies
             if (_skillInterruptThreshold > 0)
             {
                 _skillInterruptThreshold -= damage;
+
                 if (_skillInterruptThreshold <= 0)
                 {
                     if (_currentSkill != null)
