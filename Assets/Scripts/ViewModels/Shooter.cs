@@ -120,7 +120,7 @@ namespace Scripts.ViewModels
         {
             var projectile = GetObject<AoE>(aoeModelId);
             projectile.Activate(this);
-            projectile.Show();
+            projectile.Show(position);
         }
 
         #region Ammunition
