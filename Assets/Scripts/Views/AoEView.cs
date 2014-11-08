@@ -24,8 +24,7 @@ namespace Scripts.Views
 
             Transform.localScale = Vector3.one*_viewModel.Radius/2f;
             Transform.parent = null;
-
-            SetPosition();
+            Transform.position = _viewModel.Position;
         }
     }
 }

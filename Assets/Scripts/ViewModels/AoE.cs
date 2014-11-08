@@ -22,8 +22,12 @@ namespace Scripts.ViewModels
             get { return 0.05f; }
         }
 
-        public override void Show()
+        public void Show(Vector3 position)
         {
+            if (_model.IsGrounded)
+                position.y = 0;
+
+            Position = position;
             base.Show();
             Hide("AoEs are hidden immediately");
         }
@@ -31,11 +35,6 @@ namespace Scripts.ViewModels
         public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
         {
             DamageEnemy(targetObject, contactPoint);
-        }
-        
-        public void SetPosition(Vector3 position)
-        {
-            Position = position;
         }
     }
 }

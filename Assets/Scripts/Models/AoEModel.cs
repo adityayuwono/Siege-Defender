@@ -9,6 +9,9 @@ namespace Scripts.Models
         [XmlAttribute]
         public float Radius { get; set; }
 
+        [XmlAttribute]
+        public bool IsGrounded { get; set; }
+
         public AoEModel()
         {
             DeathDelay = 1f;
