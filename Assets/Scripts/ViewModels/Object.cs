@@ -28,9 +28,7 @@ namespace Scripts.ViewModels
                 Elements.Add(elementVM);
             }
 
-            _position = UnityExtension.ParseVector3(_model.Position);
-
-            SpecialEffect = new AdjustableProperty<string>("SpecialEffect", this, true);
+            _position = _model.Position.ParseVector3();
         }
 
         public RandomPositionManager RandomPositionManager { get; private set; }
@@ -79,8 +77,6 @@ namespace Scripts.ViewModels
             if (OnStartSpecialEvent != null)
                 OnStartSpecialEvent();
         }
-
-        public readonly AdjustableProperty<string> SpecialEffect;
 
         #region Death
 

@@ -16,6 +16,8 @@ namespace Scripts.ViewModels.Enemies
 
             Health = new AdjustableProperty<float>("Health", this);
             CollisionEffectNormal = _model.CollisionEffectNormal;
+
+            SpecialEffect = new AdjustableProperty<string>("SpecialEffect", this, true);
         }
 
         protected override void OnActivate()
@@ -72,7 +74,17 @@ namespace Scripts.ViewModels.Enemies
             return true;
         }
 
-        protected virtual void OnKilled() { }
+        protected virtual void OnKilled()
+        {
+            if (!string.IsNullOrEmpty(_model.LootTableId))
+            {
+                var items = Root.GetLoot(_model.LootTableId);
+                if (items != null)
+                {
+                    SpecialEffect.SetValue("ItemDrop");
+                }
+            }
+        }
 
         private void AttachProjectile(ProjectileBase source)
         {
@@ -91,6 +103,7 @@ namespace Scripts.ViewModels.Enemies
             DoAttach(source);
         }
 
+        public readonly AdjustableProperty<string> SpecialEffect;
         public Action<ProjectileBase> DoAttach;
         private readonly List<ProjectileBase> _attachedProjectiles = new List<ProjectileBase>();
         public readonly AdjustableProperty<float> Health;

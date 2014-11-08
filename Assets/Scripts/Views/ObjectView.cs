@@ -43,14 +43,7 @@ namespace Scripts.Views
             
             GameObject.SetActive(true);
 
-            _viewModel.SpecialEffect.OnChange += SpecialEffect_OnChange;
-            
             SetPosition();
-        }
-
-        private void SpecialEffect_OnChange()
-        {
-            _viewModel.Root.SpecialEffectManager.DisplaySpecialEffect(_viewModel.SpecialEffect.GetValue(), _viewModel);
         }
 
         private void Object_OnStartSpecialEvent()
@@ -62,8 +55,6 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
-            _viewModel.SpecialEffect.OnChange -= SpecialEffect_OnChange;
-
             base.OnHide(reason);
             KillGameObject(reason);
         }

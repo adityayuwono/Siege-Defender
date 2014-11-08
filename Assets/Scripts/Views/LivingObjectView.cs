@@ -41,12 +41,32 @@ namespace Scripts.Views
             }
         }
 
+        protected override void OnShow()
+        {
+            base.OnShow();
+
+            _viewModel.SpecialEffect.OnChange += SpecialEffect_OnChange;
+        }
+
+        protected override void OnHide(string reason)
+        {
+            _viewModel.SpecialEffect.OnChange -= SpecialEffect_OnChange;
+
+            base.OnHide(reason);
+        }
+
         protected override void OnDestroy()
         {
             _viewModel.DoAttach -= AttachProjectileToSelf;
 
             base.OnDestroy();
         }
+
+        private void SpecialEffect_OnChange()
+        {
+            _viewModel.Root.SpecialEffectManager.DisplaySpecialEffect(_viewModel.SpecialEffect.GetValue(), _viewModel);
+        }
+
 
         private readonly List<Transform> _projectileRooTransform = new List<Transform>();
         private void AttachProjectileToSelf(ProjectileBase projectile)
