@@ -19,6 +19,18 @@
 			SpeedDeviation="300-600"
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
 
+		<Projectile 	Id="Ascalon" Damage="0-20" 
+			AssetId="Projectiles/Ascalon" AoEId="AscalonExplosion"
+			RoF="0.125" Ammunition="9" Reload="0.1" 
+			SpeedDeviation="300-600"
+			Accuracy="0.75" Deviation="0" Scatters="3" />
+
+		<Projectile 	Id="SkySplitter" Damage="0-99" 
+			AssetId="Projectiles/SkySplitter" AoEId="LightningStrike"
+			RoF="0.6" Ammunition="99" Reload="2" 
+			SpeedDeviation="500-500"
+			Accuracy="1" Deviation="0" Scatters="1" />
+
 		<Projectile 	Id="IronArrow" Damage="10-30" 
 			AssetId="Projectiles/IronBalista" 
 			RoF="0.25" Ammunition="500" Reload="0.2" 
@@ -29,24 +41,29 @@
 			AssetId="Projectiles/FireBall" AoEId="FireDome" 
 			RoF="0.5" Ammunition="25" Reload="2" 
 			Scatters="1"
-			Accuracy="0.9" Deviation="0.001" />
+			Accuracy="0.9" Deviation="0.001" >
+		</Projectile>
 		<Projectile 	Id="ExplosiveFireBall" Damage="4-7" 
-			AssetId="Projectiles/FireBall" AoEId="Explosion"
+			AssetId="Projectiles/FireBall" AoEId="FireDome"
 			RoF="0.2" Ammunition="2500" Reload="0" 
 			Scatters="1"
 			Accuracy="0.5" Deviation="0.01" />
-		<Piercing 	Id="IronBall" Damage="50-80" 
+		<Piercing 		Id="IronBall" Damage="50-80" 
 			AssetId="Projectiles/IronBall"
 			RoF="1" Ammunition="8" Reload="2" 
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
-		<AoE 			Id="FireDome" AssetId="Projectiles/AoE" Radius="20" Damage="4-7" Scatters="1" />
-		<ParticleAoE 	Id="Explosion" AssetId="Projectiles/Explosion" Radius="20" Damage="2-3" Scatters="1" />
+		<ParticleAoE 	Id="FireDome" AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" Damage="4-7" Scatters="1" />
+		<ParticleAoE 	Id="AscalonExplosion" AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" Damage="0-5" />
+		<ParticleAoE 	Id="LightningStrike" AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="3" Damage="0-99" IsGrounded="true" />
 
 		<!-- Enemies -->
-		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" AttackSpeed="1" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
+		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
 			<Triggers>
+				<EventTrigger Event="Spawn">
+					<SpecialEffect Value="MagicCircle" />
+				</EventTrigger>
 				<EventTrigger Event="Attack">
 					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]1" />
 				</EventTrigger>
@@ -57,7 +74,7 @@
 			<Elements>
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
 			</Elements>
-			<Triggers>
+			<Triggers>				
 				<Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
 					<RandomCondition Target="{This}" Frequency="4" Value="50" /> <!-- Percentage -->
 					<Condition Target="{SpiderSpawn.ActiveObjects}" Value="\1" />
@@ -65,7 +82,7 @@
 				</Trigger>
 			</Triggers>
 		</Enemy>
-		<Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	Health="150"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+		<Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	Health="150"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" LootTableId="BasicLoot" >
 			<Elements>
 				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
 			</Elements>
@@ -83,8 +100,7 @@
 					CollisionEffectNormal="StoneBreak" >
 					<Triggers>
 						<EventTrigger Event="Break" >
-							<Drop Target="Wood" Amount="3-10" />
-							<Setter Target="{This.ActiveSkill}" Value="HeadBroken|ScreamingRandomMovement" />
+							<Setter Target="{This.ActiveSkill}" Value="HeadBroken|Slam" />
 						</EventTrigger>
 					</Triggers>
 				</Limb>
@@ -93,7 +109,6 @@
 					CollisionEffectBroken="StoneBreak" > 
 					<Triggers>
 						<EventTrigger Event="Break" >							
-							<Drop Target="LightWood" Amount="1-6" />
 							<Setter Target="{This.ActiveSkill}" Value="RightHandBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
@@ -103,7 +118,6 @@
 					CollisionEffectBroken="StoneBreak" >
 					<Triggers>
 						<EventTrigger Event="Break" >
-							<Drop Target="LightWood" Amount="1-6" />
 							<Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
@@ -111,27 +125,16 @@
 				<Limb Id="RightLeg" 	Health="500" 	AssetId="RightLeg" 		DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Triggers>
-						<EventTrigger Event="Break" >
-							<Drop Target="LightWood" Amount="1-6" />
-						</EventTrigger>
-					</Triggers>
 				</Limb>
 				<Limb Id="LeftLeg" 		Health="500" 	AssetId="LeftLeg" 		DamageMultiplier="0.75" 
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Triggers>
-						<EventTrigger Event="Break" >
-							<Drop Target="LightWood" Amount="1-6" />
-						</EventTrigger>
-					</Triggers>
 				</Limb>
 				<Limb Id="RightFoot" 	Health="750" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
 					<Triggers>
 						<EventTrigger Event="Break" >
-							<Drop Target="LightWood" Amount="1-6" />
 							<Setter Target="{This.ActiveSkill}" Value="RightFootBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
@@ -141,7 +144,6 @@
 					CollisionEffectBroken="StoneBreak" >
 					<Triggers>
 						<EventTrigger Event="Break" >
-							<Drop Target="LightWood" Amount="1-6" />
 							<Setter Target="{This.ActiveSkill}" Value="LeftFootBroken|ScreamingRandomMovement" />
 						</EventTrigger>
 					</Triggers>
@@ -150,7 +152,6 @@
 					CollisionEffectNormal="CrystalBreak_Small" >
 					<Triggers>
 						<EventTrigger Event="Break" >
-							<Drop Target="LightWood" Amount="1-6" />
 							<Setter Target="{This.ActiveSkill}" Value="CrystalBroken|RandomMovement" />
 						</EventTrigger>
 					</Triggers>
@@ -180,8 +181,9 @@
 					<Setter Target="{SpiderColumns.Level}" Value="SpawnSpiderColumn" Wait="2" />
 					<Setter Target="{This.AnimationId}" Value="Idle" />
 				</Skill>
-				<Skill Id="Slam" InterruptThreshold="200" >
-					<Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2.1" />
+				<Skill Id="Slam" InterruptThreshold="500" >
+					<SpecialEffect Target="{LeftHand.SpecialEffect}" Value="ChargingSlam" />
+					<Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2.1" IsInterruptable="true"/>
 					<Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
 					<Setter Target="{This.AnimationId}" Value="Slam_Run" />
 					<MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
@@ -274,8 +276,12 @@
 
 		<!-- Special Effects -->
 		<DamageGUI Id="StandardDamageGUI" 		AssetId="GUIs/DamageDisplay" />
-		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/M_3D_Guard_01" />
-		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/M_3D_Hit_01" />
+		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
+		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
+		<SpecialEffect Id="MagicCircle" 		AssetId="SpecialEffects/M_3D_MagicCircle_03" />
+		<SpecialEffect Id="ChargingSlam" 		AssetId="SpecialEffects/M_3D_Charge_02" />
+		<SpecialEffect Id="HitSlam" 			AssetId="SpecialEffects/M_3D_CriticalHit_01" />
+		<SpecialEffect Id="ItemDrop" 			AssetId="SpecialEffects/M_3D_ItemDrop_01" />
 
 		<Object Id="House1" AssetId="Environtments/House1"/>
 		<Object Id="House2" AssetId="Environtments/House2"/>
@@ -292,12 +298,13 @@
 			<Cache EnemyId="SpiderColumn" Count="5" />
 			<Cache EnemyId="CrystalShield" />
 
+			<Spawn EnemyId="CrystalSpider" />
 			<Spawn EnemyId="ZombieAbomination" />
 		</Level>
 		<SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
 			<Spawn EnemyId="CrystalShield" />
 		</SubLevel>
-		<SubLevel Id="SpiderColumnSwarm" Interval="15" LoopCount="-1">
+		<SubLevel Id="SpiderColumnSwarm" Interval="15" LoopCount="10">
 			<Spawn EnemyId="StrongSpiderColumn" />
 		</SubLevel>
 		<SubLevel Id="SpawnSpiderColumn" Interval="0.1" LoopCount="0">
@@ -317,6 +324,20 @@
 			<Spawn EnemyId="House3"/>
 		</SubLevel>
 	</Levels>
+
+	<Items>
+		<Item Id="Iron" AssetId="Iron" />
+		<Item Id="Aluminum" AssetId="Aluminum" />
+		<Item Id="Copper" AssetId="Copper" />
+	</Items>
+
+	<LootTables>
+		<LootTable Id="BasicLoot" Drops="1">
+			<Loot ItemId="Iron" Chance="5" />
+			<Loot ItemId="Aluminum" Chance="25" />
+			<Loot ItemId="Copper" Chance="60" />
+		</LootTable>
+	</LootTables>
 
 	<Scenes>
 		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
