@@ -28,10 +28,14 @@ namespace Scripts.Core
             _contexts.Add(context.Id, context);
         }
 
-        private IContext GetContext(string contextId)
+        public IContext GetContext(string contextId)
         {
+            if (contextId == "{This}") return _context;
+
+            contextId = contextId.Replace("{", "").Replace("}", "");
+
             if (!_contexts.ContainsKey(contextId))
-                throw new EngineException(_context, string.Format("Failed to find context: {0}", contextId));
+                throw new EngineException(_context, string.Format("Failed to find context: {0} in {1}", contextId, _context.Id));
 
             return _contexts[contextId];
         }
