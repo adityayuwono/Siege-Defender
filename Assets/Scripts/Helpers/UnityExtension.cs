@@ -41,7 +41,7 @@ namespace Scripts.Helpers
             return null;
         }
 
-        public static Vector3 ParseVector3(string string3)
+        public static Vector3 ParseVector3(this string string3)
         {
             var splitted = string3.Split(',');
             var splitFloat = new float[splitted.Length];
