@@ -28,6 +28,8 @@ namespace Scripts.ViewModels.Enemies
         public event Action OnBreak;
         protected override void OnKilled()
         {
+            base.OnKilled();
+
             if (OnBreak != null)
                 OnBreak();
 
