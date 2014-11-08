@@ -1,5 +1,8 @@
-﻿using Scripts.ViewModels;
+﻿using System;
+using Scripts.Helpers;
+using Scripts.ViewModels;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scripts.Views
 {
@@ -66,14 +69,14 @@ namespace Scripts.Views
                 }
             }
 
-            _viewModel.InvokeOnSpawn();
+            _viewModel.OnSpawn();
         }
 
         private Transform _targetTransform;
 
         private void StartWalkAnimationSubscription()
         {
-            _viewModel.InvokeOnWalk();
+            _viewModel.OnWalk();
 
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             _animation.CrossFade("Walk");
@@ -107,8 +110,11 @@ namespace Scripts.Views
 
         private void AttackAnimation()
         {
+            if (_animation == null)
+                throw new EngineException(this, string.Format("Failed to find Animation in {0}", Id));
+
             _animation.Play("Attack");
-            _viewModel.InvokeOnAttack();
+            _viewModel.OnAttack();
         }
 
         protected virtual Animator GetAnimator()
@@ -126,10 +132,7 @@ namespace Scripts.Views
         {
             // We may still be subscribed to these
             iTween.Stop(GameObject);
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(AttackAnimation);
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
+            UnsubscribeEverything();
 
             // Start the death animation, if any
             if (_animator != null)
@@ -147,11 +150,18 @@ namespace Scripts.Views
         protected override void OnDestroy()
         {
             // We may still be subscribed to this
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
+            UnsubscribeEverything();
             _viewModel.AnimationId.OnChange -= Animation_OnChange;
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
 
             base.OnDestroy();
+        }
+
+        private void UnsubscribeEverything()
+        {
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
+            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(AttackAnimation);
         }
 
         private string _lastAnimationValue;

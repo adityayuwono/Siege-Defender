@@ -29,6 +29,8 @@ namespace Scripts.ViewModels
 
         protected override void OnKilled()
         {
+            base.OnKilled();
+
             Hide("Killed");// Start the hiding process when the enemy is killed
         }
 
@@ -63,35 +65,34 @@ namespace Scripts.ViewModels
                 return _propertyLookup;
             }
         }
+        private PropertyLookup _propertyLookup;
 
         public float AttackSpeed
         {
             get { return _model.AttackSpeed; }
         }
 
-        private PropertyLookup _propertyLookup;
-
         #region Events
 
-        public event Action OnSpawn;
-        public void InvokeOnSpawn()
+        public event Action Spawn;
+        public void OnSpawn()
         {
-            if (OnSpawn != null) 
-                OnSpawn();
+            if (Spawn != null) 
+                Spawn();
         }
 
-        public event Action OnWalk;
-        public void InvokeOnWalk()
+        public event Action Walk;
+        public void OnWalk()
         {
-            if (OnWalk != null) 
-                OnWalk();
+            if (Walk != null) 
+                Walk();
         }
         
-        public event Action OnAttack;
-        public void InvokeOnAttack()
+        public event Action Attack;
+        public void OnAttack()
         {
-            if (OnAttack != null) 
-                OnAttack();
+            if (Attack != null) 
+                Attack();
         }
 
         #endregion
