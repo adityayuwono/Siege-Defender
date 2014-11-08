@@ -39,12 +39,17 @@ namespace Scripts.Models.Actions
     public enum Event
     {
         None,
-        Interrupt,
         Click,
+
+        Interrupt,
         Break,
+        
         Spawn,
         Walk,
         Attack,
+        
+        Hit,
+
         GameOver
     }
 }

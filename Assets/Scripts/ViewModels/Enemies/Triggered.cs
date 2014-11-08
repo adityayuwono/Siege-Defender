@@ -113,15 +113,29 @@ namespace Scripts.ViewModels.Enemies
                 {
                     var parentButton = _parentObject as EnemyBase;
                     if (parentButton != null)
-                        parentButton.OnSpawn += InvokeEvent;
+                        parentButton.Spawn += InvokeEvent;
                 }
                     break;
                 case Event.Attack:
                 {
                     var parentButton = _parentObject as EnemyBase;
                     if (parentButton != null)
-                        parentButton.OnAttack += InvokeEvent;
+                        parentButton.Attack += InvokeEvent;
                 }
+                    break;
+                case Event.Walk:
+                    {
+                        var parentButton = _parentObject as EnemyBase;
+                        if (parentButton != null)
+                            parentButton.Walk += InvokeEvent;
+                    }
+                    break;
+                case Event.Hit:
+                    {
+                        var parentButton = _parentObject as Projectile;
+                        if (parentButton != null)
+                            parentButton.Hit += InvokeEvent;
+                    }
                     break;
                 case Event.GameOver:
                 {
@@ -167,15 +181,29 @@ namespace Scripts.ViewModels.Enemies
                 {
                     var parentButton = _parentObject as EnemyBase;
                     if (parentButton != null)
-                        parentButton.OnSpawn -= InvokeEvent;
+                        parentButton.Spawn -= InvokeEvent;
                 }
                     break;
                 case Event.Attack:
                 {
                     var parentButton = _parentObject as EnemyBase;
                     if (parentButton != null)
-                        parentButton.OnAttack -= InvokeEvent;
+                        parentButton.Attack -= InvokeEvent;
                 }
+                    break;
+                case Event.Walk:
+                    {
+                        var parentButton = _parentObject as EnemyBase;
+                        if (parentButton != null)
+                            parentButton.Walk -= InvokeEvent;
+                    }
+                    break;
+                case Event.Hit:
+                    {
+                        var parentButton = _parentObject as Projectile;
+                        if (parentButton != null)
+                            parentButton.Hit -= InvokeEvent;
+                    }
                     break;
                 case Event.GameOver:
                     {

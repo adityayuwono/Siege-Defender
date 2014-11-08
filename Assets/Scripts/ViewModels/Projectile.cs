@@ -73,7 +73,9 @@ namespace Scripts.ViewModels
             // Spawn AoE if there are any Id defined
             if (!string.IsNullOrEmpty(_model.AoEId))
                 GetParent<Shooter>().SpawnAoE(_model.AoEId, collisionPosition);
-
+            
+            OnHit();
+            
             if (!DamageEnemy(targetObject, collisionPosition, true))
             {
                 Hide("Hit Nothing");// If we don't hit an enemy, hide the projectile
@@ -83,6 +85,13 @@ namespace Scripts.ViewModels
         public float Accuracy
         {
             get { return 1-_model.Accuracy; }
+        }
+
+        public event Action Hit;
+
+        private void OnHit()
+        {
+            if (Hit != null) Hit();
         }
 
         public bool IsRotationRandomized
