@@ -52,6 +52,23 @@ namespace Scripts
             // Keep reference of every ObjectModel in a Dictionary for faster lookup
             foreach (var objectModel in _model.Objects)
                 _objectModels.Add(objectModel.Id, objectModel);
+
+            foreach (var objectModel in _model.Items)
+                _items.Add(objectModel.Id, objectModel);
+
+            // Register all Loot Tables
+            foreach (var lootTableModel in _model.LootTables)
+            {
+                var id = lootTableModel.Id;
+                
+                if (string.IsNullOrEmpty(id))
+                    throw new EngineException(this, "Failed to register <LootTable>, <LootTable> need id");
+
+                if (_lootTables.ContainsKey(id))
+                    throw new EngineException(this, string.Format("Duplicate <LootTable> id: {0}", id));
+
+                _lootTables.Add(id, new LootTable(lootTableModel, this));
+            }
         }
 
         #region View Lookup Pool
@@ -100,6 +117,24 @@ namespace Scripts
 
             throw new EngineException(this, string.Format("ObjectModel not found, Id: {0}", id));
         }
+        #endregion
+
+        #region Loot Table
+        private readonly Dictionary<string, LootTable> _lootTables = new Dictionary<string, LootTable>();
+        public List<Item> GetLoot(string lootTableId)
+        {
+            if (_lootTables.ContainsKey(lootTableId))
+                return _lootTables[lootTableId].GetLoot();
+
+            throw new EngineException(this, string.Format("There's no loot table with id: {0}", lootTableId));
+        }
+        private readonly Dictionary<string, ItemModel> _items = new Dictionary<string, ItemModel>(); 
+        #region Items
+        public ItemModel GetItemModel(string itemId)
+        {
+            return Copier.CopyAs<ItemModel>(_items[itemId]);
+        }
+        #endregion
         #endregion
 
         public virtual void MapInjections()
@@ -223,8 +258,10 @@ namespace Scripts
 
         #endregion
 
+        #region Scenes
         private Scene _currentScene;
         private readonly Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
+
         public Scene ChangeScene(string sceneId, string levelId = "")
         {
             // Deactivate Current Active Scene, to avoid space time continuum
@@ -238,5 +275,6 @@ namespace Scripts
 
             return _currentScene;
         }
+        #endregion
     }
 }

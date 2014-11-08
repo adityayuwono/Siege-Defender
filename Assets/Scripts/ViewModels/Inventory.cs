@@ -65,7 +65,7 @@ namespace Scripts.ViewModels
     {
         private readonly ItemModel _model;
         public ItemModel Model{get { return _model; }}
-        public Item(ItemModel model, Object parent) : base(model, parent)
+        public Item(ItemModel model, Base parent) : base(model, parent)
         {
             _model = model;
         }

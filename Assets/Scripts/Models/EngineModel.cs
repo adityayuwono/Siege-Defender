@@ -29,9 +29,18 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "Scene", Type = typeof(SceneModel))]
         public List<SceneModel> Scenes { get; set; }
 
+        [XmlArray]
+        [XmlArrayItem(ElementName = "LootTable", Type = typeof(LootTableModel))]
+        public List<LootTableModel> LootTables { get; set; }
+
+        [XmlArray]
+        [XmlArrayItem(ElementName = "Item", Type = typeof(ItemModel))]
+        public List<ItemModel> Items { get; set; }
+
         public EngineModel()
         {
             Objects = new List<ObjectModel>();
+            LootTables = new List<LootTableModel>();
         }
     }
 }

@@ -16,6 +16,11 @@ namespace Scripts.Models
         public TriggeredModel Trigger { get; set; }
 
         [XmlAttribute]
+        [DefaultValue("")]
+        public string LootTableId { get; set; }
+
+        [XmlAttribute]
+        [DefaultValue("")]
         public string CollisionEffectNormal { get; set; }
 
         public int ProjectileLimit { get; protected set; }
