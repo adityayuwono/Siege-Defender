@@ -10,10 +10,6 @@ namespace Scripts
     /// </summary>
     public class XMLInitializer : MonoBehaviour
     {
-        /// <summary>
-        /// Default Engine this is a fresh game
-        /// </summary>
-        public TextAsset EngineTextAsset;
         public TextAsset DefaultPlayerSettings;
 
 
@@ -58,7 +54,7 @@ namespace Scripts
 
         private string LoadFile(string path, string defaultIfNotFound)
         {
-            var file = "";
+            string file;
 
             try
             {
