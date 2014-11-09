@@ -14,3 +14,5 @@ Library/*
 *.DotSettings
 *.unitypackage
 *Inventory.xml
+Assets/Filename.xml
+Assets/Filename.xml.meta

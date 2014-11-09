@@ -16,7 +16,7 @@ namespace Scripts.Helpers
 
         public static class Defaults
         {
-            public const string PLAYER_PROGRESS_FILE_NAME = "/PlayerSettings.xml";
+            public const string PLAYER_PROGRESS_FILE_NAME = "PlayerSettings.xml";
 
             public const string BOSS_CHARACTER_ROOT_TAG = "Character";
             public const string WAYPOINT_TRANSFORM_TAG = "Waypoint";
@@ -30,9 +30,11 @@ namespace Scripts.Helpers
             get
             {
 #if UNITY_ANDROID
-                return Application.persistentDataPath;
+                return Application.persistentDataPath+"/";
+#elif UNITY_STANDALONE_WIN
+                return "";
 #else
-                return "file://" + Application.dataPath;
+                return "file://" + Application.dataPath + "/"; ;
 #endif
             }
         }
@@ -42,9 +44,11 @@ namespace Scripts.Helpers
             get
             {
 #if UNITY_ANDROID
-                return Application.persistentDataPath;
+                return Application.persistentDataPath+"/";
+#elif UNITY_STANDALONE_WIN
+                return "";
 #else
-                return Application.dataPath;
+                return Application.dataPath+"/";
 #endif
             }
         }
