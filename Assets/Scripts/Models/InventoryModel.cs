@@ -44,11 +44,6 @@ namespace Scripts.Models
     {
         [XmlElement]
         public ProjectileOverrides Overrides { get; set; }
-
-        public ProjectileItemModel()
-        {
-            Overrides = new ProjectileOverrides();
-        }
     }
 
     [Serializable]

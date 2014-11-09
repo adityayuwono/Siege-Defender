@@ -22,7 +22,7 @@ namespace Scripts.ViewModels
             // Instantiate children elements
             foreach (var elementModel in _model.Elements)
             {
-                var elementVM = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] { elementModel, this });
+                var elementVM = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
                 if (elementVM == null)
                     throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
                 Elements.Add(elementVM);

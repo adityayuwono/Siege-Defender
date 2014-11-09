@@ -17,7 +17,7 @@ namespace Scripts.ViewModels.Actions
                 throw new EngineException(this, string.Format("{0} does not have a Target defined", FullId));
         }
 
-        protected Property Target { get; private set; }
+        protected object Target { get; private set; }
 
         protected override void OnLoad()
         {
@@ -26,13 +26,21 @@ namespace Scripts.ViewModels.Actions
             Target = FindTarget();
         }
 
-        protected virtual Property FindTarget()
+        protected virtual object FindTarget()
         {
             var parentContext = GetParent<IContext>();
             if (parentContext == null)
                 throw new EngineException(this, "Failed to find parent Context");
             
-            return parentContext.PropertyLookup.GetProperty(_model.Target.Replace("This", parentContext.Id));
+            var property = parentContext.PropertyLookup.GetProperty(_model.Target.Replace("This", parentContext.Id));
+            if (property != null)
+                return property;
+
+            var context = parentContext.PropertyLookup.GetContext(_model.Target);
+            if (context != null)
+                return context;
+
+            throw new EngineException(this, string.Format("Failed to find Target: {0}", _model.Target));
         }
     }
 }

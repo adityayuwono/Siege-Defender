@@ -14,7 +14,7 @@ namespace Scripts.ViewModels
 
             foreach (var triggeredModel in _model.Triggers)
             {
-                var triggered = Root.IoCContainer.GetInstance<Triggered>(triggeredModel.GetType(), new object[] { triggeredModel, this });
+                var triggered = Root.IoCContainer.GetInstance<Triggered>(triggeredModel.GetType(), new object[] {triggeredModel, this});
                 _triggers.Add(triggered);
             }
         }

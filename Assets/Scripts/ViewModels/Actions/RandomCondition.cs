@@ -44,7 +44,7 @@ namespace Scripts.ViewModels.Actions
             base.OnDeactivate();
         }
 
-        protected override Property FindTarget()
+        protected override object FindTarget()
         {
             return _randomizedValue;
         }

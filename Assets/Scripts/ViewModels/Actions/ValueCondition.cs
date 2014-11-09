@@ -1,4 +1,6 @@
-﻿using Scripts.Models.Actions;
+﻿using Scripts.Core;
+using Scripts.Helpers;
+using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
@@ -31,7 +33,11 @@ namespace Scripts.ViewModels.Actions
 
         private bool CompareProperty()
         {
-            var propertyValue = Target.GetValue();
+            var target = Target as Property;
+            if (target == null)
+                throw new EngineException(this, string.Format("Failed to find Property: {0}", _model.Target));
+
+            var propertyValue = target.GetValue();
 
             if (propertyValue is double || propertyValue is int || propertyValue is float)
             {
@@ -42,8 +48,8 @@ namespace Scripts.ViewModels.Actions
                 {
                     case '<':return v1 < v2;
                     case '>':return v1 > v2;
-                    case '=':return Target.GetValue().ToString() == _comparisonValue;
-                    case '!':return Target.GetValue().ToString() != _comparisonValue;
+                    case '=':return target.GetValue().ToString() == _comparisonValue;
+                    case '!':return target.GetValue().ToString() != _comparisonValue;
                 }
             }
             else if (propertyValue is bool)

@@ -1,426 +1,453 @@
 <Engine Id="SiegeDefender">
-	<Objects>
-		<Projectile 	Id="WoodArrow" Damage="8-12" 
-			AssetId="Projectiles/WoodenBalista" 
-			RoF="0.2" Ammunition="1000" Reload="1" 
+  <Objects>
+    <Projectile 	Id="WoodArrow" Damage="8-12"
+			AssetId="Projectiles/WoodenBalista"
+			RoF="0.2" Ammunition="1000" Reload="1"
 			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" />
-		<Projectile 	Id="Rock" Damage="0-6" 
-			AssetId="Projectiles/Rock" 
-			RoF="0.1" Ammunition="10000" Reload="0.5" 
-			Accuracy="0.65" Deviation="0.001" 
+    <Projectile 	Id="Rock" Damage="0-6"
+			AssetId="Projectiles/Rock"
+			RoF="0.1" Ammunition="10000" Reload="0.5"
+			Accuracy="0.65" Deviation="0.001"
 			SpeedDeviation="500-1500"
 			IsRotationRandomized="true"
 			DeathDelay="0.5"
 			Scatters="3" />
-		<Projectile 	Id="ScatterArrow" Damage="1-5" 
-			AssetId="Projectiles/WoodenBalista" 
-			RoF="0.3" Ammunition="1000" Reload="1" 
+    <Projectile 	Id="ScatterArrow" Damage="1-5"
+			AssetId="Projectiles/WoodenBalista"
+			RoF="0.3" Ammunition="1000" Reload="1"
 			SpeedDeviation="300-600"
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
-
-		<Projectile 	Id="Ascalon" Damage="0-20" 
-			AssetId="Projectiles/Ascalon" AoEId="AscalonExplosion"
-			RoF="0.125" Ammunition="9" Reload="0.1" 
-			SpeedDeviation="300-600"
-			Accuracy="0.75" Deviation="0" Scatters="3" />
-
-		<Projectile 	Id="SkySplitter" Damage="0-99" 
-			AssetId="Projectiles/SkySplitter" AoEId="LightningStrike"
-			RoF="0.6" Ammunition="99" Reload="2" 
-			SpeedDeviation="500-500"
-			Accuracy="1" Deviation="0" Scatters="1" />
-
-		<Projectile 	Id="IronArrow" Damage="10-30" 
-			AssetId="Projectiles/IronBalista" 
-			RoF="0.25" Ammunition="500" Reload="0.2" 
-			Scatters="1"
-			Accuracy="0.7" Deviation="0.005" />
-
-		<Projectile 	Id="FireBall" Damage="8-11" 
-			AssetId="Projectiles/FireBall" AoEId="FireDome" 
-			RoF="0.5" Ammunition="25" Reload="2" 
+    <Projectile 	Id="IronArrow" Damage="10-30"
+      AssetId="Projectiles/IronBalista"
+      RoF="0.25" Ammunition="500" Reload="0.2"
+      Scatters="1"
+      Accuracy="0.7" Deviation="0.005" />
+    <Projectile 	Id="FireBall" Damage="8-11"
+			AssetId="Projectiles/FireBall" AoEId="FireDome"
+			RoF="0.5" Ammunition="25" Reload="2"
 			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" >
-		</Projectile>
-		<Projectile 	Id="ExplosiveFireBall" Damage="4-7" 
+    </Projectile>
+    <Projectile 	Id="ExplosiveFireBall" Damage="4-7"
 			AssetId="Projectiles/FireBall" AoEId="FireDome"
-			RoF="0.2" Ammunition="2500" Reload="0" 
+			RoF="0.2" Ammunition="2500" Reload="0"
 			Scatters="1"
 			Accuracy="0.5" Deviation="0.01" />
-		<Piercing 		Id="IronBall" Damage="50-80" 
+    <Piercing 		Id="IronBall" Damage="50-80"
 			AssetId="Projectiles/IronBall"
-			RoF="1" Ammunition="8" Reload="2" 
+			RoF="1" Ammunition="8" Reload="2"
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
-		<ParticleAoE 	Id="FireDome" AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" Damage="4-7" Scatters="1" />
-		<ParticleAoE 	Id="AscalonExplosion" AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" Damage="0-5" />
-		<ParticleAoE 	Id="LightningStrike" AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="3" Damage="0-99" IsGrounded="true" />
+    <Projectile 	Id="Ascalon" Damage="0-20"
+			AssetId="Projectiles/Ascalon" AoEId="AscalonExplosion"
+			RoF="0.125" Ammunition="9" Reload="0.1"
+			SpeedDeviation="300-600"
+			Accuracy="0.75" Deviation="0" Scatters="3" />
+    <Projectile 	Id="SkySplitter" Damage="0-99"
+			AssetId="Projectiles/SkySplitter" AoEId="LightningStrike"
+			RoF="0.6" Ammunition="99" Reload="2"
+			SpeedDeviation="500-500"
+			Accuracy="1" Deviation="0" Scatters="1" />
 
-		<!-- Enemies -->
-		<Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
-			<Triggers>
-				<EventTrigger Event="Spawn">
-					<SpecialEffect Value="MagicCircle" />
-				</EventTrigger>
-				<EventTrigger Event="Attack">
-					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]1" />
-				</EventTrigger>
-			</Triggers>
-		</Enemy>
-		<Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
-		<Enemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
-			<Elements>
-				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
-			</Elements>
-			<Triggers>				
-				<Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
-					<RandomCondition Target="{This}" Frequency="4" Value="50" /> <!-- Percentage -->
-					<Condition Target="{SpiderSpawn.ActiveObjects}" Value="\1" />
-					<Setter Target="{SpiderSpawn.Level}" Value="SpawnSpiders" />
-				</Trigger>
-			</Triggers>
-		</Enemy>
-		<Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	Health="150"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" LootTableId="BasicLoot" >
-			<Elements>
-				<EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
-			</Elements>
-		</Enemy>
-		<Boss  Id="ZombieAbomination" 		AssetId="Enemies/ZombieAbomination" 	Health="9325" 	Speed="2" DeathDelay="5"
+    <ParticleAoE 	Id="FireDome" AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" Damage="4-7" Scatters="1" />
+    <ParticleAoE 	Id="AscalonExplosion" AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" Damage="0-5" />
+    <ParticleAoE 	Id="LightningStrike" AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="3" Damage="0-99" IsGrounded="true" />
+
+    <!-- Enemies -->
+    <Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
+      <Triggers>
+        <EventTrigger Event="Spawn">
+          <SpecialEffect Value="MagicCircle" />
+        </EventTrigger>
+        <EventTrigger Event="Attack">
+          <Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]1" />
+        </EventTrigger>
+        <EventTrigger Event="Death">
+          <Setter Target="{Root.LevelDrop}" Value="BasicLoot" />
+        </EventTrigger>
+      </Triggers>
+    </Enemy>
+    <Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
+    <Enemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+      <Elements>
+        <EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
+      </Elements>
+      <Triggers>
+        <Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
+          <RandomCondition Target="{This}" Frequency="4" Value="50" />
+          <!-- Percentage -->
+          <Condition Target="{SpiderSpawn.ActiveObjects}" Value="\1" />
+          <Setter Target="{SpiderSpawn.Level}" Value="SpawnSpiders" />
+        </Trigger>
+      </Triggers>
+    </Enemy>
+    <Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	Health="150"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+      <Elements>
+        <EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
+      </Elements>
+    </Enemy>
+    <Boss  Id="ZombieAbomination" 		AssetId="Enemies/ZombieAbomination" 	Health="9325" 	Speed="2" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
-			<Elements>
-				<EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
-				<EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="" />
-				<EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="" />
-			</Elements>
-			
-			<Limbs>
-				<Limb Id="Head" 		Health="666" 	AssetId="Head" 			DamageMultiplier="1.2" 
+      <Elements>
+        <EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
+        <EnemySpawn Id="WarpGates" AssetId="WarpGates" LevelId="" />
+        <EnemySpawn Id="ShieldSpawn" AssetId="ShieldSpawn" LevelId="" />
+      </Elements>
+
+      <Limbs>
+        <Limb Id="Head" 		Health="666" 	AssetId="Head" 			DamageMultiplier="1.2"
 					CollisionEffectNormal="StoneBreak" >
-					<Triggers>
-						<EventTrigger Event="Break" >
-							<Setter Target="{This.ActiveSkill}" Value="HeadBroken|Slam" />
-						</EventTrigger>
-					</Triggers>
-				</Limb>
-				<Limb Id="RightHand" 	Health="750" 	AssetId="RightHand" 	DamageMultiplier="0.75" 
-					CollisionEffectNormal="CrystalBreak_Small"
-					CollisionEffectBroken="StoneBreak" > 
-					<Triggers>
-						<EventTrigger Event="Break" >							
-							<Setter Target="{This.ActiveSkill}" Value="RightHandBroken|ScreamingRandomMovement" />
-						</EventTrigger>
-					</Triggers>
-				</Limb>
-				<Limb Id="LeftHand" 	Health="750" 	AssetId="LeftHand" 		DamageMultiplier="0.75"
+          <Triggers>
+            <EventTrigger Event="Break" >
+              <Setter Target="{This.ActiveSkill}" Value="HeadBroken|Slam" />
+            </EventTrigger>
+          </Triggers>
+        </Limb>
+        <Limb Id="RightHand" 	Health="750" 	AssetId="RightHand" 	DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Triggers>
-						<EventTrigger Event="Break" >
-							<Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingRandomMovement" />
-						</EventTrigger>
-					</Triggers>
-				</Limb>
-				<Limb Id="RightLeg" 	Health="500" 	AssetId="RightLeg" 		DamageMultiplier="0.75"
+          <Triggers>
+            <EventTrigger Event="Break" >
+              <Setter Target="{This.ActiveSkill}" Value="RightHandBroken|ScreamingRandomMovement" />
+            </EventTrigger>
+          </Triggers>
+        </Limb>
+        <Limb Id="LeftHand" 	Health="750" 	AssetId="LeftHand" 		DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-				</Limb>
-				<Limb Id="LeftLeg" 		Health="500" 	AssetId="LeftLeg" 		DamageMultiplier="0.75" 
+          <Triggers>
+            <EventTrigger Event="Break" >
+              <Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingRandomMovement" />
+            </EventTrigger>
+          </Triggers>
+        </Limb>
+        <Limb Id="RightLeg" 	Health="500" 	AssetId="RightLeg" 		DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-				</Limb>
-				<Limb Id="RightFoot" 	Health="750" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75"
+        </Limb>
+        <Limb Id="LeftLeg" 		Health="500" 	AssetId="LeftLeg" 		DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Triggers>
-						<EventTrigger Event="Break" >
-							<Setter Target="{This.ActiveSkill}" Value="RightFootBroken|ScreamingRandomMovement" />
-						</EventTrigger>
-					</Triggers>
-				</Limb>
-				<Limb Id="LeftFoot" 	Health="750" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75" 
+        </Limb>
+        <Limb Id="RightFoot" 	Health="750" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
-					<Triggers>
-						<EventTrigger Event="Break" >
-							<Setter Target="{This.ActiveSkill}" Value="LeftFootBroken|ScreamingRandomMovement" />
-						</EventTrigger>
-					</Triggers>
-				</Limb>
-				<Limb Id="Crystal" 		Health="1000" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25" 
+          <Triggers>
+            <EventTrigger Event="Break" >
+              <Setter Target="{This.ActiveSkill}" Value="RightFootBroken|ScreamingRandomMovement" />
+            </EventTrigger>
+          </Triggers>
+        </Limb>
+        <Limb Id="LeftFoot" 	Health="750" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75"
+					CollisionEffectNormal="CrystalBreak_Small"
+					CollisionEffectBroken="StoneBreak" >
+          <Triggers>
+            <EventTrigger Event="Break" >
+              <Setter Target="{This.ActiveSkill}" Value="LeftFootBroken|ScreamingRandomMovement" />
+            </EventTrigger>
+          </Triggers>
+        </Limb>
+        <Limb Id="Crystal" 		Health="1000" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25"
 					CollisionEffectNormal="CrystalBreak_Small" >
-					<Triggers>
-						<EventTrigger Event="Break" >
-							<Setter Target="{This.ActiveSkill}" Value="CrystalBroken|RandomMovement" />
-						</EventTrigger>
-					</Triggers>
-				</Limb>
-			</Limbs>
+          <Triggers>
+            <EventTrigger Event="Break" >
+              <Setter Target="{This.ActiveSkill}" Value="CrystalBroken|RandomMovement" />
+            </EventTrigger>
+          </Triggers>
+        </Limb>
+      </Limbs>
 
-			<Skills>
-				<Skill Id="Idle"> <!-- Default Skill, this skill is always active -->
-					<Setter Target="{This.AnimationId}" Value="Idle" Wait="4" />
-				</Skill>
-				<Skill Id="Scream"> <!-- Default Skill, this skill is always active -->
-					<Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
-				</Skill>
-				<Skill Id="CrystalShield" IsQueuedable="true" >
-					<Setter Target="{This.AnimationId}" Value="SmashSpawnShield" Wait="2.65" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-					<Setter Target="{ShieldSpawn.Level}" Value="SpawnCrystalShield" />
-				</Skill>
-				<Skill Id="ScreamingCrystalShield" IsQueuedable="true" >
-					<Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
-					<Setter Target="{This.AnimationId}" Value="SmashSpawnShield" Wait="2.65" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-					<Setter Target="{ShieldSpawn.Level}" Value="SpawnCrystalShield" />
-				</Skill>
-				<Skill Id="SpiderColumn">
-					<Setter Target="{This.AnimationId}" Value="SmashSpawnPillar" Wait="2.3" />
-					<Setter Target="{SpiderColumns.Level}" Value="SpawnSpiderColumn" Wait="2" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-				</Skill>
-				<Skill Id="Slam" InterruptThreshold="500" >
-					<SpecialEffect Target="{LeftHand.SpecialEffect}" Value="ChargingSlam" />
-					<Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2.1" IsInterruptable="true"/>
-					<Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
-					<Setter Target="{This.AnimationId}" Value="Slam_Run" />
-					<MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
-					<Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
-					<Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]4" />
-					<SpecialEvent Target="PlayerCamera" Wait="0.5" />
-					<Triggers>
-						<EventTrigger Event="Interrupt">
-							<Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingCrystalShield" />
-						</EventTrigger>
-					</Triggers>
-				</Skill>
-				<Skill Id="RandomMovement">
-					<Setter Target="{This.AnimationId}" Value="Walk" />
-					<MoveAction Id="RandomMovementAction" Target="{This}" />
-				</Skill>
-				<Skill Id="ScreamingRandomMovement">
-					<Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
-					<Setter Target="{This.AnimationId}" Value="Walk" />
-					<MoveAction Id="RandomMovementAction" Target="{This}" />
-				</Skill>
-				<!-- When Broken -->
-				<!-- These are also defined as skills, interrupt skills, meaning they will interrupt any currently charged skill -->
-				<Skill Id="HeadBroken" IsInterrupt="true">
-					<Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-				</Skill>
-				<Skill Id="RightHandBroken" IsInterrupt="true">
-					<Setter Target="{This.AnimationId}" Value="RightHandBroken" Wait="1.6" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-				</Skill>
-				<Skill Id="LeftHandBroken" IsInterrupt="true">
-					<Setter Target="{This.AnimationId}" Value="LeftHandBroken" Wait="1.3" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-				</Skill>
-				<Skill Id="RightFootBroken" IsInterrupt="true">
-					<Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-				</Skill>
-				<Skill Id="LeftFootBroken" IsInterrupt="true">
-					<Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-				</Skill>
-				<Skill Id="CrystalBroken" IsInterrupt="true">
-					<Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
-					<Setter Target="{This.AnimationId}" Value="Idle" />
-				</Skill>
-			</Skills>
+      <Skills>
+        <Skill Id="Idle">
+          <!-- Default Skill, this skill is always active -->
+          <Setter Target="{This.AnimationId}" Value="Idle" Wait="4" />
+        </Skill>
+        <Skill Id="Scream">
+          <!-- Default Skill, this skill is always active -->
+          <Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
+        </Skill>
+        <Skill Id="CrystalShield" IsQueuedable="true" >
+          <Setter Target="{This.AnimationId}" Value="SmashSpawnShield" Wait="2.65" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+          <Setter Target="{ShieldSpawn.Level}" Value="SpawnCrystalShield" />
+        </Skill>
+        <Skill Id="ScreamingCrystalShield" IsQueuedable="true" >
+          <Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
+          <Setter Target="{This.AnimationId}" Value="SmashSpawnShield" Wait="2.65" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+          <Setter Target="{ShieldSpawn.Level}" Value="SpawnCrystalShield" />
+        </Skill>
+        <Skill Id="SpiderColumn">
+          <Setter Target="{This.AnimationId}" Value="SmashSpawnPillar" Wait="2.3" />
+          <Setter Target="{SpiderColumns.Level}" Value="SpawnSpiderColumn" Wait="2" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+        </Skill>
+        <Skill Id="Slam" InterruptThreshold="500" >
+          <SpecialEffect Target="{LeftHand.SpecialEffect}" Value="ChargingSlam" />
+          <Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2.1" IsInterruptable="true"/>
+          <Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
+          <Setter Target="{This.AnimationId}" Value="Slam_Run" />
+          <MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
+          <Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
+          <Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]4" />
+          <SpecialEvent Target="PlayerCamera" Wait="0.5" />
+          <Triggers>
+            <EventTrigger Event="Interrupt">
+              <Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingCrystalShield" />
+            </EventTrigger>
+          </Triggers>
+        </Skill>
+        <Skill Id="RandomMovement">
+          <Setter Target="{This.AnimationId}" Value="Walk" />
+          <MoveAction Id="RandomMovementAction" Target="{This}" />
+        </Skill>
+        <Skill Id="ScreamingRandomMovement">
+          <Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
+          <Setter Target="{This.AnimationId}" Value="Walk" />
+          <MoveAction Id="RandomMovementAction" Target="{This}" />
+        </Skill>
+        <!-- When Broken -->
+        <!-- These are also defined as skills, interrupt skills, meaning they will interrupt any currently charged skill -->
+        <Skill Id="HeadBroken" IsInterrupt="true">
+          <Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+        </Skill>
+        <Skill Id="RightHandBroken" IsInterrupt="true">
+          <Setter Target="{This.AnimationId}" Value="RightHandBroken" Wait="1.6" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+        </Skill>
+        <Skill Id="LeftHandBroken" IsInterrupt="true">
+          <Setter Target="{This.AnimationId}" Value="LeftHandBroken" Wait="1.3" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+        </Skill>
+        <Skill Id="RightFootBroken" IsInterrupt="true">
+          <Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+        </Skill>
+        <Skill Id="LeftFootBroken" IsInterrupt="true">
+          <Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+        </Skill>
+        <Skill Id="CrystalBroken" IsInterrupt="true">
+          <Setter Target="{This.AnimationId}" Value="HeadBroken" Wait="1.6" />
+          <Setter Target="{This.AnimationId}" Value="Idle" />
+        </Skill>
+      </Skills>
 
-			<Triggers>
-				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{This}" Frequency="1" Value="30" />
-					<Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
-					<Setter Target="{This.ActiveSkill}" Value="Slam|RandomMovement" />
-				</Trigger>
+      <Triggers>
+        <Trigger TriggerOnce="false" >
+          <RandomCondition Target="{This}" Frequency="1" Value="30" />
+          <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
+          <Setter Target="{This.ActiveSkill}" Value="Slam|RandomMovement" />
+        </Trigger>
 
-				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{This}" Frequency="2" Value="5" />
-					<Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
-					<Setter Target="{This.ActiveSkill}" Value="RandomMovement|Idle" />
-				</Trigger>
-				<Trigger TriggerOnce="false" >
-					<RandomCondition Target="{This}" Frequency="1" Value="25" />
-					<Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
-					<Condition Target="{SpiderColumns.ActiveObjects}" Value="\3" />
-					<Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
-				</Trigger>
-				<Trigger>
-					<Condition Target="{This.Health}" Value="\6660" />
-					<Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
-				</Trigger>
-				<Trigger>
-					<Condition Target="{This.Health}" Value="\7200" />
-					<Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
-				</Trigger>
-				<Trigger>
-					<Condition Target="{This.Health}" Value="\4440" />
-					<Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
-				</Trigger>
-				<Trigger>
-					<Condition Target="{This.Health}" Value="\2220" />
-					<Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
-				</Trigger>
-				<Trigger>
-					<Condition Target="{This.Health}" Value="\1110" />
-					<Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
-				</Trigger>
-			</Triggers>
-		</Boss>
+        <Trigger TriggerOnce="false" >
+          <RandomCondition Target="{This}" Frequency="2" Value="5" />
+          <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
+          <Setter Target="{This.ActiveSkill}" Value="RandomMovement|Idle" />
+        </Trigger>
+        <Trigger TriggerOnce="false" >
+          <RandomCondition Target="{This}" Frequency="1" Value="25" />
+          <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
+          <Condition Target="{SpiderColumns.ActiveObjects}" Value="\3" />
+          <Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\6660" />
+          <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\7200" />
+          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\4440" />
+          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\2220" />
+          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\1110" />
+          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
+        </Trigger>
+      </Triggers>
+    </Boss>
 
-		<!-- Special Effects -->
-		<DamageGUI Id="StandardDamageGUI" 		AssetId="GUIs/DamageDisplay" />
-		<SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
-		<SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
-		<SpecialEffect Id="MagicCircle" 		AssetId="SpecialEffects/M_3D_MagicCircle_03" />
-		<SpecialEffect Id="ChargingSlam" 		AssetId="SpecialEffects/M_3D_Charge_02" />
-		<SpecialEffect Id="HitSlam" 			AssetId="SpecialEffects/M_3D_CriticalHit_01" />
-		<SpecialEffect Id="ItemDrop" 			AssetId="SpecialEffects/M_3D_ItemDrop_01" />
+    <!-- Special Effects -->
+    <DamageGUI Id="StandardDamageGUI" 		AssetId="GUIs/DamageDisplay" />
+    <SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
+    <SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
+    <SpecialEffect Id="MagicCircle" 		AssetId="SpecialEffects/M_3D_MagicCircle_03" />
+    <SpecialEffect Id="ChargingSlam" 		AssetId="SpecialEffects/M_3D_Charge_02" />
+    <SpecialEffect Id="HitSlam" 			AssetId="SpecialEffects/M_3D_CriticalHit_01" />
+    <SpecialEffect Id="ItemDrop" 			AssetId="SpecialEffects/M_3D_ItemDrop_01" />
 
-		<Object Id="House1" AssetId="Environtments/House1"/>
-		<Object Id="House2" AssetId="Environtments/House2"/>
-		<Object Id="House3" AssetId="Environtments/House3"/>
-	</Objects>
+    <Object Id="House1" AssetId="Environtments/House1"/>
+    <Object Id="House2" AssetId="Environtments/House2"/>
+    <Object Id="House3" AssetId="Environtments/House3"/>
+  </Objects>
 
-	<Levels>
-		<Level Id="Level1" Interval="1.12345" LoopCount="0">
-			<Cache EnemyId="ZombieAbomination" />
-			<Cache EnemyId="CrystalSpider" Count="5" />
-			<Cache EnemyId="StandardDamageGUI" Count="20" />
-			<Cache EnemyId="CrystalBreak_Small" Count="10" />
-			<Cache EnemyId="StoneBreak" Count="10" />
-			<Cache EnemyId="SpiderColumn" Count="5" />
-			<Cache EnemyId="CrystalShield" />
+  <Levels>
+    <Level Id="Level1" Interval="1.12345" LoopCount="0">
+      <Cache EnemyId="ZombieAbomination" />
+      <Cache EnemyId="CrystalSpider" Count="5" />
+      <Cache EnemyId="StandardDamageGUI" Count="20" />
+      <Cache EnemyId="CrystalBreak_Small" Count="10" />
+      <Cache EnemyId="StoneBreak" Count="10" />
+      <Cache EnemyId="SpiderColumn" Count="5" />
+      <Cache EnemyId="CrystalShield" />
 
-			<Spawn EnemyId="CrystalSpider" />
-			<Spawn EnemyId="ZombieAbomination" />
-		</Level>
-		<SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
-			<Spawn EnemyId="CrystalShield" />
-		</SubLevel>
-		<SubLevel Id="SpiderColumnSwarm" Interval="15" LoopCount="10">
-			<Spawn EnemyId="StrongSpiderColumn" />
-		</SubLevel>
-		<SubLevel Id="SpawnSpiderColumn" Interval="0.1" LoopCount="0">
-			<Spawn EnemyId="SpiderColumn" />
-		</SubLevel>
-		<SubLevel Id="SpawnSpiders" Interval="3" LoopCount="1">
-			<Spawn EnemyId="CrystalSpider" />
-		</SubLevel>
-		<SubLevel Id="SpawnSpidersInfinite" Interval="10" LoopCount="-1">
-			<Spawn EnemyId="CrystalSpider" />
-		</SubLevel>
+      <Spawn EnemyId="CrystalSpider" />
+      <Spawn EnemyId="ZombieAbomination" />
+    </Level>
+    <SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
+      <Spawn EnemyId="CrystalShield" />
+    </SubLevel>
+    <SubLevel Id="SpiderColumnSwarm" Interval="15" LoopCount="10">
+      <Spawn EnemyId="StrongSpiderColumn" />
+    </SubLevel>
+    <SubLevel Id="SpawnSpiderColumn" Interval="0.1" LoopCount="0">
+      <Spawn EnemyId="SpiderColumn" />
+    </SubLevel>
+    <SubLevel Id="SpawnSpiders" Interval="3" LoopCount="1">
+      <Spawn EnemyId="CrystalSpider" />
+    </SubLevel>
+    <SubLevel Id="SpawnSpidersInfinite" Interval="10" LoopCount="-1">
+      <Spawn EnemyId="CrystalSpider" />
+    </SubLevel>
 
-		<!-- Environtments -->
-		<SubLevel Id="Houses">
-			<Spawn EnemyId="House1"/>
-			<Spawn EnemyId="House2"/>
-			<Spawn EnemyId="House3"/>
-		</SubLevel>
-	</Levels>
+    <!-- Environtments -->
+    <SubLevel Id="Houses">
+      <Spawn EnemyId="House1"/>
+      <Spawn EnemyId="House2"/>
+      <Spawn EnemyId="House3"/>
+    </SubLevel>
+  </Levels>
 
-	<Items>
-		<Item Id="Iron" AssetId="Iron" />
-		<Item Id="Aluminum" AssetId="Aluminum" />
-		<Item Id="Copper" AssetId="Copper" />
-	</Items>
+  <Items>
+    <Item Id="Iron" AssetId="Iron" />
+    <Item Id="Aluminum" AssetId="Aluminum" />
+    <Item Id="Copper" AssetId="Copper" />
+  </Items>
 
-	<LootTables>
-		<LootTable Id="BasicLoot" Drops="1">
-			<Loot ItemId="Iron" Chance="5" />
-			<Loot ItemId="Aluminum" Chance="25" />
-			<Loot ItemId="Copper" Chance="60" />
-		</LootTable>
-	</LootTables>
+  <LootTables>
+    <LootTable Id="BasicLoot" Drops="1">
+      <Loot ItemId="Iron" Chance="5" />
+      <Loot ItemId="Aluminum" Chance="25" />
+      <Loot ItemId="Copper" Chance="60" />
+    </LootTable>
+  </LootTables>
 
-	<Scenes>
-		<Scene Id="MainMenu" AssetId="Scenes/MainMenu">
-			<Elements>
-				<Button AssetId="WeaponSelection" >
-					<Triggers><EventTrigger Event="Click"><LoadScene Target="SkillTree" /></EventTrigger></Triggers>
-				</Button>
-				<Button AssetId="StartGame">
-					<Triggers><EventTrigger Event="Click"><LoadScene Target="Limbo" LevelId="Level1" /></EventTrigger></Triggers>
-				</Button>
-				<Button AssetId="Options">
-					<Triggers><EventTrigger Event="Click"><LoadScene Target="OptionsMenu" /></EventTrigger></Triggers>
-				</Button>
-			</Elements>
-		</Scene>
+  <Scenes>
+    <Scene Id="MainMenu" AssetId="Scenes/MainMenu">
+      <Elements>
+        <Button AssetId="WeaponSelection" >
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="SkillTree" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
+        <Button AssetId="StartGame">
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="Limbo" LevelId="Level1" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
+        <Button AssetId="Options">
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="OptionsMenu" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
+      </Elements>
+    </Scene>
 
-		<Scene Id="OptionsMenu" AssetId="Scenes/OptionsMenu">
-			<Elements>
-				<Inventory Source="PlayerOptions" AssetId="OptionsInventory" />
-				<Button AssetId="BackToMainMenu" >
-					<Triggers><EventTrigger Event="Click"><LoadScene Target="MainMenu" /></EventTrigger></Triggers>
-				</Button>
-			</Elements>
-		</Scene>
+    <Scene Id="OptionsMenu" AssetId="Scenes/OptionsMenu">
+      <Elements>
+        <Inventory Source="PlayerOptions" AssetId="OptionsInventory" />
+        <Button AssetId="BackToMainMenu" >
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="MainMenu" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
+      </Elements>
+    </Scene>
 
-		<Scene Id="SkillTree" AssetId="Scenes/SkillTree">
-			<Elements>
-				<Inventory Source="PlayerInventory" AssetId="Inventory" />
-				<Button AssetId="BackToMainMenu" >
-					<Triggers><EventTrigger Event="Click"><LoadScene Target="MainMenu" /></EventTrigger></Triggers>
-				</Button>
-			</Elements>
-		</Scene>
+    <Scene Id="SkillTree" AssetId="Scenes/SkillTree">
+      <Elements>
+        <Inventory Source="PlayerInventory" AssetId="Inventory" />
+        <Button AssetId="BackToMainMenu" >
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="MainMenu" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
+      </Elements>
+    </Scene>
 
-		<Scene Id="Limbo" AssetId="Scenes/LimboLower">
-			<Elements>
-				<ObjectSpawn AssetId="Environtment" LevelId="Houses"/>
+    <Scene Id="Limbo" AssetId="Scenes/LimboLower">
+      <Elements>
+        <ObjectSpawn AssetId="Environtment" LevelId="Houses"/>
 
-				<EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" />
+        <EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" />
 
-				<PlayerHitbox AssetId="PlayerHealth" />
-				<SpecialEffectManager AssetId="SpecialEffectRoot" />
-				
-				<Element Id="Player" AssetId="EnemyTarget" />
+        <PlayerHitbox AssetId="PlayerHealth" />
+        <SpecialEffectManager AssetId="SpecialEffectRoot" />
 
-				<Player Id="PlayerCamera" AssetId="Player" Health="15" >
-					<Shooters>
-						<Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.Item}" >
-							<Target AssetId="Target" />
-						</Shooter>
-						<Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{Root.SkillTree.RightShooter.Item}" >
-							<Target AssetId="Target" />
-						</Shooter>
-					</Shooters>
-					<Triggers>
-						<EventTrigger Event="GameOver">
-							<LoadScene Target="MainMenu" />
-						</EventTrigger>
-					</Triggers>
-				</Player>
+        <Element Id="Player" AssetId="EnemyTarget" />
 
-				<GUIRoot AssetId="UIRoot">
-					<Elements>
-						<ProgressBar AssetId="HealthBar" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
-						<DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
-						<Button AssetId="BackToMainMenu" >
-							<Triggers><EventTrigger Event="Click"><LoadScene Target="MainMenu" /></EventTrigger></Triggers>
-						</Button>
-						<Element AssetId="LoadingCover" IsVisible="{Limbo.IsLoadingInProgress}" />
+        <Player Id="PlayerCamera" AssetId="Player" Health="15" >
+          <Shooters>
+            <Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.SkillTree.LeftShooter.Item}" >
+              <Target AssetId="Target" />
+            </Shooter>
+            <Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{Root.SkillTree.RightShooter.Item}" >
+              <Target AssetId="Target" />
+            </Shooter>
+          </Shooters>
+          <Triggers>
+            <EventTrigger Event="GameOver">
+              <LoadScene Target="MainMenu" />
+            </EventTrigger>
+          </Triggers>
+        </Player>
 
-						<Element AssetId="{Root.OptionsMenu.ControlStyle.ItemId}" >
-							<Elements>
-								<CooldownGUI AssetId="AmmunitionLeft" Value="{ShooterWeaponLeft.Ammunition}" MaxValue="{ShooterWeaponLeft.MaxAmmunition}" />
-								<CooldownGUI AssetId="AmmunitionRight" Value="{ShooterWeaponRight.Ammunition}" MaxValue="{ShooterWeaponRight.MaxAmmunition}" />
-								<ShooterGUI ShooterTarget="ShooterWeaponLeft" AssetId="ShootingGUILeft" AimingAssetId="AimingGUILeft" />
-								<ShooterGUI ShooterTarget="ShooterWeaponRight" AssetId="ShootingGUIRight" AimingAssetId="AimingGUIRight" />
-							</Elements>
-						</Element>
-					</Elements>
-				</GUIRoot>
+        <GUIRoot AssetId="UIRoot">
+          <Elements>
+            <ProgressBar AssetId="HealthBar" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
+            <DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
+            <Button AssetId="BackToMainMenu" >
+              <Triggers>
+                <EventTrigger Event="Click">
+                  <LoadScene Target="MainMenu" />
+                </EventTrigger>
+              </Triggers>
+            </Button>
+            <Element AssetId="LoadingCover" IsVisible="{Limbo.IsLoadingInProgress}" />
 
-				<Element AssetId="Ground" />
-			</Elements>
-		</Scene>
-	</Scenes>
+            <Element AssetId="{Root.OptionsMenu.ControlStyle.ItemId}" >
+              <Elements>
+                <CooldownGUI AssetId="AmmunitionLeft" Value="{ShooterWeaponLeft.Ammunition}" MaxValue="{ShooterWeaponLeft.MaxAmmunition}" />
+                <CooldownGUI AssetId="AmmunitionRight" Value="{ShooterWeaponRight.Ammunition}" MaxValue="{ShooterWeaponRight.MaxAmmunition}" />
+                <ShooterGUI ShooterTarget="ShooterWeaponLeft" AssetId="ShootingGUILeft" AimingAssetId="AimingGUILeft" />
+                <ShooterGUI ShooterTarget="ShooterWeaponRight" AssetId="ShootingGUIRight" AimingAssetId="AimingGUIRight" />
+              </Elements>
+            </Element>
+          </Elements>
+        </GUIRoot>
+
+        <Element AssetId="Ground" />
+      </Elements>
+    </Scene>
+  </Scenes>
 </Engine>

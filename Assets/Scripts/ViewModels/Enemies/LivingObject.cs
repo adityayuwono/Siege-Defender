@@ -74,16 +74,11 @@ namespace Scripts.ViewModels.Enemies
             return true;
         }
 
+        public event Action Death;
         protected virtual void OnKilled()
         {
-            if (!string.IsNullOrEmpty(_model.LootTableId))
-            {
-                var items = Root.GetLoot(_model.LootTableId);
-                if (items != null)
-                {
-                    SpecialEffect.SetValue("ItemDrop");
-                }
-            }
+            if (Death != null)
+                Death();
         }
 
         private void AttachProjectile(ProjectileBase source)

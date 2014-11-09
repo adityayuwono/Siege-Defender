@@ -130,6 +130,13 @@ namespace Scripts.ViewModels.Enemies
                             parentButton.Walk += InvokeEvent;
                     }
                     break;
+                case Event.Death:
+                    {
+                        var parentButton = _parentObject as LivingObject;
+                        if (parentButton != null)
+                            parentButton.Death += InvokeEvent;
+                    }
+                    break;
                 case Event.Hit:
                     {
                         var parentButton = _parentObject as Projectile;
@@ -196,6 +203,13 @@ namespace Scripts.ViewModels.Enemies
                         var parentButton = _parentObject as EnemyBase;
                         if (parentButton != null)
                             parentButton.Walk -= InvokeEvent;
+                    }
+                    break;
+                case Event.Death:
+                    {
+                        var parentButton = _parentObject as LivingObject;
+                        if (parentButton != null)
+                            parentButton.Death -= InvokeEvent;
                     }
                     break;
                 case Event.Hit:

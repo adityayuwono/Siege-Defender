@@ -15,7 +15,9 @@ namespace Scripts.ViewModels.Actions
         public override void Invoke()
         {
             base.Invoke();
-            var targetObject = Root.GetViewModelAsType<Object>(_model.Target);
+
+            var targetObject = Target as Object;
+
             if (targetObject != null)
                 targetObject.StartSpecialEvent();
             else

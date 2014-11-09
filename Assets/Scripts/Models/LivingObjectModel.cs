@@ -17,10 +17,6 @@ namespace Scripts.Models
 
         [XmlAttribute]
         [DefaultValue("")]
-        public string LootTableId { get; set; }
-
-        [XmlAttribute]
-        [DefaultValue("")]
         public string CollisionEffectNormal { get; set; }
 
         public int ProjectileLimit { get; protected set; }

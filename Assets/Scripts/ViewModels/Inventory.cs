@@ -107,25 +107,30 @@ namespace Scripts.ViewModels
             if (baseProjectileModel == null)
                 throw new EngineException(this, string.Format("Failed to Find a projectile model with id: {0}", _model.Base));
 
-            var overriderModel = _model.Overrides;
-
-            #region Calculate for damage increase
-            var originalSplitDamages = baseProjectileModel.Damage.Split('-');
-            var overrideSplitDamage = overriderModel.Damage.Split('-');
-            var augmentedDamages = new List<string>();
-
-            for (var i = 0; i < originalSplitDamages.Length; i++)
-            {
-                var originalSplitDamage = float.Parse(originalSplitDamages[i]) + float.Parse(overrideSplitDamage[i]);
-                augmentedDamages.Add(originalSplitDamage.ToString(CultureInfo.InvariantCulture));
-            }
-            #endregion
-
             var newProjectileModel = Copier.CopyAs<ProjectileModel>(baseProjectileModel);
             newProjectileModel.Id = baseProjectileModel.Id + "_" + Guid.NewGuid();
-            newProjectileModel.Damage = string.Join("-", augmentedDamages.ToArray());
-            newProjectileModel.Scatters += overriderModel.Scatters;
-            newProjectileModel.Ammunition += overriderModel.Ammunition;
+
+            var overriderModel = _model.Overrides;
+            if (overriderModel != null)
+            {
+                #region Calculate for damage increase
+
+                var originalSplitDamages = baseProjectileModel.Damage.Split('-');
+                var overrideSplitDamage = overriderModel.Damage.Split('-');
+                var augmentedDamages = new List<string>();
+
+                for (var i = 0; i < originalSplitDamages.Length; i++)
+                {
+                    var originalSplitDamage = float.Parse(originalSplitDamages[i]) + float.Parse(overrideSplitDamage[i]);
+                    augmentedDamages.Add(originalSplitDamage.ToString(CultureInfo.InvariantCulture));
+                }
+
+                #endregion
+
+                newProjectileModel.Damage = string.Join("-", augmentedDamages.ToArray());
+                newProjectileModel.Scatters += overriderModel.Scatters;
+                newProjectileModel.Ammunition += overriderModel.Ammunition;
+            }
 
             Stats = string.Format("Damage: {0}\n\nRate of Fire: {1}\nAmmunition: {2}", 
                 newProjectileModel.Damage, 

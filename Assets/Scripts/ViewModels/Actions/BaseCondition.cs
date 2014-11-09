@@ -11,18 +11,23 @@ namespace Scripts.ViewModels.Actions
         {
             _model = model;
         }
-        
+
+        private Property TargetProperty
+        {
+            get { return Target as Property; }
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();
 
-            Target.OnChange += Target_OnChanged;
+            TargetProperty.OnChange += Target_OnChanged;
             Target_OnChanged();
         }
 
         protected override void OnDeactivate()
         {
-            Target.OnChange -= Target_OnChanged;
+            TargetProperty.OnChange -= Target_OnChanged;
 
             base.OnDeactivate();
         }

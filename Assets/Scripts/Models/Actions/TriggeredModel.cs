@@ -47,7 +47,8 @@ namespace Scripts.Models.Actions
         Spawn,
         Walk,
         Attack,
-        
+        Death,
+
         Hit,
 
         GameOver
