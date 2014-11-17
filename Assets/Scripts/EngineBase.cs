@@ -96,7 +96,7 @@ namespace Scripts
 
         #region Singletons
         // Singletons, meaning there should be only one instance of these
-        public abstract IntervalRunner IntervalRunner { get; }
+        public abstract IIntervalRunner IntervalRunner { get; }
         public IIoCContainer IoCContainer;
         public IResource ResourceManager;
         public DamageDisplayManager DamageDisplay;

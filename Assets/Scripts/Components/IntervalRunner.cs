@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Interfaces;
 using UnityEngine;
 
 namespace Scripts.Components
@@ -8,7 +9,7 @@ namespace Scripts.Components
     /// <summary>
     /// Helper Component to iterate the time
     /// </summary>
-    public class IntervalRunner : MonoBehaviour
+    public class IntervalRunner : MonoBehaviour, IIntervalRunner
     {
         private readonly List<IntervalSubscriber> _intervals = new List<IntervalSubscriber>();
         public void SubscribeToInterval(Action action, float delay = 0f, bool startImmediately = true)
@@ -45,8 +46,13 @@ namespace Scripts.Components
 
         private void Update()
         {
+            UpdateTime(Time.deltaTime);
+        }
+
+        public void UpdateTime(float timeElapsed)
+        {
             foreach (var interval in _intervals.ToArray())
-                interval.Update(Time.deltaTime);
+                interval.Update(timeElapsed);
         }
 
         private class IntervalSubscriber

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Scripts.Components;
 using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.Models;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Enemies;
@@ -82,7 +83,7 @@ namespace Scripts
             ChangeScene(_model.Scenes[0].Id);// Load the first scene on the list
         }
 
-        public override IntervalRunner IntervalRunner
+        public override IIntervalRunner IntervalRunner
         {
             get { return _context.IntervalRunner; }
         }
