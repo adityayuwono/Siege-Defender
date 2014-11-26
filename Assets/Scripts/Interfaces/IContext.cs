@@ -1,5 +1,4 @@
 ﻿using Scripts.Core;
-using Scripts.ViewModels;
 
 namespace Scripts.Interfaces
 {

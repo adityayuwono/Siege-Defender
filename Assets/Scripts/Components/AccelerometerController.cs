@@ -26,7 +26,7 @@ namespace Scripts.Components
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(0,35,100,100), Input.acceleration+"\n"+transform.eulerAngles.ToString());
+            GUI.Label(new Rect(0,35,100,100), Input.acceleration+"\n"+transform.eulerAngles);
         }
     }
 }

@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
+    /// <summary>
+    /// Base class for everything that have Health
+    /// </summary>
     public class LivingObject : Object
     {
         private readonly LivingObjectModel _model;
