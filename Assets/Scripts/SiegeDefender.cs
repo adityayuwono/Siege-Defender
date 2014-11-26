@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Scripts.Components;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -54,7 +53,7 @@ namespace Scripts
             IoCContainer.RegisterFor<ProjectileItem>().TypeOf<BaseView>().To<ItemView>();
             IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<InventoryView>();
             IoCContainer.RegisterFor<EquipmentSlot>().TypeOf<BaseView>().To<EquipmentSlotView>();
-            IoCContainer.RegisterFor<Button>().TypeOf<BaseView>().To<ButtonView>();
+            IoCContainer.RegisterFor<ButtonGUI>().TypeOf<BaseView>().To<ButtonView>();
             IoCContainer.RegisterFor<ProgressBarGUI>().TypeOf<BaseView>().To<ProgressBarGUIView>();
             IoCContainer.RegisterFor<CooldownGUI>().TypeOf<BaseView>().To<CooldownGUIView>();
             IoCContainer.RegisterFor<ShooterGUI>().TypeOf<BaseView>().To<ShooterGUIView>();
@@ -101,6 +100,11 @@ namespace Scripts
         public override void Save()
         {
             Serializer.SaveObjectToXML(_playerSettingsModel);
+        }
+
+        public override void LogEvent(string eventCategory, string eventAction, string eventLabel, long value)
+        {
+            _context.GoogleAnalytics.LogEvent(eventCategory, eventAction, eventLabel, value);
         }
     }
 }

@@ -16,7 +16,10 @@ namespace Scripts
         public static BalistaContext Instance { get { return _instance; } }
         private static BalistaContext _instance;
 
+        // Complementary classes
+        [HideInInspector]
         public IntervalRunner IntervalRunner;
+        public GoogleAnalyticsV3 GoogleAnalytics;
 
         private void Awake()
         {
