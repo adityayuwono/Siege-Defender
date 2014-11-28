@@ -17,6 +17,9 @@ namespace Scripts.ViewModels.Enemies
             _model = model;
 
             foreach (var limbModel in _model.Limbs)
+                limbModel.Type = string.Format("{0}_{1}", _model.Type, limbModel.Id);
+
+            foreach (var limbModel in _model.Limbs)
                 _limbs.Add(new Limb(limbModel, this));
 
             foreach (var skillModel in _model.Skills)
