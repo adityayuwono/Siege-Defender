@@ -30,12 +30,19 @@ namespace Scripts
         {
             // Load Engine from external file if there's a path defined, should be for development build only
             // If no path is defined, will return the engine included with build
+            var enginePath = "";
 #if UNITY_EDITOR
-            var enginePath = "Assets/Resources/Engine.xml";
+            enginePath = "Assets/Resources/Engine.xml";
 #else
-            var enginePath = "Engine.xml";
+            enginePath = "Engine.xml";
 #endif
+
+
+#if !UNITY_ANDROID
             EngineXML = LoadFile(enginePath, "" /*No default engine, because it's checked earlier*/);
+#else
+            EngineXML = Resources.Load<TextAsset>("Engine").text;
+#endif
 
             // Start preparing XML
             InitializeEngine();
