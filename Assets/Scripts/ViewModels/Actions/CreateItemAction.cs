@@ -16,6 +16,8 @@ namespace Scripts.ViewModels.Actions
         {
             base.Invoke();
 
+            Root.LogEvent("Item", "Dropped", _model.Value, 1);
+
             var targetInventory = Target as Inventory;
 
             if (targetInventory == null)

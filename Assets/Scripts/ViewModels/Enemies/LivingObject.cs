@@ -82,8 +82,13 @@ namespace Scripts.ViewModels.Enemies
         }
 
         public event Action Death;
+        /// <summary>
+        /// Called once when damage taken is greater or equal to Health
+        /// </summary>
         protected virtual void OnKilled()
         {
+            Root.LogEvent("Enemies", "Killed", _model.Type, 1);
+
             if (Death != null)
                 Death();
         }
