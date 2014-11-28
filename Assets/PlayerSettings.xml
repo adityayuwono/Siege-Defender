@@ -13,8 +13,8 @@
     <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="ScatterArrow" Level="0" />
     <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="Rock" Level="0" />
     <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="Rock" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="Ascalon" Level="10" >
-    </Projectile>
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="Ascalon" Level="10" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="SkySplitter" Level="10" />
     <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0" >
       <Overrides Damage="2-3" />
     </Projectile>
