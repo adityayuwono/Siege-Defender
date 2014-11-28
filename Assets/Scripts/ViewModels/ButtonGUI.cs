@@ -4,11 +4,11 @@ using Scripts.ViewModels.GUIs;
 
 namespace Scripts.ViewModels
 {
-    public class Button : BaseGUI
+    public class ButtonGUI : BaseGUI
     {
         private readonly ButtonGUIModel _model;
 
-        public Button(ButtonGUIModel model, Object parent) : base(model, parent)
+        public ButtonGUI(ButtonGUIModel model, Base parent) : base(model, parent)
         {
             _model = model;
         }
