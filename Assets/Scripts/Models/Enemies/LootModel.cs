@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace Scripts.Models.Enemies
 {
@@ -9,5 +11,14 @@ namespace Scripts.Models.Enemies
 
         [XmlAttribute]
         public string ItemId { get; set; }
+
+        [XmlAttribute]
+        [DefaultValue(int.MaxValue)]
+        public int Max { get; set; }
+
+        public LootModel()
+        {
+            Max = int.MaxValue;
+        }
     }
 }

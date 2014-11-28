@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
+    /// <summary>
+    /// Body part of a Boss
+    /// Break when killed, will invoke OnDrop when the Boss is killed if it's Break
+    /// </summary>
     public class Limb : LivingObject
     {
         private readonly LimbModel _model;
@@ -25,16 +29,23 @@ namespace Scripts.ViewModels.Enemies
             return _parent.ApplyDamage(damageMultiplied, Vector3.zero);
         }
 
+        private bool _isBroken;
         public event Action OnBreak;
         protected override void OnKilled()
         {
-            base.OnKilled();
-
             if (OnBreak != null)
                 OnBreak();
 
+            _isBroken = true;
+
             if (!string.IsNullOrEmpty(_model.CollisionEffectBroken))
                 CollisionEffectNormal = _model.CollisionEffectBroken;
+        }
+
+        public void Kill()
+        {
+            if (_isBroken)
+                base.OnKilled();
         }
     }
 }

@@ -7,35 +7,74 @@ namespace Scripts.ViewModels.Enemies
     public class LootTable : Base
     {
         private readonly LootTableModel _model;
-
+        private readonly Random _randomizer;
         public LootTable(LootTableModel model, Base parent) : base(model, parent)
         {
             _model = model;
+            _randomizer = new Random();
+
+            foreach (var lootModel in _model.Loots)
+                _loots.Add(new Loot(lootModel));
         }
 
+        private readonly List<Loot> _loots = new List<Loot>(); 
+
         /// <summary>
-        /// Will give random items based on loot table, may return null if unlucky
+        /// Will give random items based on loot table
         /// </summary>
-        /// <returns>List of items, or null</returns>
+        /// <returns>List of items</returns>
         public List<Item> GetLoot()
         {
-            var randomizer = new Random();
+            foreach (var loot in _loots)
+            {
+                loot.Reset();
+            }
+
             var items = new List<Item>();
             for (var i = 0; i < _model.Drops; i++)
             {
-                foreach (var lootModel in _model.Loots)
+                foreach (var loot in _loots)
                 {
-                    var chance = randomizer.Next(100);
-                    if (chance < lootModel.Chance)
+                    var chance = _randomizer.Next(100);
+                    var item = loot.GetItemModel(Root, chance);
+                    if (item != null)
                     {
-                        var itemModel = Root.GetItemModel(lootModel.ItemId);
-                        itemModel.Type = itemModel.Id;
-                        items.Add(new Item(itemModel, Root));
+                        items.Add(item);
                         break;
                     }
                 }
             }
-            return items.Count > 0 ? items : null;
+            return items;
+        }
+
+        private class Loot
+        {
+            private readonly LootModel _model;
+            private int _max;
+
+            public Loot(LootModel model)
+            {
+                _model = model;
+                _max = _model.Max;
+            }
+            
+            public Item GetItemModel(EngineBase root, float chance)
+            {
+                if (_max > 0 && chance <= _model.Chance)
+                {
+                    var itemModel = root.GetItemModel(_model.ItemId);
+                    itemModel.Type = itemModel.Id;
+                    _max--;
+                    var item = new Item(itemModel, root);
+                    return item;
+                }
+                return null;
+            }
+
+            public void Reset()
+            {
+                _max = _model.Max;
+            }
         }
     }
 }

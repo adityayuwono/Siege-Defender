@@ -168,6 +168,14 @@ namespace Scripts.ViewModels.Enemies
             base.Hide(reason);
         }
 
+        protected override void OnKilled()
+        {
+            base.OnKilled();
+
+            foreach (var limb in _limbs)
+                limb.Kill();
+        }
+
         protected override void OnDeactivate()
         {
             if (_currentSkill != null)

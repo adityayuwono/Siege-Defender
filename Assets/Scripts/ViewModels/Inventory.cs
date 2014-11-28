@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Scripts.Core;
 using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class Inventory : Element
+    public class Inventory : Element, IContext
     {
         private readonly InventoryModel _model;
         public Inventory(InventoryModel model, Base parent) : base(model, parent)
         {
+            var prop = PropertyLookup;
             // Grab reference to Player's Inventory loaded from XML
             foreach (var inventoryModel in Root.PlayerSettingsModel.Inventories)
                 if (inventoryModel.Id == model.Source)
@@ -57,6 +60,18 @@ namespace Scripts.ViewModels
             if (OnChildrenChanged != null)
                 OnChildrenChanged();
         }
+
+        public PropertyLookup PropertyLookup
+        {
+            get
+            {
+                if (_propertyLookup == null)
+                    _propertyLookup = new PropertyLookup(Root, this);
+
+                return _propertyLookup;
+            }
+        }
+        private PropertyLookup _propertyLookup;
     }
 
     

@@ -14,12 +14,14 @@ namespace Scripts.Core
         {
             _engine = engine;
             _context = context;
+            _contexts.Add("This", context);
 
             if (engine != context)
                 _engine.PropertyLookup.RegisterContext(context);
         }
 
         private readonly Dictionary<string, IContext> _contexts = new Dictionary<string, IContext>();
+        private readonly Dictionary<string, Base> _children = new Dictionary<string, Base>();
         private void RegisterContext(IContext context)
         {
             if (_contexts.ContainsKey(context.Id))
@@ -30,34 +32,44 @@ namespace Scripts.Core
 
         public IContext GetContext(string contextId)
         {
-            if (contextId == "{This}") return _context;
-
-            contextId = contextId.Replace("{", "").Replace("}", "");
-
             if (!_contexts.ContainsKey(contextId))
-                throw new EngineException(_context, string.Format("Failed to find context: {0} in {1}", contextId, _context.Id));
+                return null;
 
             return _contexts[contextId];
         }
 
-        private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>();
-        public void RegisterProperty(Base viewModel, string id, Property property)
+        public Base GetChild(string childId)
         {
-            if (_properties.ContainsKey(id))
+            if (!_children.ContainsKey(childId))
+                return null;
+            return _children[childId];
+        }
+
+
+
+        private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>();
+        public void RegisterProperty(Base viewModel, string propertyId, Property property)
+        {
+            var viewModelId = viewModel == _context ? "This" : viewModel.Id;
+
+            if (!_children.ContainsKey(viewModelId))
+                _children.Add(viewModelId, viewModel);
+
+            if (_properties.ContainsKey(propertyId))
             {
                 // We already register that type of property, let's add to the list
-                var propertyDict = _properties[id];
-                if (propertyDict.ContainsKey(viewModel.Id))
+                var propertyDict = _properties[propertyId];
+                if (propertyDict.ContainsKey(viewModelId))
                     // Woops, duplicate
-                    throw new EngineException(_engine, string.Format("PropertyLookup: Failed to register property: {0} for ViewModel: {1}, Duplicate is found", id, viewModel.Id));
+                    throw new EngineException(_engine, string.Format("PropertyLookup: Failed to register property: {0} for ViewModel: {1}, Duplicate is found", propertyId, viewModel.Id));
 
                 // OK, everything is good, add a new property
-                propertyDict.Add(viewModel.Id, property);
+                propertyDict.Add(viewModelId, property);
             }
             else
             {
                 // No similar property registered yet, meaning this is the first of it's kind, momentous
-                _properties.Add(id, new Dictionary<string, Property> { { viewModel.Id, property } });
+                _properties.Add(propertyId, new Dictionary<string, Property> { { viewModelId, property } });
             }
         }
 
@@ -75,7 +87,7 @@ namespace Scripts.Core
         {
             // This is the last context, we simply get the property
             if (!_properties.ContainsKey(propertyId))
-                throw new EngineException(_engine, string.Format("PropertyLookup: Failed to find Property with Id: '{0}' of ViewModel: '{1}', the property is not registered", propertyId, viewModelId));
+                return null;
 
             // We got the properties, return the property owned by the viewmodel that we want
             var propertyDict = _properties[propertyId];
@@ -91,28 +103,63 @@ namespace Scripts.Core
         /// </summary>
         /// <param name="path">string </param>
         /// <returns>May return null</returns>
-        public Property GetProperty(string path)
+
+        public object GetProperty(string path)
         {
             if (path.StartsWith("{") && path.EndsWith("}"))
             {
                 path = path.Replace("{", "").Replace("}", "");
-                var bindingPath = path.Split('.');
 
-                if (bindingPath.Length == 2)
+                var paths = path.Split('.');
+
+                var context = _context;
+                for (var i = 0; i < paths.Length; i++)
                 {
-                    var foundProperty = GetProperty(bindingPath[0], bindingPath[1]);
-                    return foundProperty;
-                }
-                else
-                {
-                    if (bindingPath[0] == "Root")
+                    var currentPath = paths[i];
+
+                    if (currentPath == "Root")
                     {
-                        var foundProperty = _engine.PropertyLookup.GetContext(bindingPath[1]).PropertyLookup.GetProperty(bindingPath[2], bindingPath[3]);
-                        return foundProperty;
+                        context = _engine;
+                        continue;
                     }
+
+                    var isLast = i == paths.Length - 1;
+
+                    if (!isLast)
+                    {
+                        // As long as it's not the last one, keep iterating through context
+                        var newContext = context.PropertyLookup.GetContext(currentPath);
+                        if (newContext != null)
+                        {
+                            context = newContext;
+                            continue;
+                        }
+
+                        return context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+                    }
+                    if (paths.Length == 1)
+                    {
+                        return context.PropertyLookup.GetContext(currentPath);
+                    }
+                    
+
+                    // Try for a property, if it is found then return it
+                    var tryProperty = context.PropertyLookup.GetProperty(paths[i - 1], currentPath);
+                    if (tryProperty != null)
+                        return tryProperty;
+
+                    // No Property found, then look for a context
+                    var tryContext = context.PropertyLookup.GetContext(currentPath);
+                    if (tryContext != null)
+                        return tryContext;
+
+                    var tryChild = context.PropertyLookup.GetChild(currentPath);
+                    if (tryChild != null)
+                        return tryChild;
                 }
             }
 
+            // Yeah... nothing
             return null;
         }
 
