@@ -13,7 +13,7 @@ namespace Scripts.ViewModels.Enemies
     public class LivingObject : Object
     {
         private readonly LivingObjectModel _model;
-        public LivingObject(LivingObjectModel model, Base parent) : base(model, parent)
+        protected LivingObject(LivingObjectModel model, Base parent) : base(model, parent)
         {
             _model = model;
 

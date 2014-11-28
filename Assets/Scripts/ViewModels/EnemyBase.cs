@@ -10,7 +10,7 @@ namespace Scripts.ViewModels
     {
         private readonly EnemyBaseModel _model;
 
-        public EnemyBase(EnemyBaseModel model, Object parent) : base(model, parent)
+        public EnemyBase(EnemyBaseModel model, Base parent) : base(model, parent)
         {
             _model = model;
 

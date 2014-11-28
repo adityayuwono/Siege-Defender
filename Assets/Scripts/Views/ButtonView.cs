@@ -5,9 +5,9 @@ namespace Scripts.Views
 {
     public class ButtonView : ElementView
     {
-        private readonly Button _viewModel;
+        private readonly ButtonGUI _viewModel;
 
-        public ButtonView(Button viewModel, ObjectView parent) : base(viewModel, parent)
+        public ButtonView(ButtonGUI viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }

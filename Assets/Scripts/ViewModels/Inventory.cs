@@ -9,7 +9,7 @@ namespace Scripts.ViewModels
     public class Inventory : Element
     {
         private readonly InventoryModel _model;
-        public Inventory(InventoryModel model, Object parent) : base(model, parent)
+        public Inventory(InventoryModel model, Base parent) : base(model, parent)
         {
             // Grab reference to Player's Inventory loaded from XML
             foreach (var inventoryModel in Root.PlayerSettingsModel.Inventories)
