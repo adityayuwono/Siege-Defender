@@ -32,13 +32,9 @@ namespace Scripts.ViewModels.Actions
             if (parentContext == null)
                 throw new EngineException(this, "Failed to find parent Context");
             
-            var property = parentContext.PropertyLookup.GetProperty(_model.Target.Replace("This", parentContext.Id));
+            var property = parentContext.PropertyLookup.GetProperty(_model.Target);
             if (property != null)
                 return property;
-
-            var context = parentContext.PropertyLookup.GetContext(_model.Target);
-            if (context != null)
-                return context;
 
             throw new EngineException(this, string.Format("Failed to find Target: {0}", _model.Target));
         }
