@@ -9,5 +9,10 @@ namespace Scripts.Models
     {
         [XmlAttribute]
         public string LevelId { get; set; }
+
+        public LoadSceneActionModel()
+        {
+            Target = "";
+        }
     }
 }

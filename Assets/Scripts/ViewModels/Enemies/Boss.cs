@@ -127,7 +127,7 @@ namespace Scripts.ViewModels.Enemies
                         // Cache the interrupt events
                         // This is need to be done before: _currentSkill.Interrupt(false)
                         var interruptEvents = OnInterrupt;
-
+                        
                         if (_currentSkill.Interrupt(false))
                         {
                             _currentSkill = null;
