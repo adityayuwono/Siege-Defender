@@ -1,5 +1,4 @@
-﻿using System;
-using Scripts.Helpers;
+﻿using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -136,7 +135,7 @@ namespace Scripts.Views
 
             // Start the death animation, if any
             if (_animator != null)
-                _animator.SetBool("IsDead", true);
+                _viewModel.AnimationId.SetValue("IsDead");
             else
             {
                 var animation = GameObject.GetComponent<Animation>();
