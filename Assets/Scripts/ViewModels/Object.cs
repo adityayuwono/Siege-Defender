@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -20,12 +19,15 @@ namespace Scripts.ViewModels
                 throw new EngineException(this, "No Asset defined");
 
             // Instantiate children elements
-            foreach (var elementModel in _model.Elements)
+            if (_model.Elements != null)
             {
-                var elementVM = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
-                if (elementVM == null)
-                    throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
-                Elements.Add(elementVM);
+                foreach (var elementModel in _model.Elements)
+                {
+                    var elementVM = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
+                    if (elementVM == null)
+                        throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
+                    Elements.Add(elementVM);
+                }
             }
 
             _position = _model.Position.ParseVector3();
