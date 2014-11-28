@@ -12,11 +12,14 @@ namespace Scripts.ViewModels.Enemies
         {
             _model = model;
 
-            foreach (var conditionModel in _model.Conditions)
+            if (_model.Conditions != null)
             {
-                // Get new instance of ActionVM
-                var conditionViewModel = Root.IoCContainer.GetInstance<BaseCondition>(conditionModel.GetType(), new object[] { conditionModel, this });
-                _conditions.Add(conditionViewModel);
+                foreach (var conditionModel in _model.Conditions)
+                {
+                    // Get new instance of ActionVM
+                    var conditionViewModel = Root.IoCContainer.GetInstance<BaseCondition>(conditionModel.GetType(), new object[] {conditionModel, this});
+                    _conditions.Add(conditionViewModel);
+                }
             }
 
             _actions = new ActionCollection(_model.Actions, this);
@@ -97,7 +100,7 @@ namespace Scripts.ViewModels.Enemies
                     break;
                 case Event.Click:
                 {
-                    var parentButton = _parentObject as Button;
+                    var parentButton = _parentObject as ButtonGUI;
                     if (parentButton != null)
                         parentButton.OnClick += InvokeEvent;
                 }
@@ -172,7 +175,7 @@ namespace Scripts.ViewModels.Enemies
                     break;
                 case Event.Click:
                 {
-                    var parentButton = _parentObject as Button;
+                    var parentButton = _parentObject as ButtonGUI;
                     if (parentButton != null)
                         parentButton.OnClick -= InvokeEvent;
                 }

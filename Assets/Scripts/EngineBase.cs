@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Scripts.Components;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
@@ -50,24 +50,29 @@ namespace Scripts
             base.OnLoad();
 
             // Keep reference of every ObjectModel in a Dictionary for faster lookup
-            foreach (var objectModel in _model.Objects)
-                _objectModels.Add(objectModel.Id, objectModel);
+            if (_model.Objects != null)
+                foreach (var objectModel in _model.Objects)
+                    _objectModels.Add(objectModel.Id, objectModel);
 
-            foreach (var objectModel in _model.Items)
-                _items.Add(objectModel.Id, objectModel);
+            if (_model.Items != null)
+                foreach (var objectModel in _model.Items)
+                    _items.Add(objectModel.Id, objectModel);
 
             // Register all Loot Tables
-            foreach (var lootTableModel in _model.LootTables)
+            if (_model.LootTables != null)
             {
-                var id = lootTableModel.Id;
-                
-                if (string.IsNullOrEmpty(id))
-                    throw new EngineException(this, "Failed to register <LootTable>, <LootTable> need id");
+                foreach (var lootTableModel in _model.LootTables)
+                {
+                    var id = lootTableModel.Id;
 
-                if (_lootTables.ContainsKey(id))
-                    throw new EngineException(this, string.Format("Duplicate <LootTable> id: {0}", id));
+                    if (string.IsNullOrEmpty(id))
+                        throw new EngineException(this, "Failed to register <LootTable>, <LootTable> need id");
 
-                _lootTables.Add(id, new LootTable(lootTableModel, this));
+                    if (_lootTables.ContainsKey(id))
+                        throw new EngineException(this, string.Format("Duplicate <LootTable> id: {0}", id));
+
+                    _lootTables.Add(id, new LootTable(lootTableModel, this));
+                }
             }
         }
 
@@ -120,7 +125,7 @@ namespace Scripts
         #endregion
 
         #region Loot Table
-        private readonly Dictionary<string, LootTable> _lootTables = new Dictionary<string, LootTable>();
+        protected readonly Dictionary<string, LootTable> _lootTables = new Dictionary<string, LootTable>();
         public List<Item> GetLoot(string lootTableId)
         {
             if (_lootTables.ContainsKey(lootTableId))
@@ -128,7 +133,7 @@ namespace Scripts
 
             throw new EngineException(this, string.Format("There's no loot table with id: {0}", lootTableId));
         }
-        private readonly Dictionary<string, ItemModel> _items = new Dictionary<string, ItemModel>(); 
+        protected readonly Dictionary<string, ItemModel> _items = new Dictionary<string, ItemModel>(); 
         #region Items
         public ItemModel GetItemModel(string itemId)
         {
@@ -158,7 +163,7 @@ namespace Scripts
             // GUIs
             IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
             IoCContainer.RegisterFor<ItemModel>().TypeOf<Object>().To<Item>();
-            IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<Button>();
+            IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<ButtonGUI>();
             IoCContainer.RegisterFor<ProgressBarGUIModel>().TypeOf<Object>().To<ProgressBarGUI>();
             IoCContainer.RegisterFor<CooldownGUIModel>().TypeOf<Object>().To<CooldownGUI>();
             IoCContainer.RegisterFor<ShooterGUIModel>().TypeOf<Object>().To<ShooterGUI>();
@@ -184,6 +189,7 @@ namespace Scripts
             IoCContainer.RegisterFor<MoveActionModel>().TypeOf<BaseAction>().To<MoveAction>();
             IoCContainer.RegisterFor<StartSpecialEventModel>().TypeOf<BaseAction>().To<StartSpecialEventAction>();
             IoCContainer.RegisterFor<SpecialEffectActionModel>().TypeOf<BaseAction>().To<SpecialEffectAction>();
+            IoCContainer.RegisterFor<CreateItemActionModel>().TypeOf<BaseAction>().To<CreateItemAction>();
             IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<BaseCondition>().To<ValueCondition>();
             IoCContainer.RegisterFor<RandomConditionModel>().TypeOf<BaseCondition>().To<RandomCondition>();
             // Triggers
@@ -220,7 +226,27 @@ namespace Scripts
         {
             throw new System.NotImplementedException();
         }
-        
+
+        /// <summary>
+        /// Logs event to Analytics
+        /// </summary>
+        /// <param name="eventCategory"></param>
+        /// <param name="eventAction"></param>
+        /// <param name="eventLabel"></param>
+        /// <param name="value"></param>
+        public virtual void LogEvent(string eventCategory, string eventAction, string eventLabel, long value)
+        {
+            Console.WriteLine(string.Format("Logging: {0} {1} {2} {3}", eventCategory, eventAction, eventLabel, value));
+
+            // Validate event
+            if (string.IsNullOrEmpty(eventCategory))
+                throw new EngineException(this, "Parameter: 'eventCategory' can't be null");
+            if (string.IsNullOrEmpty(eventAction))
+                throw new EngineException(this, "Parameter: 'eventAction' can't be null");
+            if (string.IsNullOrEmpty(eventLabel))
+                throw new EngineException(this, "Parameter: 'eventLabel' can't be null");
+        }
+
         #endregion
 
         #region View Model Lookup
