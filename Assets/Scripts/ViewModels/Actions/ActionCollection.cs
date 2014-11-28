@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Scripts.Helpers;
 using Scripts.Models.Actions;
-using Scripts.ViewModels.Enemies;
-using UnityEngine;
 
 namespace Scripts.ViewModels.Actions
 {
@@ -104,7 +101,9 @@ namespace Scripts.ViewModels.Actions
 
         public bool Interrupt(bool absolute = true)
         {
-            if (absolute || _isInterruptable)
+            var isInterruptable = absolute || _isInterruptable;
+
+            if (isInterruptable)
             {
                 _parent.Root.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
                 OnActivationFinished = null;
@@ -112,7 +111,7 @@ namespace Scripts.ViewModels.Actions
                 DeactivateActions();
             }
 
-            return _isInterruptable;
+            return isInterruptable;
         }
 
         public void Deactivate()

@@ -68,7 +68,7 @@ namespace Scripts.ViewModels.Enemies
             if (isInterruptSuccessful)
             {
                 ActivationFinished = null;
-                Action_OnActivationFinished();
+                Deactivate("Skill is interrupted");// Deactivate directly, and avoid any further activation
             }
             return isInterruptSuccessful;
         }
