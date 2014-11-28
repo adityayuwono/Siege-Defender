@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -28,7 +29,7 @@ namespace SiegeDefenderTests.Stubs
         {
             get { return _intervalRunner; }
         }
-
+        
         public void AddLootTable(LootTable lootTable)
         {
             _lootTables.Add(lootTable.Id, lootTable);
@@ -47,21 +48,29 @@ namespace SiegeDefenderTests.Stubs
 
     public class IntervalRunnerStub : IIntervalRunner
     {
-        private readonly List<Action> _subscribedActions = new List<Action>();
+        private readonly Dictionary<Action, float> _subscribedActions = new Dictionary<Action, float>();
 
         public void SubscribeToInterval(Action action, float delay = 0, bool startImmediately = true)
         {
-            _subscribedActions.Add(action);
+            _subscribedActions.Add(action, delay);
         }
 
         public bool UnsubscribeFromInterval(Action action)
         {
-            if (!_subscribedActions.Contains(action))
-                return false;
+            foreach (var subscribedAction in _subscribedActions.ToArray())
+                if (subscribedAction.Key == action)
+                    return _subscribedActions.Remove(subscribedAction.Key);
 
-            _subscribedActions.Remove(action);
-            
-            return true;
+            return false;
+        }
+
+        public void UpdateTime(float timeElapsed)
+        {
+            foreach (var subscribedAction in _subscribedActions.ToArray())
+            {
+                if (subscribedAction.Value < timeElapsed)
+                    subscribedAction.Key();
+            }
         }
     }
 }
