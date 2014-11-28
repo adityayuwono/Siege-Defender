@@ -17,6 +17,10 @@ namespace Scripts.ViewModels.Enemies
         {
             _model = model;
 
+            // Validate Model
+            if (string.IsNullOrEmpty(_model.Type))
+                throw new EngineException(this, string.Format("Type for: {0} is empty", FullId));
+
             Health = new AdjustableProperty<float>("Health", this);
             CollisionEffectNormal = _model.CollisionEffectNormal;
 
