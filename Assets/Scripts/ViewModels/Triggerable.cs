@@ -21,20 +21,20 @@ namespace Scripts.ViewModels
 
         private readonly List<Triggered> _triggers = new List<Triggered>();
 
-        protected override void OnActivate()
+        public override void Show()
         {
-            base.OnActivate();
-            
+            base.Show();
+
             foreach (var triggered in _triggers)
                 triggered.Activate();
         }
 
-        protected override void OnDeactivate()
+        public override void Hide(string reason)
         {
             foreach (var triggered in _triggers)
                 triggered.Deactivate("Triggerable is deactivated");
 
-            base.OnDeactivate();
+            base.Hide(reason);
         }
     }
 }
