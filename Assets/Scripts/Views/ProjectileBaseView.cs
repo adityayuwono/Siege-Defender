@@ -36,6 +36,13 @@ namespace Scripts.Views
             _viewModel.Root.StartCoroutine(DelayedHiding(reason));
         }
 
+        protected override void OnDestroy()
+        {
+            _collisionController = null;
+
+            base.OnDestroy();
+        }
+
         private IEnumerator DelayedHiding(string reason)
         {
             yield return new WaitForSeconds(_viewModel.HideDelay);
