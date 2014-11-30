@@ -15,8 +15,8 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            if (string.IsNullOrEmpty(_model.AssetId))
-                throw new EngineException(this, "No Asset defined");
+            //if (string.IsNullOrEmpty(_model.AssetId))
+            //    throw new EngineException(this, "No Asset defined");
 
             // Instantiate children elements
             if (_model.Elements != null)
