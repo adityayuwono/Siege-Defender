@@ -62,12 +62,12 @@ namespace Scripts
             // Logs exception to google analytics
             GoogleAnalytics.LogException(message, false);
         }
+
         private void OnGUI()
         {
+            // TODO: Remove this in actual build, OnGUI is heavy in mobile
             if (!string.IsNullOrEmpty(_lastErrorMessage))
-            {
-                GUI.Label(new Rect(0,50,Screen.width, Screen.height), _lastErrorMessage);
-            }
+                GUI.Label(new Rect(0, 50, Screen.width, Screen.height), _lastErrorMessage);
         }
         #endregion
     }

@@ -224,7 +224,7 @@ namespace Scripts
 
         public virtual void ThrowError(string message)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public virtual void LogScreen(string screenId)

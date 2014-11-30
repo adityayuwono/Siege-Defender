@@ -102,6 +102,8 @@ namespace Scripts
             Serializer.SaveObjectToXML(_playerSettingsModel);
         }
 
+        #region Analytics Log
+
         public override void LogScreen(string screenId)
         {
             base.LogScreen(screenId);
@@ -115,5 +117,7 @@ namespace Scripts
 
             _context.GoogleAnalytics.LogEvent(eventCategory, eventAction, eventLabel, value);
         }
+
+        #endregion
     }
 }
