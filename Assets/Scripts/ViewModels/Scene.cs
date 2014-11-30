@@ -20,6 +20,7 @@ namespace Scripts.ViewModels
 
         public void Activate(string levelId)
         {
+            Root.LogScreen(Id);
             _levelId = levelId;
             Activate();
         }
