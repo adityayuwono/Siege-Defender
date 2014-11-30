@@ -241,7 +241,7 @@ namespace Scripts
         /// <param name="value"></param>
         public virtual void LogEvent(string eventCategory, string eventAction, string eventLabel, long value)
         {
-            Console.WriteLine(string.Format("Logging: {0} {1} {2} {3}", eventCategory, eventAction, eventLabel, value));
+            Console.WriteLine("Logging Event: {0} {1} {2} {3}", eventCategory, eventAction, eventLabel, value);
 
             // Validate event
             if (string.IsNullOrEmpty(eventCategory))
