@@ -12,29 +12,32 @@ namespace Scripts.ViewModels
         {
             _model = model;
 
-            foreach (var triggeredModel in _model.Triggers)
+            if (_model.Triggers != null)
             {
-                var triggered = Root.IoCContainer.GetInstance<Triggered>(triggeredModel.GetType(), new object[] {triggeredModel, this});
-                _triggers.Add(triggered);
+                foreach (var triggeredModel in _model.Triggers)
+                {
+                    var triggered = Root.IoCContainer.GetInstance<Triggered>(triggeredModel.GetType(), new object[] {triggeredModel, this});
+                    _triggers.Add(triggered);
+                }
             }
         }
 
         private readonly List<Triggered> _triggers = new List<Triggered>();
 
-        public override void Show()
+        protected override void OnActivate()
         {
-            base.Show();
+            base.OnActivate();
 
             foreach (var triggered in _triggers)
                 triggered.Activate();
         }
 
-        public override void Hide(string reason)
+        protected override void OnDeactivate()
         {
             foreach (var triggered in _triggers)
                 triggered.Deactivate("Triggerable is deactivated");
 
-            base.Hide(reason);
+            base.OnDeactivate();
         }
     }
 }

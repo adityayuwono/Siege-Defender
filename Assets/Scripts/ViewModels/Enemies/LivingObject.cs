@@ -81,6 +81,11 @@ namespace Scripts.ViewModels.Enemies
             return true;
         }
 
+        protected bool IsDead
+        {
+            get { return Health.GetValue() <= 0; }
+        }
+
         public event Action Death;
         /// <summary>
         /// Called once when damage taken is greater or equal to Health

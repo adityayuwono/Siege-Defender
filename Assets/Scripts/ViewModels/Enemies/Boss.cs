@@ -46,6 +46,13 @@ namespace Scripts.ViewModels.Enemies
         public readonly AdjustableProperty<string> ActiveSkill;
         private void ActivateSkill()
         {
+            // Only activate skill if Boss is still alive
+            if (IsDead)
+            {
+                ActiveSkill.SetValue("");
+                return;
+            }
+
             var skillIdToActivate = ActiveSkill.GetValue();
             var skillSplit = skillIdToActivate.Split('|');// Check for Skill Queue definition, only support 1 at queue for now
             skillIdToActivate = skillSplit[0];// The first value defined is the one we want active now
