@@ -227,6 +227,11 @@ namespace Scripts
             throw new System.NotImplementedException();
         }
 
+        public virtual void LogScreen(string screenId)
+        {
+            Console.WriteLine("Logging Screen: {0}", screenId);
+        }
+
         /// <summary>
         /// Logs event to Analytics
         /// </summary>

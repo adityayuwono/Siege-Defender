@@ -102,8 +102,17 @@ namespace Scripts
             Serializer.SaveObjectToXML(_playerSettingsModel);
         }
 
+        public override void LogScreen(string screenId)
+        {
+            base.LogScreen(screenId);
+
+            _context.GoogleAnalytics.LogScreen(screenId);
+        }
+
         public override void LogEvent(string eventCategory, string eventAction, string eventLabel, long value)
         {
+            base.LogEvent(eventCategory, eventAction, eventLabel, value);
+
             _context.GoogleAnalytics.LogEvent(eventCategory, eventAction, eventLabel, value);
         }
     }
