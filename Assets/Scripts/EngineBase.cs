@@ -291,6 +291,11 @@ namespace Scripts
 
         #region Scenes
         private Scene _currentScene;
+
+        protected Dictionary<string, Scene> Scenes
+        {
+            get { return _scenes; }
+        }
         private readonly Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
 
         public Scene ChangeScene(string sceneId, string levelId = "")

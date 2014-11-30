@@ -4,6 +4,7 @@ using System.Linq;
 using Scripts;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.ViewModels;
 using Scripts.ViewModels.Enemies;
 
 namespace SiegeDefenderTests.Stubs
@@ -43,6 +44,11 @@ namespace SiegeDefenderTests.Stubs
         public override void Save()
         {
             Console.WriteLine("Saving...");
+        }
+
+        public void AddScene(Scene newScene)
+        {
+            Scenes.Add(newScene.Id, newScene);
         }
     }
 
