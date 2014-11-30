@@ -307,7 +307,7 @@ namespace Scripts
                 _currentScene.Destroy(); // Destroy scenes when they are not needed anymore to clear memory
             }
 
-            // I think it's save enough to show a new one, let's hope i'm right
+            // I think it's save enough to show a new one
             _currentScene = _scenes[sceneId];
             _currentScene.Activate(levelId);
             _currentScene.Show();
