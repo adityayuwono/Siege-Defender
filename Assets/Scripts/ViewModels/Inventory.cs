@@ -123,6 +123,7 @@ namespace Scripts.ViewModels
                 throw new EngineException(this, string.Format("Failed to Find a projectile model with id: {0}", _model.Base));
 
             var newProjectileModel = Copier.CopyAs<ProjectileModel>(baseProjectileModel);
+            newProjectileModel.Type = newProjectileModel.Id;// Assign appropriate Id
             newProjectileModel.Id = baseProjectileModel.Id + "_" + Guid.NewGuid();
 
             var overriderModel = _model.Overrides;

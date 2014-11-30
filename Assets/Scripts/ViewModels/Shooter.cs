@@ -66,6 +66,13 @@ namespace Scripts.ViewModels
             IsShooting.SetValue(false);
         }
 
+        public override void Show()
+        {
+            base.Show();
+
+            Root.LogEvent("Weapon Usage", _projectileModel.Type, _projectileModel.Damage, 1);
+        }
+
         protected override void OnDestroyed()
         {
             _projectileBinding.OnChange -= Projectile_OnChange;
