@@ -58,6 +58,9 @@ namespace Scripts
         public void ThrowError(string message)
         {
             _lastErrorMessage = message;
+
+            // Logs exception to google analytics
+            GoogleAnalytics.LogException(message, false);
         }
         private void OnGUI()
         {
