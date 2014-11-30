@@ -4,6 +4,7 @@ using NUnit.Framework;
 using Scripts.Models.Actions;
 using Scripts.Models.Enemies;
 using Scripts.ViewModels.Enemies;
+using UnityEngine;
 
 namespace SiegeDefenderTests.Tests
 {
@@ -119,6 +120,40 @@ namespace SiegeDefenderTests.Tests
             boss.ActiveSkill.SetValue(interruptSkillId);
             
             Assert.AreEqual(interruptSkillId, boss.ActiveSkill.GetValue());
+        }
+
+        [Test]
+        public void DoesntActivateSkillWhenDead()
+        {
+            var skillId = "Skill_" + Guid.NewGuid();
+
+            var bossModel = new BossModel
+            {
+                Type = "TestBoss",
+                AssetId = "TestBoss",
+                Skills = new List<SkillModel>
+                {
+                    new SkillModel
+                    {
+                        Id = skillId,
+                        Actions = new List<BaseActionModel>
+                        {
+                            new SetterActionModel {IsInterruptable = true}
+                        }
+                    }
+                }
+            };
+
+            var boss = new Boss(bossModel, EngineBase);
+            boss.Activate();
+            boss.Show();
+
+
+            boss.ApplyDamage(2, Vector3.zero);// Kill the boss
+            boss.ActiveSkill.SetValue(skillId);
+
+
+            Assert.IsTrue(string.IsNullOrEmpty(boss.ActiveSkill.GetValue()));
         }
 
         [Test]
