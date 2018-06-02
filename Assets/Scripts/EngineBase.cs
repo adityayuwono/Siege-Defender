@@ -174,6 +174,7 @@ namespace Scripts
             IoCContainer.RegisterFor<AoEModel>().TypeOf<Object>().To<AoE>();
             IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<Object>().To<ParticleAoE>();
 
+	        IoCContainer.RegisterFor<StaticEnemyModel>().TypeOf<Object>().To<StaticEnemy>();
             IoCContainer.RegisterFor<EnemyBaseModel>().TypeOf<Object>().To<EnemyBase>();
             IoCContainer.RegisterFor<BossModel>().TypeOf<Object>().To<Boss>();
             IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<Object>().To<DamageGUI>();

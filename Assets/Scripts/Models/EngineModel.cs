@@ -9,10 +9,12 @@ namespace Scripts.Models
     public class EngineModel : BaseModel
     {
         [XmlArray]
+        [XmlArrayItem(ElementName = "StaticEnemy", Type = typeof(StaticEnemyModel))]
         [XmlArrayItem(ElementName = "Enemy", Type = typeof(EnemyBaseModel))]
+        [XmlArrayItem(ElementName = "Boss", Type = typeof(BossModel))]
+
         [XmlArrayItem(ElementName = "Object", Type = typeof(ObjectModel))]
         [XmlArrayItem(ElementName = "SpecialEffect", Type = typeof(SpecialEffectModel))]
-        [XmlArrayItem(ElementName = "Boss", Type = typeof(BossModel))]
         [XmlArrayItem(ElementName = "Projectile", Type = typeof(ProjectileModel))]
         [XmlArrayItem(ElementName = "Piercing", Type = typeof(PiercingProjectileModel))]
         [XmlArrayItem(ElementName = "AoE", Type = typeof(AoEModel))]

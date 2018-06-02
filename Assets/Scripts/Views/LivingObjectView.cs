@@ -11,7 +11,7 @@ namespace Scripts.Views
         private static readonly System.Random ProjectileRootIndexRandomizer = new System.Random();
 
         private readonly LivingObject _viewModel;
-
+	    private readonly List<Transform> _projectileRooTransform = new List<Transform>();
 
         public LivingObjectView(LivingObject viewModel, ObjectView parent) : base(viewModel, parent)
         {
@@ -50,6 +50,12 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
+	        var animation = GameObject.GetComponent<Animation>();
+	        if (animation != null)
+	        {
+		        animation.CrossFade("Death");
+	        }
+
             _viewModel.SpecialEffect.OnChange -= SpecialEffect_OnChange;
 
             base.OnHide(reason);
@@ -67,8 +73,6 @@ namespace Scripts.Views
             _viewModel.Root.SpecialEffectManager.DisplaySpecialEffect(_viewModel.SpecialEffect.GetValue(), _viewModel);
         }
 
-
-        private readonly List<Transform> _projectileRooTransform = new List<Transform>();
         private void AttachProjectileToSelf(ProjectileBase projectile)
         {
             var projectileView = _viewModel.Root.GetView<ProjectileView>(projectile);

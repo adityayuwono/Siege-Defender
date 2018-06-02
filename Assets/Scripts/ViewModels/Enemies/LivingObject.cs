@@ -12,6 +12,8 @@ namespace Scripts.ViewModels.Enemies
     /// </summary>
     public class LivingObject : Object
     {
+	    public event Action Death;
+
         private readonly LivingObjectModel _model;
         protected LivingObject(LivingObjectModel model, Base parent) : base(model, parent)
         {
@@ -86,7 +88,6 @@ namespace Scripts.ViewModels.Enemies
             get { return Health.GetValue() <= 0; }
         }
 
-        public event Action Death;
         /// <summary>
         /// Called once when damage taken is greater or equal to Health
         /// </summary>

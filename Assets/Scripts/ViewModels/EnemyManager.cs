@@ -1,9 +1,10 @@
 ﻿using Scripts.Core;
 using Scripts.Models;
+using Scripts.ViewModels.Enemies;
 
 namespace Scripts.ViewModels
 {
-    public class EnemyManager : Interval<EnemyBase>
+    public class EnemyManager : Interval<LivingObject>
     {
         private readonly EnemyManagerModel _model;
 
@@ -71,7 +72,7 @@ namespace Scripts.ViewModels
 
             for (var i = 0; i < count; i++)
             {
-                var enemy = GetObject<EnemyBase>(enemyId, GetParent<Scene>());
+                var enemy = GetObject<LivingObject>(enemyId, GetParent<Scene>());
                 enemy.Activate(this);
                 enemy.Show();
             }

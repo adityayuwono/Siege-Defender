@@ -14,10 +14,16 @@ namespace Scripts.Components
         private readonly List<IntervalSubscriber> _intervals = new List<IntervalSubscriber>();
         public void SubscribeToInterval(Action action, float delay = 0f, bool startImmediately = true)
         {
-            if (!IsContainInterval(action))
-                _intervals.Add(new IntervalSubscriber(action, delay, startImmediately));
-            else
-                throw new Exception(string.Format("Multiple registration of {0}", action));
+	        if (!IsContainInterval(action))
+	        {
+		        _intervals.Add(new IntervalSubscriber(action, delay, startImmediately));
+	        }
+	        else
+	        {
+#if UNITY_EDITOR
+		        throw new Exception(string.Format("Multiple registration of {0}", action));
+#endif
+	        }
         }
 
         public bool UnsubscribeFromInterval(Action action)

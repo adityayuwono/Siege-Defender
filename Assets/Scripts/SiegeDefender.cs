@@ -39,7 +39,9 @@ namespace Scripts
             IoCContainer.RegisterFor<PiercingProjectile>().TypeOf<BaseView>().To<PiercingProjectileView>();
             IoCContainer.RegisterFor<AoE>().TypeOf<BaseView>().To<AoEView>();
             IoCContainer.RegisterFor<ParticleAoE>().TypeOf<BaseView>().To<ParticleAoEView>();
-            IoCContainer.RegisterFor<EnemyBase>().TypeOf<BaseView>().To<EnemyBaseView>();
+	        
+	        IoCContainer.RegisterFor<StaticEnemy>().TypeOf<BaseView>().To<StaticEnemyView>();
+	        IoCContainer.RegisterFor<EnemyBase>().TypeOf<BaseView>().To<EnemyBaseView>();
             IoCContainer.RegisterFor<Boss>().TypeOf<BaseView>().To<BossView>();
             IoCContainer.RegisterFor<Limb>().TypeOf<BaseView>().To<LimbView>();
 

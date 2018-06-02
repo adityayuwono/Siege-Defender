@@ -69,8 +69,8 @@
         </EventTrigger>
       </Triggers>
     </Enemy>
-    <Enemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
-    <Enemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+    <StaticEnemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
+    <StaticEnemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
         <EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
       </Elements>
@@ -78,16 +78,16 @@
         <Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
           <RandomCondition Target="{This}" Frequency="4" Value="50" />
           <!-- Percentage -->
-          <Condition Target="{SpiderSpawn.ActiveObjects}" Value="\1" />
-          <Setter Target="{SpiderSpawn.Level}" Value="SpawnSpiders" />
+          <Condition Target="{SpiderSpawn1.ActiveObjects}" Value="\1" />
+          <Setter Target="{SpiderSpawn1.Level}" Value="SpawnSpiders" />
         </Trigger>
       </Triggers>
-    </Enemy>
-    <Enemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	Health="150"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+    </StaticEnemy>
+    <StaticEnemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" 	Health="150"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
-        <EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
+        <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
       </Elements>
-    </Enemy>
+    </StaticEnemy>
     <Boss  Id="ZombieAbomination" 		AssetId="Enemies/ZombieAbomination" 	Health="9325" 	Speed="2" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
       <Elements>

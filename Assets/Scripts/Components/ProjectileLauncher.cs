@@ -5,7 +5,7 @@ namespace Scripts.Components
 	public class ProjectileLauncher : MonoBehaviour
 	{
 		private Rigidbody _rigidbody;
-		private float _duration = 0.1f;
+		private float _duration = 0.03f;
 		private float _strength;
 		private void FixedUpdate()
 		{

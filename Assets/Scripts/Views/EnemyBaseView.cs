@@ -1,4 +1,5 @@
-﻿using Scripts.Helpers;
+﻿using Scripts.Components;
+using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,99 +10,103 @@ namespace Scripts.Views
     {
         private readonly EnemyBase _viewModel;
 
+		private Transform _targetTransform;
+	    private string _lastAnimationValue;
+
         public EnemyBaseView(EnemyBase viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }
 
-        private Animator _animator;
-        private Animation _animation;
-        
+	    protected GameObject CharacterRoot
+	    {
+		    get
+		    {
+			    if (_character == null)
+			    {
+				    var characterRoot = Transform.Find(Values.Defaults.BOSS_CHARACTER_ROOT_TAG);
+				    if (characterRoot != null)
+				    {
+					    CharacterTransform = characterRoot;
+					    _character = characterRoot.gameObject;
+					    _character.AddComponent<ViewModelController>().ViewModel = _viewModel;
+				    }
+			    }
+			    return _character;
+		    }
+	    }
+	    private GameObject _character;
+
+		protected Transform CharacterTransform { get; private set; }
+
+		protected Animator Animator { get; private set; }
+
         protected override void OnLoad()
         {
             base.OnLoad();
 
-            _animator = GetAnimator();
+            Animator = GetAnimator();
 
-            if (_viewModel.Target != null)
-            {
-                var targetTransform = _viewModel.Root.GetView<ObjectView>(_viewModel.Target).Transform;
-                _targetTransform = targetTransform;
-            }
+	        LoadTarget();
         }
 
-        protected override void OnShow()
+	    protected virtual void LoadTarget()
+	    {
+		    var targetTransform = _viewModel.Root.GetView<ObjectView>(_viewModel.Target).Transform;
+		    _targetTransform = targetTransform;
+	    }
+
+	    protected override void OnShow()
         {
             base.OnShow();
+	        
+	        _viewModel.AnimationId.OnChange += Animation_OnChange;
 
-            if (_targetTransform != null)
-            {
-                // make the enemy look directly at the player
-                Transform.LookAt(_targetTransform);
-
-                // Need to reset x rotation to make sure we are walking straight
-                var currentRotation = Transform.localEulerAngles;
-                currentRotation.x = 0;
-                Transform.localEulerAngles = currentRotation;
-            }
-            else
-            {
-                var randomRotation = 180f + (Random.value*Random.Range(-1, 2)*_viewModel.Rotation);
-                Transform.localEulerAngles = new Vector3(0, randomRotation, 0);
-            }
-
-            // TODO: This is checking for both Legacy and Mecanim, it should not
-            // Mecanim is only used in bosses
-            if (_animator != null)
-            {
-                _viewModel.AnimationId.OnChange += Animation_OnChange;
-                _animator.SetBool("IsDead", false);
-                BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
-            }
-            else
-            {
-                _animation = GameObject.GetComponent<Animation>();
-                if (_animation != null)
-                {
-                    _animation.Play("Spawn");
-                    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
-                }
-            }
+	        AdjustRotation();
+			StartWalking();
 
             _viewModel.OnSpawn();
         }
 
-        private Transform _targetTransform;
+	    protected virtual void AdjustRotation()
+	    {
+			// make the enemy look directly at the player
+		    Transform.LookAt(_targetTransform);
 
-        private void StartWalkAnimationSubscription()
-        {
-            _viewModel.OnWalk();
+		    // Need to reset x rotation to make sure we are walking straight
+		    var currentRotation = Transform.localEulerAngles;
+		    currentRotation.x = 0;
+		    Transform.localEulerAngles = currentRotation;
+	    }
 
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
-            _animation.CrossFade("Walk");
-            if (_viewModel.Speed > 0)
-            {
-                if (_targetTransform != null)
-                {
-                    var distance = Vector3.Distance(Transform.position, _targetTransform.position);
-                    var duration = distance/_viewModel.Speed;
+	    protected virtual void StartWalking()
+	    {
+		    if (Animator != null)
+		    {
+			    Animator.Play("Spawn");
+			    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
+		    }
+	    }
 
-                    var targetMovement = _targetTransform.position;
-                    targetMovement.x += Random.Range(-3f, 3f);
+	    private void StartWalkAnimationSubscription()
+	    {
+		    _viewModel.OnWalk();
+		    BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
+		    _viewModel.AnimationId.SetValue("Walk");
+		 
+		    var targetMovement = _targetTransform.position;
+		    targetMovement.x += Random.Range(-3f, 3f);
 
-                    iTween.MoveTo(GameObject, iTween.Hash("position", targetMovement, "time", duration, "easetype", "linear"));
-                    iTween.RotateTo(GameObject, iTween.Hash("y", 180d, "time", duration, "easetype", "linear"));
+		    var distance = Vector3.Distance(Transform.position, targetMovement);
+		    var duration = distance / _viewModel.Speed;
 
-                    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartAttackAnimation, duration, false);
-                }
-                else
-                {
-                    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
-                }
-            }
-        }
+		    iTween.MoveTo(GameObject, iTween.Hash("position", targetMovement, "time", duration, "easetype", "linear"));
+		    iTween.RotateTo(GameObject, iTween.Hash("y", 180d, "time", duration, "easetype", "linear"));
 
-        private void StartAttackAnimation()
+		    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartAttackAnimation, duration, false);
+	    }
+
+	    private void StartAttackAnimation()
         {
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
             BalistaContext.Instance.IntervalRunner.SubscribeToInterval(AttackAnimation, _viewModel.AttackSpeed);
@@ -109,20 +114,16 @@ namespace Scripts.Views
 
         private void AttackAnimation()
         {
-            if (_animation == null)
-                throw new EngineException(this, string.Format("Failed to find Animation in {0}", Id));
-
-            _animation.Play("Attack");
+	        _viewModel.AnimationId.SetValue("Attack");
             _viewModel.OnAttack();
         }
 
-        protected virtual Animator GetAnimator()
-        {
-            var animator = GameObject.GetComponent<Animator>();
-            return animator;
-        }
+		private Animator GetAnimator()
+		{
+			return CharacterRoot.GetComponent<Animator>();
+		}
         
-        private void Walk()
+        protected void Walk()
         {
             Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
         }
@@ -133,17 +134,9 @@ namespace Scripts.Views
             iTween.Stop(GameObject);
             UnsubscribeEverything();
 
-            // Start the death animation, if any
-            if (_animator != null)
-                _viewModel.AnimationId.SetValue("IsDead");
-            else
-            {
-                var animation = GameObject.GetComponent<Animation>();
-                if (animation != null)
-                    animation.CrossFade("Death");
-            }
+	        _viewModel.AnimationId.SetValue("Death");
 
-            base.OnHide(reason);
+	        base.OnHide(reason);
         }
 
         protected override void OnDestroy()
@@ -163,12 +156,13 @@ namespace Scripts.Views
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(AttackAnimation);
         }
 
-        private string _lastAnimationValue;
-        private void Animation_OnChange()
+        protected void Animation_OnChange()
         {
-            if (!string.IsNullOrEmpty(_lastAnimationValue))
-                _animator.SetBool(_lastAnimationValue, false);
-            _animator.SetBool(_viewModel.AnimationId.GetValue(), true);
+	        if (!string.IsNullOrEmpty(_lastAnimationValue))
+	        {
+		        Animator.SetBool(_lastAnimationValue, false);
+	        }
+            Animator.SetBool(_viewModel.AnimationId.GetValue(), true);
             _lastAnimationValue = _viewModel.AnimationId.GetValue();
         }
     }

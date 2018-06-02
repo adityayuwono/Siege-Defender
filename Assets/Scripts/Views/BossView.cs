@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Scripts.Components;
 using Scripts.Helpers;
 using Scripts.ViewModels.Enemies;
 using UnityEngine;
@@ -14,26 +13,6 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-        protected GameObject CharacterRoot
-        {
-            get
-            {
-                if (_character == null)
-                {
-                    var characterRoot = Transform.Find(Values.Defaults.BOSS_CHARACTER_ROOT_TAG);
-                    if (characterRoot != null)
-                    {
-                        _characterTransform = characterRoot;
-                        _character = characterRoot.gameObject;
-                        _character.AddComponent<ViewModelController>().ViewModel = _viewModel;
-                    }
-                }
-                return _character;
-            }
-        }
-        private GameObject _character;
-        private Transform _characterTransform;
-        
         private readonly System.Random _randomizer = new System.Random();
         private readonly List<Transform> _waypoints = new List<Transform>();
 
@@ -42,7 +21,7 @@ namespace Scripts.Views
             base.OnLoad();
 
             _viewModel.OnInterrupted += InterruptMovement;
-            _viewModel.OnMoveStart += MoveToARandomWaypoint;
+            _viewModel.OnMoveStart += MoveToRandomWaypoint;
 
             for (var i = 0; i < Transform.childCount; i++)
             {
@@ -56,10 +35,21 @@ namespace Scripts.Views
             _waypoints.Add(firstWaypoint);
         }
 
-        protected override void OnDestroy()
+	    protected override void LoadTarget()
+	    {
+		    // No target for Boss, they don't move towards the player
+	    }
+
+	    protected override void AdjustRotation()
+	    {
+			var randomRotation = 180f + (Random.value * Random.Range(-1, 2) * _viewModel.Rotation);
+		    Transform.localEulerAngles = new Vector3(0, randomRotation, 0);
+	    }
+
+	    protected override void OnDestroy()
         {
             _viewModel.OnInterrupted -= InterruptMovement;
-            _viewModel.OnMoveStart -= MoveToARandomWaypoint;
+            _viewModel.OnMoveStart -= MoveToRandomWaypoint;
             
             _waypoints.Clear();
             
@@ -68,29 +58,31 @@ namespace Scripts.Views
             base.OnDestroy();
         }
 
-        protected override Animator GetAnimator()
-        {
-            return CharacterRoot.GetComponent<Animator>();
-        }
+	    protected override void StartWalking()
+	    {
+			Animator.SetBool("Death", false);
+		    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
+	    }
 
-        #region Move to Waypoint
-
+	    #region Move to Waypoint
         private Transform GetRandomWaypoint()
         {
-            if (_waypoints.Count == 0)
-                throw new EngineException(this, "No Waypoints defined");
+	        if (_waypoints.Count == 0)
+	        {
+		        throw new EngineException(this, "No Waypoints defined");
+	        }
 
-            var randomWaypointIndex = _randomizer.Next(_waypoints.Count - 1);// Avoid randomizing the last on the list
-            var randomWaypoint = _waypoints[randomWaypointIndex];
+            var waypointIndex = _randomizer.Next(_waypoints.Count - 1);// Avoid randomizing the last on the list
+            var waypoint = _waypoints[waypointIndex];
 
             // Funky algo to let the used waypoint to be last on the list, to avoid going to the same waypoint, it looks stupid, seriously
-            _waypoints.Remove(randomWaypoint);
-            _waypoints.Add(randomWaypoint);
+            _waypoints.Remove(waypoint);
+            _waypoints.Add(waypoint);
 
-            return randomWaypoint;
+            return waypoint;
         }
 
-        private void MoveToARandomWaypoint(ViewModels.Object targetObject, float speedMultiplier)
+        private void MoveToRandomWaypoint(ViewModels.Object targetObject, float speedMultiplier)
         {
             // Multiply the speed, in case the normal walk and this Walk "Skill" is different
             var speed = _viewModel.BossSpeed*speedMultiplier;
@@ -105,22 +97,22 @@ namespace Scripts.Views
 		        moveTargetPosition = _viewModel.Root.GetView<ObjectView>(targetObject).Transform;
 	        }
 
-            var targetLookatRotation = Quaternion.LookRotation(moveTargetPosition.position - _characterTransform.position);
+            var targetLookatRotation = Quaternion.LookRotation(moveTargetPosition.position - CharacterTransform.position);
 
             // Register everything here
             // Starting with the very first motion in the pattern
-            var lookToAngle = Quaternion.Angle(targetLookatRotation, _characterTransform.rotation);
+            var lookToAngle = Quaternion.Angle(targetLookatRotation, CharacterTransform.rotation);
             var lookToDuration = lookToAngle / 24f / speed;
             
             const string easeType = "linear";
             iTween.LookTo(CharacterRoot, iTween.Hash("looktarget", moveTargetPosition, "easetype", easeType, "time", lookToDuration));
-            var walkDuration = Vector3.Distance(moveTargetPosition.localPosition, _characterTransform.localPosition) / speed;
+            var walkDuration = Vector3.Distance(moveTargetPosition.localPosition, CharacterTransform.localPosition) / speed;
             iTween.MoveTo(CharacterRoot, iTween.Hash("position", moveTargetPosition, "easetype", easeType, "time", walkDuration, "delay", lookToDuration));
 
             var rotateDuration = 0f;
             if (targetObject == null)
             {
-                rotateDuration = (lookToAngle + Quaternion.Angle(moveTargetPosition.localRotation, _characterTransform.localRotation))/24f/speed;
+                rotateDuration = (lookToAngle + Quaternion.Angle(moveTargetPosition.localRotation, CharacterTransform.localRotation))/24f/speed;
                 iTween.RotateTo(CharacterRoot, iTween.Hash("rotation", moveTargetPosition, "easetype", easeType, "time", rotateDuration, "delay", walkDuration + lookToDuration));
             }
             
