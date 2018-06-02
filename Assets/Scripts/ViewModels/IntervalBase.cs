@@ -68,8 +68,8 @@ namespace Scripts.ViewModels
             var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
             objectModel.Id = string.Format("{0}_{1}", objectModel.Id, Guid.NewGuid());
             objectModel.Type = id;
+			UnityEngine.Debug.Log("Duplicating: "+objectModel.Id);
             var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, overrideParent ?? this});
-
             if (newObject == null)
                 throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(Object)));
             

@@ -26,6 +26,15 @@ namespace Scripts.Views
 
 			var randomRotation = 180f + Random.value * Random.Range(-1, 2);
 			Transform.localEulerAngles = new Vector3(0, randomRotation, 0);
+
+			_animation.Play("Spawn");
+		}
+
+		protected override void OnHide(string reason)
+		{
+			_animation.Play("Death");
+
+			base.OnHide(reason);
 		}
 	}
 }
