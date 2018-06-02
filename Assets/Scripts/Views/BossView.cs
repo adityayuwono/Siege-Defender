@@ -73,8 +73,6 @@ namespace Scripts.Views
             return CharacterRoot.GetComponent<Animator>();
         }
 
-
-
         #region Move to Waypoint
 
         private Transform GetRandomWaypoint()
