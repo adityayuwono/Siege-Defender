@@ -27,7 +27,7 @@ namespace Scripts.Views
         {
             base.OnLoad();
 
-            _uiTable = Transform.FindChild("ItemSlot").GetComponent<UITable>();
+            _uiTable = Transform.Find("ItemSlot").GetComponent<UITable>();
         }
 
         protected override void OnDestroy()
@@ -67,7 +67,7 @@ namespace Scripts.Views
                 throw new EngineException(this, "Parent is null");
 
             Transform parentTransform = _parent.Transform;
-            var parentItemTable = _parent.Transform.FindChild("ItemSlot");
+            var parentItemTable = _parent.Transform.Find("ItemSlot");
             if (parentItemTable != null)
                 parentTransform = parentItemTable;
 

@@ -20,7 +20,7 @@ namespace Scripts.Views
             {
                 if (_character == null)
                 {
-                    var characterRoot = Transform.FindChild(Values.Defaults.BOSS_CHARACTER_ROOT_TAG);
+                    var characterRoot = Transform.Find(Values.Defaults.BOSS_CHARACTER_ROOT_TAG);
                     if (characterRoot != null)
                     {
                         _characterTransform = characterRoot;

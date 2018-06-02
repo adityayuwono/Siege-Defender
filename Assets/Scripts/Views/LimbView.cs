@@ -21,7 +21,7 @@ namespace Scripts.Views
         {
             base.OnLoad();
 
-            var tryFindBreakableParts = Transform.FindChild("Breakable");
+            var tryFindBreakableParts = Transform.Find("Breakable");
             if (tryFindBreakableParts != null)
             {
                 _breakable = tryFindBreakableParts.gameObject;

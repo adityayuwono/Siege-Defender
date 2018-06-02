@@ -12,7 +12,7 @@ namespace Scripts.Components
 
         private void Start()
         {
-            _mainCamera = GameObject.Find("Player").camera;
+            _mainCamera = GameObject.Find("Player").GetComponent<Camera>();
         }
 
         private Texture2D _crosshairImage;
@@ -77,7 +77,7 @@ namespace Scripts.Components
         {
             // Bug after destruction the MainCamera reference is not cleared, or maybe we fail to hook the new camera at Start
             if (_mainCamera == null)
-                _mainCamera = GameObject.Find("Player").camera;
+                _mainCamera = GameObject.Find("Player").GetComponent<Camera>();
 
             var ray = _mainCamera.ScreenPointToRay(inputPosition);
             RaycastHit hitInfo;

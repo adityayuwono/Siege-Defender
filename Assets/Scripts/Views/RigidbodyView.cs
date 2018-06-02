@@ -28,7 +28,7 @@ namespace Scripts.Views
             }
 
             // Recalculate center of mass
-            var centerOfMass = Transform.FindChild("CenterOfMass");
+            var centerOfMass = Transform.Find("CenterOfMass");
             if (centerOfMass != null)
                 _rigidbody.centerOfMass = centerOfMass.localPosition;
         }

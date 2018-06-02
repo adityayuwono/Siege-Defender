@@ -20,7 +20,7 @@ namespace Scripts.Components
         private void OnDrawGizmos()
         {
             Gizmos.color = Color;
-
+	        var collider = GetComponent<Collider>();
             if (collider == null || OverrideCollider)
             {
                 if (Type == GizmoType.Sphere)
