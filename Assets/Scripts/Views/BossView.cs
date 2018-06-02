@@ -97,11 +97,15 @@ namespace Scripts.Views
             // Multiply the speed, in case the normal walk and this Walk "Skill" is different
             var speed = _viewModel.BossSpeed*speedMultiplier;
 
-            Transform moveTargetPosition = null;
-            if (targetObject == null)
-                moveTargetPosition = GetRandomWaypoint();
-            else
-                moveTargetPosition = _viewModel.Root.GetView<ObjectView>(targetObject).Transform;
+            Transform moveTargetPosition;
+	        if (targetObject == null)
+	        {
+		        moveTargetPosition = GetRandomWaypoint();
+	        }
+	        else
+	        {
+		        moveTargetPosition = _viewModel.Root.GetView<ObjectView>(targetObject).Transform;
+	        }
 
             var targetLookatRotation = Quaternion.LookRotation(moveTargetPosition.position - _characterTransform.position);
 
