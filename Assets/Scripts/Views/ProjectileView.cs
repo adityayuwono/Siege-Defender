@@ -37,18 +37,19 @@ namespace Scripts.Views
                 Random.Range(-5f, 5f) * accuracy,
                 (Random.Range(-5f, 5f) * accuracy), 
                 0f);// Z is the distance to the target, we don't randomize this, we randomize speed below instead
-            var targetPosition = target.Transform.position + direction;
+            var targetPosition = target.Transform.position;
             Transform.rotation = Quaternion.LookRotation(targetPosition - Transform.position);
             #endregion
 
             var randomForce = Random.Range(_viewModel.SpeedDeviations[0], _viewModel.SpeedDeviations[1]);
-            AddRelativeForce(new Vector3(0,0,1) * randomForce);
 
-            if (_viewModel.IsRotationRandomized)
-            {
-                var randomRotation = new Vector3(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
-                Transform.localEulerAngles = (randomRotation);
-            }
+			if (_viewModel.IsRotationRandomized)
+			{
+				var randomRotation = new Vector3(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
+				Transform.localEulerAngles = (randomRotation);
+			}
+
+			AddRelativeForce(randomForce);
         }
 
         private void IsKinematic_OnChange()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Scripts.Components;
+using UnityEngine;
 using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Views
@@ -12,8 +13,6 @@ namespace Scripts.Views
         private Rigidbody _rigidbody;
         private Collider _collider;
         
-
-
         protected override void OnLoad()
         {
             base.OnLoad();
@@ -57,14 +56,9 @@ namespace Scripts.Views
             base.OnDestroy();
         }
 
-        protected virtual void AddRelativeForce(Vector3 direction, ForceMode forceMode = ForceMode.Impulse)
+        protected virtual void AddRelativeForce(float strength, ForceMode forceMode = ForceMode.Impulse)
         {
-            // Reset parameters to makes sure we have a fresh RigidBody
-            _rigidbody.isKinematic = false;
-            _rigidbody.velocity = Vector3.zero;
-            _rigidbody.angularVelocity = Vector3.zero;
-
-            _rigidbody.AddRelativeForce(direction, forceMode);
+			GameObject.AddMissingComponent<ProjectileLauncher>().Reset(strength);
         }
 
         /// <summary>

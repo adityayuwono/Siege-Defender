@@ -11,9 +11,9 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-        protected override void AddRelativeForce(Vector3 direction, ForceMode forceMode = ForceMode.Impulse)
+        protected override void AddRelativeForce(float strength, ForceMode forceMode = ForceMode.Impulse)
         {
-            base.AddRelativeForce(direction*10f, ForceMode.Acceleration);
+			base.AddRelativeForce(strength * 10f, ForceMode.Acceleration);
         }
     }
 }
