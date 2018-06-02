@@ -209,7 +209,7 @@
           <Setter Target="{This.AnimationId}" Value="Slam_Run" />
           <MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
           <Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
-          <Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]4" />
+          <Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]1" />
           <SpecialEvent Target="{Root.Limbo.PlayerCamera}" Wait="0.5" />
           <Triggers>
             <EventTrigger Event="Interrupt">
