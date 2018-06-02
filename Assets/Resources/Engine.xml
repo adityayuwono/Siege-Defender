@@ -434,7 +434,7 @@
 
         <Element Id="Player" AssetId="EnemyTarget" />
 
-        <Player Id="PlayerCamera" AssetId="Player" Health="15" >
+        <Player Id="PlayerCamera" AssetId="Player" Health="150" >
           <Shooters>
             <Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.PlayerInventory.LeftShooter.Item}" >
               <Target AssetId="Target" />
