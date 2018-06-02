@@ -13,7 +13,7 @@ namespace Scripts.Components
 			{
 				_duration -= Time.deltaTime;
 				// Reset parameters to makes sure we have a fresh RigidBody
-				_rigidbody.AddRelativeForce(Vector3.forward * _strength, ForceMode.Impulse);
+				_rigidbody.AddRelativeForce(Vector3.forward * _strength/5f, ForceMode.Impulse);
 			}
 		}
 
