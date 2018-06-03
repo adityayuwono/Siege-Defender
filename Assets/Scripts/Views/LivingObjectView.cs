@@ -50,12 +50,6 @@ namespace Scripts.Views
 
         protected override void OnHide(string reason)
         {
-	        var animation = GameObject.GetComponent<Animation>();
-	        if (animation != null)
-	        {
-		        animation.CrossFade("Death");
-	        }
-
             _viewModel.SpecialEffect.OnChange -= SpecialEffect_OnChange;
 
             base.OnHide(reason);
