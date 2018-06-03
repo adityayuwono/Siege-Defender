@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.ViewModels.Weapons;
 using UnityEngine;
 
 namespace Scripts.ViewModels
@@ -23,10 +24,10 @@ namespace Scripts.ViewModels
             {
                 foreach (var elementModel in _model.Elements)
                 {
-                    var elementVM = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
-                    if (elementVM == null)
+                    var element = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
+                    if (element == null)
                         throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
-                    Elements.Add(elementVM);
+                    Elements.Add(element);
                 }
             }
 
@@ -52,32 +53,40 @@ namespace Scripts.ViewModels
             base.OnActivate();
 
             _isDelaysIgnored = false;
-            
-            foreach (var element in Elements)
-                element.Activate();
+
+	        foreach (var element in Elements)
+	        {
+		        element.Activate();
+	        }
         }
 
         public override void Show()
         {
             base.Show();
 
-            foreach (var element in Elements)
-                element.Show();
+	        foreach (var element in Elements)
+	        {
+		        element.Show();
+	        }
         }
 
         public override void Hide(string reason)
         {
             base.Hide(reason);
 
-            foreach (var element in Elements)
-                element.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
+	        foreach (var element in Elements)
+	        {
+		        element.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
+	        }
         }
 
         public event Action OnStartSpecialEvent;
         public void StartSpecialEvent()
         {
-            if (OnStartSpecialEvent != null)
-                OnStartSpecialEvent();
+	        if (OnStartSpecialEvent != null)
+	        {
+		        OnStartSpecialEvent();
+	        }
         }
 
         #region Death
@@ -111,8 +120,10 @@ namespace Scripts.ViewModels
 
         protected override void OnDestroyed()
         {
-            foreach (var element in Elements)
-                element.Destroy();
+	        foreach (var element in Elements)
+	        {
+		        element.Destroy();
+	        }
 
             base.OnDestroyed();
         }

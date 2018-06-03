@@ -2,6 +2,7 @@
 using Scripts.Helpers;
 using Scripts.Models.Actions;
 using Scripts.ViewModels.Actions;
+using Scripts.ViewModels.Weapons;
 
 namespace Scripts.ViewModels.Enemies
 {

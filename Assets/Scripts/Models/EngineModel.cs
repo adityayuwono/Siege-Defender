@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using Scripts.Models.Enemies;
 using Scripts.Models.GUIs;
+using Scripts.Models.Weapons;
 
 namespace Scripts.Models
 {

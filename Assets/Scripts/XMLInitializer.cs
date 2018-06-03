@@ -52,7 +52,7 @@ namespace Scripts
         {
             // Keep it for later, the rest of the scenes are going to need this cutie
             // TODO: improve to cloud saving, and encrypt
-            PlayerSettingsXML = LoadFile(FilePaths.Loading + Values.Defaults.PLAYER_PROGRESS_FILE_NAME, DefaultPlayerSettings.text);
+            PlayerSettingsXML = LoadFile(FilePaths.Loading + Values.Defaults.PlayerProgressFileName, DefaultPlayerSettings.text);
 
             // Done, we simply load the next scene
             // it clears everything we put on scene, if for example we are editing a prefab

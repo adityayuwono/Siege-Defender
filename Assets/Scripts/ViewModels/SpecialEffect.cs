@@ -6,6 +6,8 @@ namespace Scripts.ViewModels
 {
     public class SpecialEffect : Object
     {
+	    public Action<Object> UpdateParent; 
+
         private readonly SpecialEffectModel _model;
 
         public SpecialEffect(SpecialEffectModel model, Base parent) : base(model, parent)
@@ -26,13 +28,13 @@ namespace Scripts.ViewModels
         {
             ShowSpecialEffect(Vector3.zero);
 
-            if (UpdateParent != null)
-                UpdateParent(parent);
+	        if (UpdateParent != null)
+	        {
+		        UpdateParent(parent);
+	        }
         }
 
-        public Action<Object> UpdateParent; 
-
-        public void SetDeathDelay(float delay)
+		public void SetDeathDelay(float delay)
         {
             _model.DeathDelay = delay;
         }

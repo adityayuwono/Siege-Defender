@@ -5,8 +5,11 @@ using Scripts.Models;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;
+using Scripts.ViewModels.Weapons;
 using Scripts.Views;
+using Scripts.Views.Enemies;
 using Scripts.Views.GUIs;
+using Scripts.Views.Weapons;
 using Object = Scripts.ViewModels.Object;
 
 namespace Scripts

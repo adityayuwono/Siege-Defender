@@ -1,4 +1,5 @@
 ﻿using Scripts.Models;
+using Scripts.Models.Enemies;
 using Scripts.ViewModels.Enemies;
 
 namespace Scripts.ViewModels

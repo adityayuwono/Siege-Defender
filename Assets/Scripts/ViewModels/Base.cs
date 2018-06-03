@@ -68,15 +68,16 @@ namespace Scripts.ViewModels
         public void Deactivate(string reason)
         {
             //UnityEngine.Debug.Log(FullId+":"+reason);
-
             var lastDeactivationReason = _lastDeactivationReason;
             _lastDeactivationReason = reason;
             
             if (!_isActive)
-                throw new EngineException(this,
+            {
+	            throw new EngineException(this,
                     string.Format("Failed to Deactivate\n" +
                                   "Reason for deactivation: {0}\n" +
                                   "Last Deactivation reason was: {1}", reason, lastDeactivationReason));
+            }
 
             _isActive = false;
 

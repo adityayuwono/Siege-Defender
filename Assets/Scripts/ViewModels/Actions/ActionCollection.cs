@@ -122,11 +122,15 @@ namespace Scripts.ViewModels.Actions
         private void DeactivateActions()
         {
             // Deactivate only activated actions, this is way easier than checking the index, and have similar result
-            foreach (var action in this.Where(action => action.IsActive))
-                action.Deactivate("Done Invoking actions");
+	        foreach (var action in this.Where(action => action.IsActive))
+	        {
+		        action.Deactivate("Done Invoking actions");
+	        }
 
-            if (_currentAction!=null)
-                _currentAction.OnActionFinished = null;
+	        if (_currentAction != null)
+	        {
+		        _currentAction.OnActionFinished = null;
+	        }
             
             _currentAction = null;
             _currentIndex = 0;

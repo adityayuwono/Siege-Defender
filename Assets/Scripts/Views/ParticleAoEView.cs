@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Scripts.Helpers;
-using Scripts.ViewModels;
+using Scripts.ViewModels.Weapons;
+using Scripts.Views.Weapons;
 using UnityEngine;
 
 namespace Scripts.Views

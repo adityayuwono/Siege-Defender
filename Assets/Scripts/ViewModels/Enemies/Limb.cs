@@ -1,5 +1,6 @@
 ﻿using System;
 using Scripts.Models.Enemies;
+using Scripts.ViewModels.Weapons;
 using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies

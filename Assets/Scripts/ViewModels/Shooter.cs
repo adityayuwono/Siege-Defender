@@ -3,6 +3,8 @@ using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Weapons;
+using Scripts.ViewModels.Weapons;
 using UnityEngine;
 
 namespace Scripts.ViewModels

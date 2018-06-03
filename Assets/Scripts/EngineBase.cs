@@ -9,10 +9,12 @@ using Scripts.Models;
 using Scripts.Models.Actions;
 using Scripts.Models.Enemies;
 using Scripts.Models.GUIs;
+using Scripts.Models.Weapons;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Actions;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;
+using Scripts.ViewModels.Weapons;
 using Scripts.Views;
 using Object = Scripts.ViewModels.Object;
 

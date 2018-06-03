@@ -26,7 +26,7 @@ namespace Scripts.Helpers
         {
             var serializer = new XmlSerializer(typeof(PlayerSettingsModel));
 
-            var sw = new StreamWriter(FilePaths.Saving + Values.Defaults.PLAYER_PROGRESS_FILE_NAME);
+            var sw = new StreamWriter(FilePaths.Saving + Values.Defaults.PlayerProgressFileName);
             serializer.Serialize(sw, model);
             sw.Close();
         }

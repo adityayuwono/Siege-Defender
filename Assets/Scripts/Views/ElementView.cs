@@ -38,8 +38,10 @@ namespace Scripts.Views
         protected override GameObject GetGameObject()
         {
             // We try to find matching child, if there's none, we instantiate from prefabs
-            if (_parent == null)
-                throw new EngineException(this, string.Format("Failed to find parent's Transform, parent is supposed to be: {0}", _viewModel.Parent.Id));
+	        if (_parent == null)
+	        {
+		        throw new EngineException(this, string.Format("Failed to find parent's Transform, parent is supposed to be: {0}", _viewModel.Parent.Id));
+	        }
 
             var tryFindChild = _parent.Transform.FindChildRecursivelyBreadthFirst(_viewModel.AssetId);
             return tryFindChild == null ? base.GetGameObject() : tryFindChild.gameObject;

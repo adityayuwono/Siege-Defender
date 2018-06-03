@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
+using Scripts.Models.Enemies;
+using Scripts.ViewModels.Weapons;
 using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
