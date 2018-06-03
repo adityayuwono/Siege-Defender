@@ -37,7 +37,7 @@ namespace Scripts.Views
                 Random.Range(-5f, 5f) * accuracy,
                 (Random.Range(-5f, 5f) * accuracy), 
                 0f);// Z is the distance to the target, we don't randomize this, we randomize speed below instead
-            var targetPosition = target.Transform.position;
+	        var targetPosition = target.Transform.position + direction;
             Transform.rotation = Quaternion.LookRotation(targetPosition - Transform.position);
             #endregion
 
