@@ -41,7 +41,7 @@ namespace Scripts
             IoCContainer.RegisterFor<ParticleAoE>().TypeOf<BaseView>().To<ParticleAoEView>();
 	        
 	        IoCContainer.RegisterFor<StaticEnemy>().TypeOf<BaseView>().To<StaticEnemyView>();
-	        IoCContainer.RegisterFor<EnemyBase>().TypeOf<BaseView>().To<EnemyBaseView>();
+	        IoCContainer.RegisterFor<Enemy>().TypeOf<BaseView>().To<EnemyView>();
             IoCContainer.RegisterFor<Boss>().TypeOf<BaseView>().To<BossView>();
             IoCContainer.RegisterFor<Limb>().TypeOf<BaseView>().To<LimbView>();
 

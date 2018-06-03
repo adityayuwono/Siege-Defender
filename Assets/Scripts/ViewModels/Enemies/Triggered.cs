@@ -114,21 +114,21 @@ namespace Scripts.ViewModels.Enemies
                     break;
                 case Event.Spawn:
                 {
-                    var parentButton = _parentObject as EnemyBase;
+                    var parentButton = _parentObject as Enemy;
                     if (parentButton != null)
                         parentButton.Spawn += InvokeEvent;
                 }
                     break;
                 case Event.Attack:
                 {
-                    var parentButton = _parentObject as EnemyBase;
+                    var parentButton = _parentObject as Enemy;
                     if (parentButton != null)
                         parentButton.Attack += InvokeEvent;
                 }
                     break;
                 case Event.Walk:
                     {
-                        var parentButton = _parentObject as EnemyBase;
+                        var parentButton = _parentObject as Enemy;
                         if (parentButton != null)
                             parentButton.Walk += InvokeEvent;
                     }
@@ -189,21 +189,21 @@ namespace Scripts.ViewModels.Enemies
                     break;
                 case Event.Spawn:
                 {
-                    var parentButton = _parentObject as EnemyBase;
+                    var parentButton = _parentObject as Enemy;
                     if (parentButton != null)
                         parentButton.Spawn -= InvokeEvent;
                 }
                     break;
                 case Event.Attack:
                 {
-                    var parentButton = _parentObject as EnemyBase;
+                    var parentButton = _parentObject as Enemy;
                     if (parentButton != null)
                         parentButton.Attack -= InvokeEvent;
                 }
                     break;
                 case Event.Walk:
                     {
-                        var parentButton = _parentObject as EnemyBase;
+                        var parentButton = _parentObject as Enemy;
                         if (parentButton != null)
                             parentButton.Walk -= InvokeEvent;
                     }

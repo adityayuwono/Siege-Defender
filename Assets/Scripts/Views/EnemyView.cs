@@ -6,14 +6,14 @@ using Random = UnityEngine.Random;
 
 namespace Scripts.Views
 {
-    public class EnemyBaseView : LivingObjectView
+    public class EnemyView : LivingObjectView
     {
-        private readonly EnemyBase _viewModel;
+        private readonly Enemy _viewModel;
 
 		private Transform _targetTransform;
 	    private string _lastAnimationValue;
 
-        public EnemyBaseView(EnemyBase viewModel, ObjectView parent) : base(viewModel, parent)
+        public EnemyView(Enemy viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }

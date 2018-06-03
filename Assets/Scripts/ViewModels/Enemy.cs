@@ -6,11 +6,11 @@ using Scripts.ViewModels.Enemies;
 
 namespace Scripts.ViewModels
 {
-    public class EnemyBase : LivingObject, IContext
+    public class Enemy : LivingObject, IContext
     {
-        private readonly EnemyBaseModel _model;
+        private readonly EnemyModel _model;
 
-        public EnemyBase(EnemyBaseModel model, Base parent) : base(model, parent)
+        public Enemy(EnemyModel model, Base parent) : base(model, parent)
         {
             _model = model;
 

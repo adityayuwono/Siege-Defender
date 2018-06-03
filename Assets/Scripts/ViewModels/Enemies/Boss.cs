@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class Boss : EnemyBase
+    public class Boss : Enemy
     {
         private readonly BossModel _model;
 

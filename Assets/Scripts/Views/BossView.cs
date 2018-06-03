@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Scripts.Views
 {
-    public class BossView : EnemyBaseView
+    public class BossView : EnemyView
     {
         private readonly Boss _viewModel;
         public BossView(Boss viewModel, ObjectView parent) : base(viewModel, parent)

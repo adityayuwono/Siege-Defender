@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models
 {
     [Serializable]
-    public class EnemyBaseModel : LivingObjectModel
+    public class EnemyModel : LivingObjectModel
     {
         [XmlAttribute]
         public string Target { get; set; }
@@ -28,7 +28,7 @@ namespace Scripts.Models
 
 
 
-        public EnemyBaseModel()
+        public EnemyModel()
         {
             DeathDelay = 2f;
         }

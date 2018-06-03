@@ -7,9 +7,9 @@ namespace Scripts.Views
     public class LimbView : LivingObjectView
     {
         private readonly Limb _viewModel;
-        private readonly EnemyBaseView _parent;
+        private readonly EnemyView _parent;
 
-        public LimbView(Limb viewModel, EnemyBaseView parent) : base(viewModel, parent)
+        public LimbView(Limb viewModel, EnemyView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
             _parent = parent;

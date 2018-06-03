@@ -11,9 +11,9 @@ namespace Scripts.ViewModels.Enemies
     public class Limb : LivingObject
     {
         private readonly LimbModel _model;
-        private readonly EnemyBase _parent;
+        private readonly Enemy _parent;
 
-        public Limb(LimbModel model, EnemyBase parent) : base(model, parent)
+        public Limb(LimbModel model, Enemy parent) : base(model, parent)
         {
             _model = model;
             _parent = parent;
