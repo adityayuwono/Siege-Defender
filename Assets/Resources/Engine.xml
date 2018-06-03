@@ -72,14 +72,14 @@
     <StaticEnemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
     <StaticEnemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
-        <EnemySpawn Id="SpiderSpawn" AssetId="SpiderSpawn" LevelId="" />
+        <EnemySpawn Id="SpiderSpawn[x]" AssetId="SpiderSpawn" LevelId="" />
       </Elements>
       <Triggers>
         <Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
           <RandomCondition Target="{This}" Frequency="4" Value="50" />
           <!-- Percentage -->
-          <Condition Target="{SpiderSpawn1.ActiveObjects}" Value="\1" />
-          <Setter Target="{SpiderSpawn1.Level}" Value="SpawnSpiders" />
+          <Condition Target="{SpiderSpawn[x].ActiveObjects}" Value="\1" />
+          <Setter Target="{SpiderSpawn[x].Level}" Value="SpawnSpiders" />
         </Trigger>
       </Triggers>
     </StaticEnemy>
@@ -88,7 +88,7 @@
         <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
       </Elements>
     </StaticEnemy>
-    <Boss  Id="ZombieAbomination" 		AssetId="Enemies/ZombieAbomination" 	Health="9325" 	Speed="2" DeathDelay="5"
+    <Boss Id="ZombieAbomination" 		AssetId="Enemies/ZombieAbomination" 	Health="9325" 	Speed="2" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
       <Elements>
         <EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
