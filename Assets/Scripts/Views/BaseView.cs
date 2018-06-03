@@ -31,8 +31,30 @@ namespace Scripts.Views
             get { return _viewModel.FullId; }
         }
 
-        protected virtual void OnShow() { }
-        protected virtual void OnHide(string reason){ }
+	    protected virtual void OnShow()
+	    {
+		    if (_isShown)
+		    {
+			    throw new EngineException(this, "Trying to show twice");
+		    }
+
+			Debug.LogWarning(string.Format("Showing {0} for the first time", Id));
+
+		    _isShown = true;
+	    }
+
+	    protected virtual void OnHide(string reason)
+	    {
+		    if (!_isShown)
+		    {
+			    throw new EngineException(this, "Trying to hide twice");
+		    }
+
+			Debug.LogWarning(string.Format("Hiding {0} the first time", Id));
+
+		    _isShown = false;
+	    }
+
         protected virtual void OnDestroy()
         {
             _viewModel.OnShow -= OnShow;

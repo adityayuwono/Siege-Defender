@@ -27,6 +27,8 @@ namespace Scripts.ViewModels
                 _model.Id = Guid.NewGuid().ToString();
         }
 
+	    public bool IsShown { get; private set; }
+
 	    public Base Parent { get; protected set; }
 
 	    public virtual EngineBase Root
@@ -76,6 +78,13 @@ namespace Scripts.ViewModels
 
         public virtual void Show()
         {
+	        if (IsShown)
+	        {
+				throw new EngineException(this, "trying to show twice");
+	        }
+
+	        IsShown = true;
+
 	        if (OnShow != null)
 	        {
 		        OnShow();
@@ -118,6 +127,13 @@ namespace Scripts.ViewModels
         
         public virtual void Hide(string reason)
         {
+	        if (!IsShown)
+	        {
+				throw new EngineException(this, "Trying to hide twice");
+	        }
+
+	        IsShown = false;
+
 	        if (OnHide != null)
 	        {
 		        OnHide(reason);
