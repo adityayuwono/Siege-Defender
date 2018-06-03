@@ -10,58 +10,70 @@ namespace Scripts.Core
     {
         private readonly EngineBase _engine;
         private readonly IContext _context;
+	    
+	    private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>();
+	    private readonly Dictionary<string, IContext> _contexts = new Dictionary<string, IContext>();
+	    private readonly Dictionary<string, Base> _children = new Dictionary<string, Base>();
+
         public PropertyLookup(EngineBase engine, IContext context)
         {
             _engine = engine;
             _context = context;
             _contexts.Add("This", context);
 
-            if (engine != context)
-                _engine.PropertyLookup.RegisterContext(context);
+	        if (engine != context)
+	        {
+		        _engine.PropertyLookup.RegisterContext(context);
+	        }
         }
 
-        private readonly Dictionary<string, IContext> _contexts = new Dictionary<string, IContext>();
-        private readonly Dictionary<string, Base> _children = new Dictionary<string, Base>();
         private void RegisterContext(IContext context)
         {
-            if (_contexts.ContainsKey(context.Id))
-                throw new Exception(string.Format("Failed to register {0} to {1}, a duplicate is found", context.Id, _context.Id));
+	        if (_contexts.ContainsKey(context.Id))
+	        {
+		        throw new Exception(string.Format("Failed to register {0} to {1}, a duplicate is found", context.Id, _context.Id));
+	        }
 
             _contexts.Add(context.Id, context);
         }
 
         public IContext GetContext(string contextId)
         {
-            if (!_contexts.ContainsKey(contextId))
-                return null;
+	        if (!_contexts.ContainsKey(contextId))
+	        {
+		        return null;
+	        }
 
             return _contexts[contextId];
         }
 
         public Base GetChild(string childId)
         {
-            if (!_children.ContainsKey(childId))
-                return null;
+	        if (!_children.ContainsKey(childId))
+	        {
+		        return null;
+	        }
             return _children[childId];
         }
 
-
-
-        private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>();
         public void RegisterProperty(Base viewModel, string propertyId, Property property)
         {
             var viewModelId = viewModel == _context ? "This" : viewModel.Id;
 
-            if (!_children.ContainsKey(viewModelId))
-                _children.Add(viewModelId, viewModel);
+	        if (!_children.ContainsKey(viewModelId))
+	        {
+		        _children.Add(viewModelId, viewModel);
+	        }
 
             if (_properties.ContainsKey(propertyId))
             {
                 // We already register that type of property, let's add to the list
                 var propertyDict = _properties[propertyId];
-                if (propertyDict.ContainsKey(viewModelId))
-                    // Woops, duplicate
-                    throw new EngineException(_engine, string.Format("PropertyLookup: Failed to register property: {0} for ViewModel: {1}, Duplicate is found", propertyId, viewModel.Id));
+	            if (propertyDict.ContainsKey(viewModelId))
+	            {
+		            // Woops, duplicate
+		            throw new EngineException(_engine, string.Format("PropertyLookup: Failed to register property: {0} for ViewModel: {1}, Duplicate is found", propertyId, viewModel.Id));
+	            }
 
                 // OK, everything is good, add a new property
                 propertyDict.Add(viewModelId, property);

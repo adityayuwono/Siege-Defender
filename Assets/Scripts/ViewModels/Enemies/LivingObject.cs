@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Scripts.Core;
 using Scripts.Helpers;
-using Scripts.Models;
 using Scripts.Models.Enemies;
 using Scripts.ViewModels.Weapons;
 using UnityEngine;
@@ -15,8 +14,14 @@ namespace Scripts.ViewModels.Enemies
     public class LivingObject : Object
     {
 	    public event Action Death;
+	    public Action<ProjectileBase> DoAttach;
 
+	    public readonly AdjustableProperty<string> SpecialEffect;
+	    public readonly AdjustableProperty<float> Health;
+	    
         private readonly LivingObjectModel _model;
+	    private readonly List<ProjectileBase> _attachedProjectiles = new List<ProjectileBase>();
+
         protected LivingObject(LivingObjectModel model, Base parent) : base(model, parent)
         {
             _model = model;
@@ -31,6 +36,13 @@ namespace Scripts.ViewModels.Enemies
             SpecialEffect = new AdjustableProperty<string>("SpecialEffect", this, true);
         }
 
+	    protected string CollisionEffectNormal { private get; set; }
+		
+	    public bool IsDead
+	    {
+		    get { return Health.GetValue() <= 0; }
+	    }
+
         protected override void OnActivate()
         {
             // Need to be set first because some conditions rely on this
@@ -42,8 +54,10 @@ namespace Scripts.ViewModels.Enemies
         public override void Hide(string reason)
         {
             // Cleanup attached projectiles
-            foreach (var projectile in _attachedProjectiles)
-                projectile.Hide(reason);
+	        foreach (var projectile in _attachedProjectiles)
+	        {
+		        projectile.Hide(reason);
+	        }
             _attachedProjectiles.Clear();
 
             base.Hide(reason);
@@ -58,8 +72,10 @@ namespace Scripts.ViewModels.Enemies
         /// <param name="source">Set if we want to attach the object to the target</param>
         public override bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
         {
-            if (source != null)
-                AttachProjectile(source);
+	        if (source != null)
+	        {
+		        AttachProjectile(source);
+	        }
 
             var currentHealth = Health.GetValue();
 
@@ -67,8 +83,10 @@ namespace Scripts.ViewModels.Enemies
             if (currentHealth > 0)
             {
                 currentHealth -= damage;
-                if (currentHealth <= 0)
-                    OnKilled();
+	            if (currentHealth <= 0)
+	            {
+		            OnKilled();
+	            }
 
                 Health.SetValue(currentHealth);
             }
@@ -78,18 +96,15 @@ namespace Scripts.ViewModels.Enemies
             {
                 Root.DamageDisplay.DisplayDamage(damage, contactPoint);
 
-                if (!string.IsNullOrEmpty(CollisionEffectNormal))
-                    Root.SpecialEffectManager.DisplaySpecialEffect(CollisionEffectNormal, contactPoint);
+	            if (!string.IsNullOrEmpty(CollisionEffectNormal))
+	            {
+		            Root.SpecialEffectManager.DisplaySpecialEffect(CollisionEffectNormal, contactPoint);
+	            }
             }
 
             return true;
         }
-
-        protected bool IsDead
-        {
-            get { return Health.GetValue() <= 0; }
-        }
-
+		
         /// <summary>
         /// Called once when damage taken is greater or equal to Health
         /// </summary>
@@ -117,11 +132,5 @@ namespace Scripts.ViewModels.Enemies
 
             DoAttach(source);
         }
-
-        public readonly AdjustableProperty<string> SpecialEffect;
-        public Action<ProjectileBase> DoAttach;
-        private readonly List<ProjectileBase> _attachedProjectiles = new List<ProjectileBase>();
-        public readonly AdjustableProperty<float> Health;
-        protected string CollisionEffectNormal { private get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace Scripts.Core
         private readonly string _propertyId;
         private readonly IContext _context;
         private readonly Base _viewModel;
+
         public AdjustableProperty(string propertyId, Base baseViewModel, bool isAlwaysChanging = false) : base (isAlwaysChanging)
         {
             _propertyId = propertyId;
@@ -31,16 +32,19 @@ namespace Scripts.Core
     public class Property<T> : Property
     {
         private readonly bool _isAlwaysChanging;
+
         public Property(bool isAlwaysChanging = false)
         {
             _isAlwaysChanging = isAlwaysChanging;
             _value = default(T);
         }
 
-        public void SetValue(T newValue)
+        public virtual void SetValue(T newValue)
         {
-            if (_value!=null && _value.Equals(newValue) && !_isAlwaysChanging) 
-                return;
+	        if (_value != null && _value.Equals(newValue) && !_isAlwaysChanging)
+	        {
+		        return;
+	        }
             
             _value = newValue;
 
@@ -63,8 +67,10 @@ namespace Scripts.Core
 
         protected void InvokeChangedEvent()
         {
-            if (OnChange != null)
-                OnChange();
+	        if (OnChange != null)
+	        {
+		        OnChange();
+	        }
         }
 
         public event Action OnChange;

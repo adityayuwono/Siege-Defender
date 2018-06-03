@@ -11,22 +11,38 @@ namespace Scripts.ViewModels.Enemies
 {
     public class Boss : Enemy
     {
+	    public event Action OnInterrupted;
+	    public event Action OnInterrupt;
+
         private readonly BossModel _model;
+	    private readonly List<Limb> _limbs = new List<Limb>();
+	    private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>();
+	    public readonly AdjustableProperty<string> ActiveSkill;
+
+	    private float _skillInterruptThreshold;
+	    private Skill _currentSkill;
+	    private string _queuedSkillId;
 
         public Boss(BossModel model, Base parent) : base(model, parent)
         {
             _model = model;
 
-            foreach (var limbModel in _model.Limbs)
-                limbModel.Type = string.Format("{0}_{1}", _model.Type, limbModel.Id);
+	        foreach (var limbModel in _model.Limbs)
+	        {
+		        limbModel.Type = string.Format("{0}_{1}", _model.Type, limbModel.Id);
+	        }
 
-            foreach (var limbModel in _model.Limbs)
-                _limbs.Add(new Limb(limbModel, this));
+	        foreach (var limbModel in _model.Limbs)
+	        {
+		        _limbs.Add(new Limb(limbModel, this));
+	        }
 
             foreach (var skillModel in _model.Skills)
             {
-                if (string.IsNullOrEmpty(skillModel.Id))
-                    throw new EngineException(this, "Skills need Id, please provide a unique Id");
+	            if (string.IsNullOrEmpty(skillModel.Id))
+	            {
+		            throw new EngineException(this, "Skills need Id, please provide a unique Id");
+	            }
                 _skills.Add(skillModel.Id, new Skill(skillModel, this));
             }
 
@@ -36,15 +52,9 @@ namespace Scripts.ViewModels.Enemies
 
         #region Skill
 
-        public event Action OnInterrupted;
-
-        private Skill _currentSkill;
-        private string _queuedSkillId;
-        private readonly Dictionary<string, Skill> _skills = new Dictionary<string, Skill>(); 
         /// <summary>
         /// Only one skill may be active at one time
         /// </summary>
-        public readonly AdjustableProperty<string> ActiveSkill;
         private void ActivateSkill()
         {
             // Only activate skill if Boss is still alive
@@ -73,8 +83,10 @@ namespace Scripts.ViewModels.Enemies
             var skillToActivate = _skills[skillIdToActivate];
             if (skillToActivate.IsInterrupt)
             {
-                if (OnInterrupted != null)
-                    OnInterrupted();
+	            if (OnInterrupted != null)
+	            {
+		            OnInterrupted();
+	            }
                 // Interrupt Skill is active
                 // Cancel everything that is currently happening, and Activate this skill
                 if (_currentSkill != null)
@@ -89,15 +101,19 @@ namespace Scripts.ViewModels.Enemies
                 if (_currentSkill != null)
                 {
                     // Only put one on queue at one time, fitting for interrupt mechanism... i think
-                    if (skillToActivate.IsQueuedable && string.IsNullOrEmpty(_queuedSkillId))
-                        _queuedSkillId = skillIdToActivate;
+	                if (skillToActivate.IsQueuedable && string.IsNullOrEmpty(_queuedSkillId))
+	                {
+		                _queuedSkillId = skillIdToActivate;
+	                }
                     return;
                 }
             }
 
             // Only update the queued skill when we are sure that the main skill is actually activated
-            if (skillSplit.Length == 2)
-                _queuedSkillId = skillSplit[1];
+	        if (skillSplit.Length == 2)
+	        {
+		        _queuedSkillId = skillSplit[1];
+	        }
 
             // Activate the lucky skill
             _currentSkill = skillToActivate;
@@ -123,8 +139,6 @@ namespace Scripts.ViewModels.Enemies
 
         #endregion
 
-        public event Action OnInterrupt;
-        private float _skillInterruptThreshold;
         public override bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
         {
             if (_skillInterruptThreshold > 0)
@@ -143,8 +157,10 @@ namespace Scripts.ViewModels.Enemies
                         {
                             _currentSkill = null;
 
-                            if (interruptEvents != null)
-                                interruptEvents();
+	                        if (interruptEvents != null)
+	                        {
+		                        interruptEvents();
+	                        }
                         }
                     }
                 }
@@ -153,28 +169,32 @@ namespace Scripts.ViewModels.Enemies
             return base.ApplyDamage(damage, contactPoint, source);
         }
 
-        private readonly List<Limb> _limbs = new List<Limb>();
-
-        protected override void OnActivate()
+		protected override void OnActivate()
         {
             base.OnActivate();
 
-            foreach (var limb in _limbs)
-                limb.Activate();
+	        foreach (var limb in _limbs)
+	        {
+		        limb.Activate();
+	        }
         }
 
         public override void Show()
         {
             base.Show();
 
-            foreach (var limb in _limbs)
-                limb.Show();
+	        foreach (var limb in _limbs)
+	        {
+		        limb.Show();
+	        }
         }
 
         public override void Hide(string reason)
         {
-            foreach (var limb in _limbs)
-                limb.Hide("Boss is hidden");
+	        foreach (var limb in _limbs)
+	        {
+		        limb.Hide("Boss is hidden");
+	        }
 
             base.Hide(reason);
         }
@@ -183,21 +203,27 @@ namespace Scripts.ViewModels.Enemies
         {
             base.OnKilled();
 
-            foreach (var limb in _limbs)
-                limb.Kill();
+	        foreach (var limb in _limbs)
+	        {
+		        limb.Kill();
+	        }
         }
 
         protected override void OnDeactivate()
         {
-            if (_currentSkill != null)
-                _currentSkill.Deactivate(string.Format("Boss is deactivated, so we deactivate '{0}'", _currentSkill.Id));
+	        if (_currentSkill != null)
+	        {
+		        _currentSkill.Deactivate(string.Format("Boss is deactivated, so we deactivate '{0}'", _currentSkill.Id));
+	        }
 
             base.OnDeactivate();
 
             // Cleanup when deactivating
             ActiveSkill.SetValue("");
-            if (_currentSkill != null)
-                _currentSkill.ActivationFinished -= Skill_OnActivationFinished;
+	        if (_currentSkill != null)
+	        {
+		        _currentSkill.ActivationFinished -= Skill_OnActivationFinished;
+	        }
             _currentSkill = null;
             _queuedSkillId = "";
         }
@@ -221,8 +247,10 @@ namespace Scripts.ViewModels.Enemies
             if (OnMoveStart != null)
             {
                 Object targetObject = null;
-                if (!string.IsNullOrEmpty(moveTarget))
-                    targetObject = Root.GetViewModelAsType<Object>(moveTarget);
+	            if (!string.IsNullOrEmpty(moveTarget))
+	            {
+		            targetObject = Root.GetViewModelAsType<Object>(moveTarget);
+	            }
 
                 OnMoveStart(targetObject, speedMultiplier);
             }
@@ -230,8 +258,10 @@ namespace Scripts.ViewModels.Enemies
 
         public void FinishedMovement()
         {
-            if (OnMovementFinished != null)
-                OnMovementFinished();
+	        if (OnMovementFinished != null)
+	        {
+		        OnMovementFinished();
+	        }
         }
 
         public override void TriggerIgnoreDelays()

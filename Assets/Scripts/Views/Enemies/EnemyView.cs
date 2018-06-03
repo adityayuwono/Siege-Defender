@@ -128,7 +128,7 @@ namespace Scripts.Views.Enemies
         {
             // We may still be subscribed to these
             iTween.Stop(GameObject);
-            UnsubscribeEverything();
+            UnsubscribeIntervals();
 
 	        _viewModel.AnimationId.SetValue("Death");
 
@@ -138,13 +138,13 @@ namespace Scripts.Views.Enemies
         protected override void OnDestroy()
         {
             // We may still be subscribed to this
-            UnsubscribeEverything();
             _viewModel.AnimationId.OnChange -= Animation_OnChange;
+            UnsubscribeIntervals();
 
             base.OnDestroy();
         }
 
-        private void UnsubscribeEverything()
+        private void UnsubscribeIntervals()
         {
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);

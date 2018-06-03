@@ -1,11 +1,15 @@
-﻿using Scripts.Interfaces;
+﻿using Scripts.Helpers;
+using Scripts.Interfaces;
 using Scripts.ViewModels;
+using Scripts.Views.Enemies;
+using UnityEngine;
 
 namespace Scripts.Views
 {
     public class BaseView : IBase
     {
         private readonly Base _viewModel;
+	    private bool _isShown = false;
 
         protected BaseView(Base viewModel, BaseView parent)
         {
@@ -17,7 +21,7 @@ namespace Scripts.Views
             _viewModel.OnDestroy += OnDestroy;
         }
 
-        public string Id
+		public string Id
         {
             get { return _viewModel.Id; }
         }
