@@ -81,11 +81,8 @@ namespace Scripts.Views
 
 	    protected virtual void StartWalking()
 	    {
-		    if (Animator != null)
-		    {
-			    Animator.Play("Spawn");
-			    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
-		    }
+		    Animator.Play("Spawn");
+		    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
 	    }
 
 	    private void StartWalkAnimationSubscription()
