@@ -131,6 +131,7 @@ namespace Scripts.Views.Enemies
             UnsubscribeIntervals();
 
 	        _viewModel.AnimationId.SetValue("Death");
+	        _viewModel.AnimationId.OnChange -= Animation_OnChange;
 
 	        base.OnHide(reason);
         }
@@ -138,7 +139,6 @@ namespace Scripts.Views.Enemies
         protected override void OnDestroy()
         {
             // We may still be subscribed to this
-            _viewModel.AnimationId.OnChange -= Animation_OnChange;
             UnsubscribeIntervals();
 
             base.OnDestroy();
