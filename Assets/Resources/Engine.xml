@@ -5,7 +5,7 @@
 			RoF="0.2" Ammunition="1000" Reload="1"
 			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" />
-    <Projectile 	Id="Rock" Damage="0-6"
+    <Projectile 	Id="Rock" Damage="4-6"
 			AssetId="Projectiles/Rock"
 			RoF="0.1" Ammunition="10000" Reload="0.5"
 			Accuracy="0.65" Deviation="0.001"
@@ -13,7 +13,7 @@
 			IsRotationRandomized="true"
 			DeathDelay="0.5"
 			Scatters="3" />
-    <Projectile 	Id="ScatterArrow" Damage="1-5"
+    <Projectile 	Id="ScatterArrow" Damage="5-8"
 			AssetId="Projectiles/WoodenBalista"
 			RoF="0.3" Ammunition="1000" Reload="1"
 			SpeedDeviation="300-600"
@@ -29,23 +29,23 @@
 			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" >
     </Projectile>
-    <Projectile 	Id="ExplosiveFireBall" Damage="4-7"
+    <Projectile 	Id="ExplosiveFireBall" Damage="5-8"
 			AssetId="Projectiles/FireBall" AoEId="FireDome"
 			RoF="0.2" Ammunition="2500" Reload="0"
 			Scatters="1"
 			Accuracy="0.5" Deviation="0.01" />
-    <Piercing 		Id="IronBall" Damage="50-80"
+    <Piercing 		Id="IronBall" Damage="30-50"
 			AssetId="Projectiles/IronBall"
 			RoF="1" Ammunition="8" Reload="2"
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
-    <Projectile 	Id="Ascalon" Damage="0-20"
+    <Projectile 	Id="Ascalon" Damage="10"
 			AssetId="Projectiles/Ascalon" AoEId="AscalonExplosion"
 			RoF="0.125" Ammunition="9" Reload="0.777"
 			SpeedDeviation="300-600"
 			Accuracy="0.75" Deviation="0" Scatters="3" />
-    <Projectile 	Id="SkySplitter" Damage="0-990"
+    <Projectile 	Id="SkySplitter" Damage="0-20"
 			AssetId="Projectiles/SkySplitter" AoEId="LightningStrike"
 			RoF="0.6" Ammunition="99" Reload="2"
 			SpeedDeviation="500-500"
