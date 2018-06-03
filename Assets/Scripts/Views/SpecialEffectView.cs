@@ -1,5 +1,4 @@
-﻿using System;
-using Scripts.Helpers;
+﻿using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
 using Object = Scripts.ViewModels.Object;

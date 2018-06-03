@@ -30,7 +30,6 @@ namespace Scripts.ViewModels
             ObjectId_OnChange();
         }
 
-
         private void ObjectId_OnChange()
         {
             var currentObjectVM = CurrentObject.GetValue();

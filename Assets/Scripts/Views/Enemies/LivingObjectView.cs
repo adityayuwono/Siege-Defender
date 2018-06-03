@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using Scripts.Helpers;
-using Scripts.ViewModels;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.Weapons;
 using Scripts.Views.Weapons;
 using UnityEngine;
 
-namespace Scripts.Views
+namespace Scripts.Views.Enemies
 {
     public class LivingObjectView : RigidbodyView
     {
@@ -26,21 +25,19 @@ namespace Scripts.Views
 
             _viewModel.DoAttach += AttachProjectileToSelf;
             var projectileRoot = Transform.FindChildRecursivelyBreadthFirst("ProjectileRoot");
-            if (projectileRoot == null)
-            {
-            }
-            else
-            {
-                if (projectileRoot.childCount > 0)
-                {
-                    for (int i = 0; i < projectileRoot.childCount; i++)
-                    {
-                        var rootChild = projectileRoot.GetChild(i);
-                        _projectileRooTransform.Add(rootChild);
-                    }
-                }
-                _projectileRooTransform.Add(projectileRoot);
-            }
+	        if (projectileRoot != null)
+	        {
+		        if (projectileRoot.childCount > 0)
+		        {
+			        for (int i = 0; i < projectileRoot.childCount; i++)
+			        {
+				        var rootChild = projectileRoot.GetChild(i);
+				        _projectileRooTransform.Add(rootChild);
+			        }
+		        }
+
+		        _projectileRooTransform.Add(projectileRoot);
+	        }
         }
 
         protected override void OnShow()

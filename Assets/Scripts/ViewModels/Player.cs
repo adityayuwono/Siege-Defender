@@ -36,15 +36,19 @@ namespace Scripts.ViewModels
             base.OnDeactivate();
         }
 
-        private void OnDamaged()
-        {
-            var currentHealth = Health.GetValue();
-            if (currentHealth <= 0)
-                if (OnGameOver != null)
-                    OnGameOver();// Player's health is 0, this means game over :( (
-        }
+	    private void OnDamaged()
+	    {
+		    var currentHealth = Health.GetValue();
+		    if (currentHealth <= 0)
+		    {
+			    if (OnGameOver != null)
+			    {
+				    OnGameOver(); // Player's health is 0, this means game over :( (
+			    }
+		    }
+	    }
 
-        public readonly AdjustableProperty<float> Health;
+	    public readonly AdjustableProperty<float> Health;
         public readonly AdjustableProperty<float> MaxHealth;
 
         public event Action OnGameOver;

@@ -6,6 +6,8 @@ namespace Scripts.ViewModels
 {
     public class ButtonGUI : BaseGUI
     {
+	    public event Action OnClick;
+
         private readonly ButtonGUIModel _model;
 
         public ButtonGUI(ButtonGUIModel model, Base parent) : base(model, parent)
@@ -13,12 +15,13 @@ namespace Scripts.ViewModels
             _model = model;
         }
 
-        public event Action OnClick;
-
-        public void OnClicked()
+		public void OnClicked()
         {
             // Invoke all actions related to this button
-            if (OnClick != null) OnClick();
+	        if (OnClick != null)
+	        {
+		        OnClick();
+	        }
         }
     }
 }

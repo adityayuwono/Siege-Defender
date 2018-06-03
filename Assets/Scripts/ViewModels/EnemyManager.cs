@@ -6,7 +6,14 @@ namespace Scripts.ViewModels
 {
     public class EnemyManager : Interval<LivingObject>
     {
+	    public readonly AdjustableProperty<string> Level;
+
         private readonly EnemyManagerModel _model;
+	    
+	    private LevelModel _levelModel;
+	    private int _loopCount;
+	    private int _currentLoop;
+	    private int _spawnIndex;
 
         public EnemyManager(EnemyManagerModel model, Object parent) : base(model, parent)
         {
@@ -14,8 +21,10 @@ namespace Scripts.ViewModels
 
             // Tell the parent Scene that it has an EnemyManager
             var parentScene = parent as Scene;
-            if (parentScene != null)
-                parentScene.EnemyManager = this;
+	        if (parentScene != null)
+	        {
+		        parentScene.EnemyManager = this;
+	        }
 
             Level = new AdjustableProperty<string>("Level", this, true);
             Level.OnChange += LoadLevel;
@@ -23,32 +32,17 @@ namespace Scripts.ViewModels
             Level.SetValue(_model.LevelId);
         }
 
+	    /// <summary>
+	    /// Overrides the next spawn index used, -1 means no override
+	    /// </summary>
+	    public int SpawnIndexOverride { get; private set; }
+
         public override void Hide(string reason)
         {
             Hide(reason, false);
         }
 
-        public readonly AdjustableProperty<string> Level;
-
-        private void LoadLevel()
-        {
-            var levelId = Level.GetValue();
-            if (string.IsNullOrEmpty(levelId)) return;
-            _spawnIndex = 0;
-            _currentLoop = 0;
-            _levelModel = Root.GetLevel(Level.GetValue());
-
-            // If Loop Count is -1, we just assign MaxValue, hoping the player will never reach it
-            _loopCount = _levelModel.LoopCount == -1 ? int.MaxValue : _levelModel.LoopCount;
-            Interval.SetValue(_levelModel.Interval);
-        }
-        
-        #region Spawning Enemies
-        private LevelModel _levelModel;
-        private int _loopCount;
-        private int _currentLoop;
-        private int _spawnIndex;
-        public void SpawnEnemy()
+		public void SpawnEnemy()
         {
             // Check if we are at the end of the sequence
             if (_spawnIndex >= _levelModel.SpawnSequence.Count && _currentLoop < _loopCount)
@@ -79,11 +73,18 @@ namespace Scripts.ViewModels
             SpawnIndexOverride = -1;
         }
 
-        /// <summary>
-        /// Overrides the next spawn index used, -1 means no override
-        /// </summary>
-        public int SpawnIndexOverride { get; private set; }
+	    private void LoadLevel()
+	    {
+		    var levelId = Level.GetValue();
+		    if (string.IsNullOrEmpty(levelId)) return;
 
-        #endregion
+		    _spawnIndex = 0;
+		    _currentLoop = 0;
+		    _levelModel = Root.GetLevel(Level.GetValue());
+
+		    // If Loop Count is -1, we just assign MaxValue, hoping the player will never reach it
+		    _loopCount = _levelModel.LoopCount == -1 ? int.MaxValue : _levelModel.LoopCount;
+		    Interval.SetValue(_levelModel.Interval);
+	    }
     }
 }

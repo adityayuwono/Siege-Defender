@@ -10,14 +10,7 @@ namespace Scripts.ViewModels
         {
             _model = model;
         }
-
-        protected override void OnLoad()
-        {
-            base.OnLoad();
-
-            Root.SpecialEffectManager = this;
-        }
-
+		
         public void DisplaySpecialEffect(string id, Vector3 position)
         {
             var specialEffect = GetObject<SpecialEffect>(id);
@@ -29,5 +22,11 @@ namespace Scripts.ViewModels
             var specialEffect = GetObject<SpecialEffect>(id);
             specialEffect.ShowSpecialEffect(parent);
         }
+	    protected override void OnLoad()
+	    {
+		    base.OnLoad();
+
+		    Root.SpecialEffectManager = this;
+	    }
     }
 }

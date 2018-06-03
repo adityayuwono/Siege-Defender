@@ -7,6 +7,7 @@ namespace Scripts.ViewModels
     public class Triggerable : Base
     {
         private readonly TriggerableModel _model;
+	    private readonly List<Triggered> _triggers = new List<Triggered>();
 
         protected Triggerable(TriggerableModel model, Base parent) : base(model, parent)
         {
@@ -22,9 +23,7 @@ namespace Scripts.ViewModels
             }
         }
 
-        private readonly List<Triggered> _triggers = new List<Triggered>();
-
-        protected override void OnActivate()
+		protected override void OnActivate()
         {
             base.OnActivate();
 

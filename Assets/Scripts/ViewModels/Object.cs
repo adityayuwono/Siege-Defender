@@ -10,9 +10,16 @@ namespace Scripts.ViewModels
 {
     public class Object : Triggerable
     {
-        private readonly ObjectModel _model;
+		public event Action OnStartSpecialEvent;
+		public Action<Object> OnObjectDeactivated;
 
-        public Object(ObjectModel model, Base parent) : base(model, parent)
+		protected readonly List<Object> Elements = new List<Object>(); 
+
+		private readonly ObjectModel _model;
+
+		private bool _isDelaysIgnored;
+
+		public Object(ObjectModel model, Base parent) : base(model, parent)
         {
             _model = model;
 
@@ -25,8 +32,10 @@ namespace Scripts.ViewModels
                 foreach (var elementModel in _model.Elements)
                 {
                     var element = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
-                    if (element == null)
-                        throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
+	                if (element == null)
+	                {
+		                throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
+	                }
                     Elements.Add(element);
                 }
             }
@@ -34,33 +43,71 @@ namespace Scripts.ViewModels
             _position = _model.Position.ParseVector3();
         }
 
-        public RandomPositionManager RandomPositionManager { get; private set; }
-        /// <summary>
+	    /// <summary>
+	    /// All things die eventually, we can only delay the inevitable
+	    /// This will delay the deactivation to show death animation, unless it is ignored (e.g. for caching)
+	    /// </summary>
+		public float DeathDelay
+	    {
+		    get { return _isDelaysIgnored ? 0 : _model.DeathDelay; }
+	    }
+
+		public RandomPositionManager RandomPositionManager { get; private set; }
+
+		public string Type
+	    {
+		    get { return _model.Type; }
+	    }
+
+		public string AssetId
+	    {
+		    get
+		    {
+			    if (_model.AssetId.StartsWith("{"))
+			    {
+				    return GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.AssetId).GetValue();
+			    }
+			    return _model.AssetId;
+		    }
+	    }
+
+		public virtual Vector3 Position
+	    {
+		    get { return _position; }
+		    protected set { _position = value; }
+	    }
+		private Vector3 _position;
+
+		/// <summary>
         /// Activate and Assign a position manager
         /// </summary>
         /// <param name="manager">Position Manager</param>
-        public void Activate(RandomPositionManager manager)
+		public void Activate(RandomPositionManager manager)
         {
             RandomPositionManager = manager;
 
             Activate();
         }
 
-        protected readonly List<Object> Elements = new List<Object>(); 
+		public void StartSpecialEvent()
+	    {
+		    if (OnStartSpecialEvent != null)
+		    {
+			    OnStartSpecialEvent();
+		    }
+	    }
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
+		public virtual bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
+	    {
+		    return false;
+	    }
 
-            _isDelaysIgnored = false;
+		public virtual void TriggerIgnoreDelays()
+	    {
+		    _isDelaysIgnored = true;
+	    }
 
-	        foreach (var element in Elements)
-	        {
-		        element.Activate();
-	        }
-        }
-
-        public override void Show()
+		public override void Show()
         {
             base.Show();
 
@@ -70,7 +117,7 @@ namespace Scripts.ViewModels
 	        }
         }
 
-        public override void Hide(string reason)
+		public override void Hide(string reason)
         {
             base.Hide(reason);
 
@@ -80,45 +127,31 @@ namespace Scripts.ViewModels
 	        }
         }
 
-        public event Action OnStartSpecialEvent;
-        public void StartSpecialEvent()
-        {
-	        if (OnStartSpecialEvent != null)
-	        {
-		        OnStartSpecialEvent();
-	        }
-        }
+		protected override void OnActivate()
+	    {
+		    base.OnActivate();
 
-        #region Death
+		    _isDelaysIgnored = false;
 
-        public virtual bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
-        {
-            return false;
-        }
+		    foreach (var element in Elements)
+		    {
+			    element.Activate();
+		    }
+	    }
 
-        /// <summary>
-        /// All things die eventually, we can only delay the inevitable
-        /// This will delay the deactivation to show death animation, unless it is ignored (e.g. for caching)
-        /// </summary>
-        public float DeathDelay
-        {
-            get { return _isDelaysIgnored ? 0 : _model.DeathDelay; }
-        }
-
-        public Action<Object> OnObjectDeactivated;
-        
-        protected override void OnDeactivate()
+		protected override void OnDeactivate()
         {
             base.OnDeactivate();
 
-            if (OnObjectDeactivated != null)
-                OnObjectDeactivated(this);
+	        if (OnObjectDeactivated != null)
+	        {
+		        OnObjectDeactivated(this);
+	        }
 
             OnObjectDeactivated = null;
         }
-        #endregion
 
-        protected override void OnDestroyed()
+		protected override void OnDestroyed()
         {
 	        foreach (var element in Elements)
 	        {
@@ -126,36 +159,6 @@ namespace Scripts.ViewModels
 	        }
 
             base.OnDestroyed();
-        }
-
-        #region Model Properties
-        public string Type
-        {
-            get { return _model.Type; }
-        }
-
-        public string AssetId
-        {
-            get
-            {
-                if (_model.AssetId.StartsWith("{"))
-                    return GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.AssetId).GetValue();
-                return _model.AssetId;
-            }
-        }
-
-        private Vector3 _position;
-        public virtual Vector3 Position
-        {
-            get { return _position; }
-            protected set { _position = value; }
-        }
-        #endregion
-
-        private bool _isDelaysIgnored;
-        public virtual void TriggerIgnoreDelays()
-        {
-            _isDelaysIgnored = true;
         }
     }
 }

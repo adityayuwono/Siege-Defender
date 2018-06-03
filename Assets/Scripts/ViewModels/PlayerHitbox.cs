@@ -15,8 +15,10 @@ namespace Scripts.ViewModels
         public void CollideWithTarget(Object obj)
         {
             var enemyViewModel = obj as Enemy;
-            if (enemyViewModel != null)
-                enemyViewModel.ApplyDamage(float.PositiveInfinity, Vector3.zero, null);
+	        if (enemyViewModel != null)
+	        {
+		        enemyViewModel.ApplyDamage(float.PositiveInfinity, Vector3.zero);
+	        }
         }
     }
 }

@@ -12,8 +12,6 @@ namespace Scripts.Views
             _viewModel = viewModel;
         }
 
-
-
         protected override void OnShow()
         {
             base.OnShow();

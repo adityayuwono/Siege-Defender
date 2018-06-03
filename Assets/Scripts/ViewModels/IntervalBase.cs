@@ -1,177 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Scripts.Core;
-using Scripts.Helpers;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public class Interval<T> : IntervalBase where T : Object
-    {
-        private readonly IntervalModel _model;
-
-        protected Interval(IntervalModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
-
-            ActiveObjects = new AdjustableProperty<int>("ActiveObjects", this);
-            ActiveObjects.SetValue(0);
-
-            Interval.SetValue(_model.Interval);
-        }
-
-        public override void Show()
-        {
-            base.Show();
-
-            // Reset the active objects count
-            ActiveObjects.SetValue(0);
-        }
-
-        public override void Hide(string reason)
-        {
-            Hide(reason, true);
-        }
-
-        protected void Hide(string reason, bool hideChildren)
-        {
-            if (hideChildren)
-            {
-                foreach (var activeObject in _activeObjects)
-                {
-                    activeObject.Hide(reason);
-                }
-            }
-
-            base.Hide(reason);
-        }
-
-        #region Spawning Objects
-
-        protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : Object
-        {
-            var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, overrideParent));
-            if (objectResult as T == null)
-                throw new EngineException(this, string.Format("Failed to cast '{0}'\ntype of ({1}) to ({2})", objectResult.Id, objectResult.GetType(), typeof (T)));
-
-            _activeObjects.Add(objectResult as T);
-            ActiveObjects.SetValue(ActiveObjects.GetValue() + 1);
-            objectResult.OnObjectDeactivated += Object_OnDeath;
-            return objectResult as TU;
-        }
-
-        private int _objectCount;
-        protected int ObjectCount { get { return _objectCount++; } }
-        protected virtual T SpawnNewObject(string id, Base overrideParent = null)
-        {
-            var modelToCopy = Root.GetObjectModel(id);
-	        var objectModel = CreateNewModel(id, modelToCopy);
-            var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, overrideParent ?? this});
-            if (newObject == null)
-                throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(Object)));
-            
-            return newObject as T;
-        }
-
-		private ObjectModel CreateNewModel(string id, ObjectModel modelToCopy)
-	    {
-		    var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
-		    objectModel.Id = string.Format("{0}_{1}", objectModel.Id, Guid.NewGuid());
-		    objectModel.Type = id;
-
-		    var actions = objectModel.Triggers.SelectMany(t => t.Actions).ToList();
-		    var conditions = objectModel.Triggers.SelectMany(t => t.Conditions).ToList();
-		    foreach (var childElement in objectModel.Elements)
-		    {
-			    if (!string.IsNullOrEmpty(childElement.Id) && childElement.Id.Contains("[x]"))
-			    {
-				    var originalId = childElement.Id;
-				    childElement.Id = string.Format("{0}_{1}", childElement.Id, Guid.NewGuid()); ;
-
-				    foreach (var action in actions)
-				    {
-					    action.Target = action.Target.Replace(originalId, childElement.Id);
-				    }
-				    foreach (var action in conditions)
-				    {
-					    action.Target = action.Target.Replace(originalId, childElement.Id);
-				    }
-			    }
-		    }
-
-		    return objectModel;
-	    }
-
-        public readonly AdjustableProperty<int> ActiveObjects;
-        private readonly List<T> _activeObjects = new List<T>();
-
-        private void Object_OnDeath(Object objectViewModel)
-        {
-            var objectT = (T) objectViewModel;
-            _activeObjects.Remove(objectT);
-            ActiveObjects.SetValue(ActiveObjects.GetValue() - 1);
-            AddToInactiveObjectList(objectT);
-        }
-        private static void AddToInactiveObjectList(T inactiveObject)
-        {
-            var objectType = inactiveObject.Type;
-
-            if (InactiveObjects.ContainsKey(objectType))
-                InactiveObjects[objectType].Add(inactiveObject);
-            else
-                InactiveObjects.Add(objectType, new List<Object> { inactiveObject });
-        }
-        
-        private static Object CheckInactiveObjects(string objectId)
-        {
-            // Id is not registered yet
-            if (!InactiveObjects.ContainsKey(objectId)) return null;
-
-            var objectList = InactiveObjects[objectId];
-
-            // Id is registered, but we don't have any copies of that inactiveObject
-            if (objectList.Count == 0) return null;
-
-            // We have some, now give them one, just one
-            var foundObject = objectList[0];
-            objectList.Remove(foundObject);
-
-            return foundObject;
-        }
-        #endregion
-
-        protected override void OnDestroyed()
-        {
-            foreach (var activeObject in _activeObjects)
-                activeObject.OnObjectDeactivated -= Object_OnDeath;
-
-            foreach (var activeObject in _activeObjects)
-                activeObject.Destroy();
-
-            _activeObjects.Clear();
-
-            DestroyInactiveObjects();
-
-            base.OnDestroyed();
-        }
-    }
-
     public abstract class IntervalBase : RandomPositionManager
     {
-        protected IntervalBase(IntervalModel model, Base parent) : base(model, parent) { }
-        public readonly Property<float> Interval = new Property<float>();
+	    public readonly Property<float> Interval = new Property<float>();
 
-        protected static readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
-        private static bool _isDestructionInProgress;
+	    protected static readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
+
+	    private static bool _isDestructionInProgress;
+
+	    protected IntervalBase(IntervalModel model, Base parent) : base(model, parent)
+	    {
+
+	    }
+
         protected static void DestroyInactiveObjects()
         {
             if (_isDestructionInProgress) return;
 
             _isDestructionInProgress = true;
             foreach (var inactiveObjects in InactiveObjects.Values)
-                foreach (var inactiveObject in inactiveObjects)
-                    inactiveObject.Destroy();
+            {
+	            foreach (var inactiveObject in inactiveObjects)
+	            {
+		            inactiveObject.Destroy();
+	            }
+            }
 
             InactiveObjects.Clear();
             _isDestructionInProgress = false;

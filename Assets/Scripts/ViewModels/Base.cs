@@ -7,8 +7,16 @@ namespace Scripts.ViewModels
 {
     public class Base : IBase
     {
+	    public Action OnShow;
+	    public Action<string> OnHide;
+	    public Action OnDestroy;
+
         private readonly BaseModel _model;
-        public Base Parent { get; protected set; }
+	    private Views.BaseView _view;
+	    private string _lastDeactivationReason;
+	    private bool _isActive;
+	    private bool _isLoaded;
+
         protected Base(BaseModel model, Base parent)
         {
             _model = model;
@@ -19,19 +27,41 @@ namespace Scripts.ViewModels
                 _model.Id = Guid.NewGuid().ToString();
         }
 
-        #region Actions
-        public Action OnShow;
-        public Action<string> OnHide;
-        #endregion
+	    public Base Parent { get; protected set; }
+
+	    public virtual EngineBase Root
+	    {
+		    get { return Parent.Root; }
+	    }
+
+	    public virtual string Id
+	    {
+		    get { return _model.Id; }
+	    }
+
+	    public virtual string FullId
+	    {
+		    get { return Parent != null ? Parent.FullId + "/" + Id : Id; }
+	    }
+
+	    public T GetParent<T>() where T : class, IBase
+	    {
+		    var parent = Parent as T;
+		    return parent ?? Parent.GetParent<T>();
+	    }
+
+	    public override string ToString()
+	    {
+		    return string.Format("{0}:{1}", GetType(), Id);
+	    }
 
         #region Activation
-
-        private bool _isActive;
-        private bool _isLoaded;
         public void Activate()
         {
-            if (_isActive)
-                throw new EngineException(this, "Failed to Activate.\n" + _lastDeactivationReason);
+	        if (_isActive)
+	        {
+		        throw new EngineException(this, "Failed to Activate.\n" + _lastDeactivationReason);
+	        }
 
             _isActive = true;
 
@@ -46,11 +76,12 @@ namespace Scripts.ViewModels
 
         public virtual void Show()
         {
-            if (OnShow != null)
-                OnShow();
+	        if (OnShow != null)
+	        {
+		        OnShow();
+	        }
         }
 
-        private Views.BaseView _view;
         protected virtual void OnLoad()
         {
             Root.RegisterToLookup(this);
@@ -59,12 +90,13 @@ namespace Scripts.ViewModels
             Root.RegisterView(this, _view);
         }
 
-        protected virtual void OnActivate() { }
+	    protected virtual void OnActivate()
+	    {
+
+	    }
         #endregion
 
         #region Deactivation
-
-        private string _lastDeactivationReason;
         public void Deactivate(string reason)
         {
             //UnityEngine.Debug.Log(FullId+":"+reason);
@@ -86,27 +118,33 @@ namespace Scripts.ViewModels
         
         public virtual void Hide(string reason)
         {
-            if (OnHide != null)
-                OnHide(reason);
+	        if (OnHide != null)
+	        {
+		        OnHide(reason);
+	        }
         }
 
         protected virtual void OnDeactivate() { }
         #endregion
 
         #region Destruction
-        public Action OnDestroy;
         public void Destroy()
         {
-            if (_isActive)
-                Deactivate("Destroyed");
+	        if (_isActive)
+	        {
+		        Deactivate("Destroyed");
+	        }
 
             OnDestroyed();
 
-            if (OnDestroy != null)
-                OnDestroy();
+	        if (OnDestroy != null)
+	        {
+		        OnDestroy();
+	        }
             
             _isLoaded = false;// Finally we will reload a destroyed object
         }
+
         protected virtual void OnDestroyed()
         {
             _view = null;
@@ -114,28 +152,5 @@ namespace Scripts.ViewModels
             Root.UnregisterFromLookup(this);
         }
         #endregion
-
-        public T GetParent<T>() where T : class, IBase
-        {
-            var parent = Parent as T;
-            return parent ?? Parent.GetParent<T>();
-        }
-
-        public virtual EngineBase Root { get { return Parent.Root; } }
-
-        public virtual string Id
-        {
-            get { return _model.Id; }
-        }
-
-        public virtual string FullId
-        {
-            get { return Parent != null ? Parent.FullId +"/"+ Id : Id; }
-        }
-
-        public override string ToString()
-        {
-            return string.Format("{0}:{1}", GetType(), Id);
-        }
     }
 }

@@ -5,7 +5,11 @@ namespace Scripts.ViewModels
 {
     public class EquipmentSlot : Element
     {
+	    public readonly AdjustableProperty<string> ItemId;
+	    public readonly AdjustableProperty<ObjectModel> Item;
+
         private readonly EquipmentSlotModel _model;
+
         public EquipmentSlot(EquipmentSlotModel model, Inventory parent) : base(model, parent)
         {
             _model = model;
@@ -15,6 +19,17 @@ namespace Scripts.ViewModels
 
             CurrentItem = Root.IoCContainer.GetInstance<Item>(_model.Item.GetType(), new object[] {_model.Item, this});
         }
+		
+	    private Item CurrentItem
+	    {
+		    set { OnItemUpdate(value); }
+	    }
+	    private Item _currentItem;
+
+	    public void Object_OnDropped(Object objectViewModel)
+	    {
+		    CurrentItem = objectViewModel as Item;
+	    }
 
         protected override void OnActivate()
         {
@@ -44,15 +59,6 @@ namespace Scripts.ViewModels
             base.OnDestroyed();
         }
 
-        public readonly AdjustableProperty<string> ItemId;
-        public readonly AdjustableProperty<ObjectModel> Item;
-
-        private Item _currentItem;
-        private Item CurrentItem
-        {
-            set { OnItemUpdate(value); }
-        }
-
         private void OnItemUpdate(Item itemViewModel)
         {
             var inventoryParent = GetParent<Inventory>();
@@ -70,11 +76,6 @@ namespace Scripts.ViewModels
             Item.SetValue(currentProjectileItem == null ? null : currentProjectileItem.GetProjectileModel());// Update actual object model
             
             Root.Save();
-        }
-
-        public void Object_OnDropped(Object objectViewModel)
-        {
-            CurrentItem = objectViewModel as Item;
         }
     }
 }

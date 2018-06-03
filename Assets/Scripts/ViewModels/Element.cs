@@ -6,6 +6,8 @@ namespace Scripts.ViewModels
 {
     public class Element : Object
     {
+	    public Property<bool> VisibilityBinding;
+
         private readonly ElementModel _model;
 
         public Element(ElementModel model, Base parent) : base(model, parent)
@@ -27,7 +29,5 @@ namespace Scripts.ViewModels
                 VisibilityBinding = GetParent<IContext>().PropertyLookup.GetProperty<bool>(_model.IsVisible);
             }
         }
-
-        public Property<bool> VisibilityBinding;
     }
 }
