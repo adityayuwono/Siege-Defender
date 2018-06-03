@@ -209,7 +209,7 @@
           <Setter Target="{This.AnimationId}" Value="Slam_Run" />
           <MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
           <Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
-          <Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]1" />
+          <Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]5" />
           <SpecialEvent Target="{Root.Limbo.PlayerCamera}" Wait="0.5" />
           <Triggers>
             <EventTrigger Event="Interrupt">
@@ -434,7 +434,7 @@
 
         <Element Id="Player" AssetId="EnemyTarget" />
 
-        <Player Id="PlayerCamera" AssetId="Player" Health="150" >
+        <Player Id="PlayerCamera" AssetId="Player" Health="100" >
           <Shooters>
             <Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.PlayerInventory.LeftShooter.Item}" >
               <Target AssetId="Target" />
