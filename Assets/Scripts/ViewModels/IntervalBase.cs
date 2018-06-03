@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
@@ -65,16 +66,42 @@ namespace Scripts.ViewModels
         protected virtual T SpawnNewObject(string id, Base overrideParent = null)
         {
             var modelToCopy = Root.GetObjectModel(id);
-            var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
-            objectModel.Id = string.Format("{0}_{1}", objectModel.Id, Guid.NewGuid());
-            objectModel.Type = id;
-			UnityEngine.Debug.Log("Duplicating: "+objectModel.Id);
+	        var objectModel = CreateNewModel(id, modelToCopy);
             var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new System.Object[] {objectModel, overrideParent ?? this});
             if (newObject == null)
                 throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(Object)));
             
             return newObject as T;
         }
+
+		private ObjectModel CreateNewModel(string id, ObjectModel modelToCopy)
+	    {
+		    var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
+		    objectModel.Id = string.Format("{0}_{1}", objectModel.Id, Guid.NewGuid());
+		    objectModel.Type = id;
+
+		    var actions = objectModel.Triggers.SelectMany(t => t.Actions).ToList();
+		    var conditions = objectModel.Triggers.SelectMany(t => t.Conditions).ToList();
+		    foreach (var childElement in objectModel.Elements)
+		    {
+			    if (!string.IsNullOrEmpty(childElement.Id) && childElement.Id.Contains("[x]"))
+			    {
+				    var originalId = childElement.Id;
+				    childElement.Id = string.Format("{0}_{1}", childElement.Id, Guid.NewGuid()); ;
+
+				    foreach (var action in actions)
+				    {
+					    action.Target = action.Target.Replace(originalId, childElement.Id);
+				    }
+				    foreach (var action in conditions)
+				    {
+					    action.Target = action.Target.Replace(originalId, childElement.Id);
+				    }
+			    }
+		    }
+
+		    return objectModel;
+	    }
 
         public readonly AdjustableProperty<int> ActiveObjects;
         private readonly List<T> _activeObjects = new List<T>();
