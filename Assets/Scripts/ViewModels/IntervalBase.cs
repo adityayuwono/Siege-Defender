@@ -8,7 +8,7 @@ namespace Scripts.ViewModels
     {
 	    public readonly Property<float> Interval = new Property<float>();
 
-	    protected static readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
+	    protected readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
 
 	    private static bool _isDestructionInProgress;
 
@@ -17,7 +17,7 @@ namespace Scripts.ViewModels
 
 	    }
 
-        protected static void DestroyInactiveObjects()
+        protected void DestroyInactiveObjects()
         {
             if (_isDestructionInProgress) return;
 

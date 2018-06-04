@@ -74,7 +74,7 @@ namespace Scripts.ViewModels
 		}
 
 		#region Spawning Objects
-		protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : global::Scripts.ViewModels.Object
+		protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : ViewModels.Object
 		{
 			var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, overrideParent));
 			if (objectResult as T == null)
@@ -138,7 +138,7 @@ namespace Scripts.ViewModels
 			AddToInactiveObjectList(objectT);
 		}
 
-		private static void AddToInactiveObjectList(T inactiveObject)
+		private void AddToInactiveObjectList(T inactiveObject)
 		{
 			var objectType = inactiveObject.Type;
 
@@ -152,7 +152,7 @@ namespace Scripts.ViewModels
 			}
 		}
 
-		private static Object CheckInactiveObjects(string objectId)
+		private Object CheckInactiveObjects(string objectId)
 		{
 			// Id is not registered yet
 			if (!InactiveObjects.ContainsKey(objectId)) return null;
