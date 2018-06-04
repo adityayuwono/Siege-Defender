@@ -22,6 +22,7 @@ namespace Scripts.Views.GUIs
 
         private void Text_OnChange()
         {
+	        _uiLabel.color = _viewModel.Color;
             _uiLabel.text = _viewModel.Text.GetValue();
         }
     }

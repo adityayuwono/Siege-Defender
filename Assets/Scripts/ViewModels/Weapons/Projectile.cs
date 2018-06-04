@@ -33,19 +33,10 @@ namespace Scripts.ViewModels.Weapons
 
         public void Shoot(ObjectView target, float accuracy)
         {
-            if (DoShooting != null)
-                DoShooting(target, accuracy);
-        }
-
-        protected override float CalculateDamage()
-        {
-            var splitDamage = _model.Damage.Split(Values.DamageDelimiter);
-            var currentDamage = float.Parse(splitDamage[0]);
-
-            foreach (var damage in splitDamage)
-                currentDamage = Random.Range(currentDamage, float.Parse(damage));
-
-            return currentDamage;
+	        if (DoShooting != null)
+	        {
+		        DoShooting(target, accuracy);
+	        }
         }
 
         protected override void OnActivate()

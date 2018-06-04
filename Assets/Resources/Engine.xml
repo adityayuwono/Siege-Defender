@@ -4,6 +4,7 @@
 			AssetId="Projectiles/WoodenBalista"
 			RoF="0.2" Ammunition="1000" Reload="1"
 			Scatters="1"
+      CriticalChance="0.5" CriticalDamageMultipler="1.5"
 			Accuracy="0.9" Deviation="0.001" />
     <Projectile 	Id="Rock" Damage="2-7"
 			AssetId="Projectiles/Rock"

@@ -8,6 +8,7 @@ namespace Scripts.ViewModels.GUIs
     public class DamageGUI : LabelGUI
     {
         private DamageGUIModel _model;
+
         public DamageGUI(DamageGUIModel model, Base parent) : base(model, parent)
         {
             _model = model;
@@ -18,8 +19,9 @@ namespace Scripts.ViewModels.GUIs
             get { return 0.5f; }
         }
 
-        public void ShowDamage(float damage, Vector3 position)
+        public void ShowDamage(float damage, bool isCrit, Vector3 position)
         {
+	        Color = isCrit ? Color.yellow : Color.white;
             Text.SetValue(Math.Round(damage).ToString(CultureInfo.InvariantCulture));
             Position = position;
 

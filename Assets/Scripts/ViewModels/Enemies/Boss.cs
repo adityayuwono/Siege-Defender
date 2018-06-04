@@ -139,7 +139,7 @@ namespace Scripts.ViewModels.Enemies
 
         #endregion
 
-        public override bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
+        public override bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
         {
             if (_skillInterruptThreshold > 0)
             {
@@ -166,7 +166,7 @@ namespace Scripts.ViewModels.Enemies
                 }
             }
 
-            return base.ApplyDamage(damage, contactPoint, source);
+            return base.ApplyDamage(damage, isCrit, contactPoint, source);
         }
 
 		protected override void OnActivate()

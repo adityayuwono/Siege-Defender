@@ -12,13 +12,21 @@ namespace Scripts.ViewModels.Weapons
             _model = model;
         }
 
-        protected virtual float CalculateDamage()
+        protected virtual float CalculateDamage(ref bool isCrit)
         {
             var splitDamage = _model.Damage.Split('-');
             var currentDamage = float.Parse(splitDamage[0]);
 
-            foreach (var damage in splitDamage)
-                currentDamage = Random.Range(currentDamage, float.Parse(damage));
+	        foreach (var damage in splitDamage)
+	        {
+		        currentDamage = Random.Range(currentDamage, float.Parse(damage));
+	        }
+
+	        isCrit = Random.Range(0f, 1f) <= _model.CriticalChance;
+	        if (isCrit)
+	        {
+		        currentDamage *= _model.CriticalDamageMultiplier;
+	        }
 
             return currentDamage;
         }
@@ -27,8 +35,9 @@ namespace Scripts.ViewModels.Weapons
 
         protected bool DamageEnemy(Object enemy, Vector3 contactPoint, bool attachToEnemy = false)
         {
-            var damage = CalculateDamage();
-            var isDamageApplied = enemy.ApplyDamage(damage, contactPoint, attachToEnemy ? this : null);
+	        var isCrit = false;
+            var damage = CalculateDamage(ref isCrit);
+            var isDamageApplied = enemy.ApplyDamage(damage, isCrit, contactPoint, attachToEnemy ? this : null);
             return isDamageApplied;
         }
 

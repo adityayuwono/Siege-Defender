@@ -31,6 +31,14 @@ namespace Scripts.Models.Weapons
         [DefaultValue(0.9f)]
         public float Accuracy { get; set; }
 
+	    [XmlAttribute]
+	    [DefaultValue(0f)]
+	    public float CriticalChance { get; set; }
+
+	    [XmlAttribute]
+	    [DefaultValue(1f)]
+	    public float CriticalDamageMultiplier { get; set; }
+
         [XmlAttribute]
         [DefaultValue(0f)]
         public float Deviation { get; set; }
@@ -54,6 +62,8 @@ namespace Scripts.Models.Weapons
             Ammunition = -1;
             Reload = 3f;
             Accuracy = 0.9f;
+	        CriticalChance = 0f;
+	        CriticalDamageMultiplier = 1f;
             Scatters = 0;
             Deviation = 0f;
             SpeedDeviation = "400-400";

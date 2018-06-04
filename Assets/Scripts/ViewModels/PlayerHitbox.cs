@@ -17,7 +17,7 @@ namespace Scripts.ViewModels
             var enemyViewModel = obj as Enemy;
 	        if (enemyViewModel != null)
 	        {
-		        enemyViewModel.ApplyDamage(float.PositiveInfinity, Vector3.zero);
+		        enemyViewModel.ApplyDamage(float.PositiveInfinity, false, Vector3.zero);
 	        }
         }
     }

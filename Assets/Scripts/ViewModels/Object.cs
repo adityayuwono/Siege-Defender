@@ -97,7 +97,7 @@ namespace Scripts.ViewModels
 		    }
 	    }
 
-		public virtual bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
+		public virtual bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
 	    {
 		    return false;
 	    }

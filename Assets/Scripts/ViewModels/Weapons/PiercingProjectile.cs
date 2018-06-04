@@ -19,9 +19,9 @@ namespace Scripts.ViewModels.Weapons
             Hide("Hide since show, this is weird, :D:D:D");
         }
 
-        protected override float CalculateDamage()
+        protected override float CalculateDamage(ref bool isCrit)
         {
-            return base.CalculateDamage()*_damageMultiplier;
+	        return base.CalculateDamage(ref isCrit) * _damageMultiplier;
         }
 
         private float _damageMultiplier;

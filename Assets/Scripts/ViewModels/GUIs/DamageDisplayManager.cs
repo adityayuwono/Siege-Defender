@@ -18,10 +18,10 @@ namespace Scripts.ViewModels.GUIs
             Root.DamageDisplay = this;
         }
 
-        public void DisplayDamage(float damage, Vector3 position)
+        public void DisplayDamage(float damage, bool isCrit, Vector3 position)
         {
             var damageGUI = GetObject<DamageGUI>(_model.DamageGUI);
-            damageGUI.ShowDamage(damage, position);
+            damageGUI.ShowDamage(damage, isCrit, position);
         }
     }
 }

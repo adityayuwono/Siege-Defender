@@ -22,12 +22,12 @@ namespace Scripts.ViewModels.Enemies
             _model.DeathDelay = parent.DeathDelay;
         }
 
-        public override bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
+        public override bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
         {
             var damageMultiplied = damage*_model.DamageMultiplier;
 
-            base.ApplyDamage(damageMultiplied, contactPoint, source);
-            return _parent.ApplyDamage(damageMultiplied, Vector3.zero);
+            base.ApplyDamage(damageMultiplied, isCrit, contactPoint, source);
+            return _parent.ApplyDamage(damageMultiplied, isCrit, Vector3.zero);
         }
 
         private bool _isBroken;

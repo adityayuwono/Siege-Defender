@@ -72,7 +72,7 @@ namespace Scripts.ViewModels.Enemies
         /// <param name="damage">How many health we should reduce</param>
         /// <param name="contactPoint">Impact coordinate for displaying damage</param>
         /// <param name="source">Set if we want to attach the object to the target</param>
-        public override bool ApplyDamage(float damage, Vector3 contactPoint, ProjectileBase source = null)
+        public override bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
         {
 	        if (source != null)
 	        {
@@ -96,7 +96,7 @@ namespace Scripts.ViewModels.Enemies
             // Because Vector3 is a struct and structs can't be null
             if (contactPoint != Vector3.zero)
             {
-                Root.DamageDisplay.DisplayDamage(damage, contactPoint);
+                Root.DamageDisplay.DisplayDamage(damage, isCrit, contactPoint);
 
 	            if (!string.IsNullOrEmpty(CollisionEffectNormal))
 	            {

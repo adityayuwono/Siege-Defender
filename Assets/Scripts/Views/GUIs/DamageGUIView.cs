@@ -21,7 +21,8 @@ namespace Scripts.Views.GUIs
         private void Hide()
         {
             BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Hide);
-            base.OnHide("Hiding DamageGUI");
+            
+	        base.OnHide("Hiding DamageGUI");
         }
     }
 }
