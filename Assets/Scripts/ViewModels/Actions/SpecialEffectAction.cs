@@ -1,4 +1,5 @@
-﻿using Scripts.Models.Actions;
+﻿using Scripts.Core;
+using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
@@ -10,5 +11,17 @@ namespace Scripts.ViewModels.Actions
         {
             _model = model;
         }
+
+	    protected override void OnDeactivate()
+	    {
+		    base.OnDeactivate();
+
+		    var property = Target;
+		    var stringProperty = property as AdjustableProperty<string>;
+		    if (stringProperty.GetValue() == _model.Value)
+		    {
+			    stringProperty.SetValue("");
+		    }
+	    }
     }
 }

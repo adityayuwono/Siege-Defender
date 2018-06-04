@@ -8,28 +8,44 @@ namespace Scripts.Views
     public class SpecialEffectView : ObjectView
     {
         private readonly SpecialEffect _viewModel;
+	    private ParticleSystem _particleSystem;
+
         public SpecialEffectView(SpecialEffect viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
         }
 
-        private ParticleSystem _particleSystem;
+	    public void StopImmediatelly()
+	    {
+		    BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath);
+
+		    _particleSystem.Stop();
+			_particleSystem.Clear(true);
+	    }
+
         protected override void OnLoad()
         {
             _viewModel.UpdateParent += UpdateParent;
+	        _viewModel.OnStopImmediatelly += StopImmediatelly;
 
             base.OnLoad();
 
             _particleSystem = GameObject.GetComponent<ParticleSystem>();
-            if (_particleSystem == null)
-                throw new EngineException(this, string.Format("Failed to find ParticleSystem component from {0}", _viewModel.AssetId));
+	        if (_particleSystem == null)
+	        {
+		        throw new EngineException(this, string.Format("Failed to find ParticleSystem component from {0}", _viewModel.AssetId));
+	        }
 
             var particleDuration = 0f;
-            foreach (var particleSystem in GameObject.GetComponentsInChildren<ParticleSystem>())
-                if (particleDuration < particleSystem.startLifetime)
-                    particleDuration = particleSystem.startLifetime + particleSystem.duration;
+	        foreach (var particleSystem in GameObject.GetComponentsInChildren<ParticleSystem>())
+	        {
+		        if (particleDuration < particleSystem.startLifetime)
+		        {
+			        particleDuration = particleSystem.startLifetime + particleSystem.duration;
+		        }
+	        }
 
-            _viewModel.SetDeathDelay(particleDuration);
+	        _viewModel.SetDeathDelay(particleDuration);
         }
 
         private void UpdateParent(Object o)

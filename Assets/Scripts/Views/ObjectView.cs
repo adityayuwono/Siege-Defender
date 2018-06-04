@@ -1,7 +1,6 @@
 ﻿using Scripts.Components;
 using Scripts.Components.SpecialEvents;
 using Scripts.Helpers;
-using Scripts.Views.Enemies;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -9,9 +8,12 @@ namespace Scripts.Views
 {
     public class ObjectView : BaseView
     {
+	    protected Vector3 AssetScale;
+
         private readonly ViewModels.Object _viewModel;
         private readonly ObjectView _parent;
-	    
+	    private bool _isLoaded;
+
 		public ObjectView(ViewModels.Object viewModel, ObjectView parent) : base(viewModel, parent)
         {
             _viewModel = viewModel;
@@ -24,7 +26,7 @@ namespace Scripts.Views
             get
             {
                 if (_gameObject == null)
-                    throw new EngineException(this, string.Format("GameObject is null"));
+                    throw new EngineException(this, "GameObject is null");
 
                 return _gameObject;
             }
@@ -50,8 +52,10 @@ namespace Scripts.Views
         private void Object_OnStartSpecialEvent()
         {
             var specialEventControllers = GameObject.GetComponents<BaseSpecialEventController>();
-            foreach (var specialEventController in specialEventControllers)
-                specialEventController.StartSpecialEvent(_viewModel.Root);
+	        foreach (var specialEventController in specialEventControllers)
+	        {
+		        specialEventController.StartSpecialEvent(_viewModel.Root);
+	        }
         }
 
         protected override void OnHide(string reason)
@@ -60,8 +64,6 @@ namespace Scripts.Views
             KillGameObject(reason);
         }
 
-        protected Vector3 AssetScale;
-        private bool _isLoaded;
         protected virtual void OnLoad()
         {
             GameObject = GetGameObject();
@@ -79,10 +81,14 @@ namespace Scripts.Views
         protected virtual Transform GetParent()
         {
             Transform parentTransform;
-            if (_parent == null || _parent.GameObject == null)
-                parentTransform = GameObject.Find("Context").transform;
-            else
-                parentTransform = _parent.GameObject.transform;
+	        if (_parent == null || _parent.GameObject == null)
+	        {
+		        parentTransform = GameObject.Find("Context").transform;
+	        }
+	        else
+	        {
+		        parentTransform = _parent.GameObject.transform;
+	        }
 
             return parentTransform;
         }
@@ -129,10 +135,12 @@ namespace Scripts.Views
             BalistaContext.Instance.IntervalRunner.SubscribeToInterval(OnDeath, _viewModel.DeathDelay, false);
         }
         
-	    private void OnDeath()
+	    protected void OnDeath()
         {
-            if (BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath) && _gameObject != null)
-                OnDeath(string.Format("{0}:{1}'s Death", GetType(), Id));
+	        if (BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath) && _gameObject != null)
+	        {
+		        OnDeath(string.Format("{0}:{1}'s Death", GetType(), Id));
+	        }
         }
         
 	    protected virtual void OnDeath(string reason)

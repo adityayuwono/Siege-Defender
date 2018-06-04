@@ -6,7 +6,8 @@ namespace Scripts.ViewModels
 {
     public class SpecialEffect : Object
     {
-	    public Action<Object> UpdateParent; 
+	    public Action<Object> UpdateParent;
+	    public Action OnStopImmediatelly;
 
         private readonly SpecialEffectModel _model;
 
@@ -38,5 +39,10 @@ namespace Scripts.ViewModels
         {
             _model.DeathDelay = delay;
         }
+
+	    public void StopImmediatelly()
+	    {
+		    OnStopImmediatelly();
+	    }
     }
 }

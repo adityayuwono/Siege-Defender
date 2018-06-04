@@ -27,8 +27,10 @@ namespace Scripts.ViewModels.Enemies
             _model = model;
 
             // Validate Model
-            if (string.IsNullOrEmpty(_model.Type))
-                throw new EngineException(this, string.Format("Type for: {0} is empty", FullId));
+	        if (string.IsNullOrEmpty(_model.Type))
+	        {
+		        throw new EngineException(this, string.Format("Type for: {0} is empty", FullId));
+	        }
 
             Health = new AdjustableProperty<float>("Health", this);
             CollisionEffectNormal = _model.CollisionEffectNormal;
@@ -98,7 +100,7 @@ namespace Scripts.ViewModels.Enemies
 
 	            if (!string.IsNullOrEmpty(CollisionEffectNormal))
 	            {
-		            Root.SpecialEffectManager.DisplaySpecialEffect(CollisionEffectNormal, contactPoint);
+		            Root.SpecialEffectManager.StartSpecialEffectOn(CollisionEffectNormal, contactPoint);
 	            }
             }
 
@@ -112,14 +114,18 @@ namespace Scripts.ViewModels.Enemies
         {
             Root.LogEvent("Enemies", "Killed", _model.Type, 1);
 
-            if (Death != null)
-                Death();
+	        if (Death != null)
+	        {
+		        Death();
+	        }
         }
 
         private void AttachProjectile(ProjectileBase source)
         {
-            if (_attachedProjectiles.Contains(source))
-                throw new EngineException(this, "Duplicate Projectile hit");
+	        if (_attachedProjectiles.Contains(source))
+	        {
+		        throw new EngineException(this, "Duplicate Projectile hit");
+	        }
 
             _attachedProjectiles.Add(source);
 

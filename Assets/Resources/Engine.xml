@@ -1,11 +1,11 @@
 <Engine Id="SiegeDefender">
   <Objects>
-    <Projectile 	Id="WoodArrow" Damage="8-12"
+    <Projectile 	Id="WoodArrow" Damage="10-14"
 			AssetId="Projectiles/WoodenBalista"
 			RoF="0.2" Ammunition="1000" Reload="1"
 			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" />
-    <Projectile 	Id="Rock" Damage="4-6"
+    <Projectile 	Id="Rock" Damage="2-7"
 			AssetId="Projectiles/Rock"
 			RoF="0.1" Ammunition="10000" Reload="0.5"
 			Accuracy="0.65" Deviation="0.001"
@@ -13,12 +13,12 @@
 			IsRotationRandomized="true"
 			DeathDelay="0.5"
 			Scatters="3" />
-    <Projectile 	Id="ScatterArrow" Damage="5-8"
+    <Projectile 	Id="ScatterArrow" Damage="1-4"
 			AssetId="Projectiles/WoodenBalista"
 			RoF="0.3" Ammunition="1000" Reload="1"
 			SpeedDeviation="300-600"
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
-    <Projectile 	Id="IronArrow" Damage="10-30"
+    <Projectile 	Id="IronArrow" Damage="10-20"
       AssetId="Projectiles/IronBalista"
       RoF="0.25" Ammunition="500" Reload="0.2"
       Scatters="1"
@@ -34,26 +34,26 @@
 			RoF="0.2" Ammunition="2500" Reload="0"
 			Scatters="1"
 			Accuracy="0.5" Deviation="0.01" />
-    <Piercing 		Id="IronBall" Damage="30-50"
+    <Piercing 		Id="IronBall" Damage="40-60"
 			AssetId="Projectiles/IronBall"
-			RoF="1" Ammunition="8" Reload="2"
+			RoF="2" Ammunition="8" Reload="2"
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
-    <Projectile 	Id="Ascalon" Damage="10"
+    <Projectile 	Id="Ascalon" Damage="1-2"
 			AssetId="Projectiles/Ascalon" AoEId="AscalonExplosion"
 			RoF="0.125" Ammunition="9" Reload="0.777"
 			SpeedDeviation="300-600"
 			Accuracy="0.75" Deviation="0" Scatters="3" />
-    <Projectile 	Id="SkySplitter" Damage="0-20"
+    <Projectile 	Id="SkySplitter" Damage="0-9"
 			AssetId="Projectiles/SkySplitter" AoEId="LightningStrike"
 			RoF="0.6" Ammunition="99" Reload="2"
 			SpeedDeviation="500-500"
 			Accuracy="1" Deviation="0" Scatters="1" />
 
-    <ParticleAoE 	Id="FireDome" AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" Damage="4-7" Scatters="1" />
-    <ParticleAoE 	Id="AscalonExplosion" AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" Damage="0-5" />
-    <ParticleAoE 	Id="LightningStrike" AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="3" Damage="0-99" IsGrounded="true" />
+    <ParticleAoE 	Id="FireDome" AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="5" Damage="4-7" Scatters="1" />
+    <ParticleAoE 	Id="AscalonExplosion" AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" Damage="11-13" />
+    <ParticleAoE 	Id="LightningStrike" AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="3" Damage="0-9" IsGrounded="true" />
 
     <!-- Enemies -->
     <Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >

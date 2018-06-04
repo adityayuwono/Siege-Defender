@@ -34,10 +34,14 @@ namespace Scripts.ViewModels.Actions
                 var newValue = 0f;
                 if (_model.Value.StartsWith("["))
                 {
-                    if (_model.Value.StartsWith("[+]"))
-                        newValue = propertyValue + float.Parse(_model.Value.Replace("[+]", ""));
+	                if (_model.Value.StartsWith("[+]"))
+	                {
+		                newValue = propertyValue + float.Parse(_model.Value.Replace("[+]", ""));
+	                }
                     else if (_model.Value.StartsWith("[-]"))
-                        newValue = propertyValue - float.Parse(_model.Value.Replace("[-]", ""));
+	                {
+		                newValue = propertyValue - float.Parse(_model.Value.Replace("[-]", ""));
+	                }
                 }
                 else
                 {

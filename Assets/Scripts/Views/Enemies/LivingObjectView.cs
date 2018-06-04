@@ -63,7 +63,15 @@ namespace Scripts.Views.Enemies
 
         private void SpecialEffect_OnChange()
         {
-            _viewModel.Root.SpecialEffectManager.DisplaySpecialEffect(_viewModel.SpecialEffect.GetValue(), _viewModel);
+	        var specialEffectId = _viewModel.SpecialEffect.GetValue();
+	        if (string.IsNullOrEmpty(specialEffectId))
+	        {
+		        _viewModel.Root.SpecialEffectManager.StopSpecialEffectOn(_viewModel);
+	        }
+	        else
+	        {
+		        _viewModel.Root.SpecialEffectManager.StartSpecialEffectOn(_viewModel.SpecialEffect.GetValue(), _viewModel);
+	        }
         }
 
         private void AttachProjectileToSelf(ProjectileBase projectile)

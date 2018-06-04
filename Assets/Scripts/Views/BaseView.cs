@@ -1,7 +1,6 @@
 ﻿using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.ViewModels;
-using Scripts.Views.Enemies;
 using UnityEngine;
 
 namespace Scripts.Views

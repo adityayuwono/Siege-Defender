@@ -11,8 +11,19 @@ namespace Scripts.ViewModels.Actions
     /// </summary>
     public class ActionCollection : List<BaseAction>
     {
-        private readonly List<BaseActionModel> _models;
-        private readonly Base _parent;
+	    /// <summary>
+	    /// Invoked by the Enumerator when the action sequence has finished Activated
+	    /// </summary>
+	    public event Action OnActivationFinished;
+
+	    private readonly List<BaseActionModel> _models;
+	    private readonly Base _parent;
+
+	    private int _currentIndex = 0;
+	    private BaseAction _currentAction;
+	    private bool _isInterruptable;
+	    private bool _isActionInvoking;
+        
         public ActionCollection(List<BaseActionModel> models, Base parent)
         {
             _models = models;
@@ -28,13 +39,17 @@ namespace Scripts.ViewModels.Actions
         
         public void Activate()
         {
-            if (_isActionInvoking)
-                return;
+	        if (_isActionInvoking)
+	        {
+		        return;
+	        }
             
             foreach (var action in this)
             {
-                if (action.IsActive)
-                    throw new EngineException(_parent, string.Format("Failed to activate, action {0} is still active"));
+	            if (action.IsActive)
+	            {
+		            throw new EngineException(_parent, string.Format("Failed to activate, action {0} is still active"));
+	            }
             }
 
             _isInterruptable = false;
@@ -43,12 +58,9 @@ namespace Scripts.ViewModels.Actions
             ActivateActions();
         }
 
-        private int _currentIndex = 0;
-        private BaseAction _currentAction;
         /// <summary>
         /// Activate actions in this collection starting from startIndex
         /// </summary>
-        /// <param name="startIndex">The index of action we want to start with</param>
         private void ActivateActions()
         {
             // Unsubsribe the interval first
@@ -78,26 +90,22 @@ namespace Scripts.ViewModels.Actions
                 {
                     _currentAction.Invoke();
                     // Edge case where the action is Load Scene Action
-                    if (_currentAction != null)
-                        _parent.Root.IntervalRunner.SubscribeToInterval(ActivateActions, _currentAction.Wait, !(_currentAction.Wait > 0));
+	                if (_currentAction != null)
+	                {
+		                _parent.Root.IntervalRunner.SubscribeToInterval(ActivateActions, _currentAction.Wait, !(_currentAction.Wait > 0));
+	                }
                 }
             }
             else
             {
                 DeactivateActions();
 
-                if (OnActivationFinished != null)
-                    OnActivationFinished();
+	            if (OnActivationFinished != null)
+	            {
+		            OnActivationFinished();
+	            }
             }
         }
-
-        /// <summary>
-        /// Invoked by the Enumerator when the action sequence has finished Activated
-        /// </summary>
-        public event Action OnActivationFinished;
-
-        private bool _isInterruptable;
-        private bool _isActionInvoking;
 
         public bool Interrupt(bool absolute = true)
         {
