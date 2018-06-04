@@ -1,10 +1,10 @@
 <Engine Id="SiegeDefender">
   <Objects>
-    <Projectile 	Id="WoodArrow" Damage="10-14"
+    <Projectile 	Id="WoodArrow" Damage="6-10"
 			AssetId="Projectiles/WoodenBalista"
 			RoF="0.2" Ammunition="1000" Reload="1"
 			Scatters="1"
-      CriticalChance="0.5" CriticalDamageMultipler="1.5"
+      CriticalChance="0.1" CriticalDamageMultipler="1.2"
 			Accuracy="0.9" Deviation="0.001" />
     <Projectile 	Id="Rock" Damage="2-7"
 			AssetId="Projectiles/Rock"
@@ -63,7 +63,7 @@
           <SpecialEffect Value="MagicCircle" />
         </EventTrigger>
         <EventTrigger Event="Attack">
-          <Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]1" />
+          <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]1" />
         </EventTrigger>
         <EventTrigger Event="Death">
           <CreateItem Target="{Root.LevelDrop}" Value="BasicLoot" />
@@ -203,15 +203,15 @@
           <Setter Target="{SpiderColumns.Level}" Value="SpawnSpiderColumn" Wait="2" />
           <Setter Target="{This.AnimationId}" Value="Idle" />
         </Skill>
-        <Skill Id="Slam" InterruptThreshold="500" >
+        <Skill Id="Slam" InterruptThreshold="300" >
           <SpecialEffect Target="{LeftHand.SpecialEffect}" Value="ChargingSlam" />
           <Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2.1" IsInterruptable="true"/>
           <Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
           <Setter Target="{This.AnimationId}" Value="Slam_Run" />
           <MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
           <Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
-          <Setter Target="{Root.Limbo.PlayerCamera.Health}" Value="[-]5" />
-          <SpecialEvent Target="{Root.Limbo.PlayerCamera}" Wait="0.5" />
+          <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]5" />
+          <SpecialEvent Target="{Root.Play.PlayerCamera}" Wait="0.5" />
           <Triggers>
             <EventTrigger Event="Interrupt">
               <Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingCrystalShield" />
@@ -372,7 +372,7 @@
   </LootTables>
 
   <Scenes>
-    <Scene Id="MainMenu" AssetId="Scenes/MainMenu">
+    <Scene Id="MainMenu" AssetId="MainMenu">
       <Elements>
         <Button AssetId="WeaponSelection" >
           <Triggers>
@@ -384,7 +384,7 @@
         <Button AssetId="StartGame">
           <Triggers>
             <EventTrigger Event="Click">
-              <LoadScene Target="Limbo" LevelId="Level1" />
+              <LoadScene Target="Play" LevelId="Level1" />
             </EventTrigger>
           </Triggers>
         </Button>
@@ -398,7 +398,7 @@
       </Elements>
     </Scene>
 
-    <Scene Id="OptionsMenu" AssetId="Scenes/OptionsMenu">
+    <Scene Id="OptionsMenu" AssetId="OptionsMenu">
       <Elements>
         <Inventory Id="OptionsInventory" Source="PlayerOptions" AssetId="OptionsInventory" />
         <Button AssetId="BackToMainMenu" >
@@ -411,7 +411,7 @@
       </Elements>
     </Scene>
 
-    <Scene Id="SkillTree" AssetId="Scenes/SkillTree">
+    <Scene Id="SkillTree" AssetId="SkillTree">
       <Elements>
         <Inventory Id="PlayerInventory" Source="PlayerInventory" AssetId="Inventory" />
         <Button AssetId="BackToMainMenu" >
@@ -424,7 +424,7 @@
       </Elements>
     </Scene>
 
-    <Scene Id="Limbo" AssetId="Scenes/LimboLower">
+    <Scene Id="Play" IsGameScene="true" AssetId="Play">
       <Elements>
         <ObjectSpawn AssetId="Environtment" LevelId="Houses"/>
 
@@ -437,10 +437,10 @@
 
         <Player Id="PlayerCamera" AssetId="Player" Health="100" >
           <Shooters>
-            <Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Root.PlayerInventory.LeftShooter.Item}" >
+            <Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Inventories.LeftShooter}" >
               <Target AssetId="Target" />
             </Shooter>
-            <Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{Root.PlayerInventory.RightShooter.Item}" >
+            <Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{Inventories.RightShooter}" >
               <Target AssetId="Target" />
             </Shooter>
           </Shooters>
@@ -464,7 +464,7 @@
             </Button>
             <Element AssetId="LoadingCover" IsVisible="{This.IsLoadingInProgress}" />
 
-            <Element AssetId="{Root.OptionsInventory.ControlStyle.ItemId}" >
+            <Element AssetId="{Inventories.ControlStyle}" >
               <Elements>
                 <CooldownGUI AssetId="AmmunitionLeft" Value="{ShooterWeaponLeft.Ammunition}" MaxValue="{ShooterWeaponLeft.MaxAmmunition}" />
                 <CooldownGUI AssetId="AmmunitionRight" Value="{ShooterWeaponRight.Ammunition}" MaxValue="{ShooterWeaponRight.MaxAmmunition}" />

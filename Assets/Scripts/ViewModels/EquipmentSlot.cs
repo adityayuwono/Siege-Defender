@@ -17,7 +17,7 @@ namespace Scripts.ViewModels
             ItemId = new AdjustableProperty<string>("ItemId", this);
             Item = new AdjustableProperty<ObjectModel>("Item", this);
 
-            CurrentItem = Root.IoCContainer.GetInstance<Item>(_model.Item.GetType(), new object[] {_model.Item, this});
+            CurrentItem = IoC.IoCContainer.GetInstance<Item>(_model.Item.GetType(), new object[] {_model.Item, this});
         }
 		
 	    private Item CurrentItem
@@ -64,18 +64,20 @@ namespace Scripts.ViewModels
             var inventoryParent = GetParent<Inventory>();
             inventoryParent.ReleaseItem(itemViewModel);// Remove it from the inventory, do this first to make sure there's a spot left in the inventory
 
-            if (_currentItem != null)
-                inventoryParent.AddItem(_currentItem);// Send the current item back to inventory
+	        if (_currentItem != null)
+	        {
+		        inventoryParent.AddItem(_currentItem); // Send the current item back to inventory
+	        }
 
-            _currentItem = itemViewModel;// Swap the current item
+	        _currentItem = itemViewModel;// Swap the current item
             _currentItem.ChangeParent(this);
             _model.Item = _currentItem.Model;// Save the change to model
             ItemId.SetValue(_currentItem.Base);// Update projectile used
 
             var currentProjectileItem = _currentItem as ProjectileItem;
             Item.SetValue(currentProjectileItem == null ? null : currentProjectileItem.GetProjectileModel());// Update actual object model
-            
-            Root.Save();
+
+	        DataContext.Save();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Scripts.Components.SpecialEvents
         public event Action OnEventStart;
         public event Action OnEventFinished;
 
-        public void StartSpecialEvent(EngineBase engine)
+        public void StartSpecialEvent(RootBase engine)
         {
             engine.StartCoroutine(EnumerateSpecialEvent());
         }

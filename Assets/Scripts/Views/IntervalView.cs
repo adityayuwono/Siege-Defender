@@ -19,12 +19,12 @@ namespace Scripts.Views
 
         protected void StartInterval()
         {
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(IntervalInvoked, _viewModel.Interval.GetValue());
+	        _viewModel.Root.Context.IntervalRunner.SubscribeToInterval(IntervalInvoked, _viewModel.Interval.GetValue());
         }
 
         protected void StopInterval()
         {
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(IntervalInvoked);
+	        _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(IntervalInvoked);
         }
 
         protected override void OnDestroy()

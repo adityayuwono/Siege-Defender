@@ -31,9 +31,14 @@ namespace Scripts.ViewModels
 
 	    public Base Parent { get; protected set; }
 
-	    public virtual EngineBase Root
+	    public virtual RootBase Root
 	    {
 		    get { return Parent.Root; }
+	    }
+
+	    public virtual GameRoot SDRoot
+	    {
+			get { return Parent.SDRoot; }
 	    }
 
 	    public virtual string Id
@@ -95,7 +100,7 @@ namespace Scripts.ViewModels
         {
             Root.RegisterToLookup(this);
 
-            _view = Root.IoCContainer.GetInstance<Views.BaseView>(GetType(), new object[] {this, Parent != null ? Parent._view : null});
+            _view = IoC.IoCContainer.GetInstance<Views.BaseView>(GetType(), new object[] {this, Parent != null ? Parent._view : null});
             Root.RegisterView(this, _view);
         }
 

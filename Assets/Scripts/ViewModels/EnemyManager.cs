@@ -80,7 +80,7 @@ namespace Scripts.ViewModels
 
 		    _spawnIndex = 0;
 		    _currentLoop = 0;
-		    _levelModel = Root.GetLevel(Level.GetValue());
+		    _levelModel = SDRoot.GetLevel(Level.GetValue());
 
 		    // If Loop Count is -1, we just assign MaxValue, hoping the player will never reach it
 		    _loopCount = _levelModel.LoopCount == -1 ? int.MaxValue : _levelModel.LoopCount;

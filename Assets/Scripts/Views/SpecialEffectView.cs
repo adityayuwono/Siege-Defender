@@ -17,7 +17,7 @@ namespace Scripts.Views
 
 	    public void StopImmediatelly()
 	    {
-		    BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath);
+		    _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(OnDeath);
 
 		    _particleSystem.Stop();
 			_particleSystem.Clear(true);

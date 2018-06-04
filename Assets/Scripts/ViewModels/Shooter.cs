@@ -15,7 +15,6 @@ namespace Scripts.ViewModels
 
 	    private readonly ShooterModel _model;
         private ProjectileModel _projectileModel;
-	    private Property<ObjectModel> _projectileBinding;
 
         public Shooter(ShooterModel model, Player parent) : base(model, parent)
         {
@@ -24,10 +23,15 @@ namespace Scripts.ViewModels
             Ammunition = new AdjustableProperty<float>("Ammunition", this);
             MaxAmmunition = new AdjustableProperty<float>("MaxAmmunition", this);
 
-            if (_model.ProjectileId == null)
-                throw new EngineException(this, "Failed to find ProjectileId");
-            if (_model.Target == null)
-                throw new EngineException(this, "Failed to find Target");
+	        if (_model.ProjectileId == null)
+	        {
+		        throw new EngineException(this, "Failed to find ProjectileId");
+	        }
+
+	        if (_model.Target == null)
+	        {
+		        throw new EngineException(this, "Failed to find Target");
+	        }
 
             Target = new Target(_model.Target, this);
             Elements.Add(Target);
@@ -66,35 +70,22 @@ namespace Scripts.ViewModels
         {
             base.OnLoad();
 
-            _projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<ObjectModel>(_model.ProjectileId);
-	        if (_projectileBinding == null)
+			var projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.ProjectileId);
+			if (projectileBinding == null)
 	        {
 		        throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", _model.ProjectileId));
 	        }
 
-            _projectileBinding.OnChange += Projectile_OnChange;
-            Projectile_OnChange();
-            
+	        var projectileItem = projectileBinding.GetValue() ;
+	        _projectileModel = DataContext.GetObjectModel(this, projectileItem) as ProjectileModel;
+
+	        Projectile_OnChange();
+
             IsShooting.SetValue(false);
-        }
-
-        public override void Show()
-        {
-            base.Show();
-
-            Root.LogEvent("Weapon Usage", _projectileModel.Type, _projectileModel.Damage, 1);
-        }
-
-        protected override void OnDestroyed()
-        {
-            _projectileBinding.OnChange -= Projectile_OnChange;
-
-            base.OnDestroyed();
         }
 
         private void Projectile_OnChange()
         {
-            _projectileModel = _projectileBinding.GetValue() as ProjectileModel;
             Interval.SetValue(_projectileModel.RoF);
             OnReload();
         }

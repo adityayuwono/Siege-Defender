@@ -90,9 +90,9 @@ namespace Scripts.ViewModels
 
 		protected virtual T SpawnNewObject(string id, Base overrideParent = null)
 		{
-			var modelToCopy = Root.GetObjectModel(id);
+			var modelToCopy = DataContext.GetObjectModel(this, id);
 			var objectModel = CreateNewModel(id, modelToCopy);
-			var newObject = Root.IoCContainer.GetInstance<Object>(objectModel.GetType(), new object[] { objectModel, overrideParent ?? this });
+			var newObject = IoC.IoCContainer.GetInstance<Object>(objectModel.GetType(), new object[] { objectModel, overrideParent ?? this });
 			if (newObject == null)
 			{
 				throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(global::Scripts.ViewModels.Object)));

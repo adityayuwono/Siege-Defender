@@ -34,12 +34,12 @@ namespace Scripts.ViewModels.Actions
         {
             base.OnActivate();
 
-            Root.IntervalRunner.SubscribeToInterval(Randomize, _model.Frequency, false);
+	        Root.IntervalRunner.SubscribeToInterval(Randomize, _model.Frequency, false);
         }
 
         protected override void OnDeactivate()
         {
-            Root.IntervalRunner.UnsubscribeFromInterval(Randomize);
+	        Root.IntervalRunner.UnsubscribeFromInterval(Randomize);
 
             base.OnDeactivate();
         }

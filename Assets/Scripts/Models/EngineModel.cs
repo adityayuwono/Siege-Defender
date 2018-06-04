@@ -7,7 +7,7 @@ using Scripts.Models.Weapons;
 namespace Scripts.Models
 {
     [XmlRoot("Engine")]
-    public class EngineModel : BaseModel
+    public class EngineModel : MenuRootModel
     {
         [XmlArray]
         [XmlArrayItem(ElementName = "StaticEnemy", Type = typeof(StaticEnemyModel))]
@@ -28,22 +28,28 @@ namespace Scripts.Models
         [XmlArrayItem(ElementName = "SubLevel", Type = typeof(LevelModel))]
         public List<LevelModel> Levels { get; set; }
 
-        [XmlArray]
-        [XmlArrayItem(ElementName = "Scene", Type = typeof(SceneModel))]
-        public List<SceneModel> Scenes { get; set; }
+	    [XmlArray]
+	    [XmlArrayItem(ElementName = "Item", Type = typeof(ItemModel))]
+	    public List<ItemModel> Items { get; set; }
 
         [XmlArray]
         [XmlArrayItem(ElementName = "LootTable", Type = typeof(LootTableModel))]
         public List<LootTableModel> LootTables { get; set; }
 
-        [XmlArray]
-        [XmlArrayItem(ElementName = "Item", Type = typeof(ItemModel))]
-        public List<ItemModel> Items { get; set; }
+	    [XmlArray]
+	    [XmlArrayItem(ElementName = "Inventory", Type = typeof(InventoryModel))]
+		public List<InventoryModel> Inventories { get; set; }
+
+		[XmlArray]
+		[XmlArrayItem(ElementName = "Scene", Type = typeof(SceneModel))]
+		public List<SceneModel> Scenes { get; set; }
 
         public EngineModel()
         {
             Objects = new List<ObjectModel>();
             LootTables = new List<LootTableModel>();
+	        Inventories = new List<InventoryModel>();
+			Scenes = new List<SceneModel>();
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Scripts.Views.Enemies
 	    protected override void StartWalking()
 	    {
 			Animator.SetBool("Death", false);
-		    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Walk);
+		    _viewModel.Root.Context.IntervalRunner.SubscribeToInterval(Walk);
 	    }
 
 	    #region Move to Waypoint
@@ -116,7 +116,7 @@ namespace Scripts.Views.Enemies
                 iTween.RotateTo(CharacterRoot, iTween.Hash("rotation", moveTargetPosition, "easetype", easeType, "time", rotateDuration, "delay", walkDuration + lookToDuration));
             }
             
-            _viewModel.Root.IntervalRunner.SubscribeToInterval(FinishedWalking, walkDuration + lookToDuration + rotateDuration, false);
+            _viewModel.SDRoot.IntervalRunner.SubscribeToInterval(FinishedWalking, walkDuration + lookToDuration + rotateDuration, false);
         }
         private void InterruptMovement()
         {
@@ -127,7 +127,7 @@ namespace Scripts.Views.Enemies
         private void FinishedWalking()
         {
             // Finished walking sequence
-            _viewModel.Root.IntervalRunner.UnsubscribeFromInterval(FinishedWalking);
+            _viewModel.SDRoot.IntervalRunner.UnsubscribeFromInterval(FinishedWalking);
             _viewModel.AnimationId.SetValue("Idle");
             _viewModel.FinishedMovement();
         }

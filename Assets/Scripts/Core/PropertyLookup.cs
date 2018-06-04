@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using Scripts.Helpers;
 using Scripts.Interfaces;
+using Scripts.Models;
 using Scripts.ViewModels;
 
 namespace Scripts.Core
 {
     public class PropertyLookup
     {
-        private readonly EngineBase _engine;
+        private readonly RootBase _engine;
         private readonly IContext _context;
 	    
 	    private readonly Dictionary<string, Dictionary<string, Property>> _properties = new Dictionary<string, Dictionary<string, Property>>();
 	    private readonly Dictionary<string, IContext> _contexts = new Dictionary<string, IContext>();
 	    private readonly Dictionary<string, Base> _children = new Dictionary<string, Base>();
 
-        public PropertyLookup(EngineBase engine, IContext context)
+        public PropertyLookup(RootBase engine, IContext context)
         {
             _engine = engine;
             _context = context;
@@ -135,6 +136,15 @@ namespace Scripts.Core
                         continue;
                     }
 
+					if (currentPath == "Inventories")
+	                {
+		                var dataContext = DataContext.Instance;
+		                var item = dataContext.Inventories[paths[1]];
+						var property = new Property<string>();
+						property.SetValue(item.Item.Base);
+		                return property;
+	                }
+
                     var isLast = i == paths.Length - 1;
 
                     if (!isLast)
@@ -154,20 +164,26 @@ namespace Scripts.Core
                         return context.PropertyLookup.GetContext(currentPath);
                     }
                     
-
                     // Try for a property, if it is found then return it
                     var tryProperty = context.PropertyLookup.GetProperty(paths[i - 1], currentPath);
-                    if (tryProperty != null)
-                        return tryProperty;
+	                if (tryProperty != null)
+	                {
+		                return tryProperty;
+	                }
 
                     // No Property found, then look for a context
                     var tryContext = context.PropertyLookup.GetContext(currentPath);
-                    if (tryContext != null)
-                        return tryContext;
+	                if (tryContext != null)
+	                {
+		                return tryContext;
+	                }
 
+					// No Context found, look for a child
                     var tryChild = context.PropertyLookup.GetChild(currentPath);
-                    if (tryChild != null)
-                        return tryChild;
+	                if (tryChild != null)
+	                {
+		                return tryChild;
+	                }
                 }
             }
 

@@ -24,7 +24,7 @@ namespace Scripts.ViewModels
         {
             base.OnLoad();
 
-            var levelModel = Root.GetLevel(_model.LevelId);
+            var levelModel = SDRoot.GetLevel(_model.LevelId);
             foreach (var spawnModel in levelModel.SpawnSequence)
                 _objectIds.Add(spawnModel.EnemyId);
         }

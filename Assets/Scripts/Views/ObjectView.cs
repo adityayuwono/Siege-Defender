@@ -25,8 +25,10 @@ namespace Scripts.Views
         {
             get
             {
-                if (_gameObject == null)
-                    throw new EngineException(this, "GameObject is null");
+	            if (_gameObject == null)
+	            {
+		            throw new EngineException(this, "GameObject is null");
+	            }
 
                 return _gameObject;
             }
@@ -78,6 +80,7 @@ namespace Scripts.Views
 
             _viewModel.OnStartSpecialEvent += Object_OnStartSpecialEvent;
         }
+
         protected virtual Transform GetParent()
         {
             Transform parentTransform;
@@ -132,12 +135,12 @@ namespace Scripts.Views
 
         private void KillGameObject(string reason)
         {
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(OnDeath, _viewModel.DeathDelay, false);
+	        _viewModel.Root.Context.IntervalRunner.SubscribeToInterval(OnDeath, _viewModel.DeathDelay, false);
         }
         
 	    protected void OnDeath()
         {
-	        if (BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath) && _gameObject != null)
+			if (_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(OnDeath) && _gameObject != null)
 	        {
 		        OnDeath(string.Format("{0}:{1}'s Death", GetType(), Id));
 	        }
@@ -153,7 +156,7 @@ namespace Scripts.Views
         {
             _viewModel.OnStartSpecialEvent -= Object_OnStartSpecialEvent;
 
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(OnDeath);
+	        _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(OnDeath);
 
             _isLoaded = false;
 

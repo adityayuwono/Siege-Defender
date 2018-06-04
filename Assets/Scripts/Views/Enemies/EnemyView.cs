@@ -81,13 +81,13 @@ namespace Scripts.Views.Enemies
 	    protected virtual void StartWalking()
 	    {
 		    Animator.Play("Spawn");
-		    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
+		    _viewModel.Root.Context.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
 	    }
 
 	    private void StartWalkAnimationSubscription()
 	    {
 		    _viewModel.OnWalk();
-		    BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
+		    _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
 		    _viewModel.AnimationId.SetValue("Walk");
 		 
 		    var targetMovement = _targetTransform.position;
@@ -99,13 +99,13 @@ namespace Scripts.Views.Enemies
 		    iTween.MoveTo(GameObject, iTween.Hash("position", targetMovement, "time", duration, "easetype", "linear"));
 		    iTween.RotateTo(GameObject, iTween.Hash("y", 180d, "time", duration, "easetype", "linear"));
 
-		    BalistaContext.Instance.IntervalRunner.SubscribeToInterval(StartAttackAnimation, duration, false);
+		    _viewModel.Root.Context.IntervalRunner.SubscribeToInterval(StartAttackAnimation, duration, false);
 	    }
 
 	    private void StartAttackAnimation()
         {
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(AttackAnimation, _viewModel.AttackSpeed);
+	        _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
+	        _viewModel.Root.Context.IntervalRunner.SubscribeToInterval(AttackAnimation, _viewModel.AttackSpeed);
         }
 
         private void AttackAnimation()
@@ -146,10 +146,10 @@ namespace Scripts.Views.Enemies
 
         private void UnsubscribeIntervals()
         {
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Walk);
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(AttackAnimation);
+	        _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
+	        _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(Walk);
+	        _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
+	        _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(AttackAnimation);
         }
 
         protected void Animation_OnChange()

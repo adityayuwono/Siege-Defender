@@ -4,6 +4,7 @@ using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using UnityEngine;
 
 namespace Scripts.ViewModels
 {
@@ -20,12 +21,11 @@ namespace Scripts.ViewModels
 
         public void Activate(string levelId)
         {
-            Root.LogScreen(Id);
             _levelId = levelId;
             Activate();
         }
 
-        public PropertyLookup PropertyLookup
+	    public PropertyLookup PropertyLookup
         {
             get
             {
@@ -53,7 +53,7 @@ namespace Scripts.ViewModels
 
 	        if (EnemyManager != null && !string.IsNullOrEmpty(_levelId))
             {
-                var levelModel = Root.GetLevel(_levelId);
+                var levelModel = SDRoot.GetLevel(_levelId);
 
                 // Start caching all Objects here
                 StartCaching(levelModel.CacheList);

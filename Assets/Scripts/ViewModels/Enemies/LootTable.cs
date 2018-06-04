@@ -58,11 +58,11 @@ namespace Scripts.ViewModels.Enemies
                 _max = _model.Max;
             }
             
-            public Item GetItemModel(EngineBase root, float chance)
+            public Item GetItemModel(RootBase root, float chance)
             {
                 if (_max > 0 && chance <= _model.Chance)
                 {
-                    var itemModel = root.GetItemModel(_model.ItemId);
+                    var itemModel = DataContext.GetItemModel(_model.ItemId);
                     itemModel.Type = itemModel.Id;
                     _max--;
                     var item = new Item(itemModel, root);

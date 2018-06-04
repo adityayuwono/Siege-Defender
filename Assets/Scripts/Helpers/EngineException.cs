@@ -8,10 +8,8 @@ namespace Scripts.Helpers
         public EngineException(IBase baseObject, string message) :
             base(string.Format("{0}({1})\n{2}\nat: {3}", baseObject.GetType(), baseObject.FullId, message, 0))
         {
-#if !UNITY_EDITOR
             var errorMessage = string.Format("{0}({1}): {2}\nat: {3}", baseObject.GetType(), baseObject.Id, message, 0);
-            BalistaContext.Instance.ThrowError(errorMessage);
-#endif
+            //GameContext.Instance.ThrowError(errorMessage);
         }
     }
 }

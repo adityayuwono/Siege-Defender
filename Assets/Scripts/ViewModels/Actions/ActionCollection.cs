@@ -32,7 +32,7 @@ namespace Scripts.ViewModels.Actions
             foreach (var actionModel in models)
             {
                 // Get new instance of ActionVM
-                var actionVM = parent.Root.IoCContainer.GetInstance<BaseAction>(actionModel.GetType(), new object[] { actionModel, _parent });
+                var actionVM = IoC.IoCContainer.GetInstance<BaseAction>(actionModel.GetType(), new object[] { actionModel, _parent });
                 Add(actionVM);
             }
         }
@@ -64,7 +64,7 @@ namespace Scripts.ViewModels.Actions
         private void ActivateActions()
         {
             // Unsubsribe the interval first
-            _parent.Root.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
+			_parent.Root.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
 
             if (_currentIndex < Count)
             {
@@ -113,7 +113,7 @@ namespace Scripts.ViewModels.Actions
 
             if (isInterruptable)
             {
-                _parent.Root.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
+                _parent.SDRoot.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
                 OnActivationFinished = null;
                 // Deactivate everything immediately
                 DeactivateActions();

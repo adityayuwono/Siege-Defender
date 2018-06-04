@@ -16,16 +16,18 @@ namespace Scripts.ViewModels.Actions
         {
             base.Invoke();
 
-            Root.LogEvent("Item", "Dropped", _model.Value, 1);
-
             var targetInventory = Target as Inventory;
 
-            if (targetInventory == null)
-                throw new EngineException(this, string.Format("Failed to find Inventory: {0}", _model.Target));
+	        if (targetInventory == null)
+	        {
+		        throw new EngineException(this, string.Format("Failed to find Inventory: {0}", _model.Target));
+	        }
 
-            var items = Root.GetLoot(_model.Value);
-            foreach (var item in items)
-                targetInventory.AddItem(item);
+            var items = SDRoot.GetLoot(_model.Value);
+	        foreach (var item in items)
+	        {
+		        targetInventory.AddItem(item);
+	        }
         }
     }
 }

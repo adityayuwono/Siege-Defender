@@ -15,7 +15,7 @@ namespace Scripts.ViewModels.GUIs
         {
             base.OnLoad();
 
-            Root.DamageDisplay = this;
+            SDRoot.DamageDisplay = this;
         }
 
         public void DisplayDamage(float damage, bool isCrit, Vector3 position)

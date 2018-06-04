@@ -20,8 +20,10 @@ namespace Scripts.Components
         protected virtual void OnSetup() { }
         private void Start()
         {
-            if (!_isSet)
-                throw new EngineException(this, "Failed to continue, need Setup first");
+	        if (!_isSet)
+	        {
+		        throw new EngineException(this, "Failed to continue, need Setup first");
+	        }
         }
         
         public string Id

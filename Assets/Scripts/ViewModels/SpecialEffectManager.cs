@@ -52,7 +52,7 @@ namespace Scripts.ViewModels
 	    {
 		    base.OnLoad();
 
-		    Root.SpecialEffectManager = this;
+		    ((GameRoot)Root).SpecialEffectManager = this;
 	    }
     }
 }

@@ -7,9 +7,9 @@ namespace Scripts.Helpers
 {
     public class ResourcePooler : IResource
     {
-        private readonly EngineBase _mainEngine;
+        private readonly RootBase _mainEngine;
 
-        public ResourcePooler(EngineBase engine)
+        public ResourcePooler(RootBase engine)
         {
             _mainEngine = engine;
         }

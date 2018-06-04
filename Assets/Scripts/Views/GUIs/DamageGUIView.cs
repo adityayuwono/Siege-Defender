@@ -13,14 +13,14 @@ namespace Scripts.Views.GUIs
 
         protected override void OnHide(string reason)
         {
-            BalistaContext.Instance.IntervalRunner.SubscribeToInterval(Hide, _viewModel.HideDelay, false);
+	        _viewModel.Root.Context.IntervalRunner.SubscribeToInterval(Hide, _viewModel.HideDelay, false);
             
             iTween.MoveTo(GameObject, _viewModel.Position + (Vector3.up*2f), _viewModel.HideDelay);
         }
 
         private void Hide()
         {
-            BalistaContext.Instance.IntervalRunner.UnsubscribeFromInterval(Hide);
+	        _viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(Hide);
             
 	        base.OnHide("Hiding DamageGUI");
         }

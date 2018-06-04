@@ -27,7 +27,7 @@ namespace Scripts.ViewModels
 				return _projectileModel;
 			}
 
-			var baseProjectileModel = Root.GetObjectModel(_model.Base) as ProjectileModel;
+			var baseProjectileModel = DataContext.GetObjectModel(this, _model.Base) as ProjectileModel;
 			if (baseProjectileModel == null)
 			{
 				throw new EngineException(this, string.Format("Failed to Find a projectile model with id: {0}", _model.Base));
@@ -65,7 +65,7 @@ namespace Scripts.ViewModels
 				newProjectileModel.Ammunition);
 
 			// Register the new Model, to make sure it's available for duplication later
-			Root.AddNewObjectModel(newProjectileModel);
+			DataContext.AddNewObjectModel(newProjectileModel);
 			_projectileModel = new ProjectileModel();
 
 			return newProjectileModel;

@@ -31,7 +31,7 @@ namespace Scripts.ViewModels
             {
                 foreach (var elementModel in _model.Elements)
                 {
-                    var element = Root.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
+                    var element = IoC.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
 	                if (element == null)
 	                {
 		                throw new EngineException(this, string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));

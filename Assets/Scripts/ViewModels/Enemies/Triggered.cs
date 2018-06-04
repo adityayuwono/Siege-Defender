@@ -18,7 +18,7 @@ namespace Scripts.ViewModels.Enemies
                 foreach (var conditionModel in _model.Conditions)
                 {
                     // Get new instance of ActionVM
-                    var conditionViewModel = Root.IoCContainer.GetInstance<BaseCondition>(conditionModel.GetType(), new object[] {conditionModel, this});
+                    var conditionViewModel = IoC.IoCContainer.GetInstance<BaseCondition>(conditionModel.GetType(), new object[] {conditionModel, this});
                     _conditions.Add(conditionViewModel);
                 }
             }

@@ -96,11 +96,11 @@ namespace Scripts.ViewModels.Enemies
             // Because Vector3 is a struct and structs can't be null
             if (contactPoint != Vector3.zero)
             {
-                Root.DamageDisplay.DisplayDamage(damage, isCrit, contactPoint);
+	            SDRoot.DamageDisplay.DisplayDamage(damage, isCrit, contactPoint);
 
 	            if (!string.IsNullOrEmpty(CollisionEffectNormal))
 	            {
-		            Root.SpecialEffectManager.StartSpecialEffectOn(CollisionEffectNormal, contactPoint);
+		            SDRoot.SpecialEffectManager.StartSpecialEffectOn(CollisionEffectNormal, contactPoint);
 	            }
             }
 
@@ -112,8 +112,6 @@ namespace Scripts.ViewModels.Enemies
         /// </summary>
         protected virtual void OnKilled()
         {
-            Root.LogEvent("Enemies", "Killed", _model.Type, 1);
-
 	        if (Death != null)
 	        {
 		        Death();

@@ -13,9 +13,8 @@ namespace Scripts.ViewModels
 
         public Inventory(InventoryModel model, Base parent) : base(model, parent)
         {
-            var prop = PropertyLookup;
             // Grab reference to Player's Inventory loaded from XML
-            foreach (var inventoryModel in Root.PlayerSettingsModel.Inventories)
+            foreach (var inventoryModel in DataContext.PlayerSettingsModel.Inventories)
             {
 	            if (inventoryModel.Id == model.Source)
 	            {
@@ -25,7 +24,7 @@ namespace Scripts.ViewModels
 
 	        foreach (var itemModel in _model.Items)
 	        {
-		        Elements.Add(Root.IoCContainer.GetInstance<Item>(itemModel.GetType(), new object[] {itemModel, this}));
+		        Elements.Add(IoC.IoCContainer.GetInstance<Item>(itemModel.GetType(), new object[] {itemModel, this}));
 	        }
 
 	        foreach (var equipmentSlotModel in _model.EquipmentSlots)
