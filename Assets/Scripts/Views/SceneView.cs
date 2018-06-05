@@ -3,24 +3,24 @@ using UnityEngine;
 
 namespace Scripts.Views
 {
-    public class SceneView : ObjectView
-    {
-	    private Scene _viewModel;
+	public class SceneView : ObjectView
+	{
+		private readonly Scene _viewModel;
 
-        public SceneView(Scene viewModel, ObjectView parent) : base(viewModel, parent)
-        {
-	        _viewModel = viewModel;
-        }
+		public SceneView(Scene viewModel, ObjectView parent) : base(viewModel, parent)
+		{
+			_viewModel = viewModel;
+		}
 
-	    protected override GameObject GetGameObject()
-	    {
+		protected override GameObject GetGameObject()
+		{
 			var gameObject = GameObject.Find(_viewModel.AssetId);
-		    return gameObject;
-	    }
+			return gameObject;
+		}
 
-	    protected override Transform GetParent()
-	    {
-		    return null;
-	    }
-    }
+		protected override Transform GetParent()
+		{
+			return null;
+		}
+	}
 }

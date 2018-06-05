@@ -4,24 +4,24 @@ using Scripts.Models.GUIs;
 
 namespace Scripts.ViewModels.GUIs
 {
-    public class ValueDisplayGUI : BaseGUI
-    {
-        private readonly ValueDisplayGUIModel _model;
+	public class ValueDisplayGUI : BaseGUI
+	{
+		private readonly ValueDisplayGUIModel _model;
+		public Property<float> MaxValue;
 
-        public ValueDisplayGUI(ValueDisplayGUIModel model, Object parent) : base(model, parent)
-        {
-            _model = model;
-        }
+		public Property<float> Value;
 
-        protected override void OnLoad()
-        {
-            base.OnLoad();
+		public ValueDisplayGUI(ValueDisplayGUIModel model, Object parent) : base(model, parent)
+		{
+			_model = model;
+		}
 
-            Value = GetParent<IContext>().PropertyLookup.GetProperty<float>(_model.Value);
-            MaxValue = GetParent<IContext>().PropertyLookup.GetProperty<float>(_model.MaxValue);
-        }
+		protected override void OnLoad()
+		{
+			base.OnLoad();
 
-        public Property<float> Value;
-        public Property<float> MaxValue;
-    }
+			Value = GetParent<IContext>().PropertyLookup.GetProperty<float>(_model.Value);
+			MaxValue = GetParent<IContext>().PropertyLookup.GetProperty<float>(_model.MaxValue);
+		}
+	}
 }

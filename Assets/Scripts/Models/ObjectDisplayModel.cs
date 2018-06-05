@@ -2,9 +2,8 @@
 
 namespace Scripts.Models
 {
-    public class ObjectDisplayModel : IntervalModel
-    {
-        [XmlAttribute]
-        public string ObjectId { get; set; }
-    }
+	public class ObjectDisplayModel : IntervalModel
+	{
+		[XmlAttribute] public string ObjectId { get; set; }
+	}
 }

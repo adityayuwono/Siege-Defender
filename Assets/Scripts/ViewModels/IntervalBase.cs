@@ -4,34 +4,28 @@ using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
-    public abstract class IntervalBase : RandomPositionManager
-    {
-	    public readonly Property<float> Interval = new Property<float>();
+	public abstract class IntervalBase : RandomPositionManager
+	{
+		private static bool _isDestructionInProgress;
 
-	    protected readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
+		protected readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
+		public readonly Property<float> Interval = new Property<float>();
 
-	    private static bool _isDestructionInProgress;
+		protected IntervalBase(IntervalModel model, Base parent) : base(model, parent)
+		{
+		}
 
-	    protected IntervalBase(IntervalModel model, Base parent) : base(model, parent)
-	    {
+		protected void DestroyInactiveObjects()
+		{
+			if (_isDestructionInProgress) return;
 
-	    }
+			_isDestructionInProgress = true;
+			foreach (var inactiveObjects in InactiveObjects.Values)
+			foreach (var inactiveObject in inactiveObjects)
+				inactiveObject.Destroy();
 
-        protected void DestroyInactiveObjects()
-        {
-            if (_isDestructionInProgress) return;
-
-            _isDestructionInProgress = true;
-            foreach (var inactiveObjects in InactiveObjects.Values)
-            {
-	            foreach (var inactiveObject in inactiveObjects)
-	            {
-		            inactiveObject.Destroy();
-	            }
-            }
-
-            InactiveObjects.Clear();
-            _isDestructionInProgress = false;
-        }
-    }
+			InactiveObjects.Clear();
+			_isDestructionInProgress = false;
+		}
+	}
 }

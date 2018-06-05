@@ -4,39 +4,40 @@ using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
-    public class BaseCondition : TargetProperty
-    {
-        private readonly BaseConditionModel _model;
-        protected BaseCondition(BaseConditionModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
-        }
+	public class BaseCondition : TargetProperty
+	{
+		private readonly BaseConditionModel _model;
 
-        private Property TargetProperty
-        {
-            get { return Target as Property; }
-        }
+		public readonly Property<bool> IsMatch = new Property<bool>();
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
+		protected BaseCondition(BaseConditionModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
+		}
 
-            TargetProperty.OnChange += Target_OnChanged;
-            Target_OnChanged();
-        }
+		private Property TargetProperty
+		{
+			get { return Target as Property; }
+		}
 
-        protected override void OnDeactivate()
-        {
-            TargetProperty.OnChange -= Target_OnChanged;
+		protected override void OnActivate()
+		{
+			base.OnActivate();
 
-            base.OnDeactivate();
-        }
+			TargetProperty.OnChange += Target_OnChanged;
+			Target_OnChanged();
+		}
 
-        protected virtual void Target_OnChanged()
-        {
-            throw new NotImplementedException();
-        }
+		protected override void OnDeactivate()
+		{
+			TargetProperty.OnChange -= Target_OnChanged;
 
-        public readonly Property<bool> IsMatch = new Property<bool>();
-    }
+			base.OnDeactivate();
+		}
+
+		protected virtual void Target_OnChanged()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

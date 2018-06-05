@@ -2,8 +2,8 @@
 
 namespace Scripts.Models.GUIs
 {
-    [Serializable]
-    public class LabelGUIModel : ObjectModel
-    {
-    }
+	[Serializable]
+	public class LabelGUIModel : ObjectModel
+	{
+	}
 }

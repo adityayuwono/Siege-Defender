@@ -2,8 +2,8 @@
 
 namespace Scripts.Models.Actions
 {
-    [Serializable]
-    public class BaseConditionModel : TargetPropertyModel
-    {
-    }
+	[Serializable]
+	public class BaseConditionModel : TargetPropertyModel
+	{
+	}
 }

@@ -2,8 +2,8 @@
 
 namespace Scripts.Models
 {
-    [Serializable]
-    public class SpecialEffectModel : ObjectModel
-    {
-    }
+	[Serializable]
+	public class SpecialEffectModel : ObjectModel
+	{
+	}
 }

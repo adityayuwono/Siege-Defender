@@ -4,73 +4,74 @@ using Scripts.ViewModels.Actions;
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class Skill : Triggerable
-    {
-        private readonly SkillModel _model;
- 
-        public Skill(SkillModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
+	public class Skill : Triggerable
+	{
+		private readonly ActionCollection _actions;
+		private readonly SkillModel _model;
 
-            _actions = new ActionCollection(_model.Actions, this);
-        }
+		public Skill(SkillModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
 
-        private readonly ActionCollection _actions;
-        public event Action<Skill> ActivationFinished;
+			_actions = new ActionCollection(_model.Actions, this);
+		}
 
-        public bool IsQueuedable
-        {
-            get { return _model.IsQueuedable; }
-        }
+		public bool IsQueuedable
+		{
+			get { return _model.IsQueuedable; }
+		}
 
-        public bool IsInterrupt
-        {
-            get { return _model.IsInterrupt; }
-        }
+		public bool IsInterrupt
+		{
+			get { return _model.IsInterrupt; }
+		}
 
-        public float InterruptThreshold
-        {
-            get { return _model.InterruptThreshold; }
-        }
+		public float InterruptThreshold
+		{
+			get { return _model.InterruptThreshold; }
+		}
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
+		public event Action<Skill> ActivationFinished;
 
-            _actions.OnActivationFinished += Action_OnActivationFinished;
-            _actions.Activate();
-        }
+		protected override void OnActivate()
+		{
+			base.OnActivate();
 
-        private void Action_OnActivationFinished()
-        {
-            Deactivate("Done activating Skill");
+			_actions.OnActivationFinished += Action_OnActivationFinished;
+			_actions.Activate();
+		}
 
-            OnActivationFinished();
-        }
+		private void Action_OnActivationFinished()
+		{
+			Deactivate("Done activating Skill");
 
-        private void OnActivationFinished()
-        {
-            if (ActivationFinished != null)
-                ActivationFinished(this);
-        }
+			OnActivationFinished();
+		}
 
-        protected override void OnDeactivate()
-        {
-            _actions.OnActivationFinished -= Action_OnActivationFinished;
-            _actions.Deactivate();
-            
-            base.OnDeactivate();
-        }
+		private void OnActivationFinished()
+		{
+			if (ActivationFinished != null)
+				ActivationFinished(this);
+		}
 
-        public bool Interrupt(bool absolute = true)
-        {
-            var isInterruptSuccessful = _actions.Interrupt(absolute);
-            if (isInterruptSuccessful)
-            {
-                ActivationFinished = null;
-                Deactivate("Skill is interrupted");// Deactivate directly, and avoid any further activation
-            }
-            return isInterruptSuccessful;
-        }
-    }
+		protected override void OnDeactivate()
+		{
+			_actions.OnActivationFinished -= Action_OnActivationFinished;
+			_actions.Deactivate();
+
+			base.OnDeactivate();
+		}
+
+		public bool Interrupt(bool absolute = true)
+		{
+			var isInterruptSuccessful = _actions.Interrupt(absolute);
+			if (isInterruptSuccessful)
+			{
+				ActivationFinished = null;
+				Deactivate("Skill is interrupted"); // Deactivate directly, and avoid any further activation
+			}
+
+			return isInterruptSuccessful;
+		}
+	}
 }

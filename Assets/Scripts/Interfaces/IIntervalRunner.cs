@@ -2,11 +2,11 @@
 
 namespace Scripts.Interfaces
 {
-    public interface IIntervalRunner
-    {
-        void SubscribeToInterval(Action action, float delay = 0f, bool startImmediately = true);
-        bool UnsubscribeFromInterval(Action action);
+	public interface IIntervalRunner
+	{
+		void SubscribeToInterval(Action action, float delay = 0f, bool startImmediately = true);
+		bool UnsubscribeFromInterval(Action action);
 
-        void UpdateTime(float timeElapsed);
-    }
+		void UpdateTime(float timeElapsed);
+	}
 }

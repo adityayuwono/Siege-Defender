@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Scripts.Core
+﻿namespace Scripts.Core
 {
-    public class IntervalRunner
-    {
-    }
+	public class IntervalRunner
+	{
+	}
 }

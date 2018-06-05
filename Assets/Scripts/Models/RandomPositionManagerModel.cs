@@ -2,8 +2,8 @@
 
 namespace Scripts.Models
 {
-    [Serializable]
-    public class RandomPositionManagerModel : ElementModel
-    {
-    }
+	[Serializable]
+	public class RandomPositionManagerModel : ElementModel
+	{
+	}
 }

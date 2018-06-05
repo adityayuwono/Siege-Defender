@@ -3,30 +3,31 @@ using UnityEngine;
 
 namespace Scripts.Views
 {
-    public class ObjectSpawnView : IntervalView
-    {
-        private readonly ObjectSpawn _viewModel;
-        public ObjectSpawnView(ObjectSpawn viewModel, ObjectView parent) : base(viewModel, parent)
-        {
-            _viewModel = viewModel;
-        }
+	public class ObjectSpawnView : IntervalView
+	{
+		private readonly ObjectSpawn _viewModel;
 
-        protected override void OnShow()
-        {
-            base.OnShow();
+		private int _spawnPointOverride;
 
-            for (var i = 0; i < SpawnPoints.Count; i++)
-            {
-                _spawnPointOverride = i;
-                _viewModel.SpawnObject();
-            }
-        }
+		public ObjectSpawnView(ObjectSpawn viewModel, ObjectView parent) : base(viewModel, parent)
+		{
+			_viewModel = viewModel;
+		}
 
-        private int _spawnPointOverride;
+		protected override void OnShow()
+		{
+			base.OnShow();
 
-        public override Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = -1)
-        {
-            return base.GetRandomSpawnPoint(true, _spawnPointOverride);
-        }
-    }
+			for (var i = 0; i < SpawnPoints.Count; i++)
+			{
+				_spawnPointOverride = i;
+				_viewModel.SpawnObject();
+			}
+		}
+
+		public override Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = -1)
+		{
+			return base.GetRandomSpawnPoint(true, _spawnPointOverride);
+		}
+	}
 }

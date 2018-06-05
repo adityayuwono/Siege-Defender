@@ -1,6 +1,6 @@
 ﻿namespace Scripts.Components
 {
-    public class FloatToSizeBinding : BaseBinding
-    {
-    }
+	public class FloatToSizeBinding : BaseBinding
+	{
+	}
 }

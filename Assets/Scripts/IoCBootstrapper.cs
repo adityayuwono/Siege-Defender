@@ -17,19 +17,20 @@ using Object = Scripts.ViewModels.Object;
 
 namespace Scripts
 {
-    /// <summary>
-    /// Main Component as a bridge between the Engine to Unity
-    /// </summary>
-    public class IoCBootstrapper : MonoBehaviour
-    {
-        protected void Start()
-        {
-	        MapInjections();
-        }
+	/// <summary>
+	///     Main Component as a bridge between the Engine to Unity
+	/// </summary>
+	public class IoCBootstrapper : MonoBehaviour
+	{
+		protected void Start()
+		{
+			MapInjections();
+		}
 
-	    private void MapInjections()
-	    {
+		private void MapInjections()
+		{
 			#region Model to ViewModel
+
 			IoC.IoCContainer.RegisterFor<ObjectModel>().TypeOf<Object>().To<Object>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectModel>().TypeOf<Object>().To<SpecialEffect>();
 			IoC.IoCContainer.RegisterFor<ElementModel>().TypeOf<Object>().To<Element>();
@@ -77,9 +78,11 @@ namespace Scripts
 			// Triggers
 			IoC.IoCContainer.RegisterFor<TriggeredModel>().TypeOf<Triggered>().To<Triggered>();
 			IoC.IoCContainer.RegisterFor<EventTriggeredModel>().TypeOf<Triggered>().To<EventTriggered>();
+
 			#endregion
 
 			#region ViewModel to View(BaseView)
+
 			IoC.IoCContainer.RegisterFor<Projectile>().TypeOf<BaseView>().To<ProjectileView>();
 			IoC.IoCContainer.RegisterFor<PiercingProjectile>().TypeOf<BaseView>().To<PiercingProjectileView>();
 			IoC.IoCContainer.RegisterFor<AoE>().TypeOf<BaseView>().To<AoEView>();
@@ -119,7 +122,8 @@ namespace Scripts
 			IoC.IoCContainer.RegisterFor<PlayerHitbox>().TypeOf<BaseView>().To<PlayerHitboxView>();
 
 			IoC.IoCContainer.RegisterFor<GUIRoot>().TypeOf<BaseView>().To<GUIRootView>();
+
 			#endregion
-	    }
-    }
+		}
+	}
 }

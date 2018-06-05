@@ -2,13 +2,13 @@
 
 namespace Scripts.Components
 {
-    public class RotationController : MonoBehaviour
-    {
-        public Vector3 AxisMultiplier;
+	public class RotationController : MonoBehaviour
+	{
+		public Vector3 AxisMultiplier;
 
-        private void Update()
-        {
-            transform.Rotate(AxisMultiplier);
-        }
-    }
+		private void Update()
+		{
+			transform.Rotate(AxisMultiplier);
+		}
+	}
 }

@@ -1,6 +1,7 @@
 ﻿using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
+using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Views
 {
@@ -21,7 +22,7 @@ namespace Scripts.Views
 			_viewModel.OnParentChanged += OnParentChanged;
 		}
 
-		private void OnParentChanged(global::Scripts.ViewModels.Object newParent)
+		private void OnParentChanged(Object newParent)
 		{
 			_parent = newParent.Root.GetView<ObjectView>(newParent);
 
@@ -33,7 +34,7 @@ namespace Scripts.Views
 			if (_parent == null)
 				throw new EngineException(this, "Parent is null");
 
-			Transform parentTransform = _parent.Transform;
+			var parentTransform = _parent.Transform;
 			var parentItemTable = _parent.Transform.Find("ItemSlot");
 			if (parentItemTable != null)
 				parentTransform = parentItemTable;

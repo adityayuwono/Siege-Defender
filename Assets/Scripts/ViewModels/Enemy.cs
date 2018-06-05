@@ -6,100 +6,90 @@ using Scripts.ViewModels.Enemies;
 
 namespace Scripts.ViewModels
 {
-    public class Enemy : LivingObject, IContext
-    {
-	    public readonly AdjustableProperty<string> AnimationId;
+	public class Enemy : LivingObject, IContext
+	{
+		private readonly EnemyModel _model;
+		public readonly AdjustableProperty<string> AnimationId;
+		private PropertyLookup _propertyLookup;
 
-        private readonly EnemyModel _model;
+		public Enemy(EnemyModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
 
-        public Enemy(EnemyModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
+			AnimationId = new AdjustableProperty<string>("AnimationId", this);
+		}
 
-            AnimationId = new AdjustableProperty<string>("AnimationId", this);
-        }
+		public Object Target { get; private set; }
 
-	    public Object Target { get; private set; }
-	    
-	    public virtual float Speed
-	    {
-		    get { return _model.Speed; }
-	    }
-	    public float Rotation
-	    {
-		    get { return _model.Rotation / 2f; }
-	    }
+		public virtual float Speed
+		{
+			get { return _model.Speed; }
+		}
 
-	    public PropertyLookup PropertyLookup
-	    {
-		    get
-		    {
-			    if (_propertyLookup == null)
-			    {
-				    _propertyLookup = new PropertyLookup(Root, this);
-			    }
+		public float Rotation
+		{
+			get { return _model.Rotation / 2f; }
+		}
 
-			    return _propertyLookup;
-		    }
-	    }
-	    private PropertyLookup _propertyLookup;
+		public float AttackSpeed
+		{
+			get { return _model.AttackSpeed; }
+		}
 
-	    public float AttackSpeed
-	    {
-		    get { return _model.AttackSpeed; }
-	    }
+		public PropertyLookup PropertyLookup
+		{
+			get
+			{
+				if (_propertyLookup == null) _propertyLookup = new PropertyLookup(Root, this);
 
-	    #region Events
-	    public event Action Spawn;
-	    public void OnSpawn()
-	    {
-		    if (Spawn != null)
-		    {
-			    Spawn();
-		    }
-	    }
+				return _propertyLookup;
+			}
+		}
 
-	    public event Action Walk;
-	    public void OnWalk()
-	    {
-		    if (Walk != null)
-		    {
-			    Walk();
-		    }
-	    }
+		protected override void OnLoad()
+		{
+			base.OnLoad();
 
-	    public event Action Attack;
-	    public void OnAttack()
-	    {
-		    if (Attack != null)
-		    {
-			    Attack();
-		    }
-	    }
-	    #endregion
-
-        protected override void OnLoad()
-        {
-            base.OnLoad();
-
-	        if (!string.IsNullOrEmpty(_model.Target))
-	        {
-		        Target = Root.GetViewModelAsType<Object>(_model.Target);
-	        }
-        }
+			if (!string.IsNullOrEmpty(_model.Target)) Target = Root.GetViewModelAsType<Object>(_model.Target);
+		}
 
 		protected override void OnKilled()
-        {
-            base.OnKilled();
+		{
+			base.OnKilled();
 
-            Hide("Killed");// Start the hiding process when the enemy is killed
-        }
+			Hide("Killed"); // Start the hiding process when the enemy is killed
+		}
 
-        protected override void OnDeactivate()
-        {
-            AnimationId.SetValue("");
+		protected override void OnDeactivate()
+		{
+			AnimationId.SetValue("");
 
-            base.OnDeactivate();
-        }
-    }
+			base.OnDeactivate();
+		}
+
+		#region Events
+
+		public event Action Spawn;
+
+		public void OnSpawn()
+		{
+			if (Spawn != null) Spawn();
+		}
+
+		public event Action Walk;
+
+		public void OnWalk()
+		{
+			if (Walk != null) Walk();
+		}
+
+		public event Action Attack;
+
+		public void OnAttack()
+		{
+			if (Attack != null) Attack();
+		}
+
+		#endregion
+	}
 }

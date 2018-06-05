@@ -3,90 +3,86 @@ using UnityEngine;
 
 namespace Scripts.Components
 {
-    public class AimingController : BaseTexturedController
-    {
-        private const float TouchDeviation = 1.2f;
-        private const string CrosshairAssetPath = "GUIs/Crosshair";
+	public class AimingController : BaseTexturedController
+	{
+		private const float TouchDeviation = 1.2f;
+		private const string CrosshairAssetPath = "GUIs/Crosshair";
+		private static Vector2 _halfScreen;
 
-        private Camera _mainCamera;
+		private Vector2 _circleCenter;
 
-        private void Start()
-        {
-            _mainCamera = GameObject.Find("Player").GetComponent<Camera>();
-        }
+		private Texture2D _crosshairImage;
+		private Rect _crosshairRect;
 
-        private Texture2D _crosshairImage;
-        private static Vector2 _halfScreen;
+		private Camera _mainCamera;
 
-        protected override void OnSetup()
-        {
-            base.OnSetup();
-            
-            _halfScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
+		private void Start()
+		{
+			_mainCamera = GameObject.Find("Player").GetComponent<Camera>();
+		}
 
-            _crosshairImage = Resources.Load<Texture2D>(CrosshairAssetPath);
-            _crosshairRect = new Rect(Screen.height / 2f, Screen.width / 2f, Screen.height * Values.GuiCrosshairSizeF, Screen.height * Values.GuiCrosshairSizeF);
-        }
+		protected override void OnSetup()
+		{
+			base.OnSetup();
 
-        protected override void OnChange()
-        {
-            base.OnChange();
+			_halfScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
 
-            _circleCenter = TextureScreenArea.center;
-        }
+			_crosshairImage = Resources.Load<Texture2D>(CrosshairAssetPath);
+			_crosshairRect = new Rect(Screen.height / 2f, Screen.width / 2f, Screen.height * Values.GuiCrosshairSizeF,
+				Screen.height * Values.GuiCrosshairSizeF);
+		}
 
-        private Vector2 _circleCenter;
-        private Rect _crosshairRect;
-        private void OnGUI()
-        {
-            GUI.DrawTexture(_crosshairRect, _crosshairImage);
-        }
+		protected override void OnChange()
+		{
+			base.OnChange();
 
-        private void Update()
-        {
-            if (Input.touches.Length > 0)
-            {
-                foreach (var touch in Input.touches)
-                {
-                    ProcessTouchOrMouse(touch.position);
-                }
-            }
-            else
-            {
-                ProcessTouchOrMouse(Input.mousePosition);
-            }
-        }
+			_circleCenter = TextureScreenArea.center;
+		}
 
-        private void ProcessTouchOrMouse(Vector2 inputPosition)
-        {
-            inputPosition.y = Screen.height - inputPosition.y;
-            if (TextureScreenArea.Contains(inputPosition))
-            {
-                var relativeToCenter = (inputPosition - _circleCenter) * TouchDeviation;
+		private void OnGUI()
+		{
+			GUI.DrawTexture(_crosshairRect, _crosshairImage);
+		}
 
-                _crosshairRect.x = _halfScreen.x + (_halfScreen.x * (relativeToCenter.x / (TextureScreenArea.width / 2f)));
-                _crosshairRect.y = _halfScreen.y + (_halfScreen.y * (relativeToCenter.y / (TextureScreenArea.height / 2f)));
+		private void Update()
+		{
+			if (Input.touches.Length > 0)
+				foreach (var touch in Input.touches)
+					ProcessTouchOrMouse(touch.position);
+			else
+				ProcessTouchOrMouse(Input.mousePosition);
+		}
 
-                UpdateObjectPosition(new Vector3(
-                _crosshairRect.x + (Screen.height * Values.GuiCrosshairHalfsizeF),
-                (Screen.height - _crosshairRect.y) - (Screen.height * Values.GuiCrosshairHalfsizeF), 0));
-            }
-        }
+		private void ProcessTouchOrMouse(Vector2 inputPosition)
+		{
+			inputPosition.y = Screen.height - inputPosition.y;
+			if (TextureScreenArea.Contains(inputPosition))
+			{
+				var relativeToCenter = (inputPosition - _circleCenter) * TouchDeviation;
 
-        private void UpdateObjectPosition(Vector3 inputPosition)
-        {
-            // Bug after destruction the MainCamera reference is not cleared, or maybe we fail to hook the new camera at Start
-            if (_mainCamera == null)
-                _mainCamera = GameObject.Find("Player").GetComponent<Camera>();
+				_crosshairRect.x = _halfScreen.x + _halfScreen.x * (relativeToCenter.x / (TextureScreenArea.width / 2f));
+				_crosshairRect.y = _halfScreen.y + _halfScreen.y * (relativeToCenter.y / (TextureScreenArea.height / 2f));
 
-            var ray = _mainCamera.ScreenPointToRay(inputPosition);
-            RaycastHit hitInfo;
+				UpdateObjectPosition(new Vector3(
+					_crosshairRect.x + Screen.height * Values.GuiCrosshairHalfsizeF,
+					Screen.height - _crosshairRect.y - Screen.height * Values.GuiCrosshairHalfsizeF, 0));
+			}
+		}
 
-            if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, Values.CrosshairLayermask))
-            {
-                var position = _mainCamera.ScreenToWorldPoint(new Vector3(inputPosition.x, inputPosition.y, hitInfo.distance));
-                transform.position = position;
-            }
-        }
-    }
+		private void UpdateObjectPosition(Vector3 inputPosition)
+		{
+			// Bug after destruction the MainCamera reference is not cleared, or maybe we fail to hook the new camera at Start
+			if (_mainCamera == null)
+				_mainCamera = GameObject.Find("Player").GetComponent<Camera>();
+
+			var ray = _mainCamera.ScreenPointToRay(inputPosition);
+			RaycastHit hitInfo;
+
+			if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, Values.CrosshairLayermask))
+			{
+				var position = _mainCamera.ScreenToWorldPoint(new Vector3(inputPosition.x, inputPosition.y, hitInfo.distance));
+				transform.position = position;
+			}
+		}
+	}
 }

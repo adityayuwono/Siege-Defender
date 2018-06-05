@@ -4,15 +4,14 @@ using Scripts.Models.Actions;
 
 namespace Scripts.Models
 {
-    [Serializable]
-    public class LoadSceneActionModel : BaseActionModel
-    {
-        [XmlAttribute]
-        public string LevelId { get; set; }
+	[Serializable]
+	public class LoadSceneActionModel : BaseActionModel
+	{
+		public LoadSceneActionModel()
+		{
+			Target = "";
+		}
 
-        public LoadSceneActionModel()
-        {
-            Target = "";
-        }
-    }
+		[XmlAttribute] public string LevelId { get; set; }
+	}
 }

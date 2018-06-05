@@ -4,77 +4,74 @@ using Scripts.Models.Enemies;
 
 namespace Scripts.ViewModels.Enemies
 {
-    public class LootTable : Base
-    {
-        private readonly LootTableModel _model;
-        private readonly Random _randomizer;
-        public LootTable(LootTableModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
-            _randomizer = new Random();
+	public class LootTable : Base
+	{
+		private readonly List<Loot> _loots = new List<Loot>();
+		private readonly LootTableModel _model;
+		private readonly Random _randomizer;
 
-            foreach (var lootModel in _model.Loots)
-                _loots.Add(new Loot(lootModel));
-        }
+		public LootTable(LootTableModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
+			_randomizer = new Random();
 
-        private readonly List<Loot> _loots = new List<Loot>(); 
+			foreach (var lootModel in _model.Loots)
+				_loots.Add(new Loot(lootModel));
+		}
 
-        /// <summary>
-        /// Will give random items based on loot table
-        /// </summary>
-        /// <returns>List of items</returns>
-        public List<Item> GetLoot()
-        {
-            foreach (var loot in _loots)
-            {
-                loot.Reset();
-            }
+		/// <summary>
+		///     Will give random items based on loot table
+		/// </summary>
+		/// <returns>List of items</returns>
+		public List<Item> GetLoot()
+		{
+			foreach (var loot in _loots) loot.Reset();
 
-            var items = new List<Item>();
-            for (var i = 0; i < _model.Drops; i++)
-            {
-                foreach (var loot in _loots)
-                {
-                    var chance = _randomizer.Next(100);
-                    var item = loot.GetItemModel(Root, chance);
-                    if (item != null)
-                    {
-                        items.Add(item);
-                        break;
-                    }
-                }
-            }
-            return items;
-        }
+			var items = new List<Item>();
+			for (var i = 0; i < _model.Drops; i++)
+				foreach (var loot in _loots)
+				{
+					var chance = _randomizer.Next(100);
+					var item = loot.GetItemModel(Root, chance);
+					if (item != null)
+					{
+						items.Add(item);
+						break;
+					}
+				}
 
-        private class Loot
-        {
-            private readonly LootModel _model;
-            private int _max;
+			return items;
+		}
 
-            public Loot(LootModel model)
-            {
-                _model = model;
-                _max = _model.Max;
-            }
-            
-            public Item GetItemModel(RootBase root, float chance)
-            {
-                if (_max > 0 && chance <= _model.Chance)
-                {
-                    var itemModel = DataContext.GetItemModel(_model.ItemId);
-                    itemModel.Type = itemModel.Id;
-                    _max--;
-                    var item = new Item(itemModel, root);
-                    return item;
-                }
-                return null;
-            }
+		private class Loot
+		{
+			private readonly LootModel _model;
+			private int _max;
 
-            public void Reset()
-            {
-                _max = _model.Max;
-            }
-        }
-    }
+			public Loot(LootModel model)
+			{
+				_model = model;
+				_max = _model.Max;
+			}
+
+			public Item GetItemModel(RootBase root, float chance)
+			{
+				if (_max > 0 && chance <= _model.Chance)
+				{
+					var itemModel = DataContext.GetItemModel(_model.ItemId);
+					itemModel.Type = itemModel.Id;
+					_max--;
+					var item = new Item(itemModel, root);
+					return item;
+				}
+
+				return null;
+			}
+
+			public void Reset()
+			{
+				_max = _model.Max;
+			}
+		}
+	}
 }

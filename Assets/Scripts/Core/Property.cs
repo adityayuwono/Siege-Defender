@@ -5,79 +5,75 @@ using Scripts.ViewModels;
 
 namespace Scripts.Core
 {
-    public class AdjustableProperty<T> : Property<T> , IDisposable
-    {
-        private readonly string _propertyId;
-        private readonly IContext _context;
-        private readonly Base _viewModel;
+	public class AdjustableProperty<T> : Property<T>, IDisposable
+	{
+		private readonly IContext _context;
+		private readonly string _propertyId;
+		private readonly Base _viewModel;
 
-        public AdjustableProperty(string propertyId, Base baseViewModel, bool isAlwaysChanging = false) : base (isAlwaysChanging)
-        {
-            _propertyId = propertyId;
-            _viewModel = baseViewModel;
-            _context = baseViewModel as IContext ?? baseViewModel.GetParent<IContext>();
+		public AdjustableProperty(string propertyId, Base baseViewModel, bool isAlwaysChanging = false) : base(
+			isAlwaysChanging)
+		{
+			_propertyId = propertyId;
+			_viewModel = baseViewModel;
+			_context = baseViewModel as IContext ?? baseViewModel.GetParent<IContext>();
 
-            if (_context == null)
-                throw new EngineException(baseViewModel, "Failed to find Context in the hierarchy");
+			if (_context == null)
+				throw new EngineException(baseViewModel, "Failed to find Context in the hierarchy");
 
-            _context.PropertyLookup.RegisterProperty(baseViewModel, _propertyId, this);
-        }
+			_context.PropertyLookup.RegisterProperty(baseViewModel, _propertyId, this);
+		}
 
-        public void Dispose()
-        {
-            _context.PropertyLookup.UnregisterProperty(_viewModel, _propertyId);
-        }
-    }
+		public void Dispose()
+		{
+			_context.PropertyLookup.UnregisterProperty(_viewModel, _propertyId);
+		}
+	}
 
-    public class Property<T> : Property
-    {
-        private readonly bool _isAlwaysChanging;
+	public class Property<T> : Property
+	{
+		private readonly bool _isAlwaysChanging;
 
-        public Property(bool isAlwaysChanging = false)
-        {
-            _isAlwaysChanging = isAlwaysChanging;
-            _value = default(T);
-        }
+		public Property(bool isAlwaysChanging = false)
+		{
+			_isAlwaysChanging = isAlwaysChanging;
+			_value = default(T);
+		}
 
-        public virtual void SetValue(T newValue)
-        {
-	        if (_value != null && _value.Equals(newValue) && !_isAlwaysChanging)
-	        {
-		        return;
-	        }
-            
-            _value = newValue;
+		public virtual void SetValue(T newValue)
+		{
+			if (_value != null && _value.Equals(newValue) && !_isAlwaysChanging) return;
 
-            InvokeChangedEvent();
-        }
+			_value = newValue;
 
-        public new T GetValue()
-        {
-            return _value != null ? (T) _value : default(T);
-        }
-    }
+			InvokeChangedEvent();
+		}
 
-    public class Property : IChangeProperty
-    {
-        protected object _value;
-        public object GetValue()
-        {
-            return _value;
-        }
+		public new T GetValue()
+		{
+			return _value != null ? (T) _value : default(T);
+		}
+	}
 
-        protected void InvokeChangedEvent()
-        {
-	        if (OnChange != null)
-	        {
-		        OnChange();
-	        }
-        }
+	public class Property : IChangeProperty
+	{
+		protected object _value;
 
-        public event Action OnChange;
-    }
+		public event Action OnChange;
 
-    public interface IChangeProperty
-    {
-        event Action OnChange;
-    }
+		public object GetValue()
+		{
+			return _value;
+		}
+
+		protected void InvokeChangedEvent()
+		{
+			if (OnChange != null) OnChange();
+		}
+	}
+
+	public interface IChangeProperty
+	{
+		event Action OnChange;
+	}
 }

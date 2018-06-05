@@ -2,7 +2,7 @@
 
 namespace Scripts.Components
 {
-    public class SpriteBinding : MonoBehaviour
-    {
-    }
+	public class SpriteBinding : MonoBehaviour
+	{
+	}
 }

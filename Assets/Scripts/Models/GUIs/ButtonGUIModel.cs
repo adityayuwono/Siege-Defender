@@ -2,8 +2,8 @@
 
 namespace Scripts.Models.GUIs
 {
-    [Serializable]
-    public class ButtonGUIModel : BaseGUIModel
-    {
-    }
+	[Serializable]
+	public class ButtonGUIModel : BaseGUIModel
+	{
+	}
 }

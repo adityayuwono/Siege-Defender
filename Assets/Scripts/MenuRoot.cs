@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Scripts.Interfaces;
 using Scripts.Models;
 using Scripts.ViewModels;
@@ -7,8 +8,8 @@ namespace Scripts
 {
 	public class MenuRoot : RootBase
 	{
-		private readonly MenuRootModel _model;
 		private readonly IIntervalRunner _intervalRunner;
+		private readonly MenuRootModel _model;
 
 		public MenuRoot(MenuRootModel model, BaseContext parent)
 			: base(model, parent)
@@ -29,7 +30,7 @@ namespace Scripts
 
 		public override void StartCoroutine(IEnumerator coroutine)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		protected override void OnActivate()

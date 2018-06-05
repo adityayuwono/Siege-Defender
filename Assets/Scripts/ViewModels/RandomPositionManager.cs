@@ -2,13 +2,13 @@
 
 namespace Scripts.ViewModels
 {
-    public class RandomPositionManager : Element
-    {
-        private readonly RandomPositionManagerModel _model;
+	public class RandomPositionManager : Element
+	{
+		private readonly RandomPositionManagerModel _model;
 
-        public RandomPositionManager(RandomPositionManagerModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
-        }
-    }
+		public RandomPositionManager(RandomPositionManagerModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
+		}
+	}
 }

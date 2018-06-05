@@ -4,19 +4,16 @@ using System.Xml.Serialization;
 
 namespace Scripts.Models.Actions
 {
-    [Serializable]
-    public class BaseActionModel : TargetPropertyModel
-    {
-        [XmlAttribute]
-        public float Wait { get; set; }
+	[Serializable]
+	public class BaseActionModel : TargetPropertyModel
+	{
+		public BaseActionModel()
+		{
+			Wait = 0;
+		}
 
-        [XmlAttribute]
-        [DefaultValue(false)]
-        public bool IsInterruptable { get; set; }
+		[XmlAttribute] public float Wait { get; set; }
 
-        public BaseActionModel()
-        {
-            Wait = 0;
-        }
-    }
+		[XmlAttribute] [DefaultValue(false)] public bool IsInterruptable { get; set; }
+	}
 }

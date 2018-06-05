@@ -4,45 +4,41 @@ using UnityEngine;
 
 namespace Scripts.ViewModels
 {
-    public class SpecialEffect : Object
-    {
-	    public Action<Object> UpdateParent;
-	    public Action OnStopImmediatelly;
+	public class SpecialEffect : Object
+	{
+		private readonly SpecialEffectModel _model;
+		public Action OnStopImmediatelly;
+		public Action<Object> UpdateParent;
 
-        private readonly SpecialEffectModel _model;
+		public SpecialEffect(SpecialEffectModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
+		}
 
-        public SpecialEffect(SpecialEffectModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
-        }
+		public void ShowSpecialEffect(Vector3 position)
+		{
+			Position = position;
 
-        public void ShowSpecialEffect(Vector3 position)
-        {
-            Position = position;
-            
-            Activate();
-            Show();
-            Hide("Only Display for a short time");
-        }
+			Activate();
+			Show();
+			Hide("Only Display for a short time");
+		}
 
-        public void ShowSpecialEffect(Object parent)
-        {
-            ShowSpecialEffect(Vector3.zero);
+		public void ShowSpecialEffect(Object parent)
+		{
+			ShowSpecialEffect(Vector3.zero);
 
-	        if (UpdateParent != null)
-	        {
-		        UpdateParent(parent);
-	        }
-        }
+			if (UpdateParent != null) UpdateParent(parent);
+		}
 
 		public void SetDeathDelay(float delay)
-        {
-            _model.DeathDelay = delay;
-        }
+		{
+			_model.DeathDelay = delay;
+		}
 
-	    public void StopImmediatelly()
-	    {
-		    OnStopImmediatelly();
-	    }
-    }
+		public void StopImmediatelly()
+		{
+			OnStopImmediatelly();
+		}
+	}
 }

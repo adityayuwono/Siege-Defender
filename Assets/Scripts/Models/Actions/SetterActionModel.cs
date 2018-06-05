@@ -2,9 +2,8 @@
 
 namespace Scripts.Models.Actions
 {
-    [Serializable]
-    public class SetterActionModel : BaseActionModel
-    {
-        
-    }
+	[Serializable]
+	public class SetterActionModel : BaseActionModel
+	{
+	}
 }

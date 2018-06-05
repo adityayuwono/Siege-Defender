@@ -1,95 +1,89 @@
 ﻿using System;
 using Scripts.Core;
-using Scripts.Helpers;
 using Scripts.Models.Weapons;
 using Scripts.Views;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Scripts.ViewModels.Weapons
 {
-    public class Projectile : ProjectileBase
-    {
-        private readonly ProjectileModel _model;
+	public class Projectile : ProjectileBase
+	{
+		private readonly ProjectileModel _model;
+		public readonly Property<bool> IsKinematic = new Property<bool>();
 
-        public Projectile(ProjectileModel model, Shooter parent) : base(model, parent)
-        {
-            _model = model;
+		private bool _hasCollided;
 
-            CalculateSpeed();
-        }
+		public float[] SpeedDeviations;
 
-        private void CalculateSpeed()
-        {
-            var splitSpeed = _model.SpeedDeviation.Split('-');
-            var speed0 = float.Parse(splitSpeed[0]);
-            var speed1 = float.Parse(splitSpeed[1]);
+		public Projectile(ProjectileModel model, Shooter parent) : base(model, parent)
+		{
+			_model = model;
 
-            SpeedDeviations = new[] {speed0, speed1};
-        }
+			CalculateSpeed();
+		}
 
-        public event Action<ObjectView, float> DoShooting;
-        public readonly Property<bool> IsKinematic = new Property<bool>(); 
+		public override Vector3 Position
+		{
+			get { return Vector3.zero; }
+		}
 
-        public void Shoot(ObjectView target, float accuracy)
-        {
-	        if (DoShooting != null)
-	        {
-		        DoShooting(target, accuracy);
-	        }
-        }
+		public float Accuracy
+		{
+			get { return 1 - _model.Accuracy; }
+		}
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
+		public bool IsRotationRandomized
+		{
+			get { return _model.IsRotationRandomized; }
+		}
 
-            _hasCollided = false;
-            IsKinematic.SetValue(false);
-        }
+		private void CalculateSpeed()
+		{
+			var splitSpeed = _model.SpeedDeviation.Split('-');
+			var speed0 = float.Parse(splitSpeed[0]);
+			var speed1 = float.Parse(splitSpeed[1]);
 
-        public override Vector3 Position
-        {
-            get { return Vector3.zero; }
-        }
+			SpeedDeviations = new[] {speed0, speed1};
+		}
 
-        private bool _hasCollided;
-        public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
-        {
-            // BUG: Need checking here because sometimes two collisions can happen very quickly
-            if (_hasCollided) return;
-            _hasCollided = true;
+		public event Action<ObjectView, float> DoShooting;
 
-            IsKinematic.SetValue(true);
-            
-            // Spawn AoE if there are any Id defined
-            if (!string.IsNullOrEmpty(_model.AoEId))
-                GetParent<Shooter>().SpawnAoE(_model.AoEId, collisionPosition);
-            
-            OnHit();
-            
-            if (!DamageEnemy(targetObject, collisionPosition, true))
-            {
-                Hide("Hit Nothing");// If we don't hit an enemy, hide the projectile
-            }
-        }
+		public void Shoot(ObjectView target, float accuracy)
+		{
+			if (DoShooting != null) DoShooting(target, accuracy);
+		}
 
-        public float Accuracy
-        {
-            get { return 1-_model.Accuracy; }
-        }
+		protected override void OnActivate()
+		{
+			base.OnActivate();
 
-        public event Action Hit;
+			_hasCollided = false;
+			IsKinematic.SetValue(false);
+		}
 
-        private void OnHit()
-        {
-            if (Hit != null) Hit();
-        }
+		public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
+		{
+			// BUG: Need checking here because sometimes two collisions can happen very quickly
+			if (_hasCollided) return;
+			_hasCollided = true;
 
-        public bool IsRotationRandomized
-        {
-            get { return _model.IsRotationRandomized; }
-        }
+			IsKinematic.SetValue(true);
 
-        public float[] SpeedDeviations;
-    }
+			// Spawn AoE if there are any Id defined
+			if (!string.IsNullOrEmpty(_model.AoEId))
+				GetParent<Shooter>().SpawnAoE(_model.AoEId, collisionPosition);
+
+			OnHit();
+
+			if (!DamageEnemy(targetObject, collisionPosition, true))
+				Hide("Hit Nothing"); // If we don't hit an enemy, hide the projectile
+		}
+
+		public event Action Hit;
+
+		private void OnHit()
+		{
+			if (Hit != null) Hit();
+		}
+	}
 }

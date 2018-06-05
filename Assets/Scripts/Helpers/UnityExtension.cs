@@ -3,65 +3,63 @@ using UnityEngine;
 
 namespace Scripts.Helpers
 {
-    public static class UnityExtension
-    {
-        /// <summary>
-        /// Will lookup the child recursively, using breadth first search
-        /// </summary>
-        /// <param name="name">The name of the child GameObjects you wish to find</param>
-        /// <param name="includeInactive">Whether to include inactivate GameObjects or not</param>
-        /// <param name="value">The parent transform</param>
-        /// <returns></returns>
-        public static Transform FindChildRecursivelyBreadthFirst(this Transform value, string name, bool includeInactive = true)
-        {
-            var splitNames = name.Split('/');
+	public static class UnityExtension
+	{
+		/// <summary>
+		///     Will lookup the child recursively, using breadth first search
+		/// </summary>
+		/// <param name="name">The name of the child GameObjects you wish to find</param>
+		/// <param name="includeInactive">Whether to include inactivate GameObjects or not</param>
+		/// <param name="value">The parent transform</param>
+		/// <returns></returns>
+		public static Transform FindChildRecursivelyBreadthFirst(this Transform value, string name,
+			bool includeInactive = true)
+		{
+			var splitNames = name.Split('/');
 
-            var queue = new List<Transform>();
-            var child = value;
+			var queue = new List<Transform>();
+			var child = value;
 
-            for (var i = 0; i < child.childCount; i++)
-                queue.Add(child.GetChild(i));
+			for (var i = 0; i < child.childCount; i++)
+				queue.Add(child.GetChild(i));
 
-            while (queue.Count > 0)
-            {
-                child = queue[0];
-                queue.RemoveAt(0);
+			while (queue.Count > 0)
+			{
+				child = queue[0];
+				queue.RemoveAt(0);
 
-                var childSearchPattern = splitNames[splitNames.Length - 1];
-                
-                var isFound = child.name == childSearchPattern;
-                isFound &= includeInactive || child.gameObject.activeInHierarchy;
+				var childSearchPattern = splitNames[splitNames.Length - 1];
 
-                if (isFound) return child;
+				var isFound = child.name == childSearchPattern;
+				isFound &= includeInactive || child.gameObject.activeInHierarchy;
 
-                for (var i = 0; i < child.childCount; i++)
-                    queue.Add(child.GetChild(i));
-            }
+				if (isFound) return child;
 
-            return null;
-        }
+				for (var i = 0; i < child.childCount; i++)
+					queue.Add(child.GetChild(i));
+			}
 
-        public static Vector3 ParseVector3(this string string3)
-        {
-            var splitted = string3.Split(',');
-            var splitFloat = new float[splitted.Length];
+			return null;
+		}
 
-            for (var i = 0; i < splitted.Length; i++)
-            {
-                splitFloat[i] = float.Parse(splitted[i]);
-            }
+		public static Vector3 ParseVector3(this string string3)
+		{
+			var splitted = string3.Split(',');
+			var splitFloat = new float[splitted.Length];
 
-            return new Vector3(splitFloat[0], splitFloat[1], splitFloat[2]);
-        }
+			for (var i = 0; i < splitted.Length; i++) splitFloat[i] = float.Parse(splitted[i]);
 
-        public static bool ContainsIfThisIsACircle(this Rect rect, Vector2 point)
-        {
-            var center = rect.center;
-            var radius = (rect.width + rect.height)/4f;
+			return new Vector3(splitFloat[0], splitFloat[1], splitFloat[2]);
+		}
 
-            var distanceFromPointToCenter = Vector2.Distance(point, center);
+		public static bool ContainsIfThisIsACircle(this Rect rect, Vector2 point)
+		{
+			var center = rect.center;
+			var radius = (rect.width + rect.height) / 4f;
 
-            return distanceFromPointToCenter <= radius;
-        }
-    }
+			var distanceFromPointToCenter = Vector2.Distance(point, center);
+
+			return distanceFromPointToCenter <= radius;
+		}
+	}
 }

@@ -2,33 +2,37 @@
 
 namespace Scripts.Components
 {
-    public class BaseBinding : BaseController
-    {
-        private Property _property;
-        public void SetProperty(Property property)
-        {
-            _property = property;
-        }
+	public class BaseBinding : BaseController
+	{
+		private Property _property;
 
-        private void Start()
-        {
-            Bind();
-        }
+		public void SetProperty(Property property)
+		{
+			_property = property;
+		}
 
-        private void OnDestroy()
-        {
-            Unbind();
-        }
+		private void Start()
+		{
+			Bind();
+		}
 
-        protected virtual void Bind()
-        {
-            _property.OnChange += OnChanged;
-        }
+		private void OnDestroy()
+		{
+			Unbind();
+		}
 
-        protected virtual void Unbind()
-        {
-            _property.OnChange -= OnChanged;
-        }
-        protected virtual void OnChanged() { }
-    }
+		protected virtual void Bind()
+		{
+			_property.OnChange += OnChanged;
+		}
+
+		protected virtual void Unbind()
+		{
+			_property.OnChange -= OnChanged;
+		}
+
+		protected virtual void OnChanged()
+		{
+		}
+	}
 }

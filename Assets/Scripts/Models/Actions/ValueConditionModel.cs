@@ -2,8 +2,8 @@
 
 namespace Scripts.Models.Actions
 {
-    [Serializable]
-    public class ValueConditionModel : BaseConditionModel
-    {
-    }
+	[Serializable]
+	public class ValueConditionModel : BaseConditionModel
+	{
+	}
 }

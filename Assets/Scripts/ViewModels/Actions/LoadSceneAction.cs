@@ -3,24 +3,25 @@ using Scripts.ViewModels.Actions;
 
 namespace Scripts.ViewModels
 {
-    public class LoadSceneAction : BaseAction
-    {
-        private readonly LoadSceneActionModel _model;
-        public LoadSceneAction(LoadSceneActionModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
-        }
+	public class LoadSceneAction : BaseAction
+	{
+		private readonly LoadSceneActionModel _model;
 
-        public override void Invoke()
-        {
-            base.Invoke();
+		public LoadSceneAction(LoadSceneActionModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
+		}
 
-            Root.ChangeScene(_model.Target, _model.LevelId);
-        }
+		public override void Invoke()
+		{
+			base.Invoke();
 
-        protected override object FindTarget()
-        {
-            return null;
-        }
-    }
+			Root.ChangeScene(_model.Target, _model.LevelId);
+		}
+
+		protected override object FindTarget()
+		{
+			return null;
+		}
+	}
 }

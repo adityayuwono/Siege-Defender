@@ -4,21 +4,21 @@ using System.Xml.Serialization;
 
 namespace Scripts.Models.Enemies
 {
-    [Serializable]
-    public class BossModel : EnemyModel
-    {
-        [XmlArray]
-        [XmlArrayItem(ElementName = "Limb", Type = typeof(LimbModel))]
-        public List<LimbModel> Limbs { get; set; }
+	[Serializable]
+	public class BossModel : EnemyModel
+	{
+		public BossModel()
+		{
+			Limbs = new List<LimbModel>();
+			Skills = new List<SkillModel>();
+		}
 
-        [XmlArray]
-        [XmlArrayItem(ElementName = "Skill", Type = typeof(SkillModel))]
-        public List<SkillModel> Skills { get; set; }
+		[XmlArray]
+		[XmlArrayItem(ElementName = "Limb", Type = typeof(LimbModel))]
+		public List<LimbModel> Limbs { get; set; }
 
-        public BossModel()
-        {
-            Limbs = new List<LimbModel>();
-            Skills = new List<SkillModel>();
-        }
-    }
+		[XmlArray]
+		[XmlArrayItem(ElementName = "Skill", Type = typeof(SkillModel))]
+		public List<SkillModel> Skills { get; set; }
+	}
 }

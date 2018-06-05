@@ -3,28 +3,29 @@ using UnityEngine;
 
 namespace Scripts.Views.Weapons
 {
-    public class AoEView : ProjectileBaseView
-    {
-        private readonly AoE _viewModel;
-        public AoEView(AoE viewModel, ShooterView parent) : base(viewModel, parent)
-        {
-            _viewModel = viewModel;
-        }
+	public class AoEView : ProjectileBaseView
+	{
+		private readonly AoE _viewModel;
 
-        protected override void OnLoad()
-        {
-            base.OnLoad();
+		public AoEView(AoE viewModel, ShooterView parent) : base(viewModel, parent)
+		{
+			_viewModel = viewModel;
+		}
 
-            Freeze();
-        }
+		protected override void OnLoad()
+		{
+			base.OnLoad();
 
-        protected override void OnShow()
-        {
-            base.OnShow();
+			Freeze();
+		}
 
-            Transform.localScale = Vector3.one*_viewModel.Radius/2f;
-            Transform.parent = null;
-            Transform.position = _viewModel.Position;
-        }
-    }
+		protected override void OnShow()
+		{
+			base.OnShow();
+
+			Transform.localScale = Vector3.one * _viewModel.Radius / 2f;
+			Transform.parent = null;
+			Transform.position = _viewModel.Position;
+		}
+	}
 }

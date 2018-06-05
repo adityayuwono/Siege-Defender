@@ -5,26 +5,21 @@ using Scripts.Models.Actions;
 
 namespace Scripts.Models.Enemies
 {
-    [Serializable]
-    public class LivingObjectModel : ObjectModel
-    {
-        [XmlAttribute]
-        [DefaultValue(1)]
-        public int Health { get; set; }
+	[Serializable]
+	public class LivingObjectModel : ObjectModel
+	{
+		public LivingObjectModel()
+		{
+			Health = 1;
+			ProjectileLimit = 3;
+		}
 
-        [XmlElement]
-        public TriggeredModel Trigger { get; set; }
+		[XmlAttribute] [DefaultValue(1)] public int Health { get; set; }
 
-        [XmlAttribute]
-        [DefaultValue("")]
-        public string CollisionEffectNormal { get; set; }
+		[XmlElement] public TriggeredModel Trigger { get; set; }
 
-        public int ProjectileLimit { get; protected set; }
+		[XmlAttribute] [DefaultValue("")] public string CollisionEffectNormal { get; set; }
 
-        public LivingObjectModel()
-        {
-            Health = 1;
-            ProjectileLimit = 3;
-        }
-    }
+		public int ProjectileLimit { get; protected set; }
+	}
 }

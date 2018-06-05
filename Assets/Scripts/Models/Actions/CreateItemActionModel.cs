@@ -1,6 +1,6 @@
 ﻿namespace Scripts.Models.Actions
 {
-    public class CreateItemActionModel : BaseActionModel
-    {
-    }
+	public class CreateItemActionModel : BaseActionModel
+	{
+	}
 }

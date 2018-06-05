@@ -2,9 +2,8 @@
 
 namespace Scripts.Models.GUIs
 {
-    [Serializable]
-    public class ProgressBarGUIModel : ValueDisplayGUIModel
-    {
-        
-    }
+	[Serializable]
+	public class ProgressBarGUIModel : ValueDisplayGUIModel
+	{
+	}
 }

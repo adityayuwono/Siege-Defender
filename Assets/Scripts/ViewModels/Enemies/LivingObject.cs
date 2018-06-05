@@ -8,133 +8,115 @@ using UnityEngine;
 
 namespace Scripts.ViewModels.Enemies
 {
-    /// <summary>
-    /// Base class for everything that have Health
-    /// </summary>
-    public class LivingObject : Object
-    {
-	    public event Action Death;
-	    public Action<ProjectileBase> DoAttach;
+	/// <summary>
+	///     Base class for everything that have Health
+	/// </summary>
+	public class LivingObject : Object
+	{
+		private readonly List<ProjectileBase> _attachedProjectiles = new List<ProjectileBase>();
 
-	    public readonly AdjustableProperty<string> SpecialEffect;
-	    public readonly AdjustableProperty<float> Health;
-	    
-        private readonly LivingObjectModel _model;
-	    private readonly List<ProjectileBase> _attachedProjectiles = new List<ProjectileBase>();
+		private readonly LivingObjectModel _model;
+		public readonly AdjustableProperty<float> Health;
 
-        protected LivingObject(LivingObjectModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
+		public readonly AdjustableProperty<string> SpecialEffect;
+		public Action<ProjectileBase> DoAttach;
 
-            // Validate Model
-	        if (string.IsNullOrEmpty(_model.Type))
-	        {
-		        throw new EngineException(this, string.Format("Type for: {0} is empty", FullId));
-	        }
+		protected LivingObject(LivingObjectModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
 
-            Health = new AdjustableProperty<float>("Health", this);
-            CollisionEffectNormal = _model.CollisionEffectNormal;
+			// Validate Model
+			if (string.IsNullOrEmpty(_model.Type))
+				throw new EngineException(this, string.Format("Type for: {0} is empty", FullId));
 
-            SpecialEffect = new AdjustableProperty<string>("SpecialEffect", this, true);
-        }
+			Health = new AdjustableProperty<float>("Health", this);
+			CollisionEffectNormal = _model.CollisionEffectNormal;
 
-	    protected string CollisionEffectNormal { private get; set; }
-		
-	    public bool IsDead
-	    {
-		    get { return Health.GetValue() <= 0; }
-	    }
+			SpecialEffect = new AdjustableProperty<string>("SpecialEffect", this, true);
+		}
 
-        protected override void OnActivate()
-        {
-            // Need to be set first because some conditions rely on this
-            Health.SetValue(_model.Health);
+		protected string CollisionEffectNormal { private get; set; }
 
-            base.OnActivate();
-        }
-        
-        public override void Hide(string reason)
-        {
-            // Cleanup attached projectiles
-	        foreach (var projectile in _attachedProjectiles)
-	        {
-		        projectile.Hide(reason);
-	        }
-            _attachedProjectiles.Clear();
+		public bool IsDead
+		{
+			get { return Health.GetValue() <= 0; }
+		}
 
-            base.Hide(reason);
-        }
+		public event Action Death;
 
-        /// <summary>
-        /// Reduce health by the amount specified
-        /// Health is only reduced if it is above 0
-        /// </summary>
-        /// <param name="damage">How many health we should reduce</param>
-        /// <param name="contactPoint">Impact coordinate for displaying damage</param>
-        /// <param name="source">Set if we want to attach the object to the target</param>
-        public override bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
-        {
-	        if (source != null)
-	        {
-		        AttachProjectile(source);
-	        }
+		protected override void OnActivate()
+		{
+			// Need to be set first because some conditions rely on this
+			Health.SetValue(_model.Health);
 
-            var currentHealth = Health.GetValue();
+			base.OnActivate();
+		}
 
-            // To avoid killing the enemy more than once
-            if (currentHealth > 0)
-            {
-                currentHealth -= damage;
-	            if (currentHealth <= 0)
-	            {
-		            OnKilled();
-	            }
+		public override void Hide(string reason)
+		{
+			// Cleanup attached projectiles
+			foreach (var projectile in _attachedProjectiles) projectile.Hide(reason);
+			_attachedProjectiles.Clear();
 
-                Health.SetValue(currentHealth);
-            }
+			base.Hide(reason);
+		}
 
-            // Because Vector3 is a struct and structs can't be null
-            if (contactPoint != Vector3.zero)
-            {
-	            SDRoot.DamageDisplay.DisplayDamage(damage, isCrit, contactPoint);
+		/// <summary>
+		///     Reduce health by the amount specified
+		///     Health is only reduced if it is above 0
+		/// </summary>
+		/// <param name="damage">How many health we should reduce</param>
+		/// <param name="contactPoint">Impact coordinate for displaying damage</param>
+		/// <param name="source">Set if we want to attach the object to the target</param>
+		public override bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
+		{
+			if (source != null) AttachProjectile(source);
 
-	            if (!string.IsNullOrEmpty(CollisionEffectNormal))
-	            {
-		            SDRoot.SpecialEffectManager.StartSpecialEffectOn(CollisionEffectNormal, contactPoint);
-	            }
-            }
+			var currentHealth = Health.GetValue();
 
-            return true;
-        }
-		
-        /// <summary>
-        /// Called once when damage taken is greater or equal to Health
-        /// </summary>
-        protected virtual void OnKilled()
-        {
-	        if (Death != null)
-	        {
-		        Death();
-	        }
-        }
+			// To avoid killing the enemy more than once
+			if (currentHealth > 0)
+			{
+				currentHealth -= damage;
+				if (currentHealth <= 0) OnKilled();
 
-        private void AttachProjectile(ProjectileBase source)
-        {
-	        if (_attachedProjectiles.Contains(source))
-	        {
-		        throw new EngineException(this, "Duplicate Projectile hit");
-	        }
+				Health.SetValue(currentHealth);
+			}
 
-            _attachedProjectiles.Add(source);
+			// Because Vector3 is a struct and structs can't be null
+			if (contactPoint != Vector3.zero)
+			{
+				SDRoot.DamageDisplay.DisplayDamage(damage, isCrit, contactPoint);
 
-            while (_attachedProjectiles.Count > _model.ProjectileLimit)
-            {
-                var projectileToRemove = _attachedProjectiles[0];
-                _attachedProjectiles.Remove(projectileToRemove);
-                projectileToRemove.Hide("Hiding because we have too many already");
-            }
+				if (!string.IsNullOrEmpty(CollisionEffectNormal))
+					SDRoot.SpecialEffectManager.StartSpecialEffectOn(CollisionEffectNormal, contactPoint);
+			}
 
-            DoAttach(source);
-        }
-    }
+			return true;
+		}
+
+		/// <summary>
+		///     Called once when damage taken is greater or equal to Health
+		/// </summary>
+		protected virtual void OnKilled()
+		{
+			if (Death != null) Death();
+		}
+
+		private void AttachProjectile(ProjectileBase source)
+		{
+			if (_attachedProjectiles.Contains(source)) throw new EngineException(this, "Duplicate Projectile hit");
+
+			_attachedProjectiles.Add(source);
+
+			while (_attachedProjectiles.Count > _model.ProjectileLimit)
+			{
+				var projectileToRemove = _attachedProjectiles[0];
+				_attachedProjectiles.Remove(projectileToRemove);
+				projectileToRemove.Hide("Hiding because we have too many already");
+			}
+
+			DoAttach(source);
+		}
+	}
 }

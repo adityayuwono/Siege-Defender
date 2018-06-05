@@ -3,22 +3,23 @@ using UnityEngine;
 
 namespace Scripts.Views
 {
-    public class StaticObjectView : RigidbodyView
-    {
-        private StaticObject _viewModel;
-        public StaticObjectView(StaticObject viewModel, ObjectView parent) : base(viewModel, parent)
-        {
-            _viewModel = viewModel;
-        }
+	public class StaticObjectView : RigidbodyView
+	{
+		private StaticObject _viewModel;
 
-        protected override void OnLoad()
-        {
-            base.OnLoad();
+		public StaticObjectView(StaticObject viewModel, ObjectView parent) : base(viewModel, parent)
+		{
+			_viewModel = viewModel;
+		}
 
-            Freeze();
+		protected override void OnLoad()
+		{
+			base.OnLoad();
 
-            Transform.localScale = AssetScale;
-            Transform.localRotation = Quaternion.identity;
-        }
-    }
+			Freeze();
+
+			Transform.localScale = AssetScale;
+			Transform.localRotation = Quaternion.identity;
+		}
+	}
 }

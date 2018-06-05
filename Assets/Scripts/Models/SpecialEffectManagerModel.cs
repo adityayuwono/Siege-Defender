@@ -2,8 +2,8 @@
 
 namespace Scripts.Models
 {
-    [Serializable]
-    public class SpecialEffectManagerModel : IntervalModel
-    {
-    }
+	[Serializable]
+	public class SpecialEffectManagerModel : IntervalModel
+	{
+	}
 }

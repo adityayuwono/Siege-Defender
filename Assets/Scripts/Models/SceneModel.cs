@@ -2,8 +2,8 @@
 
 namespace Scripts.Models
 {
-    [Serializable]
-    public class SceneModel : IntervalModel
-    {
-    }
+	[Serializable]
+	public class SceneModel : IntervalModel
+	{
+	}
 }

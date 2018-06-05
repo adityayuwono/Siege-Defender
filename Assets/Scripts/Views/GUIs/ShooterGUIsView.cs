@@ -4,30 +4,30 @@ using UnityEngine;
 
 namespace Scripts.Views.GUIs
 {
-    public class ShooterGUIView : BaseGUIView
-    {
-        private readonly ShooterGUI _viewModel;
-        private readonly ObjectView _parent;
+	public class ShooterGUIView : BaseGUIView
+	{
+		private readonly ObjectView _parent;
+		private readonly ShooterGUI _viewModel;
 
-        public ShooterGUIView(ShooterGUI viewModel, ObjectView parent) : base(viewModel, parent)
-        {
-            _viewModel = viewModel;
-            _parent = parent;
-        }
+		private GameObject _aimingGameObject;
 
-        private GameObject _aimingGameObject;
-        
-        protected override void OnLoad()
-        {
-            base.OnLoad();
+		public ShooterGUIView(ShooterGUI viewModel, ObjectView parent) : base(viewModel, parent)
+		{
+			_viewModel = viewModel;
+			_parent = parent;
+		}
 
-            _aimingGameObject = _parent.Transform.FindChildRecursivelyBreadthFirst(_viewModel.AimingAssetId).gameObject;
+		protected override void OnLoad()
+		{
+			base.OnLoad();
 
-            var targetView = _viewModel.Root.GetView<TargetView>(_viewModel.Shooter.Target);
-            targetView.SetupController(_aimingGameObject.GetComponent<UITexture>());
+			_aimingGameObject = _parent.Transform.FindChildRecursivelyBreadthFirst(_viewModel.AimingAssetId).gameObject;
 
-            var sourceView = _viewModel.Root.GetView<ShooterView>(_viewModel.Shooter);
-            sourceView.SetupController(GameObject.GetComponent<UITexture>());
-        }
-    }
+			var targetView = _viewModel.Root.GetView<TargetView>(_viewModel.Shooter.Target);
+			targetView.SetupController(_aimingGameObject.GetComponent<UITexture>());
+
+			var sourceView = _viewModel.Root.GetView<ShooterView>(_viewModel.Shooter);
+			sourceView.SetupController(GameObject.GetComponent<UITexture>());
+		}
+	}
 }

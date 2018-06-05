@@ -2,8 +2,8 @@
 
 namespace Scripts.Interfaces
 {
-    public interface IContext : IBase
-    {
-        PropertyLookup PropertyLookup { get; }
-    }
+	public interface IContext : IBase
+	{
+		PropertyLookup PropertyLookup { get; }
+	}
 }

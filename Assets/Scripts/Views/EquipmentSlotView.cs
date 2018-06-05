@@ -3,26 +3,27 @@ using Scripts.ViewModels;
 
 namespace Scripts.Views
 {
-    public class EquipmentSlotView : ElementView
-    {
-        private readonly EquipmentSlot _viewModel;
-        public EquipmentSlotView(EquipmentSlot viewModel, InventoryView parent) : base(viewModel, parent)
-        {
-            _viewModel = viewModel;
-        }
+	public class EquipmentSlotView : ElementView
+	{
+		private readonly EquipmentSlot _viewModel;
 
-        protected override void OnLoad()
-        {
-            base.OnLoad();
+		public EquipmentSlotView(EquipmentSlot viewModel, InventoryView parent) : base(viewModel, parent)
+		{
+			_viewModel = viewModel;
+		}
 
-            GameObject.AddComponent<DragDropContainerController>().OnDropped += _viewModel.Object_OnDropped;
-        }
+		protected override void OnLoad()
+		{
+			base.OnLoad();
 
-        protected override void OnDestroy()
-        {
-            GameObject.GetComponent<DragDropContainerController>().OnDropped -= _viewModel.Object_OnDropped;
+			GameObject.AddComponent<DragDropContainerController>().OnDropped += _viewModel.Object_OnDropped;
+		}
 
-            base.OnDestroy();
-        }
-    }
+		protected override void OnDestroy()
+		{
+			GameObject.GetComponent<DragDropContainerController>().OnDropped -= _viewModel.Object_OnDropped;
+
+			base.OnDestroy();
+		}
+	}
 }

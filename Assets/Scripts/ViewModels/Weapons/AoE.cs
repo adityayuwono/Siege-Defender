@@ -1,41 +1,40 @@
-﻿using Scripts.Models;
-using Scripts.Models.Weapons;
+﻿using Scripts.Models.Weapons;
 using UnityEngine;
 
 namespace Scripts.ViewModels.Weapons
 {
-    public class AoE : ProjectileBase
-    {
-        private readonly AoEModel _model;
-        
-        public AoE(AoEModel model, Shooter parent) : base(model, parent)
-        {
-            _model = model;
-        }
+	public class AoE : ProjectileBase
+	{
+		private readonly AoEModel _model;
 
-        public float Radius
-        {
-            get { return _model.Radius; }
-        }
+		public AoE(AoEModel model, Shooter parent) : base(model, parent)
+		{
+			_model = model;
+		}
 
-        public override float HideDelay
-        {
-            get { return 0.05f; }
-        }
+		public float Radius
+		{
+			get { return _model.Radius; }
+		}
 
-        public void Show(Vector3 position)
-        {
-            if (_model.IsGrounded)
-                position.y = 0;
+		public override float HideDelay
+		{
+			get { return 0.05f; }
+		}
 
-            Position = position;
-            base.Show();
-            Hide("AoEs are hidden immediately");
-        }
+		public void Show(Vector3 position)
+		{
+			if (_model.IsGrounded)
+				position.y = 0;
 
-        public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
-        {
-            DamageEnemy(targetObject, contactPoint);
-        }
-    }
+			Position = position;
+			base.Show();
+			Hide("AoEs are hidden immediately");
+		}
+
+		public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
+		{
+			DamageEnemy(targetObject, contactPoint);
+		}
+	}
 }

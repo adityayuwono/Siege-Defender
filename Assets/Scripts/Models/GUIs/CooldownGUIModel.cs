@@ -2,8 +2,8 @@
 
 namespace Scripts.Models.GUIs
 {
-    [Serializable]
-    public class CooldownGUIModel : ValueDisplayGUIModel
-    {
-    }
+	[Serializable]
+	public class CooldownGUIModel : ValueDisplayGUIModel
+	{
+	}
 }

@@ -3,25 +3,22 @@ using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
-    public class SpecialEffectAction : SetterAction
-    {
-        private readonly SpecialEffectActionModel _model;
+	public class SpecialEffectAction : SetterAction
+	{
+		private readonly SpecialEffectActionModel _model;
 
-        public SpecialEffectAction(SpecialEffectActionModel model, Base parent) : base(model, parent)
-        {
-            _model = model;
-        }
+		public SpecialEffectAction(SpecialEffectActionModel model, Base parent) : base(model, parent)
+		{
+			_model = model;
+		}
 
-	    protected override void OnDeactivate()
-	    {
-		    base.OnDeactivate();
+		protected override void OnDeactivate()
+		{
+			base.OnDeactivate();
 
-		    var property = Target;
-		    var stringProperty = property as AdjustableProperty<string>;
-		    if (stringProperty.GetValue() == _model.Value)
-		    {
-			    stringProperty.SetValue("");
-		    }
-	    }
-    }
+			var property = Target;
+			var stringProperty = property as AdjustableProperty<string>;
+			if (stringProperty.GetValue() == _model.Value) stringProperty.SetValue("");
+		}
+	}
 }

@@ -5,35 +5,36 @@ using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Components
 {
-    public class BaseController : MonoBehaviour, IBase
-    {
-        protected Object ViewModel { get; private set; }
+	public class BaseController : MonoBehaviour, IBase
+	{
+		private bool _isSet;
+		protected Object ViewModel { get; private set; }
 
-        private bool _isSet;
-        public void Setup(Object viewModel)
-        {
-            _isSet = true;
-            ViewModel = viewModel;
+		public string Id
+		{
+			get { return ViewModel.Id; }
+		}
 
-            OnSetup();
-        }
-        protected virtual void OnSetup() { }
-        private void Start()
-        {
-	        if (!_isSet)
-	        {
-		        throw new EngineException(this, "Failed to continue, need Setup first");
-	        }
-        }
-        
-        public string Id
-        {
-            get { return ViewModel.Id; }
-        }
+		public string FullId
+		{
+			get { return ViewModel.Id; }
+		}
 
-        public string FullId
-        {
-            get { return ViewModel.Id; }
-        }
-    }
+		public void Setup(Object viewModel)
+		{
+			_isSet = true;
+			ViewModel = viewModel;
+
+			OnSetup();
+		}
+
+		protected virtual void OnSetup()
+		{
+		}
+
+		private void Start()
+		{
+			if (!_isSet) throw new EngineException(this, "Failed to continue, need Setup first");
+		}
+	}
 }

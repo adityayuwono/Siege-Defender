@@ -9,10 +9,11 @@ namespace Scripts.ViewModels
 {
 	public class Interval<T> : IntervalBase where T : Object
 	{
-		public readonly AdjustableProperty<int> ActiveObjects;
+		private readonly List<T> _activeObjects = new List<T>();
 
 		private readonly IntervalModel _model;
-		private readonly List<T> _activeObjects = new List<T>();
+		public readonly AdjustableProperty<int> ActiveObjects;
+		private int _objectCount;
 
 		protected Interval(IntervalModel model, Base parent)
 			: base(model, parent)
@@ -25,8 +26,10 @@ namespace Scripts.ViewModels
 			Interval.SetValue(_model.Interval);
 		}
 
-		protected int ObjectCount { get { return _objectCount++; } }
-		private int _objectCount;
+		protected int ObjectCount
+		{
+			get { return _objectCount++; }
+		}
 
 		public override void Show()
 		{
@@ -44,27 +47,17 @@ namespace Scripts.ViewModels
 		protected void Hide(string reason, bool hideChildren)
 		{
 			if (hideChildren)
-			{
 				foreach (var activeObject in _activeObjects)
-				{
 					activeObject.Hide(reason);
-				}
-			}
 
 			base.Hide(reason);
 		}
 
 		protected override void OnDestroyed()
 		{
-			foreach (var activeObject in _activeObjects)
-			{
-				activeObject.OnObjectDeactivated -= Object_OnDeath;
-			}
+			foreach (var activeObject in _activeObjects) activeObject.OnObjectDeactivated -= Object_OnDeath;
 
-			foreach (var activeObject in _activeObjects)
-			{
-				activeObject.Destroy();
-			}
+			foreach (var activeObject in _activeObjects) activeObject.Destroy();
 
 			_activeObjects.Clear();
 
@@ -74,13 +67,13 @@ namespace Scripts.ViewModels
 		}
 
 		#region Spawning Objects
-		protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : ViewModels.Object
+
+		protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : Object
 		{
-			var objectResult = (CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, overrideParent));
+			var objectResult = CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, overrideParent);
 			if (objectResult as T == null)
-			{
-				throw new EngineException(this, string.Format("Failed to cast '{0}'\ntype of ({1}) to ({2})", objectResult.Id, objectResult.GetType(), typeof(T)));
-			}
+				throw new EngineException(this,
+					string.Format("Failed to cast '{0}'\ntype of ({1}) to ({2})", objectResult.Id, objectResult.GetType(), typeof(T)));
 
 			_activeObjects.Add(objectResult as T);
 			ActiveObjects.SetValue(ActiveObjects.GetValue() + 1);
@@ -92,11 +85,11 @@ namespace Scripts.ViewModels
 		{
 			var modelToCopy = DataContext.GetObjectModel(this, id);
 			var objectModel = CreateNewModel(id, modelToCopy);
-			var newObject = IoC.IoCContainer.GetInstance<Object>(objectModel.GetType(), new object[] { objectModel, overrideParent ?? this });
+			var newObject =
+				IoC.IoCContainer.GetInstance<Object>(objectModel.GetType(), new object[] {objectModel, overrideParent ?? this});
 			if (newObject == null)
-			{
-				throw new EngineException(this, string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(global::Scripts.ViewModels.Object)));
-			}
+				throw new EngineException(this,
+					string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(Object)));
 
 			return newObject as T;
 		}
@@ -110,29 +103,22 @@ namespace Scripts.ViewModels
 			var actions = objectModel.Triggers.SelectMany(t => t.Actions).ToList();
 			var conditions = objectModel.Triggers.SelectMany(t => t.Conditions).ToList();
 			foreach (var childElement in objectModel.Elements)
-			{
 				if (!string.IsNullOrEmpty(childElement.Id) && childElement.Id.Contains("[x]"))
 				{
 					var originalId = childElement.Id;
-					childElement.Id = string.Format("{0}_{1}", childElement.Id, Guid.NewGuid()); ;
+					childElement.Id = string.Format("{0}_{1}", childElement.Id, Guid.NewGuid());
+					;
 
-					foreach (var action in actions)
-					{
-						action.Target = action.Target.Replace(originalId, childElement.Id);
-					}
-					foreach (var action in conditions)
-					{
-						action.Target = action.Target.Replace(originalId, childElement.Id);
-					}
+					foreach (var action in actions) action.Target = action.Target.Replace(originalId, childElement.Id);
+					foreach (var action in conditions) action.Target = action.Target.Replace(originalId, childElement.Id);
 				}
-			}
 
 			return objectModel;
 		}
 
 		private void Object_OnDeath(Object objectViewModel)
 		{
-			var objectT = (T)objectViewModel;
+			var objectT = (T) objectViewModel;
 			_activeObjects.Remove(objectT);
 			ActiveObjects.SetValue(ActiveObjects.GetValue() - 1);
 			AddToInactiveObjectList(objectT);
@@ -143,13 +129,9 @@ namespace Scripts.ViewModels
 			var objectType = inactiveObject.Type;
 
 			if (InactiveObjects.ContainsKey(objectType))
-			{
 				InactiveObjects[objectType].Add(inactiveObject);
-			}
 			else
-			{
-				InactiveObjects.Add(objectType, new List<Object> { inactiveObject });
-			}
+				InactiveObjects.Add(objectType, new List<Object> {inactiveObject});
 		}
 
 		private Object CheckInactiveObjects(string objectId)
@@ -168,6 +150,7 @@ namespace Scripts.ViewModels
 
 			return foundObject;
 		}
+
 		#endregion
 	}
 }

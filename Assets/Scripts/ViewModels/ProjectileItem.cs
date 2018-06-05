@@ -10,31 +10,27 @@ namespace Scripts.ViewModels
 	public class ProjectileItem : Item
 	{
 		private readonly ProjectileItemModel _model;
+
+		private ProjectileModel _projectileModel;
+
 		public ProjectileItem(ProjectileItemModel model, Object parent)
 			: base(model, parent)
 		{
 			_model = model;
 		}
 
-		private ProjectileModel _projectileModel;
-
 		public string Stats { get; private set; }
 
 		public ProjectileModel GetProjectileModel()
 		{
-			if (_projectileModel != null)
-			{
-				return _projectileModel;
-			}
+			if (_projectileModel != null) return _projectileModel;
 
 			var baseProjectileModel = DataContext.GetObjectModel(this, _model.Base) as ProjectileModel;
 			if (baseProjectileModel == null)
-			{
 				throw new EngineException(this, string.Format("Failed to Find a projectile model with id: {0}", _model.Base));
-			}
 
 			var newProjectileModel = Copier.CopyAs<ProjectileModel>(baseProjectileModel);
-			newProjectileModel.Type = newProjectileModel.Id;// Assign appropriate Id
+			newProjectileModel.Type = newProjectileModel.Id; // Assign appropriate Id
 			newProjectileModel.Id = baseProjectileModel.Id + "_" + Guid.NewGuid();
 
 			var overriderModel = _model.Overrides;

@@ -1,42 +1,36 @@
-﻿using Scripts.Helpers;
-using Scripts.ViewModels;
-using UnityEngine;
-using Object = Scripts.ViewModels.Object;
+﻿using Scripts.ViewModels;
 
 namespace Scripts.Views
 {
-    public class InventoryView : ElementView
-    {
-        private readonly Inventory _viewModel;
-        private UITable _uiTable;
+	public class InventoryView : ElementView
+	{
+		private readonly Inventory _viewModel;
+		private UITable _uiTable;
 
-        public InventoryView(Inventory viewModel, ObjectView parent) : base(viewModel, parent)
-        {
-            _viewModel = viewModel;
+		public InventoryView(Inventory viewModel, ObjectView parent) : base(viewModel, parent)
+		{
+			_viewModel = viewModel;
 
-            _viewModel.OnChildrenChanged += Children_OnChanged;
-        }
+			_viewModel.OnChildrenChanged += Children_OnChanged;
+		}
 
-        private void Children_OnChanged()
-        {
-	        if (_uiTable != null)
-	        {
-		        _uiTable.Reposition();
-	        }
-        }
+		private void Children_OnChanged()
+		{
+			if (_uiTable != null) _uiTable.Reposition();
+		}
 
-        protected override void OnLoad()
-        {
-            base.OnLoad();
+		protected override void OnLoad()
+		{
+			base.OnLoad();
 
-            _uiTable = Transform.Find("ItemSlot").GetComponent<UITable>();
-        }
+			_uiTable = Transform.Find("ItemSlot").GetComponent<UITable>();
+		}
 
-        protected override void OnDestroy()
-        {
-            _viewModel.OnChildrenChanged -= Children_OnChanged;
+		protected override void OnDestroy()
+		{
+			_viewModel.OnChildrenChanged -= Children_OnChanged;
 
-            base.OnDestroy();
-        }
-    }
+			base.OnDestroy();
+		}
+	}
 }

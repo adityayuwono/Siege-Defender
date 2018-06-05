@@ -2,8 +2,8 @@
 
 namespace Scripts.Models.GUIs
 {
-    [Serializable]
-    public class DamageGUIModel : LabelGUIModel
-    {
-    }
+	[Serializable]
+	public class DamageGUIModel : LabelGUIModel
+	{
+	}
 }

@@ -9,139 +9,135 @@ using UnityEngine;
 
 namespace Scripts.ViewModels
 {
-    public class Shooter : Interval<ProjectileBase>
-    {
-	    public readonly Property<bool> IsShooting = new Property<bool>();
+	public class Shooter : Interval<ProjectileBase>
+	{
+		private readonly ShooterModel _model;
 
-	    private readonly ShooterModel _model;
-        private ProjectileModel _projectileModel;
+		public readonly Property<bool> IsReloading = new Property<bool>();
+		public readonly Property<bool> IsShooting = new Property<bool>();
 
-        public Shooter(ShooterModel model, Player parent) : base(model, parent)
-        {
-            _model = model;
+		private float _accuracy;
+		private ProjectileModel _projectileModel;
 
-            Ammunition = new AdjustableProperty<float>("Ammunition", this);
-            MaxAmmunition = new AdjustableProperty<float>("MaxAmmunition", this);
+		public Shooter(ShooterModel model, Player parent) : base(model, parent)
+		{
+			_model = model;
 
-	        if (_model.ProjectileId == null)
-	        {
-		        throw new EngineException(this, "Failed to find ProjectileId");
-	        }
+			Ammunition = new AdjustableProperty<float>("Ammunition", this);
+			MaxAmmunition = new AdjustableProperty<float>("MaxAmmunition", this);
 
-	        if (_model.Target == null)
-	        {
-		        throw new EngineException(this, "Failed to find Target");
-	        }
+			if (_model.ProjectileId == null) throw new EngineException(this, "Failed to find ProjectileId");
 
-            Target = new Target(_model.Target, this);
-            Elements.Add(Target);
-        }
+			if (_model.Target == null) throw new EngineException(this, "Failed to find Target");
 
-        public float ReloadDuration
-        {
-            get { return _projectileModel.Reload; }
-        }
+			Target = new Target(_model.Target, this);
+			Elements.Add(Target);
+		}
 
-        private float _accuracy;
-        public float Accuracy
-        {
-            get { return 1 - (_accuracy -= _projectileModel.Deviation); }
-            private set { _accuracy = value; }
-        }
+		public float ReloadDuration
+		{
+			get { return _projectileModel.Reload; }
+		}
 
-        public int Scatters
-        {
-            get { return _projectileModel.Scatters; }
-        }
+		public float Accuracy
+		{
+			get { return 1 - (_accuracy -= _projectileModel.Deviation); }
+			private set { _accuracy = value; }
+		}
 
-        public Object Target { get; private set; }
+		public int Scatters
+		{
+			get { return _projectileModel.Scatters; }
+		}
 
-	    #region Ammunition
-	    public readonly AdjustableProperty<float> Ammunition;
-	    public readonly AdjustableProperty<float> MaxAmmunition;
-	    private float AmmunitionProperty
-	    {
-		    get { return Ammunition.GetValue(); }
-		    set { Ammunition.SetValue(value); }
-	    }
-	    #endregion
+		public Object Target { get; private set; }
 
-        protected override void OnLoad()
-        {
-            base.OnLoad();
+		protected override void OnLoad()
+		{
+			base.OnLoad();
 
 			var projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.ProjectileId);
 			if (projectileBinding == null)
-	        {
-		        throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", _model.ProjectileId));
-	        }
+				throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", _model.ProjectileId));
 
-	        var projectileItem = projectileBinding.GetValue() ;
-	        _projectileModel = DataContext.GetObjectModel(this, projectileItem) as ProjectileModel;
+			var projectileItem = projectileBinding.GetValue();
+			_projectileModel = DataContext.GetObjectModel(this, projectileItem) as ProjectileModel;
 
-	        Projectile_OnChange();
+			Projectile_OnChange();
 
-            IsShooting.SetValue(false);
-        }
+			IsShooting.SetValue(false);
+		}
 
-        private void Projectile_OnChange()
-        {
-            Interval.SetValue(_projectileModel.RoF);
-            OnReload();
-        }
+		private void Projectile_OnChange()
+		{
+			Interval.SetValue(_projectileModel.RoF);
+			OnReload();
+		}
 
-        public readonly Property<bool> IsReloading = new Property<bool>();
-        public Projectile SpawnProjectile()
-        {
-            if (AmmunitionProperty > 0)
-            {
-                AmmunitionProperty--;
-                var projectile = GetObject<Projectile>(_projectileModel.Id);
-                projectile.Activate(this);
-                projectile.Show();
+		public Projectile SpawnProjectile()
+		{
+			if (AmmunitionProperty > 0)
+			{
+				AmmunitionProperty--;
+				var projectile = GetObject<Projectile>(_projectileModel.Id);
+				projectile.Activate(this);
+				projectile.Show();
 
-                return projectile;
-            }
+				return projectile;
+			}
 
-            if (!IsReloading.GetValue())
-            {
-                IsReloading.SetValue(true);
-                Root.StartCoroutine(Reload());
-            }
+			if (!IsReloading.GetValue())
+			{
+				IsReloading.SetValue(true);
+				Root.StartCoroutine(Reload());
+			}
 
-            return null;
-        }
+			return null;
+		}
 
-        private IEnumerator Reload()
-        {
-            yield return new WaitForSeconds(ReloadDuration);
-            OnReload();
-        }
+		private IEnumerator Reload()
+		{
+			yield return new WaitForSeconds(ReloadDuration);
+			OnReload();
+		}
 
-        private void OnReload()
-        {
-            Accuracy = _projectileModel.Accuracy;
-            AmmunitionProperty = _projectileModel.Ammunition;
-            MaxAmmunition.SetValue(_projectileModel.Ammunition);
-            IsReloading.SetValue(false);
-        }
+		private void OnReload()
+		{
+			Accuracy = _projectileModel.Accuracy;
+			AmmunitionProperty = _projectileModel.Ammunition;
+			MaxAmmunition.SetValue(_projectileModel.Ammunition);
+			IsReloading.SetValue(false);
+		}
 
-        public void SpawnAoE(string aoeModelId, Vector3 position)
-        {
-            var projectile = GetObject<AoE>(aoeModelId);
-            projectile.Activate(this);
-            projectile.Show(position);
-        }
+		public void SpawnAoE(string aoeModelId, Vector3 position)
+		{
+			var projectile = GetObject<AoE>(aoeModelId);
+			projectile.Activate(this);
+			projectile.Show(position);
+		}
 
-        public void StartShooting()
-        {
-            IsShooting.SetValue(true);
-        }
+		public void StartShooting()
+		{
+			IsShooting.SetValue(true);
+		}
 
-        public void StopShooting()
-        {
-            IsShooting.SetValue(false);
-            Accuracy = _projectileModel.Accuracy;
-        }
-    }
+		public void StopShooting()
+		{
+			IsShooting.SetValue(false);
+			Accuracy = _projectileModel.Accuracy;
+		}
+
+		#region Ammunition
+
+		public readonly AdjustableProperty<float> Ammunition;
+		public readonly AdjustableProperty<float> MaxAmmunition;
+
+		private float AmmunitionProperty
+		{
+			get { return Ammunition.GetValue(); }
+			set { Ammunition.SetValue(value); }
+		}
+
+		#endregion
+	}
 }

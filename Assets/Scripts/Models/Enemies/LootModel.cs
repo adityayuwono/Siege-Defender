@@ -1,24 +1,21 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace Scripts.Models.Enemies
 {
-    public class LootModel : BaseModel
-    {
-        [XmlAttribute]
-        public float Chance { get; set; }
+	public class LootModel : BaseModel
+	{
+		public LootModel()
+		{
+			Max = int.MaxValue;
+		}
 
-        [XmlAttribute]
-        public string ItemId { get; set; }
+		[XmlAttribute] public float Chance { get; set; }
 
-        [XmlAttribute]
-        [DefaultValue(int.MaxValue)]
-        public int Max { get; set; }
+		[XmlAttribute] public string ItemId { get; set; }
 
-        public LootModel()
-        {
-            Max = int.MaxValue;
-        }
-    }
+		[XmlAttribute]
+		[DefaultValue(int.MaxValue)]
+		public int Max { get; set; }
+	}
 }

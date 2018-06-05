@@ -5,9 +5,8 @@ namespace Scripts.ViewModels
 {
 	public class Item : Object
 	{
-		public Action<Object> OnParentChanged;
-
 		private readonly ItemModel _model;
+		public Action<Object> OnParentChanged;
 
 		public Item(ItemModel model, Base parent)
 			: base(model, parent)
@@ -29,10 +28,7 @@ namespace Scripts.ViewModels
 		{
 			Parent = newParent;
 
-			if (OnParentChanged != null)
-			{
-				OnParentChanged(newParent);
-			}
+			if (OnParentChanged != null) OnParentChanged(newParent);
 		}
 	}
 }

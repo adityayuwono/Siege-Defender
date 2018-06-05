@@ -4,19 +4,16 @@ using System.Xml.Serialization;
 
 namespace Scripts.Models.Actions
 {
-    [Serializable]
-    public class MoveActionModel : BaseActionModel
-    {
-        [XmlAttribute]
-        public string MoveTarget { get; set; }
+	[Serializable]
+	public class MoveActionModel : BaseActionModel
+	{
+		public MoveActionModel()
+		{
+			SpeedMultiplier = 1;
+		}
 
-        [XmlAttribute]
-        [DefaultValue(1)]
-        public float SpeedMultiplier { get; set; }
+		[XmlAttribute] public string MoveTarget { get; set; }
 
-        public MoveActionModel()
-        {
-            SpeedMultiplier = 1;
-        }
-    }
+		[XmlAttribute] [DefaultValue(1)] public float SpeedMultiplier { get; set; }
+	}
 }

@@ -10,7 +10,7 @@ namespace Scripts
 			// Prepare the IntervalRunner, this will manage all time based execution of this game
 			IntervalRunner = gameObject.AddComponent<IntervalRunner>();
 
-			Physics.IgnoreLayerCollision(9, 9);// Layer 9 will not collide with layer 9, this is the projectiles
+			Physics.IgnoreLayerCollision(9, 9); // Layer 9 will not collide with layer 9, this is the projectiles
 
 			var engineModel = DataContext.EngineModel;
 
