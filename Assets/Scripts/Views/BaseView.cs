@@ -37,8 +37,6 @@ namespace Scripts.Views
 			    throw new EngineException(this, "Trying to show twice");
 		    }
 
-			Debug.LogWarning(string.Format("Showing {0} for the first time", Id));
-
 		    _isShown = true;
 	    }
 
@@ -48,8 +46,6 @@ namespace Scripts.Views
 		    {
 			    throw new EngineException(this, "Trying to hide twice");
 		    }
-
-			Debug.LogWarning(string.Format("Hiding {0} the first time", Id));
 
 		    _isShown = false;
 	    }
