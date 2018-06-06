@@ -41,11 +41,7 @@ namespace Scripts.ViewModels.Weapons
 
 		private void CalculateSpeed()
 		{
-			var splitSpeed = _model.SpeedDeviation.Split('-');
-			var speed0 = float.Parse(splitSpeed[0]);
-			var speed1 = float.Parse(splitSpeed[1]);
-
-			SpeedDeviations = new[] {speed0, speed1};
+			SpeedDeviations = _model.SpeedDeviation;
 		}
 
 		public void Shoot(ObjectView target, float accuracy)
