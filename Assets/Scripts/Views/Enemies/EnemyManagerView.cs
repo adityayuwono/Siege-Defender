@@ -7,7 +7,8 @@ namespace Scripts.Views.Enemies
 	{
 		private readonly EnemyManager _viewModel;
 
-		public EnemyManagerView(EnemyManager viewModel, ObjectView parent) : base(viewModel, parent)
+		public EnemyManagerView(EnemyManager viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}
@@ -19,7 +20,10 @@ namespace Scripts.Views.Enemies
 			// Listen to interval changes
 			_viewModel.Interval.OnChange += Interval_OnChange;
 
-			if (string.IsNullOrEmpty(_viewModel.Level.GetValue())) return;
+			if (string.IsNullOrEmpty(_viewModel.Level.GetValue()))
+			{
+				return;
+			}
 
 			StartInterval();
 		}
@@ -43,8 +47,10 @@ namespace Scripts.Views.Enemies
 		{
 			var spawnIndexOverride = _viewModel.SpawnIndexOverride;
 			if (spawnIndexOverride >= SpawnPointCount)
-				Debug.LogError(string.Format("{0} is more than the available Spawning Points of {1}", _viewModel.SpawnIndexOverride,
-					Id));
+			{
+				Debug.LogError(string.Format("{0} is more than the available Spawning Points of {1}",
+					_viewModel.SpawnIndexOverride, Id));
+			}
 
 			return base.GetRandomSpawnPoint(ignoreY, spawnIndexOverride);
 		}

@@ -6,7 +6,8 @@ namespace Scripts.Views.GUIs
 	{
 		private GUIRoot _viewModel;
 
-		public GUIRootView(GUIRoot viewModel, ObjectView parent) : base(viewModel, parent)
+		public GUIRootView(GUIRoot viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

@@ -37,6 +37,7 @@ namespace Scripts.Helpers
 		/// <typeparam name="T">Interface type of key</typeparam>
 		/// <param name="classType"></param>
 		/// <param name="parameters"></param>
+		/// <exception cref="Exception"></exception>
 		/// <returns>New instance of type bound to key</returns>
 		public T GetInstance<T>(Type classType, object[] parameters = null) where T : class
 		{
@@ -46,25 +47,33 @@ namespace Scripts.Helpers
 			// Check if we have mapped the key type
 			var interfaceContainer = Get(classType);
 			if (interfaceContainer == null)
+			{
 				return default(T);
+			}
 
 			var instanceContainer = interfaceContainer.GetInstance(key);
 			if (instanceContainer != null)
 			{
 				var instanceObject = instanceContainer.GetInstance();
 				if (instanceObject != null)
+				{
 					return instanceObject as T;
+				}
 			}
 
 			var instanceType = interfaceContainer.GetInstanceType(key);
 
 			if (instanceType == null)
+			{
 				return default(T);
+			}
 
 			// We have the instance type that we want, now we activate the constructor
 			var instance = CreateInstance(instanceType, parameters);
 			if (instance == null)
+			{
 				throw new Exception(string.Format("Failed to create an Instance for {0} with parameters: {1}", key, parameters));
+			}
 
 			return instance as T;
 		}
@@ -84,7 +93,9 @@ namespace Scripts.Helpers
 				foreach (var constructorInfo in constructors)
 				{
 					foreach (var parameterInfo in constructorInfo.GetParameters())
+					{
 						possibleConstructors += parameterInfo.ParameterType + ", ";
+					}
 					possibleConstructors += ")\n";
 				}
 
@@ -127,7 +138,9 @@ namespace Scripts.Helpers
 			private set
 			{
 				if (_type != null)
+				{
 					throw new Exception(string.Format("Failed to bind to type: {0}, type is already bound to type: {1}", Type, value));
+				}
 
 				_type = value;
 			}
@@ -154,7 +167,6 @@ namespace Scripts.Helpers
 		}
 	}
 
-
 	public class BaseContainer<T> : IInjection where T : class, IInjection, new()
 	{
 		private readonly Dictionary<Type, IInjection> _maps = new Dictionary<Type, IInjection>();
@@ -164,7 +176,9 @@ namespace Scripts.Helpers
 			var interfaceType = typeof(TInjection);
 
 			if (!_maps.ContainsKey(interfaceType))
+			{
 				_maps.Add(interfaceType, new T());
+			}
 
 			return _maps[interfaceType] as T;
 		}
@@ -172,8 +186,9 @@ namespace Scripts.Helpers
 		protected T Get(Type key)
 		{
 			if (!_maps.ContainsKey(key))
+			{
 				return default(T);
-			//throw new Exception(string.Format("Failed to find Class for Interface: \"{0}\"", key));
+			}
 
 			return _maps[key] as T;
 		}

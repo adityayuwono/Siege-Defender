@@ -94,7 +94,7 @@ namespace Scripts.ViewModels
 		{
 			Root.RegisterToLookup(this);
 
-			_view = IoC.IoCContainer.GetInstance<BaseView>(GetType(), new object[] {this, Parent != null ? Parent._view : null});
+			_view = IoC.IoCContainer.GetInstance<BaseView>(GetType(), new object[] { this, Parent != null ? Parent._view : null });
 			Root.RegisterView(this, _view);
 		}
 
@@ -115,8 +115,8 @@ namespace Scripts.ViewModels
 			if (!_isActive)
 				throw new EngineException(this,
 					string.Format("Failed to Deactivate\n" +
-					              "Reason for deactivation: {0}\n" +
-					              "Last Deactivation reason was: {1}", reason, lastDeactivationReason));
+								  "Reason for deactivation: {0}\n" +
+								  "Last Deactivation reason was: {1}", reason, lastDeactivationReason));
 
 			_isActive = false;
 

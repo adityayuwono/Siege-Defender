@@ -7,7 +7,8 @@ namespace Scripts.Views
 	{
 		private readonly Player _viewModel;
 
-		public PlayerView(Player viewModel, ObjectView parent) : base(viewModel, parent)
+		public PlayerView(Player viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

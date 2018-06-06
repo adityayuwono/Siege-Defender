@@ -11,7 +11,8 @@ namespace Scripts.Views.Enemies
 
 		private GameObject _breakable;
 
-		public LimbView(Limb viewModel, EnemyView parent) : base(viewModel, parent)
+		public LimbView(Limb viewModel, EnemyView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 			_parent = parent;

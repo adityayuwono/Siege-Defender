@@ -6,7 +6,8 @@ namespace Scripts.Views
 	{
 		private readonly ObjectDisplay _viewModel;
 
-		public ObjectDisplayView(ObjectDisplay viewModel, ObjectView parent) : base(viewModel, parent)
+		public ObjectDisplayView(ObjectDisplay viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 

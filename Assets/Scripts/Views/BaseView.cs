@@ -31,14 +31,20 @@ namespace Scripts.Views
 
 		protected virtual void OnShow()
 		{
-			if (_isShown) throw new EngineException(this, "Trying to show twice");
+			if (_isShown)
+			{
+				throw new EngineException(this, "Trying to show twice");
+			}
 
 			_isShown = true;
 		}
 
 		protected virtual void OnHide(string reason)
 		{
-			if (!_isShown) throw new EngineException(this, "Trying to hide twice");
+			if (!_isShown)
+			{
+				throw new EngineException(this, "Trying to hide twice");
+			}
 
 			_isShown = false;
 		}

@@ -15,7 +15,8 @@ namespace Scripts.Views.Enemies
 
 		private readonly LivingObject _viewModel;
 
-		public LivingObjectView(LivingObject viewModel, ObjectView parent) : base(viewModel, parent)
+		public LivingObjectView(LivingObject viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

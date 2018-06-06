@@ -13,7 +13,8 @@ namespace Scripts.Views.Enemies
 
 		private Transform _targetTransform;
 
-		public EnemyView(Enemy viewModel, ObjectView parent) : base(viewModel, parent)
+		public EnemyView(Enemy viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

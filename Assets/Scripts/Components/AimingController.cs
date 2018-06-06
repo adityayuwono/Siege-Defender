@@ -29,8 +29,8 @@ namespace Scripts.Components
 
 			_crosshairImage = Resources.Load<Texture2D>(CrosshairAssetPath);
 			_crosshairRect = new Rect(
-				Screen.height / 2f, 
-				Screen.width / 2f, 
+				Screen.height / 2f,
+				Screen.width / 2f,
 				Screen.height * Values.GuiCrosshairSizeF,
 				Screen.height * Values.GuiCrosshairSizeF);
 		}

@@ -6,7 +6,8 @@ namespace Scripts.Views.GUIs
 	{
 		private DamageDisplayManager _viewModel;
 
-		public DamageDisplayView(DamageDisplayManager viewModel, ObjectView parent) : base(viewModel, parent)
+		public DamageDisplayView(DamageDisplayManager viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

@@ -8,7 +8,8 @@ namespace Scripts.Views.Enemies
 		private readonly StaticEnemy _viewModel;
 		private Animation _animation;
 
-		public StaticEnemyView(StaticEnemy viewModel, ObjectView parent) : base(viewModel, parent)
+		public StaticEnemyView(StaticEnemy viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

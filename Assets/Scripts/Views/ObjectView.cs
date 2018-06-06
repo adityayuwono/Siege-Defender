@@ -17,7 +17,8 @@ namespace Scripts.Views
 		protected Vector3 AssetScale;
 		public Transform Transform;
 
-		public ObjectView(Object viewModel, ObjectView parent) : base(viewModel, parent)
+		public ObjectView(Object viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 			_parent = parent;
@@ -53,7 +54,9 @@ namespace Scripts.Views
 		{
 			var specialEventControllers = GameObject.GetComponents<BaseSpecialEventController>();
 			foreach (var specialEventController in specialEventControllers)
+			{
 				specialEventController.StartSpecialEvent(_viewModel.Root);
+			}
 		}
 
 		protected override void OnHide(string reason)
@@ -81,9 +84,13 @@ namespace Scripts.Views
 		{
 			Transform parentTransform;
 			if (_parent == null || _parent.GameObject == null)
+			{
 				parentTransform = GameObject.Find("Context").transform;
+			}
 			else
+			{
 				parentTransform = _parent.GameObject.transform;
+			}
 
 			return parentTransform;
 		}
@@ -133,7 +140,9 @@ namespace Scripts.Views
 		protected void OnDeath()
 		{
 			if (_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(OnDeath) && _gameObject != null)
+			{
 				OnDeath(string.Format("{0}:{1}'s Death", GetType(), Id));
+			}
 		}
 
 		protected virtual void OnDeath(string reason)

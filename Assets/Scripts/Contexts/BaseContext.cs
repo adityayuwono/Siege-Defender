@@ -1,11 +1,12 @@
 ﻿using Scripts.Components;
 using UnityEngine;
 
-namespace Scripts
+namespace Scripts.Contexts
 {
 	public class BaseContext : BaseController
 	{
-		[HideInInspector] public IntervalRunner IntervalRunner;
+		[HideInInspector]
+		public IntervalRunner IntervalRunner;
 
 		#region Error Debug
 

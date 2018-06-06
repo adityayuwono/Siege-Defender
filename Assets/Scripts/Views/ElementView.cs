@@ -9,7 +9,8 @@ namespace Scripts.Views
 		private readonly ObjectView _parent;
 		private readonly Element _viewModel;
 
-		public ElementView(Element viewModel, ObjectView parent) : base(viewModel, parent)
+		public ElementView(Element viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 			_parent = parent;

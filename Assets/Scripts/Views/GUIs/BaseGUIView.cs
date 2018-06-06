@@ -6,7 +6,8 @@ namespace Scripts.Views.GUIs
 	{
 		private readonly BaseGUI _viewModel;
 
-		public BaseGUIView(BaseGUI viewModel, ObjectView parent) : base(viewModel, parent)
+		public BaseGUIView(BaseGUI viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

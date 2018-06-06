@@ -7,10 +7,10 @@ namespace Scripts.Views
 	public class RigidbodyView : ObjectView
 	{
 		private Collider _collider;
-
 		private Rigidbody _rigidbody;
 
-		protected RigidbodyView(Object viewModel, ObjectView parent) : base(viewModel, parent)
+		protected RigidbodyView(Object viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 		}
 
@@ -19,10 +19,16 @@ namespace Scripts.Views
 			base.OnLoad();
 
 			_collider = GameObject.GetComponent<Collider>();
-			if (_collider == null) _collider = GameObject.GetComponentInChildren<Collider>();
+			if (_collider == null)
+			{
+				_collider = GameObject.GetComponentInChildren<Collider>();
+			}
 
 			_rigidbody = GameObject.GetComponent<Rigidbody>();
-			if (_rigidbody == null) _rigidbody = GameObject.GetComponentInChildren<Rigidbody>();
+			if (_rigidbody == null)
+			{
+				_rigidbody = GameObject.GetComponentInChildren<Rigidbody>();
+			}
 			if (_rigidbody == null)
 			{
 				_rigidbody = GameObject.AddComponent<Rigidbody>();
@@ -31,19 +37,28 @@ namespace Scripts.Views
 
 			// Recalculate center of mass
 			var centerOfMass = Transform.Find("CenterOfMass");
-			if (centerOfMass != null) _rigidbody.centerOfMass = centerOfMass.localPosition;
+			if (centerOfMass != null)
+			{
+				_rigidbody.centerOfMass = centerOfMass.localPosition;
+			}
 		}
 
 		protected override void OnShow()
 		{
 			base.OnShow();
 
-			if (_collider != null) _collider.enabled = true;
+			if (_collider != null)
+			{
+				_collider.enabled = true;
+			}
 		}
 
 		protected override void OnHide(string reason)
 		{
-			if (_collider != null) _collider.enabled = false;
+			if (_collider != null)
+			{
+				_collider.enabled = false;
+			}
 
 			base.OnHide(reason);
 		}
@@ -62,7 +77,7 @@ namespace Scripts.Views
 		}
 
 		/// <summary>
-		///     FREEZE!!!
+		/// FREEZE!!!
 		/// </summary>
 		protected void Freeze(bool isKinematic = false)
 		{

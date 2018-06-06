@@ -9,7 +9,8 @@ namespace Scripts.Views
 	{
 		protected readonly List<MinMaxRandom> SpawnPoints = new List<MinMaxRandom>();
 
-		public RandomPositionManagerView(RandomPositionManager viewModel, ObjectView parent) : base(viewModel, parent)
+		public RandomPositionManagerView(RandomPositionManager viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 		}
 
@@ -33,7 +34,9 @@ namespace Scripts.Views
 		public virtual Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = -1)
 		{
 			if (spawnIndex == -1)
+			{
 				spawnIndex = Random.Range(0, SpawnPointCount);
+			}
 
 			return SpawnPoints[spawnIndex].GetRandomSpot(ignoreY);
 		}

@@ -12,7 +12,8 @@ namespace Scripts.Views
 
 		private ObjectView _target;
 
-		public ShooterView(Shooter viewModel, ObjectView parent) : base(viewModel, parent)
+		public ShooterView(Shooter viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}
@@ -50,7 +51,9 @@ namespace Scripts.Views
 				var projectile = _viewModel.SpawnProjectile();
 
 				if (projectile != null)
+				{
 					projectile.Shoot(_target, _viewModel.Accuracy);
+				}
 			}
 		}
 

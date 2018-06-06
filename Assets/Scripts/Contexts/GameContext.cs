@@ -1,7 +1,7 @@
 ﻿using Scripts.Components;
 using UnityEngine;
 
-namespace Scripts
+namespace Scripts.Contexts
 {
 	public class GameContext : BaseContext
 	{

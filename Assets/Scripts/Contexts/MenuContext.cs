@@ -1,7 +1,7 @@
 ﻿using Scripts.Models;
 using UnityEngine;
 
-namespace Scripts
+namespace Scripts.Contexts
 {
 	public class MenuContext : BaseContext
 	{

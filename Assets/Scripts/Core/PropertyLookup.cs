@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -29,21 +30,29 @@ namespace Scripts.Core
 		private void RegisterContext(IContext context)
 		{
 			if (_contexts.ContainsKey(context.Id))
+			{
 				throw new Exception(string.Format("Failed to register {0} to {1}, a duplicate is found", context.Id, _context.Id));
+			}
 
 			_contexts.Add(context.Id, context);
 		}
 
 		public IContext GetContext(string contextId)
 		{
-			if (!_contexts.ContainsKey(contextId)) return null;
+			if (!_contexts.ContainsKey(contextId))
+			{
+				return null;
+			}
 
 			return _contexts[contextId];
 		}
 
 		public Base GetChild(string childId)
 		{
-			if (!_children.ContainsKey(childId)) return null;
+			if (!_children.ContainsKey(childId))
+			{
+				return null;
+			}
 			return _children[childId];
 		}
 
@@ -58,9 +67,11 @@ namespace Scripts.Core
 				// We already register that type of property, let's add to the list
 				var propertyDict = _properties[propertyId];
 				if (propertyDict.ContainsKey(viewModelId))
+				{
 					throw new EngineException(_engine,
 						string.Format("PropertyLookup: Failed to register property: {0} for ViewModel: {1}, Duplicate is found",
 							propertyId, viewModel.Id));
+				}
 
 				// OK, everything is good, add a new property
 				propertyDict.Add(viewModelId, property);
@@ -68,7 +79,7 @@ namespace Scripts.Core
 			else
 			{
 				// No similar property registered yet, meaning this is the first of it's kind, momentous
-				_properties.Add(propertyId, new Dictionary<string, Property> {{viewModelId, property}});
+				_properties.Add(propertyId, new Dictionary<string, Property> { { viewModelId, property } });
 			}
 		}
 
@@ -87,14 +98,18 @@ namespace Scripts.Core
 		{
 			// This is the last context, we simply get the property
 			if (!_properties.ContainsKey(propertyId))
+			{
 				return null;
+			}
 
 			// We got the properties, return the property owned by the viewmodel that we want
 			var propertyDict = _properties[propertyId];
 			if (!propertyDict.ContainsKey(viewModelId))
+			{
 				throw new EngineException(_engine,
 					string.Format("PropertyLookup: Failed to find Property with Id: '{0}' of ViewModel: '{1}'", propertyId,
 						viewModelId));
+			}
 
 			// This means we found the property, return it
 			return propertyDict[viewModelId];
@@ -148,19 +163,31 @@ namespace Scripts.Core
 						return context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
 					}
 
-					if (paths.Length == 1) return context.PropertyLookup.GetContext(currentPath);
+					if (paths.Length == 1)
+					{
+						return context.PropertyLookup.GetContext(currentPath);
+					}
 
 					// Try for a property, if it is found then return it
 					var tryProperty = context.PropertyLookup.GetProperty(paths[i - 1], currentPath);
-					if (tryProperty != null) return tryProperty;
+					if (tryProperty != null)
+					{
+						return tryProperty;
+					}
 
 					// No Property found, then look for a context
 					var tryContext = context.PropertyLookup.GetContext(currentPath);
-					if (tryContext != null) return tryContext;
+					if (tryContext != null)
+					{
+						return tryContext;
+					}
 
 					// No Context found, look for a child
 					var tryChild = context.PropertyLookup.GetChild(currentPath);
-					if (tryChild != null) return tryChild;
+					if (tryChild != null)
+					{
+						return tryChild;
+					}
 				}
 			}
 

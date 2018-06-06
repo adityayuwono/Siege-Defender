@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Scripts.Contexts;
 using Scripts.Models.Enemies;
 
 namespace Scripts.ViewModels.Enemies

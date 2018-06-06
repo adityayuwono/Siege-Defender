@@ -8,7 +8,8 @@ namespace Scripts.Views.GUIs
 
 		private UILabel _uiLabel;
 
-		public LabelGUIView(LabelGUI viewModel, ObjectView parent) : base(viewModel, parent)
+		public LabelGUIView(LabelGUI viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

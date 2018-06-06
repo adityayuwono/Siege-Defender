@@ -11,7 +11,8 @@ namespace Scripts.Views.GUIs
 
 		private GameObject _aimingGameObject;
 
-		public ShooterGUIView(ShooterGUI viewModel, ObjectView parent) : base(viewModel, parent)
+		public ShooterGUIView(ShooterGUI viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 			_parent = parent;

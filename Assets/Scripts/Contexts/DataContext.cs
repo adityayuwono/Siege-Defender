@@ -9,7 +9,7 @@ using Scripts.ViewModels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Scripts
+namespace Scripts.Contexts
 {
 	/// <summary>
 	///     Deserialize XML then store it
@@ -92,8 +92,8 @@ namespace Scripts
 		private void LoadInventories(List<InventoryModel> inventoryModels)
 		{
 			foreach (var inventoryModel in inventoryModels)
-			foreach (var equipmentSlot in inventoryModel.EquipmentSlots)
-				Inventories.Add(equipmentSlot.Id, equipmentSlot);
+				foreach (var equipmentSlot in inventoryModel.EquipmentSlots)
+					Inventories.Add(equipmentSlot.Id, equipmentSlot);
 		}
 
 		private void LoadData(EngineModel model)

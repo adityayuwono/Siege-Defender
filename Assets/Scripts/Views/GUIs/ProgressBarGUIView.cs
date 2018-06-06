@@ -8,7 +8,8 @@ namespace Scripts.Views.GUIs
 
 		private UIProgressBar _uiProgressBar;
 
-		public ProgressBarGUIView(ProgressBarGUI viewModel, ObjectView parent) : base(viewModel, parent)
+		public ProgressBarGUIView(ProgressBarGUI viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

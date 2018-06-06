@@ -7,7 +7,8 @@ namespace Scripts.Views.Weapons
 	{
 		private readonly PiercingProjectile _viewModel;
 
-		public PiercingProjectileView(PiercingProjectile viewModel, ShooterView parent) : base(viewModel, parent)
+		public PiercingProjectileView(PiercingProjectile viewModel, ShooterView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

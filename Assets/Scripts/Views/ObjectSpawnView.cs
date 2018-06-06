@@ -9,7 +9,8 @@ namespace Scripts.Views
 
 		private int _spawnPointOverride;
 
-		public ObjectSpawnView(ObjectSpawn viewModel, ObjectView parent) : base(viewModel, parent)
+		public ObjectSpawnView(ObjectSpawn viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

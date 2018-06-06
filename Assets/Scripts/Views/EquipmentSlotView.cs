@@ -7,7 +7,8 @@ namespace Scripts.Views
 	{
 		private readonly EquipmentSlot _viewModel;
 
-		public EquipmentSlotView(EquipmentSlot viewModel, InventoryView parent) : base(viewModel, parent)
+		public EquipmentSlotView(EquipmentSlot viewModel, InventoryView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

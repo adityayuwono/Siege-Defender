@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -54,10 +55,14 @@ namespace Scripts
 					var id = lootTableModel.Id;
 
 					if (string.IsNullOrEmpty(id))
+					{
 						throw new EngineException(this, "Failed to register <LootTable>, <LootTable> need id");
+					}
 
 					if (LootTables.ContainsKey(id))
+					{
 						throw new EngineException(this, string.Format("Duplicate <LootTable> id: {0}", id));
+					}
 
 					LootTables.Add(id, new LootTable(lootTableModel, this));
 				}
@@ -65,7 +70,10 @@ namespace Scripts
 
 		public LevelModel GetLevel(string levelId)
 		{
-			foreach (var levelModel in _model.Levels.Where(levelModel => levelModel.Id == levelId)) return levelModel;
+			foreach (var levelModel in _model.Levels.Where(levelModel => levelModel.Id == levelId))
+			{
+				return levelModel;
+			}
 			throw new EngineException(this, string.Format("Level not found: {0}", levelId));
 		}
 

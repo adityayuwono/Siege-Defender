@@ -7,7 +7,8 @@ namespace Scripts.Views.Weapons
 	{
 		private readonly AoE _viewModel;
 
-		public AoEView(AoE viewModel, ShooterView parent) : base(viewModel, parent)
+		public AoEView(AoE viewModel, ShooterView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

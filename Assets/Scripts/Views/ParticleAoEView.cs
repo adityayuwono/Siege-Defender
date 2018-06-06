@@ -13,7 +13,8 @@ namespace Scripts.Views
 
 		private List<ParticleSystem> _particleSystem;
 
-		public ParticleAoEView(ParticleAoE viewModel, ShooterView parent) : base(viewModel, parent)
+		public ParticleAoEView(ParticleAoE viewModel, ShooterView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}
@@ -24,14 +25,18 @@ namespace Scripts.Views
 
 			_particleSystem = GameObject.GetComponentsInChildren<ParticleSystem>().ToList();
 			if (_particleSystem == null)
+			{
 				throw new EngineException(this,
 					string.Format("Failed to find ParticleSystem component from {0}", _viewModel.AssetId));
+			}
 
 			var particleDuration = 0f;
 			foreach (var particleSystem in _particleSystem)
 			{
 				if (particleDuration < particleSystem.startLifetime)
+				{
 					particleDuration = particleSystem.startLifetime + particleSystem.duration;
+				}
 
 				particleSystem.startSize *= _viewModel.Radius / 2f;
 				particleSystem.Play(true);
@@ -43,7 +48,10 @@ namespace Scripts.Views
 		protected override void OnDeath(string reason)
 		{
 			base.OnDeath(reason);
-			foreach (var particleSystem in _particleSystem) particleSystem.Clear(true);
+			foreach (var particleSystem in _particleSystem)
+			{
+				particleSystem.Clear(true);
+			}
 		}
 	}
 }

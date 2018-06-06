@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts.Contexts;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
@@ -16,7 +17,8 @@ namespace Scripts
 
 		private readonly RootModel _model;
 
-		protected RootBase(RootModel model, BaseContext parent) : base(model, null)
+		protected RootBase(RootModel model, BaseContext parent)
+			: base(model, null)
 		{
 			_model = model;
 			Context = parent;

@@ -11,7 +11,8 @@ namespace Scripts.Views.Weapons
 
 		private CollisionController _collisionController;
 
-		protected ProjectileBaseView(ProjectileBase viewModel, ShooterView parent) : base(viewModel, parent)
+		protected ProjectileBaseView(ProjectileBase viewModel, ShooterView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

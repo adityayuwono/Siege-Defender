@@ -8,7 +8,8 @@ namespace Scripts.Views.GUIs
 
 		private UITexture _uiTexture;
 
-		public CooldownGUIView(CooldownGUI viewModel, ObjectView parent) : base(viewModel, parent)
+		public CooldownGUIView(CooldownGUI viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

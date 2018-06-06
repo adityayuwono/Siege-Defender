@@ -13,7 +13,8 @@ namespace Scripts.Views.Enemies
 		private readonly Boss _viewModel;
 		private readonly List<Transform> _waypoints = new List<Transform>();
 
-		public BossView(Boss viewModel, ObjectView parent) : base(viewModel, parent)
+		public BossView(Boss viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

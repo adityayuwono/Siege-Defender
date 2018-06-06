@@ -1,7 +1,7 @@
 ﻿using System;
 using Scripts.Interfaces;
 
-namespace Scripts
+namespace Scripts.Contexts
 {
 	public class EmptyIntervalRunner : IIntervalRunner
 	{

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Contexts;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
-using Scripts.ViewModels.Weapons;
 
 namespace Scripts.ViewModels
 {

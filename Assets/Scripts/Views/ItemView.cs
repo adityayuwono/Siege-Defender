@@ -37,7 +37,9 @@ namespace Scripts.Views
 			var parentTransform = _parent.Transform;
 			var parentItemTable = _parent.Transform.Find("ItemSlot");
 			if (parentItemTable != null)
+			{
 				parentTransform = parentItemTable;
+			}
 
 			return parentTransform;
 		}
