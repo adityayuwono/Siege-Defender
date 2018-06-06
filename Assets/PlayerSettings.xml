@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PlayerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
   <Inventory Id="PlayerInventory" AssetId="Inventory" Slots="36">
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="IronBullet" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="IronBullet" Level="1" />
     <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="IronBall" Level="1" />
     <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="IronBall" Level="1" />
     <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="FireBall" Level="1" />
