@@ -1,12 +1,12 @@
 <Engine Id="SiegeDefender">
   <Objects>
-    <Projectile 	Id="WoodArrow" Damage="6-10"
+    <Projectile Id="WoodArrow" Damage="6-10"
 			AssetId="Projectiles/WoodenBalista"
 			RoF="0.2" Ammunition="1000" Reload="1"
 			Scatters="1"
       CriticalChance="0.1" CriticalDamageMultiplier="1.2"
 			Accuracy="0.9" Deviation="0.001" />
-    <Projectile 	Id="Rock" Damage="2-7"
+    <Projectile Id="Rock" Damage="2-7"
 			AssetId="Projectiles/Rock"
 			RoF="0.1" Ammunition="10000" Reload="0.5"
 			Accuracy="0.65" Deviation="0.001"
@@ -14,51 +14,51 @@
 			IsRotationRandomized="true"
 			DeathDelay="0.5"
 			Scatters="3" />
-    <Projectile 	Id="ScatterArrow" Damage="1-4"
+    <Projectile Id="ScatterArrow" Damage="1-4"
 			AssetId="Projectiles/WoodenBalista"
 			RoF="0.3" Ammunition="1000" Reload="1"
 			SpeedDeviation="300-600"
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
-    <Projectile 	Id="IronArrow" Damage="10-20"
+    <Projectile Id="IronArrow" Damage="10-20"
       AssetId="Projectiles/IronBalista"
       RoF="0.25" Ammunition="500" Reload="0.2"
       Scatters="1"
       Accuracy="0.7" Deviation="0.005" />
-    <Projectile 	Id="FireBall" Damage="8-11"
+    <Projectile Id="FireBall" Damage="8-11"
 			AssetId="Projectiles/FireBall" AoEId="FireDome"
 			RoF="0.5" Ammunition="25" Reload="2"
 			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" >
     </Projectile>
-    <Projectile 	Id="ExplosiveFireBall" Damage="5-8"
+    <Projectile Id="ExplosiveFireBall" Damage="5-8"
 			AssetId="Projectiles/FireBall" AoEId="FireDome"
 			RoF="0.2" Ammunition="2500" Reload="0"
 			Scatters="1"
 			Accuracy="0.5" Deviation="0.01" />
-    <Piercing 		Id="IronBall" Damage="40-60"
+    <Piercing Id="IronBall" Damage="40-60"
 			AssetId="Projectiles/IronBall"
 			RoF="2" Ammunition="8" Reload="2"
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
-    <Projectile 	Id="Ascalon" Damage="1-2"
+    <Projectile Id="Ascalon" Damage="1-2"
 			AssetId="Projectiles/Ascalon" AoEId="AscalonExplosion"
 			RoF="0.125" Ammunition="9" Reload="0.777"
 			SpeedDeviation="300-600"
       CriticalChance="0.1" CriticalDamageMultiplier="100"
 			Accuracy="0.75" Deviation="0" Scatters="3" />
-    <Projectile 	Id="SkySplitter" Damage="1-3"
+    <Projectile Id="SkySplitter" Damage="1-3"
 			AssetId="Projectiles/SkySplitter" AoEId="LightningStrike"
 			RoF="0.6" Ammunition="99" Reload="2"
 			SpeedDeviation="500-500"
 			Accuracy="1" Deviation="0" Scatters="1" />
 
-    <ParticleAoE 	Id="FireDome" AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="10" Damage="4-7" Scatters="1" />
-    <ParticleAoE 	Id="AscalonExplosion" AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="3" Damage="20" />
-    <ParticleAoE 	Id="LightningStrike" AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" Damage="0-22" IsGrounded="true" />
+    <ParticleAoE Id="FireDome" AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" Damage="4-7" Scatters="1" />
+    <ParticleAoE Id="AscalonExplosion" AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="3" Damage="20-20" />
+    <ParticleAoE Id="LightningStrike" AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" Damage="0-22" IsGrounded="true" />
 
     <!-- Enemies -->
-    <Enemy Id="CrystalSpider" 	AssetId="Enemies/CrystalSpider"		Health="20" 	Speed="3" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
+    <Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="20" Speed="3" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
       <Triggers>
         <EventTrigger Event="Spawn">
           <SpecialEffect Value="MagicCircle" />
@@ -71,8 +71,8 @@
         </EventTrigger>
       </Triggers>
     </Enemy>
-    <StaticEnemy Id="CrystalShield" 	AssetId="Enemies/CrystalShield" 	Health="700"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
-    <StaticEnemy Id="SpiderColumn" 	AssetId="Enemies/SpiderColumn" 	 	Health="35"  	Speed="0" 	DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+    <StaticEnemy Id="CrystalShield" AssetId="Enemies/CrystalShield" Health="700"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
+    <StaticEnemy Id="SpiderColumn" AssetId="Enemies/SpiderColumn"  Health="35"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
         <EnemySpawn Id="SpiderSpawn[x]" AssetId="SpiderSpawn" LevelId="" />
       </Elements>
@@ -90,7 +90,7 @@
         <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
       </Elements>
     </StaticEnemy>
-    <Boss Id="ZombieAbomination" 		AssetId="Enemies/ZombieAbomination" 	Health="9325" 	Speed="2" DeathDelay="5"
+    <Boss Id="ZombieAbomination" AssetId="Enemies/ZombieAbomination" Health="9325" Speed="2" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
       <Elements>
         <EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -99,7 +99,7 @@
       </Elements>
 
       <Limbs>
-        <Limb Id="Head" 		Health="250" 	AssetId="Head" 			DamageMultiplier="1.2"
+        <Limb Id="Head" Health="250" AssetId="Head" DamageMultiplier="1.2"
 					CollisionEffectNormal="StoneBreak" >
           <Triggers>
             <EventTrigger Event="Break" >
@@ -110,7 +110,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="RightHand" 	Health="450" 	AssetId="RightHand" 	DamageMultiplier="0.75"
+        <Limb Id="RightHand" Health="450" AssetId="RightHand" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -122,7 +122,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="LeftHand" 	Health="450" 	AssetId="LeftHand" 		DamageMultiplier="0.75"
+        <Limb Id="LeftHand" Health="450" AssetId="LeftHand" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -134,15 +134,15 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="RightLeg" 	Health="300" 	AssetId="RightLeg" 		DamageMultiplier="0.75"
+        <Limb Id="RightLeg" Health="300" AssetId="RightLeg" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
         </Limb>
-        <Limb Id="LeftLeg" 		Health="300" 	AssetId="LeftLeg" 		DamageMultiplier="0.75"
+        <Limb Id="LeftLeg" Health="300" AssetId="LeftLeg" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
         </Limb>
-        <Limb Id="RightFoot" 	Health="450" 	AssetId="Bip001 R Foot" DamageMultiplier="0.75"
+        <Limb Id="RightFoot" Health="450" AssetId="Bip001 R Foot" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -154,7 +154,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="LeftFoot" 	Health="450" 	AssetId="Bip001 L Foot" DamageMultiplier="0.75"
+        <Limb Id="LeftFoot" Health="450" AssetId="Bip001 L Foot" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -166,7 +166,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="Crystal" 		Health="800" 	AssetId="Bip001 Spine2" DamageMultiplier="0.25"
+        <Limb Id="Crystal" Health="800" AssetId="Bip001 Spine2" DamageMultiplier="0.25"
 					CollisionEffectNormal="CrystalBreak_Small" >
           <Triggers>
             <EventTrigger Event="Break" >
@@ -206,8 +206,8 @@
         </Skill>
         <Skill Id="Slam" InterruptThreshold="250" >
           <SpecialEffect Target="{LeftHand.SpecialEffect}" Value="ChargingSlam" />
-          <Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2.1" IsInterruptable="true"/>
-          <Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="7" IsInterruptable="true" />
+          <Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2" IsInterruptable="true"/>
+          <Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
           <Setter Target="{This.AnimationId}" Value="Slam_Run" />
           <MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
           <Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
@@ -258,22 +258,22 @@
 
       <Triggers>
         <Trigger TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="1" Value="30" />
+          <RandomCondition Target="{This}" Frequency="2" Value="15" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Setter Target="{This.ActiveSkill}" Value="Slam|RandomMovement" />
         </Trigger>
-
         <Trigger TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="2" Value="5" />
+          <RandomCondition Target="{This}" Frequency="2" Value="10" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
-          <Setter Target="{This.ActiveSkill}" Value="RandomMovement|Idle" />
+          <Setter Target="{This.ActiveSkill}" Value="RandomMovement|ScreamingRandomMovement" />
         </Trigger>
         <Trigger TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="1" Value="25" />
+          <RandomCondition Target="{This}" Frequency="1" Value="20" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
-          <Condition Target="{SpiderColumns.ActiveObjects}" Value="\3" />
+          <Condition Target="{SpiderColumns.ActiveObjects}" Value="\5" />
           <Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
         </Trigger>
+
         <Trigger>
           <Condition Target="{This.Health}" Value="\6660" />
           <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
@@ -298,13 +298,13 @@
     </Boss>
 
     <!-- Special Effects -->
-    <DamageGUI Id="StandardDamageGUI" 		AssetId="GUIs/DamageDisplay" />
-    <SpecialEffect Id="CrystalBreak_Small" 	AssetId="SpecialEffects/CrystalBreak_Small" />
-    <SpecialEffect Id="StoneBreak" 			AssetId="SpecialEffects/StoneBreak" />
-    <SpecialEffect Id="MagicCircle" 		AssetId="SpecialEffects/M_3D_MagicCircle_03" />
-    <SpecialEffect Id="ChargingSlam" 		AssetId="SpecialEffects/M_3D_Charge_02" />
-    <SpecialEffect Id="HitSlam" 			AssetId="SpecialEffects/M_3D_CriticalHit_01" />
-    <SpecialEffect Id="ItemDrop" 			AssetId="SpecialEffects/M_3D_ItemDrop_01" />
+    <DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" />
+    <SpecialEffect Id="CrystalBreak_Small" AssetId="SpecialEffects/CrystalBreak_Small" />
+    <SpecialEffect Id="StoneBreak" AssetId="SpecialEffects/StoneBreak" />
+    <SpecialEffect Id="MagicCircle" AssetId="SpecialEffects/M_3D_MagicCircle_03" />
+    <SpecialEffect Id="ChargingSlam" AssetId="SpecialEffects/M_3D_Charge_02" />
+    <SpecialEffect Id="HitSlam" AssetId="SpecialEffects/M_3D_CriticalHit_01" />
+    <SpecialEffect Id="ItemDrop" AssetId="SpecialEffects/M_3D_ItemDrop_01" />
 
     <Object Id="House1" AssetId="Environtments/House1"/>
     <Object Id="House2" AssetId="Environtments/House2"/>
