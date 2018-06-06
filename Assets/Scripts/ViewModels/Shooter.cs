@@ -86,11 +86,7 @@ namespace Scripts.ViewModels
 			if (AmmunitionProperty > 0)
 			{
 				AmmunitionProperty--;
-				var projectile = GetProjectile(_projectileModel);
-				projectile.Activate(this);
-				projectile.Show();
-
-				return projectile;
+				return GetProjectile(_projectileModel, this);
 			}
 
 			if (!IsReloading.GetValue())
@@ -104,7 +100,7 @@ namespace Scripts.ViewModels
 
 		public void SpawnAoE(string aoeModelId, Vector3 position)
 		{
-			var projectile = GetAoE(_aoeModel);
+			var projectile = GetObject<AoE>(_aoeModel.Id, _aoeModel);
 			projectile.Activate(this);
 			projectile.Show(position);
 		}
@@ -146,30 +142,12 @@ namespace Scripts.ViewModels
 			OnReload();
 		}
 
-		private Projectile GetProjectile(ProjectileModel projectileModel)
+		private Projectile GetProjectile(ProjectileModel projectileModel, Shooter parent)
 		{
-			var projectileId = projectileModel.Id;
-			var projectile = CheckInactiveObjects(projectileId) as Projectile ?? SpawnNewProjectile(projectileModel);
+			var projectile = GetObject<Projectile>(projectileModel.Id, projectileModel);
+			projectile.Activate(parent);
+			projectile.Show();
 			return projectile;
-		}
-
-		private Projectile SpawnNewProjectile(ProjectileModel projectileModel)
-		{
-			var newProjectileModel = SpawnNewObject(projectileModel.Id, projectileModel);
-			return newProjectileModel as Projectile;
-		}
-
-		private AoE GetAoE(AoEModel aoeModel)
-		{
-			var aoeModelId = aoeModel.Id;
-			var projectile = CheckInactiveObjects(aoeModelId) as AoE ?? SpawnNewAoE(aoeModel);
-			return projectile;
-		}
-
-		private AoE SpawnNewAoE(AoEModel aoeModel)
-		{
-			var newProjectileModel = SpawnNewObject(aoeModel.Id, aoeModel);
-			return newProjectileModel as AoE;
 		}
 
 		private IEnumerator Reload()

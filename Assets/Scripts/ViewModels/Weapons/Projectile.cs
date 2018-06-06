@@ -8,12 +8,14 @@ namespace Scripts.ViewModels.Weapons
 {
 	public class Projectile : ProjectileBase
 	{
-		private readonly ProjectileModel _model;
+		public event Action Hit;
+		public event Action<ObjectView, float> DoShooting;
+		public float[] SpeedDeviations;
 		public readonly Property<bool> IsKinematic = new Property<bool>();
 
-		private bool _hasCollided;
+		private readonly ProjectileModel _model;
 
-		public float[] SpeedDeviations;
+		private bool _hasCollided;
 
 		public Projectile(ProjectileModel model, Shooter parent) : base(model, parent)
 		{
@@ -46,11 +48,12 @@ namespace Scripts.ViewModels.Weapons
 			SpeedDeviations = new[] {speed0, speed1};
 		}
 
-		public event Action<ObjectView, float> DoShooting;
-
 		public void Shoot(ObjectView target, float accuracy)
 		{
-			if (DoShooting != null) DoShooting(target, accuracy);
+			if (DoShooting != null)
+			{
+				DoShooting(target, accuracy);
+			}
 		}
 
 		protected override void OnActivate()
@@ -64,7 +67,10 @@ namespace Scripts.ViewModels.Weapons
 		public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
 		{
 			// BUG: Need checking here because sometimes two collisions can happen very quickly
-			if (_hasCollided) return;
+			if (_hasCollided)
+			{
+				return;
+			}
 			_hasCollided = true;
 
 			IsKinematic.SetValue(true);
@@ -83,11 +89,12 @@ namespace Scripts.ViewModels.Weapons
 			}
 		}
 
-		public event Action Hit;
-
 		private void OnHit()
 		{
-			if (Hit != null) Hit();
+			if (Hit != null)
+			{
+				Hit();
+			}
 		}
 	}
 }

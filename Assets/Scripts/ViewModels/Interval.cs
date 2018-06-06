@@ -56,9 +56,15 @@ namespace Scripts.ViewModels
 
 		protected override void OnDestroyed()
 		{
-			foreach (var activeObject in _activeObjects) activeObject.OnObjectDeactivated -= Object_OnDeath;
+			foreach (var activeObject in _activeObjects)
+			{
+				activeObject.OnObjectDeactivated -= Object_OnDeath;
+			}
 
-			foreach (var activeObject in _activeObjects) activeObject.Destroy();
+			foreach (var activeObject in _activeObjects)
+			{
+				activeObject.Destroy();
+			}
 
 			_activeObjects.Clear();
 
