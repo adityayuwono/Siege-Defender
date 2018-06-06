@@ -28,7 +28,10 @@ namespace Scripts.ViewModels
 		{
 			Parent = newParent;
 
-			if (OnParentChanged != null) OnParentChanged(newParent);
+			if (OnParentChanged != null)
+			{
+				OnParentChanged(newParent);
+			}
 		}
 	}
 }

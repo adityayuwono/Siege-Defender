@@ -27,14 +27,18 @@ namespace Scripts.ViewModels
 
 			// Instantiate children elements
 			if (_model.Elements != null)
+			{
 				foreach (var elementModel in _model.Elements)
 				{
 					var element = IoC.IoCContainer.GetInstance<Object>(elementModel.GetType(), new object[] {elementModel, this});
 					if (element == null)
+					{
 						throw new EngineException(this,
 							string.Format("Failed to find ViewModel for {0}:{1}", elementModel.GetType(), elementModel.Id));
+					}
 					Elements.Add(element);
 				}
+			}
 
 			_position = _model.Position.ParseVector3();
 		}
@@ -88,7 +92,10 @@ namespace Scripts.ViewModels
 
 		public void StartSpecialEvent()
 		{
-			if (OnStartSpecialEvent != null) OnStartSpecialEvent();
+			if (OnStartSpecialEvent != null)
+			{
+				OnStartSpecialEvent();
+			}
 		}
 
 		public virtual bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
@@ -105,14 +112,20 @@ namespace Scripts.ViewModels
 		{
 			base.Show();
 
-			foreach (var element in Elements) element.Show();
+			foreach (var element in Elements)
+			{
+				element.Show();
+			}
 		}
 
 		public override void Hide(string reason)
 		{
 			base.Hide(reason);
 
-			foreach (var element in Elements) element.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
+			foreach (var element in Elements)
+			{
+				element.Hide(string.Format("Child of {0} was hidden because: {1}", Id, reason));
+			}
 		}
 
 		protected override void OnActivate()
@@ -121,21 +134,29 @@ namespace Scripts.ViewModels
 
 			_isDelaysIgnored = false;
 
-			foreach (var element in Elements) element.Activate();
+			foreach (var element in Elements)
+			{
+				element.Activate();
+			}
 		}
 
 		protected override void OnDeactivate()
 		{
 			base.OnDeactivate();
 
-			if (OnObjectDeactivated != null) OnObjectDeactivated(this);
-
+			if (OnObjectDeactivated != null)
+			{
+				OnObjectDeactivated(this);
+			}
 			OnObjectDeactivated = null;
 		}
 
 		protected override void OnDestroyed()
 		{
-			foreach (var element in Elements) element.Destroy();
+			foreach (var element in Elements)
+			{
+				element.Destroy();
+			}
 
 			base.OnDestroyed();
 		}

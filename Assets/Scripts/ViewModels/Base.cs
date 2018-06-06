@@ -24,7 +24,9 @@ namespace Scripts.ViewModels
 
 			// Generate a unique Id if there's none
 			if (string.IsNullOrEmpty(_model.Id))
+			{
 				_model.Id = Guid.NewGuid().ToString();
+			}
 		}
 
 		public bool IsShown { get; private set; }

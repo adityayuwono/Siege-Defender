@@ -14,12 +14,14 @@ namespace Scripts.ViewModels
 			_model = model;
 
 			if (_model.Triggers != null)
+			{
 				foreach (var triggeredModel in _model.Triggers)
 				{
 					var triggered =
 						IoC.IoCContainer.GetInstance<Triggered>(triggeredModel.GetType(), new object[] {triggeredModel, this});
 					_triggers.Add(triggered);
 				}
+			}
 		}
 
 		protected override void OnActivate()
@@ -27,13 +29,17 @@ namespace Scripts.ViewModels
 			base.OnActivate();
 
 			foreach (var triggered in _triggers)
+			{
 				triggered.Activate();
+			}
 		}
 
 		protected override void OnDeactivate()
 		{
 			foreach (var triggered in _triggers)
+			{
 				triggered.Deactivate("Triggerable is deactivated");
+			}
 
 			base.OnDeactivate();
 		}
