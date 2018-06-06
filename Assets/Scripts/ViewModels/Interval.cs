@@ -4,6 +4,7 @@ using System.Linq;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models;
+using Scripts.ViewModels.Weapons;
 
 namespace Scripts.ViewModels
 {
@@ -68,12 +69,14 @@ namespace Scripts.ViewModels
 
 		#region Spawning Objects
 
-		protected TU GetObject<TU>(string objectId, Base overrideParent = null) where TU : Object
+		protected TU GetObject<TU>(string objectId, ObjectModel modelToCopy = null, Base overrideParent = null) where TU : Object
 		{
-			var objectResult = CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, overrideParent);
-			if (objectResult as T == null)
+			var objectResult = CheckInactiveObjects(objectId) ?? SpawnNewObject(objectId, modelToCopy, overrideParent);
+			if (!(objectResult is T))
+			{
 				throw new EngineException(this,
 					string.Format("Failed to cast '{0}'\ntype of ({1}) to ({2})", objectResult.Id, objectResult.GetType(), typeof(T)));
+			}
 
 			_activeObjects.Add(objectResult as T);
 			ActiveObjects.SetValue(ActiveObjects.GetValue() + 1);
@@ -81,20 +84,25 @@ namespace Scripts.ViewModels
 			return objectResult as TU;
 		}
 
-		protected virtual T SpawnNewObject(string id, Base overrideParent = null)
+		protected virtual T SpawnNewObject(string id, ObjectModel modelToCopy = null, Base overrideParent = null)
 		{
-			var modelToCopy = DataContext.GetObjectModel(this, id);
-			var objectModel = CreateNewModel(id, modelToCopy);
+			if (modelToCopy == null)
+			{
+				modelToCopy = DataContext.GetObjectModel(this, id);
+			}
+			var objectModel = CreateDuplicateModel(id, modelToCopy);
 			var newObject =
 				IoC.IoCContainer.GetInstance<Object>(objectModel.GetType(), new object[] {objectModel, overrideParent ?? this});
 			if (newObject == null)
+			{
 				throw new EngineException(this,
 					string.Format("Failed to instantiate {0}:{1} as {2}", objectModel.GetType(), id, typeof(Object)));
+			}
 
 			return newObject as T;
 		}
 
-		private ObjectModel CreateNewModel(string id, ObjectModel modelToCopy)
+		protected static ObjectModel CreateDuplicateModel(string id, ObjectModel modelToCopy)
 		{
 			var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
 			objectModel.Id = string.Format("{0}_{1}", objectModel.Id, Guid.NewGuid());
@@ -129,20 +137,30 @@ namespace Scripts.ViewModels
 			var objectType = inactiveObject.Type;
 
 			if (InactiveObjects.ContainsKey(objectType))
+			{
 				InactiveObjects[objectType].Add(inactiveObject);
+			}
 			else
+			{
 				InactiveObjects.Add(objectType, new List<Object> {inactiveObject});
+			}
 		}
 
-		private Object CheckInactiveObjects(string objectId)
+		protected Object CheckInactiveObjects(string objectId)
 		{
 			// Id is not registered yet
-			if (!InactiveObjects.ContainsKey(objectId)) return null;
+			if (!InactiveObjects.ContainsKey(objectId))
+			{
+				return null;
+			}
 
 			var objectList = InactiveObjects[objectId];
 
 			// Id is registered, but we don't have any copies of that inactiveObject
-			if (objectList.Count == 0) return null;
+			if (objectList.Count == 0)
+			{
+				return null;
+			}
 
 			// We have some, now give them one, just one
 			var foundObject = objectList[0];

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using Scripts.Models.Weapons;
 
@@ -31,19 +32,26 @@ namespace Scripts.Models
 	[Serializable]
 	public class ItemModel : ObjectModel
 	{
-		[XmlAttribute] public string Base { get; set; }
+		public ItemModel()
+		{
+			Level = 1;
+		}
 
-		[XmlAttribute] public int Level { get; set; }
+		[XmlAttribute] public string BaseItem { get; set; }
+
+		[XmlAttribute]
+		[DefaultValue(1)]
+		public int Level { get; set; }
 	}
 
 	[Serializable]
 	public class ProjectileItemModel : ItemModel
 	{
-		[XmlElement] public ProjectileOverrides Overrides { get; set; }
+		[XmlElement] public ProjectileEnchantments Enchantments { get; set; }
 	}
 
 	[Serializable]
-	public class ProjectileOverrides : ProjectileModel
+	public class ProjectileEnchantments : ProjectileModel
 	{
 	}
 }

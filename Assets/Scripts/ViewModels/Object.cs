@@ -60,7 +60,9 @@ namespace Scripts.ViewModels
 			get
 			{
 				if (_model.AssetId.StartsWith("{"))
-					return GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.AssetId).GetValue();
+				{
+					return GetParent<IContext>().PropertyLookup.GetProperty<ItemModel>(_model.AssetId).GetValue().BaseItem;
+				}
 				return _model.AssetId;
 			}
 		}

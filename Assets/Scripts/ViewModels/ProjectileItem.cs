@@ -21,38 +21,43 @@ namespace Scripts.ViewModels
 
 		public string Stats { get; private set; }
 
+		// Return BaseProjectile, multiplied by level and improved with enchantment
 		public ProjectileModel GetProjectileModel()
 		{
-			if (_projectileModel != null) return _projectileModel;
+			if (_projectileModel != null)
+			{
+				return _projectileModel;
+			}
 
-			var baseProjectileModel = DataContext.GetObjectModel(this, _model.Base) as ProjectileModel;
+			var baseProjectileModel = DataContext.GetObjectModel(this, _model.BaseItem) as ProjectileModel;
 			if (baseProjectileModel == null)
-				throw new EngineException(this, string.Format("Failed to Find a projectile model with id: {0}", _model.Base));
+			{
+				throw new EngineException(this, string.Format("Failed to Find a projectile model with id: {0}", _model.BaseItem));
+			}
 
 			var newProjectileModel = Copier.CopyAs<ProjectileModel>(baseProjectileModel);
 			newProjectileModel.Type = newProjectileModel.Id; // Assign appropriate Id
 			newProjectileModel.Id = baseProjectileModel.Id + "_" + Guid.NewGuid();
 
-			var overriderModel = _model.Overrides;
+			var overriderModel = _model.Enchantments;
 			if (overriderModel != null)
 			{
 				#region Calculate for damage increase
-
-				var originalSplitDamages = baseProjectileModel.Damage.Split('-');
-				var overrideSplitDamage = overriderModel.Damage.Split('-');
-				var augmentedDamages = new List<string>();
+				var originalSplitDamages = baseProjectileModel.Damage;
+				var overrideSplitDamage = overriderModel.Damage;
+				var augmentedDamages = new List<float>();
 
 				for (var i = 0; i < originalSplitDamages.Length; i++)
 				{
-					var originalSplitDamage = float.Parse(originalSplitDamages[i]) + float.Parse(overrideSplitDamage[i]);
-					augmentedDamages.Add(originalSplitDamage.ToString(CultureInfo.InvariantCulture));
+					var originalSplitDamage = (originalSplitDamages[i] * _model.Level) + overrideSplitDamage[i];
+					augmentedDamages.Add(originalSplitDamage);
 				}
-
 				#endregion
 
-				newProjectileModel.Damage = string.Join("-", augmentedDamages.ToArray());
+				newProjectileModel.Damage = augmentedDamages.ToArray();
 				newProjectileModel.Scatters += overriderModel.Scatters;
 				newProjectileModel.Ammunition += overriderModel.Ammunition;
+				newProjectileModel.AoEId = overriderModel.AoEId;
 			}
 
 			Stats = string.Format("Damage: {0}\n\nRate of Fire: {1}\nAmmunition: {2}",
@@ -62,7 +67,7 @@ namespace Scripts.ViewModels
 
 			// Register the new Model, to make sure it's available for duplication later
 			DataContext.AddNewObjectModel(newProjectileModel);
-			_projectileModel = new ProjectileModel();
+			_projectileModel = newProjectileModel;
 
 			return newProjectileModel;
 		}

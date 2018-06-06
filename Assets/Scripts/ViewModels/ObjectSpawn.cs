@@ -37,7 +37,7 @@ namespace Scripts.ViewModels
 
 			var randomId = _objectIds[randomIndex];
 
-			var objectVM = GetObject<Object>(randomId, GetParent<Scene>());
+			var objectVM = GetObject<Object>(randomId, null, GetParent<Scene>());
 			objectVM.Activate(this);
 			objectVM.Show();
 		}

@@ -14,21 +14,33 @@ namespace Scripts.ViewModels
 		public Inventory(InventoryModel model, Base parent) : base(model, parent)
 		{
 			// Grab reference to Player's Inventory loaded from XML
-			foreach (var inventoryModel in DataContext.PlayerSettingsModel.Inventories)
+			foreach (var inventoryModel in DataContext.PlayerDataModel.Inventories)
+			{
 				if (inventoryModel.Id == model.Source)
+				{
 					_model = inventoryModel;
+				}
+			}
 
 			foreach (var itemModel in _model.Items)
+			{
 				Elements.Add(IoC.IoCContainer.GetInstance<Item>(itemModel.GetType(), new object[] {itemModel, this}));
+			}
 
-			foreach (var equipmentSlotModel in _model.EquipmentSlots) Elements.Add(new EquipmentSlot(equipmentSlotModel, this));
+			foreach (var equipmentSlotModel in _model.EquipmentSlots)
+			{
+				Elements.Add(new EquipmentSlot(equipmentSlotModel, this));
+			}
 		}
 
 		public PropertyLookup PropertyLookup
 		{
 			get
 			{
-				if (_propertyLookup == null) _propertyLookup = new PropertyLookup(Root, this);
+				if (_propertyLookup == null)
+				{
+					_propertyLookup = new PropertyLookup(Root, this);
+				}
 
 				return _propertyLookup;
 			}
@@ -64,7 +76,10 @@ namespace Scripts.ViewModels
 
 		private void InvokeChildrenChanged()
 		{
-			if (OnChildrenChanged != null) OnChildrenChanged();
+			if (OnChildrenChanged != null)
+			{
+				OnChildrenChanged();
+			}
 		}
 	}
 }

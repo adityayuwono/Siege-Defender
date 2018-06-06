@@ -14,9 +14,9 @@ namespace Scripts.ViewModels
 			_model = model;
 		}
 
-		public string Base
+		public string BaseItem
 		{
-			get { return _model.Base; }
+			get { return _model.BaseItem; }
 		}
 
 		public ItemModel Model

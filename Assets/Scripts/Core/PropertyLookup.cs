@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Scripts.Helpers;
 using Scripts.Interfaces;
+using Scripts.Models;
 using Scripts.ViewModels;
 
 namespace Scripts.Core
@@ -127,8 +128,8 @@ namespace Scripts.Core
 					{
 						var dataContext = DataContext.Instance;
 						var item = dataContext.Inventories[paths[1]];
-						var property = new Property<string>();
-						property.SetValue(item.Item.Base);
+						var property = new Property<ItemModel>();
+						property.SetValue(item.Item);
 						return property;
 					}
 

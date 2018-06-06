@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PlayerSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PlayerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
   <Inventory Id="PlayerInventory" AssetId="Inventory" Slots="36">
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="IronBall" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="FireBall" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="FireBall" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="ExplosiveFireBall" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="ExplosiveFireBall" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="IronArrow" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="IronArrow" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="ScatterArrow" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="ScatterArrow" Level="0" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="Ascalon" Level="1" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="SkySplitter" Level="1" />
-    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0" >
-      <Overrides Damage="2-3" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="IronBall" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="IronBall" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="FireBall" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="FireBall" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="ExplosiveFireBall" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="ExplosiveFireBall" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="IronArrow" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="IronArrow" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="ScatterArrow" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="ScatterArrow" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="Ascalon" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="Ascalon" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="SkySplitter" Level="1" />
+    <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="SkySplitter" Level="1" >
+      <Enchantments Damage="2-3" />
     </Projectile>
     <EquipmentSlot Id="LeftShooter" AssetId="LeftWeaponContainer" DeathDelay="0">
-      <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0" />
+      <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="WoodArrow" Level="1" />
     </EquipmentSlot>
     <EquipmentSlot Id="RightShooter" AssetId="RightWeaponContainer" DeathDelay="0">
-      <Projectile AssetId="GUIs/Buttons/ProjectileIcon" Base="WoodArrow" Level="0" />
+      <Projectile AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="WoodArrow" Level="1" />
     </EquipmentSlot>
   </Inventory>
   <Inventory Id="PlayerOptions" AssetId="OptionsInventory" Slots="36">
-    <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="ControlStyle1" Level="0" />
+    <Item AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="ControlStyle1" Level="1" />
     <EquipmentSlot Id="ControlStyle" AssetId="ControlStyleContainer" DeathDelay="0">
-      <Item AssetId="GUIs/Buttons/ProjectileIcon" Base="ControlStyle2" Level="0" />
+      <Item AssetId="GUIs/Buttons/ProjectileIcon" BaseItem="ControlStyle2" Level="1" />
     </EquipmentSlot>
   </Inventory>
-</PlayerSettings>
+</PlayerData>

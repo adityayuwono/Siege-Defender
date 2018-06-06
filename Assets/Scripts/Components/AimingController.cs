@@ -28,7 +28,10 @@ namespace Scripts.Components
 			_halfScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
 
 			_crosshairImage = Resources.Load<Texture2D>(CrosshairAssetPath);
-			_crosshairRect = new Rect(Screen.height / 2f, Screen.width / 2f, Screen.height * Values.GuiCrosshairSizeF,
+			_crosshairRect = new Rect(
+				Screen.height / 2f, 
+				Screen.width / 2f, 
+				Screen.height * Values.GuiCrosshairSizeF,
 				Screen.height * Values.GuiCrosshairSizeF);
 		}
 
@@ -47,10 +50,14 @@ namespace Scripts.Components
 		private void Update()
 		{
 			if (Input.touches.Length > 0)
+			{
 				foreach (var touch in Input.touches)
 					ProcessTouchOrMouse(touch.position);
+			}
 			else
+			{
 				ProcessTouchOrMouse(Input.mousePosition);
+			}
 		}
 
 		private void ProcessTouchOrMouse(Vector2 inputPosition)
@@ -73,7 +80,9 @@ namespace Scripts.Components
 		{
 			// Bug after destruction the MainCamera reference is not cleared, or maybe we fail to hook the new camera at Start
 			if (_mainCamera == null)
+			{
 				_mainCamera = GameObject.Find("Player").GetComponent<Camera>();
+			}
 
 			var ray = _mainCamera.ScreenPointToRay(inputPosition);
 			RaycastHit hitInfo;

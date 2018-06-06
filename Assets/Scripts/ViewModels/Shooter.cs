@@ -18,6 +18,7 @@ namespace Scripts.ViewModels
 
 		private float _accuracy;
 		private ProjectileModel _projectileModel;
+		private AoEModel _aoeModel;
 
 		public Shooter(ShooterModel model, Player parent) : base(model, parent)
 		{
@@ -26,9 +27,15 @@ namespace Scripts.ViewModels
 			Ammunition = new AdjustableProperty<float>("Ammunition", this);
 			MaxAmmunition = new AdjustableProperty<float>("MaxAmmunition", this);
 
-			if (_model.ProjectileId == null) throw new EngineException(this, "Failed to find ProjectileId");
+			if (_model.ProjectileId == null)
+			{
+				throw new EngineException(this, "Failed to find ProjectileId");
+			}
 
-			if (_model.Target == null) throw new EngineException(this, "Failed to find Target");
+			if (_model.Target == null)
+			{
+				throw new EngineException(this, "Failed to find Target");
+			}
 
 			Target = new Target(_model.Target, this);
 			Elements.Add(Target);
@@ -52,26 +59,26 @@ namespace Scripts.ViewModels
 
 		public Object Target { get; private set; }
 
-		protected override void OnLoad()
+		#region Ammunition
+		public readonly AdjustableProperty<float> Ammunition;
+		public readonly AdjustableProperty<float> MaxAmmunition;
+
+		private float AmmunitionProperty
 		{
-			base.OnLoad();
+			get { return Ammunition.GetValue(); }
+			set { Ammunition.SetValue(value); }
+		}
+		#endregion
 
-			var projectileBinding = GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.ProjectileId);
-			if (projectileBinding == null)
-				throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", _model.ProjectileId));
-
-			var projectileItem = projectileBinding.GetValue();
-			_projectileModel = DataContext.GetObjectModel(this, projectileItem) as ProjectileModel;
-
-			Projectile_OnChange();
-
-			IsShooting.SetValue(false);
+		public void StartShooting()
+		{
+			IsShooting.SetValue(true);
 		}
 
-		private void Projectile_OnChange()
+		public void StopShooting()
 		{
-			Interval.SetValue(_projectileModel.RoF);
-			OnReload();
+			IsShooting.SetValue(false);
+			Accuracy = _projectileModel.Accuracy;
 		}
 
 		public Projectile SpawnProjectile()
@@ -79,7 +86,7 @@ namespace Scripts.ViewModels
 			if (AmmunitionProperty > 0)
 			{
 				AmmunitionProperty--;
-				var projectile = GetObject<Projectile>(_projectileModel.Id);
+				var projectile = GetProjectile(_projectileModel);
 				projectile.Activate(this);
 				projectile.Show();
 
@@ -95,6 +102,76 @@ namespace Scripts.ViewModels
 			return null;
 		}
 
+		public void SpawnAoE(string aoeModelId, Vector3 position)
+		{
+			var projectile = GetAoE(_aoeModel);
+			projectile.Activate(this);
+			projectile.Show(position);
+		}
+
+		protected override void OnLoad()
+		{
+			base.OnLoad();
+
+			var projectileItemBinding = GetParent<IContext>().PropertyLookup.GetProperty<ItemModel>(_model.ProjectileId);
+			if (projectileItemBinding == null)
+			{
+				throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", _model.ProjectileId));
+			}
+
+			var projectileItemModel = (ProjectileItemModel)projectileItemBinding.GetValue();
+			var projectileItem = new ProjectileItem(projectileItemModel, this);
+
+			_projectileModel = projectileItem.GetProjectileModel();
+
+			if (!string.IsNullOrEmpty(_projectileModel.AoEId))
+			{
+				var aoeModel = DataContext.GetObjectModel(this, _projectileModel.AoEId);
+				_aoeModel = (AoEModel) CreateDuplicateModel(aoeModel.Id, aoeModel);
+
+				for (var i = 0; i < 2; i++)
+				{
+					_aoeModel.Damage[i] = _projectileModel.Damage[i] * _aoeModel.DamageMultiplier;
+				}
+			}
+			
+			UpdateProjectile();
+
+			IsShooting.SetValue(false);
+		}
+
+		private void UpdateProjectile()
+		{
+			Interval.SetValue(_projectileModel.RoF);
+			OnReload();
+		}
+
+		private Projectile GetProjectile(ProjectileModel projectileModel)
+		{
+			var projectileId = projectileModel.Id;
+			var projectile = CheckInactiveObjects(projectileId) as Projectile ?? SpawnNewProjectile(projectileModel);
+			return projectile;
+		}
+
+		private Projectile SpawnNewProjectile(ProjectileModel projectileModel)
+		{
+			var newProjectileModel = SpawnNewObject(projectileModel.Id, projectileModel);
+			return newProjectileModel as Projectile;
+		}
+
+		private AoE GetAoE(AoEModel aoeModel)
+		{
+			var aoeModelId = aoeModel.Id;
+			var projectile = CheckInactiveObjects(aoeModelId) as AoE ?? SpawnNewAoE(aoeModel);
+			return projectile;
+		}
+
+		private AoE SpawnNewAoE(AoEModel aoeModel)
+		{
+			var newProjectileModel = SpawnNewObject(aoeModel.Id, aoeModel);
+			return newProjectileModel as AoE;
+		}
+
 		private IEnumerator Reload()
 		{
 			yield return new WaitForSeconds(ReloadDuration);
@@ -108,36 +185,5 @@ namespace Scripts.ViewModels
 			MaxAmmunition.SetValue(_projectileModel.Ammunition);
 			IsReloading.SetValue(false);
 		}
-
-		public void SpawnAoE(string aoeModelId, Vector3 position)
-		{
-			var projectile = GetObject<AoE>(aoeModelId);
-			projectile.Activate(this);
-			projectile.Show(position);
-		}
-
-		public void StartShooting()
-		{
-			IsShooting.SetValue(true);
-		}
-
-		public void StopShooting()
-		{
-			IsShooting.SetValue(false);
-			Accuracy = _projectileModel.Accuracy;
-		}
-
-		#region Ammunition
-
-		public readonly AdjustableProperty<float> Ammunition;
-		public readonly AdjustableProperty<float> MaxAmmunition;
-
-		private float AmmunitionProperty
-		{
-			get { return Ammunition.GetValue(); }
-			set { Ammunition.SetValue(value); }
-		}
-
-		#endregion
 	}
 }

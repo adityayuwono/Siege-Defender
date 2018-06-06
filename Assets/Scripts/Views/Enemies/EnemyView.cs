@@ -129,6 +129,7 @@ namespace Scripts.Views.Enemies
 		{
 			// We may still be subscribed to these
 			iTween.Stop(GameObject);
+			iTween.Stop(CharacterRoot);
 			UnsubscribeIntervals();
 
 			_viewModel.AnimationId.SetValue("Death");

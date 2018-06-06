@@ -53,9 +53,12 @@
 			SpeedDeviation="500-500"
 			Accuracy="1" Deviation="0" Scatters="1" />
 
-    <ParticleAoE Id="FireDome" AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" Damage="4-7" Scatters="1" />
-    <ParticleAoE Id="AscalonExplosion" AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="3" Damage="20-20" />
-    <ParticleAoE Id="LightningStrike" AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" Damage="0-22" IsGrounded="true" />
+    <ParticleAoE Id="FireDome" 
+      AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" DamageMultiplier="0.75" Scatters="1" />
+    <ParticleAoE Id="AscalonExplosion" 
+      AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="3" DamageMultiplier="1" />
+    <ParticleAoE Id="LightningStrike" 
+      AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" DamageMultiplier="3" IsGrounded="true" />
 
     <!-- Enemies -->
     <Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="20" Speed="3" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >

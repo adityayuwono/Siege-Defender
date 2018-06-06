@@ -62,7 +62,7 @@ namespace Scripts.ViewModels
 
 			for (var i = 0; i < count; i++)
 			{
-				var enemy = GetObject<LivingObject>(enemyId, GetParent<Scene>());
+				var enemy = GetObject<LivingObject>(enemyId, null, GetParent<Scene>());
 				enemy.Activate(this);
 				enemy.Show();
 			}

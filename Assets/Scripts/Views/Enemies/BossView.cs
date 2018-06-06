@@ -99,9 +99,13 @@ namespace Scripts.Views.Enemies
 
 			Transform moveTargetPosition;
 			if (targetObject == null)
+			{
 				moveTargetPosition = GetRandomWaypoint();
+			}
 			else
+			{
 				moveTargetPosition = _viewModel.Root.GetView<ObjectView>(targetObject).Transform;
+			}
 
 			var targetLookatRotation = Quaternion.LookRotation(moveTargetPosition.position - CharacterTransform.position);
 

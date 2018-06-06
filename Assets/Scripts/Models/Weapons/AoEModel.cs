@@ -11,8 +11,13 @@ namespace Scripts.Models.Weapons
 			DeathDelay = 1f;
 		}
 
-		[XmlAttribute] public float Radius { get; set; }
+		[XmlAttribute]
+		public float DamageMultiplier { get; set; }
 
-		[XmlAttribute] public bool IsGrounded { get; set; }
+		[XmlAttribute] 
+		public float Radius { get; set; }
+
+		[XmlAttribute] 
+		public bool IsGrounded { get; set; }
 	}
 }

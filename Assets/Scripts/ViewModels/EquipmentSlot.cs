@@ -61,15 +61,18 @@ namespace Scripts.ViewModels
 		private void OnItemUpdate(Item itemViewModel)
 		{
 			var inventoryParent = GetParent<Inventory>();
-			inventoryParent
-				.ReleaseItem(itemViewModel); // Remove it from the inventory, do this first to make sure there's a spot left in the inventory
+			// Remove it from the inventory, do this first to make sure there's a spot left in the inventory
+			inventoryParent.ReleaseItem(itemViewModel);
 
-			if (_currentItem != null) inventoryParent.AddItem(_currentItem); // Send the current item back to inventory
+			if (_currentItem != null)
+			{
+				inventoryParent.AddItem(_currentItem); // Send the current item back to inventory
+			}
 
 			_currentItem = itemViewModel; // Swap the current item
 			_currentItem.ChangeParent(this);
 			_model.Item = _currentItem.Model; // Save the change to model
-			ItemId.SetValue(_currentItem.Base); // Update projectile used
+			ItemId.SetValue(_currentItem.BaseItem); // Update projectile used
 
 			var currentProjectileItem = _currentItem as ProjectileItem;
 			Item.SetValue(currentProjectileItem == null

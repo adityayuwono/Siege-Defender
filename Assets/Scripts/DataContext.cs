@@ -4,6 +4,8 @@ using System.IO;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Weapons;
+using Scripts.ViewModels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +32,7 @@ namespace Scripts
 
 		public static EngineModel EngineModel { get; private set; }
 
-		public static PlayerSettingsModel PlayerSettingsModel { get; private set; }
+		public static PlayerDataModel PlayerDataModel { get; private set; }
 		public static DataContext Instance { get; set; }
 		public static string LevelId { get; set; }
 
@@ -63,7 +65,7 @@ namespace Scripts
 
 		public static void Save()
 		{
-			Serializer.SaveObjectToXML(PlayerSettingsModel);
+			Serializer.SaveObjectToXML(PlayerDataModel);
 		}
 
 		private void InitializeEngine()
@@ -76,11 +78,11 @@ namespace Scripts
 			EngineModel = Deserializer<EngineModel>.GetObjectFromXML(engineText);
 
 			var inventoryXML = PlayerSettingsXML;
-			PlayerSettingsModel = Deserializer<PlayerSettingsModel>.GetObjectFromXML(inventoryXML);
+			PlayerDataModel = Deserializer<PlayerDataModel>.GetObjectFromXML(inventoryXML);
 
 			LoadData(EngineModel);
 
-			LoadInventories(PlayerSettingsModel.Inventories);
+			LoadInventories(PlayerDataModel.Inventories);
 
 			// Done, we simply load the next scene
 			// it clears everything we put on scene, if for example we are editing a prefab

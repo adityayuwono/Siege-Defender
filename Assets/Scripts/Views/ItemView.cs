@@ -46,8 +46,8 @@ namespace Scripts.Views
 		{
 			base.OnLoad();
 
-			GameObject.GetComponent<UISprite>().spriteName = _viewModel.Base;
-			GameObject.GetComponent<UIButton>().normalSprite = _viewModel.Base;
+			GameObject.GetComponent<UISprite>().spriteName = _viewModel.BaseItem;
+			GameObject.GetComponent<UIButton>().normalSprite = _viewModel.BaseItem;
 		}
 
 		protected override void OnShow()

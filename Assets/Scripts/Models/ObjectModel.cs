@@ -13,7 +13,8 @@ namespace Scripts.Models
 		///     Grouping Identifier
 		///     Not XML Attribute, this is auto-set from Id when we spawn it
 		/// </summary>
-		[XmlIgnore] public string Type;
+		[XmlIgnore] 
+		public string Type;
 
 		public ObjectModel()
 		{
@@ -45,12 +46,18 @@ namespace Scripts.Models
 			set { Elements = value; }
 		}
 
-		[XmlIgnore] public List<ElementModel> Elements { get; private set; }
+		[XmlIgnore] 
+		public List<ElementModel> Elements { get; private set; }
 
-		[XmlAttribute] public string AssetId { get; set; }
+		[XmlAttribute] 
+		public string AssetId { get; set; }
 
-		[XmlAttribute] [DefaultValue("0,0,0")] public string Position { get; set; }
+		[XmlAttribute] 
+		[DefaultValue("0,0,0")] 
+		public string Position { get; set; }
 
-		[XmlAttribute] [DefaultValue(0)] public float DeathDelay { get; set; }
+		[XmlAttribute] 
+		[DefaultValue(0)] 
+		public float DeathDelay { get; set; }
 	}
 }

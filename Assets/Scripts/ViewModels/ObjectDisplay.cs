@@ -56,9 +56,12 @@ namespace Scripts.ViewModels
 		}
 
 
-		protected override Object SpawnNewObject(string id, Base overrideParent = null)
+		protected override Object SpawnNewObject(string id, ObjectModel modelToCopy = null, Base overrideParent = null)
 		{
-			var modelToCopy = DataContext.GetObjectModel(this, id);
+			if (modelToCopy == null)
+			{
+				modelToCopy = DataContext.GetObjectModel(this, id);
+			}
 			var objectModel = Copier.CopyAs<ObjectModel>(modelToCopy);
 
 			objectModel.Id = string.Format("{0}_{1}_{2}", objectModel.Id, Id, ObjectCount);

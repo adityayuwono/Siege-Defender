@@ -71,7 +71,7 @@ namespace Scripts.ViewModels
 			var activeObjects = new List<Object>();
 			foreach (var objectId in objectsToCache)
 			{
-				var objectToCache = GetObject<Object>(objectId, this);
+				var objectToCache = GetObject<Object>(objectId, null, this);
 				objectToCache.Activate();
 				objectToCache.Show(); // Have to show to cache, in order to prepare the prefabs
 				objectToCache.TriggerIgnoreDelays();

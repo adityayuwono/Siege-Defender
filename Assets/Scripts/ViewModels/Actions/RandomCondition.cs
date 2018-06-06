@@ -26,8 +26,10 @@ namespace Scripts.ViewModels.Actions
 			if (double.TryParse(_model.Value, out valueAsDouble))
 			{
 				if (valueAsDouble > 100)
+				{
 					throw new EngineException(this,
 						"Value provided should be a percentage of success between 0-100, other than those is kinda pointless");
+				}
 
 				_threshold = valueAsDouble / 100d;
 			}
