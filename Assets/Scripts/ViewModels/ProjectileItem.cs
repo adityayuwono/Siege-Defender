@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Scripts.Helpers;
 using Scripts.Models;
 using Scripts.Models.Weapons;
+using UnityEngine;
 
 namespace Scripts.ViewModels
 {
@@ -55,6 +55,10 @@ namespace Scripts.ViewModels
 				#endregion
 
 				newProjectileModel.Damage = augmentedDamages.ToArray();
+				newProjectileModel.Accuracy = Mathf.Min(newProjectileModel.Accuracy + overriderModel.Accuracy, 1f);
+				newProjectileModel.Reload = Mathf.Max(newProjectileModel.Reload - overriderModel.Reload, 1f);
+				newProjectileModel.CriticalChance = Mathf.Min(newProjectileModel.CriticalChance + overriderModel.CriticalChance, 1f);
+				newProjectileModel.CriticalDamageMultiplier = newProjectileModel.CriticalDamageMultiplier + overriderModel.CriticalDamageMultiplier;
 				newProjectileModel.Scatters += overriderModel.Scatters;
 				newProjectileModel.Ammunition += overriderModel.Ammunition;
 				newProjectileModel.AoEId = overriderModel.AoEId;
