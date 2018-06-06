@@ -2,13 +2,13 @@
   <Objects>
     <Projectile Id="WoodArrow" Damage="6-10"
 			AssetId="Projectiles/WoodenBalista"
-			RoF="0.2" Ammunition="1000" Reload="1"
+			RoF="0.2" Ammunition="1000" Reload="2"
 			Scatters="1"
       CriticalChance="0.1" CriticalDamageMultiplier="1.2"
 			Accuracy="0.9" Deviation="0.001" />
     <Projectile Id="Rock" Damage="2-7"
 			AssetId="Projectiles/Rock"
-			RoF="0.1" Ammunition="10000" Reload="0.5"
+			RoF="0.1" Ammunition="10000" Reload="2"
 			Accuracy="0.65" Deviation="0.001"
 			SpeedDeviation="500-1500"
 			IsRotationRandomized="true"
@@ -16,40 +16,40 @@
 			Scatters="3" />
     <Projectile Id="ScatterArrow" Damage="1-4"
 			AssetId="Projectiles/WoodenBalista"
-			RoF="0.3" Ammunition="1000" Reload="1"
+			RoF="0.3" Ammunition="1000" Reload="5"
 			SpeedDeviation="300-600"
 			Accuracy="0.3" Deviation="0.0001" Scatters="5" />
     <Projectile Id="IronArrow" Damage="10-20"
       AssetId="Projectiles/IronBalista"
-      RoF="0.25" Ammunition="500" Reload="0.2"
+      RoF="0.25" Ammunition="500" Reload="3"
       Scatters="1"
       Accuracy="0.7" Deviation="0.005" />
     <Projectile Id="FireBall" Damage="8-11"
 			AssetId="Projectiles/FireBall" AoEId="FireDome"
-			RoF="0.5" Ammunition="25" Reload="2"
+			RoF="0.5" Ammunition="25" Reload="5"
 			Scatters="1"
 			Accuracy="0.9" Deviation="0.001" >
     </Projectile>
     <Projectile Id="ExplosiveFireBall" Damage="5-8"
 			AssetId="Projectiles/FireBall" AoEId="FireDome"
-			RoF="0.2" Ammunition="2500" Reload="0"
+			RoF="0.2" Ammunition="2500" Reload="5"
 			Scatters="1"
 			Accuracy="0.5" Deviation="0.01" />
     <Piercing Id="IronBall" Damage="40-60"
 			AssetId="Projectiles/IronBall"
-			RoF="2" Ammunition="8" Reload="2"
+			RoF="2" Ammunition="8" Reload="5"
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
     <Projectile Id="Ascalon" Damage="1-2"
 			AssetId="Projectiles/Ascalon" AoEId="AscalonExplosion"
-			RoF="0.125" Ammunition="9" Reload="0.777"
+			RoF="0.125" Ammunition="9" Reload="2"
 			SpeedDeviation="300-600"
       CriticalChance="0.1" CriticalDamageMultiplier="100"
 			Accuracy="0.75" Deviation="0" Scatters="3" />
     <Projectile Id="SkySplitter" Damage="1-3"
 			AssetId="Projectiles/SkySplitter" AoEId="LightningStrike"
-			RoF="0.6" Ammunition="99" Reload="2"
+			RoF="0.6" Ammunition="99" Reload="4"
 			SpeedDeviation="500-500"
 			Accuracy="1" Deviation="0" Scatters="1" />
 
