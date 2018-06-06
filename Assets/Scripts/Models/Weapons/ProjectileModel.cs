@@ -12,7 +12,7 @@ namespace Scripts.Models.Weapons
 			DeathDelay = 1f;
 
 			Ammunition = -1;
-			Reload = 3f;
+			ReloadTime = 3f;
 			Accuracy = 0.9f;
 			CriticalChance = 0f;
 			CriticalDamageMultiplier = 1f;

@@ -43,7 +43,7 @@ namespace Scripts.ViewModels
 
 		public float ReloadDuration
 		{
-			get { return _projectileModel.Reload; }
+			get { return _projectileModel.ReloadTime; }
 		}
 
 		public float Accuracy

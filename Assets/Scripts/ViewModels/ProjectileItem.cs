@@ -56,7 +56,7 @@ namespace Scripts.ViewModels
 
 				newProjectileModel.Damage = augmentedDamages.ToArray();
 				newProjectileModel.Accuracy = Mathf.Min(newProjectileModel.Accuracy + overriderModel.Accuracy, 1f);
-				newProjectileModel.Reload = Mathf.Max(newProjectileModel.Reload - overriderModel.Reload, 1f);
+				newProjectileModel.ReloadTime = Mathf.Max(newProjectileModel.ReloadTime - overriderModel.ReloadTime, 1f);
 				newProjectileModel.CriticalChance = Mathf.Min(newProjectileModel.CriticalChance + overriderModel.CriticalChance, 1f);
 				newProjectileModel.CriticalDamageMultiplier = newProjectileModel.CriticalDamageMultiplier + overriderModel.CriticalDamageMultiplier;
 				newProjectileModel.Scatters += overriderModel.Scatters;
