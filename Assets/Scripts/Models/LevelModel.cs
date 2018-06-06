@@ -13,9 +13,12 @@ namespace Scripts.Models
 			LoopCount = 0;
 		}
 
-		[XmlAttribute] public float Interval { get; set; }
+		[XmlAttribute]
+		public float Interval { get; set; }
 
-		[XmlAttribute] [DefaultValue(0)] public int LoopCount { get; set; }
+		[XmlAttribute]
+		[DefaultValue(0)]
+		public int LoopCount { get; set; }
 
 
 		[XmlElement(ElementName = "Spawn", Type = typeof(SpawnModel))]

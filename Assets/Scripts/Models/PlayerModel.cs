@@ -12,12 +12,14 @@ namespace Scripts.Models
 			Shooters = new List<ShooterModel>();
 		}
 
-		[XmlElement] public PlayerHitboxModel PlayerHitbox { get; set; }
+		[XmlElement]
+		public PlayerHitboxModel PlayerHitbox { get; set; }
 
 		[XmlArray]
 		[XmlArrayItem(ElementName = "Shooter", Type = typeof(ShooterModel))]
 		public List<ShooterModel> Shooters { get; set; }
 
-		[XmlAttribute] public float Health { get; set; }
+		[XmlAttribute]
+		public float Health { get; set; }
 	}
 }

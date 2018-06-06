@@ -14,10 +14,10 @@ namespace Scripts.Models.Weapons
 		[XmlAttribute]
 		public float DamageMultiplier { get; set; }
 
-		[XmlAttribute] 
+		[XmlAttribute]
 		public float Radius { get; set; }
 
-		[XmlAttribute] 
+		[XmlAttribute]
 		public bool IsGrounded { get; set; }
 	}
 }

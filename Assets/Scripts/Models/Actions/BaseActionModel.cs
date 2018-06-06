@@ -12,8 +12,11 @@ namespace Scripts.Models.Actions
 			Wait = 0;
 		}
 
-		[XmlAttribute] public float Wait { get; set; }
+		[XmlAttribute]
+		public float Wait { get; set; }
 
-		[XmlAttribute] [DefaultValue(false)] public bool IsInterruptable { get; set; }
+		[XmlAttribute]
+		[DefaultValue(false)]
+		public bool IsInterruptable { get; set; }
 	}
 }

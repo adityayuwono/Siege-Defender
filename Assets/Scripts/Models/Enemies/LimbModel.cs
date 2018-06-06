@@ -13,10 +13,14 @@ namespace Scripts.Models.Enemies
 			ProjectileLimit = 2;
 		}
 
-		[XmlAttribute] public string CollisionEffectOnBreak { get; set; }
+		[XmlAttribute]
+		public string CollisionEffectOnBreak { get; set; }
 
-		[XmlAttribute] public string CollisionEffectBroken { get; set; }
+		[XmlAttribute]
+		public string CollisionEffectBroken { get; set; }
 
-		[XmlAttribute] [DefaultValue(1f)] public float DamageMultiplier { get; set; }
+		[XmlAttribute]
+		[DefaultValue(1f)]
+		public float DamageMultiplier { get; set; }
 	}
 }

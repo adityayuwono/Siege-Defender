@@ -12,8 +12,11 @@ namespace Scripts.Models.Actions
 			SpeedMultiplier = 1;
 		}
 
-		[XmlAttribute] public string MoveTarget { get; set; }
+		[XmlAttribute]
+		public string MoveTarget { get; set; }
 
-		[XmlAttribute] [DefaultValue(1)] public float SpeedMultiplier { get; set; }
+		[XmlAttribute]
+		[DefaultValue(1)]
+		public float SpeedMultiplier { get; set; }
 	}
 }

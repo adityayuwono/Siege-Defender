@@ -8,7 +8,9 @@ namespace Scripts.Models.Actions
 	[Serializable]
 	public class TriggeredModel : BaseModel
 	{
-		[XmlAttribute] [DefaultValue(true)] public bool TriggerOnce;
+		[XmlAttribute]
+		[DefaultValue(true)]
+		public bool TriggerOnce;
 
 		public TriggeredModel()
 		{
@@ -25,29 +27,5 @@ namespace Scripts.Models.Actions
 		[XmlElement(ElementName = "SpecialEvent", Type = typeof(StartSpecialEventModel))]
 		[XmlElement(ElementName = "SpecialEffect", Type = typeof(SpecialEffectActionModel))]
 		public List<BaseActionModel> Actions { get; set; }
-	}
-
-	[Serializable]
-	public class EventTriggeredModel : TriggeredModel
-	{
-		[XmlAttribute] public Event Event { get; set; }
-	}
-
-	public enum Event
-	{
-		None,
-		Click,
-
-		Interrupt,
-		Break,
-
-		Spawn,
-		Walk,
-		Attack,
-		Death,
-
-		Hit,
-
-		GameOver
 	}
 }

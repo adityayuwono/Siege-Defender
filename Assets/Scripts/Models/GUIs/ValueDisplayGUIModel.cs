@@ -6,8 +6,10 @@ namespace Scripts.Models.GUIs
 	[Serializable]
 	public class ValueDisplayGUIModel : BaseGUIModel
 	{
-		[XmlAttribute] public string Value { get; set; }
+		[XmlAttribute]
+		public string Value { get; set; }
 
-		[XmlAttribute] public string MaxValue { get; set; }
+		[XmlAttribute]
+		public string MaxValue { get; set; }
 	}
 }

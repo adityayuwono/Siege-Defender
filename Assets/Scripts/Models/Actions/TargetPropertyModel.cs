@@ -16,6 +16,7 @@ namespace Scripts.Models.Actions
 		[DefaultValue("{This}")]
 		public string Target { get; set; }
 
-		[XmlAttribute] public string Value { get; set; }
+		[XmlAttribute]
+		public string Value { get; set; }
 	}
 }

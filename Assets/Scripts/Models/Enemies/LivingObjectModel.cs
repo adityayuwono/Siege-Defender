@@ -14,11 +14,16 @@ namespace Scripts.Models.Enemies
 			ProjectileLimit = 3;
 		}
 
-		[XmlAttribute] [DefaultValue(1)] public int Health { get; set; }
+		[XmlAttribute]
+		[DefaultValue(1)]
+		public int Health { get; set; }
 
-		[XmlElement] public TriggeredModel Trigger { get; set; }
+		[XmlElement]
+		public TriggeredModel Trigger { get; set; }
 
-		[XmlAttribute] [DefaultValue("")] public string CollisionEffectNormal { get; set; }
+		[XmlAttribute]
+		[DefaultValue("")]
+		public string CollisionEffectNormal { get; set; }
 
 		public int ProjectileLimit { get; protected set; }
 	}

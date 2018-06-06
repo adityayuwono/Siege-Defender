@@ -6,6 +6,7 @@ namespace Scripts.Models
 	[Serializable]
 	public class EnemyManagerModel : IntervalModel
 	{
-		[XmlAttribute] public string LevelId { get; set; }
+		[XmlAttribute]
+		public string LevelId { get; set; }
 	}
 }

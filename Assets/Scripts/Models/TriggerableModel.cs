@@ -17,6 +17,7 @@ namespace Scripts.Models
 			set { Triggers = value; }
 		}
 
-		[XmlIgnore] public List<TriggeredModel> Triggers { get; private set; }
+		[XmlIgnore]
+		public List<TriggeredModel> Triggers { get; private set; }
 	}
 }

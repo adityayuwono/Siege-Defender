@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using Scripts.Models.Weapons;
 
 namespace Scripts.Models
 {
@@ -17,9 +16,11 @@ namespace Scripts.Models
 			EquipmentSlots = new List<EquipmentSlotModel>();
 		}
 
-		[XmlAttribute] public string Source { get; set; }
+		[XmlAttribute]
+		public string Source { get; set; }
 
-		[XmlAttribute] public int Slots { get; set; }
+		[XmlAttribute]
+		public int Slots { get; set; }
 
 		[XmlElement(ElementName = "Item", Type = typeof(ItemModel))]
 		[XmlElement(ElementName = "Projectile", Type = typeof(ProjectileItemModel))]
@@ -37,21 +38,11 @@ namespace Scripts.Models
 			Level = 1;
 		}
 
-		[XmlAttribute] public string BaseItem { get; set; }
+		[XmlAttribute]
+		public string BaseItem { get; set; }
 
 		[XmlAttribute]
 		[DefaultValue(1)]
 		public int Level { get; set; }
-	}
-
-	[Serializable]
-	public class ProjectileItemModel : ItemModel
-	{
-		[XmlElement] public ProjectileEnchantments Enchantments { get; set; }
-	}
-
-	[Serializable]
-	public class ProjectileEnchantments : ProjectileModel
-	{
 	}
 }

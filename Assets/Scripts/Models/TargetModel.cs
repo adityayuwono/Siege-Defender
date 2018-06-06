@@ -6,6 +6,7 @@ namespace Scripts.Models
 	[Serializable]
 	public class TargetModel : ObjectModel
 	{
-		[XmlAttribute] public string Index { get; set; }
+		[XmlAttribute]
+		public string Index { get; set; }
 	}
 }

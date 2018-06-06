@@ -7,10 +7,13 @@ namespace Scripts.Models
 	[XmlRoot("Shooter")]
 	public class ShooterModel : IntervalModel
 	{
-		[XmlAttribute] public string ProjectileId { get; set; }
+		[XmlAttribute]
+		public string ProjectileId { get; set; }
 
-		[XmlElement] public TargetModel Target { get; set; }
+		[XmlElement]
+		public TargetModel Target { get; set; }
 
-		[XmlAttribute] public string Index { get; set; }
+		[XmlAttribute]
+		public string Index { get; set; }
 	}
 }

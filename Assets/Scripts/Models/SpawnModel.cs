@@ -11,10 +11,15 @@ namespace Scripts.Models
 			SpawnIndexOverride = -1;
 		}
 
-		[XmlAttribute] [DefaultValue(1)] public int Count { get; set; }
+		[XmlAttribute]
+		[DefaultValue(1)]
+		public int Count { get; set; }
 
-		[XmlAttribute] public string EnemyId { get; set; }
+		[XmlAttribute]
+		public string EnemyId { get; set; }
 
-		[XmlAttribute] [DefaultValue(-1)] public int SpawnIndexOverride { get; set; }
+		[XmlAttribute]
+		[DefaultValue(-1)]
+		public int SpawnIndexOverride { get; set; }
 	}
 }

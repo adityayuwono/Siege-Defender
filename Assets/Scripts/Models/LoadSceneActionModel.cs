@@ -12,6 +12,7 @@ namespace Scripts.Models
 			Target = "";
 		}
 
-		[XmlAttribute] public string LevelId { get; set; }
+		[XmlAttribute]
+		public string LevelId { get; set; }
 	}
 }

@@ -12,6 +12,8 @@ namespace Scripts.Models.Weapons
 			DamageReduction = 0.75f;
 		}
 
-		[XmlAttribute] [DefaultValue(0.75f)] public float DamageReduction { get; set; }
+		[XmlAttribute]
+		[DefaultValue(0.75f)]
+		public float DamageReduction { get; set; }
 	}
 }

@@ -10,9 +10,11 @@ namespace Scripts.Models.Enemies
 			Max = int.MaxValue;
 		}
 
-		[XmlAttribute] public float Chance { get; set; }
+		[XmlAttribute]
+		public float Chance { get; set; }
 
-		[XmlAttribute] public string ItemId { get; set; }
+		[XmlAttribute]
+		public string ItemId { get; set; }
 
 		[XmlAttribute]
 		[DefaultValue(int.MaxValue)]

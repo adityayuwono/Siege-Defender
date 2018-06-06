@@ -6,6 +6,7 @@ namespace Scripts.Models
 	[Serializable]
 	public class IntervalModel : RandomPositionManagerModel
 	{
-		[XmlAttribute] public float Interval { get; set; }
+		[XmlAttribute]
+		public float Interval { get; set; }
 	}
 }

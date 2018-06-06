@@ -6,6 +6,7 @@ namespace Scripts.Models
 	[Serializable]
 	public class ElementModel : ObjectModel
 	{
-		[XmlAttribute] public string IsVisible { get; set; }
+		[XmlAttribute]
+		public string IsVisible { get; set; }
 	}
 }

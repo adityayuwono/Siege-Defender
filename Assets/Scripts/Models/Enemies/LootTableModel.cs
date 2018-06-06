@@ -11,7 +11,8 @@ namespace Scripts.Models.Enemies
 			Loots = new List<LootModel>();
 		}
 
-		[XmlAttribute] public int Drops { get; set; }
+		[XmlAttribute]
+		public int Drops { get; set; }
 
 		[XmlElement(ElementName = "Loot", Type = typeof(LootModel))]
 		public List<LootModel> Loots { get; set; }

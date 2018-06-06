@@ -11,6 +11,7 @@ namespace Scripts.Models.Actions
 			Target = "{This.SpecialEffect}";
 		}
 
-		[XmlAttribute] public string SpecialEffectId { get; set; }
+		[XmlAttribute]
+		public string SpecialEffectId { get; set; }
 	}
 }
