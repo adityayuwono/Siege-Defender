@@ -1,9 +1,10 @@
 <Engine Id="SiegeDefender">
   <Objects>
-    <Projectile Id="IronBullet" Damage="3-3"
+    <Projectile Id="Ascalon" Damage="4-4"
       AssetId="Projectiles/IronBullet"
-      RoF="0.05" Ammunition="10000" ReloadTime="1"
+      RoF="0.05" Ammunition="10" ReloadTime="1"
       Scatters="1"
+      AoEId="AscalonExplosion"
       CriticalChance="0.5" CriticalDamageMultiplier="1.1"
       Accuracy="1" Deviation="0" />
     <Projectile Id="WoodArrow" Damage="6-10"
@@ -47,12 +48,6 @@
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
 
-    <Projectile Id="Ascalon" Damage="1-2"
-			AssetId="Projectiles/Ascalon" AoEId="AscalonExplosion"
-			RoF="0.125" Ammunition="9" ReloadTime="2"
-			SpeedDeviation="300-600"
-      CriticalChance="0.1" CriticalDamageMultiplier="100"
-			Accuracy="0.75" Deviation="0" Scatters="3" />
     <Projectile Id="SkySplitter" Damage="1-3"
 			AssetId="Projectiles/SkySplitter" AoEId="LightningStrike"
 			RoF="0.6" Ammunition="99" ReloadTime="4"
@@ -62,7 +57,7 @@
     <ParticleAoE Id="FireDome" 
       AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" DamageMultiplier="0.75" Scatters="1" />
     <ParticleAoE Id="AscalonExplosion" 
-      AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="3" DamageMultiplier="1" />
+      AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" DamageMultiplier="1" />
     <ParticleAoE Id="LightningStrike" 
       AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" DamageMultiplier="3" IsGrounded="true" />
 
@@ -384,14 +379,14 @@
   <Scenes>
     <Scene Id="MainMenu" AssetId="MainMenu">
       <Elements>
-        <Button AssetId="WeaponSelection" >
+        <Button AssetId="Inventory" >
           <Triggers>
             <EventTrigger Event="Click">
-              <LoadScene Target="SkillTree" />
+              <LoadScene Target="Inventory" />
             </EventTrigger>
           </Triggers>
         </Button>
-        <Button AssetId="StartGame">
+        <Button AssetId="Play">
           <Triggers>
             <EventTrigger Event="Click">
               <LoadScene Target="Play" LevelId="Level1" />
@@ -401,17 +396,17 @@
         <Button AssetId="Options">
           <Triggers>
             <EventTrigger Event="Click">
-              <LoadScene Target="OptionsMenu" />
+              <LoadScene Target="Options" />
             </EventTrigger>
           </Triggers>
         </Button>
       </Elements>
     </Scene>
 
-    <Scene Id="OptionsMenu" AssetId="OptionsMenu">
+    <Scene Id="Options" AssetId="Options">
       <Elements>
         <Inventory Id="OptionsInventory" Source="PlayerOptions" AssetId="OptionsInventory" />
-        <Button AssetId="BackToMainMenu" >
+        <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">
               <LoadScene Target="MainMenu" />
@@ -421,13 +416,20 @@
       </Elements>
     </Scene>
 
-    <Scene Id="SkillTree" AssetId="SkillTree">
+    <Scene Id="Inventory" AssetId="Inventory">
       <Elements>
-        <Inventory Id="PlayerInventory" Source="PlayerInventory" AssetId="Inventory" />
-        <Button AssetId="BackToMainMenu" >
+        <Inventory Id="PlayerInventory" Source="PlayerInventory" AssetId="InventoryRoot/PlayerInventory" />
+        <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">
               <LoadScene Target="MainMenu" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
+        <Button AssetId="Play" >
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="Play" LevelId="Level1" />
             </EventTrigger>
           </Triggers>
         </Button>

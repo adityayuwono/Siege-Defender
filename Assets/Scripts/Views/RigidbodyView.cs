@@ -32,14 +32,18 @@ namespace Scripts.Views
 			if (_rigidbody == null)
 			{
 				_rigidbody = GameObject.AddComponent<Rigidbody>();
-				_rigidbody.isKinematic = true;
 			}
 
-			// Recalculate center of mass
-			var centerOfMass = Transform.Find("CenterOfMass");
-			if (centerOfMass != null)
+			if (_rigidbody != null)
 			{
-				_rigidbody.centerOfMass = centerOfMass.localPosition;
+				_rigidbody.isKinematic = true;
+
+				// Recalculate center of mass
+				var centerOfMass = Transform.Find("CenterOfMass");
+				if (centerOfMass != null)
+				{
+					_rigidbody.centerOfMass = centerOfMass.localPosition;
+				}
 			}
 		}
 

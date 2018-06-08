@@ -1,6 +1,8 @@
-﻿using Scripts.Helpers;
+﻿using Scripts.Core;
+using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Views
@@ -32,10 +34,12 @@ namespace Scripts.Views
 		protected override Transform GetParent()
 		{
 			if (_parent == null)
+			{
 				throw new EngineException(this, "Parent is null");
+			}
 
 			var parentTransform = _parent.Transform;
-			var parentItemTable = _parent.Transform.Find("ItemSlot");
+			var parentItemTable = _parent.Transform.Find(InventoryView.ItemSlotRoots);
 			if (parentItemTable != null)
 			{
 				parentTransform = parentItemTable;
@@ -48,8 +52,8 @@ namespace Scripts.Views
 		{
 			base.OnLoad();
 
-			GameObject.GetComponent<UISprite>().spriteName = _viewModel.BaseItem;
-			GameObject.GetComponent<UIButton>().normalSprite = _viewModel.BaseItem;
+			GameObject.GetComponent<Image>().sprite =
+				SpriteLookup.Instance.GetSpriteByName(_viewModel.BaseItem);
 		}
 
 		protected override void OnShow()

@@ -1,11 +1,14 @@
-﻿using Scripts.ViewModels;
+﻿using Scripts.Components.UI;
+using Scripts.ViewModels;
 
 namespace Scripts.Views
 {
 	public class InventoryView : ElementView
 	{
+		public const string ItemSlotRoots = "ItemSlot";
+
 		private readonly Inventory _viewModel;
-		private UITable _uiTable;
+		private Table table;
 
 		public InventoryView(Inventory viewModel, ObjectView parent)
 			: base(viewModel, parent)
@@ -17,14 +20,17 @@ namespace Scripts.Views
 
 		private void Children_OnChanged()
 		{
-			if (_uiTable != null) _uiTable.Reposition();
+			if (table != null)
+			{
+				table.Reposition();
+			}
 		}
 
 		protected override void OnLoad()
 		{
 			base.OnLoad();
 
-			_uiTable = Transform.Find("ItemSlot").GetComponent<UITable>();
+			table = Transform.Find("ItemSlot").GetComponent<Table>();
 		}
 
 		protected override void OnDestroy()

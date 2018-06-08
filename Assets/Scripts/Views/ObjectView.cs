@@ -28,7 +28,10 @@ namespace Scripts.Views
 		{
 			get
 			{
-				if (_gameObject == null) throw new EngineException(this, "GameObject is null");
+				if (_gameObject == null)
+				{
+					throw new EngineException(this, "GameObject is null");
+				}
 
 				return _gameObject;
 			}
@@ -75,7 +78,11 @@ namespace Scripts.Views
 
 			GameObject.AddComponent<ViewModelController>().ViewModel = _viewModel;
 
-			GameObject.transform.parent = GetParent();
+			var parent = GetParent();
+			if (parent != null)
+			{
+				GameObject.transform.SetParent(parent);
+			}
 
 			_viewModel.OnStartSpecialEvent += Object_OnStartSpecialEvent;
 		}

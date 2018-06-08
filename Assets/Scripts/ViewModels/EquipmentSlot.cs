@@ -65,13 +65,15 @@ namespace Scripts.ViewModels
 			// Remove it from the inventory, do this first to make sure there's a spot left in the inventory
 			inventoryParent.ReleaseItem(itemViewModel);
 
-			if (_currentItem != null)
-			{
-				inventoryParent.AddItem(_currentItem); // Send the current item back to inventory
-			}
-
+			var oldItem = _currentItem;
 			_currentItem = itemViewModel; // Swap the current item
 			_currentItem.ChangeParent(this);
+
+			if (oldItem != null)
+			{
+				inventoryParent.AddItem(oldItem); // Send the current item back to inventory
+			}
+
 			_model.Item = _currentItem.Model; // Save the change to model
 			ItemId.SetValue(_currentItem.BaseItem); // Update projectile used
 

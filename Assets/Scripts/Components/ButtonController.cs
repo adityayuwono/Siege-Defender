@@ -7,7 +7,7 @@ namespace Scripts.Components
 	{
 		public Action OnClicked;
 
-		public void OnClick()
+		public void OnMouseUp()
 		{
 			// Yes, it's this simple
 			OnClicked();

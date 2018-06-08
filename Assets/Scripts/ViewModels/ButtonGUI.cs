@@ -18,7 +18,10 @@ namespace Scripts.ViewModels
 		public void OnClicked()
 		{
 			// Invoke all actions related to this button
-			if (OnClick != null) OnClick();
+			if (OnClick != null)
+			{
+				OnClick();
+			}
 		}
 	}
 }
