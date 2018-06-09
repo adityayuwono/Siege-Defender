@@ -1,4 +1,5 @@
-﻿using Scripts.Helpers;
+﻿using Scripts.Extensions;
+using Scripts.Helpers;
 using Scripts.ViewModels.Enemies;
 using UnityEngine;
 

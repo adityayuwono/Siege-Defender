@@ -3,7 +3,7 @@ using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Components
 {
-	public class DragDropContainerController : UIDragDropContainer
+	public class DragDropContainerController : MonoBehaviour
 	{
 		public event System.Action<Object> OnDropped;
 
