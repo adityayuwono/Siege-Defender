@@ -8,12 +8,14 @@ namespace Scripts.ViewModels.GUIs
 	{
 		private readonly LabelGUIModel _model;
 		public readonly Property<string> Text = new Property<string>();
-		public Color Color;
 
 		public LabelGUI(LabelGUIModel model, Base parent) : base(model, parent)
 		{
 			_model = model;
 			Color = Color.white;
 		}
+
+		public int Size { get; protected set; }
+		public Color Color { get; protected set; }
 	}
 }

@@ -1,5 +1,4 @@
-﻿using Scripts.Helpers;
-using Scripts.ViewModels;
+﻿using Scripts.ViewModels;
 using UnityEngine;
 // ReSharper disable RedundantUsingDirective
 using System.Linq; // This is used when iterating inputs, but it's only in Android
@@ -12,7 +11,6 @@ namespace Scripts.Components
 	/// </summary>
 	public class ShootingController : BaseTexturedController
 	{
-		private Rect _clickCheckArea;
 		private Shooter _shooterView;
 
 		protected override void OnSetup()
@@ -20,15 +18,6 @@ namespace Scripts.Components
 			base.OnSetup();
 
 			_shooterView = ViewModel as Shooter;
-		}
-
-		protected override void OnChange()
-		{
-			base.OnChange();
-
-			_clickCheckArea = TextureScreenArea;
-			// Reverse the height, because Mouse position is 0 when at bottom
-			_clickCheckArea.y = Screen.height - _clickCheckArea.y - TextureScreenArea.height;
 		}
 
 		private void Update()
@@ -40,11 +29,17 @@ namespace Scripts.Components
                 else
                     _shooterView.StopShooting();
 #else
+			var rectTransform = MainTexture.GetComponent<RectTransform>();
+			var isRectangleContainsMouse = RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
 			// If Mouse, for testing purposes only
-			if (Input.GetMouseButton(0) && _clickCheckArea.ContainsIfThisIsACircle(Input.mousePosition))
+			if (Input.GetMouseButton(0) && isRectangleContainsMouse)
+			{
 				_shooterView.StartShooting();
+			}
 			else
+			{
 				_shooterView.StopShooting();
+			}
 #endif
 		}
 	}

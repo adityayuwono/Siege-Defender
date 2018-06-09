@@ -28,7 +28,7 @@ namespace Scripts.Views
 		{
 			_parent = newParent.Root.GetView<ObjectView>(newParent);
 
-			Transform.parent = GetParent();
+			Transform.SetParent(GetParent());
 		}
 
 		protected override Transform GetParent()

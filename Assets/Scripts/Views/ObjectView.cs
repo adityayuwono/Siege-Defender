@@ -81,7 +81,7 @@ namespace Scripts.Views
 			var parent = GetParent();
 			if (parent != null)
 			{
-				GameObject.transform.SetParent(parent);
+				GameObject.transform.SetParent(parent, false);
 			}
 
 			_viewModel.OnStartSpecialEvent += Object_OnStartSpecialEvent;

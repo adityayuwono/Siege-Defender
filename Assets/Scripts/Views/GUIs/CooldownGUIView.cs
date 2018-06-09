@@ -1,4 +1,5 @@
 ﻿using Scripts.ViewModels.GUIs;
+using UnityEngine.UI;
 
 namespace Scripts.Views.GUIs
 {
@@ -6,7 +7,7 @@ namespace Scripts.Views.GUIs
 	{
 		private readonly CooldownGUI _viewModel;
 
-		private UITexture _uiTexture;
+		private Image _image;
 
 		public CooldownGUIView(CooldownGUI viewModel, ObjectView parent)
 			: base(viewModel, parent)
@@ -18,12 +19,12 @@ namespace Scripts.Views.GUIs
 		{
 			base.OnLoad();
 
-			_uiTexture = GameObject.GetComponent<UITexture>();
+			_image = GameObject.GetComponent<Image>();
 		}
 
 		protected override void UpdateValueDisplay(float value, float maxValue)
 		{
-			_uiTexture.fillAmount = value / maxValue;
+			_image.fillAmount = value / maxValue;
 		}
 	}
 }

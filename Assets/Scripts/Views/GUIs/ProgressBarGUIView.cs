@@ -1,4 +1,5 @@
 ﻿using Scripts.ViewModels.GUIs;
+using UnityEngine.UI;
 
 namespace Scripts.Views.GUIs
 {
@@ -6,7 +7,7 @@ namespace Scripts.Views.GUIs
 	{
 		private readonly ProgressBarGUI _viewModel;
 
-		private UIProgressBar _uiProgressBar;
+		private Image _image;
 
 		public ProgressBarGUIView(ProgressBarGUI viewModel, ObjectView parent)
 			: base(viewModel, parent)
@@ -18,12 +19,12 @@ namespace Scripts.Views.GUIs
 		{
 			base.OnLoad();
 
-			_uiProgressBar = GameObject.GetComponent<UIProgressBar>();
+			_image = GameObject.GetComponent<Image>();
 		}
 
 		protected override void UpdateValueDisplay(float value, float maxValue)
 		{
-			_uiProgressBar.value = value / maxValue;
+			_image.fillAmount = value / maxValue;
 		}
 	}
 }

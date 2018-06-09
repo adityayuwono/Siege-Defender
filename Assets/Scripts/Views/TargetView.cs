@@ -1,5 +1,6 @@
 ﻿using Scripts.Components;
 using Scripts.ViewModels;
+using UnityEngine.UI;
 
 namespace Scripts.Views
 {
@@ -12,10 +13,10 @@ namespace Scripts.Views
 			_viewModel = viewModel;
 		}
 
-		public void SetupController(UITexture uiSprite)
+		public void SetupController(Image image)
 		{
 			var followMouseController = GameObject.AddComponent<AimingController>();
-			followMouseController.MainTexture = uiSprite;
+			followMouseController.MainTexture = image;
 			followMouseController.Setup(_viewModel);
 		}
 	}

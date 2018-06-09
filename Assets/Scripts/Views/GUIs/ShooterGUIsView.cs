@@ -1,6 +1,7 @@
 ﻿using Scripts.Helpers;
 using Scripts.ViewModels.GUIs;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts.Views.GUIs
 {
@@ -25,10 +26,10 @@ namespace Scripts.Views.GUIs
 			_aimingGameObject = _parent.Transform.FindChildRecursivelyBreadthFirst(_viewModel.AimingAssetId).gameObject;
 
 			var targetView = _viewModel.Root.GetView<TargetView>(_viewModel.Shooter.Target);
-			targetView.SetupController(_aimingGameObject.GetComponent<UITexture>());
+			targetView.SetupController(_aimingGameObject.GetComponent<Image>());
 
 			var sourceView = _viewModel.Root.GetView<ShooterView>(_viewModel.Shooter);
-			sourceView.SetupController(GameObject.GetComponent<UITexture>());
+			sourceView.SetupController(GameObject.GetComponent<Image>());
 		}
 	}
 }

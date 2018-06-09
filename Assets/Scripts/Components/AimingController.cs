@@ -1,4 +1,5 @@
-﻿using Scripts.Helpers;
+﻿using Scripts.Extensions;
+using Scripts.Helpers;
 using UnityEngine;
 
 namespace Scripts.Components
@@ -52,7 +53,9 @@ namespace Scripts.Components
 			if (Input.touches.Length > 0)
 			{
 				foreach (var touch in Input.touches)
+				{
 					ProcessTouchOrMouse(touch.position);
+				}
 			}
 			else
 			{
@@ -62,13 +65,17 @@ namespace Scripts.Components
 
 		private void ProcessTouchOrMouse(Vector2 inputPosition)
 		{
-			inputPosition.y = Screen.height - inputPosition.y;
-			if (TextureScreenArea.Contains(inputPosition))
-			{
-				var relativeToCenter = (inputPosition - _circleCenter) * TouchDeviation;
+			var rectTransform = MainTexture.GetComponent<RectTransform>();
+			var isRectangleContainsMouse = RectTransformUtility.RectangleContainsScreenPoint(rectTransform, inputPosition, Camera.main);
 
-				_crosshairRect.x = _halfScreen.x + _halfScreen.x * (relativeToCenter.x / (TextureScreenArea.width / 2f));
-				_crosshairRect.y = _halfScreen.y + _halfScreen.y * (relativeToCenter.y / (TextureScreenArea.height / 2f));
+			if (isRectangleContainsMouse)
+			{
+				var screenRect = rectTransform.ToScreenSpace();
+				var normalizedInputPosition = new Vector2(inputPosition.x, Screen.height - inputPosition.y);
+				var relativeToCenter = (normalizedInputPosition - screenRect.center) * TouchDeviation;
+
+				_crosshairRect.x = _halfScreen.x + _halfScreen.x * (relativeToCenter.x / (screenRect.width/2f));
+				_crosshairRect.y = _halfScreen.y + _halfScreen.y * (relativeToCenter.y / (screenRect.height/2f));
 
 				UpdateObjectPosition(new Vector3(
 					_crosshairRect.x + Screen.height * Values.GuiCrosshairHalfsizeF,
@@ -78,11 +85,7 @@ namespace Scripts.Components
 
 		private void UpdateObjectPosition(Vector3 inputPosition)
 		{
-			// Bug after destruction the MainCamera reference is not cleared, or maybe we fail to hook the new camera at Start
-			if (_mainCamera == null)
-			{
-				_mainCamera = GameObject.Find("Player").GetComponent<Camera>();
-			}
+			_mainCamera = GameObject.Find("Player").GetComponent<Camera>();
 
 			var ray = _mainCamera.ScreenPointToRay(inputPosition);
 			RaycastHit hitInfo;

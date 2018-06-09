@@ -6,7 +6,7 @@ namespace Scripts.Views.GUIs
 	{
 		private readonly LabelGUI _viewModel;
 
-		private UILabel _uiLabel;
+		private UnityEngine.UI.Text _text;
 
 		public LabelGUIView(LabelGUI viewModel, ObjectView parent)
 			: base(viewModel, parent)
@@ -18,15 +18,16 @@ namespace Scripts.Views.GUIs
 		{
 			base.OnLoad();
 
-			_uiLabel = GameObject.GetComponent<UILabel>();
+			_text = GameObject.GetComponent<UnityEngine.UI.Text>();
 			_viewModel.Text.OnChange += Text_OnChange;
 			Text_OnChange();
 		}
 
 		private void Text_OnChange()
 		{
-			_uiLabel.color = _viewModel.Color;
-			_uiLabel.text = _viewModel.Text.GetValue();
+			_text.color = _viewModel.Color;
+			_text.fontSize = _viewModel.Size;
+			_text.text = _viewModel.Text.GetValue();
 		}
 	}
 }

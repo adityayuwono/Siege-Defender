@@ -8,7 +8,6 @@ Library/*
 /Assets/UnityVS*
 *Debug/
 *.suo
-*.csproj
 *.sln
 *.unityproj
 *.DotSettings

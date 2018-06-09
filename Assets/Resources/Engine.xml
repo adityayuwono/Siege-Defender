@@ -5,7 +5,7 @@
       RoF="0.05" Ammunition="10" ReloadTime="1"
       Scatters="1"
       AoEId="AscalonExplosion"
-      CriticalChance="0.5" CriticalDamageMultiplier="1.1"
+      CriticalChance="0.5" CriticalDamageMultiplier="2"
       Accuracy="1" Deviation="0" />
     <Projectile Id="WoodArrow" Damage="6-10"
 			AssetId="Projectiles/WoodenBalista"
@@ -57,7 +57,7 @@
     <ParticleAoE Id="FireDome" 
       AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" DamageMultiplier="0.75" Scatters="1" />
     <ParticleAoE Id="AscalonExplosion" 
-      AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" DamageMultiplier="1" />
+      AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" DamageMultiplier="2" />
     <ParticleAoE Id="LightningStrike" 
       AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" DamageMultiplier="3" IsGrounded="true" />
 
@@ -446,6 +446,7 @@
         <SpecialEffectManager AssetId="SpecialEffectRoot" />
 
         <Element Id="Player" AssetId="EnemyTarget" />
+        <DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
 
         <Player Id="PlayerCamera" AssetId="Player" Health="100" >
           <Shooters>
@@ -463,17 +464,17 @@
           </Triggers>
         </Player>
 
-        <GUIRoot AssetId="UIRoot">
+        <GUIRoot AssetId="Canvas">
           <Elements>
-            <ProgressBar AssetId="HealthBar" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
-            <DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" />
-            <Button AssetId="BackToMainMenu" >
+            <ProgressBar AssetId="HealthBarBackground/HealthBar" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
+            
+            <!-- <Button AssetId="BackToMainMenu" >
               <Triggers>
                 <EventTrigger Event="Click">
                   <LoadScene Target="MainMenu" />
                 </EventTrigger>
               </Triggers>
-            </Button>
+            </Button> -->
             <Element AssetId="LoadingCover" IsVisible="{This.IsLoadingInProgress}" />
 
             <Element AssetId="{Inventories.ControlStyle}" >

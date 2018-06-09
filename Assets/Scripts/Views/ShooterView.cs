@@ -1,6 +1,7 @@
 ﻿using Scripts.Components;
 using Scripts.ViewModels;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts.Views
 {
@@ -66,10 +67,10 @@ namespace Scripts.Views
 			base.OnDestroy();
 		}
 
-		public void SetupController(UITexture uiSprite)
+		public void SetupController(Image image)
 		{
 			var shootingUI = GameObject.AddComponent<ShootingController>();
-			shootingUI.MainTexture = uiSprite;
+			shootingUI.MainTexture = image;
 			shootingUI.Setup(_viewModel);
 		}
 	}

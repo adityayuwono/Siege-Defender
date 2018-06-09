@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6834ef69f4b8ab14192925ac79e8a924
-timeCreated: 1528424934
+timeCreated: 1528485480
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -13,6 +13,9 @@ TextureImporter:
     21300012: Atlas_1
     21300014: Atlas_2
     21300016: Atlas_3
+    21300018: Atlas_4
+    21300020: Atlas_5
+    21300022: Atlas_6
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -136,8 +139,8 @@ TextureImporter:
       name: Bottom
       rect:
         serializedVersion: 2
-        x: 56
-        y: 682
+        x: 57
+        y: 681
         width: 1161
         height: 113
       alignment: 0
@@ -227,6 +230,48 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Atlas_4
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 512
+        width: 251
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Atlas_5
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 379
+        width: 335
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 10, y: 15, z: 35, w: 15}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Atlas_6
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 291
+        width: 212
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 10, y: 0, z: 10, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
