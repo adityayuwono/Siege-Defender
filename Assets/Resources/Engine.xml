@@ -466,7 +466,7 @@
 
         <GUIRoot AssetId="Canvas">
           <Elements>
-            <ProgressBar AssetId="HealthBarBackground/HealthBar" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
+            <ProgressBar AssetId="HealthBar" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
             
             <!-- <Button AssetId="BackToMainMenu" >
               <Triggers>
