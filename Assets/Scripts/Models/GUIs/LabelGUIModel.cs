@@ -3,7 +3,7 @@
 namespace Scripts.Models.GUIs
 {
 	[Serializable]
-	public class LabelGUIModel : ElementModel
+	public class LabelGUIModel : ObjectModel
 	{
 	}
 }

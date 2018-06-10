@@ -41,14 +41,14 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
 		[XmlArrayItem(ElementName = "ObjectSpawn", Type = typeof(ObjectSpawnModel))]
 		[XmlArrayItem(ElementName = "SpecialEffectManager", Type = typeof(SpecialEffectManagerModel))]
-		public List<ElementModel> ElementsSerialized
+		public List<ObjectModel> ElementsSerialized
 		{
 			get { return Elements != null ? (Elements.Count > 0 ? Elements : null) : null; }
 			set { Elements = value; }
 		}
 
 		[XmlIgnore]
-		public List<ElementModel> Elements { get; private set; }
+		public List<ObjectModel> Elements { get; private set; }
 
 		[XmlAttribute]
 		public string AssetId { get; set; }
