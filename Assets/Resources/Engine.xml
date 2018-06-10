@@ -298,6 +298,10 @@
           <Condition Target="{This.Health}" Value="\1110" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
+
+        <EventTrigger Event="Death">
+          <LoadScene Target="GameEnd" />
+        </EventTrigger>
       </Triggers>
     </Boss>
 
@@ -437,18 +441,15 @@
       </Elements>
     </Scene>
 
-    <Scene Id="Play" IsGameScene="true" AssetId="Play">
+    <Scene Id="Game" IsGameScene="true" AssetId="Game">
       <Elements>
         <ObjectSpawn AssetId="Environtment" LevelId="Houses"/>
-
         <EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" />
-
-        <PlayerHitbox AssetId="PlayerHealth" />
         <SpecialEffectManager AssetId="SpecialEffectRoot" />
-
         <Element Id="Player" AssetId="EnemyTarget" />
         <DamageDisplay AssetId="DamageDisplayRoot" DamageGUI="StandardDamageGUI" HealthBarGUI="StandardHealthBar" />
 
+        <PlayerHitbox AssetId="PlayerHealth" />
         <Player Id="PlayerCamera" AssetId="Player" Health="100" >
           <Shooters>
             <Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Inventories.LeftShooter}" >
@@ -477,7 +478,6 @@
               </Triggers>
             </Button>
             <Element AssetId="LoadingCover" IsVisible="{This.IsLoadingInProgress}" />
-
             <Element AssetId="{Inventories.ControlStyle}" >
               <Elements>
                 <CooldownGUI AssetId="AmmunitionLeft" Value="{ShooterWeaponLeft.Ammunition}" MaxValue="{ShooterWeaponLeft.MaxAmmunition}" />
@@ -490,6 +490,18 @@
         </GUIRoot>
 
         <Element AssetId="Ground" />
+      </Elements>
+    </Scene>
+
+    <Scene Id="GameEnd" AssetId="GameEnd">
+      <Elements>
+        <Button AssetId="MainMenu" >
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="MainMenu" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
       </Elements>
     </Scene>
   </Scenes>
