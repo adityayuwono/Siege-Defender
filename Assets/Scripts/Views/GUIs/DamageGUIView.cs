@@ -17,7 +17,7 @@ namespace Scripts.Views.GUIs
 		{
 			_viewModel.Root.Context.IntervalRunner.SubscribeToInterval(Hide, _viewModel.HideDelay, false);
 
-			var targetPosition = (_viewModel.Position + Vector3.up * 2f) + Vector3.right * Random.Range(-1, 1);
+			var targetPosition = _viewModel.Position + Vector3.up * 2f;
 			iTween.MoveTo(GameObject, targetPosition, _viewModel.HideDelay);
 		}
 
