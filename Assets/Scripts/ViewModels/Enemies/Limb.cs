@@ -11,6 +11,8 @@ namespace Scripts.ViewModels.Enemies
 	/// </summary>
 	public class Limb : LivingObject
 	{
+		public event Action OnBreak;
+
 		private readonly LimbModel _model;
 		private readonly Enemy _parent;
 
@@ -32,23 +34,35 @@ namespace Scripts.ViewModels.Enemies
 			return _parent.ApplyDamage(damageMultiplied, isCrit, Vector3.zero);
 		}
 
-		public event Action OnBreak;
+		protected override void CreateHealthBar()
+		{
+		}
+
+		protected override void HideHealthBar(string reason)
+		{
+		}
 
 		protected override void OnKilled()
 		{
 			if (OnBreak != null)
+			{
 				OnBreak();
+			}
 
 			_isBroken = true;
 
 			if (!string.IsNullOrEmpty(_model.CollisionEffectBroken))
+			{
 				CollisionEffectNormal = _model.CollisionEffectBroken;
+			}
 		}
 
 		public void Kill()
 		{
 			if (_isBroken)
+			{
 				base.OnKilled();
+			}
 		}
 	}
 }

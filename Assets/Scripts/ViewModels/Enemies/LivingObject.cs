@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models.Enemies;
+using Scripts.ViewModels.GUIs;
 using Scripts.ViewModels.Weapons;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace Scripts.ViewModels.Enemies
 
 		public readonly AdjustableProperty<string> SpecialEffect;
 		public Action<ProjectileBase> DoAttach;
+		private HealthBar _healthBar;
 
 		protected LivingObject(LivingObjectModel model, Base parent) : base(model, parent)
 		{
@@ -37,6 +39,11 @@ namespace Scripts.ViewModels.Enemies
 
 		protected string CollisionEffectNormal { private get; set; }
 
+		public float HealthPercentage
+		{
+			get { return Health.GetValue() / _model.Health; }
+		}
+
 		public bool IsDead
 		{
 			get { return Health.GetValue() <= 0; }
@@ -52,15 +59,27 @@ namespace Scripts.ViewModels.Enemies
 			base.OnActivate();
 		}
 
+		public override void Show()
+		{
+			base.Show();
+
+			CreateHealthBar();
+		}
+
 		public override void Hide(string reason)
 		{
 			// Cleanup attached projectiles
-			foreach (var projectile in _attachedProjectiles) projectile.Hide(reason);
+			foreach (var projectile in _attachedProjectiles)
+			{
+				projectile.Hide(reason);
+			}
 			_attachedProjectiles.Clear();
+			
+			HideHealthBar(reason);
 
 			base.Hide(reason);
 		}
-
+		
 		/// <summary>
 		///     Reduce health by the amount specified
 		///     Health is only reduced if it is above 0
@@ -70,7 +89,10 @@ namespace Scripts.ViewModels.Enemies
 		/// <param name="source">Set if we want to attach the object to the target</param>
 		public override bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
 		{
-			if (source != null) AttachProjectile(source);
+			if (source != null)
+			{
+				AttachProjectile(source);
+			}
 
 			var currentHealth = Health.GetValue();
 
@@ -78,7 +100,10 @@ namespace Scripts.ViewModels.Enemies
 			if (currentHealth > 0)
 			{
 				currentHealth -= damage;
-				if (currentHealth <= 0) OnKilled();
+				if (currentHealth <= 0)
+				{
+					OnKilled();
+				}
 
 				Health.SetValue(currentHealth);
 			}
@@ -89,10 +114,26 @@ namespace Scripts.ViewModels.Enemies
 				SDRoot.DamageDisplay.DisplayDamage(damage, isCrit, contactPoint);
 
 				if (!string.IsNullOrEmpty(CollisionEffectNormal))
+				{
 					SDRoot.SpecialEffectManager.StartSpecialEffectOn(CollisionEffectNormal, contactPoint);
+				}
 			}
 
 			return true;
+		}
+
+		protected virtual void CreateHealthBar()
+		{
+			_healthBar = SDRoot.DamageDisplay.CreateHealthBar();
+			_healthBar.Activate(this);
+			_healthBar.Show();
+		}
+
+		protected virtual void HideHealthBar(string reason)
+		{
+			_healthBar.Hide(reason);
+
+			_healthBar = null;
 		}
 
 		/// <summary>
@@ -100,7 +141,10 @@ namespace Scripts.ViewModels.Enemies
 		/// </summary>
 		protected virtual void OnKilled()
 		{
-			if (Death != null) Death();
+			if (Death != null)
+			{
+				Death();
+			}
 		}
 
 		private void AttachProjectile(ProjectileBase source)

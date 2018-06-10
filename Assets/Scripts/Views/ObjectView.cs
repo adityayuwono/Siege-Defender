@@ -15,7 +15,6 @@ namespace Scripts.Views
 		private GameObject _gameObject;
 		private bool _isLoaded;
 		protected Vector3 AssetScale;
-		public Transform Transform;
 
 		public ObjectView(Object viewModel, ObjectView parent)
 			: base(viewModel, parent)
@@ -37,6 +36,8 @@ namespace Scripts.Views
 			}
 			private set { _gameObject = value; }
 		}
+
+		public Transform Transform { get; private set; }
 
 		protected override void OnShow()
 		{

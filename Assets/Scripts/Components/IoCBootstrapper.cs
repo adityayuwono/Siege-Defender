@@ -27,7 +27,7 @@ namespace Scripts
 			MapInjections();
 		}
 
-		private void MapInjections()
+		private static void MapInjections()
 		{
 			#region Model to ViewModel
 
@@ -60,6 +60,7 @@ namespace Scripts
 			IoC.IoCContainer.RegisterFor<EnemyModel>().TypeOf<Object>().To<Enemy>();
 			IoC.IoCContainer.RegisterFor<BossModel>().TypeOf<Object>().To<Boss>();
 			IoC.IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<Object>().To<DamageGUI>();
+			IoC.IoCContainer.RegisterFor<HealthBarModel>().TypeOf<Object>().To<HealthBar>();
 
 			IoC.IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
 
@@ -95,6 +96,7 @@ namespace Scripts
 
 			IoC.IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
 			IoC.IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
+			IoC.IoCContainer.RegisterFor<HealthBar>().TypeOf<BaseView>().To<HealthBarView>();
 			IoC.IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectManager>().TypeOf<BaseView>().To<SpecialEffectManagerView>();
 			IoC.IoCContainer.RegisterFor<ObjectDisplay>().TypeOf<BaseView>().To<ObjectDisplayView>();

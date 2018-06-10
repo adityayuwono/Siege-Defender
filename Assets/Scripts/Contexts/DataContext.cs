@@ -92,20 +92,32 @@ namespace Scripts.Contexts
 		private void LoadInventories(List<InventoryModel> inventoryModels)
 		{
 			foreach (var inventoryModel in inventoryModels)
+			{
 				foreach (var equipmentSlot in inventoryModel.EquipmentSlots)
+				{
 					Inventories.Add(equipmentSlot.Id, equipmentSlot);
+				}
+			}
 		}
 
 		private void LoadData(EngineModel model)
 		{
 			// Keep reference of every ObjectModel in a Dictionary for faster lookup
 			if (model.Objects != null)
+			{
 				foreach (var objectModel in model.Objects)
+				{
 					ObjectModels.Add(objectModel.Id, objectModel);
+				}
+			}
 
 			if (model.Items != null)
+			{
 				foreach (var objectModel in model.Items)
+				{
 					Items.Add(objectModel.Id, objectModel);
+				}
+			}
 		}
 
 		private string LoadFile(string path, string defaultIfNotFound)

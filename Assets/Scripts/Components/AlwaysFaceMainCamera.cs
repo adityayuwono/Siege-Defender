@@ -4,12 +4,14 @@ namespace Scripts.Components
 {
 	public class AlwaysFaceMainCamera : MonoBehaviour
 	{
-		private Transform Target;
+		public Transform Target;
  
 		private void  Update ()
 		{
-			var wantedPos = Camera.main.WorldToViewportPoint(Target.position);
-			transform.position = wantedPos;
+			if (Target != null)
+			{
+				transform.position = Target.position;
+			}
 		}
 	}
 }

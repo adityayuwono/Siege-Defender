@@ -28,6 +28,7 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "AoE", Type = typeof(AoEModel))]
 		[XmlArrayItem(ElementName = "ParticleAoE", Type = typeof(ParticleAoEModel))]
 		[XmlArrayItem(ElementName = "DamageGUI", Type = typeof(DamageGUIModel))]
+		[XmlArrayItem(ElementName = "HealthBar", Type = typeof(HealthBarModel))]
 		public List<ObjectModel> Objects { get; set; }
 
 		[XmlArray]

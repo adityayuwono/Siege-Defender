@@ -48,8 +48,12 @@ namespace Scripts.ViewModels
 		protected void Hide(string reason, bool hideChildren)
 		{
 			if (hideChildren)
+			{
 				foreach (var activeObject in _activeObjects)
+				{
 					activeObject.Hide(reason);
+				}
+			}
 
 			base.Hide(reason);
 		}

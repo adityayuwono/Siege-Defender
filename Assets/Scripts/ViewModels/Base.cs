@@ -68,7 +68,10 @@ namespace Scripts.ViewModels
 
 		public void Activate()
 		{
-			if (_isActive) throw new EngineException(this, "Failed to Activate.\n" + _lastDeactivationReason);
+			if (_isActive)
+			{
+				throw new EngineException(this, "Failed to Activate.\n" + _lastDeactivationReason);
+			}
 
 			_isActive = true;
 
@@ -113,10 +116,12 @@ namespace Scripts.ViewModels
 			_lastDeactivationReason = reason;
 
 			if (!_isActive)
+			{
 				throw new EngineException(this,
 					string.Format("Failed to Deactivate\n" +
 								  "Reason for deactivation: {0}\n" +
 								  "Last Deactivation reason was: {1}", reason, lastDeactivationReason));
+			}
 
 			_isActive = false;
 
@@ -125,11 +130,17 @@ namespace Scripts.ViewModels
 
 		public virtual void Hide(string reason)
 		{
-			if (!IsShown) throw new EngineException(this, "Trying to hide twice");
+			if (!IsShown)
+			{
+				throw new EngineException(this, "Trying to hide twice");
+			}
 
 			IsShown = false;
 
-			if (OnHide != null) OnHide(reason);
+			if (OnHide != null)
+			{
+				OnHide(reason);
+			}
 		}
 
 		protected virtual void OnDeactivate()
@@ -142,11 +153,17 @@ namespace Scripts.ViewModels
 
 		public void Destroy()
 		{
-			if (_isActive) Deactivate("Destroyed");
+			if (_isActive)
+			{
+				Deactivate("Destroyed");
+			}
 
 			OnDestroyed();
 
-			if (OnDestroy != null) OnDestroy();
+			if (OnDestroy != null)
+			{
+				OnDestroy();
+			}
 
 			_isLoaded = false; // Finally we will reload a destroyed object
 		}

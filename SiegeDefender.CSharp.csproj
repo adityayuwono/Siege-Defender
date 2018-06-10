@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.2.1p2</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -371,6 +373,7 @@
     <Compile Include="Assets\Scripts\ViewModels\GUIs\DamageDisplayManager.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\DamageGUI.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\GUIRoot.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\GUIs\HealthBar.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\LabelGUI.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\ProgressBarGUI.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\ShooterGUIs.cs" />
@@ -414,6 +417,8 @@
     <Compile Include="Assets\Scripts\Views\GUIs\DamageDisplayView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\DamageGUIView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\GUIRootView.cs" />
+    <Compile Include="Assets\Scripts\Models\GUIs\HealthBarModel.cs" />
+    <Compile Include="Assets\Scripts\Views\GUIs\HealthBarView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\LabelGUIView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\ProgressBarGUIView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\ShooterGUIsView.cs" />

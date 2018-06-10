@@ -1,9 +1,10 @@
 ﻿using Scripts.Models;
+using Scripts.ViewModels.Enemies;
 using UnityEngine;
 
 namespace Scripts.ViewModels.GUIs
 {
-	public class DamageDisplayManager : Interval<DamageGUI>
+	public class DamageDisplayManager : Interval<Object>
 	{
 		private readonly DamageDisplayGUIModel _model;
 
@@ -23,6 +24,12 @@ namespace Scripts.ViewModels.GUIs
 		{
 			var damageGUI = GetObject<DamageGUI>(_model.DamageGUI);
 			damageGUI.ShowDamage(damage, isCrit, position);
+		}
+
+		public HealthBar CreateHealthBar()
+		{
+			var healthBarGUI = GetObject<HealthBar>(_model.HealthBarGUI);
+			return healthBarGUI;
 		}
 	}
 }

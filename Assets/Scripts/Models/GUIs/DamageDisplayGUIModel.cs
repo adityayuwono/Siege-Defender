@@ -6,5 +6,8 @@ namespace Scripts.Models
 	{
 		[XmlAttribute]
 		public string DamageGUI { get; set; }
+
+		[XmlAttribute]
+		public string HealthBarGUI { get; set; }
 	}
 }

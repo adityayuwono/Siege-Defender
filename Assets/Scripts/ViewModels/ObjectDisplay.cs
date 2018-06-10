@@ -37,7 +37,9 @@ namespace Scripts.ViewModels
 		{
 			var currentObjectVM = CurrentObject.GetValue();
 			if (currentObjectVM != null)
+			{
 				currentObjectVM.Hide("Changing displayed object");
+			}
 
 			var newProjectile = GetObject<Object>(ObjectIdBinding.GetValue());
 			newProjectile.Activate();

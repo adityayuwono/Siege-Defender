@@ -81,7 +81,10 @@ namespace Scripts.ViewModels
 
 			ActiveObjects.OnChange += CheckIfAllObjectsAreDeactivated;
 
-			foreach (var activeObject in activeObjects) activeObject.Hide("Just for caching");
+			foreach (var activeObject in activeObjects)
+			{
+				activeObject.Hide("Just for caching");
+			}
 		}
 
 		private void CheckIfAllObjectsAreDeactivated()

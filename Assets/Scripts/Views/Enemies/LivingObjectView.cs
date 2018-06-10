@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Scripts.Extensions;
-using Scripts.Helpers;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.Weapons;
 using Scripts.Views.Weapons;
@@ -22,6 +21,8 @@ namespace Scripts.Views.Enemies
 			_viewModel = viewModel;
 		}
 
+		public Transform HealthBarRoot { get; private set; }
+
 		protected override void OnLoad()
 		{
 			base.OnLoad();
@@ -31,14 +32,18 @@ namespace Scripts.Views.Enemies
 			if (projectileRoot != null)
 			{
 				if (projectileRoot.childCount > 0)
+				{
 					for (var i = 0; i < projectileRoot.childCount; i++)
 					{
 						var rootChild = projectileRoot.GetChild(i);
 						_projectileRooTransform.Add(rootChild);
 					}
+				}
 
 				_projectileRooTransform.Add(projectileRoot);
 			}
+
+			HealthBarRoot = Transform.FindChildRecursivelyBreadthFirst("HealthBarRoot");
 		}
 
 		protected override void OnShow()

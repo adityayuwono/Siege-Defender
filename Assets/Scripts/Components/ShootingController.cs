@@ -22,14 +22,18 @@ namespace Scripts.Components
 
 		private void Update()
 		{
+			var rectTransform = MainTexture.GetComponent<RectTransform>();
 #if !UNITY_EDITOR
 // If Android
-                if (Input.touches.Any(touch => _clickCheckArea.Contains(touch.position)))
-                    _shooterView.StartShooting();
-                else
-                    _shooterView.StopShooting();
+			if (Input.touches.Any(touch => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, touch.position, Camera.main)))
+			{
+				_shooterView.StartShooting();
+			}
+			else
+			{
+				_shooterView.StopShooting();
+			}
 #else
-			var rectTransform = MainTexture.GetComponent<RectTransform>();
 			var isRectangleContainsMouse = RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition, Camera.main);
 			// If Mouse, for testing purposes only
 			if (Input.GetMouseButton(0) && isRectangleContainsMouse)

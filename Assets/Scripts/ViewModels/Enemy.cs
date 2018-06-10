@@ -8,6 +8,10 @@ namespace Scripts.ViewModels
 {
 	public class Enemy : LivingObject, IContext
 	{
+		public event Action Spawn;
+		public event Action Walk;
+		public event Action Attack;
+		
 		private readonly EnemyModel _model;
 		public readonly AdjustableProperty<string> AnimationId;
 		private PropertyLookup _propertyLookup;
@@ -40,7 +44,10 @@ namespace Scripts.ViewModels
 		{
 			get
 			{
-				if (_propertyLookup == null) _propertyLookup = new PropertyLookup(Root, this);
+				if (_propertyLookup == null)
+				{
+					_propertyLookup = new PropertyLookup(Root, this);
+				}
 
 				return _propertyLookup;
 			}
@@ -50,7 +57,10 @@ namespace Scripts.ViewModels
 		{
 			base.OnLoad();
 
-			if (!string.IsNullOrEmpty(_model.Target)) Target = Root.GetViewModelAsType<Object>(_model.Target);
+			if (!string.IsNullOrEmpty(_model.Target))
+			{
+				Target = Root.GetViewModelAsType<Object>(_model.Target);
+			}
 		}
 
 		protected override void OnKilled()
@@ -69,25 +79,29 @@ namespace Scripts.ViewModels
 
 		#region Events
 
-		public event Action Spawn;
-
 		public void OnSpawn()
 		{
-			if (Spawn != null) Spawn();
+			if (Spawn != null)
+			{
+				Spawn();
+			}
 		}
-
-		public event Action Walk;
 
 		public void OnWalk()
 		{
-			if (Walk != null) Walk();
+			if (Walk != null)
+			{
+				Walk();
+			}
 		}
 
-		public event Action Attack;
 
 		public void OnAttack()
 		{
-			if (Attack != null) Attack();
+			if (Attack != null)
+			{
+				Attack();
+			}
 		}
 
 		#endregion
