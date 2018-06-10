@@ -19,33 +19,8 @@ namespace Scripts.Views
 		{
 			base.OnLoad();
 
-			_collider = GameObject.GetComponent<Collider>();
-			if (_collider == null)
-			{
-				_collider = GameObject.GetComponentInChildren<Collider>();
-			}
-
-			_rigidbody = GameObject.GetComponent<Rigidbody>();
-			if (_rigidbody == null)
-			{
-				_rigidbody = GameObject.GetComponentInChildren<Rigidbody>();
-			}
-			if (_rigidbody == null)
-			{
-				_rigidbody = GameObject.AddComponent<Rigidbody>();
-			}
-
-			if (_rigidbody != null)
-			{
-				_rigidbody.isKinematic = true;
-
-				// Recalculate center of mass
-				var centerOfMass = Transform.Find("CenterOfMass");
-				if (centerOfMass != null)
-				{
-					_rigidbody.centerOfMass = centerOfMass.localPosition;
-				}
-			}
+			PrepareColliderComponent();
+			PrepareRigidbodyComponent();
 		}
 
 		protected override void OnShow()
@@ -88,6 +63,42 @@ namespace Scripts.Views
 		{
 			_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 			_rigidbody.isKinematic = isKinematic;
+		}
+
+		private void PrepareColliderComponent()
+		{
+			_collider = GameObject.GetComponent<Collider>();
+			if (_collider == null)
+			{
+				_collider = GameObject.GetComponentInChildren<Collider>();
+			}
+		}
+
+		private void PrepareRigidbodyComponent()
+		{
+			_rigidbody = GameObject.GetComponent<Rigidbody>();
+			if (_rigidbody == null)
+			{
+				_rigidbody = GameObject.GetComponentInChildren<Rigidbody>();
+			}
+			if (_rigidbody == null)
+			{
+				if (GameObject.GetComponent<BoxCollider2D>() == null)
+				{
+					_rigidbody = GameObject.AddComponent<Rigidbody>();
+				}
+			}
+			if (_rigidbody != null)
+			{
+				_rigidbody.isKinematic = true;
+
+				// Recalculate center of mass
+				var centerOfMass = Transform.Find("CenterOfMass");
+				if (centerOfMass != null)
+				{
+					_rigidbody.centerOfMass = centerOfMass.localPosition;
+				}
+			}
 		}
 	}
 }
