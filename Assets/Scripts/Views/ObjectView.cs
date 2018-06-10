@@ -54,15 +54,6 @@ namespace Scripts.Views
 			SetPosition();
 		}
 
-		private void Object_OnStartSpecialEvent()
-		{
-			var specialEventControllers = GameObject.GetComponents<BaseSpecialEventController>();
-			foreach (var specialEventController in specialEventControllers)
-			{
-				specialEventController.StartSpecialEvent(_viewModel.Root);
-			}
-		}
-
 		protected override void OnHide(string reason)
 		{
 			base.OnHide(reason);
@@ -140,11 +131,6 @@ namespace Scripts.Views
 			return controller;
 		}
 
-		private void KillGameObject(string reason)
-		{
-			_viewModel.Root.Context.IntervalRunner.SubscribeToInterval(OnDeath, _viewModel.DeathDelay, false);
-		}
-
 		protected void OnDeath()
 		{
 			if (_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(OnDeath) && _gameObject != null)
@@ -172,6 +158,20 @@ namespace Scripts.Views
 			_gameObject = null;
 
 			base.OnDestroy();
+		}
+
+		private void Object_OnStartSpecialEvent()
+		{
+			var specialEventControllers = GameObject.GetComponents<BaseSpecialEventController>();
+			foreach (var specialEventController in specialEventControllers)
+			{
+				specialEventController.StartSpecialEvent(_viewModel.Root);
+			}
+		}
+
+		private void KillGameObject(string reason)
+		{
+			_viewModel.Root.Context.IntervalRunner.SubscribeToInterval(OnDeath, _viewModel.DeathDelay, false);
 		}
 	}
 }

@@ -24,9 +24,13 @@ namespace Scripts.ViewModels
 			var specialEffect = GetObject<SpecialEffect>(id);
 
 			if (_specialEffects.ContainsKey(viewModel))
+			{
 				_specialEffects[viewModel] = specialEffect;
+			}
 			else
+			{
 				_specialEffects.Add(viewModel, specialEffect);
+			}
 
 			specialEffect.ShowSpecialEffect(viewModel);
 		}
@@ -34,7 +38,10 @@ namespace Scripts.ViewModels
 		public void StopSpecialEffectOn(Object viewModel)
 		{
 			if (!_specialEffects.ContainsKey(viewModel))
-				throw new EngineException(this, string.Format("Failed to find SpecialEffect on {0}", viewModel.Id));
+			{
+				throw new EngineException(this, 
+					string.Format("Failed to find SpecialEffect on {0}", viewModel.Id));
+			}
 			var specialEffect = _specialEffects[viewModel];
 			specialEffect.StopImmediatelly();
 		}

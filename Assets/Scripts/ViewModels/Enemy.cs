@@ -95,7 +95,6 @@ namespace Scripts.ViewModels
 			}
 		}
 
-
 		public void OnAttack()
 		{
 			if (Attack != null)

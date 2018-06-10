@@ -1,5 +1,4 @@
 ﻿using Scripts.Models;
-using Scripts.ViewModels.Enemies;
 using UnityEngine;
 
 namespace Scripts.ViewModels.GUIs
@@ -13,13 +12,6 @@ namespace Scripts.ViewModels.GUIs
 			_model = model;
 		}
 
-		protected override void OnLoad()
-		{
-			base.OnLoad();
-
-			SDRoot.DamageDisplay = this;
-		}
-
 		public void DisplayDamage(float damage, bool isCrit, Vector3 position)
 		{
 			var damageGUI = GetObject<DamageGUI>(_model.DamageGUI);
@@ -30,6 +22,13 @@ namespace Scripts.ViewModels.GUIs
 		{
 			var healthBarGUI = GetObject<HealthBar>(_model.HealthBarGUI);
 			return healthBarGUI;
+		}
+
+		protected override void OnLoad()
+		{
+			base.OnLoad();
+
+			SDRoot.DamageDisplay = this;
 		}
 	}
 }

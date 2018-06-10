@@ -18,9 +18,13 @@ namespace Scripts.ViewModels.Actions
 			_comparisonValue = _model.Value.Replace('\\', '<');
 			var comparisonSign = _comparisonValue[0];
 			if (comparisonSign != '<' && comparisonSign != '>' && comparisonSign != '!' && comparisonSign != '=')
+			{
 				comparisonSign = '=';
+			}
 			else
+			{
 				_comparisonValue = _comparisonValue.Substring(1, _comparisonValue.Length - 1);
+			}
 
 			_comparisonSign = comparisonSign;
 		}
@@ -35,7 +39,10 @@ namespace Scripts.ViewModels.Actions
 		{
 			var target = Target as Property;
 			if (target == null)
-				throw new EngineException(this, string.Format("Failed to find Property: {0}", _model.Target));
+			{
+				throw new EngineException(this, 
+					string.Format("Failed to find Property: {0}", _model.Target));
+			}
 
 			var propertyValue = target.GetValue();
 

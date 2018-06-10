@@ -1,7 +1,6 @@
 ﻿using Scripts.Components;
 using Scripts.ViewModels.GUIs;
 using Scripts.Views.Enemies;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace Scripts.Views.GUIs
@@ -12,7 +11,8 @@ namespace Scripts.Views.GUIs
 		private AlwaysFaceMainCamera _positionComponent;
 		private Image _image;
 
-		public HealthBarView(HealthBar viewModel, ObjectView parent) : base(viewModel, parent)
+		public HealthBarView(HealthBar viewModel, ObjectView parent)
+			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

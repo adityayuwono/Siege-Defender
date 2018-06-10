@@ -6,21 +6,21 @@ namespace Scripts.ViewModels
 {
 	public class Player : Element
 	{
-		private readonly PlayerModel _model;
+		public event Action OnGameOver;
 
 		public readonly AdjustableProperty<float> Health;
 		public readonly AdjustableProperty<float> MaxHealth;
 
 		public Player(PlayerModel model, Scene parent) : base(model, parent)
 		{
-			_model = model;
-
 			Health = new AdjustableProperty<float>("Health", this);
 			MaxHealth = new AdjustableProperty<float>("MaxHealth", this);
-			MaxHealth.SetValue(_model.Health);
+			MaxHealth.SetValue(model.Health);
 
-			foreach (var shooterModel in _model.Shooters)
+			foreach (var shooterModel in model.Shooters)
+			{
 				Elements.Add(new Shooter(shooterModel, this));
+			}
 		}
 
 		protected override void OnActivate()
@@ -43,10 +43,13 @@ namespace Scripts.ViewModels
 		{
 			var currentHealth = Health.GetValue();
 			if (currentHealth <= 0)
+			{
 				if (OnGameOver != null)
-					OnGameOver(); // Player's health is 0, this means game over :( (
+				{
+					// Player's health is 0, this means game over :( (
+					OnGameOver();
+				}
+			}
 		}
-
-		public event Action OnGameOver;
 	}
 }

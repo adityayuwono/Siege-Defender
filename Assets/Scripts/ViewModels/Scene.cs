@@ -24,7 +24,10 @@ namespace Scripts.ViewModels
 		{
 			get
 			{
-				if (_propertyLookup == null) _propertyLookup = new PropertyLookup(Root, this);
+				if (_propertyLookup == null)
+				{
+					_propertyLookup = new PropertyLookup(Root, this);
+				}
 
 				return _propertyLookup;
 			}
@@ -41,8 +44,10 @@ namespace Scripts.ViewModels
 			base.Show();
 
 			if (EnemyManager == null && !string.IsNullOrEmpty(_levelId))
+			{
 				throw new EngineException(this,
 					"No EnemyManager provided but there\'s a LevelId specified, there may have been a mistake");
+			}
 
 			if (EnemyManager != null && !string.IsNullOrEmpty(_levelId))
 			{
@@ -57,7 +62,10 @@ namespace Scripts.ViewModels
 		{
 			IsLoadingInProgress.SetValue(true);
 			var objectIds = new List<string>();
-			foreach (var spawnModel in objectsToCache) objectIds.Add(spawnModel.EnemyId);
+			foreach (var spawnModel in objectsToCache)
+			{
+				objectIds.Add(spawnModel.EnemyId);
+			}
 
 			Root.StartCoroutine(CacheObjects(objectIds));
 		}

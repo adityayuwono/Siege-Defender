@@ -57,18 +57,18 @@ namespace Scripts.ViewModels.Actions
 		{
 			return _randomizedValue;
 		}
-
-		private void Randomize()
-		{
-			var randomValue = _randomizer.NextDouble();
-			_randomizedValue.SetValue(randomValue);
-		}
-
+		
 		protected override void Target_OnChanged()
 		{
 			IsMatch.SetValue(_randomizedValue.GetValue() <= _threshold);
 			// Immediatelly set to false to allow 2 consecutive Matches when in luck, if there's such a thing in coding
 			IsMatch.SetValue(false);
+		}
+
+		private void Randomize()
+		{
+			var randomValue = _randomizer.NextDouble();
+			_randomizedValue.SetValue(randomValue);
 		}
 	}
 }

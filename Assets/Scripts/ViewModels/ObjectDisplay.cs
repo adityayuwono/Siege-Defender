@@ -35,10 +35,10 @@ namespace Scripts.ViewModels
 
 		private void ObjectId_OnChange()
 		{
-			var currentObjectVM = CurrentObject.GetValue();
-			if (currentObjectVM != null)
+			var currentObject = CurrentObject.GetValue();
+			if (currentObject != null)
 			{
-				currentObjectVM.Hide("Changing displayed object");
+				currentObject.Hide("Changing displayed object");
 			}
 
 			var newProjectile = GetObject<Object>(ObjectIdBinding.GetValue());
@@ -57,7 +57,6 @@ namespace Scripts.ViewModels
 
 			base.OnDestroyed();
 		}
-
 
 		protected override Object SpawnNewObject(string id, ObjectModel modelToCopy = null, Base overrideParent = null)
 		{

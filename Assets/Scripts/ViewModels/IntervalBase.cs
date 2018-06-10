@@ -17,12 +17,19 @@ namespace Scripts.ViewModels
 
 		protected void DestroyInactiveObjects()
 		{
-			if (_isDestructionInProgress) return;
+			if (_isDestructionInProgress)
+			{
+				return;
+			}
 
 			_isDestructionInProgress = true;
 			foreach (var inactiveObjects in InactiveObjects.Values)
-			foreach (var inactiveObject in inactiveObjects)
-				inactiveObject.Destroy();
+			{
+				foreach (var inactiveObject in inactiveObjects)
+				{
+					inactiveObject.Destroy();
+				}
+			}
 
 			InactiveObjects.Clear();
 			_isDestructionInProgress = false;

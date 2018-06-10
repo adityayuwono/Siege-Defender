@@ -9,11 +9,6 @@ namespace Scripts.ViewModels.GUIs
 		{
 		}
 
-		protected override void OnLoad()
-		{
-			base.OnLoad();
-		}
-
 		protected override void OnActivate()
 		{
 			base.OnActivate();

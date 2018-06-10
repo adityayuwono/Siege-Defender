@@ -17,7 +17,7 @@ namespace Scripts.Views
 		{
 			base.OnShow();
 
-			GameObject.AddComponent<TriggerController>().OnCollision += _viewModel.CollideWithTarget;
+			GameObject.AddComponent<TriggerController>().Collision += _viewModel.CollideWithTarget;
 		}
 	}
 }

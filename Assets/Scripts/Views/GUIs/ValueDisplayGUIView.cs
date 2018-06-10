@@ -19,23 +19,23 @@ namespace Scripts.Views.GUIs
 			_viewModel.Value.OnChange += Value_OnChange;
 		}
 
+		protected override void OnDestroy()
+		{
+			_viewModel.Value.OnChange -= Value_OnChange;
+
+			base.OnDestroy();
+		}
+		
+		protected virtual void UpdateValueDisplay(float value, float maxValue)
+		{
+		}
+
 		private void Value_OnChange()
 		{
 			var value = _viewModel.Value.GetValue();
 			var maxValue = _viewModel.MaxValue.GetValue();
 
 			UpdateValueDisplay(value, maxValue);
-		}
-
-		protected virtual void UpdateValueDisplay(float value, float maxValue)
-		{
-		}
-
-		protected override void OnDestroy()
-		{
-			_viewModel.Value.OnChange -= Value_OnChange;
-
-			base.OnDestroy();
 		}
 	}
 }

@@ -17,8 +17,11 @@ namespace Scripts.ViewModels.Actions
 			base.OnDeactivate();
 
 			var property = Target;
-			var stringProperty = property as AdjustableProperty<string>;
-			if (stringProperty.GetValue() == _model.Value) stringProperty.SetValue("");
+			var stringProperty = (AdjustableProperty<string>) property;
+			if (stringProperty.GetValue() == _model.Value)
+			{
+				stringProperty.SetValue("");
+			}
 		}
 	}
 }

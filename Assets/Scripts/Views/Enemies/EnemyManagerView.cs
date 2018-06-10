@@ -13,6 +13,18 @@ namespace Scripts.Views.Enemies
 			_viewModel = viewModel;
 		}
 
+		public override Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = 0)
+		{
+			var spawnIndexOverride = _viewModel.SpawnIndexOverride;
+			if (spawnIndexOverride >= SpawnPointCount)
+			{
+				Debug.LogError(string.Format("{0} is more than the available Spawning Points of {1}",
+					_viewModel.SpawnIndexOverride, Id));
+			}
+
+			return base.GetRandomSpawnPoint(ignoreY, spawnIndexOverride);
+		}
+
 		protected override void OnShow()
 		{
 			base.OnShow();
@@ -28,13 +40,6 @@ namespace Scripts.Views.Enemies
 			StartInterval();
 		}
 
-		private void Interval_OnChange()
-		{
-			// When the interval changes we stop it and start it again
-			StopInterval();
-			StartInterval();
-		}
-
 		protected override void OnHide(string reason)
 		{
 			_viewModel.Interval.OnChange -= Interval_OnChange;
@@ -43,21 +48,16 @@ namespace Scripts.Views.Enemies
 			base.OnHide(reason);
 		}
 
-		public override Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = 0)
-		{
-			var spawnIndexOverride = _viewModel.SpawnIndexOverride;
-			if (spawnIndexOverride >= SpawnPointCount)
-			{
-				Debug.LogError(string.Format("{0} is more than the available Spawning Points of {1}",
-					_viewModel.SpawnIndexOverride, Id));
-			}
-
-			return base.GetRandomSpawnPoint(ignoreY, spawnIndexOverride);
-		}
-
 		protected override void IntervalInvoked()
 		{
 			_viewModel.SpawnEnemy();
+		}
+
+		private void Interval_OnChange()
+		{
+			// When the interval changes we stop it and start it again
+			StopInterval();
+			StartInterval();
 		}
 	}
 }

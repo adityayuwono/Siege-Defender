@@ -32,11 +32,6 @@ namespace Scripts.Views
 			base.OnDestroy();
 		}
 
-		private void UpdateVisibility()
-		{
-			GameObject.SetActive(_viewModel.VisibilityBinding.GetValue());
-		}
-
 		protected override GameObject GetGameObject()
 		{
 			// We try to find matching child, if there's none, we instantiate from prefabs
@@ -58,6 +53,11 @@ namespace Scripts.Views
 		protected override void SetPosition()
 		{
 			// Assume asset's position
+		}
+
+		private void UpdateVisibility()
+		{
+			GameObject.SetActive(_viewModel.VisibilityBinding.GetValue());
 		}
 	}
 }

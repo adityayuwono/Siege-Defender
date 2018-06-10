@@ -15,15 +15,7 @@ namespace Scripts.Views
 		{
 			_viewModel = viewModel;
 
-			_viewModel.OnChildrenChanged += Children_OnChanged;
-		}
-
-		private void Children_OnChanged()
-		{
-			if (table != null)
-			{
-				table.Reposition();
-			}
+			_viewModel.ChildrenChanged += Children_OnChanged;
 		}
 
 		protected override void OnLoad()
@@ -35,9 +27,17 @@ namespace Scripts.Views
 
 		protected override void OnDestroy()
 		{
-			_viewModel.OnChildrenChanged -= Children_OnChanged;
+			_viewModel.ChildrenChanged -= Children_OnChanged;
 
 			base.OnDestroy();
+		}
+
+		private void Children_OnChanged()
+		{
+			if (table != null)
+			{
+				table.Reposition();
+			}
 		}
 	}
 }

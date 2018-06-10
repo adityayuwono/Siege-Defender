@@ -364,6 +364,7 @@
     <Compile Include="Assets\Scripts\ViewModels\ButtonGUI.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Element.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Enemies\Boss.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Enemies\EventTriggered.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Enemies\Limb.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Enemies\LivingObject.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Enemies\LootTable.cs" />

@@ -10,7 +10,7 @@ namespace Scripts.ViewModels
 	{
 		private readonly InventoryModel _model;
 		private PropertyLookup _propertyLookup;
-		public Action OnChildrenChanged;
+		public Action ChildrenChanged;
 
 		public Inventory(InventoryModel model, Base parent) : base(model, parent)
 		{
@@ -77,9 +77,9 @@ namespace Scripts.ViewModels
 
 		private void InvokeChildrenChanged()
 		{
-			if (OnChildrenChanged != null)
+			if (ChildrenChanged != null)
 			{
-				OnChildrenChanged();
+				ChildrenChanged();
 			}
 		}
 	}

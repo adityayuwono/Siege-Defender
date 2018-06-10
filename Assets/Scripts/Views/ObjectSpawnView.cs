@@ -15,6 +15,11 @@ namespace Scripts.Views
 			_viewModel = viewModel;
 		}
 
+		public override Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = -1)
+		{
+			return base.GetRandomSpawnPoint(true, _spawnPointOverride);
+		}
+
 		protected override void OnShow()
 		{
 			base.OnShow();
@@ -24,11 +29,6 @@ namespace Scripts.Views
 				_spawnPointOverride = i;
 				_viewModel.SpawnObject();
 			}
-		}
-
-		public override Vector3 GetRandomSpawnPoint(bool ignoreY = true, int spawnIndex = -1)
-		{
-			return base.GetRandomSpawnPoint(true, _spawnPointOverride);
 		}
 	}
 }

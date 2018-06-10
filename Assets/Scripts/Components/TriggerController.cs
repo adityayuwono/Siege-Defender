@@ -6,7 +6,7 @@ namespace Scripts.Components
 {
 	public class TriggerController : MonoBehaviour
 	{
-		public Action<Object> OnCollision;
+		public Action<Object> Collision;
 
 		private void OnTriggerEnter(Collider target)
 		{
@@ -14,7 +14,7 @@ namespace Scripts.Components
 			if (viewModelController != null)
 			{
 				var viewModel = viewModelController.GetViewModel();
-				OnCollision(viewModel);
+				Collision(viewModel);
 			}
 		}
 	}

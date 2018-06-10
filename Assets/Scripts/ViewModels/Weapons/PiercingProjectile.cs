@@ -9,7 +9,8 @@ namespace Scripts.ViewModels.Weapons
 
 		private float _damageMultiplier;
 
-		public PiercingProjectile(PiercingProjectileModel model, Shooter parent) : base(model, parent)
+		public PiercingProjectile(PiercingProjectileModel model, Shooter parent) 
+			: base(model, parent)
 		{
 			_model = model;
 		}
@@ -27,19 +28,24 @@ namespace Scripts.ViewModels.Weapons
 			Hide("Hide since show, this is weird, :D:D:D");
 		}
 
-		protected override float CalculateDamage(ref bool isCrit)
-		{
-			return base.CalculateDamage(ref isCrit) * _damageMultiplier;
-		}
-
 		public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
 		{
 			// Spawn AoE if there are any Id defined
 			if (!string.IsNullOrEmpty(_model.AoEId))
+			{
 				GetParent<Shooter>().SpawnAoE(_model.AoEId, collisionPosition);
+			}
 
 			if (DamageEnemy(targetObject, contactPoint, false))
-				_damageMultiplier *= _model.DamageReduction; // Every enemy hit by piercing will reduce it's effectiveness
+			{
+				// Every enemy hit by piercing will reduce it's effectiveness
+				_damageMultiplier *= _model.DamageReduction;
+			}
+		}
+
+		protected override float CalculateDamage(ref bool isCrit)
+		{
+			return base.CalculateDamage(ref isCrit) * _damageMultiplier;
 		}
 	}
 }

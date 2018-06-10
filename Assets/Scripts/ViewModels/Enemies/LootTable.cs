@@ -17,7 +17,9 @@ namespace Scripts.ViewModels.Enemies
 			_randomizer = new Random();
 
 			foreach (var lootModel in _model.Loots)
+			{
 				_loots.Add(new Loot(lootModel));
+			}
 		}
 
 		/// <summary>

@@ -32,7 +32,9 @@ namespace Scripts.ViewModels.Enemies
 
 			// Validate Model
 			if (string.IsNullOrEmpty(_model.Type))
+			{
 				throw new EngineException(this, string.Format("Type for: {0} is empty", FullId));
+			}
 
 			Health = new AdjustableProperty<float>("Health", this);
 			CollisionEffectNormal = _model.CollisionEffectNormal;
@@ -158,7 +160,10 @@ namespace Scripts.ViewModels.Enemies
 
 		private void AttachProjectile(ProjectileBase source)
 		{
-			if (_attachedProjectiles.Contains(source)) throw new EngineException(this, "Duplicate Projectile hit");
+			if (_attachedProjectiles.Contains(source))
+			{
+				throw new EngineException(this, "Duplicate Projectile hit");
+			}
 
 			_attachedProjectiles.Add(source);
 

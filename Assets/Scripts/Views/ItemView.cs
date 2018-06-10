@@ -21,14 +21,7 @@ namespace Scripts.Views
 			_viewModel = viewModel;
 			_parent = parent;
 
-			_viewModel.OnParentChanged += OnParentChanged;
-		}
-
-		private void OnParentChanged(Object newParent)
-		{
-			_parent = newParent.Root.GetView<ObjectView>(newParent);
-
-			Transform.SetParent(GetParent());
+			_viewModel.ParentChanged += Parent_OnChanged;
 		}
 
 		protected override Transform GetParent()
@@ -66,9 +59,16 @@ namespace Scripts.Views
 
 		protected override void OnDestroy()
 		{
-			_viewModel.OnParentChanged -= OnParentChanged;
+			_viewModel.ParentChanged -= Parent_OnChanged;
 
 			base.OnDestroy();
+		}
+
+		private void Parent_OnChanged(Object newParent)
+		{
+			_parent = newParent.Root.GetView<ObjectView>(newParent);
+
+			Transform.SetParent(GetParent());
 		}
 	}
 }

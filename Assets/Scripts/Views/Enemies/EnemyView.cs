@@ -51,12 +51,6 @@ namespace Scripts.Views.Enemies
 			LoadTarget();
 		}
 
-		protected virtual void LoadTarget()
-		{
-			var targetTransform = _viewModel.Root.GetView<ObjectView>(_viewModel.Target).Transform;
-			_targetTransform = targetTransform;
-		}
-
 		protected override void OnShow()
 		{
 			base.OnShow();
@@ -67,6 +61,35 @@ namespace Scripts.Views.Enemies
 			StartWalking();
 
 			_viewModel.OnSpawn();
+		}
+
+		protected override void OnHide(string reason)
+		{
+			// We may still be subscribed to these
+			iTween.Stop(GameObject);
+			iTween.Stop(CharacterRoot);
+			UnsubscribeIntervals();
+
+			_viewModel.AnimationId.SetValue("Death");
+			SetupDeathEndHandler();
+
+			_viewModel.AnimationId.OnChange -= Animation_OnChange;
+
+			base.OnHide(reason);
+		}
+
+		protected override void OnDestroy()
+		{
+			// We may still be subscribed to this
+			UnsubscribeIntervals();
+
+			base.OnDestroy();
+		}
+
+		protected virtual void LoadTarget()
+		{
+			var targetTransform = _viewModel.Root.GetView<ObjectView>(_viewModel.Target).Transform;
+			_targetTransform = targetTransform;
 		}
 
 		protected virtual void AdjustRotation()
@@ -84,6 +107,21 @@ namespace Scripts.Views.Enemies
 		{
 			Animator.Play("Spawn");
 			_viewModel.Root.Context.IntervalRunner.SubscribeToInterval(StartWalkAnimationSubscription, 1f, false);
+		}
+
+		protected void Walk()
+		{
+			Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
+		}
+
+		protected void Animation_OnChange()
+		{
+			if (!string.IsNullOrEmpty(_lastAnimationValue))
+			{
+				Animator.SetBool(_lastAnimationValue, false);
+			}
+			Animator.SetBool(_viewModel.AnimationId.GetValue(), true);
+			_lastAnimationValue = _viewModel.AnimationId.GetValue();
 		}
 
 		private void StartWalkAnimationSubscription()
@@ -121,50 +159,12 @@ namespace Scripts.Views.Enemies
 			return CharacterRoot.GetComponent<Animator>();
 		}
 
-		protected void Walk()
-		{
-			Transform.localPosition += Transform.forward * Time.deltaTime * _viewModel.Speed;
-		}
-
-		protected override void OnHide(string reason)
-		{
-			// We may still be subscribed to these
-			iTween.Stop(GameObject);
-			iTween.Stop(CharacterRoot);
-			UnsubscribeIntervals();
-
-			_viewModel.AnimationId.SetValue("Death");
-			SetupDeathEndHandler();
-			
-			_viewModel.AnimationId.OnChange -= Animation_OnChange;
-
-			base.OnHide(reason);
-		}
-
-		protected override void OnDestroy()
-		{
-			// We may still be subscribed to this
-			UnsubscribeIntervals();
-
-			base.OnDestroy();
-		}
-
 		private void UnsubscribeIntervals()
 		{
 			_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
 			_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(Walk);
 			_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(StartAttackAnimation);
 			_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(AttackAnimation);
-		}
-
-		protected void Animation_OnChange()
-		{
-			if (!string.IsNullOrEmpty(_lastAnimationValue))
-			{
-				Animator.SetBool(_lastAnimationValue, false);
-			}
-			Animator.SetBool(_viewModel.AnimationId.GetValue(), true);
-			_lastAnimationValue = _viewModel.AnimationId.GetValue();
 		}
 
 		private void SetupDeathEndHandler()

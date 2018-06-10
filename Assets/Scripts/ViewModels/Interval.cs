@@ -121,15 +121,24 @@ namespace Scripts.ViewModels
 			var actions = objectModel.Triggers.SelectMany(t => t.Actions).ToList();
 			var conditions = objectModel.Triggers.SelectMany(t => t.Conditions).ToList();
 			foreach (var childElement in objectModel.Elements)
+			{
 				if (!string.IsNullOrEmpty(childElement.Id) && childElement.Id.Contains("[x]"))
 				{
 					var originalId = childElement.Id;
 					childElement.Id = string.Format("{0}_{1}", childElement.Id, Guid.NewGuid());
 					;
 
-					foreach (var action in actions) action.Target = action.Target.Replace(originalId, childElement.Id);
-					foreach (var action in conditions) action.Target = action.Target.Replace(originalId, childElement.Id);
+					foreach (var action in actions)
+					{
+						action.Target = action.Target.Replace(originalId, childElement.Id);
+					}
+
+					foreach (var action in conditions)
+					{
+						action.Target = action.Target.Replace(originalId, childElement.Id);
+					}
 				}
+			}
 
 			return objectModel;
 		}

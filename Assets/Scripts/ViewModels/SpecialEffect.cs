@@ -28,7 +28,10 @@ namespace Scripts.ViewModels
 		{
 			ShowSpecialEffect(Vector3.zero);
 
-			if (UpdateParent != null) UpdateParent(parent);
+			if (UpdateParent != null)
+			{
+				UpdateParent(parent);
+			}
 		}
 
 		public void SetDeathDelay(float delay)

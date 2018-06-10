@@ -20,7 +20,10 @@ namespace Scripts.ViewModels
 
 			// Tell the parent Scene that it has an EnemyManager
 			var parentScene = parent as Scene;
-			if (parentScene != null) parentScene.EnemyManager = this;
+			if (parentScene != null)
+			{
+				parentScene.EnemyManager = this;
+			}
 
 			Level = new AdjustableProperty<string>("Level", this, true);
 			Level.OnChange += LoadLevel;
@@ -54,7 +57,10 @@ namespace Scripts.ViewModels
 			var enemyId = spawnModel.EnemyId;
 
 			// Empty enemyId mean that we want to skip some spawn iterations
-			if (string.IsNullOrEmpty(enemyId)) return;
+			if (string.IsNullOrEmpty(enemyId))
+			{
+				return;
+			}
 
 			var count = spawnModel.Count;
 			SpawnIndexOverride = spawnModel.SpawnIndexOverride;
@@ -73,7 +79,10 @@ namespace Scripts.ViewModels
 		private void LoadLevel()
 		{
 			var levelId = Level.GetValue();
-			if (string.IsNullOrEmpty(levelId)) return;
+			if (string.IsNullOrEmpty(levelId))
+			{
+				return;
+			}
 
 			_spawnIndex = 0;
 			_currentLoop = 0;

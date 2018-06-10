@@ -38,11 +38,6 @@ namespace Scripts.Views.Enemies
 			_viewModel.OnBreak += BreakBrekables;
 		}
 
-		private void BreakBrekables()
-		{
-			if (_breakable != null) _breakable.SetActive(false);
-		}
-
 		protected override void OnHide(string reason)
 		{
 			_viewModel.OnBreak -= BreakBrekables; // :D
@@ -77,6 +72,12 @@ namespace Scripts.Views.Enemies
 		protected override void SetPosition()
 		{
 			// Assume asset's position
+		}
+
+		private void BreakBrekables()
+		{
+			if (_breakable != null)
+				_breakable.SetActive(false);
 		}
 	}
 }

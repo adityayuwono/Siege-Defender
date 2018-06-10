@@ -16,7 +16,7 @@ namespace Scripts.Views
 			_viewModel = viewModel;
 		}
 
-		public void StopImmediatelly()
+		public void HandleStopImmediatelly()
 		{
 			_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(OnDeath);
 
@@ -26,8 +26,8 @@ namespace Scripts.Views
 
 		protected override void OnLoad()
 		{
-			_viewModel.UpdateParent += UpdateParent;
-			_viewModel.OnStopImmediatelly += StopImmediatelly;
+			_viewModel.UpdateParent += HandleUpdateParent;
+			_viewModel.OnStopImmediatelly += HandleStopImmediatelly;
 
 			base.OnLoad();
 
@@ -51,16 +51,6 @@ namespace Scripts.Views
 			_viewModel.SetDeathDelay(particleDuration);
 		}
 
-		private void UpdateParent(Object o)
-		{
-			var view = _viewModel.Root.GetView<ObjectView>(o);
-			if (view != null)
-			{
-				Transform.parent = view.Transform;
-				Transform.localPosition = Vector3.zero;
-			}
-		}
-
 		protected override void OnShow()
 		{
 			base.OnShow();
@@ -73,6 +63,16 @@ namespace Scripts.Views
 			base.OnDeath(reason);
 
 			_particleSystem.Clear(true);
+		}
+
+		private void HandleUpdateParent(Object o)
+		{
+			var view = _viewModel.Root.GetView<ObjectView>(o);
+			if (view != null)
+			{
+				Transform.parent = view.Transform;
+				Transform.localPosition = Vector3.zero;
+			}
 		}
 	}
 }

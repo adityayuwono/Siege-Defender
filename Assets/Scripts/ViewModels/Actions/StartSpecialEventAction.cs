@@ -19,9 +19,14 @@ namespace Scripts.ViewModels.Actions
 			var targetObject = Target as Object;
 
 			if (targetObject != null)
+			{
 				targetObject.StartSpecialEvent();
+			}
 			else
-				throw new EngineException(this, string.Format("Target: {0} was not an object", _model.Target));
+			{
+				throw new EngineException(this, 
+					string.Format("Target: {0} was not an object", _model.Target));
+			}
 		}
 	}
 }

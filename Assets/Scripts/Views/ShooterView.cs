@@ -19,6 +19,13 @@ namespace Scripts.Views
 			_viewModel = viewModel;
 		}
 
+		public void SetupController(Image image)
+		{
+			var shootingUI = GameObject.AddComponent<ShootingController>();
+			shootingUI.MainTexture = image;
+			shootingUI.Setup(_viewModel);
+		}
+
 		protected override void OnLoad()
 		{
 			base.OnLoad();
@@ -26,22 +33,6 @@ namespace Scripts.Views
 			_target = _viewModel.Root.GetView<ObjectView>(_viewModel.Target);
 
 			_viewModel.IsShooting.OnChange += OnShootingChanged;
-		}
-
-		private void OnShootingChanged()
-		{
-			if (_viewModel.IsShooting.GetValue())
-			{
-				if (Time.time - _lastInvocationTime > _viewModel.Interval.GetValue())
-				{
-					_lastInvocationTime = Time.time;
-					StartInterval();
-				}
-			}
-			else
-			{
-				StopInterval();
-			}
 		}
 
 		protected override void IntervalInvoked()
@@ -67,11 +58,20 @@ namespace Scripts.Views
 			base.OnDestroy();
 		}
 
-		public void SetupController(Image image)
+		private void OnShootingChanged()
 		{
-			var shootingUI = GameObject.AddComponent<ShootingController>();
-			shootingUI.MainTexture = image;
-			shootingUI.Setup(_viewModel);
+			if (_viewModel.IsShooting.GetValue())
+			{
+				if (Time.time - _lastInvocationTime > _viewModel.Interval.GetValue())
+				{
+					_lastInvocationTime = Time.time;
+					StartInterval();
+				}
+			}
+			else
+			{
+				StopInterval();
+			}
 		}
 	}
 }

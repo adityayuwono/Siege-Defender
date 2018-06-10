@@ -17,6 +17,10 @@ namespace Scripts.ViewModels.Weapons
 			get { return 0f; }
 		}
 
+		public virtual void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
+		{
+		}
+
 		protected virtual float CalculateDamage(ref bool isCrit)
 		{
 			var currentDamage = Random.Range(_model.Damage[0], _model.Damage[1]);
@@ -28,10 +32,6 @@ namespace Scripts.ViewModels.Weapons
 			}
 
 			return currentDamage;
-		}
-
-		public virtual void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
-		{
 		}
 
 		protected bool DamageEnemy(Object enemy, Vector3 contactPoint, bool attachToEnemy = false)

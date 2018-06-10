@@ -11,7 +11,8 @@ namespace Scripts.ViewModels.GUIs
 
 		public Property<float> Value;
 
-		public ValueDisplayGUI(ValueDisplayGUIModel model, Object parent) : base(model, parent)
+		public ValueDisplayGUI(ValueDisplayGUIModel model, Object parent) 
+			: base(model, parent)
 		{
 			_model = model;
 		}

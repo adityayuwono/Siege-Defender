@@ -14,13 +14,7 @@ namespace Scripts.ViewModels.GUIs
 		public void Activate(LivingObject livingObject)
 		{
 			LivingObject = livingObject;
-
 			Activate();
-		}
-
-		protected override void OnDeactivate()
-		{
-			base.OnDeactivate();
 		}
 	}
 }

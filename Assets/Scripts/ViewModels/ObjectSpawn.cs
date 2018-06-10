@@ -19,7 +19,9 @@ namespace Scripts.ViewModels
 			_model = model;
 
 			if (string.IsNullOrEmpty(_model.LevelId))
+			{
 				throw new EngineException(this, "An ObjectSpawn need a LevelId");
+			}
 		}
 
 		protected override void OnLoad()
@@ -28,7 +30,9 @@ namespace Scripts.ViewModels
 
 			var levelModel = SDRoot.GetLevel(_model.LevelId);
 			foreach (var spawnModel in levelModel.SpawnSequence)
+			{
 				_objectIds.Add(spawnModel.EnemyId);
+			}
 		}
 
 		public void SpawnObject()

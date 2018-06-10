@@ -45,12 +45,6 @@ namespace Scripts.Views.Weapons
 			base.OnDestroy();
 		}
 
-		private IEnumerator DelayedHiding(string reason)
-		{
-			yield return new WaitForSeconds(_viewModel.HideDelay);
-			HideProjectile(reason);
-		}
-
 		protected virtual void HideProjectile(string reason)
 		{
 			_collisionController.OnCollision -= _viewModel.CollideWithTarget;
@@ -64,6 +58,12 @@ namespace Scripts.Views.Weapons
 			Transform.parent = null;
 
 			base.OnDeath(reason);
+		}
+
+		private IEnumerator DelayedHiding(string reason)
+		{
+			yield return new WaitForSeconds(_viewModel.HideDelay);
+			HideProjectile(reason);
 		}
 	}
 }

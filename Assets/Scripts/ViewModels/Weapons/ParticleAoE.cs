@@ -6,7 +6,8 @@ namespace Scripts.ViewModels.Weapons
 	{
 		private readonly ParticleAoEModel _model;
 
-		public ParticleAoE(ParticleAoEModel model, Shooter parent) : base(model, parent)
+		public ParticleAoE(ParticleAoEModel model, Shooter parent) 
+			: base(model, parent)
 		{
 			_model = model;
 		}
