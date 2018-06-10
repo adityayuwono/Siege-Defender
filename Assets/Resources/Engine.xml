@@ -267,12 +267,12 @@
           <Setter Target="{This.ActiveSkill}" Value="Slam|RandomMovement" />
         </Trigger>
         <Trigger TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="2" Value="10" />
+          <RandomCondition Target="{This}" Frequency="1" Value="20" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Setter Target="{This.ActiveSkill}" Value="RandomMovement|ScreamingRandomMovement" />
         </Trigger>
         <Trigger TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="1" Value="20" />
+          <RandomCondition Target="{This}" Frequency="2" Value="25" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Condition Target="{SpiderColumns.ActiveObjects}" Value="\5" />
           <Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
