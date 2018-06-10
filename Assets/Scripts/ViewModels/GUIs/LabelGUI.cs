@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts.ViewModels.GUIs
 {
-	public class LabelGUI : Object
+	public class LabelGUI : Element
 	{
 		private readonly LabelGUIModel _model;
 		public readonly Property<string> Text = new Property<string>();

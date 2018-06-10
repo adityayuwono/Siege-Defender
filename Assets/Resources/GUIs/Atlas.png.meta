@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6834ef69f4b8ab14192925ac79e8a924
-timeCreated: 1528608576
+timeCreated: 1528617826
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -145,9 +145,9 @@ TextureImporter:
       name: Bottom
       rect:
         serializedVersion: 2
-        x: 55
+        x: 58
         y: 682
-        width: 1159
+        width: 1158
         height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

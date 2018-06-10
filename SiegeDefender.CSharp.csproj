@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.2.1p2</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -229,7 +231,6 @@
     <Compile Include="Assets\Scripts\Components\AccelerometerController.cs" />
     <Compile Include="Assets\Scripts\Components\AimingController.cs" />
     <Compile Include="Assets\Scripts\Components\AlwaysFaceMainCamera.cs" />
-    <Compile Include="Assets\Scripts\Components\AnimationEventHandler.cs" />
     <Compile Include="Assets\Scripts\Components\BaseBinding.cs" />
     <Compile Include="Assets\Scripts\Components\BaseController.cs" />
     <Compile Include="Assets\Scripts\Components\BaseTexturedController.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="Assets\Scripts\Core\SpriteLookup.cs" />
     <Compile Include="Assets\Scripts\Extensions\RectTransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\UnityExtension.cs" />
+    <Compile Include="Assets\Scripts\GameEndStats.cs" />
     <Compile Include="Assets\Scripts\GameRoot.cs" />
     <Compile Include="Assets\Scripts\Helpers\Copier.cs" />
     <Compile Include="Assets\Scripts\Helpers\Deserializer.cs" />
@@ -307,6 +309,7 @@
     <Compile Include="Assets\Scripts\Models\Enemies\StaticEnemyModel.cs" />
     <Compile Include="Assets\Scripts\Models\EngineModel.cs" />
     <Compile Include="Assets\Scripts\Models\EquipmentSlotModel.cs" />
+    <Compile Include="Assets\Scripts\Models\GUIs\GameEndStatsModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\BaseGUIModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\ButtonGUIModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\CooldownGUIModel.cs" />
@@ -373,6 +376,7 @@
     <Compile Include="Assets\Scripts\ViewModels\GUIs\CooldownGUI.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\DamageDisplayManager.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\DamageGUI.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\GUIs\GameEndStats.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\GUIRoot.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\HealthBar.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\LabelGUI.cs" />
@@ -417,6 +421,7 @@
     <Compile Include="Assets\Scripts\Views\GUIs\CooldownGUIView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\DamageDisplayView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\DamageGUIView.cs" />
+    <Compile Include="Assets\Scripts\Views\GUIs\GameEndStatsView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\GUIRootView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\HealthBarView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\LabelGUIView.cs" />

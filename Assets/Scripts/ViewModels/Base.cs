@@ -86,11 +86,17 @@ namespace Scripts.ViewModels
 
 		public virtual void Show()
 		{
-			if (IsShown) throw new EngineException(this, "trying to show twice");
+			if (IsShown)
+			{
+				throw new EngineException(this, "trying to show twice");
+			}
 
 			IsShown = true;
 
-			if (OnShow != null) OnShow();
+			if (OnShow != null)
+			{
+				OnShow();
+			}
 		}
 
 		protected virtual void OnLoad()

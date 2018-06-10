@@ -83,6 +83,10 @@ namespace Scripts.ViewModels.Weapons
 			{
 				Hide("Hit Nothing"); // If we don't hit an enemy, hide the projectile
 			}
+			else
+			{
+				GameEndStats.AddOneHit();
+			}
 		}
 
 		private void OnHit()

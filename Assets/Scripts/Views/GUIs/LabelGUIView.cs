@@ -2,7 +2,7 @@
 
 namespace Scripts.Views.GUIs
 {
-	public class LabelGUIView : ObjectView
+	public class LabelGUIView : ElementView
 	{
 		private readonly LabelGUI _viewModel;
 

@@ -7,6 +7,8 @@ namespace Scripts.Contexts
 	{
 		private void Start()
 		{
+			GameEndStats.Reset();
+
 			// Prepare the IntervalRunner, this will manage all time based execution of this game
 			IntervalRunner = gameObject.AddComponent<IntervalRunner>();
 

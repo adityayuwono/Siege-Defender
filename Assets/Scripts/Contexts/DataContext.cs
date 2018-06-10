@@ -4,8 +4,6 @@ using System.IO;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
-using Scripts.Models.Weapons;
-using Scripts.ViewModels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

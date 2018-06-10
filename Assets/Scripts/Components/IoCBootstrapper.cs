@@ -49,6 +49,7 @@ namespace Scripts
 			IoC.IoCContainer.RegisterFor<ProgressBarGUIModel>().TypeOf<Object>().To<ProgressBarGUI>();
 			IoC.IoCContainer.RegisterFor<CooldownGUIModel>().TypeOf<Object>().To<CooldownGUI>();
 			IoC.IoCContainer.RegisterFor<ShooterGUIModel>().TypeOf<Object>().To<ShooterGUI>();
+			IoC.IoCContainer.RegisterFor<GameEndStatsModel>().TypeOf<Object>().To<ViewModels.GUIs.GameEndStats>();
 
 			// ProjectileBase
 			IoC.IoCContainer.RegisterFor<ProjectileModel>().TypeOf<Object>().To<Projectile>();
@@ -109,6 +110,7 @@ namespace Scripts
 			IoC.IoCContainer.RegisterFor<ProgressBarGUI>().TypeOf<BaseView>().To<ProgressBarGUIView>();
 			IoC.IoCContainer.RegisterFor<CooldownGUI>().TypeOf<BaseView>().To<CooldownGUIView>();
 			IoC.IoCContainer.RegisterFor<ShooterGUI>().TypeOf<BaseView>().To<ShooterGUIView>();
+			IoC.IoCContainer.RegisterFor<ViewModels.GUIs.GameEndStats>().TypeOf<BaseView>().To<GameEndStatsView>();
 
 			IoC.IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();
 			IoC.IoCContainer.RegisterFor<SpecialEffect>().TypeOf<BaseView>().To<SpecialEffectView>();
