@@ -16,7 +16,8 @@ namespace Scripts.Views.GUIs
 		protected override void OnHide(string reason)
 		{
 			_viewModel.Root.Context.IntervalRunner.SubscribeToInterval(Hide, _viewModel.HideDelay, false);
-
+			
+			Transform.position = _viewModel.Position;
 			var targetPosition = _viewModel.Position + Vector3.up * 2f;
 			iTween.MoveTo(GameObject, targetPosition, _viewModel.HideDelay);
 		}
