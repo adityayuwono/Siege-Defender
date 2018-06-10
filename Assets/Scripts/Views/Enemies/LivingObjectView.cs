@@ -71,9 +71,13 @@ namespace Scripts.Views.Enemies
 		{
 			var specialEffectId = _viewModel.SpecialEffect.GetValue();
 			if (string.IsNullOrEmpty(specialEffectId))
+			{
 				_viewModel.SDRoot.SpecialEffectManager.StopSpecialEffectOn(_viewModel);
+			}
 			else
+			{
 				_viewModel.SDRoot.SpecialEffectManager.StartSpecialEffectOn(_viewModel.SpecialEffect.GetValue(), _viewModel);
+			}
 		}
 
 		private void AttachProjectileToSelf(ProjectileBase projectile)

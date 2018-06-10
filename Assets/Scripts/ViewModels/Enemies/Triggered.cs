@@ -143,6 +143,13 @@ namespace Scripts.ViewModels.Enemies
 						parentButton.Death += InvokeEvent;
 				}
 					break;
+				case Event.DeathEnd:
+				{
+					var parentButton = _parentObject as LivingObject;
+					if (parentButton != null)
+						parentButton.DeathEnd += InvokeEvent;
+				}
+					break;
 				case Event.Hit:
 				{
 					var parentButton = _parentObject as Projectile;

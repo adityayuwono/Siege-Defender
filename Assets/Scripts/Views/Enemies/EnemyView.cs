@@ -134,6 +134,8 @@ namespace Scripts.Views.Enemies
 			UnsubscribeIntervals();
 
 			_viewModel.AnimationId.SetValue("Death");
+			SetupDeathEndHandler();
+			
 			_viewModel.AnimationId.OnChange -= Animation_OnChange;
 
 			base.OnHide(reason);
@@ -157,9 +159,25 @@ namespace Scripts.Views.Enemies
 
 		protected void Animation_OnChange()
 		{
-			if (!string.IsNullOrEmpty(_lastAnimationValue)) Animator.SetBool(_lastAnimationValue, false);
+			if (!string.IsNullOrEmpty(_lastAnimationValue))
+			{
+				Animator.SetBool(_lastAnimationValue, false);
+			}
 			Animator.SetBool(_viewModel.AnimationId.GetValue(), true);
 			_lastAnimationValue = _viewModel.AnimationId.GetValue();
+		}
+
+		private void SetupDeathEndHandler()
+		{
+			var handleDeathBehaviour = Animator.GetBehaviour<HandleDeath>();
+			if (handleDeathBehaviour != null)
+			{
+				handleDeathBehaviour.HandleDeathEnd = () =>
+				{
+					handleDeathBehaviour.HandleDeathEnd = null;
+					_viewModel.InvokeDeathEnd();
+				};
+			}
 		}
 	}
 }

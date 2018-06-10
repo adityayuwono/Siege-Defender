@@ -14,6 +14,9 @@ namespace Scripts.ViewModels.Enemies
 	/// </summary>
 	public class LivingObject : Object
 	{
+		public event Action Death;
+		public event Action DeathEnd;
+
 		private readonly List<ProjectileBase> _attachedProjectiles = new List<ProjectileBase>();
 
 		private readonly LivingObjectModel _model;
@@ -48,8 +51,6 @@ namespace Scripts.ViewModels.Enemies
 		{
 			get { return Health.GetValue() <= 0; }
 		}
-
-		public event Action Death;
 
 		protected override void OnActivate()
 		{
@@ -120,6 +121,14 @@ namespace Scripts.ViewModels.Enemies
 			}
 
 			return true;
+		}
+
+		public void InvokeDeathEnd()
+		{
+			if (DeathEnd != null)
+			{
+				DeathEnd();
+			}
 		}
 
 		protected virtual void CreateHealthBar()

@@ -12,6 +12,7 @@
 		Walk,
 		Attack,
 		Death,
+		DeathEnd,
 
 		Hit,
 

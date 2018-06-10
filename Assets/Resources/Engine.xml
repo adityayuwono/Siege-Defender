@@ -31,7 +31,7 @@
       RoF="0.25" Ammunition="500" ReloadTime="3"
       Scatters="1"
       Accuracy="0.7" Deviation="0.005" />
-    <Projectile Id="FireBall" Damage="8-11"
+    <Projectile Id="FireBall" Damage="8-1100"
 			AssetId="Projectiles/FireBall" AoEId="FireDome"
 			RoF="0.5" Ammunition="25" ReloadTime="5"
 			Scatters="1"
@@ -299,8 +299,8 @@
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
 
-        <EventTrigger Event="Death">
-          <LoadScene Target="GameEnd" />
+        <EventTrigger Event="DeathEnd">
+          <LoadScene Target="PlayEnd" />
         </EventTrigger>
       </Triggers>
     </Boss>
@@ -441,7 +441,7 @@
       </Elements>
     </Scene>
 
-    <Scene Id="Game" IsGameScene="true" AssetId="Game">
+    <Scene Id="Play" IsGameScene="true" AssetId="Play">
       <Elements>
         <ObjectSpawn AssetId="Environtment" LevelId="Houses"/>
         <EnemySpawn Id="EnemySpawn" AssetId="EnemySpawnLocation" />
@@ -493,7 +493,7 @@
       </Elements>
     </Scene>
 
-    <Scene Id="GameEnd" AssetId="GameEnd">
+    <Scene Id="PlayEnd" AssetId="PlayEnd">
       <Elements>
         <Button AssetId="MainMenu" >
           <Triggers>
