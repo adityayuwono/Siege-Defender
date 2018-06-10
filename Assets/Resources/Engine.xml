@@ -31,7 +31,7 @@
       RoF="0.25" Ammunition="500" ReloadTime="3"
       Scatters="1"
       Accuracy="0.7" Deviation="0.005" />
-    <Projectile Id="FireBall" Damage="8-1100"
+    <Projectile Id="FireBall" Damage="8-11"
 			AssetId="Projectiles/FireBall" AoEId="FireDome"
 			RoF="0.5" Ammunition="25" ReloadTime="5"
 			Scatters="1"
