@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6834ef69f4b8ab14192925ac79e8a924
-timeCreated: 1528525016
+timeCreated: 1528599195
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -18,6 +18,7 @@ TextureImporter:
     21300022: Atlas_6
     21300024: Atlas_7
     21300026: Atlas_8
+    21300028: Atlas_9
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -118,7 +119,7 @@ TextureImporter:
         width: 8
         height: 772
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -132,7 +133,7 @@ TextureImporter:
         width: 604
         height: 656
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 140, y: 140, z: 140, w: 140}
       outline: []
       physicsShape: []
@@ -146,7 +147,7 @@ TextureImporter:
         width: 1161
         height: 113
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 200, y: 0, z: 200, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +161,7 @@ TextureImporter:
         width: 326
         height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 40, y: 0, z: 135, w: 0}
       outline: []
       physicsShape: []
@@ -174,7 +175,7 @@ TextureImporter:
         width: 518
         height: 547
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,7 +189,7 @@ TextureImporter:
         width: 262
         height: 122
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 44, y: 25, z: 44, w: 60}
       outline: []
       physicsShape: []
@@ -202,7 +203,7 @@ TextureImporter:
         width: 262
         height: 118
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 44, y: 25, z: 44, w: 60}
       outline: []
       physicsShape: []
@@ -216,7 +217,7 @@ TextureImporter:
         width: 100
         height: 94
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 28, y: 31, z: 28, w: 25}
       outline: []
       physicsShape: []
@@ -230,7 +231,7 @@ TextureImporter:
         width: 80
         height: 81
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -244,7 +245,7 @@ TextureImporter:
         width: 251
         height: 251
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -258,7 +259,7 @@ TextureImporter:
         width: 335
         height: 89
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 10, y: 15, z: 35, w: 15}
       outline: []
       physicsShape: []
@@ -272,7 +273,7 @@ TextureImporter:
         width: 212
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 10, y: 0, z: 10, w: 0}
       outline: []
       physicsShape: []
@@ -286,7 +287,7 @@ TextureImporter:
         width: 212
         height: 65
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 10, y: 0, z: 10, w: 0}
       outline: []
       physicsShape: []
@@ -300,8 +301,22 @@ TextureImporter:
         width: 269
         height: 107
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 60, y: 40, z: 60, w: 31}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Atlas_9
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 47
+        width: 85
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 22, y: 27, z: 22, w: 20}
       outline: []
       physicsShape: []
       tessellationDetail: 0
