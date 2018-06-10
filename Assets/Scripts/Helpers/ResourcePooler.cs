@@ -19,14 +19,15 @@ namespace Scripts.Helpers
 			try
 			{
 				var asset = Resources.Load<Object>(assetId);
-				var newObject = Object.Instantiate(asset) as GameObject;
+				var newObject = (GameObject) Object.Instantiate(asset);
 				newObject.name = asset.name;
 
 				return newObject;
 			}
 			catch (Exception ex)
 			{
-				throw new EngineException(_mainEngine, string.Format("Failed to find resource with path: {0}\n{1}", assetId, ex));
+				throw new EngineException(_mainEngine, 
+					string.Format("Failed to find resource with path: {0}\n{1}", assetId, ex));
 			}
 		}
 	}

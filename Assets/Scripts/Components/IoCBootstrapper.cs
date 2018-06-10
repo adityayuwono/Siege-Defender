@@ -15,7 +15,7 @@ using Scripts.Views.Weapons;
 using UnityEngine;
 using Object = Scripts.ViewModels.Object;
 
-namespace Scripts
+namespace Scripts.Components
 {
 	/// <summary>
 	///     Main Component as a bridge between the Engine to Unity

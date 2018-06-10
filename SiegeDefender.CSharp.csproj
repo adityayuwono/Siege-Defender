@@ -227,7 +227,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\HandleDeath.cs" />
+    <Compile Include="Assets\Scripts\AnimatorBehaviours\HandleDeath.cs" />
     <Compile Include="Assets\Scripts\Components\AccelerometerController.cs" />
     <Compile Include="Assets\Scripts\Components\AimingController.cs" />
     <Compile Include="Assets\Scripts\Components\FollowTarget.cs" />
@@ -260,6 +260,8 @@
     <Compile Include="Assets\Scripts\Contexts\GameContext.cs" />
     <Compile Include="Assets\Scripts\Contexts\MenuContext.cs" />
     <Compile Include="Assets\Scripts\Core\AdjustableProperty.cs" />
+    <Compile Include="Assets\Scripts\Helpers\FilePaths.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IChangeProperty.cs" />
     <Compile Include="Assets\Scripts\Core\Property.cs" />
     <Compile Include="Assets\Scripts\Core\PropertyLookup.cs" />
     <Compile Include="Assets\Scripts\Core\SpriteLookup.cs" />

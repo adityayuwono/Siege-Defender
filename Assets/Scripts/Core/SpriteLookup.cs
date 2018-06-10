@@ -7,12 +7,6 @@ namespace Scripts.Core
 {
 	public class SpriteLookup
 	{
-		private readonly List<Sprite> _artSprites;
-		private SpriteLookup()
-		{
-			_artSprites = Resources.LoadAll<Sprite>("GUIs/ProjectileIcons").ToList();
-		}
-
 		public static SpriteLookup Instance
 		{
 			get
@@ -26,6 +20,12 @@ namespace Scripts.Core
 			}
 		}
 		private static SpriteLookup _instance;
+
+		private readonly List<Sprite> _artSprites;
+		private SpriteLookup()
+		{
+			_artSprites = Resources.LoadAll<Sprite>("GUIs/ProjectileIcons").ToList();
+		}
 
 		public Sprite GetSpriteByName(string spriteName)
 		{

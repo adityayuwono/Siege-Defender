@@ -8,16 +8,6 @@ namespace Scripts.Components
 		private Rigidbody _rigidbody;
 		private float _strength;
 
-		private void FixedUpdate()
-		{
-			if (_duration > 0)
-			{
-				_duration -= Time.deltaTime;
-				// Reset parameters to makes sure we have a fresh RigidBody
-				_rigidbody.AddRelativeForce(Vector3.forward * _strength / 5f, ForceMode.Impulse);
-			}
-		}
-
 		public void Reset(float strength)
 		{
 			_rigidbody = GetComponent<Rigidbody>();
@@ -27,6 +17,15 @@ namespace Scripts.Components
 			;
 			_strength = strength;
 			_duration = 0.1f;
+		}
+
+		private void FixedUpdate()
+		{
+			if (_duration > 0)
+			{
+				_duration -= Time.deltaTime;
+				_rigidbody.AddRelativeForce(Vector3.forward * _strength / 5f, ForceMode.Impulse);
+			}
 		}
 	}
 }

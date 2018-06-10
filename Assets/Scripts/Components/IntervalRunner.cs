@@ -44,6 +44,11 @@ namespace Scripts.Components
 			foreach (var interval in _intervals.ToArray()) interval.Update(timeElapsed);
 		}
 
+		private void Update()
+		{
+			UpdateTime(Time.deltaTime);
+		}
+
 		/// <summary>
 		///     Check if we already have an interval with that specific action
 		/// </summary>
@@ -55,11 +60,6 @@ namespace Scripts.Components
 		private IntervalSubscriber GetInterval(Action action)
 		{
 			return _intervals.FirstOrDefault(interval => interval.ActionHash == action.GetHashCode());
-		}
-
-		private void Update()
-		{
-			UpdateTime(Time.deltaTime);
 		}
 
 		private class IntervalSubscriber

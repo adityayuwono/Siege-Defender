@@ -1,4 +1,5 @@
 ﻿using System;
+using Scripts.Interfaces;
 
 namespace Scripts.Core
 {
@@ -42,10 +43,5 @@ namespace Scripts.Core
 		{
 			if (OnChange != null) OnChange();
 		}
-	}
-
-	public interface IChangeProperty
-	{
-		event Action OnChange;
 	}
 }

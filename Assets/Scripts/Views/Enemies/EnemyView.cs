@@ -1,4 +1,5 @@
-﻿using Scripts.Components;
+﻿using Scripts.AnimatorBehaviours;
+using Scripts.Components;
 using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
