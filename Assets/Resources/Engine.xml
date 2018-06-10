@@ -21,7 +21,7 @@
 			IsRotationRandomized="true"
 			DeathDelay="0.5"
 			Scatters="3" />
-    <Projectile Id="ScatterArrow" Damage="6-10"
+    <Projectile Id="ScatterArrow" Damage="5-10"
 			AssetId="Projectiles/WoodenBalista"
 			RoF="0.75" Ammunition="1000" ReloadTime="5"
 			SpeedDeviation="300-600"
