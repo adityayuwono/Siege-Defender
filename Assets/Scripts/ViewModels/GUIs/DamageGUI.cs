@@ -19,9 +19,9 @@ namespace Scripts.ViewModels.GUIs
 		public void ShowDamage(float damage, bool isCrit, Vector3 position)
 		{
 			Color = isCrit ? Color.yellow : Color.white;
-			Size = isCrit ? 30 : 20;
-			Text.SetValue(Math.Round(damage).ToString(CultureInfo.InvariantCulture));
+			Size = isCrit ? 25 : 20;
 			Position = position;
+			Text.SetValue(Math.Round(damage).ToString(CultureInfo.InvariantCulture));
 
 			Activate();
 			Show();
