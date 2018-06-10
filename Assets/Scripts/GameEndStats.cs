@@ -5,43 +5,43 @@ namespace Scripts
 {
 	public class GameEndStats
 	{
-		private static int TotalHit;
-		private static int TotalProjectileShot;
+		private static int _totalHit;
+		private static int _totalProjectileShot;
 
 		public static void Reset()
 		{
-			TotalHit = 0;
-			TotalProjectileShot = 0;
-			EnemiesKilled = 0;
+			_totalHit = 0;
+			_totalProjectileShot = 0;
+			_enemiesKilled = 0;
 			_totalDamage = 0;
 			_totalTime = 0;
 		}
 
 		public static void AddOneProjectile()
 		{
-			TotalProjectileShot++;
+			_totalProjectileShot++;
 		}
 
 		public static void AddOneHit()
 		{
-			TotalHit++;
+			_totalHit++;
 		}
 
 		public static float GetAccuracy()
 		{
-			return TotalHit * 100f / TotalProjectileShot;
+			return _totalHit * 100f / _totalProjectileShot;
 		}
 
-		private static int EnemiesKilled;
+		private static int _enemiesKilled;
 
 		public static void AddOneEnemyKilled()
 		{
-			EnemiesKilled++;
+			_enemiesKilled++;
 		}
 
 		public static object GetEnemiesKilled()
 		{
-			return EnemiesKilled;
+			return _enemiesKilled;
 		}
 
 		private static float _totalDamage;

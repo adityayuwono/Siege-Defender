@@ -2,7 +2,7 @@
 
 namespace Scripts.Components
 {
-	public class AlwaysFaceMainCamera : MonoBehaviour
+	public class FollowTarget : MonoBehaviour
 	{
 		public Transform Target;
  

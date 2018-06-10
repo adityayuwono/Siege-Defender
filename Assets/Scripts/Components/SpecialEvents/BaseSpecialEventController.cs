@@ -21,12 +21,18 @@ namespace Scripts.Components.SpecialEvents
 
 		protected void InvokeEventStart()
 		{
-			if (OnEventStart != null) OnEventStart();
+			if (OnEventStart != null)
+			{
+				OnEventStart();
+			}
 		}
 
 		protected void InvokeEventFinished()
 		{
-			if (OnEventFinished != null) OnEventFinished();
+			if (OnEventFinished != null)
+			{
+				OnEventFinished();
+			}
 		}
 	}
 }

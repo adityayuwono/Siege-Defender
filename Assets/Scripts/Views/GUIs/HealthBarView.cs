@@ -8,7 +8,7 @@ namespace Scripts.Views.GUIs
 	public class HealthBarView : ObjectView
 	{
 		private HealthBar _viewModel;
-		private AlwaysFaceMainCamera _positionComponent;
+		private FollowTarget _positionComponent;
 		private Image _image;
 
 		public HealthBarView(HealthBar viewModel, ObjectView parent)
@@ -21,7 +21,7 @@ namespace Scripts.Views.GUIs
 		{
 			base.OnLoad();
 
-			_positionComponent = GameObject.AddComponent<AlwaysFaceMainCamera>();
+			_positionComponent = GameObject.AddComponent<FollowTarget>();
 			_image = GameObject.GetComponent<Image>();
 		}
 

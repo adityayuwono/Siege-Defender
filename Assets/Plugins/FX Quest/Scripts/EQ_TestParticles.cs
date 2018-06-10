@@ -7,6 +7,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 #endregion
 
@@ -256,23 +257,23 @@ public class EQ_TestParticles : MonoBehaviour
 			GUILayout.BeginHorizontal();
 
 				// 2D Demo scene button
-				if(Application.loadedLevelName=="2D_Demo")
+				if(SceneManager.GetActiveScene().name=="2D_Demo")
 					GUI.enabled=false;
 				else
 					GUI.enabled=true;
 				if(GUI.Button(new Rect(12, 25, 125, 25), "2D Demo scene"))
 				{
-					Application.LoadLevel("2D_Demo");
+					SceneManager.LoadScene("2D_Demo");
 				}
 
 				// 3D Demo scene button
-				if(Application.loadedLevelName=="3D_Demo")
+				if (SceneManager.GetActiveScene().name == "3D_Demo")
 					GUI.enabled=false;
 				else
 					GUI.enabled=true;
 				if(GUI.Button(new Rect(155, 25, 125, 25), "3D Demo scene"))
 				{
-					Application.LoadLevel("3D_Demo");
+					SceneManager.LoadScene("3D_Demo");
 				}
 			GUILayout.EndHorizontal();
 		}

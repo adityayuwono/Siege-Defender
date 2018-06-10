@@ -74,7 +74,8 @@ namespace Scripts
 			{
 				return levelModel;
 			}
-			throw new EngineException(this, string.Format("Level not found: {0}", levelId));
+			throw new EngineException(this, 
+				string.Format("Level not found: {0}", levelId));
 		}
 
 		public void ThrowError(string message)

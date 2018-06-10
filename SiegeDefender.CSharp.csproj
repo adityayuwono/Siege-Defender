@@ -230,7 +230,7 @@
     <Compile Include="Assets\HandleDeath.cs" />
     <Compile Include="Assets\Scripts\Components\AccelerometerController.cs" />
     <Compile Include="Assets\Scripts\Components\AimingController.cs" />
-    <Compile Include="Assets\Scripts\Components\AlwaysFaceMainCamera.cs" />
+    <Compile Include="Assets\Scripts\Components\FollowTarget.cs" />
     <Compile Include="Assets\Scripts\Components\BaseBinding.cs" />
     <Compile Include="Assets\Scripts\Components\BaseController.cs" />
     <Compile Include="Assets\Scripts\Components\BaseTexturedController.cs" />
