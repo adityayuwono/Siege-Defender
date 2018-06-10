@@ -17,10 +17,12 @@ namespace Scripts.ViewModels.GUIs
 		protected override void OnActivate()
 		{
 			base.OnActivate();
-
-			Text.SetValue(string.Format("Accuracy: {0}%\nEnemies Killed: {1}", 
+			Size = 40;
+			Text.SetValue(string.Format("Accuracy: {0}%\nEnemies Killed: {1}\n\nTotal Damage: {2}\nDPS: {3}",
 				Scripts.GameEndStats.GetAccuracy(),
-				Scripts.GameEndStats.GetEnemiesKilled()));
+				Scripts.GameEndStats.GetEnemiesKilled(),
+				Scripts.GameEndStats.GetTotalDamage(),
+				Scripts.GameEndStats.GetDPS()));
 		}
 	}
 }

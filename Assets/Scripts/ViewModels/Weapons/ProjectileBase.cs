@@ -39,6 +39,10 @@ namespace Scripts.ViewModels.Weapons
 			var isCrit = false;
 			var damage = CalculateDamage(ref isCrit);
 			var isDamageApplied = enemy.ApplyDamage(damage, isCrit, contactPoint, attachToEnemy ? this : null);
+			if (isDamageApplied)
+			{
+				GameEndStats.AddDamage(damage);
+			}
 			return isDamageApplied;
 		}
 	}
