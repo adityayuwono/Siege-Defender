@@ -7,11 +7,8 @@ namespace Scripts.ViewModels.GUIs
 {
 	public class DamageGUI : LabelGUI
 	{
-		private DamageGUIModel _model;
-
 		public DamageGUI(DamageGUIModel model, Base parent) : base(model, parent)
 		{
-			_model = model;
 		}
 
 		public float HideDelay

@@ -10,8 +10,6 @@ namespace Scripts.Components
 		private const string CrosshairAssetPath = "GUIs/Crosshair";
 		private static Vector2 _halfScreen;
 
-		private Vector2 _circleCenter;
-
 		private Texture2D _crosshairImage;
 		private Rect _crosshairRect;
 
@@ -34,13 +32,6 @@ namespace Scripts.Components
 				Screen.width / 2f,
 				Screen.height * Values.GuiCrosshairSizeF,
 				Screen.height * Values.GuiCrosshairSizeF);
-		}
-
-		protected override void OnChange()
-		{
-			base.OnChange();
-
-			_circleCenter = TextureScreenArea.center;
 		}
 
 		private void OnGUI()

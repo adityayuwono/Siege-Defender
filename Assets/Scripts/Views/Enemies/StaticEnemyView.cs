@@ -5,13 +5,11 @@ namespace Scripts.Views.Enemies
 {
 	public class StaticEnemyView : LivingObjectView
 	{
-		private readonly StaticEnemy _viewModel;
 		private Animation _animation;
 
 		public StaticEnemyView(StaticEnemy viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
-			_viewModel = viewModel;
 		}
 
 		protected override void OnLoad()

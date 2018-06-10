@@ -5,8 +5,10 @@ namespace Scripts.Contexts
 {
 	public class MenuContext : BaseContext
 	{
-		private void Start()
+		protected override void Start()
 		{
+			base.Start();
+
 			var engineModel = DataContext.EngineModel;
 
 			var sceneModel = engineModel.Scenes.Find(s => s.Id == gameObject.name);

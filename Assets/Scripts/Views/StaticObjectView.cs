@@ -5,11 +5,8 @@ namespace Scripts.Views
 {
 	public class StaticObjectView : RigidbodyView
 	{
-		private StaticObject _viewModel;
-
 		public StaticObjectView(StaticObject viewModel, ObjectView parent) : base(viewModel, parent)
 		{
-			_viewModel = viewModel;
 		}
 
 		protected override void OnLoad()

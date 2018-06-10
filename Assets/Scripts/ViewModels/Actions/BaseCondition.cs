@@ -6,13 +6,10 @@ namespace Scripts.ViewModels.Actions
 {
 	public class BaseCondition : TargetProperty
 	{
-		private readonly BaseConditionModel _model;
-
 		public readonly Property<bool> IsMatch = new Property<bool>();
 
 		protected BaseCondition(BaseConditionModel model, Base parent) : base(model, parent)
 		{
-			_model = model;
 		}
 
 		private Property TargetProperty

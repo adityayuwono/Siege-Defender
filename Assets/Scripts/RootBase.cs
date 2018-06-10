@@ -15,12 +15,9 @@ namespace Scripts
 	{
 		public readonly BaseContext Context;
 
-		private readonly RootModel _model;
-
 		protected RootBase(RootModel model, BaseContext parent)
 			: base(model, null)
 		{
-			_model = model;
 			Context = parent;
 
 			PropertyLookup = new PropertyLookup(this, this); // This is the root
@@ -28,9 +25,11 @@ namespace Scripts
 		}
 
 		public abstract IIntervalRunner IntervalRunner { get; }
+		
 		public IResource ResourceManager { get; private set; }
 
 		public PropertyLookup PropertyLookup { get; private set; }
+		
 		public abstract void StartCoroutine(IEnumerator coroutine);
 
 		public void ChangeScene(string sceneName, string levelId)

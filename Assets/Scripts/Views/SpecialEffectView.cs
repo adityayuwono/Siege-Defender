@@ -41,9 +41,10 @@ namespace Scripts.Views
 			var particleDuration = 0f;
 			foreach (var particleSystem in GameObject.GetComponentsInChildren<ParticleSystem>())
 			{
-				if (particleDuration < particleSystem.startLifetime)
+				var startLifetime = particleSystem.main.startLifetime.constant;
+				if (particleDuration < startLifetime)
 				{
-					particleDuration = particleSystem.startLifetime + particleSystem.duration;
+					particleDuration = startLifetime + particleSystem.main.duration;
 				}
 			}
 

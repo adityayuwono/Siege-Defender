@@ -5,14 +5,11 @@ namespace Scripts.Views.GUIs
 {
 	public class ProgressBarGUIView : ValueDisplayGUIView
 	{
-		private readonly ProgressBarGUI _viewModel;
-
 		private Image _image;
 
 		public ProgressBarGUIView(ProgressBarGUI viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
-			_viewModel = viewModel;
 		}
 
 		protected override void OnLoad()

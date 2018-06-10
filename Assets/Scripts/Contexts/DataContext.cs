@@ -47,16 +47,16 @@ namespace Scripts.Contexts
 #if UNITY_EDITOR
 			enginePath = "Assets/Resources/Engine.xml";
 #else
-            enginePath = "Engine.xml";
+			enginePath = "Engine.xml";
 #endif
 
 
 #if !UNITY_ANDROID
-            EngineXML = LoadFile(enginePath, "" /*No default engine, because it's checked earlier*/);
+			EngineXML = LoadFile(enginePath, "" /*No default engine, because it's checked earlier*/);
 #else
 			EngineXML = Resources.Load<TextAsset>("Engine").text;
 #endif
-
+			UnityEngine.Debug.Log(enginePath);
 			// Start preparing XML
 			InitializeEngine();
 		}
@@ -150,7 +150,8 @@ namespace Scripts.Contexts
 
 		public static ObjectModel GetObjectModel(IBase baseObject, string id)
 		{
-			if (ObjectModels.ContainsKey(id)) return ObjectModels[id];
+			if (ObjectModels.ContainsKey(id))
+				return ObjectModels[id];
 
 			throw new EngineException(baseObject, string.Format("ObjectModel not found, Id: {0}", id));
 		}

@@ -19,7 +19,9 @@ namespace Scripts.Core
 			_context = baseViewModel as IContext ?? baseViewModel.GetParent<IContext>();
 
 			if (_context == null)
+			{
 				throw new EngineException(baseViewModel, "Failed to find Context in the hierarchy");
+			}
 
 			_context.PropertyLookup.RegisterProperty(baseViewModel, _propertyId, this);
 		}

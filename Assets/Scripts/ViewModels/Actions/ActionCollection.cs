@@ -11,7 +11,11 @@ namespace Scripts.ViewModels.Actions
 	/// </summary>
 	public class ActionCollection : List<BaseAction>
 	{
-		private readonly List<BaseActionModel> _models;
+		/// <summary>
+		///     Invoked by the Enumerator when the action sequence has finished Activated
+		/// </summary>
+		public event Action OnActivationFinished;
+
 		private readonly Base _parent;
 		private BaseAction _currentAction;
 
@@ -21,21 +25,15 @@ namespace Scripts.ViewModels.Actions
 
 		public ActionCollection(List<BaseActionModel> models, Base parent)
 		{
-			_models = models;
 			_parent = parent;
 
 			foreach (var actionModel in models)
 			{
 				// Get new instance of ActionVM
-				var actionVM = IoC.IoCContainer.GetInstance<BaseAction>(actionModel.GetType(), new object[] {actionModel, _parent});
-				Add(actionVM);
+				var action = IoC.IoCContainer.GetInstance<BaseAction>(actionModel.GetType(), new object[] {actionModel, _parent});
+				Add(action);
 			}
 		}
-
-		/// <summary>
-		///     Invoked by the Enumerator when the action sequence has finished Activated
-		/// </summary>
-		public event Action OnActivationFinished;
 
 		public void Activate()
 		{
@@ -49,6 +47,26 @@ namespace Scripts.ViewModels.Actions
 			_isActionInvoking = true;
 			_currentIndex = 0;
 			ActivateActions();
+		}
+
+		public bool Interrupt(bool absolute = true)
+		{
+			var isInterruptable = absolute || _isInterruptable;
+
+			if (isInterruptable)
+			{
+				_parent.SDRoot.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
+				OnActivationFinished = null;
+				// Deactivate everything immediately
+				DeactivateActions();
+			}
+
+			return isInterruptable;
+		}
+
+		public void Deactivate()
+		{
+			Interrupt();
 		}
 
 		/// <summary>
@@ -93,26 +111,6 @@ namespace Scripts.ViewModels.Actions
 
 				if (OnActivationFinished != null) OnActivationFinished();
 			}
-		}
-
-		public bool Interrupt(bool absolute = true)
-		{
-			var isInterruptable = absolute || _isInterruptable;
-
-			if (isInterruptable)
-			{
-				_parent.SDRoot.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
-				OnActivationFinished = null;
-				// Deactivate everything immediately
-				DeactivateActions();
-			}
-
-			return isInterruptable;
-		}
-
-		public void Deactivate()
-		{
-			Interrupt();
 		}
 
 		private void DeactivateActions()

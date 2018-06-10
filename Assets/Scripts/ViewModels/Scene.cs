@@ -9,8 +9,6 @@ namespace Scripts.ViewModels
 {
 	public class Scene : Interval<Object>, IContext
 	{
-		private readonly SceneModel _model;
-
 		public readonly AdjustableProperty<bool> IsLoadingInProgress;
 		private string _levelId;
 		private PropertyLookup _propertyLookup;
@@ -19,8 +17,6 @@ namespace Scripts.ViewModels
 
 		public Scene(SceneModel model, Base parent) : base(model, parent)
 		{
-			_model = model;
-
 			IsLoadingInProgress = new AdjustableProperty<bool>("IsLoadingInProgress", this);
 		}
 

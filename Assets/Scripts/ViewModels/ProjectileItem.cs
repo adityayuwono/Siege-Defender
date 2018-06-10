@@ -62,7 +62,10 @@ namespace Scripts.ViewModels
 				newProjectileModel.CriticalDamageMultiplier = newProjectileModel.CriticalDamageMultiplier + overriderModel.CriticalDamageMultiplier;
 				newProjectileModel.Scatters += overriderModel.Scatters;
 				newProjectileModel.Ammunition += overriderModel.Ammunition;
-				newProjectileModel.AoEId = overriderModel.AoEId;
+				if (string.IsNullOrEmpty(newProjectileModel.AoEId))
+				{
+					newProjectileModel.AoEId = overriderModel.AoEId;
+				}
 			}
 
 			Stats = string.Format("Damage: {0}\n\nRate of Fire: {1}\nAmmunition: {2}",

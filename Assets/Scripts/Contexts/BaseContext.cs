@@ -8,6 +8,13 @@ namespace Scripts.Contexts
 		[HideInInspector]
 		public IntervalRunner IntervalRunner;
 
+		public static BaseContext Instance { get; protected set; }
+
+		protected virtual void Start()
+		{
+			Instance = this;
+		}
+
 		#region Error Debug
 
 		// Used to display error to the user, not going to be included in the actual release

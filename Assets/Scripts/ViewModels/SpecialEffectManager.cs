@@ -7,12 +7,10 @@ namespace Scripts.ViewModels
 {
 	public class SpecialEffectManager : Interval<SpecialEffect>
 	{
-		private readonly SpecialEffectManagerModel _model;
 		private readonly Dictionary<Object, SpecialEffect> _specialEffects = new Dictionary<Object, SpecialEffect>();
 
 		public SpecialEffectManager(SpecialEffectManagerModel model, Object parent) : base(model, parent)
 		{
-			_model = model;
 		}
 
 		public void StartSpecialEffectOn(string id, Vector3 position)

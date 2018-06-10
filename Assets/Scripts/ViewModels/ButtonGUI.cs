@@ -6,14 +6,11 @@ namespace Scripts.ViewModels
 {
 	public class ButtonGUI : BaseGUI
 	{
-		private readonly ButtonGUIModel _model;
+		public event Action OnClick;
 
 		public ButtonGUI(ButtonGUIModel model, Base parent) : base(model, parent)
 		{
-			_model = model;
 		}
-
-		public event Action OnClick;
 
 		public void OnClicked()
 		{

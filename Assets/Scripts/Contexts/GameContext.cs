@@ -5,8 +5,10 @@ namespace Scripts.Contexts
 {
 	public class GameContext : BaseContext
 	{
-		private void Start()
+		protected override void Start()
 		{
+			base.Start();
+
 			GameEndStats.Reset();
 
 			// Prepare the IntervalRunner, this will manage all time based execution of this game
