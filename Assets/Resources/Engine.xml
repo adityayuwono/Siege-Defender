@@ -499,7 +499,7 @@
 
     <Scene Id="PlayEnd" AssetId="PlayEnd">
       <Elements>
-        <GameEndStats AssetId="Title/GameStats/Stats" />
+        <GameEndStats IsStatic="true" AssetId="Title/GameStats/Stats" />
         <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">
