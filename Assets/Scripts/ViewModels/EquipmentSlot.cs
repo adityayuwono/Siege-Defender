@@ -27,9 +27,14 @@ namespace Scripts.ViewModels
 			set { OnItemUpdate(value); }
 		}
 
-		public void Object_OnDropped(Object objectViewModel)
+		public void Object_OnDropped(Object objectVM)
 		{
-			CurrentItem = objectViewModel as Item;
+			var droppedItem = objectVM as Item;
+			
+			if (droppedItem.GetParent<EquipmentSlot>() == null)
+			{
+				CurrentItem = droppedItem;
+			}
 		}
 
 		protected override void OnActivate()
@@ -60,14 +65,14 @@ namespace Scripts.ViewModels
 			base.OnDestroyed();
 		}
 
-		private void OnItemUpdate(Item itemViewModel)
+		private void OnItemUpdate(Item item)
 		{
 			var inventoryParent = GetParent<Inventory>();
 			// Remove it from the inventory, do this first to make sure there's a spot left in the inventory
-			inventoryParent.ReleaseItem(itemViewModel);
+			inventoryParent.ReleaseItem(item);
 
 			var oldItem = _currentItem;
-			_currentItem = itemViewModel; // Swap the current item
+			_currentItem = item; // Swap the current item
 			_currentItem.ChangeParent(this);
 
 			if (oldItem != null)

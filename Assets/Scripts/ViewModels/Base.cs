@@ -55,6 +55,11 @@ namespace Scripts.ViewModels
 
 		public T GetParent<T>() where T : class, IBase
 		{
+			if (Parent == null)
+			{
+				return null;
+			}
+
 			var parent = Parent as T;
 			return parent ?? Parent.GetParent<T>();
 		}
