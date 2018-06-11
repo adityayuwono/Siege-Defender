@@ -13,12 +13,14 @@ namespace Scripts.ViewModels
 		public Action ChildrenChanged;
 
 		public AdjustableProperty<string> SelectedItemBaseName;
-		public AdjustableProperty<string> SelectedItemStats;
+		public AdjustableProperty<string> SelectedItemStatNames;
+		public AdjustableProperty<string> SelectedItemStatNumbers;
 
 		public Inventory(InventoryModel model, Base parent) : base(model, parent)
 		{
 			SelectedItemBaseName = new AdjustableProperty<string>("SelectedItemBaseName", this);
-			SelectedItemStats = new AdjustableProperty<string>("SelectedItemStats", this);
+			SelectedItemStatNames = new AdjustableProperty<string>("SelectedItemStatNames", this);
+			SelectedItemStatNumbers = new AdjustableProperty<string>("SelectedItemStatNumbers", this);
 
 			// Grab reference to Player's Inventory loaded from XML
 			foreach (var inventoryModel in DataContext.PlayerDataModel.Inventories)
@@ -84,7 +86,8 @@ namespace Scripts.ViewModels
 		public void SelectItem(Item item)
 		{
 			SelectedItemBaseName.SetValue(item.BaseItem);
-			SelectedItemStats.SetValue(item.Stats.GetValue());
+			SelectedItemStatNames.SetValue(item.Stats);
+			SelectedItemStatNumbers.SetValue(item.Numbers);
 		}
 
 		private void InvokeChildrenChanged()

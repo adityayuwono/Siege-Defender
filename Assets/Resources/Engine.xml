@@ -426,7 +426,8 @@
       <Elements>
         <Inventory Id="PlayerInventory" Source="PlayerInventory" AssetId="InventoryRoot/PlayerInventory" />
         <Label Text="{PlayerInventory.SelectedItemBaseName}" IsStatic="true" AssetId="InventoryRoot/Information/BaseName" />
-        <Label Text="{PlayerInventory.SelectedItemStats}" IsStatic="true" AssetId="InventoryRoot/Information/Stats" />
+        <Label Text="{PlayerInventory.SelectedItemStatNames}" IsStatic="true" AssetId="InventoryRoot/Information/StatNames" />
+        <Label Text="{PlayerInventory.SelectedItemStatNumbers}" IsStatic="true" AssetId="InventoryRoot/Information/StatNumbers" />
         <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">

@@ -73,9 +73,10 @@ namespace Scripts.ViewModels
 				}
 			}
 
-			var stats =
+			var stats = "Damage\nSpeed\n\nRate of Fire\nAmmunition\nReload Time\n\nAccuracy\nRecoil";
+			var numbers =
 				string.Format(
-					"Damage: {0}\nSpeed: {6}\n\nRate of Fire: {1}\nAmmunition: {2}\nReloadTime: {3}\n\nAccuracy: {4}\nRecoil: {5}",
+					"{0}\n{6}\n\n{1}\n{2}\n{3}\n\n{4}\n{5}",
 					string.Format("{0}-{1}", newProjectileModel.Damage[0], newProjectileModel.Damage[1]),
 					newProjectileModel.RoF,
 					newProjectileModel.Ammunition,
@@ -87,8 +88,9 @@ namespace Scripts.ViewModels
 
 			if (newProjectileModel.CriticalChance > 0)
 			{
-				stats +=
-					string.Format("\n\nCritical Chance: {0}%\nCritical Damage: {1}%",
+				stats += "\n\nCritical Chance\nCritical Damage";
+				numbers +=
+					string.Format("\n\n{0}%\n{1}%",
 						newProjectileModel.CriticalChance * 100,
 						newProjectileModel.CriticalDamageMultiplier * 100
 					);
@@ -96,13 +98,16 @@ namespace Scripts.ViewModels
 
 			if (newProjectileModel.Scatters > 1)
 			{
-				stats +=
-					string.Format("\n\nProjectiles Shot: {0}",
+				stats += "\n\nProjectiles Shot";
+				numbers +=
+					string.Format("\n\n{0}",
 						newProjectileModel.Scatters
 					);
 			}
 
-			Stats.SetValue(stats);
+			Stats = stats;
+			Numbers = numbers;
+
 			// Register the new Model, to make sure it's available for duplication later
 			DataContext.AddNewObjectModel(newProjectileModel);
 			_projectileModel = newProjectileModel;

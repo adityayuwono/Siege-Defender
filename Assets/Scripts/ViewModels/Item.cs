@@ -8,9 +8,6 @@ namespace Scripts.ViewModels
 	{
 		public Action<Object> ParentChanged;
 
-		public AdjustableProperty<string> BaseName;
-		public AdjustableProperty<string> Stats;
-
 		private readonly ItemModel _model;
 
 		public Item(ItemModel model, Base parent)
@@ -18,10 +15,7 @@ namespace Scripts.ViewModels
 		{
 			_model = model;
 
-			Stats = new AdjustableProperty<string>("Stats", this);
-			BaseName = new AdjustableProperty<string>("BaseName", this);
-
-			BaseName.SetValue(_model.BaseItem);
+			BaseName = _model.BaseItem;
 		}
 
 		public string BaseItem
@@ -33,6 +27,10 @@ namespace Scripts.ViewModels
 		{
 			get { return _model; }
 		}
+
+		public string BaseName { get; protected set; }
+		public string Stats { get; protected set; }
+		public string Numbers { get; protected set; }
 
 		public void ChangeParent(Object newParent)
 		{
