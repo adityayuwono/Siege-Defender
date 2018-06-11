@@ -6,9 +6,10 @@ namespace Scripts.ViewModels
 {
 	public class EquipmentSlot : Element
 	{
-		private readonly EquipmentSlotModel _model;
 		public readonly AdjustableProperty<ObjectModel> Item;
 		public readonly AdjustableProperty<string> ItemId;
+
+		private readonly EquipmentSlotModel _model;
 		private Item _currentItem;
 
 		public EquipmentSlot(EquipmentSlotModel model, Inventory parent) : base(model, parent)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Scripts.ViewModels;
+using UnityEngine;
 
 namespace Scripts.Components.UI
 {
@@ -8,6 +9,11 @@ namespace Scripts.Components.UI
 
 		private DragDropContainerController _dragDropContainerController;
 
+		private Item Item
+		{
+			get { return (Item)GetComponent<ViewModelController>().ViewModel; }
+		}
+
 		private void OnMouseDown()
 		{
 			IsDragMode = true;
@@ -15,6 +21,7 @@ namespace Scripts.Components.UI
 
 		private void OnMouseUp()
 		{
+			Item.Select();
 			IsDragMode = false;
 			if (_dragDropContainerController != null)
 			{

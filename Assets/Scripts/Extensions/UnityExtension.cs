@@ -21,7 +21,9 @@ namespace Scripts.Extensions
 			var child = value;
 
 			for (var i = 0; i < child.childCount; i++)
+			{
 				queue.Add(child.GetChild(i));
+			}
 
 			while (queue.Count > 0)
 			{
@@ -33,10 +35,15 @@ namespace Scripts.Extensions
 				var isFound = child.name == childSearchPattern;
 				isFound &= includeInactive || child.gameObject.activeInHierarchy;
 
-				if (isFound) return child;
+				if (isFound)
+				{
+					return child;
+				}
 
 				for (var i = 0; i < child.childCount; i++)
+				{
 					queue.Add(child.GetChild(i));
+				}
 			}
 
 			return null;

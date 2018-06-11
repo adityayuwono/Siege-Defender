@@ -1,11 +1,12 @@
 <Engine Id="SiegeDefender">
   <Objects>
-    <Projectile Id="Ascalon" Damage="4-4"
+    <Projectile Id="Ascalon" Damage="40-41"
       AssetId="Projectiles/IronBullet"
-      RoF="0.05" Ammunition="10" ReloadTime="1"
+      RoF="0.2" Ammunition="1" ReloadTime="0.01"
       Scatters="1"
+      SpeedDeviation="20-30"
       AoEId="AscalonExplosion"
-      CriticalChance="0.5" CriticalDamageMultiplier="2"
+      CriticalChance="0.5" CriticalDamageMultiplier="2.35"
       Accuracy="1" Deviation="0" />
     <Projectile Id="WoodArrow" Damage="6-10"
 			AssetId="Projectiles/WoodenBalista"
@@ -57,7 +58,7 @@
     <ParticleAoE Id="FireDome" 
       AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" DamageMultiplier="0.75" Scatters="1" />
     <ParticleAoE Id="AscalonExplosion" 
-      AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="1" DamageMultiplier="2" />
+      AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="8" DamageMultiplier="1" />
     <ParticleAoE Id="LightningStrike" 
       AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" DamageMultiplier="3" IsGrounded="true" />
 
@@ -424,6 +425,8 @@
     <Scene Id="Inventory" AssetId="Inventory">
       <Elements>
         <Inventory Id="PlayerInventory" Source="PlayerInventory" AssetId="InventoryRoot/PlayerInventory" />
+        <Label Text="{PlayerInventory.SelectedItemBaseName}" IsStatic="true" AssetId="InventoryRoot/Information/BaseName" />
+        <Label Text="{PlayerInventory.SelectedItemStats}" IsStatic="true" AssetId="InventoryRoot/Information/Stats" />
         <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">

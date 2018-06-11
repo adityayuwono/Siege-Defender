@@ -60,7 +60,10 @@ namespace Scripts.Core
 		{
 			var viewModelId = viewModel == _context ? "This" : viewModel.Id;
 
-			if (!_children.ContainsKey(viewModelId)) _children.Add(viewModelId, viewModel);
+			if (!_children.ContainsKey(viewModelId))
+			{
+				_children.Add(viewModelId, viewModel);
+			}
 
 			if (_properties.ContainsKey(propertyId))
 			{
@@ -106,6 +109,7 @@ namespace Scripts.Core
 			var propertyDict = _properties[propertyId];
 			if (!propertyDict.ContainsKey(viewModelId))
 			{
+				return null;
 				throw new EngineException(_engine,
 					string.Format("PropertyLookup: Failed to find Property with Id: '{0}' of ViewModel: '{1}'", propertyId,
 						viewModelId));
@@ -173,6 +177,13 @@ namespace Scripts.Core
 					if (tryProperty != null)
 					{
 						return tryProperty;
+					}
+
+					// Try for a property, if it is found then return it
+					var tryThisProperty = context.PropertyLookup.GetProperty("This", currentPath);
+					if (tryThisProperty != null)
+					{
+						return tryThisProperty;
 					}
 
 					// No Property found, then look for a context

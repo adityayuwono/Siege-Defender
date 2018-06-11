@@ -20,7 +20,12 @@ namespace Scripts.ViewModels
 			_model = model;
 		}
 
-		public string Stats { get; private set; }
+		protected override void OnLoad()
+		{
+			base.OnLoad();
+
+			GetProjectileModel();
+		}
 
 		// Return BaseProjectile, multiplied by level and improved with enchantment
 		public ProjectileModel GetProjectileModel()
@@ -68,11 +73,36 @@ namespace Scripts.ViewModels
 				}
 			}
 
-			Stats = string.Format("Damage: {0}\n\nRate of Fire: {1}\nAmmunition: {2}",
-				newProjectileModel.Damage,
-				newProjectileModel.RoF,
-				newProjectileModel.Ammunition);
+			var stats =
+				string.Format(
+					"Damage: {0}\nSpeed: {6}\n\nRate of Fire: {1}\nAmmunition: {2}\nReloadTime: {3}\n\nAccuracy: {4}\nRecoil: {5}",
+					string.Format("{0}-{1}", newProjectileModel.Damage[0], newProjectileModel.Damage[1]),
+					newProjectileModel.RoF,
+					newProjectileModel.Ammunition,
+					newProjectileModel.ReloadTime,
+					newProjectileModel.Accuracy,
+					newProjectileModel.Deviation,
+					string.Format("{0}-{1}", newProjectileModel.SpeedDeviation[0], newProjectileModel.SpeedDeviation[1])
+				);
 
+			if (newProjectileModel.CriticalChance > 0)
+			{
+				stats +=
+					string.Format("\n\nCritical Chance: {0}%\nCritical Damage: {1}%",
+						newProjectileModel.CriticalChance * 100,
+						newProjectileModel.CriticalDamageMultiplier * 100
+					);
+			}
+
+			if (newProjectileModel.Scatters > 1)
+			{
+				stats +=
+					string.Format("\n\nProjectiles Shot: {0}",
+						newProjectileModel.Scatters
+					);
+			}
+
+			Stats.SetValue(stats);
 			// Register the new Model, to make sure it's available for duplication later
 			DataContext.AddNewObjectModel(newProjectileModel);
 			_projectileModel = newProjectileModel;

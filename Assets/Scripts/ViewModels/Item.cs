@@ -1,17 +1,27 @@
 ﻿using System;
+using Scripts.Core;
 using Scripts.Models;
 
 namespace Scripts.ViewModels
 {
 	public class Item : Object
 	{
-		private readonly ItemModel _model;
 		public Action<Object> ParentChanged;
+
+		public AdjustableProperty<string> BaseName;
+		public AdjustableProperty<string> Stats;
+
+		private readonly ItemModel _model;
 
 		public Item(ItemModel model, Base parent)
 			: base(model, parent)
 		{
 			_model = model;
+
+			Stats = new AdjustableProperty<string>("Stats", this);
+			BaseName = new AdjustableProperty<string>("BaseName", this);
+
+			BaseName.SetValue(_model.BaseItem);
 		}
 
 		public string BaseItem
@@ -32,6 +42,11 @@ namespace Scripts.ViewModels
 			{
 				ParentChanged(newParent);
 			}
+		}
+
+		public void Select()
+		{
+			GetParent<Inventory>().SelectItem(this);
 		}
 	}
 }

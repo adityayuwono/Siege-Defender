@@ -12,8 +12,14 @@ namespace Scripts.ViewModels
 		private PropertyLookup _propertyLookup;
 		public Action ChildrenChanged;
 
+		public AdjustableProperty<string> SelectedItemBaseName;
+		public AdjustableProperty<string> SelectedItemStats;
+
 		public Inventory(InventoryModel model, Base parent) : base(model, parent)
 		{
+			SelectedItemBaseName = new AdjustableProperty<string>("SelectedItemBaseName", this);
+			SelectedItemStats = new AdjustableProperty<string>("SelectedItemStats", this);
+
 			// Grab reference to Player's Inventory loaded from XML
 			foreach (var inventoryModel in DataContext.PlayerDataModel.Inventories)
 			{
@@ -73,6 +79,12 @@ namespace Scripts.ViewModels
 			Elements.Remove(itemViewModel);
 
 			InvokeChildrenChanged();
+		}
+
+		public void SelectItem(Item item)
+		{
+			SelectedItemBaseName.SetValue(item.BaseItem);
+			SelectedItemStats.SetValue(item.Stats.GetValue());
 		}
 
 		private void InvokeChildrenChanged()

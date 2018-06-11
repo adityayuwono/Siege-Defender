@@ -26,7 +26,9 @@ namespace Scripts.Views.GUIs
 			_viewModel.Root.Context.IntervalRunner.SubscribeToInterval(Hide, _viewModel.HideDelay*2f, false);
 
 			iTween.Stop(GameObject);
+			Transform.localScale = _initialScale;
 			iTween.MoveBy(GameObject, Vector3.up * 2f, _viewModel.HideDelay);
+			iTween.ScaleBy(GameObject, Vector3.one * 1.25f, _viewModel.HideDelay);
 		}
 
 		private void Hide()

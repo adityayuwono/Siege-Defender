@@ -14,7 +14,7 @@ namespace Scripts.ViewModels
 
 		private readonly List<string> _objectIds = new List<string>();
 
-		public ObjectSpawn(ObjectSpawnModel model, Object parent) : base(model, parent)
+		public ObjectSpawn(ObjectSpawnModel model, Element parent) : base(model, parent)
 		{
 			_model = model;
 

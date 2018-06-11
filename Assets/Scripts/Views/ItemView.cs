@@ -16,7 +16,9 @@ namespace Scripts.Views
 			: base(viewModel, parent)
 		{
 			if (parent == null)
+			{
 				throw new EngineException(this, "Parent is null");
+			}
 
 			_viewModel = viewModel;
 			_parent = parent;

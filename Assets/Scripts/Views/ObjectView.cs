@@ -1,5 +1,6 @@
 ﻿using Scripts.Components;
 using Scripts.Components.SpecialEvents;
+using Scripts.Extensions;
 using Scripts.Helpers;
 using UnityEngine;
 using Object = Scripts.ViewModels.Object;
@@ -96,6 +97,12 @@ namespace Scripts.Views
 
 		protected virtual GameObject GetGameObject()
 		{
+			var tryFindChild = _parent.Transform.FindChildRecursivelyBreadthFirst(_viewModel.AssetId);
+			if (tryFindChild != null)
+			{
+				return tryFindChild.gameObject;
+			}
+
 			var gameObject = _viewModel.Root.ResourceManager.GetGameObject(_viewModel.AssetId);
 			gameObject.name = string.Format("{0}({1})", _viewModel.AssetId, _viewModel.Id);
 			return gameObject;

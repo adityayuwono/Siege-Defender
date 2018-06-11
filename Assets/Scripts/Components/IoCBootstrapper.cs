@@ -49,6 +49,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<ProgressBarGUIModel>().TypeOf<Object>().To<ProgressBarGUI>();
 			IoC.IoCContainer.RegisterFor<CooldownGUIModel>().TypeOf<Object>().To<CooldownGUI>();
 			IoC.IoCContainer.RegisterFor<ShooterGUIModel>().TypeOf<Object>().To<ShooterGUI>();
+			IoC.IoCContainer.RegisterFor<LabelGUIModel>().TypeOf<Object>().To<LabelGUI>();
 			IoC.IoCContainer.RegisterFor<GameEndStatsModel>().TypeOf<Object>().To<ViewModels.GUIs.GameEndStats>();
 
 			// ProjectileBase

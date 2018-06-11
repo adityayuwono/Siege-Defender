@@ -1,4 +1,5 @@
 ﻿using Scripts.ViewModels.GUIs;
+using UnityEngine;
 
 namespace Scripts.Views.GUIs
 {
@@ -23,10 +24,30 @@ namespace Scripts.Views.GUIs
 			Text_OnChange();
 		}
 
+		protected override void SetPosition()
+		{
+			if (!_viewModel.IsStatic)
+			{
+				base.SetPosition();
+			}
+		}
+
+		protected override Transform GetParent()
+		{
+			if (!_viewModel.IsStatic)
+			{
+				return base.GetParent();
+			}
+			return null;
+		}
+
 		private void Text_OnChange()
 		{
 			_text.color = _viewModel.Color;
-			_text.fontSize = _viewModel.Size;
+			if (_viewModel.Size != 0)
+			{
+				_text.fontSize = _viewModel.Size;
+			}
 			_text.text = _viewModel.Text.GetValue();
 		}
 	}
