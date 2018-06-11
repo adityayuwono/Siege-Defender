@@ -8,13 +8,15 @@ namespace Scripts.ViewModels
 {
 	public class Inventory : Element, IContext
 	{
-		private readonly InventoryModel _model;
-		private PropertyLookup _propertyLookup;
 		public Action ChildrenChanged;
 
 		public AdjustableProperty<string> SelectedItemBaseName;
 		public AdjustableProperty<string> SelectedItemStatNames;
 		public AdjustableProperty<string> SelectedItemStatNumbers;
+
+		private readonly InventoryModel _model;
+		private PropertyLookup _propertyLookup;
+		private Item _selectedItem;
 
 		public Inventory(InventoryModel model, Base parent) : base(model, parent)
 		{
@@ -85,6 +87,13 @@ namespace Scripts.ViewModels
 
 		public void SelectItem(Item item)
 		{
+			if (_selectedItem != null)
+			{
+				_selectedItem.IsSelected.SetValue(false);
+			}
+			_selectedItem = item;
+			_selectedItem.IsSelected.SetValue(true);
+
 			SelectedItemBaseName.SetValue(item.BaseItem);
 			SelectedItemStatNames.SetValue(item.Stats);
 			SelectedItemStatNumbers.SetValue(item.Numbers);

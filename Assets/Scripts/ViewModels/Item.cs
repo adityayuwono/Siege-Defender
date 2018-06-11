@@ -7,6 +7,7 @@ namespace Scripts.ViewModels
 	public class Item : Object
 	{
 		public Action<Object> ParentChanged;
+		public AdjustableProperty<bool> IsSelected;
 
 		private readonly ItemModel _model;
 
@@ -14,6 +15,8 @@ namespace Scripts.ViewModels
 			: base(model, parent)
 		{
 			_model = model;
+
+			IsSelected = new AdjustableProperty<bool>("IsSelected", this);
 
 			BaseName = _model.BaseItem;
 		}

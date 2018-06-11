@@ -23,6 +23,7 @@ namespace Scripts.Views
 			_viewModel = viewModel;
 			_parent = parent;
 
+			_viewModel.IsSelected.OnChange += UpdateSelectedMark;
 			_viewModel.ParentChanged += Parent_OnChanged;
 		}
 
@@ -47,7 +48,8 @@ namespace Scripts.Views
 		{
 			base.OnLoad();
 
-			GameObject.GetComponent<Image>().sprite =
+			GameObject.GetComponent<Image>().enabled = false;
+			Transform.GetChild(0).GetComponent<Image>().sprite =
 				SpriteLookup.Instance.GetSpriteByName(_viewModel.BaseItem);
 		}
 
@@ -71,6 +73,11 @@ namespace Scripts.Views
 			_parent = newParent.Root.GetView<ObjectView>(newParent);
 
 			Transform.SetParent(GetParent());
+		}
+
+		private void UpdateSelectedMark()
+		{
+			GameObject.GetComponent<Image>().enabled = _viewModel.IsSelected.GetValue();
 		}
 	}
 }

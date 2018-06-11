@@ -11,13 +11,14 @@ namespace Scripts.ViewModels
 {
 	public class Object : Triggerable
 	{
-		private readonly ObjectModel _model;
+		public event Action OnStartSpecialEvent;
+		public Action<Object> OnObjectDeactivated;
 
 		protected readonly List<Object> Elements = new List<Object>();
 
+		private readonly ObjectModel _model;
 		private bool _isDelaysIgnored;
 		private Vector3 _position;
-		public Action<Object> OnObjectDeactivated;
 
 		public Object(ObjectModel model, Base parent) : base(model, parent)
 		{
@@ -77,8 +78,6 @@ namespace Scripts.ViewModels
 			get { return _position; }
 			protected set { _position = value; }
 		}
-
-		public event Action OnStartSpecialEvent;
 
 		/// <summary>
 		///     Activate and Assign a position manager
