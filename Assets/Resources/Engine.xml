@@ -56,7 +56,7 @@
       AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" DamageMultiplier="3" IsGrounded="true" />
 
     <!-- Enemies -->
-    <Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="20" Speed="3" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
+    <Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="20" Speed="5" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
       <Triggers>
         <EventTrigger Event="Spawn">
           <SpecialEffect Value="MagicCircle" />
