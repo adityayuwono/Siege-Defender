@@ -122,7 +122,7 @@ namespace Scripts.ViewModels
 			var projectileItemModel = (ProjectileItemModel)projectileItemBinding.GetValue();
 			var projectileItem = new ProjectileItem(projectileItemModel, this);
 
-			_projectileModel = projectileItem.GetProjectileModel();
+			_projectileModel = projectileItem.UpdateModel();
 
 			if (!string.IsNullOrEmpty(_projectileModel.Stats.AoEId))
 			{

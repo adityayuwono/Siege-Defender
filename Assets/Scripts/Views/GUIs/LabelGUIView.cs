@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Views.GUIs
 {
-	public class LabelGUIView : ObjectView
+	public class LabelGUIView : StaticGUIView
 	{
 		private readonly LabelGUI _viewModel;
 
@@ -22,23 +22,6 @@ namespace Scripts.Views.GUIs
 			_text = GameObject.GetComponent<UnityEngine.UI.Text>();
 			_viewModel.Text.OnChange += Text_OnChange;
 			Text_OnChange();
-		}
-
-		protected override void SetPosition()
-		{
-			if (!_viewModel.IsStatic)
-			{
-				base.SetPosition();
-			}
-		}
-
-		protected override Transform GetParent()
-		{
-			if (!_viewModel.IsStatic)
-			{
-				return base.GetParent();
-			}
-			return null;
 		}
 
 		private void Text_OnChange()

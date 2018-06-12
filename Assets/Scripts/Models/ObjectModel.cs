@@ -38,6 +38,7 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "CooldownGUI", Type = typeof(CooldownGUIModel))]
 		[XmlArrayItem(ElementName = "ShooterGUI", Type = typeof(ShooterGUIModel))]
 		[XmlArrayItem(ElementName = "Label", Type = typeof(LabelGUIModel))]
+		[XmlArrayItem(ElementName = "StatsLabel", Type = typeof(StatsLabelModel))]
 		[XmlArrayItem(ElementName = "GameEndStats", Type = typeof(GameEndStatsModel))]
 		// Intervals
 		[XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]

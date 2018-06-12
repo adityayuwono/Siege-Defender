@@ -1,4 +1,5 @@
 ﻿using Scripts.Contexts;
+using Scripts.Core;
 using Scripts.Models.Items;
 
 namespace Scripts.ViewModels.Items
@@ -6,10 +7,15 @@ namespace Scripts.ViewModels.Items
 	public class WeaponSlot : EquipmentSlot
 	{
 		private WeaponSlotModel _model;
+		
+		public readonly AdjustableProperty<ProjectileItem> ProjectileItem;
 
 		public WeaponSlot(WeaponSlotModel model, Inventory parent) : base(model, parent)
 		{
 			_model = model;
+
+			ProjectileItem = new AdjustableProperty<ProjectileItem>("ProjectileItem", this, true);
+			ProjectileItem.SetValue(CurrentItem as ProjectileItem);
 		}
 
 		private Item CurrentEnchantment
@@ -100,9 +106,14 @@ namespace Scripts.ViewModels.Items
 		protected override void HandleItemUpdate(ProjectileItem currentItem)
 		{
 			var currentProjectileItem = currentItem;
-			Item.SetValue(currentProjectileItem.GetProjectileModel(_currentEnchantment != null
+			Item.SetValue(currentProjectileItem.UpdateModel(_currentEnchantment != null
 				? _currentEnchantment.Model as EnchantmentItemModel
 				: null));
+
+			if (ProjectileItem != null)
+			{
+				ProjectileItem.SetValue(currentItem);
+			}
 		}
 
 		private void HandleEnchantmentDropped(EnchantmentItem droppedEnchantment)

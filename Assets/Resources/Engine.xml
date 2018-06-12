@@ -1,16 +1,16 @@
 <Engine Id="SiegeDefender">
   <Objects>
     <Projectile Id="Ascalon" AssetId="Projectiles/IronBullet" >
-      <Stats Damage="40-41"
+      <Stats Damage="4-5"
       RoF="0.2" Ammunition="1" ReloadTime="0.01"
       Scatters="1"
       SpeedDeviation="20-30"
       AoEId="AscalonExplosion"
-      CriticalChance="0.25" CriticalDamageMultiplier="2.35"
+      CriticalChance="0.25" CriticalDamageMultiplier="45"
       Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="WoodArrow" AssetId="Projectiles/WoodenBalista" >
-      <Stats Damage="6-10000"
+      <Stats Damage="6-10"
 			RoF="0.2" Ammunition="1000" ReloadTime="2"
 			Scatters="1"
       CriticalChance="0.1" CriticalDamageMultiplier="1.2"
@@ -429,9 +429,8 @@
     <Scene Id="Inventory" AssetId="Inventory">
       <Elements>
         <Inventory Id="PlayerInventory" Source="PlayerInventory" AssetId="InventoryRoot/PlayerInventory" />
-        <Label Text="{RightShooter.Item.SelectedItemBaseName}" IsStatic="true" AssetId="InventoryRoot/InformationRight/BaseName" />
-        <Label Text="{RightShooter.Item.SelectedItemStatNames}" IsStatic="true" AssetId="InventoryRoot/InformationRight/StatNames" />
-        <Label Text="{RightShooter.Item.SelectedItemStatNumbers}" IsStatic="true" AssetId="InventoryRoot/InformationRight/StatNumbers" />
+        <StatsLabel Source="{PlayerInventory.LeftShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationLeft" />
+        <StatsLabel Source="{PlayerInventory.RightShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationRight" />
         <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">

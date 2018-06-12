@@ -1,5 +1,4 @@
 ﻿using System;
-using Scripts.Core;
 using Scripts.Models.Items;
 
 namespace Scripts.ViewModels.Items
@@ -31,6 +30,7 @@ namespace Scripts.ViewModels.Items
 		public string BaseName { get; protected set; }
 		public string Stats { get; protected set; }
 		public string Numbers { get; protected set; }
+		public string Augmentation { get; set; }
 
 		public string ItemSlotRoots
 		{

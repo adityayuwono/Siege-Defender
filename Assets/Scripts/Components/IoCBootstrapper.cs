@@ -62,6 +62,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<CooldownGUIModel>().TypeOf<Object>().To<CooldownGUI>();
 			IoC.IoCContainer.RegisterFor<ShooterGUIModel>().TypeOf<Object>().To<ShooterGUI>();
 			IoC.IoCContainer.RegisterFor<LabelGUIModel>().TypeOf<Object>().To<LabelGUI>();
+			IoC.IoCContainer.RegisterFor<StatsLabelModel>().TypeOf<Object>().To<StatsLabel>();
 			IoC.IoCContainer.RegisterFor<GameEndStatsModel>().TypeOf<Object>().To<ViewModels.GUIs.GameEndStats>();
 
 			// ProjectileBase
@@ -105,7 +106,6 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<Boss>().TypeOf<BaseView>().To<BossView>();
 			IoC.IoCContainer.RegisterFor<Limb>().TypeOf<BaseView>().To<LimbView>();
 
-			IoC.IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
 			IoC.IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
 			IoC.IoCContainer.RegisterFor<HealthBar>().TypeOf<BaseView>().To<HealthBarView>();
 			IoC.IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
@@ -127,6 +127,8 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<ProgressBarGUI>().TypeOf<BaseView>().To<ProgressBarGUIView>();
 			IoC.IoCContainer.RegisterFor<CooldownGUI>().TypeOf<BaseView>().To<CooldownGUIView>();
 			IoC.IoCContainer.RegisterFor<ShooterGUI>().TypeOf<BaseView>().To<ShooterGUIView>();
+			IoC.IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
+			IoC.IoCContainer.RegisterFor<StatsLabel>().TypeOf<BaseView>().To<StatsLabelView>();
 			IoC.IoCContainer.RegisterFor<ViewModels.GUIs.GameEndStats>().TypeOf<BaseView>().To<GameEndStatsView>();
 
 			IoC.IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();

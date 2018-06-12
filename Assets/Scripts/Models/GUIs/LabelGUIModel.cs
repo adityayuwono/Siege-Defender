@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models.GUIs
 {
 	[Serializable]
-	public class LabelGUIModel : ObjectModel
+	public class LabelGUIModel : StaticGUIModel
 	{
 		public LabelGUIModel()
 		{
@@ -13,8 +13,5 @@ namespace Scripts.Models.GUIs
 
 		[XmlAttribute]
 		public string Text { get; set; }
-
-		[XmlAttribute]
-		public bool IsStatic { get; set; }
 	}
 }

@@ -22,8 +22,9 @@ namespace Scripts.ViewModels.Items
 			LoadItem(model);
 		}
 
-		private Item CurrentItem
+		protected Item CurrentItem
 		{
+			get { return _currentItem;}
 			set
 			{
 				HandleItemUpdate(this, ref _currentItem, value);
@@ -57,20 +58,6 @@ namespace Scripts.ViewModels.Items
 			_currentItem.Hide(reason);
 
 			base.Hide(reason);
-		}
-
-		protected override void OnActivate()
-		{
-			base.OnActivate();
-
-			_currentItem.Activate();
-		}
-
-		protected override void OnDestroyed()
-		{
-			_currentItem.Destroy();
-
-			base.OnDestroyed();
 		}
 
 		protected static void HandleItemUpdate(EquipmentSlot parent, ref Item currentItem, Item newItem)
@@ -109,6 +96,20 @@ namespace Scripts.ViewModels.Items
 
 		protected virtual void HandleItemUpdate(ProjectileItem currentItem)
 		{
+		}
+
+		protected override void OnActivate()
+		{
+			base.OnActivate();
+
+			_currentItem.Activate();
+		}
+
+		protected override void OnDestroyed()
+		{
+			_currentItem.Destroy();
+
+			base.OnDestroyed();
 		}
 
 		private bool CheckIfItemValid(Object droppedObject)

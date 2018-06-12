@@ -165,7 +165,11 @@ namespace Scripts.Core
 							continue;
 						}
 
-						return context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+						var contextProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+						if (contextProperty != null)
+						{
+							return contextProperty;
+						}
 					}
 
 					if (paths.Length == 1)

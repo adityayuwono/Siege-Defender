@@ -310,6 +310,8 @@
     <Compile Include="Assets\Scripts\Models\Enemies\SkillModel.cs" />
     <Compile Include="Assets\Scripts\Models\Enemies\StaticEnemyModel.cs" />
     <Compile Include="Assets\Scripts\Models\EngineModel.cs" />
+    <Compile Include="Assets\Scripts\Models\GUIs\StaticGUIModel.cs" />
+    <Compile Include="Assets\Scripts\Models\GUIs\StatsLabelModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\EquipmentSlotModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\GameEndStatsModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\BaseGUIModel.cs" />
@@ -378,6 +380,8 @@
     <Compile Include="Assets\Scripts\ViewModels\Enemies\Triggered.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Enemy.cs" />
     <Compile Include="Assets\Scripts\ViewModels\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\GUIs\StaticGUI.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\GUIs\StatsLabel.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\EquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\BaseGUI.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\CooldownGUI.cs" />
@@ -425,6 +429,8 @@
     <Compile Include="Assets\Scripts\Views\Enemies\LimbView.cs" />
     <Compile Include="Assets\Scripts\Views\Enemies\LivingObjectView.cs" />
     <Compile Include="Assets\Scripts\Views\Enemies\StaticEnemyView.cs" />
+    <Compile Include="Assets\Scripts\Views\GUIs\StaticGUIView.cs" />
+    <Compile Include="Assets\Scripts\Views\GUIs\StatsLabelView.cs" />
     <Compile Include="Assets\Scripts\Views\Items\EquipmentSlotView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\BaseGUIView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\CooldownGUIView.cs" />
