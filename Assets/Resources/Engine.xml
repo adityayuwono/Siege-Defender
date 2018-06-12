@@ -11,34 +11,34 @@
     </Projectile>
     <Projectile Id="WoodArrow" AssetId="Projectiles/WoodenBalista" >
       <Stats Damage="6-10"
-			RoF="0.2" Ammunition="1000" ReloadTime="2"
+			RoF="0.2" Ammunition="1000" ReloadTime="3"
 			Scatters="1"
       CriticalChance="0.1" CriticalDamageMultiplier="1.2"
-			Accuracy="0.9" Deviation="0.001" />
+			Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="ScatterArrow" AssetId="Projectiles/WoodenBalista" >
       <Stats Damage="5-10"
 			RoF="0.75" Ammunition="1000" ReloadTime="5"
 			SpeedDeviation="300-600"
-			Accuracy="0.5" Deviation="0.0001" Scatters="5" />
+			Accuracy="0.5" Deviation="0" Scatters="5" />
     </Projectile>
     <Projectile Id="IronArrow" AssetId="Projectiles/IronBalista" >
       <Stats Damage="10-20"
-      RoF="0.25" Ammunition="500" ReloadTime="3"
+      RoF="0.25" Ammunition="500" ReloadTime="4"
       Scatters="1"
-      Accuracy="0.7" Deviation="0.005" />
+      Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="FireBall" AssetId="Projectiles/FireBall" >
       <Stats Damage="8-11"
       AoEId="FireDome"
 			RoF="0.5" Ammunition="25" ReloadTime="5"
 			Scatters="1"
-			Accuracy="0.9" Deviation="0.001" />
+			Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="SkySplitter" AssetId="Projectiles/SkySplitter" >
-      <Stats Damage="1-3"
+      <Stats Damage="1-5"
       AoEId="LightningStrike"
-      RoF="0.6" Ammunition="99" ReloadTime="4"
+      RoF="0.6" Ammunition="99" ReloadTime="6"
       SpeedDeviation="500-500"
       Accuracy="1" Deviation="0" Scatters="1" />
     </Projectile>
