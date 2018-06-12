@@ -88,7 +88,7 @@
         <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
       </Elements>
     </StaticEnemy>
-    <Boss Id="ZombieAbomination" AssetId="Enemies/ZombieAbomination" Health="9325" Speed="2" DeathDelay="5"
+    <Boss Id="ZombieAbomination" AssetId="Enemies/ZombieAbomination" Health="999" Speed="2" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
       <Elements>
         <EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -273,23 +273,23 @@
         </Trigger>
 
         <Trigger>
-          <Condition Target="{This.Health}" Value="\6660" />
+          <Condition Target="{This.Health}" Value="\666" />
           <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\7200" />
+          <Condition Target="{This.Health}" Value="\720" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\4440" />
+          <Condition Target="{This.Health}" Value="\444" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\2220" />
+          <Condition Target="{This.Health}" Value="\222" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\1110" />
+          <Condition Target="{This.Health}" Value="\111" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
 
