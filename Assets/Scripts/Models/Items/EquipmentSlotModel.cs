@@ -1,7 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
-namespace Scripts.Models
+namespace Scripts.Models.Items
 {
+	[Serializable]
 	public class EquipmentSlotModel : ElementModel
 	{
 		[XmlElement(ElementName = "Item", Type = typeof(ItemModel))]

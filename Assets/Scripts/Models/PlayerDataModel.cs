@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Scripts.Models.Items;
 
 namespace Scripts.Models
 {

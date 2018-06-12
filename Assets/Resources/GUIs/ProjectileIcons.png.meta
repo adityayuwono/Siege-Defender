@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: cd677831adbd3a34697f5fcc81c7f1fb
-timeCreated: 1528724089
+timeCreated: 1528768033
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -14,6 +14,36 @@ TextureImporter:
     21300014: ControlStyle1
     21300016: ControlStyle2
     21300018: ProjectileIcons_0
+    21300020: E1_1
+    21300022: ProjectileIcons_2
+    21300024: ProjectileIcons_3
+    21300026: ProjectileIcons_4
+    21300028: ProjectileIcons_5
+    21300030: ProjectileIcons_6
+    21300032: E2_1
+    21300034: ProjectileIcons_8
+    21300036: ProjectileIcons_9
+    21300038: ProjectileIcons_10
+    21300040: ProjectileIcons_11
+    21300042: ProjectileIcons_12
+    21300044: E5_1
+    21300046: ProjectileIcons_14
+    21300048: ProjectileIcons_15
+    21300050: E3_1
+    21300052: ProjectileIcons_17
+    21300054: ProjectileIcons_18
+    21300056: ProjectileIcons_19
+    21300058: ProjectileIcons_20
+    21300060: ProjectileIcons_21
+    21300062: E4_1
+    21300064: ProjectileIcons_23
+    21300066: ProjectileIcons_24
+    21300068: ProjectileIcons_25
+    21300070: ProjectileIcons_26
+    21300072: ProjectileIcons_27
+    21300074: ProjectileIcons_28
+    21300076: ProjectileIcons_29
+    21300078: ProjectileIcons_30
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -110,7 +140,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 31
+        y: 168
         width: 89
         height: 86
       alignment: 0
@@ -124,7 +154,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 105
-        y: 31
+        y: 168
         width: 90
         height: 86
       alignment: 0
@@ -138,7 +168,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 206
-        y: 31
+        y: 168
         width: 90
         height: 86
       alignment: 0
@@ -152,7 +182,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 307
-        y: 30
+        y: 167
         width: 90
         height: 87
       alignment: 0
@@ -166,7 +196,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 408
-        y: 31
+        y: 168
         width: 91
         height: 86
       alignment: 0
@@ -180,7 +210,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 31
+        y: 168
         width: 90
         height: 86
       alignment: 0
@@ -194,7 +224,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 617
-        y: 31
+        y: 168
         width: 90
         height: 86
       alignment: 0
@@ -208,7 +238,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 718
-        y: 31
+        y: 168
         width: 90
         height: 86
       alignment: 0
@@ -222,7 +252,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 819
-        y: 30
+        y: 167
         width: 90
         height: 87
       alignment: 0
@@ -236,9 +266,429 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 920
-        y: 30
+        y: 167
         width: 90
         height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: E1_1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 90
+        width: 49
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 83
+        width: 45
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_3
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 82
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 91
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_5
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 90
+        width: 41
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_6
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 79
+        width: 39
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: E2_1
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 90
+        width: 48
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_8
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 83
+        width: 45
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_9
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 82
+        width: 45
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_10
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 91
+        width: 46
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_11
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 90
+        width: 41
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_12
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 79
+        width: 39
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: E5_1
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 90
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_14
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 83
+        width: 45
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_15
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 82
+        width: 46
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: E3_1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 11
+        width: 49
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_17
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 4
+        width: 45
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_18
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 3
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_19
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 12
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_20
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 11
+        width: 41
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_21
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 0
+        width: 39
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: E4_1
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 13
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_23
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 6
+        width: 45
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_24
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 5
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_25
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 14
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_26
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 13
+        width: 41
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_27
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 2
+        width: 39
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_28
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 12
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_29
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 11
+        width: 41
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ProjectileIcons_30
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 0
+        width: 39
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

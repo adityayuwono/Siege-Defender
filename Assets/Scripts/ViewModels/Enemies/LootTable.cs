@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Scripts.Contexts;
 using Scripts.Models.Enemies;
+using Scripts.ViewModels.Items;
 
 namespace Scripts.ViewModels.Enemies
 {

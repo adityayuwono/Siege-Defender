@@ -1,4 +1,5 @@
 ﻿using Scripts.ViewModels;
+using Scripts.ViewModels.Items;
 using UnityEngine;
 
 namespace Scripts.Components.UI

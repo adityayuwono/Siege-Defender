@@ -4,6 +4,7 @@ using Scripts.Extensions;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Items;
 using Scripts.ViewModels.Weapons;
 using UnityEngine;
 

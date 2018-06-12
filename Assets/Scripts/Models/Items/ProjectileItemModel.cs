@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace Scripts.Models
+namespace Scripts.Models.Items
 {
 	[Serializable]
 	public class ProjectileItemModel : ItemModel
 	{
 		[XmlElement]
-		public ProjectileEnchantments Enchantments { get; set; }
+		public EnchantmentItemModel Enchantment { get; set; }
 	}
 }

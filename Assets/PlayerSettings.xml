@@ -12,15 +12,20 @@
     <Projectile AssetId="GUIs/ItemTemplate" BaseItem="Ascalon" Level="1" />
     <Projectile AssetId="GUIs/ItemTemplate" BaseItem="Ascalon" Level="1" />
     <Projectile AssetId="GUIs/ItemTemplate" BaseItem="SkySplitter" Level="1" />
-    <Projectile AssetId="GUIs/ItemTemplate" BaseItem="SkySplitter" Level="1" >
-      <Enchantments Damage="2-3" />
-    </Projectile>
-    <EquipmentSlot Id="LeftShooter" AssetId="LeftWeaponContainer" DeathDelay="0">
+    <Projectile AssetId="GUIs/ItemTemplate" BaseItem="SkySplitter" Level="1" />
+
+    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E1_1" />
+    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E2_1" />
+    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E3_1" />
+    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E4_1" />
+    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E5_1" />
+
+    <WeaponSlot Id="LeftShooter" AssetId="LeftWeaponContainer" DeathDelay="0">
       <Projectile AssetId="GUIs/ItemTemplate" BaseItem="WoodArrow" Level="1" />
-    </EquipmentSlot>
-    <EquipmentSlot Id="RightShooter" AssetId="RightWeaponContainer" DeathDelay="0">
+    </WeaponSlot>
+    <WeaponSlot Id="RightShooter" AssetId="RightWeaponContainer" DeathDelay="0">
       <Projectile AssetId="GUIs/ItemTemplate" BaseItem="WoodArrow" Level="1" />
-    </EquipmentSlot>
+    </WeaponSlot>
   </Inventory>
   <Inventory Id="PlayerOptions" AssetId="OptionsInventory" Slots="36">
     <Item AssetId="GUIs/ItemTemplate" BaseItem="ControlStyle2" Level="1" />

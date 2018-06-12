@@ -31,17 +31,12 @@ namespace Scripts.ViewModels.Weapons
 
 		public float Accuracy
 		{
-			get { return 1 - _model.Accuracy; }
-		}
-
-		public bool IsRotationRandomized
-		{
-			get { return _model.IsRotationRandomized; }
+			get { return 1 - _model.Stats.Accuracy; }
 		}
 
 		private void CalculateSpeed()
 		{
-			SpeedDeviations = _model.SpeedDeviation;
+			SpeedDeviations = _model.Stats.SpeedDeviation;
 		}
 
 		public void Shoot(ObjectView target, float accuracy)
@@ -72,9 +67,9 @@ namespace Scripts.ViewModels.Weapons
 			IsKinematic.SetValue(true);
 
 			// Spawn AoE if there are any Id defined
-			if (!string.IsNullOrEmpty(_model.AoEId))
+			if (!string.IsNullOrEmpty(_model.Stats.AoEId))
 			{
-				GetParent<Shooter>().SpawnAoE(_model.AoEId, collisionPosition);
+				GetParent<Shooter>().SpawnAoE(_model.Stats.AoEId, collisionPosition);
 			}
 
 			OnHit();

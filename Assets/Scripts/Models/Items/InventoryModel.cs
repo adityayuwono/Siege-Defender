@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace Scripts.Models
+namespace Scripts.Models.Items
 {
 	[XmlRoot("Inventory")]
 	[Serializable]
@@ -24,25 +23,11 @@ namespace Scripts.Models
 
 		[XmlElement(ElementName = "Item", Type = typeof(ItemModel))]
 		[XmlElement(ElementName = "Projectile", Type = typeof(ProjectileItemModel))]
+		[XmlElement(ElementName = "Enchantment", Type = typeof(EnchantmentItemModel))]
 		public List<ItemModel> Items { get; set; }
 
 		[XmlElement(ElementName = "EquipmentSlot", Type = typeof(EquipmentSlotModel))]
+		[XmlElement(ElementName = "WeaponSlot", Type = typeof(WeaponSlotModel))]
 		public List<EquipmentSlotModel> EquipmentSlots { get; set; }
-	}
-
-	[Serializable]
-	public class ItemModel : ObjectModel
-	{
-		public ItemModel()
-		{
-			Level = 1;
-		}
-
-		[XmlAttribute]
-		public string BaseItem { get; set; }
-
-		[XmlAttribute]
-		[DefaultValue(1)]
-		public int Level { get; set; }
 	}
 }

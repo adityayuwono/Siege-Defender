@@ -1,11 +1,11 @@
 ﻿using Scripts.Core;
 using Scripts.Helpers;
-using Scripts.ViewModels;
+using Scripts.ViewModels.Items;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = Scripts.ViewModels.Object;
 
-namespace Scripts.Views
+namespace Scripts.Views.Items
 {
 	public class ItemView : ObjectView
 	{
@@ -23,7 +23,6 @@ namespace Scripts.Views
 			_viewModel = viewModel;
 			_parent = parent;
 
-			_viewModel.IsSelected.OnChange += UpdateSelectedMark;
 			_viewModel.ParentChanged += Parent_OnChanged;
 		}
 
@@ -35,7 +34,13 @@ namespace Scripts.Views
 			}
 
 			var parentTransform = _parent.Transform;
-			var parentItemTable = _parent.Transform.Find(InventoryView.ItemSlotRoots);
+			var parentItemSlot = _parent.Transform.Find(_viewModel.ItemSlotRoots);
+			if (parentItemSlot == null)
+			{
+				parentItemSlot = _parent.Transform.Find(InventoryView.ItemSlotRoots);
+			}
+
+			var parentItemTable = parentItemSlot;
 			if (parentItemTable != null)
 			{
 				parentTransform = parentItemTable;
@@ -73,11 +78,6 @@ namespace Scripts.Views
 			_parent = newParent.Root.GetView<ObjectView>(newParent);
 
 			Transform.SetParent(GetParent());
-		}
-
-		private void UpdateSelectedMark()
-		{
-			GameObject.GetComponent<Image>().enabled = _viewModel.IsSelected.GetValue();
 		}
 	}
 }

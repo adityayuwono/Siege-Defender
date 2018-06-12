@@ -31,9 +31,9 @@ namespace Scripts.ViewModels.Weapons
 		public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
 		{
 			// Spawn AoE if there are any Id defined
-			if (!string.IsNullOrEmpty(_model.AoEId))
+			if (!string.IsNullOrEmpty(_model.Stats.AoEId))
 			{
-				GetParent<Shooter>().SpawnAoE(_model.AoEId, collisionPosition);
+				GetParent<Shooter>().SpawnAoE(_model.Stats.AoEId, collisionPosition);
 			}
 
 			if (DamageEnemy(targetObject, contactPoint, false))

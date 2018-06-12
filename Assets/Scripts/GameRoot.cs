@@ -8,6 +8,7 @@ using Scripts.Models;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;
+using Scripts.ViewModels.Items;
 
 namespace Scripts
 {

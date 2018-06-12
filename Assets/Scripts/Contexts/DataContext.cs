@@ -4,6 +4,7 @@ using System.IO;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Items;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

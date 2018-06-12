@@ -46,12 +46,6 @@ namespace Scripts.Views.Weapons
 
 			var randomForce = Random.Range(_viewModel.SpeedDeviations[0], _viewModel.SpeedDeviations[1]);
 
-			if (_viewModel.IsRotationRandomized)
-			{
-				var randomRotation = new Vector3(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
-				Transform.localEulerAngles = randomRotation;
-			}
-
 			AddRelativeForce(randomForce);
 		}
 

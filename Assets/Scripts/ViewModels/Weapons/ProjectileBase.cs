@@ -23,12 +23,12 @@ namespace Scripts.ViewModels.Weapons
 
 		protected virtual float CalculateDamage(ref bool isCrit)
 		{
-			var currentDamage = Random.Range(_model.Damage[0], _model.Damage[1]);
+			var currentDamage = Random.Range(_model.Stats.Damage[0], _model.Stats.Damage[1]);
 
-			isCrit = Random.Range(0f, 1f) <= _model.CriticalChance;
+			isCrit = Random.Range(0f, 1f) <= _model.Stats.CriticalChance;
 			if (isCrit)
 			{
-				currentDamage *= _model.CriticalDamageMultiplier;
+				currentDamage *= _model.Stats.CriticalDamageMultiplier;
 			}
 
 			return currentDamage;

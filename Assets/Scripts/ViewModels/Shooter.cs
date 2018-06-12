@@ -4,7 +4,9 @@ using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Items;
 using Scripts.Models.Weapons;
+using Scripts.ViewModels.Items;
 using Scripts.ViewModels.Weapons;
 using UnityEngine;
 
@@ -44,18 +46,18 @@ namespace Scripts.ViewModels
 
 		public float ReloadDuration
 		{
-			get { return _projectileModel.ReloadTime; }
+			get { return _projectileModel.Stats.ReloadTime; }
 		}
 
 		public float Accuracy
 		{
-			get { return 1 - (_accuracy -= _projectileModel.Deviation); }
+			get { return 1 - (_accuracy -= _projectileModel.Stats.Deviation); }
 			private set { _accuracy = value; }
 		}
 
 		public int Scatters
 		{
-			get { return _projectileModel.Scatters; }
+			get { return _projectileModel.Stats.Scatters; }
 		}
 
 		public Object Target { get; private set; }
@@ -79,7 +81,7 @@ namespace Scripts.ViewModels
 		public void StopShooting()
 		{
 			IsShooting.SetValue(false);
-			Accuracy = _projectileModel.Accuracy;
+			Accuracy = _projectileModel.Stats.Accuracy;
 		}
 
 		public Projectile SpawnProjectile()
@@ -122,14 +124,14 @@ namespace Scripts.ViewModels
 
 			_projectileModel = projectileItem.GetProjectileModel();
 
-			if (!string.IsNullOrEmpty(_projectileModel.AoEId))
+			if (!string.IsNullOrEmpty(_projectileModel.Stats.AoEId))
 			{
-				var aoeModel = DataContext.GetObjectModel(this, _projectileModel.AoEId);
+				var aoeModel = DataContext.GetObjectModel(this, _projectileModel.Stats.AoEId);
 				_aoeModel = (AoEModel) CreateDuplicateModel(aoeModel.Id, aoeModel);
 
 				for (var i = 0; i < 2; i++)
 				{
-					_aoeModel.Damage[i] = _projectileModel.Damage[i] * _aoeModel.DamageMultiplier;
+					_aoeModel.Stats.Damage[i] = _projectileModel.Stats.Damage[i] * _aoeModel.DamageMultiplier;
 				}
 			}
 			
@@ -140,7 +142,7 @@ namespace Scripts.ViewModels
 
 		private void UpdateProjectile()
 		{
-			Interval.SetValue(_projectileModel.RoF);
+			Interval.SetValue(_projectileModel.Stats.RoF);
 			OnReload();
 		}
 
@@ -160,9 +162,9 @@ namespace Scripts.ViewModels
 
 		private void OnReload()
 		{
-			Accuracy = _projectileModel.Accuracy;
-			AmmunitionProperty = _projectileModel.Ammunition;
-			MaxAmmunition.SetValue(_projectileModel.Ammunition);
+			Accuracy = _projectileModel.Stats.Accuracy;
+			AmmunitionProperty = _projectileModel.Stats.Ammunition;
+			MaxAmmunition.SetValue(_projectileModel.Stats.Ammunition);
 			IsReloading.SetValue(false);
 		}
 	}

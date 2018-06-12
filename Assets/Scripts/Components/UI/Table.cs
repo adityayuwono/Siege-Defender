@@ -29,7 +29,7 @@ namespace Scripts.Components.UI
 					{
 						var child = transform.GetChild(childIndex);
 						child.GetComponent<RectTransform>().anchoredPosition =
-							new Vector3((Margin.y * j + ItemSize.y * j), -(Margin.x * i + ItemSize.x * i), 0);
+							new Vector2((Margin.y * j + ItemSize.y * j), -(Margin.x * i + ItemSize.x * i));
 
 						childIndex++;
 						if (childIndex == maxChild)

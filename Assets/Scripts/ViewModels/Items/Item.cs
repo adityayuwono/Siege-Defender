@@ -1,13 +1,12 @@
 ﻿using System;
 using Scripts.Core;
-using Scripts.Models;
+using Scripts.Models.Items;
 
-namespace Scripts.ViewModels
+namespace Scripts.ViewModels.Items
 {
 	public class Item : Object
 	{
 		public Action<Object> ParentChanged;
-		public AdjustableProperty<bool> IsSelected;
 
 		private readonly ItemModel _model;
 
@@ -15,8 +14,6 @@ namespace Scripts.ViewModels
 			: base(model, parent)
 		{
 			_model = model;
-
-			IsSelected = new AdjustableProperty<bool>("IsSelected", this);
 
 			BaseName = _model.BaseItem;
 		}
@@ -34,6 +31,11 @@ namespace Scripts.ViewModels
 		public string BaseName { get; protected set; }
 		public string Stats { get; protected set; }
 		public string Numbers { get; protected set; }
+
+		public string ItemSlotRoots
+		{
+			get { return _model.ItemSlotRoots; }
+		}
 
 		public void ChangeParent(Object newParent)
 		{

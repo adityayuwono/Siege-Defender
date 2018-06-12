@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using Scripts.Models.GUIs;
+using Scripts.Models.Items;
 
 namespace Scripts.Models
 {

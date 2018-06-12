@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Scripts.Contexts;
 using Scripts.Helpers;
-using Scripts.Models;
+using Scripts.Models.Items;
 using Scripts.Models.Weapons;
 using UnityEngine;
 
-namespace Scripts.ViewModels
+namespace Scripts.ViewModels.Items
 {
 	public class ProjectileItem : Item
 	{
@@ -27,14 +27,21 @@ namespace Scripts.ViewModels
 			GetProjectileModel();
 		}
 
+		public ProjectileModel GetProjectileModel(EnchantmentItemModel enchantmentModel)
+		{
+			_model.Enchantment = enchantmentModel;
+
+			return GetProjectileModel();
+		}
+
+		public void DetachEnchantment()
+		{
+			_model.Enchantment = null;
+		}
+
 		// Return BaseProjectile, multiplied by level and improved with enchantment
 		public ProjectileModel GetProjectileModel()
 		{
-			if (_projectileModel != null)
-			{
-				return _projectileModel;
-			}
-
 			var baseProjectileModel = DataContext.GetObjectModel(this, _model.BaseItem) as ProjectileModel;
 			if (baseProjectileModel == null)
 			{
@@ -45,12 +52,12 @@ namespace Scripts.ViewModels
 			newProjectileModel.Type = newProjectileModel.Id; // Assign appropriate Id
 			newProjectileModel.Id = baseProjectileModel.Id + "_" + Guid.NewGuid();
 
-			var overriderModel = _model.Enchantments;
+			var overriderModel = _model.Enchantment;
 			if (overriderModel != null)
 			{
 				#region Calculate for damage increase
-				var originalSplitDamages = baseProjectileModel.Damage;
-				var overrideSplitDamage = overriderModel.Damage;
+				var originalSplitDamages = baseProjectileModel.Stats.Damage;
+				var overrideSplitDamage = overriderModel.Stats.Damage;
 				var augmentedDamages = new List<float>();
 
 				for (var i = 0; i < originalSplitDamages.Length; i++)
@@ -60,16 +67,19 @@ namespace Scripts.ViewModels
 				}
 				#endregion
 
-				newProjectileModel.Damage = augmentedDamages.ToArray();
-				newProjectileModel.Accuracy = Mathf.Min(newProjectileModel.Accuracy + overriderModel.Accuracy, 1f);
-				newProjectileModel.ReloadTime = Mathf.Min(newProjectileModel.ReloadTime + overriderModel.ReloadTime, 1f);
-				newProjectileModel.CriticalChance = Mathf.Min(newProjectileModel.CriticalChance + overriderModel.CriticalChance, 1f);
-				newProjectileModel.CriticalDamageMultiplier = newProjectileModel.CriticalDamageMultiplier + overriderModel.CriticalDamageMultiplier;
-				newProjectileModel.Scatters += overriderModel.Scatters;
-				newProjectileModel.Ammunition += overriderModel.Ammunition;
-				if (string.IsNullOrEmpty(newProjectileModel.AoEId))
+				newProjectileModel.Stats.Damage = augmentedDamages.ToArray();
+				newProjectileModel.Stats.Accuracy = Mathf.Min(newProjectileModel.Stats.Accuracy + overriderModel.Stats.Accuracy, 1f);
+				newProjectileModel.Stats.ReloadTime = Mathf.Min(newProjectileModel.Stats.ReloadTime + overriderModel.Stats.ReloadTime, 1f);
+				newProjectileModel.Stats.CriticalChance =
+					Mathf.Min(
+						newProjectileModel.Stats.CriticalChance + overriderModel.Stats.CriticalChance +
+						(newProjectileModel.Stats.CriticalChance > 0 ? -1 : 0), 1f);
+				newProjectileModel.Stats.CriticalDamageMultiplier = newProjectileModel.Stats.CriticalDamageMultiplier + overriderModel.Stats.CriticalDamageMultiplier;
+				newProjectileModel.Stats.Scatters += overriderModel.Stats.Scatters;
+				newProjectileModel.Stats.Ammunition += overriderModel.Stats.Ammunition;
+				if (string.IsNullOrEmpty(newProjectileModel.Stats.AoEId))
 				{
-					newProjectileModel.AoEId = overriderModel.AoEId;
+					newProjectileModel.Stats.AoEId = overriderModel.Stats.AoEId;
 				}
 			}
 
@@ -77,31 +87,31 @@ namespace Scripts.ViewModels
 			var numbers =
 				string.Format(
 					"{0}\n{6}\n\n{1}\n{2}\n{3}\n\n{4}\n{5}",
-					string.Format("{0}-{1}", newProjectileModel.Damage[0], newProjectileModel.Damage[1]),
-					newProjectileModel.RoF,
-					newProjectileModel.Ammunition,
-					newProjectileModel.ReloadTime,
-					newProjectileModel.Accuracy,
-					newProjectileModel.Deviation,
-					string.Format("{0}-{1}", newProjectileModel.SpeedDeviation[0], newProjectileModel.SpeedDeviation[1])
+					string.Format("{0}-{1}", newProjectileModel.Stats.Damage[0], newProjectileModel.Stats.Damage[1]),
+					newProjectileModel.Stats.RoF,
+					newProjectileModel.Stats.Ammunition,
+					newProjectileModel.Stats.ReloadTime,
+					newProjectileModel.Stats.Accuracy,
+					newProjectileModel.Stats.Deviation,
+					string.Format("{0}-{1}", newProjectileModel.Stats.SpeedDeviation[0], newProjectileModel.Stats.SpeedDeviation[1])
 				);
 
-			if (newProjectileModel.CriticalChance > 0)
+			if (newProjectileModel.Stats.CriticalChance > 0)
 			{
 				stats += "\n\nCritical Chance\nCritical Damage";
 				numbers +=
 					string.Format("\n\n{0}%\n{1}%",
-						newProjectileModel.CriticalChance * 100,
-						newProjectileModel.CriticalDamageMultiplier * 100
+						newProjectileModel.Stats.CriticalChance * 100,
+						newProjectileModel.Stats.CriticalDamageMultiplier * 100
 					);
 			}
 
-			if (newProjectileModel.Scatters > 1)
+			if (newProjectileModel.Stats.Scatters > 1)
 			{
 				stats += "\n\nProjectiles Shot";
 				numbers +=
 					string.Format("\n\n{0}",
-						newProjectileModel.Scatters
+						newProjectileModel.Stats.Scatters
 					);
 			}
 

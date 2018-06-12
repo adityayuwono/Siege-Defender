@@ -4,6 +4,7 @@ using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Items;
 using Scripts.ViewModels;
 
 namespace Scripts.Core

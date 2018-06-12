@@ -2,9 +2,9 @@
 using Scripts.Contexts;
 using Scripts.Core;
 using Scripts.Interfaces;
-using Scripts.Models;
+using Scripts.Models.Items;
 
-namespace Scripts.ViewModels
+namespace Scripts.ViewModels.Items
 {
 	public class Inventory : Element, IContext
 	{
@@ -40,7 +40,7 @@ namespace Scripts.ViewModels
 
 			foreach (var equipmentSlotModel in _model.EquipmentSlots)
 			{
-				Elements.Add(new EquipmentSlot(equipmentSlotModel, this));
+				Elements.Add(IoC.IoCContainer.GetInstance<EquipmentSlot>(equipmentSlotModel.GetType(), new object[] { equipmentSlotModel, this }));
 			}
 		}
 
@@ -87,13 +87,6 @@ namespace Scripts.ViewModels
 
 		public void SelectItem(Item item)
 		{
-			if (_selectedItem != null)
-			{
-				_selectedItem.IsSelected.SetValue(false);
-			}
-			_selectedItem = item;
-			_selectedItem.IsSelected.SetValue(true);
-
 			SelectedItemBaseName.SetValue(item.BaseItem);
 			SelectedItemStatNames.SetValue(item.Stats);
 			SelectedItemStatNumbers.SetValue(item.Numbers);

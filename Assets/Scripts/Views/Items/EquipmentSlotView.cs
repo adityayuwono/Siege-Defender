@@ -1,7 +1,8 @@
 ﻿using Scripts.Components;
 using Scripts.ViewModels;
+using Scripts.ViewModels.Items;
 
-namespace Scripts.Views
+namespace Scripts.Views.Items
 {
 	public class EquipmentSlotView : ElementView
 	{

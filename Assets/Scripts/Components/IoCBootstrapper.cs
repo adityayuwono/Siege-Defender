@@ -2,15 +2,18 @@
 using Scripts.Models.Actions;
 using Scripts.Models.Enemies;
 using Scripts.Models.GUIs;
+using Scripts.Models.Items;
 using Scripts.Models.Weapons;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Actions;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;
+using Scripts.ViewModels.Items;
 using Scripts.ViewModels.Weapons;
 using Scripts.Views;
 using Scripts.Views.Enemies;
 using Scripts.Views.GUIs;
+using Scripts.Views.Items;
 using Scripts.Views.Weapons;
 using UnityEngine;
 using Object = Scripts.ViewModels.Object;
@@ -42,9 +45,18 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<DamageDisplayGUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectManagerModel>().TypeOf<Object>().To<SpecialEffectManager>();
 			IoC.IoCContainer.RegisterFor<ObjectDisplayModel>().TypeOf<Object>().To<ObjectDisplay>();
-			// GUIs
+			
+			// Items
 			IoC.IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
 			IoC.IoCContainer.RegisterFor<ItemModel>().TypeOf<Object>().To<Item>();
+			IoC.IoCContainer.RegisterFor<ItemModel>().TypeOf<Item>().To<Item>();
+			IoC.IoCContainer.RegisterFor<ProjectileItemModel>().TypeOf<Item>().To<ProjectileItem>();
+			IoC.IoCContainer.RegisterFor<EnchantmentItemModel>().TypeOf<Item>().To<EnchantmentItem>();
+			IoC.IoCContainer.RegisterFor<EquipmentSlotModel>().TypeOf<EquipmentSlot>().To<EquipmentSlot>();
+			IoC.IoCContainer.RegisterFor<WeaponSlotModel>().TypeOf<EquipmentSlot>().To<WeaponSlot>();
+
+			// GUIs
+			IoC.IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
 			IoC.IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<ButtonGUI>();
 			IoC.IoCContainer.RegisterFor<ProgressBarGUIModel>().TypeOf<Object>().To<ProgressBarGUI>();
 			IoC.IoCContainer.RegisterFor<CooldownGUIModel>().TypeOf<Object>().To<CooldownGUI>();
@@ -58,16 +70,12 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<AoEModel>().TypeOf<Object>().To<AoE>();
 			IoC.IoCContainer.RegisterFor<ParticleAoEModel>().TypeOf<Object>().To<ParticleAoE>();
 
+			// Enemies
 			IoC.IoCContainer.RegisterFor<StaticEnemyModel>().TypeOf<Object>().To<StaticEnemy>();
 			IoC.IoCContainer.RegisterFor<EnemyModel>().TypeOf<Object>().To<Enemy>();
 			IoC.IoCContainer.RegisterFor<BossModel>().TypeOf<Object>().To<Boss>();
 			IoC.IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<Object>().To<DamageGUI>();
 			IoC.IoCContainer.RegisterFor<HealthBarModel>().TypeOf<Object>().To<HealthBar>();
-
-			IoC.IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
-
-			IoC.IoCContainer.RegisterFor<ItemModel>().TypeOf<Item>().To<Item>();
-			IoC.IoCContainer.RegisterFor<ProjectileItemModel>().TypeOf<Item>().To<ProjectileItem>();
 
 			// Actions, doesnt have a view
 			IoC.IoCContainer.RegisterFor<LoadSceneActionModel>().TypeOf<BaseAction>().To<LoadSceneAction>();
@@ -78,6 +86,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<CreateItemActionModel>().TypeOf<BaseAction>().To<CreateItemAction>();
 			IoC.IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<BaseCondition>().To<ValueCondition>();
 			IoC.IoCContainer.RegisterFor<RandomConditionModel>().TypeOf<BaseCondition>().To<RandomCondition>();
+
 			// Triggers
 			IoC.IoCContainer.RegisterFor<TriggeredModel>().TypeOf<Triggered>().To<Triggered>();
 			IoC.IoCContainer.RegisterFor<EventTriggeredModel>().TypeOf<Triggered>().To<EventTriggered>();
@@ -102,11 +111,18 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectManager>().TypeOf<BaseView>().To<SpecialEffectManagerView>();
 			IoC.IoCContainer.RegisterFor<ObjectDisplay>().TypeOf<BaseView>().To<ObjectDisplayView>();
-			// GUIs
+
+			// Items
 			IoC.IoCContainer.RegisterFor<Item>().TypeOf<BaseView>().To<ItemView>();
 			IoC.IoCContainer.RegisterFor<ProjectileItem>().TypeOf<BaseView>().To<ItemView>();
+			IoC.IoCContainer.RegisterFor<EnchantmentItem>().TypeOf<BaseView>().To<ItemView>();
 			IoC.IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<InventoryView>();
 			IoC.IoCContainer.RegisterFor<EquipmentSlot>().TypeOf<BaseView>().To<EquipmentSlotView>();
+			IoC.IoCContainer.RegisterFor<WeaponSlot>().TypeOf<BaseView>().To<WeaponSlotView>();
+
+			// GUIs
+			IoC.IoCContainer.RegisterFor<GUIRoot>().TypeOf<BaseView>().To<GUIRootView>();
+
 			IoC.IoCContainer.RegisterFor<ButtonGUI>().TypeOf<BaseView>().To<ButtonView>();
 			IoC.IoCContainer.RegisterFor<ProgressBarGUI>().TypeOf<BaseView>().To<ProgressBarGUIView>();
 			IoC.IoCContainer.RegisterFor<CooldownGUI>().TypeOf<BaseView>().To<CooldownGUIView>();
@@ -125,9 +141,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<EnemyManager>().TypeOf<BaseView>().To<EnemyManagerView>();
 			IoC.IoCContainer.RegisterFor<ObjectSpawn>().TypeOf<BaseView>().To<ObjectSpawnView>();
 			IoC.IoCContainer.RegisterFor<PlayerHitbox>().TypeOf<BaseView>().To<PlayerHitboxView>();
-
-			IoC.IoCContainer.RegisterFor<GUIRoot>().TypeOf<BaseView>().To<GUIRootView>();
-
+			
 			#endregion
 		}
 	}
