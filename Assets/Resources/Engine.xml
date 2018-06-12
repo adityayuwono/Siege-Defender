@@ -83,7 +83,7 @@
         </Trigger>
       </Triggers>
     </StaticEnemy>
-    <StaticEnemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" Health="150" Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+    <StaticEnemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" Health="70" Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
         <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
       </Elements>
