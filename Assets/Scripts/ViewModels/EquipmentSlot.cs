@@ -27,21 +27,17 @@ namespace Scripts.ViewModels
 			set { OnItemUpdate(value); }
 		}
 
-		public void Object_OnDropped(Object objectVM)
+		public void HandleObjectDropped(Object droppedObject)
 		{
-			var droppedItem = objectVM as Item;
-			
-			if (droppedItem.GetParent<EquipmentSlot>() == null)
+			var droppedProjectileItem = droppedObject as ProjectileItem;
+
+			if (droppedProjectileItem != null)
 			{
-				CurrentItem = droppedItem;
+				if (droppedProjectileItem.GetParent<EquipmentSlot>() == null)
+				{
+					CurrentItem = droppedProjectileItem;
+				}
 			}
-		}
-
-		protected override void OnActivate()
-		{
-			base.OnActivate();
-
-			_currentItem.Activate();
 		}
 
 		public override void Show()
@@ -56,6 +52,13 @@ namespace Scripts.ViewModels
 			_currentItem.Hide(reason);
 
 			base.Hide(reason);
+		}
+
+		protected override void OnActivate()
+		{
+			base.OnActivate();
+
+			_currentItem.Activate();
 		}
 
 		protected override void OnDestroyed()
