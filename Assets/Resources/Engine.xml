@@ -502,7 +502,7 @@
 
     <Scene Id="PlayEnd" AssetId="PlayEnd">
       <Elements>
-        <Inventory Id="LootRewards" Source="LootRewardst" AssetId="LootRewards" />
+        <Inventory Id="LootRewards" Source="LootRewards" AssetId="LootRewards" />
         <GameEndStats IsStatic="true" AssetId="Title/GameStats/Stats" />
         <Button AssetId="MainMenu" >
           <Triggers>
