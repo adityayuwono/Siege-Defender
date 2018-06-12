@@ -97,7 +97,7 @@
       </Elements>
 
       <Limbs>
-        <Limb Id="Head" Health="250" AssetId="Head" DamageMultiplier="1.2"
+        <Limb Id="Head" Health="250" AssetId="Head" DamageMultiplier="2"
 					CollisionEffectNormal="StoneBreak" >
           <Triggers>
             <EventTrigger Event="Break" >
