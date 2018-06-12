@@ -76,7 +76,7 @@ namespace Scripts.Models.Items
 		[DefaultValue("400-400")]
 		public string SpeedDeviationSerialized
 		{
-			get { return string.Format("{0}-{1}", Damage[0], Damage[1]); }
+			get { return string.Format("{0}-{1}", SpeedDeviation[0], SpeedDeviation[1]); }
 			set
 			{
 				var speedStrings = value.Split('-');
