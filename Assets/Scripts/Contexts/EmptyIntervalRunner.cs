@@ -5,7 +5,11 @@ namespace Scripts.Contexts
 {
 	public class EmptyIntervalRunner : IIntervalRunner
 	{
-		public void SubscribeToInterval(Action action, float delay = 0, bool startImmediately = true)
+		public void SubscribeToInterval(Action action, float delay = 0, bool startImmediately = true, bool oneTimeTrigger = false)
+		{
+		}
+
+		public void SubscribeOneTimeInterval(Action action, float delay = 0, bool startImmediately = true)
 		{
 		}
 

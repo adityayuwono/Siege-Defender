@@ -5,6 +5,7 @@ using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Levels;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;

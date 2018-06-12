@@ -335,8 +335,15 @@
       <Cache EnemyId="SpiderColumn" Count="5" />
       <Cache EnemyId="CrystalShield" />
 
-      <Spawn EnemyId="CrystalSpider" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="CrystalSpider" Count="3" />
       <Spawn EnemyId="ZombieAbomination" />
+      <SpawnInterval EnemyId="CrystalSpider" Count="2" Interval="5" LoopCount="-1" />
+      <SpawnInterval EnemyId="StrongSpiderColumn" Count="1" Interval="7" LoopCount="10" />
     </Level>
     <SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
       <Spawn EnemyId="CrystalShield" />
@@ -502,7 +509,7 @@
 
     <Scene Id="PlayEnd" AssetId="PlayEnd">
       <Elements>
-        <Inventory Id="LootRewards" Source="LootRewards" AssetId="LootRewards" />
+        <!-- <Inventory Id="LootRewards" Source="LootRewards" AssetId="LootRewards" /> -->
         <GameEndStats IsStatic="true" AssetId="Title/GameStats/Stats" />
         <Button AssetId="MainMenu" >
           <Triggers>

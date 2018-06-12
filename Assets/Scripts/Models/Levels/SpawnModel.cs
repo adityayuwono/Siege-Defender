@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace Scripts.Models
+namespace Scripts.Models.Levels
 {
 	public class SpawnModel : BaseModel
 	{

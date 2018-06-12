@@ -4,6 +4,7 @@ using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Models.Levels;
 
 namespace Scripts.ViewModels
 {

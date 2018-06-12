@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using Scripts.Models.Levels;
 
 namespace Scripts.Models
 {
@@ -22,6 +23,7 @@ namespace Scripts.Models
 
 
 		[XmlElement(ElementName = "Spawn", Type = typeof(SpawnModel))]
+		[XmlElement(ElementName = "SpawnInterval", Type = typeof(SpawnIntervalModel))]
 		public List<SpawnModel> SpawnSequence { get; set; }
 
 		[XmlElement(ElementName = "Cache", Type = typeof(SpawnModel))]

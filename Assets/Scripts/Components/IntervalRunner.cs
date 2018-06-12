@@ -13,11 +13,17 @@ namespace Scripts.Components
 	{
 		private readonly List<IntervalSubscriber> _intervals = new List<IntervalSubscriber>();
 
-		public void SubscribeToInterval(Action action, float delay = 0f, bool startImmediately = true)
+		public void SubscribeToInterval(Action action, float delay = 0f, bool startImmediately = true, bool oneTimeTrigger = false)
 		{
 			if (!IsContainInterval(action))
 			{
-				_intervals.Add(new IntervalSubscriber(action, delay, startImmediately));
+				Action<IntervalSubscriber> removeSubscriber = null;
+				if (oneTimeTrigger)
+				{
+					removeSubscriber = RemoveInterval;
+				}
+
+				_intervals.Add(new IntervalSubscriber(action, delay, startImmediately, removeSubscriber));
 			}
 			else
 			{
@@ -27,12 +33,17 @@ namespace Scripts.Components
 			}
 		}
 
+		public void SubscribeOneTimeInterval(Action action, float delay = 0, bool startImmediately = true)
+		{
+			SubscribeToInterval(action, delay, startImmediately, true);
+		}
+
 		public bool UnsubscribeFromInterval(Action action)
 		{
 			var intervalToRemove = GetInterval(action);
 			if (intervalToRemove != null)
 			{
-				_intervals.Remove(intervalToRemove);
+				RemoveInterval(intervalToRemove);
 				return true;
 			}
 
@@ -41,12 +52,20 @@ namespace Scripts.Components
 
 		public void UpdateTime(float timeElapsed)
 		{
-			foreach (var interval in _intervals.ToArray()) interval.Update(timeElapsed);
+			foreach (var interval in _intervals.ToArray())
+			{
+				interval.Update(timeElapsed);
+			}
 		}
 
 		private void Update()
 		{
 			UpdateTime(Time.deltaTime);
+		}
+
+		private void RemoveInterval(IntervalSubscriber interval)
+		{
+			_intervals.Remove(interval);
 		}
 
 		/// <summary>
@@ -68,15 +87,20 @@ namespace Scripts.Components
 			private readonly Action _onInvokedAction;
 			public readonly int ActionHash;
 			private float _currentDelay;
+			private readonly Action<IntervalSubscriber> _removeInterval;
 
-			public IntervalSubscriber(Action action, float delay, bool startImmediatelly)
+			public IntervalSubscriber(Action action, float delay, bool startImmediatelly, Action<IntervalSubscriber> removeInterval)
 			{
 				ActionHash = action.GetHashCode();
 
 				_onInvokedAction = action;
 				_delay = delay;
+				_removeInterval = removeInterval;
 
-				if (!startImmediatelly) _currentDelay = _delay;
+				if (!startImmediatelly)
+				{
+					_currentDelay = _delay;
+				}
 			}
 
 			public void Update(float deltaTime)
@@ -85,6 +109,11 @@ namespace Scripts.Components
 				if (_currentDelay <= 0)
 				{
 					_onInvokedAction();
+
+					if (_removeInterval != null)
+					{
+						_removeInterval(this);
+					}
 					_currentDelay += _delay;
 				}
 			}

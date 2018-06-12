@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts
 {
-	public class GameEndStats
+	public class GameEndStatsManager
 	{
 		private static int _totalHit;
 		private static int _totalProjectileShot;

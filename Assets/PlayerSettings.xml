@@ -28,13 +28,7 @@
     </Enchantment>
     <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E5_1">
       <Stats RoF="0.15" Deviation="0.002" />
-    </Enchantment>    
-
-    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E1_1" />
-    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E2_1" />
-    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E3_1" />
-    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E4_1" />
-    <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E5_1" />
+    </Enchantment>
 
     <WeaponSlot Id="LeftShooter" AssetId="LeftWeaponContainer" DeathDelay="0">
       <Projectile AssetId="GUIs/ItemTemplate" BaseItem="WoodArrow" Level="1" />

@@ -1,5 +1,6 @@
 ﻿using Scripts.Core;
 using Scripts.Models;
+using Scripts.Models.Levels;
 using Scripts.ViewModels.Enemies;
 
 namespace Scripts.ViewModels
@@ -51,9 +52,34 @@ namespace Scripts.ViewModels
 			}
 
 			// Ignore if we have reaced the end of the sequence
-			if (_spawnIndex >= _levelModel.SpawnSequence.Count) return;
+			if (_spawnIndex >= _levelModel.SpawnSequence.Count)
+			{
+				return;
+			}
 
 			var spawnModel = _levelModel.SpawnSequence[_spawnIndex];
+			var spawnIntervalModel = spawnModel as SpawnIntervalModel;
+			if (spawnIntervalModel != null)
+			{
+				UnityEngine.Debug.Log("Subscribing "+spawnIntervalModel.Id);
+				Root.IntervalRunner.SubscribeToInterval(
+					() => SpawnInterval(spawnIntervalModel), spawnIntervalModel.Interval, false);
+			}
+			else
+			{
+				OneTimeSpawn(spawnModel);
+			}
+
+			_spawnIndex++;
+		}
+
+		private void SpawnInterval(SpawnIntervalModel spawnIntervalModel)
+		{
+			PeriodicSpawn(spawnIntervalModel);
+		}
+
+		private void OneTimeSpawn(SpawnModel spawnModel)
+		{
 			var enemyId = spawnModel.EnemyId;
 
 			// Empty enemyId mean that we want to skip some spawn iterations
@@ -64,8 +90,6 @@ namespace Scripts.ViewModels
 
 			var count = spawnModel.Count;
 			SpawnIndexOverride = spawnModel.SpawnIndexOverride;
-			_spawnIndex++;
-
 			for (var i = 0; i < count; i++)
 			{
 				var enemy = GetObject<LivingObject>(enemyId, null, GetParent<Scene>());
@@ -74,6 +98,20 @@ namespace Scripts.ViewModels
 			}
 
 			SpawnIndexOverride = -1;
+		}
+
+		private void PeriodicSpawn(SpawnModel spawnModel)
+		{
+			var enemyId = spawnModel.EnemyId;
+
+			var count = spawnModel.Count;
+
+			for (var i = 0; i < count; i++)
+			{
+				var enemy = GetObject<LivingObject>(enemyId, null, GetParent<Scene>());
+				enemy.Activate(this);
+				enemy.Show();
+			}
 		}
 
 		private void LoadLevel()
