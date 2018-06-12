@@ -14,6 +14,22 @@
     <Projectile AssetId="GUIs/ItemTemplate" BaseItem="SkySplitter" Level="1" />
     <Projectile AssetId="GUIs/ItemTemplate" BaseItem="SkySplitter" Level="1" />
 
+    <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E1_1">
+      <Stats Accuracy="-0.25" Scatters="2" />
+    </Enchantment>
+    <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E2_1">
+      <Stats Ammunition="1000" SpeedDeviation="10-20" />
+    </Enchantment>
+    <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E3_1">
+      <Stats CriticalChance="0.1" CriticalDamageMultiplier="1.5" />
+    </Enchantment>
+    <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E4_1">
+      <Stats RoF="0.3" Accuracy="0.1" />
+    </Enchantment>
+    <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E5_1">
+      <Stats RoF="0.15" Deviation="0.002" />
+    </Enchantment>    
+
     <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E1_1" />
     <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E2_1" />
     <Enchantment AssetId="GUIs/ItemTemplate" BaseItem="E3_1" />
