@@ -14,10 +14,10 @@ namespace Scripts.ViewModels.GUIs
 			base.OnActivate();
 			Size = 40;
 			Text.SetValue(string.Format("Accuracy: {0}%\nEnemies Killed: {1}\n\nTotal Damage: {2}\nDPS: {3}",
-				Scripts.GameEndStats.GetAccuracy(),
-				Scripts.GameEndStats.GetEnemiesKilled(),
-				Scripts.GameEndStats.GetTotalDamage(),
-				Scripts.GameEndStats.GetDPS()));
+				GameEndStatsManager.GetAccuracy(),
+				GameEndStatsManager.GetEnemiesKilled(),
+				GameEndStatsManager.GetTotalDamage(),
+				GameEndStatsManager.GetDPS()));
 		}
 	}
 }

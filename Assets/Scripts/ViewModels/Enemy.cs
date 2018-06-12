@@ -66,7 +66,7 @@ namespace Scripts.ViewModels
 		protected override void OnKilled()
 		{
 			base.OnKilled();
-			GameEndStats.AddOneEnemyKilled();
+			GameEndStatsManager.AddOneEnemyKilled();
 			Hide("Killed"); // Start the hiding process when the enemy is killed
 		}
 

@@ -41,7 +41,7 @@ namespace Scripts.ViewModels.Weapons
 			var isDamageApplied = enemy.ApplyDamage(damage, isCrit, contactPoint, attachToEnemy ? this : null);
 			if (isDamageApplied)
 			{
-				GameEndStats.AddDamage(damage);
+				GameEndStatsManager.AddDamage(damage);
 			}
 			return isDamageApplied;
 		}

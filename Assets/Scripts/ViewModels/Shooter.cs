@@ -88,7 +88,7 @@ namespace Scripts.ViewModels
 		{
 			if (AmmunitionProperty > 0)
 			{
-				GameEndStats.AddOneProjectile();
+				GameEndStatsManager.AddOneProjectile();
 				AmmunitionProperty--;
 				return GetProjectile(_projectileModel, this);
 			}

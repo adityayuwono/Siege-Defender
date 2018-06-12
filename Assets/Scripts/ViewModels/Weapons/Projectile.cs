@@ -80,7 +80,7 @@ namespace Scripts.ViewModels.Weapons
 			}
 			else
 			{
-				GameEndStats.AddOneHit();
+				GameEndStatsManager.AddOneHit();
 			}
 		}
 
