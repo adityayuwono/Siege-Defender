@@ -28,8 +28,8 @@ namespace Scripts.Components.UI
 					for (var j = 0; j < Column; j++)
 					{
 						var child = transform.GetChild(childIndex);
-						child.GetComponent<RectTransform>().anchoredPosition =
-							new Vector2((Margin.y * j + ItemSize.y * j), -(Margin.x * i + ItemSize.x * i));
+						var position = new Vector2((Margin.y * j + ItemSize.y * j), -(Margin.x * i + ItemSize.x * i));
+						child.GetComponent<RectTransform>().anchoredPosition = position;
 
 						childIndex++;
 						if (childIndex == maxChild)

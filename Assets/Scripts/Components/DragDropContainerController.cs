@@ -13,7 +13,6 @@ namespace Scripts.Components
 			if (viewModelController != null)
 			{
 				OnDropped(viewModelController.GetViewModel());
-				droppedGameObject.transform.localPosition = Vector3.zero;
 			}
 		}
 	}
