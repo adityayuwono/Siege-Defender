@@ -14,7 +14,7 @@ namespace Scripts.Components
 		private void Update()
 		{
 			var xClamped = -Input.acceleration.z / 2f;
-			var xAngle = /*27.5f+*/ xClamped * 30f;
+			var xAngle = /*27.5f+*/ (xClamped * 30f) - 7.5f;
 
 			// Between 90 to the left, and 90 to the right
 			var yClamped = Input.acceleration.x * 90f;
