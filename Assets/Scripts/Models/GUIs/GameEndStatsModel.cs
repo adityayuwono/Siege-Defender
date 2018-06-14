@@ -3,7 +3,7 @@
 namespace Scripts.Models.GUIs
 {
 	[Serializable]
-	public class GameEndStatsModel : LabelGUIModel
+	public class GameEndStatsModel : LabelModel
 	{
 	}
 }

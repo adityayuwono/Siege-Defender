@@ -4,14 +4,14 @@ using Scripts.Models.GUIs;
 
 namespace Scripts.ViewModels.GUIs
 {
-	public class ValueDisplayGUI : BaseGUI
+	public class Percentage : BaseGUI
 	{
-		private readonly ValueDisplayGUIModel _model;
+		private readonly PercentageModel _model;
 		public Property<float> MaxValue;
 
 		public Property<float> Value;
 
-		public ValueDisplayGUI(ValueDisplayGUIModel model, Object parent) 
+		public Percentage(PercentageModel model, Object parent) 
 			: base(model, parent)
 		{
 			_model = model;

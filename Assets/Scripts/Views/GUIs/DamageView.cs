@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Scripts.Views.GUIs
 {
-	public class DamageGUIView : LabelGUIView
+	public class DamageView : LabelView
 	{
-		private readonly DamageGUI _viewModel;
+		private readonly Damage _viewModel;
 		private Vector3 _initialScale;
 
-		public DamageGUIView(DamageGUI viewModel, ObjectView parent)
+		public DamageView(Damage viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;

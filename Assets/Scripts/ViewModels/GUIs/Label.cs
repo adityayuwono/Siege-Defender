@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Scripts.ViewModels.GUIs
 {
-	public class LabelGUI : StaticGUI
+	public class Label : Static
 	{
 		public readonly Property<string> Text = new Property<string>();
 
-		private readonly LabelGUIModel _model;
+		private readonly LabelModel _model;
 
-		public LabelGUI(LabelGUIModel model, Base parent) : base(model, parent)
+		public Label(LabelModel model, ViewModels.Base parent) : base(model, parent)
 		{
 			_model = model;
 			Color = Color.white;

@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace Scripts.Views.GUIs
 {
-	public class StaticGUIView : ObjectView
+	public class StaticView : ObjectView
 	{
-		private readonly StaticGUI _viewModel;
-		public StaticGUIView(StaticGUI viewModel, ObjectView parent) : base(viewModel, parent)
+		private readonly Static _viewModel;
+		public StaticView(Static viewModel, ObjectView parent) : base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 		}

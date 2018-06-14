@@ -3,7 +3,7 @@
 namespace Scripts.Models.GUIs
 {
 	[Serializable]
-	public class ProgressBarGUIModel : ValueDisplayGUIModel
+	public class DamageModel : LabelModel
 	{
 	}
 }

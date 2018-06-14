@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 namespace Scripts.Views.GUIs
 {
-	public class CooldownGUIView : ValueDisplayGUIView
+	public class CooldownView : PercentageView
 	{
 		private Image _image;
 
-		public CooldownGUIView(CooldownGUI viewModel, ObjectView parent)
+		public CooldownView(Cooldown viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
 		}

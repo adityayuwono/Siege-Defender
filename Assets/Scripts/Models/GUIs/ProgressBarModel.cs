@@ -3,7 +3,7 @@
 namespace Scripts.Models.GUIs
 {
 	[Serializable]
-	public class CooldownGUIModel : ValueDisplayGUIModel
+	public class ProgressBarModel : PercentageModel
 	{
 	}
 }

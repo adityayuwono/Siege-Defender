@@ -4,11 +4,11 @@ using Scripts.ViewModels.GUIs;
 
 namespace Scripts.ViewModels
 {
-	public class ButtonGUI : BaseGUI
+	public class ButtonGUI : GUIs.BaseGUI
 	{
 		public event Action OnClick;
 
-		public ButtonGUI(ButtonGUIModel model, Base parent) : base(model, parent)
+		public ButtonGUI(ButtonModel model, Base parent) : base(model, parent)
 		{
 		}
 

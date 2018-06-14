@@ -29,7 +29,7 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "Piercing", Type = typeof(PiercingProjectileModel))]
 		[XmlArrayItem(ElementName = "AoE", Type = typeof(AoEModel))]
 		[XmlArrayItem(ElementName = "ParticleAoE", Type = typeof(ParticleAoEModel))]
-		[XmlArrayItem(ElementName = "DamageGUI", Type = typeof(DamageGUIModel))]
+		[XmlArrayItem(ElementName = "DamageGUI", Type = typeof(DamageModel))]
 		[XmlArrayItem(ElementName = "HealthBar", Type = typeof(HealthBarModel))]
 		public List<ObjectModel> Objects { get; set; }
 

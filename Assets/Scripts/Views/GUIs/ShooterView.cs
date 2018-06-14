@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 namespace Scripts.Views.GUIs
 {
-	public class ShooterGUIView : BaseGUIView
+	public class ShooterView : BaseGUIView
 	{
 		private readonly ObjectView _parent;
 		private readonly ShooterGUI _viewModel;
 
 		private GameObject _aimingGameObject;
 
-		public ShooterGUIView(ShooterGUI viewModel, ObjectView parent)
+		public ShooterView(ShooterGUI viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
@@ -28,7 +28,7 @@ namespace Scripts.Views.GUIs
 			var targetView = _viewModel.Root.GetView<TargetView>(_viewModel.Shooter.Target);
 			targetView.SetupController(_aimingGameObject.GetComponent<Image>());
 
-			var sourceView = _viewModel.Root.GetView<ShooterView>(_viewModel.Shooter);
+			var sourceView = _viewModel.Root.GetView<Views.ShooterView>(_viewModel.Shooter);
 			sourceView.SetupController(GameObject.GetComponent<Image>());
 		}
 	}

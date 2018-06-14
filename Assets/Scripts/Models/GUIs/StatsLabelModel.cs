@@ -2,7 +2,7 @@
 
 namespace Scripts.Models.GUIs
 {
-	public class StatsLabelModel : StaticGUIModel
+	public class StatsLabelModel : StaticModel
 	{
 		[XmlAttribute]
 		public string Source { get; set; }

@@ -1,8 +1,8 @@
 ﻿using System.Xml.Serialization;
 
-namespace Scripts.Models
+namespace Scripts.Models.GUIs
 {
-	public class DamageDisplayGUIModel : IntervalModel
+	public class DamageDisplayModel : IntervalModel
 	{
 		[XmlAttribute]
 		public string DamageGUI { get; set; }

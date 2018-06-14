@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Scripts.ViewModels.GUIs
 {
-	public class DamageGUI : LabelGUI
+	public class Damage : Label
 	{
-		public DamageGUI(DamageGUIModel model, Base parent) : base(model, parent)
+		public Damage(DamageModel model, ViewModels.Base parent) : base(model, parent)
 		{
 		}
 

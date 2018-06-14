@@ -4,9 +4,9 @@ namespace Scripts.ViewModels.GUIs
 {
 	public class ShooterGUI : BaseGUI
 	{
-		private readonly ShooterGUIModel _model;
+		private readonly ShooterModel _model;
 
-		public ShooterGUI(ShooterGUIModel model, Object parent) 
+		public ShooterGUI(ShooterModel model, Object parent) 
 			: base(model, parent)
 		{
 			_model = model;

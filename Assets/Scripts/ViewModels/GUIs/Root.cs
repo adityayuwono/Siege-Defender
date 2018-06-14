@@ -2,9 +2,9 @@
 
 namespace Scripts.ViewModels.GUIs
 {
-	public class GUIRoot : Element
+	public class Root : Element
 	{
-		public GUIRoot(RootGUIModel model, Object parent) 
+		public Root(RootModel model, Object parent) 
 			: base(model, parent)
 		{
 		}

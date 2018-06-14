@@ -4,9 +4,9 @@ using System.Xml.Serialization;
 namespace Scripts.Models.GUIs
 {
 	[Serializable]
-	public class LabelGUIModel : StaticGUIModel
+	public class LabelModel : StaticModel
 	{
-		public LabelGUIModel()
+		public LabelModel()
 		{
 			Text = string.Empty;
 		}

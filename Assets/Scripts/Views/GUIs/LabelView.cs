@@ -1,15 +1,14 @@
 ﻿using Scripts.ViewModels.GUIs;
-using UnityEngine;
 
 namespace Scripts.Views.GUIs
 {
-	public class LabelGUIView : StaticGUIView
+	public class LabelView : StaticView
 	{
-		private readonly LabelGUI _viewModel;
+		private readonly Label _viewModel;
 
 		private UnityEngine.UI.Text _text;
 
-		public LabelGUIView(LabelGUI viewModel, ObjectView parent)
+		public LabelView(Label viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;

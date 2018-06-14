@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 namespace Scripts.Views.GUIs
 {
-	public class ProgressBarGUIView : ValueDisplayGUIView
+	public class ProgressBarView : PercentageView
 	{
 		private Image _image;
 
-		public ProgressBarGUIView(ProgressBarGUI viewModel, ObjectView parent)
+		public ProgressBarView(ProgressBar viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
 		}

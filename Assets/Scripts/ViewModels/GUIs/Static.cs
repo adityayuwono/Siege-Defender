@@ -2,10 +2,10 @@
 
 namespace Scripts.ViewModels.GUIs
 {
-	public class StaticGUI : Object
+	public class Static : Object
 	{
-		private readonly StaticGUIModel _model;
-		public StaticGUI(StaticGUIModel model, Base parent)
+		private readonly StaticModel _model;
+		public Static(StaticModel model, Base parent)
 			: base(model, parent)
 		{
 			_model = model;

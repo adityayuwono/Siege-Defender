@@ -2,9 +2,9 @@
 
 namespace Scripts.Views.GUIs
 {
-	public class GUIRootView : ElementView
+	public class RootView : ElementView
 	{
-		public GUIRootView(GUIRoot viewModel, ObjectView parent)
+		public RootView(Root viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
 		}

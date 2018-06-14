@@ -5,14 +5,14 @@ using Scripts.ViewModels.Items;
 
 namespace Scripts.ViewModels.GUIs
 {
-	public class StatsLabel : StaticGUI
+	public class StatsLabel : Static
 	{
 		public Action ItemUpdate;
 
 		private readonly StatsLabelModel _model;
 		private AdjustableProperty<ProjectileItem> _boundProjectileItem;
 
-		public StatsLabel(StatsLabelModel model, Base parent) : base(model, parent)
+		public StatsLabel(StatsLabelModel model, ViewModels.Base parent) : base(model, parent)
 		{
 			_model = model;
 		}

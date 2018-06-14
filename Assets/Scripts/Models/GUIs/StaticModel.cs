@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Scripts.Models.GUIs
 {
 	[Serializable]
-	public class StaticGUIModel : ObjectModel
+	public class StaticModel : ObjectModel
 	{
 		[XmlAttribute]
 		public bool IsStatic { get; set; }

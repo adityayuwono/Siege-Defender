@@ -5,7 +5,7 @@ namespace Scripts.ViewModels.GUIs
 {
 	public class HealthBar : Object
 	{
-		public HealthBar(HealthBarModel model, Base parent) : base(model, parent)
+		public HealthBar(HealthBarModel model, ViewModels.Base parent) : base(model, parent)
 		{
 		}
 

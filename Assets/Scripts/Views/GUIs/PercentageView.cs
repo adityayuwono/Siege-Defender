@@ -2,11 +2,11 @@
 
 namespace Scripts.Views.GUIs
 {
-	public class ValueDisplayGUIView : BaseGUIView
+	public class PercentageView : BaseGUIView
 	{
-		private readonly ValueDisplayGUI _viewModel;
+		private readonly Percentage _viewModel;
 
-		public ValueDisplayGUIView(ValueDisplayGUI viewModel, ObjectView parent)
+		public PercentageView(Percentage viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;

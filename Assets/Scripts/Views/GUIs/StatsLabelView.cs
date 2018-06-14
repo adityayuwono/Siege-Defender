@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 namespace Scripts.Views.GUIs
 {
-	public class StatsLabelView : StaticGUIView
+	public class StatsLabelView : StaticView
 	{
-		private StatsLabel _viewModel;
+		private readonly StatsLabel _viewModel;
 
 		private Text _baseNameText;
 		private Text _statNamesText;

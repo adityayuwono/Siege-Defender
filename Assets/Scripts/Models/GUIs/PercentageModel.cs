@@ -4,12 +4,12 @@ using System.Xml.Serialization;
 namespace Scripts.Models.GUIs
 {
 	[Serializable]
-	public class ShooterGUIModel : BaseGUIModel
+	public class PercentageModel : BaseGUIModel
 	{
 		[XmlAttribute]
-		public string ShooterTarget { get; set; }
+		public string Value { get; set; }
 
 		[XmlAttribute]
-		public string AimingAssetId { get; set; }
+		public string MaxValue { get; set; }
 	}
 }
