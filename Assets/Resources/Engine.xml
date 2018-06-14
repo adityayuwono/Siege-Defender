@@ -69,8 +69,12 @@
         </EventTrigger>
       </Triggers>
     </Enemy>
-    <StaticEnemy Id="CrystalShield" AssetId="Enemies/CrystalShield" Health="700"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" />
-    <StaticEnemy Id="SpiderColumn" AssetId="Enemies/SpiderColumn"  Health="35"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+    <StaticEnemy Id="CrystalShield" AssetId="Enemies/CrystalShield" Health="700"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+      <Elements>
+        <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnColumnFast" />
+      </Elements>
+    </StaticEnemy>
+    <StaticEnemy Id="SpiderColumn" AssetId="Enemies/SpiderColumn"  Health="24"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
         <EnemySpawn Id="SpiderSpawn[x]" AssetId="SpiderSpawn" LevelId="" />
       </Elements>
