@@ -9,15 +9,15 @@ namespace Scripts.Models.Items
 	{
 		public WeaponStatsModel()
 		{
-			DamageSerialized = "1-1";
-			RoF = 1f;
-			Ammunition = -1;
-			ReloadTime = 3f;
-			Accuracy = 0.9f;
+			DamageSerialized = "0-0";
+			RoF = 0f;
+			Ammunition = 0;
+			ReloadTime = 0f;
+			Accuracy = 0f;
 			CriticalChance = 0f;
-			CriticalDamageMultiplier = 1f;
+			CriticalDamageMultiplier = 0f;
 			Deviation = 0f;
-			SpeedDeviationSerialized = "400-400";
+			SpeedDeviationSerialized = "0-0";
 			Scatters = 0;
 		}
 
@@ -25,7 +25,7 @@ namespace Scripts.Models.Items
 		public float[] Damage { get; set; }
 
 		[XmlAttribute("Damage")]
-		[DefaultValue("1-1")]
+		[DefaultValue("0-0")]
 		public string DamageSerialized
 		{
 			get { return string.Format("{0}-{1}", Damage[0], Damage[1]); }
@@ -39,22 +39,22 @@ namespace Scripts.Models.Items
 		}
 
 		[XmlAttribute]
-		[DefaultValue(1f)]
+		[DefaultValue(0f)]
 		public float RoF { get; set; }
 
 		[XmlAttribute]
 		public string AoEId { get; set; }
 
 		[XmlAttribute]
-		[DefaultValue(-1)]
+		[DefaultValue(0)]
 		public int Ammunition { get; set; }
 
 		[XmlAttribute]
-		[DefaultValue(3f)]
+		[DefaultValue(0f)]
 		public float ReloadTime { get; set; }
 
 		[XmlAttribute]
-		[DefaultValue(0.9f)]
+		[DefaultValue(0f)]
 		public float Accuracy { get; set; }
 
 		[XmlAttribute]
@@ -62,7 +62,7 @@ namespace Scripts.Models.Items
 		public float CriticalChance { get; set; }
 
 		[XmlAttribute]
-		[DefaultValue(1f)]
+		[DefaultValue(0f)]
 		public float CriticalDamageMultiplier { get; set; }
 
 		[XmlAttribute]
@@ -73,7 +73,7 @@ namespace Scripts.Models.Items
 		public float[] SpeedDeviation { get; set; }
 
 		[XmlAttribute("SpeedDeviation")]
-		[DefaultValue("400-400")]
+		[DefaultValue("0-0")]
 		public string SpeedDeviationSerialized
 		{
 			get { return string.Format("{0}-{1}", SpeedDeviation[0], SpeedDeviation[1]); }
@@ -87,7 +87,7 @@ namespace Scripts.Models.Items
 		}
 
 		[XmlAttribute]
-		[DefaultValue(1)]
+		[DefaultValue(0)]
 		public int Scatters { get; set; }
 	}
 }
