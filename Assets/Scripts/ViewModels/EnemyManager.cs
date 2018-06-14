@@ -61,7 +61,6 @@ namespace Scripts.ViewModels
 			var spawnIntervalModel = spawnModel as SpawnIntervalModel;
 			if (spawnIntervalModel != null)
 			{
-				UnityEngine.Debug.Log("Subscribing "+spawnIntervalModel.Id);
 				Root.IntervalRunner.SubscribeToInterval(
 					() => SpawnInterval(spawnIntervalModel), spawnIntervalModel.Interval, false);
 			}
