@@ -2,7 +2,7 @@
   <Objects>
     <Projectile Id="Ascalon" AssetId="Projectiles/IronBullet" >
       <Stats Damage="4-5"
-      RoF="0.2" Ammunition="1" ReloadTime="0.01"
+      RoF="0.2" Ammunition="1" ReloadTime="0"
       Scatters="1"
       SpeedDeviation="20-30"
       AoEId="AscalonExplosion"
@@ -10,41 +10,46 @@
       Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="WoodArrow" AssetId="Projectiles/WoodenBalista" >
-      <Stats Damage="6-10"
-			RoF="0.2" Ammunition="1000" ReloadTime="3"
+      <Stats 
+        Damage="6-10"
+        SpeedDeviation="400-400"
+        RoF="0.2" Ammunition="100" ReloadTime="0"
 			Scatters="1"
       CriticalChance="0.1" CriticalDamageMultiplier="1.2"
 			Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="ScatterArrow" AssetId="Projectiles/WoodenBalista" >
       <Stats Damage="5-10"
-			RoF="0.75" Ammunition="1000" ReloadTime="5"
+			RoF="0.75" Ammunition="100" ReloadTime="0"
 			SpeedDeviation="300-600"
 			Accuracy="0.5" Deviation="0" Scatters="5" />
     </Projectile>
     <Projectile Id="IronArrow" AssetId="Projectiles/IronBalista" >
       <Stats Damage="10-20"
-      RoF="0.25" Ammunition="500" ReloadTime="4"
+        SpeedDeviation="300-400"
+      RoF="0.25" Ammunition="50" ReloadTime="0"
       Scatters="1"
       Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="FireBall" AssetId="Projectiles/FireBall" >
       <Stats Damage="8-11"
+        SpeedDeviation="250-300"
       AoEId="FireDome"
-			RoF="0.5" Ammunition="25" ReloadTime="5"
+			RoF="0.5" Ammunition="25" ReloadTime="1"
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="SkySplitter" AssetId="Projectiles/SkySplitter" >
       <Stats Damage="1-5"
       AoEId="LightningStrike"
-      RoF="0.6" Ammunition="99" ReloadTime="6"
+      RoF="0.6" Ammunition="9" ReloadTime="5"
       SpeedDeviation="500-500"
       Accuracy="1" Deviation="0" Scatters="1" />
     </Projectile>
     <Piercing Id="IronBall" AssetId="Projectiles/IronBall" >
       <Stats Damage="40-60"
-  			RoF="2" Ammunition="8" ReloadTime="5"
+        SpeedDeviation="400-400"
+  			RoF="2" Ammunition="4" ReloadTime="1"
   			Scatters="1"
   			Accuracy="1" Deviation="0" />    
     </Piercing>
