@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Models.Items;
@@ -71,13 +70,14 @@ namespace Scripts.ViewModels.Items
 				#endregion
 
 				newProjectileModel.Stats.Damage = augmentedDamages.ToArray();
-				newProjectileModel.Stats.Accuracy = Mathf.Min(newProjectileModel.Stats.Accuracy + enchantmentModel.Stats.Accuracy, 1f);
 				newProjectileModel.Stats.ReloadTime = Mathf.Min(newProjectileModel.Stats.ReloadTime + enchantmentModel.Stats.ReloadTime, 1f);
+
 				newProjectileModel.Stats.CriticalChance =
 					Mathf.Min(
 						newProjectileModel.Stats.CriticalChance + enchantmentModel.Stats.CriticalChance +
 						(newProjectileModel.Stats.CriticalChance > 0 && enchantmentModel.Stats.CriticalChance > 0 ? -1 : 0), 1f);
 				newProjectileModel.Stats.CriticalDamageMultiplier = newProjectileModel.Stats.CriticalDamageMultiplier + enchantmentModel.Stats.CriticalDamageMultiplier;
+
 				newProjectileModel.Stats.Scatters += enchantmentModel.Stats.Scatters;
 				newProjectileModel.Stats.Ammunition += enchantmentModel.Stats.Ammunition;
 				if (string.IsNullOrEmpty(newProjectileModel.Stats.AoEId))
@@ -95,30 +95,25 @@ namespace Scripts.ViewModels.Items
 
 		private void UpdateStats(ProjectileModel projectileModel, EnchantmentItemModel enchantment)
 		{
-			var stats = "Damage\nSpeed\n\nRate of Fire\nAmmunition\nReload Time\n\nAccuracy\nRecoil";
+			var stats = "Damage\nSpeed\n\nRate of Fire\nAmmunition\nReload Time";
 			var numbers =
 				string.Format(
-					"{0}\n{6}\n\n{1}\n{2}\n{3}\n\n{4}\n{5}",
+					"{0}\n{1}\n\n{2}\n{3}\n{4}",
 					string.Format("{0}-{1}", projectileModel.Stats.Damage[0], projectileModel.Stats.Damage[1]),
+					string.Format("{0}-{1}", projectileModel.Stats.SpeedDeviation[0], projectileModel.Stats.SpeedDeviation[1]),
 					projectileModel.Stats.RoF,
 					projectileModel.Stats.Ammunition,
-					projectileModel.Stats.ReloadTime,
-					projectileModel.Stats.Accuracy,
-					projectileModel.Stats.Deviation,
-					string.Format("{0}-{1}", projectileModel.Stats.SpeedDeviation[0], projectileModel.Stats.SpeedDeviation[1])
+					projectileModel.Stats.ReloadTime
 				);
 			var augmentation = "";
 			if (enchantment != null)
 			{
 				augmentation =
-					string.Format("{0}\n{6}\n\n{1}\n{2}\n{3}\n\n{4}\n{5}",
+					string.Format("{0}\n\n\n{1}\n{2}\n{3}",
 						string.Format("{0}-{1}", enchantment.Stats.Damage[0], enchantment.Stats.Damage[1]),
 						enchantment.Stats.RoF,
 						enchantment.Stats.Ammunition,
-						enchantment.Stats.ReloadTime,
-						enchantment.Stats.Accuracy,
-						enchantment.Stats.Deviation,
-						string.Format("{0}-{1}", enchantment.Stats.SpeedDeviation[0], enchantment.Stats.SpeedDeviation[1])
+						enchantment.Stats.ReloadTime
 					);
 			} 
 
