@@ -5,7 +5,8 @@ namespace Scripts.Views.GUIs
 {
 	public class BloodOverlayView : PercentageView
 	{
-		private Color _defaultColor = new Color(1,1,1,0);
+		private readonly Color _defaultColor = new Color(1,1,1,0);
+
 		public BloodOverlayView(BloodOverlay viewModel, ObjectView parent)
 			: base(viewModel, parent)
 		{
