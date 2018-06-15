@@ -29,7 +29,7 @@ namespace Scripts.Views.GUIs
 			targetView.SetupController(_aimingGameObject.GetComponent<Image>());
 
 			var sourceView = _viewModel.Root.GetView<Views.ShooterView>(_viewModel.Shooter);
-			sourceView.SetupController(GameObject.GetComponent<Image>());
+			sourceView.SetupController(Image);
 		}
 	}
 }

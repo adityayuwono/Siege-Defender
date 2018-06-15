@@ -12,16 +12,9 @@ namespace Scripts.Views.GUIs
 		{
 		}
 
-		protected override void OnLoad()
-		{
-			base.OnLoad();
-
-			_image = GameObject.GetComponent<Image>();
-		}
-
 		protected override void UpdateValueDisplay(float value, float maxValue)
 		{
-			_image.fillAmount = value / maxValue;
+			Image.fillAmount = value / maxValue;
 		}
 	}
 }
