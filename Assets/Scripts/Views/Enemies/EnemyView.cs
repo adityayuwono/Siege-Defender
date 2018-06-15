@@ -1,8 +1,10 @@
 ﻿using Scripts.AnimatorBehaviours;
 using Scripts.Components;
+using Scripts.Enums;
 using Scripts.Helpers;
 using Scripts.ViewModels;
 using UnityEngine;
+using AnimationEvent = Scripts.AnimatorBehaviours.AnimationEvent;
 
 namespace Scripts.Views.Enemies
 {
@@ -58,6 +60,7 @@ namespace Scripts.Views.Enemies
 
 			_viewModel.AnimationId.OnChange += Animation_OnChange;
 
+			SetupAnimationEventHandler();
 			AdjustRotation();
 			StartWalking();
 
@@ -72,8 +75,6 @@ namespace Scripts.Views.Enemies
 			UnsubscribeIntervals();
 
 			_viewModel.AnimationId.SetValue("Death");
-			SetupDeathEndHandler();
-
 			_viewModel.AnimationId.OnChange -= Animation_OnChange;
 
 			base.OnHide(reason);
@@ -152,7 +153,6 @@ namespace Scripts.Views.Enemies
 		private void AttackAnimation()
 		{
 			_viewModel.AnimationId.SetValue("Attack");
-			_viewModel.OnAttack();
 		}
 
 		private Animator GetAnimator()
@@ -168,16 +168,25 @@ namespace Scripts.Views.Enemies
 			_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(AttackAnimation);
 		}
 
-		private void SetupDeathEndHandler()
+		private void SetupAnimationEventHandler()
 		{
-			var handleDeathBehaviour = Animator.GetBehaviour<HandleDeath>();
-			if (handleDeathBehaviour != null)
+			var handleAttackBehaviour = Animator.GetBehaviour<AnimationEvent>();
+			if (handleAttackBehaviour != null)
 			{
-				handleDeathBehaviour.HandleDeathEnd = () =>
-				{
-					handleDeathBehaviour.HandleDeathEnd = null;
-					_viewModel.InvokeDeathEnd();
-				};
+				handleAttackBehaviour.Invoke = AnimationEventHandler;
+			}
+		}
+
+		private void AnimationEventHandler(AnimationEventType eventType)
+		{
+			if (eventType == AnimationEventType.Attack)
+			{
+				_viewModel.OnAttack();
+			}
+
+			if (eventType == AnimationEventType.Death)
+			{
+				_viewModel.InvokeDeathEnd();
 			}
 		}
 	}

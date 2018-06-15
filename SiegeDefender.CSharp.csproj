@@ -227,7 +227,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AnimatorBehaviours\HandleDeath.cs" />
+    <Compile Include="Assets\Scripts\AnimatorBehaviours\AnimationEvent.cs" />
     <Compile Include="Assets\Scripts\Components\AccelerometerController.cs" />
     <Compile Include="Assets\Scripts\Components\AimingController.cs" />
     <Compile Include="Assets\Scripts\Components\BaseBinding.cs" />

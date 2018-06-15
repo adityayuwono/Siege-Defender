@@ -1,18 +1,20 @@
 ﻿using System;
+using Scripts.Enums;
 using UnityEngine;
 
 namespace Scripts.AnimatorBehaviours
 {
-	public class HandleDeath : StateMachineBehaviour
+	public class AnimationEvent : StateMachineBehaviour
 	{
-		public Action HandleDeathEnd;
+		public Action<AnimationEventType> Invoke;
+		public AnimationEventType EventType;
 
 		// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 		public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
-			if (HandleDeathEnd != null)
+			if (Invoke != null)
 			{
-				HandleDeathEnd();
+				Invoke(EventType);
 			}
 		}
 	}
