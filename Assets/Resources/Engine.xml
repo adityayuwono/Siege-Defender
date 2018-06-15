@@ -446,19 +446,18 @@
 
   <LootTables>
     <LootTable Id="BasicLoot" Drops="1">
-      <Loot ItemId="Iron" Chance="5" />
-      <Loot ItemId="Aluminum" Chance="25" />
-      <Loot ItemId="Copper" Chance="60" />
+      <Loot ItemId="Iron" Chance="0.1" />
+      <Loot ItemId="Aluminum" Chance="0.2" />
+      <Loot ItemId="Copper" Chance="0.5" />
     </LootTable>
     <LootTable Id="BossLimbLoot" Drops="3">
-      <Loot ItemId="Iron" Chance="50" />
-      <Loot ItemId="Aluminum" Chance="75" Max="2" />
-      <Loot ItemId="Copper" Chance="100" Max="1" />
+      <Loot ItemId="Iron" Chance="1" />
+      <Loot ItemId="Aluminum" Chance="2.5" Max="2" />
+      <Loot ItemId="Copper" Chance="5" Max="1" />
     </LootTable>
     <LootTable Id="CrystalLimbLoot" Drops="5">
-      <Loot ItemId="Iron" Chance="50" />
-      <Loot ItemId="Aluminum" Chance="100" Max="2" />
-      <Loot ItemId="Copper" Chance="100" Max="1" />
+      <Loot ItemId="Iron" Chance="2" />
+      <Loot ItemId="Aluminum" Chance="2.5" Max="2" />
     </LootTable>
   </LootTables>
 
