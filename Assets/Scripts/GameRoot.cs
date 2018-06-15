@@ -5,7 +5,6 @@ using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
-using Scripts.Models.Levels;
 using Scripts.ViewModels;
 using Scripts.ViewModels.Enemies;
 using Scripts.ViewModels.GUIs;
@@ -51,23 +50,27 @@ namespace Scripts
 			base.OnLoad();
 
 			// Register all Loot Tables
-			if (_model.LootTables != null)
-				foreach (var lootTableModel in _model.LootTables)
+			if (_model.LootTables == null)
+			{
+				return;
+			}
+
+			foreach (var lootTableModel in _model.LootTables)
+			{
+				var id = lootTableModel.Id;
+
+				if (string.IsNullOrEmpty(id))
 				{
-					var id = lootTableModel.Id;
-
-					if (string.IsNullOrEmpty(id))
-					{
-						throw new EngineException(this, "Failed to register <LootTable>, <LootTable> need id");
-					}
-
-					if (LootTables.ContainsKey(id))
-					{
-						throw new EngineException(this, string.Format("Duplicate <LootTable> id: {0}", id));
-					}
-
-					LootTables.Add(id, new LootTable(lootTableModel, this));
+					throw new EngineException(this, "Failed to register <LootTable>, <LootTable> need id");
 				}
+
+				if (LootTables.ContainsKey(id))
+				{
+					throw new EngineException(this, string.Format("Duplicate <LootTable> id: {0}", id));
+				}
+
+				LootTables.Add(id, new LootTable(lootTableModel, this));
+			}
 		}
 
 		public LevelModel GetLevel(string levelId)

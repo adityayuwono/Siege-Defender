@@ -43,14 +43,20 @@ namespace Scripts
 
 		public void RegisterToLookup(Base viewModel)
 		{
-			if (_vmLookup.ContainsKey(viewModel.Id)) return;
+			if (_vmLookup.ContainsKey(viewModel.Id))
+			{
+				return;
+			}
 
 			_vmLookup.Add(viewModel.Id, viewModel);
 		}
 
 		public void UnregisterFromLookup(Base viewModel)
 		{
-			if (!_vmLookup.ContainsKey(viewModel.Id)) return;
+			if (!_vmLookup.ContainsKey(viewModel.Id))
+			{
+				return;
+			}
 
 			_vmLookup.Remove(viewModel.Id);
 		}
