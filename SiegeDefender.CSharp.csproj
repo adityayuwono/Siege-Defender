@@ -263,6 +263,7 @@
     <Compile Include="Assets\Scripts\Core\Property.cs" />
     <Compile Include="Assets\Scripts\Core\PropertyLookup.cs" />
     <Compile Include="Assets\Scripts\Core\SpriteLookup.cs" />
+    <Compile Include="Assets\Scripts\Enums\AnimationEventType.cs" />
     <Compile Include="Assets\Scripts\Extensions\RectTransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\UnityExtension.cs" />
     <Compile Include="Assets\Scripts\GameEndStatsManager.cs" />
