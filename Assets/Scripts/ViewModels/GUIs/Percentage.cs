@@ -11,7 +11,7 @@ namespace Scripts.ViewModels.GUIs
 
 		public Property<float> Value;
 
-		public Percentage(PercentageModel model, Object parent) 
+		public Percentage(PercentageModel model, Base parent) 
 			: base(model, parent)
 		{
 			_model = model;

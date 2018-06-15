@@ -311,6 +311,7 @@
     <Compile Include="Assets\Scripts\Models\Enemies\StaticEnemyModel.cs" />
     <Compile Include="Assets\Scripts\Models\EngineModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\BaseGUIModel.cs" />
+    <Compile Include="Assets\Scripts\Models\GUIs\BloodOverlayModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\ButtonModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\CooldownModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\DamageDisplayModel.cs" />
@@ -382,6 +383,7 @@
     <Compile Include="Assets\Scripts\ViewModels\Enemy.cs" />
     <Compile Include="Assets\Scripts\ViewModels\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\BaseGUI.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\GUIs\BloodOverlay.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\Cooldown.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\DamageDisplayManager.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\Damage.cs" />
@@ -431,6 +433,7 @@
     <Compile Include="Assets\Scripts\Views\Enemies\LivingObjectView.cs" />
     <Compile Include="Assets\Scripts\Views\Enemies\StaticEnemyView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\BaseGUIView.cs" />
+    <Compile Include="Assets\Scripts\Views\GUIs\BloodOverlayView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\CooldownView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\DamageDisplayView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\DamageView.cs" />

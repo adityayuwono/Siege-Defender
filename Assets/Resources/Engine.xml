@@ -492,7 +492,7 @@
         <GUIRoot AssetId="Canvas">
           <Elements>
             <ProgressBar AssetId="HealthBar" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
-            
+            <BloodOverlay AssetId="BloodOverlay" Value="{PlayerCamera.Health}" MaxValue="{PlayerCamera.MaxHealth}" />
             <Button AssetId="MainMenu" >
               <Triggers>
                 <EventTrigger Event="Click">

@@ -17,6 +17,9 @@ using Scripts.Views.Items;
 using Scripts.Views.Weapons;
 using UnityEngine;
 using Object = Scripts.ViewModels.Object;
+using RootModel = Scripts.Models.GUIs.RootModel;
+using ShooterModel = Scripts.Models.GUIs.ShooterModel;
+using ShooterView = Scripts.Views.GUIs.ShooterView;
 
 namespace Scripts.Components
 {
@@ -41,8 +44,8 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<Object>().To<EnemyManager>();
 			IoC.IoCContainer.RegisterFor<ObjectSpawnModel>().TypeOf<Object>().To<ObjectSpawn>();
 			IoC.IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<Object>().To<PlayerHitbox>();
-			IoC.IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Object>().To<GUIRoot>();
-			IoC.IoCContainer.RegisterFor<DamageDisplayGUIModel>().TypeOf<Object>().To<DamageDisplayManager>();
+			IoC.IoCContainer.RegisterFor<RootModel>().TypeOf<Object>().To<Root>();
+			IoC.IoCContainer.RegisterFor<DamageDisplayModel>().TypeOf<Object>().To<DamageDisplayManager>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectManagerModel>().TypeOf<Object>().To<SpecialEffectManager>();
 			IoC.IoCContainer.RegisterFor<ObjectDisplayModel>().TypeOf<Object>().To<ObjectDisplay>();
 			
@@ -56,14 +59,15 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<WeaponSlotModel>().TypeOf<EquipmentSlot>().To<WeaponSlot>();
 
 			// GUIs
-			IoC.IoCContainer.RegisterFor<RootGUIModel>().TypeOf<Element>().To<GUIRoot>();
-			IoC.IoCContainer.RegisterFor<ButtonGUIModel>().TypeOf<Object>().To<ButtonGUI>();
-			IoC.IoCContainer.RegisterFor<ProgressBarGUIModel>().TypeOf<Object>().To<ProgressBarGUI>();
-			IoC.IoCContainer.RegisterFor<CooldownGUIModel>().TypeOf<Object>().To<CooldownGUI>();
-			IoC.IoCContainer.RegisterFor<ShooterGUIModel>().TypeOf<Object>().To<ShooterGUI>();
-			IoC.IoCContainer.RegisterFor<LabelGUIModel>().TypeOf<Object>().To<LabelGUI>();
+			IoC.IoCContainer.RegisterFor<RootModel>().TypeOf<Element>().To<Root>();
+			IoC.IoCContainer.RegisterFor<ButtonModel>().TypeOf<Object>().To<ButtonGUI>();
+			IoC.IoCContainer.RegisterFor<ProgressBarModel>().TypeOf<Object>().To<ProgressBar>();
+			IoC.IoCContainer.RegisterFor<CooldownModel>().TypeOf<Object>().To<Cooldown>();
+			IoC.IoCContainer.RegisterFor<ShooterModel>().TypeOf<Object>().To<ShooterGUI>();
+			IoC.IoCContainer.RegisterFor<LabelModel>().TypeOf<Object>().To<Label>();
 			IoC.IoCContainer.RegisterFor<StatsLabelModel>().TypeOf<Object>().To<StatsLabel>();
-			IoC.IoCContainer.RegisterFor<GameEndStatsModel>().TypeOf<Object>().To<ViewModels.GUIs.GameEndStats>();
+			IoC.IoCContainer.RegisterFor<GameEndStatsModel>().TypeOf<Object>().To<GameEndStats>();
+			IoC.IoCContainer.RegisterFor<BloodOverlayModel>().TypeOf<Object>().To<BloodOverlay>();
 
 			// ProjectileBase
 			IoC.IoCContainer.RegisterFor<ProjectileModel>().TypeOf<Object>().To<Projectile>();
@@ -75,7 +79,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<StaticEnemyModel>().TypeOf<Object>().To<StaticEnemy>();
 			IoC.IoCContainer.RegisterFor<EnemyModel>().TypeOf<Object>().To<Enemy>();
 			IoC.IoCContainer.RegisterFor<BossModel>().TypeOf<Object>().To<Boss>();
-			IoC.IoCContainer.RegisterFor<DamageGUIModel>().TypeOf<Object>().To<DamageGUI>();
+			IoC.IoCContainer.RegisterFor<DamageModel>().TypeOf<Object>().To<Damage>();
 			IoC.IoCContainer.RegisterFor<HealthBarModel>().TypeOf<Object>().To<HealthBar>();
 
 			// Actions, doesnt have a view
@@ -106,7 +110,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<Boss>().TypeOf<BaseView>().To<BossView>();
 			IoC.IoCContainer.RegisterFor<Limb>().TypeOf<BaseView>().To<LimbView>();
 
-			IoC.IoCContainer.RegisterFor<DamageGUI>().TypeOf<BaseView>().To<DamageGUIView>();
+			IoC.IoCContainer.RegisterFor<Damage>().TypeOf<BaseView>().To<DamageView>();
 			IoC.IoCContainer.RegisterFor<HealthBar>().TypeOf<BaseView>().To<HealthBarView>();
 			IoC.IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectManager>().TypeOf<BaseView>().To<SpecialEffectManagerView>();
@@ -121,20 +125,20 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<WeaponSlot>().TypeOf<BaseView>().To<WeaponSlotView>();
 
 			// GUIs
-			IoC.IoCContainer.RegisterFor<GUIRoot>().TypeOf<BaseView>().To<GUIRootView>();
-
+			IoC.IoCContainer.RegisterFor<Root>().TypeOf<BaseView>().To<RootView>();
 			IoC.IoCContainer.RegisterFor<ButtonGUI>().TypeOf<BaseView>().To<ButtonView>();
-			IoC.IoCContainer.RegisterFor<ProgressBarGUI>().TypeOf<BaseView>().To<ProgressBarGUIView>();
-			IoC.IoCContainer.RegisterFor<CooldownGUI>().TypeOf<BaseView>().To<CooldownGUIView>();
-			IoC.IoCContainer.RegisterFor<ShooterGUI>().TypeOf<BaseView>().To<ShooterGUIView>();
-			IoC.IoCContainer.RegisterFor<LabelGUI>().TypeOf<BaseView>().To<LabelGUIView>();
+			IoC.IoCContainer.RegisterFor<ProgressBar>().TypeOf<BaseView>().To<ProgressBarView>();
+			IoC.IoCContainer.RegisterFor<Cooldown>().TypeOf<BaseView>().To<CooldownView>();
+			IoC.IoCContainer.RegisterFor<ShooterGUI>().TypeOf<BaseView>().To<ShooterView>();
+			IoC.IoCContainer.RegisterFor<Label>().TypeOf<BaseView>().To<LabelView>();
 			IoC.IoCContainer.RegisterFor<StatsLabel>().TypeOf<BaseView>().To<StatsLabelView>();
-			IoC.IoCContainer.RegisterFor<ViewModels.GUIs.GameEndStats>().TypeOf<BaseView>().To<GameEndStatsView>();
+			IoC.IoCContainer.RegisterFor<GameEndStats>().TypeOf<BaseView>().To<GameEndStatsView>();
+			IoC.IoCContainer.RegisterFor<BloodOverlay>().TypeOf<BaseView>().To<BloodOverlayView>();
 
 			IoC.IoCContainer.RegisterFor<Object>().TypeOf<BaseView>().To<ObjectView>();
 			IoC.IoCContainer.RegisterFor<SpecialEffect>().TypeOf<BaseView>().To<SpecialEffectView>();
 			IoC.IoCContainer.RegisterFor<StaticObject>().TypeOf<BaseView>().To<StaticObjectView>();
-			IoC.IoCContainer.RegisterFor<Shooter>().TypeOf<BaseView>().To<ShooterView>();
+			IoC.IoCContainer.RegisterFor<Shooter>().TypeOf<BaseView>().To<Views.ShooterView>();
 			IoC.IoCContainer.RegisterFor<Target>().TypeOf<BaseView>().To<TargetView>();
 			IoC.IoCContainer.RegisterFor<Scene>().TypeOf<BaseView>().To<SceneView>();
 

@@ -40,6 +40,7 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "Label", Type = typeof(LabelModel))]
 		[XmlArrayItem(ElementName = "StatsLabel", Type = typeof(StatsLabelModel))]
 		[XmlArrayItem(ElementName = "GameEndStats", Type = typeof(GameEndStatsModel))]
+		[XmlArrayItem(ElementName = "BloodOverlay", Type = typeof(BloodOverlayModel))]
 		// Intervals
 		[XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
 		[XmlArrayItem(ElementName = "ObjectSpawn", Type = typeof(ObjectSpawnModel))]
