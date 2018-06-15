@@ -54,14 +54,14 @@
   			Accuracy="1" Deviation="0" />    
     </Piercing>
     <ParticleAoE Id="FireDome" 
-      AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="15" DamageMultiplier="0.75" Scatters="1" />
+      AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="10" DamageMultiplier="0.75" Scatters="1" />
     <ParticleAoE Id="AscalonExplosion" 
       AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="8" DamageMultiplier="1" />
     <ParticleAoE Id="LightningStrike" 
       AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" DamageMultiplier="3" IsGrounded="true" />
 
     <!-- Enemies -->
-    <Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="20" Speed="5" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
+    <Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="12" Speed="7" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
       <Triggers>
         <EventTrigger Event="Spawn">
           <SpecialEffect Value="MagicCircle" />
@@ -85,19 +85,19 @@
       </Elements>
       <Triggers>
         <Trigger Id="RandomlySpawnsSpider" TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="4" Value="50" />
+          <RandomCondition Target="{This}" Frequency="10" Value="35" />
           <!-- Percentage -->
           <Condition Target="{SpiderSpawn[x].ActiveObjects}" Value="\1" />
           <Setter Target="{SpiderSpawn[x].Level}" Value="SpawnSpiders" />
         </Trigger>
       </Triggers>
     </StaticEnemy>
-    <StaticEnemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" Health="70" Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+    <StaticEnemy Id="StrongSpiderColumn" AssetId="Enemies/SpiderColumn" Health="100" Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
         <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
       </Elements>
     </StaticEnemy>
-    <Boss Id="ZombieAbomination" AssetId="Enemies/ZombieAbomination" Health="999" Speed="2" DeathDelay="5"
+    <Boss Id="ZombieAbomination" AssetId="Enemies/ZombieAbomination" Health="2999" Speed="2.5" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
       <Elements>
         <EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -106,7 +106,7 @@
       </Elements>
 
       <Limbs>
-        <Limb Id="Head" Health="250" AssetId="Head" DamageMultiplier="2"
+        <Limb Id="Head" Health="1000" AssetId="Head" DamageMultiplier="3"
 					CollisionEffectNormal="StoneBreak" >
           <Triggers>
             <EventTrigger Event="Break" >
@@ -117,7 +117,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="RightHand" Health="450" AssetId="RightHand" DamageMultiplier="0.75"
+        <Limb Id="RightHand" Health="450" AssetId="RightHand" DamageMultiplier="0.5"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -129,7 +129,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="LeftHand" Health="450" AssetId="LeftHand" DamageMultiplier="0.75"
+        <Limb Id="LeftHand" Health="450" AssetId="LeftHand" DamageMultiplier="0.5"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -211,14 +211,14 @@
           <Setter Target="{SpiderColumns.Level}" Value="SpawnSpiderColumn" Wait="2" />
           <Setter Target="{This.AnimationId}" Value="Idle" />
         </Skill>
-        <Skill Id="Slam" InterruptThreshold="250" >
+        <Skill Id="Slam" InterruptThreshold="350" >
           <SpecialEffect Target="{LeftHand.SpecialEffect}" Value="ChargingSlam" />
           <Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2" IsInterruptable="true"/>
           <Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
           <Setter Target="{This.AnimationId}" Value="Slam_Run" />
           <MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
           <Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
-          <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]5" />
+          <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]10" />
           <SpecialEvent Target="{Root.Play.PlayerCamera}" Wait="0.5" />
           <Triggers>
             <EventTrigger Event="Interrupt">
@@ -265,7 +265,7 @@
 
       <Triggers>
         <Trigger TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="2" Value="15" />
+          <RandomCondition Target="{This}" Frequency="1" Value="20" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Setter Target="{This.ActiveSkill}" Value="Slam|RandomMovement" />
         </Trigger>
@@ -275,30 +275,50 @@
           <Setter Target="{This.ActiveSkill}" Value="RandomMovement|SpiderColumn" />
         </Trigger>
         <Trigger TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="2" Value="25" />
+          <RandomCondition Target="{This}" Frequency="2" Value="35" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Condition Target="{SpiderColumns.ActiveObjects}" Value="\5" />
           <Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
         </Trigger>
 
         <Trigger>
-          <Condition Target="{This.Health}" Value="\666" />
+          <Condition Target="{This.Health}" Value="\2500" />
           <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\720" />
+          <Condition Target="{This.Health}" Value="\2100" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\444" />
+          <Condition Target="{This.Health}" Value="\1800" />
+          <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\1500" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\222" />
+          <Condition Target="{This.Health}" Value="\1200" />
+          <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\900" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\111" />
+          <Condition Target="{This.Health}" Value="\700" />
+          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\400" />
+          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\300" />
+          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
+        </Trigger>
+        <Trigger>
+          <Condition Target="{This.Health}" Value="\100" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
 
@@ -322,46 +342,61 @@
     <Object Id="House2" AssetId="Environtments/House2"/>
     <Object Id="House3" AssetId="Environtments/House3"/>
 
-    <Enchantment Id="E1_1" Prefix="Scattering"
-      Scatters="3" Accuracy="-0.25" />
-    <Enchantment Id="E2_1" Prefix="Malicious"
-      Ammunition="1000" SpeedDeviation="50-75" />
-    <Enchantment Id="E3_1" Prefix="Fierce"
-      CriticalChance="0.25" CriticalDamageMultiplier="3" />
-    <Enchantment Id="E4_1" Prefix="Stablilized"
-      Accuracy="0.15" RoF="0.1" />
-    <Enchantment Id="E5_1" Prefix="Stablilized"
-      RoF="0.15" Deviation="0.001" />
+    <Enchantment Id="E1_1" Prefix="Scattering"/>
+    <Enchantment Id="E2_1" Prefix="Malicious"/>
+    <Enchantment Id="E3_1" Prefix="Fierce"/>
+    <Enchantment Id="E4_1" Prefix="Stablilized"/>
+    <Enchantment Id="E5_1" Prefix="Stablilized"/>
   </Objects>
 
   <Levels>
-    <Level Id="Level1" Interval="1.12345" LoopCount="0">
+    <Level Id="Level1" Interval="1.5" LoopCount="0">
       <Cache EnemyId="ZombieAbomination" />
       <Cache EnemyId="CrystalSpider" Count="5" />
       <Cache EnemyId="StandardDamageGUI" Count="20" />
       <Cache EnemyId="CrystalBreak_Small" Count="10" />
       <Cache EnemyId="StoneBreak" Count="10" />
       <Cache EnemyId="SpiderColumn" Count="5" />
-      <Cache EnemyId="CrystalShield" />
 
       <Spawn EnemyId="CrystalSpider" Count="1" />
       <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="SpiderColumn" Count="1" />
       <Spawn EnemyId="CrystalSpider" Count="1" />
       <Spawn EnemyId="CrystalSpider" Count="1" />
       <Spawn EnemyId="CrystalSpider" Count="1" />
-      <Spawn EnemyId="CrystalSpider" Count="3" />
+      <Spawn EnemyId="SpiderColumn" Count="2" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="SpiderColumn" Count="3" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="SpiderColumn" Count="3" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn EnemyId="SpiderColumn" Count="5" />
+      <Spawn EnemyId="CrystalSpider" Count="1" />
+      <Spawn />
+      <Spawn EnemyId="StrongSpiderColumn"/>
+      <Spawn EnemyId="StrongSpiderColumn"/>
+      <Spawn EnemyId="StrongSpiderColumn"/>
+      <Spawn />
+      <Spawn EnemyId="StrongSpiderColumn"/>
+      <Spawn EnemyId="StrongSpiderColumn"/>
+      <Spawn EnemyId="StrongSpiderColumn"/>
+      <Spawn EnemyId="StrongSpiderColumn"/>
+      <Spawn EnemyId="StrongSpiderColumn"/>
       <Spawn EnemyId="ZombieAbomination" />
-      <SpawnInterval EnemyId="CrystalSpider" Count="2" Interval="5" LoopCount="-1" />
-      <SpawnInterval EnemyId="StrongSpiderColumn" Count="1" Interval="7" LoopCount="10" />
+      <SpawnInterval EnemyId="CrystalSpider" Count="1" Interval="20" LoopCount="10" />
+      <SpawnInterval EnemyId="SpiderColumn" Count="1" Interval="15" LoopCount="-1" />
+      <SpawnInterval EnemyId="StrongSpiderColumn" Count="1" Interval="25" LoopCount="-1" />
     </Level>
     <SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
       <Spawn EnemyId="CrystalShield" />
     </SubLevel>
-    <SubLevel Id="SpiderColumnSwarm" Interval="15" LoopCount="10">
-      <Spawn EnemyId="StrongSpiderColumn" />
-    </SubLevel>
     <SubLevel Id="SpawnSpiderColumn" Interval="0.1" LoopCount="0">
       <Spawn EnemyId="SpiderColumn" />
+    </SubLevel>
+    <SubLevel Id="SpiderColumnSwarm" Interval="1" LoopCount="0">
+      <Spawn EnemyId="StrongSpiderColumn"/>
+      <Spawn EnemyId="StrongSpiderColumn"/>
     </SubLevel>
     <SubLevel Id="SpawnSpiders" Interval="3" LoopCount="1">
       <Spawn EnemyId="CrystalSpider" />
@@ -369,6 +404,10 @@
     <SubLevel Id="SpawnSpidersInfinite" Interval="10" LoopCount="-1">
       <Spawn EnemyId="CrystalSpider" />
     </SubLevel>
+    <SubLevel Id="SpawnColumnFast" Interval="5" LoopCount="-1">
+      <Spawn EnemyId="SpiderColumn" />
+    </SubLevel>
+    
 
     <!-- Environtments -->
     <SubLevel Id="Houses">
@@ -379,6 +418,27 @@
   </Levels>
 
   <Items>
+    <EnchantmentGenerator Id="E1_1" Prefix="Scattering">
+      <MinStats Scatters="1" Accuracy="-0.3" />
+      <MaxStats Scatters="2" Accuracy="-0.25" />
+    </EnchantmentGenerator>
+    <EnchantmentGenerator Id="E2_1" Prefix="Malicious">
+      <MinStats Ammunition="100" SpeedDeviation="25-50" />
+      <MinStats Ammunition="200" SpeedDeviation="75-150" />
+    </EnchantmentGenerator>
+    <EnchantmentGenerator Id="E3_1" Prefix="Fierce">
+      <MinStats CriticalChance="0.10" CriticalDamageMultiplier="1.25" />
+      <MinStats CriticalChance="0.25" CriticalDamageMultiplier="3" />
+    </EnchantmentGenerator>
+    <EnchantmentGenerator Id="E4_1" Prefix="Stabilized">
+      <MinStats Accuracy="0.05" RoF="0.05" />
+      <MinStats Accuracy="0.15" RoF="0.25" />
+    </EnchantmentGenerator>
+    <EnchantmentGenerator Id="E5_1" Prefix="Stablilized">
+      <MinStats RoF="0.15" Deviation="0.0001" />
+      <MinStats RoF="0.50" Deviation="0.01" />
+    </EnchantmentGenerator>
+
     <Item Id="Iron" AssetId="Iron" />
     <Item Id="Aluminum" AssetId="Aluminum" />
     <Item Id="Copper" AssetId="Copper" />
