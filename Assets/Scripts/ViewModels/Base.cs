@@ -33,7 +33,7 @@ namespace Scripts.ViewModels
 
 		public Base Parent { get; protected set; }
 
-		public virtual RootBase Root
+		public virtual IRoot Root
 		{
 			get { return Parent.Root; }
 		}

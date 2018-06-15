@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Scripts.Interfaces;
 using UnityEngine;
 
 namespace Scripts.Components.SpecialEvents
@@ -9,7 +10,7 @@ namespace Scripts.Components.SpecialEvents
 		public event Action OnEventStart;
 		public event Action OnEventFinished;
 
-		public void StartSpecialEvent(RootBase engine)
+		public void StartSpecialEvent(IRoot engine)
 		{
 			engine.StartCoroutine(EnumerateSpecialEvent());
 		}

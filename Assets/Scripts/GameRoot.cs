@@ -27,7 +27,7 @@ namespace Scripts
 			get { return Context.IntervalRunner; }
 		}
 
-		public override RootBase Root
+		public override IRoot Root
 		{
 			get { return this; }
 		}
@@ -92,10 +92,12 @@ namespace Scripts
 
 		protected readonly Dictionary<string, LootTable> LootTables = new Dictionary<string, LootTable>();
 
-		public List<Item> GetLoot(string lootTableId)
+		public List<Item> GetLoot(string lootTableId, Inventory inventory)
 		{
 			if (LootTables.ContainsKey(lootTableId))
-				return LootTables[lootTableId].GetLoot();
+			{
+				return LootTables[lootTableId].GetLoot(inventory);
+			}
 
 			throw new EngineException(this, string.Format("There's no loot table with id: {0}", lootTableId));
 		}

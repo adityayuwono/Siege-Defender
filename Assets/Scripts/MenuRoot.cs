@@ -24,7 +24,7 @@ namespace Scripts
 			get { return _intervalRunner; }
 		}
 
-		public override RootBase Root
+		public override IRoot Root
 		{
 			get { return this; }
 		}

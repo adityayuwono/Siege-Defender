@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Scripts.Contexts;
+using Scripts.Interfaces;
 using Scripts.Models.Enemies;
 using Scripts.ViewModels.Items;
 
@@ -27,7 +28,7 @@ namespace Scripts.ViewModels.Enemies
 		///     Will give random items based on loot table
 		/// </summary>
 		/// <returns>List of items</returns>
-		public List<Item> GetLoot()
+		public List<Item> GetLoot(Inventory inventory)
 		{
 			foreach (var loot in _loots) loot.Reset();
 
@@ -36,7 +37,7 @@ namespace Scripts.ViewModels.Enemies
 				foreach (var loot in _loots)
 				{
 					var chance = _randomizer.Next(100);
-					var item = loot.GetItemModel(Root, chance);
+					var item = loot.GetItemModel(inventory, chance);
 					if (item != null)
 					{
 						items.Add(item);
@@ -58,14 +59,14 @@ namespace Scripts.ViewModels.Enemies
 				_max = _model.Max;
 			}
 
-			public Item GetItemModel(RootBase root, float chance)
+			public Item GetItemModel(Base parent, float chance)
 			{
 				if (_max > 0 && chance <= _model.Chance)
 				{
 					var itemModel = DataContext.GetItemModel(_model.ItemId);
 					itemModel.Type = itemModel.Id;
 					_max--;
-					var item = new Item(itemModel, root);
+					var item = new Item(itemModel, parent);
 					return item;
 				}
 

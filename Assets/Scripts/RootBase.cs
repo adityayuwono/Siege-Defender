@@ -11,17 +11,22 @@ using UnityEngine.SceneManagement;
 
 namespace Scripts
 {
-	public abstract class RootBase : Base, IContext, IViewModelLookup, IViewLookup
+	public abstract class RootBase : Base, IRoot
 	{
-		public readonly BaseContext Context;
+		private readonly BaseContext _context;
 
 		protected RootBase(RootModel model, BaseContext parent)
 			: base(model, null)
 		{
-			Context = parent;
+			_context = parent;
 
 			PropertyLookup = new PropertyLookup(this, this); // This is the root
 			ResourceManager = new ResourcePooler(this);
+		}
+
+		public BaseContext Context
+		{
+			get { return _context; }
 		}
 
 		public abstract IIntervalRunner IntervalRunner { get; }

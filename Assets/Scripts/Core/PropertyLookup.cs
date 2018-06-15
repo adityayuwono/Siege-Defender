@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Interfaces;
-using Scripts.Models;
 using Scripts.Models.Items;
 using Scripts.ViewModels;
 
@@ -14,12 +13,12 @@ namespace Scripts.Core
 		private readonly Dictionary<string, Base> _children = new Dictionary<string, Base>();
 		private readonly IContext _context;
 		private readonly Dictionary<string, IContext> _contexts = new Dictionary<string, IContext>();
-		private readonly RootBase _engine;
+		private readonly IRoot _engine;
 
 		private readonly Dictionary<string, Dictionary<string, Property>> _properties =
 			new Dictionary<string, Dictionary<string, Property>>();
 
-		public PropertyLookup(RootBase engine, IContext context)
+		public PropertyLookup(IRoot engine, IContext context)
 		{
 			_engine = engine;
 			_context = context;
