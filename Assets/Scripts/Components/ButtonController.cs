@@ -7,10 +7,19 @@ namespace Scripts.Components
 	{
 		public Action OnClicked;
 
+		private float _timeMouseDown;
+
+		public void OnMouseDown()
+		{
+			_timeMouseDown = Time.time;
+		}
+
 		public void OnMouseUp()
 		{
-			// Yes, it's this simple
-			OnClicked();
+			if (Time.time - _timeMouseDown < 1)
+			{
+				OnClicked();
+			}
 		}
 	}
 }
