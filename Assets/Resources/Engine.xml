@@ -327,6 +327,7 @@
         </EventTrigger>
       </Triggers>
     </Boss>
+  <!-- Enemies -->
 
     <!-- Special Effects -->
     <DamageGUI Id="StandardDamageGUI" AssetId="GUIs/DamageDisplay" />
@@ -407,7 +408,6 @@
     <SubLevel Id="SpawnColumnFast" Interval="5" LoopCount="-1">
       <Spawn EnemyId="SpiderColumn" />
     </SubLevel>
-    
 
     <!-- Environtments -->
     <SubLevel Id="Houses">
