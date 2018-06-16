@@ -2,7 +2,7 @@
 
 namespace Scripts.Interfaces
 {
-	public interface IContext : IBase
+	public interface IContext : IHaveRoot
 	{
 		PropertyLookup PropertyLookup { get; }
 	}

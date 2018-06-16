@@ -1,5 +1,5 @@
-﻿using Scripts.Models;
-using UnityEngine;
+﻿using Scripts.Components;
+using Scripts.Models;
 
 namespace Scripts.Contexts
 {
@@ -9,7 +9,10 @@ namespace Scripts.Contexts
 		{
 			base.Start();
 
-			var engineModel = DataContext.EngineModel;
+			// Prepare the IntervalRunner, this will manage all time based execution of this game
+			IntervalRunner = gameObject.AddComponent<IntervalRunner>();
+
+			var engineModel = DataContext.Instance.EngineModel;
 
 			var sceneModel = engineModel.Scenes.Find(s => s.Id == gameObject.name);
 			var sceneRootModel = new MenuRootModel {SceneModel = sceneModel};

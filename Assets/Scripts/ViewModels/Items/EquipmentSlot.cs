@@ -128,7 +128,7 @@ namespace Scripts.ViewModels.Items
 			_model.Item = currentItem.Model; // Save the change to model
 			ItemId.SetValue(currentItem.BaseItem); // Update projectile used
 
-			DataContext.Save();
+			DataContext.Instance.Save();
 		}
 	}
 }

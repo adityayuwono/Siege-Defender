@@ -1,5 +1,4 @@
 ﻿using System;
-using Scripts.Contexts;
 using Scripts.Core;
 using Scripts.Interfaces;
 using Scripts.Models.Items;
@@ -10,28 +9,13 @@ namespace Scripts.ViewModels.Items
 	{
 		public Action ChildrenChanged;
 
-		public AdjustableProperty<string> SelectedItemBaseName;
-		public AdjustableProperty<string> SelectedItemStatNames;
-		public AdjustableProperty<string> SelectedItemStatNumbers;
-
 		private readonly InventoryModel _model;
 		private PropertyLookup _propertyLookup;
-		private Item _selectedItem;
 
-		public Inventory(InventoryModel model, Base parent) : base(model, parent)
+		public Inventory(InventoryModel model, IHaveRoot parent)
+			: base(model, parent)
 		{
-			SelectedItemBaseName = new AdjustableProperty<string>("SelectedItemBaseName", this);
-			SelectedItemStatNames = new AdjustableProperty<string>("SelectedItemStatNames", this);
-			SelectedItemStatNumbers = new AdjustableProperty<string>("SelectedItemStatNumbers", this);
-
-			// Grab reference to Player's Inventory loaded from XML
-			foreach (var inventoryModel in DataContext.PlayerDataModel.Inventories)
-			{
-				if (inventoryModel.Id == model.Source)
-				{
-					_model = inventoryModel;
-				}
-			}
+			_model = model;
 
 			foreach (var itemModel in _model.Items)
 			{
@@ -55,6 +39,12 @@ namespace Scripts.ViewModels.Items
 
 				return _propertyLookup;
 			}
+		}
+
+		public void OverrideModelForShowing(IHaveRoot parent, string modelAssetId)
+		{
+			Parent = parent;
+			_model.AssetId = modelAssetId;
 		}
 
 		public override void Show()
@@ -83,13 +73,6 @@ namespace Scripts.ViewModels.Items
 			Elements.Remove(itemViewModel);
 
 			InvokeChildrenChanged();
-		}
-
-		public void SelectItem(Item item)
-		{
-			SelectedItemBaseName.SetValue(item.BaseItem);
-			SelectedItemStatNames.SetValue(item.Stats);
-			SelectedItemStatNumbers.SetValue(item.Numbers);
 		}
 
 		private void InvokeChildrenChanged()

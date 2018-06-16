@@ -5,8 +5,7 @@ namespace Scripts.Contexts
 {
 	public class BaseContext : BaseController
 	{
-		[HideInInspector]
-		public IntervalRunner IntervalRunner;
+		public IntervalRunner IntervalRunner { get; protected set; }
 
 		public static BaseContext Instance { get; protected set; }
 

@@ -4,7 +4,6 @@ using Scripts.Extensions;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
-using Scripts.Models.Items;
 using Scripts.ViewModels.Weapons;
 using UnityEngine;
 
@@ -21,7 +20,8 @@ namespace Scripts.ViewModels
 		private bool _isDelaysIgnored;
 		private Vector3 _position;
 
-		public Object(ObjectModel model, Base parent) : base(model, parent)
+		public Object(ObjectModel model, IHaveRoot parent)
+			: base(model, parent)
 		{
 			_model = model;
 
@@ -68,7 +68,7 @@ namespace Scripts.ViewModels
 			{
 				if (_model.AssetId.StartsWith("{"))
 				{
-					return GetParent<IContext>().PropertyLookup.GetProperty<ItemModel>(_model.AssetId).GetValue().BaseItem;
+					return GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.AssetId).GetValue();
 				}
 				return _model.AssetId;
 			}

@@ -3,7 +3,6 @@ using System.Xml.Serialization;
 using Scripts.Models.Enemies;
 using Scripts.Models.GUIs;
 using Scripts.Models.Items;
-using Scripts.Models.Levels;
 using Scripts.Models.Weapons;
 
 namespace Scripts.Models
@@ -15,7 +14,6 @@ namespace Scripts.Models
 		{
 			Objects = new List<ObjectModel>();
 			LootTables = new List<LootTableModel>();
-			Inventories = new List<InventoryModel>();
 			Scenes = new List<SceneModel>();
 		}
 
@@ -45,10 +43,6 @@ namespace Scripts.Models
 		[XmlArray]
 		[XmlArrayItem(ElementName = "LootTable", Type = typeof(LootTableModel))]
 		public List<LootTableModel> LootTables { get; set; }
-
-		[XmlArray]
-		[XmlArrayItem(ElementName = "Inventory", Type = typeof(InventoryModel))]
-		public List<InventoryModel> Inventories { get; set; }
 
 		[XmlArray]
 		[XmlArrayItem(ElementName = "Scene", Type = typeof(SceneModel))]

@@ -267,7 +267,9 @@
     <Compile Include="Assets\Scripts\Extensions\RectTransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\UnityExtension.cs" />
     <Compile Include="Assets\Scripts\GameEndStatsManager.cs" />
-    <Compile Include="Assets\Scripts\GameRoot.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\InventoryReferenceModel.cs" />
+    <Compile Include="Assets\Scripts\Roots\DataRoot.cs" />
+    <Compile Include="Assets\Scripts\Roots\GameRoot.cs" />
     <Compile Include="Assets\Scripts\Helpers\Copier.cs" />
     <Compile Include="Assets\Scripts\Helpers\Deserializer.cs" />
     <Compile Include="Assets\Scripts\Helpers\EngineException.cs" />
@@ -279,13 +281,15 @@
     <Compile Include="Assets\Scripts\Interfaces\IBase.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IChangeProperty.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IContext.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IHaveRoot.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IHaveView.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IIntervalRunner.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IResource.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IRoot.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IViewLookup.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IViewModelLookup.cs" />
     <Compile Include="Assets\Scripts\IoC.cs" />
-    <Compile Include="Assets\Scripts\MenuRoot.cs" />
+    <Compile Include="Assets\Scripts\Roots\MenuRoot.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\BaseActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\BaseConditionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\CreateItemActionModel.cs" />
@@ -358,7 +362,7 @@
     <Compile Include="Assets\Scripts\Models\Weapons\ParticleAoEModel.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\PiercingProjectileModel.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\ProjectileModel.cs" />
-    <Compile Include="Assets\Scripts\RootBase.cs" />
+    <Compile Include="Assets\Scripts\Roots\RootBase.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\ActionCollection.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\BaseAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\BaseCondition.cs" />
@@ -402,6 +406,7 @@
     <Compile Include="Assets\Scripts\ViewModels\Items\EnchantmentItem.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\EquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\Inventory.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Items\InventoryReference.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\Item.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\ProjectileItem.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\WeaponSlot.cs" />

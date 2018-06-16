@@ -16,7 +16,7 @@ namespace Scripts.Contexts
 
 			Physics.IgnoreLayerCollision(9, 9); // Layer 9 will not collide with layer 9, this is the projectiles
 
-			var engineModel = DataContext.EngineModel;
+			var engineModel = DataContext.Instance.EngineModel;
 
 			var sceneModel = engineModel.Scenes.Find(s => s.Id == gameObject.name);
 			engineModel.SceneModel = sceneModel;

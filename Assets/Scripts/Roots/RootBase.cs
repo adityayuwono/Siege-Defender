@@ -39,7 +39,9 @@ namespace Scripts
 
 		public void ChangeScene(string sceneName, string levelId)
 		{
-			DataContext.LevelId = levelId;
+			Hide("Change Scene");
+			Deactivate("Change Scene");
+			DataContext.Instance.LevelId = levelId;
 			SceneManager.LoadScene(sceneName);
 		}
 

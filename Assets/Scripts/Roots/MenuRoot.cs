@@ -12,6 +12,8 @@ namespace Scripts
 		private readonly IIntervalRunner _intervalRunner;
 		private readonly MenuRootModel _model;
 
+		private Scene _scene;
+
 		public MenuRoot(MenuRootModel model, BaseContext parent)
 			: base(model, parent)
 		{
@@ -38,9 +40,16 @@ namespace Scripts
 		{
 			base.OnActivate();
 
-			var scene = new Scene(_model.SceneModel, this);
-			scene.Activate(DataContext.LevelId);
-			scene.Show();
+			_scene = new Scene(_model.SceneModel, this);
+			_scene.Activate(DataContext.Instance.LevelId);
+			_scene.Show();
+		}
+
+		protected override void OnDeactivate()
+		{
+			_scene.Deactivate("Deactivating Root");
+			_scene.Destroy();
+			base.OnDeactivate();
 		}
 	}
 }

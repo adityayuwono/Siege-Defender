@@ -6,18 +6,17 @@ using Scripts.Views;
 
 namespace Scripts.ViewModels
 {
-	public class Base : IBase
+	public class Base : IHaveRoot, IHaveView
 	{
 		private readonly BaseModel _model;
 		private bool _isActive;
 		private bool _isLoaded;
 		private string _lastDeactivationReason;
-		private BaseView _view;
 		public Action OnDestroy;
 		public Action<string> OnHide;
 		public Action OnShow;
 
-		protected Base(BaseModel model, Base parent)
+		protected Base(BaseModel model, IHaveRoot parent)
 		{
 			_model = model;
 			Parent = parent;
@@ -31,7 +30,7 @@ namespace Scripts.ViewModels
 
 		public bool IsShown { get; private set; }
 
-		public Base Parent { get; protected set; }
+		public IHaveRoot Parent { get; protected set; }
 
 		public virtual IRoot Root
 		{
@@ -52,6 +51,8 @@ namespace Scripts.ViewModels
 		{
 			get { return Parent != null ? Parent.FullId + "/" + Id : Id; }
 		}
+
+		public BaseView View { get; private set; }
 
 		public T GetParent<T>() where T : class, IBase
 		{
@@ -108,8 +109,10 @@ namespace Scripts.ViewModels
 		{
 			Root.RegisterToLookup(this);
 
-			_view = IoC.IoCContainer.GetInstance<BaseView>(GetType(), new object[] { this, Parent != null ? Parent._view : null });
-			Root.RegisterView(this, _view);
+			var parentHaveView = Parent as IHaveView;
+			View = IoC.IoCContainer.GetInstance<BaseView>(GetType(),
+				new object[] {this, parentHaveView != null ? parentHaveView.View : null});
+			Root.RegisterView(this, View);
 		}
 
 		protected virtual void OnActivate()
@@ -181,7 +184,7 @@ namespace Scripts.ViewModels
 
 		protected virtual void OnDestroyed()
 		{
-			_view = null;
+			View = null;
 			Root.UnregisterView(this);
 			Root.UnregisterFromLookup(this);
 		}

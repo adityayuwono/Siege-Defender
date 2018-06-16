@@ -98,7 +98,7 @@ namespace Scripts.ViewModels
 		{
 			if (modelToCopy == null)
 			{
-				modelToCopy = DataContext.GetObjectModel(this, id);
+				modelToCopy = DataContext.Instance.GetObjectModel(this, id);
 			}
 			var objectModel = CreateDuplicateModel(id, modelToCopy);
 			var newObject =

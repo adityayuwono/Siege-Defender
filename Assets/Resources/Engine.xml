@@ -490,7 +490,7 @@
 
     <Scene Id="Options" AssetId="Options">
       <Elements>
-        <Inventory Id="OptionsInventory" Source="PlayerOptions" AssetId="OptionsInventory" />
+        <InventoryReference Source="PlayerOptions" AssetId="OptionsInventory" />
         <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">
@@ -503,9 +503,9 @@
 
     <Scene Id="Inventory" AssetId="Inventory">
       <Elements>
-        <Inventory Id="PlayerInventory" Source="PlayerInventory" AssetId="InventoryRoot/PlayerInventory" />
-        <StatsLabel Source="{PlayerInventory.LeftShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationLeft" />
-        <StatsLabel Source="{PlayerInventory.RightShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationRight" />
+        <InventoryReference Source="PlayerInventory" AssetId="InventoryRoot/PlayerInventory" />
+        <StatsLabel Source="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationLeft" />
+        <StatsLabel Source="{DataRoot.PlayerInventory.RightShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationRight" />
         <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">
@@ -534,10 +534,10 @@
         <PlayerHitbox AssetId="PlayerHealth" />
         <Player Id="PlayerCamera" AssetId="Player" Health="100" >
           <Shooters>
-            <Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{Inventories.LeftShooter}" >
+            <Shooter Id="ShooterWeaponLeft" AssetId="LeftShooter" ProjectileId="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem}" >
               <Target AssetId="Target" />
             </Shooter>
-            <Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{Inventories.RightShooter}" >
+            <Shooter Id="ShooterWeaponRight" AssetId="RightShooter" ProjectileId="{DataRoot.PlayerInventory.RightShooter.ProjectileItem}" >
               <Target AssetId="Target" />
             </Shooter>
           </Shooters>
@@ -560,7 +560,7 @@
               </Triggers>
             </Button>
             <Element AssetId="LoadingCover" IsVisible="{This.IsLoadingInProgress}" />
-            <Element AssetId="{Inventories.ControlStyle}" >
+            <Element AssetId="{DataRoot.PlayerOptions.ControlStyle.ItemId}" >
               <Elements>
                 <CooldownGUI AssetId="AmmunitionLeft" Value="{ShooterWeaponLeft.Ammunition}" MaxValue="{ShooterWeaponLeft.MaxAmmunition}" />
                 <CooldownGUI AssetId="AmmunitionRight" Value="{ShooterWeaponRight.Ammunition}" MaxValue="{ShooterWeaponRight.MaxAmmunition}" />

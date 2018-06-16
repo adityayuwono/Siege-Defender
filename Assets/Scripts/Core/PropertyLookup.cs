@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Interfaces;
-using Scripts.Models.Items;
 using Scripts.ViewModels;
 
 namespace Scripts.Core
@@ -24,7 +23,10 @@ namespace Scripts.Core
 			_context = context;
 			_contexts.Add("This", context);
 
-			if (engine != context) _engine.PropertyLookup.RegisterContext(context);
+			if (engine != context)
+			{
+				_engine.PropertyLookup.RegisterContext(context);
+			}
 		}
 
 		private void RegisterContext(IContext context)
@@ -133,6 +135,7 @@ namespace Scripts.Core
 				var paths = path.Split('.');
 
 				var context = _context;
+				Base viewModel = null;
 				for (var i = 0; i < paths.Length; i++)
 				{
 					var currentPath = paths[i];
@@ -143,13 +146,10 @@ namespace Scripts.Core
 						continue;
 					}
 
-					if (currentPath == "Inventories")
+					if (currentPath == "DataRoot")
 					{
-						var dataContext = DataContext.Instance;
-						var item = dataContext.Inventories[paths[1]];
-						var property = new Property<ItemModel>();
-						property.SetValue(item.Item);
-						return property;
+						context = DataContext.Instance;
+						continue;
 					}
 
 					var isLast = i == paths.Length - 1;
@@ -168,6 +168,13 @@ namespace Scripts.Core
 						if (contextProperty != null)
 						{
 							return contextProperty;
+						}
+
+						// No Context found, look for a child
+						var tryFindChild = context.PropertyLookup.GetChild(currentPath);
+						if (tryFindChild != null)
+						{
+							viewModel = tryFindChild;
 						}
 					}
 

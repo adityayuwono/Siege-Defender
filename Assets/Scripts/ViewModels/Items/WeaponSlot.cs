@@ -23,7 +23,7 @@ namespace Scripts.ViewModels.Items
 			set
 			{
 				HandleItemUpdate(this, ref _currentEnchantment, value);
-				DataContext.Save();
+				DataContext.Instance.Save();
 			}
 		}
 		private Item _currentEnchantment;

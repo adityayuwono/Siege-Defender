@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Scripts.Interfaces;
 using Scripts.Models;
 using Scripts.ViewModels.Enemies;
 
@@ -9,7 +10,8 @@ namespace Scripts.ViewModels
 		private readonly TriggerableModel _model;
 		private readonly List<Triggered> _triggers = new List<Triggered>();
 
-		protected Triggerable(TriggerableModel model, Base parent) : base(model, parent)
+		protected Triggerable(TriggerableModel model, IHaveRoot parent)
+			: base(model, parent)
 		{
 			_model = model;
 

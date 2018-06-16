@@ -42,7 +42,7 @@ namespace Scripts.ViewModels.Items
 		// Return BaseProjectile, multiplied by level and improved with enchantment
 		public ProjectileModel UpdateModel()
 		{
-			var baseProjectileModel = DataContext.GetObjectModel(this, _model.BaseItem) as ProjectileModel;
+			var baseProjectileModel = DataContext.Instance.GetObjectModel(this, _model.BaseItem) as ProjectileModel;
 			if (baseProjectileModel == null)
 			{
 				throw new EngineException(this, string.Format("Failed to Find a projectile model with id: {0}", _model.BaseItem));
@@ -87,7 +87,7 @@ namespace Scripts.ViewModels.Items
 			}
 
 			// Register the new Model, to make sure it's available for duplication later
-			DataContext.AddNewObjectModel(newProjectileModel);
+			DataContext.Instance.AddNewObjectModel(newProjectileModel);
 			_projectileModel = newProjectileModel;
 
 			return newProjectileModel;

@@ -9,7 +9,8 @@ namespace Scripts.ViewModels
 		private readonly ElementModel _model;
 		public Property<bool> VisibilityBinding;
 
-		public Element(ElementModel model, Base parent) : base(model, parent)
+		public Element(ElementModel model, IHaveRoot parent)
+			: base(model, parent)
 		{
 			_model = model;
 		}

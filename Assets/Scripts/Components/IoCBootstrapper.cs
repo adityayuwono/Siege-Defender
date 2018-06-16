@@ -28,7 +28,7 @@ namespace Scripts.Components
 	/// </summary>
 	public class IoCBootstrapper : MonoBehaviour
 	{
-		protected void Start()
+		protected void Awake()
 		{
 			MapInjections();
 		}
@@ -51,6 +51,7 @@ namespace Scripts.Components
 			
 			// Items
 			IoC.IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
+			IoC.IoCContainer.RegisterFor<InventoryReferenceModel>().TypeOf<Object>().To<InventoryReference>();
 			IoC.IoCContainer.RegisterFor<ItemModel>().TypeOf<Object>().To<Item>();
 			IoC.IoCContainer.RegisterFor<ItemModel>().TypeOf<Item>().To<Item>();
 			IoC.IoCContainer.RegisterFor<ProjectileItemModel>().TypeOf<Item>().To<ProjectileItem>();
@@ -121,6 +122,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<ProjectileItem>().TypeOf<BaseView>().To<ItemView>();
 			IoC.IoCContainer.RegisterFor<EnchantmentItem>().TypeOf<BaseView>().To<ItemView>();
 			IoC.IoCContainer.RegisterFor<Inventory>().TypeOf<BaseView>().To<InventoryView>();
+			//IoC.IoCContainer.RegisterFor<InventoryReference>().TypeOf<BaseView>().To<InventoryReferenceView>();
 			IoC.IoCContainer.RegisterFor<EquipmentSlot>().TypeOf<BaseView>().To<EquipmentSlotView>();
 			IoC.IoCContainer.RegisterFor<WeaponSlot>().TypeOf<BaseView>().To<WeaponSlotView>();
 

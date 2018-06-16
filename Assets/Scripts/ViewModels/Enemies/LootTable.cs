@@ -63,7 +63,7 @@ namespace Scripts.ViewModels.Enemies
 			{
 				if (_max > 0 && chance <= _model.Chance)
 				{
-					var itemModel = DataContext.GetItemModel(_model.ItemId);
+					var itemModel = DataContext.Instance.GetItemModel(_model.ItemId);
 					itemModel.Type = itemModel.Id;
 					_max--;
 					var item = new Item(itemModel, parent);

@@ -22,7 +22,6 @@ namespace Scripts.Components.UI
 
 		private void OnMouseUp()
 		{
-			Item.Select();
 			IsDragMode = false;
 			if (_dragDropContainerController != null)
 			{

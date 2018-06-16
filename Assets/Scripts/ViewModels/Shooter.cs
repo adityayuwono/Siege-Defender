@@ -113,20 +113,19 @@ namespace Scripts.ViewModels
 		{
 			base.OnLoad();
 
-			var projectileItemBinding = GetParent<IContext>().PropertyLookup.GetProperty<ItemModel>(_model.ProjectileId);
+			var projectileItemBinding = GetParent<IContext>().PropertyLookup.GetProperty<ProjectileItem>(_model.ProjectileId);
 			if (projectileItemBinding == null)
 			{
 				throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", _model.ProjectileId));
 			}
 
-			var projectileItemModel = (ProjectileItemModel)projectileItemBinding.GetValue();
-			var projectileItem = new ProjectileItem(projectileItemModel, this);
+			var projectileItem = projectileItemBinding.GetValue();
 
 			_projectileModel = projectileItem.UpdateModel();
 
 			if (!string.IsNullOrEmpty(_projectileModel.Stats.AoEId))
 			{
-				var aoeModel = DataContext.GetObjectModel(this, _projectileModel.Stats.AoEId);
+				var aoeModel = DataContext.Instance.GetObjectModel(this, _projectileModel.Stats.AoEId);
 				_aoeModel = (AoEModel) CreateDuplicateModel(aoeModel.Id, aoeModel);
 
 				for (var i = 0; i < 2; i++)

@@ -46,10 +46,5 @@ namespace Scripts.ViewModels.Items
 				ParentChanged(newParent);
 			}
 		}
-
-		public void Select()
-		{
-			GetParent<Inventory>().SelectItem(this);
-		}
 	}
 }

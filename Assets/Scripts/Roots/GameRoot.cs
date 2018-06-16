@@ -73,6 +73,10 @@ namespace Scripts
 			}
 		}
 
+		protected override void OnDeactivate()
+		{
+		}
+
 		public LevelModel GetLevel(string levelId)
 		{
 			foreach (var levelModel in _model.Levels.Where(levelModel => levelModel.Id == levelId))
