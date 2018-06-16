@@ -25,7 +25,10 @@ namespace Scripts.ViewModels.Actions
 			}
 
 			var items = SDRoot.GetLoot(_model.Value, targetInventory);
-			foreach (var item in items) targetInventory.AddItem(item);
+			foreach (var item in items)
+			{
+				targetInventory.AddItem(item);
+			}
 		}
 	}
 }

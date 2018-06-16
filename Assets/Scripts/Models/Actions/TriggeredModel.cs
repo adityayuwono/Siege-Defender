@@ -26,6 +26,7 @@ namespace Scripts.Models.Actions
 		[XmlElement(ElementName = "MoveAction", Type = typeof(MoveActionModel))]
 		[XmlElement(ElementName = "SpecialEvent", Type = typeof(StartSpecialEventModel))]
 		[XmlElement(ElementName = "SpecialEffect", Type = typeof(SpecialEffectActionModel))]
+		[XmlElement(ElementName = "CreateItem", Type = typeof(CreateItemActionModel))]
 		public List<BaseActionModel> Actions { get; set; }
 	}
 }

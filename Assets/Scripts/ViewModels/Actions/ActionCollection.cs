@@ -37,11 +37,18 @@ namespace Scripts.ViewModels.Actions
 
 		public void Activate()
 		{
-			if (_isActionInvoking) return;
+			if (_isActionInvoking)
+			{
+				return;
+			}
 
 			foreach (var action in this)
+			{
 				if (action.IsActive)
+				{
 					throw new EngineException(_parent, string.Format("Failed to activate, action {0} is still active"));
+				}
+			}
 
 			_isInterruptable = false;
 			_isActionInvoking = true;
@@ -102,7 +109,9 @@ namespace Scripts.ViewModels.Actions
 					_currentAction.Invoke();
 					// Edge case where the action is Load Scene Action
 					if (_currentAction != null)
+					{
 						_parent.Root.IntervalRunner.SubscribeToInterval(ActivateActions, _currentAction.Wait, !(_currentAction.Wait > 0));
+					}
 				}
 			}
 			else

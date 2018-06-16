@@ -70,7 +70,7 @@
           <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]1" />
         </EventTrigger>
         <EventTrigger Event="Death">
-          <CreateItem Target="{Root.LevelDrop}" Value="BasicLoot" />
+          <CreateItem Target="{DataRoot.LootDrop}" Value="BasicLoot" />
         </EventTrigger>
       </Triggers>
     </Enemy>
@@ -113,7 +113,7 @@
               <Setter Target="{This.ActiveSkill}" Value="HeadBroken|ScreamingRandomMovement" />
             </EventTrigger>
             <EventTrigger Event="Death" >
-              <CreateItem Target="{Root.LevelDrop}" ItemId="BossLimbLoot" />
+              <CreateItem Target="{DataRoot.LootDrop}" Value="BossLimbLoot" />
             </EventTrigger>
           </Triggers>
         </Limb>
@@ -125,7 +125,7 @@
               <Setter Target="{This.ActiveSkill}" Value="RightHandBroken|ScreamingRandomMovement" />
             </EventTrigger>
             <EventTrigger Event="Death" >
-              <CreateItem Target="{Root.LevelDrop}" ItemId="BossLimbLoot" />
+              <CreateItem Target="{DataRoot.LootDrop}" Value="BossLimbLoot" />
             </EventTrigger>
           </Triggers>
         </Limb>
@@ -137,7 +137,7 @@
               <Setter Target="{This.ActiveSkill}" Value="LeftHandBroken|ScreamingRandomMovement" />
             </EventTrigger>
             <EventTrigger Event="Death" >
-              <CreateItem Target="{Root.LevelDrop}" ItemId="BossLimbLoot" />
+              <CreateItem Target="{DataRoot.LootDrop}" Value="BossLimbLoot" />
             </EventTrigger>
           </Triggers>
         </Limb>
@@ -157,7 +157,7 @@
               <Setter Target="{This.ActiveSkill}" Value="RightFootBroken|ScreamingRandomMovement" />
             </EventTrigger>
             <EventTrigger Event="Death" >
-              <CreateItem Target="{Root.LevelDrop}" ItemId="BossLimbLoot" />
+              <CreateItem Target="{DataRoot.LootDrop}" Value="BossLimbLoot" />
             </EventTrigger>
           </Triggers>
         </Limb>
@@ -169,7 +169,7 @@
               <Setter Target="{This.ActiveSkill}" Value="LeftFootBroken|ScreamingRandomMovement" />
             </EventTrigger>
             <EventTrigger Event="Death" >
-              <CreateItem Target="{Root.LevelDrop}" ItemId="BossLimbLoot" />
+              <CreateItem Target="{DataRoot.LootDrop}" Value="BossLimbLoot" />
             </EventTrigger>
           </Triggers>
         </Limb>
@@ -180,7 +180,7 @@
               <Setter Target="{This.ActiveSkill}" Value="CrystalBroken|RandomMovement" />
             </EventTrigger>
             <EventTrigger Event="Death" >
-              <CreateItem Target="{Root.LevelDrop}" ItemId="CrystalLimbLoot" />
+              <CreateItem Target="{DataRoot.LootDrop}" Value="CrystalLimbLoot" />
             </EventTrigger>
           </Triggers>
         </Limb>
