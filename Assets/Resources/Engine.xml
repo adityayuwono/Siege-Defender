@@ -13,21 +13,21 @@
       <Stats 
         Damage="6-10"
         SpeedDeviation="400-400"
-        RoF="0.2" Ammunition="100" ReloadTime="0"
+        RoF="0.3" Ammunition="100" ReloadTime="0"
 			Scatters="1"
       CriticalChance="0.1" CriticalDamageMultiplier="1.2"
 			Accuracy="1" Deviation="0" />
     </Projectile>
     <Projectile Id="ScatterArrow" AssetId="Projectiles/WoodenBalista" >
       <Stats Damage="5-10"
-			RoF="0.75" Ammunition="100" ReloadTime="0"
+			RoF="0.6" Ammunition="100" ReloadTime="0"
 			SpeedDeviation="300-600"
 			Accuracy="0.5" Deviation="0" Scatters="5" />
     </Projectile>
     <Projectile Id="IronArrow" AssetId="Projectiles/IronBalista" >
       <Stats Damage="10-20"
         SpeedDeviation="300-400"
-      RoF="0.25" Ammunition="50" ReloadTime="0"
+      RoF="0.35" Ammunition="50" ReloadTime="0"
       Scatters="1"
       Accuracy="1" Deviation="0" />
     </Projectile>
@@ -35,7 +35,7 @@
       <Stats Damage="8-11"
         SpeedDeviation="250-300"
       AoEId="FireDome"
-			RoF="0.5" Ammunition="25" ReloadTime="1"
+			RoF="0.45" Ammunition="25" ReloadTime="1"
 			Scatters="1"
 			Accuracy="1" Deviation="0" />
     </Projectile>
