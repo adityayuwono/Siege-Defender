@@ -8,7 +8,6 @@ namespace Scripts.ViewModels.Items
 	public class Inventory : Element, IContext
 	{
 		public Action ChildrenChanged;
-		public Property<String> SelectedItem;
 
 		private readonly InventoryModel _model;
 		private PropertyLookup _propertyLookup;
@@ -28,7 +27,8 @@ namespace Scripts.ViewModels.Items
 				Elements.Add(IoC.IoCContainer.GetInstance<EquipmentSlot>(equipmentSlotModel.GetType(), new object[] { equipmentSlotModel, this }));
 			}
 
-			SelectedItem = new Property<string>();
+			// Need this to trigger registration of context in parent
+			var propertyLookup = PropertyLookup;
 		}
 
 		public PropertyLookup PropertyLookup

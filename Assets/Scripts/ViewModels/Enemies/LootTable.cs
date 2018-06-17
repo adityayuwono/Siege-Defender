@@ -34,6 +34,7 @@ namespace Scripts.ViewModels.Enemies
 
 			var items = new List<Item>();
 			for (var i = 0; i < _model.Drops; i++)
+			{
 				foreach (var loot in _loots)
 				{
 					var chance = _randomizer.Next(100);
@@ -44,6 +45,7 @@ namespace Scripts.ViewModels.Enemies
 						break;
 					}
 				}
+			}
 
 			return items;
 		}
@@ -65,6 +67,7 @@ namespace Scripts.ViewModels.Enemies
 				{
 					var itemModel = DataContext.Instance.GetItemModel(_model.ItemId);
 					itemModel.Type = itemModel.Id;
+					itemModel.Id = Guid.NewGuid().ToString();
 					_max--;
 					var item = new Item(itemModel, parent);
 					return item;

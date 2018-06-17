@@ -25,6 +25,7 @@ namespace Scripts.Core
 		private SpriteLookup()
 		{
 			_artSprites = Resources.LoadAll<Sprite>("GUIs/ProjectileIcons").ToList();
+			_artSprites.AddRange(Resources.LoadAll<Sprite>("GUIs/MaterialIcons").ToList());
 		}
 
 		public Sprite GetSpriteByName(string spriteName)

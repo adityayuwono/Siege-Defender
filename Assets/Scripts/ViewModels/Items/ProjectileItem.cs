@@ -30,18 +30,27 @@ namespace Scripts.ViewModels.Items
 		public ProjectileModel UpdateModel(EnchantmentItemModel enchantmentModel)
 		{
 			_model.Enchantment = enchantmentModel;
+			_projectileModel = null;
 
 			return UpdateModel();
 		}
 
 		public void DetachEnchantment()
 		{
+			_projectileModel = null;
 			_model.Enchantment = null;
+
+			UpdateModel();
 		}
 
 		// Return BaseProjectile, multiplied by level and improved with enchantment
 		public ProjectileModel UpdateModel()
 		{
+			if (_projectileModel != null)
+			{
+				return _projectileModel;
+			}
+
 			var baseProjectileModel = DataContext.Instance.GetObjectModel(this, _model.BaseItem) as ProjectileModel;
 			if (baseProjectileModel == null)
 			{
@@ -78,6 +87,7 @@ namespace Scripts.ViewModels.Items
 						(newProjectileModel.Stats.CriticalChance > 0 && enchantmentModel.Stats.CriticalChance > 0 ? -1 : 0), 1f);
 				newProjectileModel.Stats.CriticalDamageMultiplier = newProjectileModel.Stats.CriticalDamageMultiplier + enchantmentModel.Stats.CriticalDamageMultiplier;
 
+				newProjectileModel.Stats.Accuracy += enchantmentModel.Stats.Accuracy;
 				newProjectileModel.Stats.Scatters += enchantmentModel.Stats.Scatters;
 				newProjectileModel.Stats.Ammunition += enchantmentModel.Stats.Ammunition;
 				if (string.IsNullOrEmpty(newProjectileModel.Stats.AoEId))

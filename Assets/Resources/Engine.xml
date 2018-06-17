@@ -433,25 +433,26 @@
       <MinStats RoF="0.50" Deviation="0.01" />
     </EnchantmentGenerator>
 
-    <Item Id="Iron" AssetId="Iron" />
-    <Item Id="Aluminum" AssetId="Aluminum" />
-    <Item Id="Copper" AssetId="Copper" />
+    <Item Id="HardShell" AssetId="GUIs/ItemTemplate" BaseItem="HardShell" />
+    <Item Id="BoneShard" AssetId="GUIs/ItemTemplate" BaseItem="BoneShard" />
+    <Item Id="HardBone" AssetId="GUIs/ItemTemplate" BaseItem="HardBone" />
+    <Item Id="CrystalSpike" AssetId="GUIs/ItemTemplate" BaseItem="CrystalSpike" />
+    <Item Id="CrystalShard" AssetId="GUIs/ItemTemplate" BaseItem="CrystalShard" />
+    <Item Id="PerfectCrystal" AssetId="GUIs/ItemTemplate" BaseItem="PerfectCrystal" />
   </Items>
 
   <LootTables>
-    <LootTable Id="BasicLoot" Drops="1">
-      <Loot ItemId="Iron" Chance="0.1" />
-      <Loot ItemId="Aluminum" Chance="0.2" />
-      <Loot ItemId="Copper" Chance="0.5" />
+    <LootTable Id="BasicLoot" Drops="5">
+      <Loot ItemId="CrystalSpike" Chance="0.03" />
     </LootTable>
     <LootTable Id="BossLimbLoot" Drops="3">
-      <Loot ItemId="Iron" Chance="1" />
-      <Loot ItemId="Aluminum" Chance="2.5" Max="2" />
-      <Loot ItemId="Copper" Chance="5" Max="1" />
+      <Loot ItemId="PerfectCrystal" Chance="1" />
+      <Loot ItemId="HardBone" Chance="2.5" Max="2" />
+      <Loot ItemId="BoneShard" Chance="5" Max="1" />
     </LootTable>
-    <LootTable Id="CrystalLimbLoot" Drops="5">
-      <Loot ItemId="Iron" Chance="2" />
-      <Loot ItemId="Aluminum" Chance="2.5" Max="2" />
+    <LootTable Id="CrystalLimbLoot" Drops="1">
+      <Loot ItemId="CrystalShard" Chance="10" />
+      <Loot ItemId="PerfectCrystal" Chance="5" Max="2" />
     </LootTable>
   </LootTables>
 
@@ -571,8 +572,20 @@
 
     <Scene Id="PlayEnd" AssetId="PlayEnd">
       <Elements>
-        <!-- <Inventory Id="LootRewards" Source="LootRewards" AssetId="LootRewards" /> -->
         <GameEndStats IsStatic="true" AssetId="Title/GameStats/Stats" />
+        <Button AssetId="LootDrop" >
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="LootMenu" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
+      </Elements>
+    </Scene>
+
+    <Scene Id="LootMenu" AssetId="LootMenu">
+      <Elements>
+        <InventoryReference Source="LootDrop" AssetId="InventoryRoot/LootDrop" />
         <Button AssetId="MainMenu" >
           <Triggers>
             <EventTrigger Event="Click">

@@ -9,7 +9,6 @@ namespace Scripts.Models.Items
 	{
 		public ItemModel()
 		{
-			Level = 1;
 			ItemSlotRoots = "ItemSlot";
 		}
 
@@ -18,7 +17,7 @@ namespace Scripts.Models.Items
 
 		[XmlAttribute]
 		[DefaultValue(1)]
-		public int Level { get; set; }
+		public int Quantity { get; set; }
 
 		[XmlIgnore]
 		public string ItemSlotRoots { get; set; }
