@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using Scripts.Models.Items;
 
 namespace Scripts.Models.Actions
 {
@@ -26,7 +27,11 @@ namespace Scripts.Models.Actions
 		[XmlElement(ElementName = "MoveAction", Type = typeof(MoveActionModel))]
 		[XmlElement(ElementName = "SpecialEvent", Type = typeof(StartSpecialEventModel))]
 		[XmlElement(ElementName = "SpecialEffect", Type = typeof(SpecialEffectActionModel))]
+		[XmlElement(ElementName = "SaveGame", Type = typeof(SaveGameModel))]
+		// Inventory Actions
 		[XmlElement(ElementName = "CreateItem", Type = typeof(CreateItemActionModel))]
+		[XmlElement(ElementName = "TransferInventoryItems", Type = typeof(TransferInventoryItemsModel))]
+		[XmlElement(ElementName = "SellInventoryItems", Type = typeof(SellInventoryItemsModel))]
 		public List<BaseActionModel> Actions { get; set; }
 	}
 }

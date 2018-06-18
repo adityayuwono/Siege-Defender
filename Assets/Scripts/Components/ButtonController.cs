@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Components
@@ -7,19 +8,10 @@ namespace Scripts.Components
 	{
 		public Action OnClicked;
 
-		private float _timeMouseDown;
-
-		public void OnMouseDown()
+		public IEnumerator OnMouseUpAsButton()
 		{
-			_timeMouseDown = Time.time;
-		}
-
-		public void OnMouseUp()
-		{
-			if (Time.time - _timeMouseDown < 1)
-			{
-				OnClicked();
-			}
+			yield return null;
+			OnClicked();
 		}
 	}
 }

@@ -2,7 +2,7 @@
 {
 	public static class Values
 	{
-		public const float GuiCrosshairSizeF = 0.08f;
+		public const float GuiCrosshairSizeF = 0.1f;
 
 		public const int CrosshairLayermask = ~(1 << 9);
 

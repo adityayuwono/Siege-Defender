@@ -10,6 +10,7 @@ namespace Scripts.Models.Items
 		public ItemModel()
 		{
 			ItemSlotRoots = "ItemSlot";
+			Quantity = 1;
 		}
 
 		[XmlAttribute]
@@ -18,6 +19,9 @@ namespace Scripts.Models.Items
 		[XmlAttribute]
 		[DefaultValue(1)]
 		public int Quantity { get; set; }
+
+		[XmlAttribute]
+		public int Price { get; set; }
 
 		[XmlIgnore]
 		public string ItemSlotRoots { get; set; }

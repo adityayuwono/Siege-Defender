@@ -25,10 +25,10 @@ namespace Scripts.ViewModels.Actions
 		{
 			base.OnLoad();
 
-			Target = FindTarget();
+			Target = FindTarget(_model.Target);
 		}
 
-		protected virtual object FindTarget()
+		protected virtual object FindTarget(string targetPath)
 		{
 			var parentContext = GetParent<IContext>();
 			if (parentContext == null)
@@ -36,14 +36,14 @@ namespace Scripts.ViewModels.Actions
 				throw new EngineException(this, "Failed to find parent Context");
 			}
 
-			var property = parentContext.PropertyLookup.GetProperty(_model.Target);
+			var property = parentContext.PropertyLookup.GetProperty(targetPath);
 			if (property != null)
 			{
 				return property;
 			}
 
-			throw new EngineException(this, 
-				string.Format("Failed to find Target: {0}", _model.Target));
+			throw new EngineException(this,
+				string.Format("Failed to find Target: {0}", targetPath));
 		}
 	}
 }

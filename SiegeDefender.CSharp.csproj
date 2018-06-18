@@ -268,6 +268,9 @@
     <Compile Include="Assets\Scripts\Extensions\UnityExtension.cs" />
     <Compile Include="Assets\Scripts\GameEndStatsManager.cs" />
     <Compile Include="Assets\Scripts\Models\Items\InventoryReferenceModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\SaveGameModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\SellInventoryItemsModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\TransferInventoryItemsModel.cs" />
     <Compile Include="Assets\Scripts\Roots\DataRoot.cs" />
     <Compile Include="Assets\Scripts\Roots\GameRoot.cs" />
     <Compile Include="Assets\Scripts\Helpers\Copier.cs" />
@@ -366,6 +369,7 @@
     <Compile Include="Assets\Scripts\ViewModels\Actions\ActionCollection.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\BaseAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\BaseCondition.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Actions\BaseInventoryAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\CreateItemAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\LoadSceneAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\MoveAction.cs" />
@@ -409,6 +413,9 @@
     <Compile Include="Assets\Scripts\ViewModels\Items\InventoryReference.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\Item.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\ProjectileItem.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Items\SaveGame.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Actions\SellInventoryItems.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Actions\TransferInventoryItems.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\WeaponSlot.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Object.cs" />
     <Compile Include="Assets\Scripts\ViewModels\ObjectDisplay.cs" />

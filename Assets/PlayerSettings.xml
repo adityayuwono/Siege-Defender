@@ -23,19 +23,16 @@
     <Projectile AssetId="GUIs/ItemTemplate" BaseItem="SkySplitter" Level="1" />
 
     <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E1_1">
-      <Stats Accuracy="-0.25" Scatters="2"/>
-    </Enchantment>
-    <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E2_1">
-      <Stats Ammunition="100"/>
+      <Stats Accuracy="-0.25" Scatters="2" RoF="1" />
     </Enchantment>
     <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E3_1">
       <Stats CriticalChance="0.1" CriticalDamageMultiplier="1.5"/>
     </Enchantment>
     <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E4_1">
-      <Stats RoF="0.3" />
+      <Stats RoF="-0.05" />
     </Enchantment>
     <Enchantment AssetId="GUIs/EnchantmentTemplate" BaseItem="E5_1">
-      <Stats Damage="1-3"/>
+      <Stats Damage="1-3" CriticalChance="-1" />
     </Enchantment>
 
     <WeaponSlot Id="LeftShooter" AssetId="LeftWeaponContainer" DeathDelay="0">

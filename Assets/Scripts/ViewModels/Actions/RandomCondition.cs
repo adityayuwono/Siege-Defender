@@ -53,7 +53,7 @@ namespace Scripts.ViewModels.Actions
 			base.OnDeactivate();
 		}
 
-		protected override object FindTarget()
+		protected override object FindTarget(string targetPath)
 		{
 			return _randomizedValue;
 		}

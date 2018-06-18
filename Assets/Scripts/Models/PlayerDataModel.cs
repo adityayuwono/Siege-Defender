@@ -9,6 +9,9 @@ namespace Scripts.Models
 	[XmlRoot("PlayerData")]
 	public class PlayerDataModel : BaseModel
 	{
+		[XmlAttribute]
+		public int Money { get; set; }
+
 		[XmlElement(ElementName = "Inventory", Type = typeof(InventoryModel))]
 		public List<InventoryModel> Inventories { get; set; }
 	}

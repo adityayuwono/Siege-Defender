@@ -16,8 +16,6 @@ namespace Scripts.Roots
 {
 	public class DataRoot : RootBase
 	{
-		private IIntervalRunner _intervalRunner;
-
 		/// <summary>
 		///     Text file that holds all the engine data
 		/// </summary>
@@ -27,22 +25,22 @@ namespace Scripts.Roots
 		///     Text file that holds all the player's progress
 		/// </summary>
 		public string PlayerSettingsXML;
-
 		public TextAsset DefaultPlayerSettings;
 
-		public Property<List<Inventory>> _inventories;
+		public readonly Property<List<Inventory>> Inventories;
+		public readonly AdjustableProperty<int> Money;
 
 		public DataRoot()
-			: base(new RootModel{Id = "DataRoot"}, null)
+			: this(new RootModel{Id = "DataRoot"}, null)
 		{
-			_inventories = new Property<List<Inventory>>();
-			_inventories.SetValue(new List<Inventory>());
 		}
 
 		public DataRoot(RootModel model, BaseContext parent) : base(model, parent)
 		{
-			_inventories = new Property<List<Inventory>>();
-			_inventories.SetValue(new List<Inventory>());
+			Money = new AdjustableProperty<int>("Money", this);
+
+			Inventories = new Property<List<Inventory>>();
+			Inventories.SetValue(new List<Inventory>());
 		}
 
 		public EngineModel EngineModel { get; private set; }
@@ -53,10 +51,18 @@ namespace Scripts.Roots
 		{
 			get { return _intervalRunner; }
 		}
+		private IIntervalRunner _intervalRunner;
 
 		public override IRoot Root
 		{
 			get { return this; }
+		}
+
+		public void AddMoney(int money)
+		{
+			PlayerDataModel.Money += money;
+			Money.SetValue(PlayerDataModel.Money);
+			Save();
 		}
 
 		public override void StartCoroutine(IEnumerator coroutine)
@@ -82,8 +88,8 @@ namespace Scripts.Roots
 			PlayerDataModel = Deserializer<PlayerDataModel>.GetObjectFromXML(inventoryXML);
 
 			LoadData(EngineModel);
-
 			LoadInventories(PlayerDataModel.Inventories);
+			Money.SetValue(PlayerDataModel.Money);
 
 			// Done, we simply load the next scene
 			// it clears everything we put on scene, if for example we are editing a prefab
@@ -95,7 +101,7 @@ namespace Scripts.Roots
 			foreach (var inventoryModel in inventoryModels)
 			{
 				var inventory = new Inventory(inventoryModel, this);
-				_inventories.GetValue().Add(inventory);
+				Inventories.GetValue().Add(inventory);
 			}
 		}
 
@@ -172,7 +178,7 @@ namespace Scripts.Roots
 
 		public Inventory GetInventorySource(string sourceId)
 		{
-			return _inventories.GetValue().Find(i => i.Id == sourceId);
+			return Inventories.GetValue().Find(i => i.Id == sourceId);
 		}
 	}
 }

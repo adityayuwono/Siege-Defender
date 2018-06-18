@@ -83,13 +83,17 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<DamageModel>().TypeOf<Object>().To<Damage>();
 			IoC.IoCContainer.RegisterFor<HealthBarModel>().TypeOf<Object>().To<HealthBar>();
 
-			// Actions, doesnt have a view
+			// Actions, doesn't have a view
 			IoC.IoCContainer.RegisterFor<LoadSceneActionModel>().TypeOf<BaseAction>().To<LoadSceneAction>();
 			IoC.IoCContainer.RegisterFor<SetterActionModel>().TypeOf<BaseAction>().To<SetterAction>();
 			IoC.IoCContainer.RegisterFor<MoveActionModel>().TypeOf<BaseAction>().To<MoveAction>();
 			IoC.IoCContainer.RegisterFor<StartSpecialEventModel>().TypeOf<BaseAction>().To<StartSpecialEventAction>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectActionModel>().TypeOf<BaseAction>().To<SpecialEffectAction>();
+			IoC.IoCContainer.RegisterFor<SaveGameModel>().TypeOf<BaseAction>().To<SaveGame>();
 			IoC.IoCContainer.RegisterFor<CreateItemActionModel>().TypeOf<BaseAction>().To<CreateItemAction>();
+			IoC.IoCContainer.RegisterFor<TransferInventoryItemsModel>().TypeOf<BaseAction>().To<TransferInventoryItems>();
+			IoC.IoCContainer.RegisterFor<SellInventoryItemsModel>().TypeOf<BaseAction>().To<SellInventoryItems>();
+			// Conditions, doesn't have a view
 			IoC.IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<BaseCondition>().To<ValueCondition>();
 			IoC.IoCContainer.RegisterFor<RandomConditionModel>().TypeOf<BaseCondition>().To<RandomCondition>();
 

@@ -14,7 +14,7 @@ namespace Scripts.ViewModels
 		public event Action OnStartSpecialEvent;
 		public Action<Object> OnObjectDeactivated;
 
-		protected readonly List<Object> Elements = new List<Object>();
+		public readonly List<Object> Elements = new List<Object>();
 
 		private readonly ObjectModel _model;
 		private bool _isDelaysIgnored;

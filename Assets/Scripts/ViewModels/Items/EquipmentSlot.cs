@@ -1,4 +1,5 @@
-﻿using Scripts.Contexts;
+﻿using System;
+using Scripts.Contexts;
 using Scripts.Core;
 using Scripts.Models;
 using Scripts.Models.Items;
@@ -7,6 +8,8 @@ namespace Scripts.ViewModels.Items
 {
 	public class EquipmentSlot : Element
 	{
+		public Action<Item> OnItemUpdate;
+
 		public readonly AdjustableProperty<ObjectModel> Item;
 		public readonly AdjustableProperty<string> ItemId;
 
@@ -38,7 +41,7 @@ namespace Scripts.ViewModels.Items
 			var isItemValid = CheckIfItemValid(droppedObject);
 			if (isItemValid)
 			{
-				var droppedItem = (Item)droppedObject;
+				var droppedItem = (Item) droppedObject;
 				if (droppedItem.GetParent<EquipmentSlot>() == null)
 				{
 					CurrentItem = droppedItem;
@@ -50,19 +53,30 @@ namespace Scripts.ViewModels.Items
 		{
 			base.Show();
 
-			_currentItem.Show();
+			if (_currentItem != null)
+			{
+				_currentItem.Show();
+			}
 		}
 
 		public override void Hide(string reason)
 		{
-			_currentItem.Hide(reason);
+			if (_currentItem != null)
+			{
+				_currentItem.Hide(reason);
+			}
 
 			base.Hide(reason);
 		}
 
-		protected static void HandleItemUpdate(EquipmentSlot parent, ref Item currentItem, Item newItem)
+		public void ReleaseItem()
 		{
-			var inventoryParent = parent.GetParent<Inventory>();
+			CurrentItem = null;
+		}
+
+		protected static void HandleItemUpdate(EquipmentSlot equipmentSlot, ref Item currentItem, Item newItem)
+		{
+			var inventoryParent = equipmentSlot.GetParent<Inventory>();
 			// Remove it from the inventory, do this first to make sure there's a spot left in the inventory
 			if (newItem != null)
 			{
@@ -73,17 +87,20 @@ namespace Scripts.ViewModels.Items
 			currentItem = newItem; // Swap the current item
 			if (currentItem != null)
 			{
-				currentItem.ChangeParent(parent);
+				currentItem.ChangeParent(equipmentSlot);
 			}
 
-			parent.UpdateOldItem(inventoryParent, oldItem);
+			equipmentSlot.UpdateOldItem(inventoryParent, oldItem);
 
-			parent.UpdateItem();
+			equipmentSlot.UpdateItem();
 		}
 
 		protected virtual void LoadItem(EquipmentSlotModel model)
 		{
-			CurrentItem = IoC.IoCContainer.GetInstance<Item>(model.Item.GetType(), new object[] { model.Item, this });
+			if (model.Item != null)
+			{
+				CurrentItem = IoC.IoCContainer.GetInstance<Item>(model.Item.GetType(), new object[] { model.Item, this });
+			}
 		}
 
 		protected virtual void UpdateOldItem(Inventory inventoryParent, Item oldItem)
@@ -102,12 +119,18 @@ namespace Scripts.ViewModels.Items
 		{
 			base.OnActivate();
 
-			_currentItem.Activate();
+			if (_currentItem != null)
+			{
+				_currentItem.Activate();
+			}
 		}
 
 		protected override void OnDestroyed()
 		{
-			_currentItem.Destroy();
+			if (_currentItem != null)
+			{
+				_currentItem.Destroy();
+			}
 
 			base.OnDestroyed();
 		}
@@ -121,14 +144,21 @@ namespace Scripts.ViewModels.Items
 		private void UpdateItem()
 		{
 			HandleItemUpdate(_currentItem as ProjectileItem);
+			if (OnItemUpdate != null && _currentItem != null)
+			{
+				OnItemUpdate(_currentItem);
+			}
 		}
 
 		private void SaveItemChange(Item currentItem)
 		{
-			_model.Item = currentItem.Model; // Save the change to model
-			ItemId.SetValue(currentItem.BaseItem); // Update projectile used
+			if (currentItem != null)
+			{
+				_model.Item = currentItem.Model; // Save the change to model
+				ItemId.SetValue(currentItem.BaseItem); // Update projectile used
 
-			DataContext.Instance.Save();
+				DataContext.Instance.Save();
+			}
 		}
 	}
 }

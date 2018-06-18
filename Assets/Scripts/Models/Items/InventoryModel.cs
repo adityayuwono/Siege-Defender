@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace Scripts.Models.Items
@@ -29,5 +30,9 @@ namespace Scripts.Models.Items
 		[XmlElement(ElementName = "EquipmentSlot", Type = typeof(EquipmentSlotModel))]
 		[XmlElement(ElementName = "WeaponSlot", Type = typeof(WeaponSlotModel))]
 		public List<EquipmentSlotModel> EquipmentSlots { get; set; }
+
+		[XmlAttribute]
+		[DefaultValue(false)]
+		public bool AlwaysTransferFromSlots { get; set; }
 	}
 }

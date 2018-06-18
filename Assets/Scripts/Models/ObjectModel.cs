@@ -32,6 +32,7 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplayModel))]
 		[XmlArrayItem(ElementName = "ObjectDisplay", Type = typeof(ObjectDisplayModel))]
 		// GUIs
+		[XmlArrayItem(ElementName = "Inventory", Type = typeof(InventoryModel))]
 		[XmlArrayItem(ElementName = "InventoryReference", Type = typeof(InventoryReferenceModel))]
 		[XmlArrayItem(ElementName = "Button", Type = typeof(ButtonModel))]
 		[XmlArrayItem(ElementName = "ProgressBar", Type = typeof(ProgressBarModel))]

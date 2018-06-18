@@ -37,6 +37,17 @@ namespace Scripts.ViewModels.Items
 			get { return _model.ItemSlotRoots; }
 		}
 
+		public int Quantity
+		{
+			get { return _model.Quantity; }
+			set { _model.Quantity = value; }
+		}
+
+		public int Price
+		{
+			get { return _model.Price; }
+		}
+
 		public void ChangeParent(Object newParent)
 		{
 			Parent = newParent;

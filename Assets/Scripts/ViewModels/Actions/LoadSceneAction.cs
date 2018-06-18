@@ -19,7 +19,7 @@ namespace Scripts.ViewModels
 			Root.ChangeScene(_model.Target, _model.LevelId);
 		}
 
-		protected override object FindTarget()
+		protected override object FindTarget(string targetPath)
 		{
 			return null;
 		}

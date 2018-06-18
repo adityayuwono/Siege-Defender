@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Scripts.Core;
 using Scripts.Interfaces;
 using Scripts.Models.Items;
@@ -24,11 +26,27 @@ namespace Scripts.ViewModels.Items
 
 			foreach (var equipmentSlotModel in _model.EquipmentSlots)
 			{
-				Elements.Add(IoC.IoCContainer.GetInstance<EquipmentSlot>(equipmentSlotModel.GetType(), new object[] { equipmentSlotModel, this }));
+				var equipmentSlot =
+					IoC.IoCContainer.GetInstance<EquipmentSlot>(equipmentSlotModel.GetType(), new object[] {equipmentSlotModel, this});
+				Elements.Add(equipmentSlot);
+
+				if (_model.AlwaysTransferFromSlots)
+				{
+					equipmentSlot.OnItemUpdate += GetItemFromSlot;
+				} 
 			}
 
 			// Need this to trigger registration of context in parent
 			var propertyLookup = PropertyLookup;
+		}
+
+		private void GetItemFromSlot(Item item)
+		{
+			var equipmentSlot = item.GetParent<EquipmentSlot>();
+			if (equipmentSlot != null)
+			{
+				equipmentSlot.ReleaseItem();
+			}
 		}
 
 		public PropertyLookup PropertyLookup
@@ -63,7 +81,11 @@ namespace Scripts.ViewModels.Items
 
 			Elements.Add(item);
 			_model.Items.Add(item.Model);
-			item.ChangeParent(this);
+			
+			if (IsShown)
+			{
+				item.ChangeParent(this);
+			}
 
 			InvokeChildrenChanged();
 		}
@@ -76,6 +98,26 @@ namespace Scripts.ViewModels.Items
 			Elements.Remove(itemViewModel);
 
 			InvokeChildrenChanged();
+		}
+
+		public void CombineItemsToStack()
+		{
+			var objects = Elements.Where(e => e.GetType() == typeof(Item)).ToArray();
+			var combinedItems = new List<Item>();
+			foreach (var o in objects)
+			{
+				var item = o as Item;
+				var existingCombinedItem = combinedItems.FirstOrDefault(i => i.BaseItem == item.BaseItem);
+				if (existingCombinedItem != null)
+				{
+					existingCombinedItem.Quantity += item.Quantity;
+					ReleaseItem(item);
+				}
+				else
+				{
+					combinedItems.Add(item);
+				}
+			}
 		}
 
 		private void InvokeChildrenChanged()

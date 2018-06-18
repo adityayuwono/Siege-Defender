@@ -1,10 +1,8 @@
-﻿using Scripts.Helpers;
-using Scripts.Models.Actions;
-using Scripts.ViewModels.Items;
+﻿using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions
 {
-	public class CreateItemAction : BaseAction
+	public class CreateItemAction : BaseInventoryAction
 	{
 		private readonly CreateItemActionModel _model;
 
@@ -17,17 +15,10 @@ namespace Scripts.ViewModels.Actions
 		{
 			base.Invoke();
 
-			var targetInventory = Target as Inventory;
-
-			if (targetInventory == null)
-			{
-				throw new EngineException(this, string.Format("Failed to find Inventory: {0}", _model.Target));
-			}
-
-			var items = SDRoot.GetLoot(_model.Value, targetInventory);
+			var items = SDRoot.GetLoot(_model.Value, TargetInventory);
 			foreach (var item in items)
 			{
-				targetInventory.AddItem(item);
+				TargetInventory.AddItem(item);
 			}
 		}
 	}
