@@ -31,7 +31,9 @@ namespace Scripts.Components
 				if (viewModelController != null)
 				{
 					if (collisionPosition.y < 0)
+					{
 						collisionPosition.y *= -1;
+					}
 
 					var viewModel = viewModelController.GetViewModel();
 					OnCollision(viewModel, transform.position, collisionPosition);

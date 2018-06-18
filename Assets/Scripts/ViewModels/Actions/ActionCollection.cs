@@ -118,7 +118,10 @@ namespace Scripts.ViewModels.Actions
 			{
 				DeactivateActions();
 
-				if (OnActivationFinished != null) OnActivationFinished();
+				if (OnActivationFinished != null)
+				{
+					OnActivationFinished();
+				}
 			}
 		}
 
