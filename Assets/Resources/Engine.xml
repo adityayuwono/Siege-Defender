@@ -112,7 +112,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="RightHand" Health="200" AssetId="RightHand" DamageMultiplier="0.5"
+        <Limb Id="RightHand" Health="150" AssetId="RightHand" DamageMultiplier="0.5"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -124,7 +124,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="LeftHand" Health="200" AssetId="LeftHand" DamageMultiplier="0.5"
+        <Limb Id="LeftHand" Health="150" AssetId="LeftHand" DamageMultiplier="0.5"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -136,15 +136,15 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="RightLeg" Health="200" AssetId="RightLeg" DamageMultiplier="0.75"
+        <Limb Id="RightLeg" Health="100" AssetId="RightLeg" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
         </Limb>
-        <Limb Id="LeftLeg" Health="200" AssetId="LeftLeg" DamageMultiplier="0.75"
+        <Limb Id="LeftLeg" Health="100" AssetId="LeftLeg" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
         </Limb>
-        <Limb Id="RightFoot" Health="200" AssetId="Bip001 R Foot" DamageMultiplier="0.75"
+        <Limb Id="RightFoot" Health="100" AssetId="Bip001 R Foot" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -156,7 +156,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="LeftFoot" Health="200" AssetId="Bip001 L Foot" DamageMultiplier="0.75"
+        <Limb Id="LeftFoot" Health="100" AssetId="Bip001 L Foot" DamageMultiplier="0.75"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -168,7 +168,7 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="Crystal" Health="300" AssetId="Bip001 Spine2" DamageMultiplier="0.25"
+        <Limb Id="Crystal" Health="200" AssetId="Bip001 Spine2" DamageMultiplier="0.25"
 					CollisionEffectNormal="CrystalBreak_Small" >
           <Triggers>
             <EventTrigger Event="Break" >
@@ -277,14 +277,6 @@
         </Trigger>
 
         <Trigger>
-          <Condition Target="{This.Health}" Value="\2500" />
-          <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
-        </Trigger>
-        <Trigger>
-          <Condition Target="{This.Health}" Value="\2100" />
-          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
-        </Trigger>
-        <Trigger>
           <Condition Target="{This.Health}" Value="\1800" />
           <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
         </Trigger>
@@ -301,11 +293,11 @@
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\700" />
-          <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
+          <Condition Target="{This.Health}" Value="\600" />
+          <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\400" />
+          <Condition Target="{This.Health}" Value="\300" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
