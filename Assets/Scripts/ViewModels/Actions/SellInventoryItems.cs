@@ -1,11 +1,9 @@
 ﻿using System.Linq;
 using Scripts.Contexts;
-using Scripts.Helpers;
 using Scripts.Models.Items;
-using Scripts.Roots;
-using Scripts.ViewModels.Actions;
+using Scripts.ViewModels.Items;
 
-namespace Scripts.ViewModels.Items
+namespace Scripts.ViewModels.Actions
 {
 	public class SellInventoryItems : BaseInventoryAction
 	{

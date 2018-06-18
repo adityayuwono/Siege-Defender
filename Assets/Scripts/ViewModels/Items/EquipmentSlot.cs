@@ -91,7 +91,6 @@ namespace Scripts.ViewModels.Items
 			}
 
 			equipmentSlot.UpdateOldItem(inventoryParent, oldItem);
-
 			equipmentSlot.UpdateItem();
 		}
 
