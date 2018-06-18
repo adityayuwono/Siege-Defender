@@ -80,7 +80,8 @@ namespace Scripts.ViewModels.Items
 			// Remove it from the inventory, do this first to make sure there's a spot left in the inventory
 			if (newItem != null)
 			{
-				inventoryParent.ReleaseItem(newItem);
+				var newItemsInventory = newItem.GetParent<Inventory>();
+				newItemsInventory.ReleaseItem(newItem);
 			}
 
 			var oldItem = currentItem;
