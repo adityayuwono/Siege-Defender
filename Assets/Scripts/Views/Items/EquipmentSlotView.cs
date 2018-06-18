@@ -1,5 +1,4 @@
 ﻿using Scripts.Components;
-using Scripts.ViewModels;
 using Scripts.ViewModels.Items;
 
 namespace Scripts.Views.Items

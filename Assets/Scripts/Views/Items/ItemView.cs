@@ -78,7 +78,6 @@ namespace Scripts.Views.Items
 			_parent = newParent.Root.GetView<ObjectView>(newParent);
 
 			Transform.SetParent(GetParent());
-
 			Transform.localPosition = Vector3.zero;
 		}
 	}
