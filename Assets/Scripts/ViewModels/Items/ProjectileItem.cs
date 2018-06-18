@@ -80,6 +80,7 @@ namespace Scripts.ViewModels.Items
 
 				newProjectileModel.Stats.Damage = augmentedDamages.ToArray();
 				newProjectileModel.Stats.ReloadTime = Mathf.Min(newProjectileModel.Stats.ReloadTime + enchantmentModel.Stats.ReloadTime, 1f);
+				newProjectileModel.Stats.RoF += enchantmentModel.Stats.RoF;
 
 				newProjectileModel.Stats.CriticalChance =
 					Mathf.Min(
