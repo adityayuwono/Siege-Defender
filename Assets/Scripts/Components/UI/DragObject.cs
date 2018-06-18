@@ -1,4 +1,5 @@
-﻿using Scripts.ViewModels;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Scripts.ViewModels.Items;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Scripts.Components.UI
 	{
 		public bool IsDragMode { get; set; }
 
-		private DragDropContainerController _dragDropContainerController;
+		private readonly List<DragDropContainerController> _dragDropContainerControllers = new List<DragDropContainerController>();
 
 		private Item Item
 		{
@@ -23,9 +24,10 @@ namespace Scripts.Components.UI
 		private void OnMouseUp()
 		{
 			IsDragMode = false;
-			if (_dragDropContainerController != null)
+			var dragDropContainerController = _dragDropContainerControllers.FirstOrDefault();
+			if (dragDropContainerController != null)
 			{
-				_dragDropContainerController.OnDrop(gameObject);
+				dragDropContainerController.OnDrop(gameObject);
 			}
 			else
 			{
@@ -39,12 +41,22 @@ namespace Scripts.Components.UI
 
 		private void OnTriggerEnter2D(Collider2D coll)
 		{
-			_dragDropContainerController = coll.GetComponent<DragDropContainerController>();
+			var dragDropContainerController = coll.GetComponent<DragDropContainerController>();
+
+			if (!_dragDropContainerControllers.Contains(dragDropContainerController))
+			{
+				_dragDropContainerControllers.Add(dragDropContainerController);
+			}
 		}
 
 		private void OnTriggerExit2D(Collider2D coll)
 		{
-			_dragDropContainerController = null;
+			var dragDropContainerController = coll.GetComponent<DragDropContainerController>();
+
+			if (_dragDropContainerControllers.Contains(dragDropContainerController))
+			{
+				_dragDropContainerControllers.Remove(dragDropContainerController);
+			}
 		}
 
 		private void Update()
