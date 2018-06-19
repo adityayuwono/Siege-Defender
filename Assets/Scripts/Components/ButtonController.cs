@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Components
@@ -8,10 +7,14 @@ namespace Scripts.Components
 	{
 		public Action OnClicked;
 
-		public IEnumerator OnMouseUpAsButton()
+		public void OnMouseUp()
 		{
-			yield return null;
-			OnClicked();
+#if !UNITY_EDITOR
+			if (Input.touches.Length == 1)
+#endif
+			{
+				OnClicked();
+			}
 		}
 	}
 }
