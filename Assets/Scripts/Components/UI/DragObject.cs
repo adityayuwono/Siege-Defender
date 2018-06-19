@@ -57,11 +57,11 @@ namespace Scripts.Components.UI
 		{
 			if (IsDragMode)
 			{
-				UpdateCardPositionForDragging();
+				UpdatePositionForDragging();
 			}
 		}
 
-		private void UpdateCardPositionForDragging()
+		private void UpdatePositionForDragging()
 		{
 			var screenPoint = Input.mousePosition;
 			screenPoint.y -= 10;
