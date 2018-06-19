@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Scripts.ViewModels.Items;
 using UnityEngine;
 
 namespace Scripts.Components.UI
@@ -10,11 +9,6 @@ namespace Scripts.Components.UI
 		public bool IsDragMode { get; set; }
 
 		private readonly List<DragDropContainerController> _dragDropContainerControllers = new List<DragDropContainerController>();
-
-		private Item Item
-		{
-			get { return (Item)GetComponent<ViewModelController>().ViewModel; }
-		}
 
 		private void OnMouseDown()
 		{
