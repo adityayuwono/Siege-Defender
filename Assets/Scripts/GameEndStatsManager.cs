@@ -29,7 +29,7 @@ namespace Scripts
 
 		public static float GetAccuracy()
 		{
-			return _totalHit * 100f / _totalProjectileShot;
+			return _totalProjectileShot == 0 ? _totalProjectileShot : _totalHit * 100f / _totalProjectileShot;
 		}
 
 		private static int _enemiesKilled;
