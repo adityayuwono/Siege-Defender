@@ -49,9 +49,8 @@ namespace Scripts.Roots
 
 		public override IIntervalRunner IntervalRunner
 		{
-			get { return _intervalRunner; }
+			get { throw new NotImplementedException(); }
 		}
-		private IIntervalRunner _intervalRunner;
 
 		public override IRoot Root
 		{
