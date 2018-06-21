@@ -2,6 +2,7 @@
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
+using Scripts.Roots;
 using Scripts.Views;
 
 namespace Scripts.ViewModels

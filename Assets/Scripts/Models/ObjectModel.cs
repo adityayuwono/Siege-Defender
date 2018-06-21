@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using Scripts.Models.Enemies;
 using Scripts.Models.GUIs;
 using Scripts.Models.Items;
 

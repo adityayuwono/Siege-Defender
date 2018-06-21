@@ -1,4 +1,6 @@
-﻿namespace Scripts.Interfaces
+﻿using Scripts.Roots;
+
+namespace Scripts.Interfaces
 {
 	public interface IHaveRoot : IBase
 	{

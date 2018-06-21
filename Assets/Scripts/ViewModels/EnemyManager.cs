@@ -1,5 +1,6 @@
 ﻿using Scripts.Core;
 using Scripts.Models;
+using Scripts.Models.Enemies;
 using Scripts.Models.Levels;
 using Scripts.ViewModels.Enemies;
 

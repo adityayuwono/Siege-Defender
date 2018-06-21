@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace Scripts.Models
+namespace Scripts.Models.Enemies
 {
 	[Serializable]
 	public class EnemyManagerModel : IntervalModel
