@@ -449,6 +449,13 @@
     <Scene Id="MainMenu" AssetId="MainMenu">
       <Elements>
         <Label AssetId="MoneyText" Text="{DataRoot.Money}" IsStatic="true" />
+        <Button AssetId="Equipments" >
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="Equipments" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
         <Button AssetId="Inventory" >
           <Triggers>
             <EventTrigger Event="Click">
@@ -486,7 +493,7 @@
       </Elements>
     </Scene>
 
-    <Scene Id="Inventory" AssetId="Inventory">
+    <Scene Id="Equipments" AssetId="Equipments">
       <Elements>
         <InventoryReference Source="PlayerInventory" AssetId="InventoryRoot/PlayerInventory" />
         <StatsLabel Source="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationLeft" />
@@ -502,6 +509,19 @@
           <Triggers>
             <EventTrigger Event="Click">
               <LoadScene Target="Play" LevelId="Level1" />
+            </EventTrigger>
+          </Triggers>
+        </Button>
+      </Elements>
+    </Scene>
+
+    <Scene Id="Inventory" AssetId="Inventory">
+      <Elements>
+        <InventoryReference Source="CraftingMaterials" AssetId="InventoryRoot/CraftingMaterials" />
+        <Button AssetId="MainMenu" >
+          <Triggers>
+            <EventTrigger Event="Click">
+              <LoadScene Target="MainMenu" />
             </EventTrigger>
           </Triggers>
         </Button>
