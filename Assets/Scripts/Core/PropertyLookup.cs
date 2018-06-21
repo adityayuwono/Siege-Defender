@@ -135,7 +135,6 @@ namespace Scripts.Core
 				var paths = path.Split('.');
 
 				var context = _context;
-				Base viewModel = null;
 				for (var i = 0; i < paths.Length; i++)
 				{
 					var currentPath = paths[i];
@@ -174,7 +173,6 @@ namespace Scripts.Core
 						var tryFindChild = context.PropertyLookup.GetChild(currentPath);
 						if (tryFindChild != null)
 						{
-							viewModel = tryFindChild;
 						}
 					}
 

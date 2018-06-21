@@ -4,7 +4,7 @@ namespace Scripts.ViewModels.GUIs
 {
 	public class GameEndStats : Label
 	{
-		public GameEndStats(GameEndStatsModel model, ViewModels.Base parent)
+		public GameEndStats(GameEndStatsModel model, Base parent)
 			: base(model, parent)
 		{
 		}
