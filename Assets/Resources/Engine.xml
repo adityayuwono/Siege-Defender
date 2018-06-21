@@ -5,15 +5,15 @@
         SpeedDeviation="500-550"
         RoF="0.1" Ammunition="100" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
-        CriticalChance="0.01" CriticalDamageMultiplier="45"        
+        CriticalChance="0.005" CriticalDamageMultiplier="45"        
         AoEId="AscalonExplosion" />
     </Projectile>
     <Projectile Id="WoodArrow" AssetId="Projectiles/WoodenBalista" >
-      <Stats Damage="6-10"
+      <Stats Damage="7-12"
         SpeedDeviation="400-400"
         RoF="0.3" Ammunition="100" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
-        CriticalChance="0.1" CriticalDamageMultiplier="1.2" />
+        CriticalChance="0.1" CriticalDamageMultiplier="10" />
     </Projectile>
     <Projectile Id="ScatterArrow" AssetId="Projectiles/WoodenBalista" >
       <Stats Damage="5-10"
@@ -69,7 +69,7 @@
         </EventTrigger>
       </Triggers>
     </Enemy>
-    <StaticEnemy Id="CrystalShield" AssetId="Enemies/CrystalShield" Health="500"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
+    <StaticEnemy Id="CrystalShield" AssetId="Enemies/CrystalShield" Health="300"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
         <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnColumnFast" />
       </Elements>
