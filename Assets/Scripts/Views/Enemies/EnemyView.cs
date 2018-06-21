@@ -130,7 +130,7 @@ namespace Scripts.Views.Enemies
 		{
 			_viewModel.OnWalk();
 			_viewModel.Root.Context.IntervalRunner.UnsubscribeFromInterval(StartWalkAnimationSubscription);
-			_viewModel.AnimationId.SetValue("Walk");
+			Animator.Play("Walk");
 
 			var targetMovement = _targetTransform.position;
 			targetMovement.x += Random.Range(-3f, 3f);
@@ -139,7 +139,6 @@ namespace Scripts.Views.Enemies
 			var duration = distance / _viewModel.Speed;
 
 			iTween.MoveTo(GameObject, iTween.Hash("position", targetMovement, "time", duration, "easetype", "linear"));
-			iTween.RotateTo(GameObject, iTween.Hash("y", 180d, "time", duration, "easetype", "linear"));
 
 			_viewModel.Root.Context.IntervalRunner.SubscribeToInterval(StartAttackAnimation, duration, false);
 		}
