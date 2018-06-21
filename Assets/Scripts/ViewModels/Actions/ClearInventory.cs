@@ -5,10 +5,10 @@ using Scripts.ViewModels.Items;
 
 namespace Scripts.ViewModels.Actions
 {
-	public class SellInventoryItems : BaseInventoryAction
+	public class ClearInventory : BaseInventoryAction
 	{
-		private readonly SellInventoryItemsModel _model;
-		public SellInventoryItems(SellInventoryItemsModel model, Base parent)
+		private readonly ClearInventoryModel _model;
+		public ClearInventory(ClearInventoryModel model, Base parent)
 			: base(model, parent)
 		{
 			_model = model;
@@ -25,7 +25,10 @@ namespace Scripts.ViewModels.Actions
 				TargetInventory.ReleaseItem(item);
 			}
 
-			DataContext.Instance.AddMoney(totalItemPrice);
+			if (_model.SellItems)
+			{
+				DataContext.Instance.AddMoney(totalItemPrice);
+			}
 		}
 	}
 }

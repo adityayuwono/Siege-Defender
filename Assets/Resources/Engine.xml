@@ -206,14 +206,14 @@
           <Setter Target="{SpiderColumns.Level}" Value="SpawnSpiderColumn" Wait="2" />
           <Setter Target="{This.AnimationId}" Value="Idle" />
         </Skill>
-        <Skill Id="Slam" InterruptThreshold="350" >
+        <Skill Id="Slam" InterruptThreshold="150" >
           <SpecialEffect Target="{LeftHand.SpecialEffect}" Value="ChargingSlam" />
           <Setter Target="{This.AnimationId}" Value="Slam_Start" Wait="2" IsInterruptable="true"/>
           <Setter Target="{This.AnimationId}" Value="Slam_Charge" Wait="5" IsInterruptable="true" />
           <Setter Target="{This.AnimationId}" Value="Slam_Run" />
           <MoveAction Target="{This}" MoveTarget="Player" SpeedMultiplier="10" />
           <Setter Target="{This.AnimationId}" Value="Slam_End" Wait="0.2" />
-          <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]10" />
+          <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]15" />
           <SpecialEvent Target="{Root.Play.PlayerCamera}" Wait="0.5" />
           <Triggers>
             <EventTrigger Event="Interrupt">
@@ -528,7 +528,8 @@
           </Shooters>
           <Triggers>
             <EventTrigger Event="GameOver">
-              <LoadScene Target="MainMenu" />
+              <!-- <ClearInventory Target="{DataRoot.LootDrop}" SellItems="false"/> -->
+              <LoadScene Target="PlayEnd" />
             </EventTrigger>
           </Triggers>
         </Player>
@@ -608,7 +609,7 @@
           <Triggers>
             <EventTrigger Event="Click">
               <TransferInventoryItems Target="{DataRoot.CraftingMaterials}" Value="{Root.This.ReceivedMaterials}" CombineItems="true" />
-              <SellInventoryItems Target="{DataRoot.LootDrop}" />
+              <ClearInventory Target="{DataRoot.LootDrop}" SellItems="true" />
               <SaveGame/>
               <LoadScene Target="MainMenu" />
             </EventTrigger>

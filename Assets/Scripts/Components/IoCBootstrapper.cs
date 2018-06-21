@@ -92,7 +92,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<SaveGameModel>().TypeOf<BaseAction>().To<SaveGame>();
 			IoC.IoCContainer.RegisterFor<CreateItemActionModel>().TypeOf<BaseAction>().To<CreateItemAction>();
 			IoC.IoCContainer.RegisterFor<TransferInventoryItemsModel>().TypeOf<BaseAction>().To<TransferInventoryItems>();
-			IoC.IoCContainer.RegisterFor<SellInventoryItemsModel>().TypeOf<BaseAction>().To<SellInventoryItems>();
+			IoC.IoCContainer.RegisterFor<ClearInventoryModel>().TypeOf<BaseAction>().To<ClearInventory>();
 			// Conditions, doesn't have a view
 			IoC.IoCContainer.RegisterFor<ValueConditionModel>().TypeOf<BaseCondition>().To<ValueCondition>();
 			IoC.IoCContainer.RegisterFor<RandomConditionModel>().TypeOf<BaseCondition>().To<RandomCondition>();

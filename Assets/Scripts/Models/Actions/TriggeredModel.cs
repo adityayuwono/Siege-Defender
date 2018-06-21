@@ -31,7 +31,7 @@ namespace Scripts.Models.Actions
 		// Inventory Actions
 		[XmlElement(ElementName = "CreateItem", Type = typeof(CreateItemActionModel))]
 		[XmlElement(ElementName = "TransferInventoryItems", Type = typeof(TransferInventoryItemsModel))]
-		[XmlElement(ElementName = "SellInventoryItems", Type = typeof(SellInventoryItemsModel))]
+		[XmlElement(ElementName = "ClearInventory", Type = typeof(ClearInventoryModel))]
 		public List<BaseActionModel> Actions { get; set; }
 	}
 }

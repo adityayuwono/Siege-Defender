@@ -269,7 +269,7 @@
     <Compile Include="Assets\Scripts\GameEndStatsManager.cs" />
     <Compile Include="Assets\Scripts\Models\Items\InventoryReferenceModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\SaveGameModel.cs" />
-    <Compile Include="Assets\Scripts\Models\Items\SellInventoryItemsModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\ClearInventoryModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\TransferInventoryItemsModel.cs" />
     <Compile Include="Assets\Scripts\Roots\DataRoot.cs" />
     <Compile Include="Assets\Scripts\Roots\GameRoot.cs" />
@@ -414,7 +414,7 @@
     <Compile Include="Assets\Scripts\ViewModels\Items\Item.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\ProjectileItem.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\SaveGame.cs" />
-    <Compile Include="Assets\Scripts\ViewModels\Actions\SellInventoryItems.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Actions\ClearInventory.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\TransferInventoryItems.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\WeaponSlot.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Object.cs" />
