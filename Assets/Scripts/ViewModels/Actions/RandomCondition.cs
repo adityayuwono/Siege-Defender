@@ -13,7 +13,7 @@ namespace Scripts.ViewModels.Actions
 	{
 		private readonly RandomConditionModel _model;
 
-		private readonly Property<double> _randomizedValue = new Property<double>();
+		private readonly Property<double> _randomizedValue = new Property<double>(true);
 
 		private readonly Random _randomizer = new Random();
 		private readonly double _threshold;
@@ -43,12 +43,26 @@ namespace Scripts.ViewModels.Actions
 		{
 			base.OnActivate();
 
-			Root.IntervalRunner.SubscribeToInterval(Randomize, _model.Frequency, false);
+			_randomizedValue.OnChange += Value_OnChange;
+
+			if (_model.Frequency > 0)
+			{
+				Root.IntervalRunner.SubscribeToInterval(Randomize, _model.Frequency, false);
+			}
+			else
+			{
+				Randomize();
+			}
 		}
 
 		protected override void OnDeactivate()
 		{
-			Root.IntervalRunner.UnsubscribeFromInterval(Randomize);
+			_randomizedValue.OnChange -= Value_OnChange;
+
+			if (_model.Frequency > 0)
+			{
+				Root.IntervalRunner.UnsubscribeFromInterval(Randomize);
+			}
 
 			base.OnDeactivate();
 		}
@@ -58,11 +72,9 @@ namespace Scripts.ViewModels.Actions
 			return _randomizedValue;
 		}
 		
-		protected override void Target_OnChanged()
+		private void Value_OnChange()
 		{
 			IsMatch.SetValue(_randomizedValue.GetValue() <= _threshold);
-			// Immediatelly set to false to allow 2 consecutive Matches when in luck, if there's such a thing in coding
-			IsMatch.SetValue(false);
 		}
 
 		private void Randomize()
