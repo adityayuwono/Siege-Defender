@@ -13,6 +13,10 @@ namespace Scripts.Components
 			if (OnCollision != null)
 			{
 				var viewModelController = collisionInfo.gameObject.GetComponent<ViewModelController>();
+				if (viewModelController == null)
+				{
+					viewModelController = collisionInfo.gameObject.GetComponentInParent<ViewModelController>();
+				}
 				if (viewModelController != null)
 				{
 					var viewModel = viewModelController.GetViewModel();
@@ -27,7 +31,10 @@ namespace Scripts.Components
 			if (OnCollision != null)
 			{
 				var viewModelController = target.gameObject.GetComponent<ViewModelController>();
-
+				if (viewModelController == null)
+				{
+					viewModelController = target.gameObject.GetComponentInParent<ViewModelController>();
+				}
 				if (viewModelController != null)
 				{
 					if (collisionPosition.y < 0)
