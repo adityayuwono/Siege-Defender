@@ -15,6 +15,7 @@ namespace Scripts.ViewModels.Enemies
 	public class LivingObject : Object
 	{
 		public event Action Death;
+		public event Func<Vector3> RequestPositionUpdate;
 		public event Action DeathEnd;
 
 		private readonly List<ProjectileBase> _attachedProjectiles = new List<ProjectileBase>();
@@ -154,6 +155,7 @@ namespace Scripts.ViewModels.Enemies
 		{
 			if (Death != null)
 			{
+				Position = RequestPositionUpdate();
 				Death();
 			}
 		}

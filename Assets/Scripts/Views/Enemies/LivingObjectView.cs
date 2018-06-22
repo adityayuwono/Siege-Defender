@@ -19,6 +19,7 @@ namespace Scripts.Views.Enemies
 			: base(viewModel, parent)
 		{
 			_viewModel = viewModel;
+			_viewModel.RequestPositionUpdate += UpdateViewModelPosition;
 		}
 
 		public Transform HealthBarRoot { get; private set; }
@@ -95,6 +96,11 @@ namespace Scripts.Views.Enemies
 			{
 				projectileTransform.parent = Transform;
 			}
+		}
+
+		private Vector3 UpdateViewModelPosition()
+		{
+			return Transform.localPosition;
 		}
 	}
 }
