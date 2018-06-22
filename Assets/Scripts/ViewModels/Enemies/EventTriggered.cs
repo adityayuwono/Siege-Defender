@@ -11,6 +11,8 @@ namespace Scripts.ViewModels.Enemies
 
 		private Object _parentObject;
 
+		private bool _isInvoked;
+
 		public EventTriggered(EventTriggeredModel model, Base parent) : base(model, parent)
 		{
 			_model = model;
@@ -130,6 +132,7 @@ namespace Scripts.ViewModels.Enemies
 
 		private void InvokeEvent()
 		{
+			_isInvoked = true;
 			base.OnActivate();
 		}
 
@@ -231,6 +234,12 @@ namespace Scripts.ViewModels.Enemies
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
+			}
+
+			if (_isInvoked)
+			{
+				_isInvoked = false;
+				base.OnDeactivate();
 			}
 		}
 	}
