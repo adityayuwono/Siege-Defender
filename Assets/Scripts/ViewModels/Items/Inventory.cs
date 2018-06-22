@@ -40,15 +40,6 @@ namespace Scripts.ViewModels.Items
 			var propertyLookup = PropertyLookup;
 		}
 
-		private void GetItemFromSlot(Item item)
-		{
-			var equipmentSlot = item.GetParent<EquipmentSlot>();
-			if (equipmentSlot != null)
-			{
-				equipmentSlot.ReleaseItem();
-			}
-		}
-
 		public PropertyLookup PropertyLookup
 		{
 			get
@@ -117,6 +108,18 @@ namespace Scripts.ViewModels.Items
 				{
 					combinedItems.Add(item);
 				}
+
+				o.Hide("Combining item");
+				o.Deactivate("Combining item");
+			}
+		}
+
+		private static void GetItemFromSlot(Item item)
+		{
+			var equipmentSlot = item.GetParent<EquipmentSlot>();
+			if (equipmentSlot != null)
+			{
+				equipmentSlot.ReleaseItem();
 			}
 		}
 
