@@ -34,7 +34,6 @@ namespace Scripts.ViewModels.Actions
 
 		protected virtual void Target_OnChanged()
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

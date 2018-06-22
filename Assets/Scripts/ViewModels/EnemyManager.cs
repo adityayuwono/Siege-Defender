@@ -73,6 +73,12 @@ namespace Scripts.ViewModels
 			_spawnIndex++;
 		}
 
+		public LivingObject GetEnemy(string enemyId, Base overrideParent)
+		{
+			var enemy = GetObject<LivingObject>(enemyId, null, overrideParent);
+			return enemy;
+		}
+
 		private void SpawnInterval(SpawnIntervalModel spawnIntervalModel)
 		{
 			PeriodicSpawn(spawnIntervalModel);
@@ -92,7 +98,7 @@ namespace Scripts.ViewModels
 			SpawnIndexOverride = spawnModel.SpawnIndexOverride;
 			for (var i = 0; i < count; i++)
 			{
-				var enemy = GetObject<LivingObject>(enemyId, null, GetParent<Scene>());
+				var enemy = GetEnemy(enemyId, GetParent<Scene>());
 				enemy.Activate(this);
 				enemy.Show();
 			}

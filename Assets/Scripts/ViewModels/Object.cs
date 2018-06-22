@@ -91,6 +91,16 @@ namespace Scripts.ViewModels
 			Activate();
 		}
 
+		/// <summary>
+		///     Activate and Assign a position
+		/// </summary>
+		public void Activate(Vector3 position)
+		{
+			Position = position;
+
+			Activate();
+		}
+
 		public void StartSpecialEvent()
 		{
 			if (OnStartSpecialEvent != null)

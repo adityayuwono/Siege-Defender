@@ -267,6 +267,7 @@
     <Compile Include="Assets\Scripts\Extensions\RectTransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\UnityExtension.cs" />
     <Compile Include="Assets\Scripts\GameEndStatsManager.cs" />
+    <Compile Include="Assets\Scripts\Models\Actions\SpawnActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\InventoryReferenceModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\SaveGameModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\ClearInventoryModel.cs" />
@@ -375,6 +376,7 @@
     <Compile Include="Assets\Scripts\ViewModels\Actions\MoveAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\RandomCondition.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\SetterAction.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Actions\SpawnAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\SpecialEffectAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\StartSpecialEventAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\TargetProperty.cs" />
