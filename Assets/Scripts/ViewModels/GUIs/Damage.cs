@@ -7,7 +7,7 @@ namespace Scripts.ViewModels.GUIs
 {
 	public class Damage : Label
 	{
-		public Damage(DamageModel model, ViewModels.Base parent) : base(model, parent)
+		public Damage(DamageModel model, Base parent) : base(model, parent)
 		{
 		}
 

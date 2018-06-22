@@ -1,5 +1,4 @@
-﻿using Scripts.Models;
-using Scripts.Models.GUIs;
+﻿using Scripts.Models.GUIs;
 using UnityEngine;
 
 namespace Scripts.ViewModels.GUIs
