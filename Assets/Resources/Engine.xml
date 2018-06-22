@@ -62,7 +62,7 @@
           <SpecialEffect Value="MagicCircle" />
         </EventTrigger>
         <EventTrigger Event="Attack">
-          <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]1" />
+          <Setter Target="{Root.Play.PlayerCamera.Health}" Value="[-]2" />
         </EventTrigger>
         <EventTrigger Event="Death">
           <CreateItem Target="{DataRoot.LootDrop}" Value="BasicLoot" />
