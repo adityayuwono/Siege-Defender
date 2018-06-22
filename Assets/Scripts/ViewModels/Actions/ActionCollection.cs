@@ -62,7 +62,7 @@ namespace Scripts.ViewModels.Actions
 
 			if (isInterruptable)
 			{
-				_parent.SDRoot.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
+				_parent.Root.IntervalRunner.UnsubscribeFromInterval(ActivateActions);
 				OnActivationFinished = null;
 				// Deactivate everything immediately
 				DeactivateActions();
