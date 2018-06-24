@@ -18,6 +18,8 @@ namespace Scripts.ViewModels.GUIs
 			Color = Color.white;
 		}
 
+		public int Size { get; protected set; }
+		public Color Color { get; protected set; }
 		protected override void OnLoad()
 		{
 			base.OnLoad();
@@ -44,8 +46,5 @@ namespace Scripts.ViewModels.GUIs
 		{
 			Text.SetValue(_propertyBinding.GetValue().ToString());
 		}
-
-		public int Size { get; protected set; }
-		public Color Color { get; protected set; }
 	}
 }
