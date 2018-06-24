@@ -12,7 +12,7 @@ namespace Scripts.ViewModels.GUIs
 		private readonly StatsLabelModel _model;
 		private AdjustableProperty<ProjectileItem> _boundProjectileItem;
 
-		public StatsLabel(StatsLabelModel model, ViewModels.Base parent) : base(model, parent)
+		public StatsLabel(StatsLabelModel model, Base parent) : base(model, parent)
 		{
 			_model = model;
 		}
