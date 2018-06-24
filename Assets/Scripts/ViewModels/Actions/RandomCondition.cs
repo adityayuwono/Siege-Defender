@@ -1,5 +1,4 @@
-﻿using System;
-using Scripts.Core;
+﻿using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models.Actions;
 
@@ -15,7 +14,6 @@ namespace Scripts.ViewModels.Actions
 
 		private readonly Property<double> _randomizedValue = new Property<double>(true);
 
-		private readonly Random _randomizer = new Random();
 		private readonly double _threshold;
 
 		public RandomCondition(RandomConditionModel model, Base parent) : base(model, parent)
@@ -79,7 +77,7 @@ namespace Scripts.ViewModels.Actions
 
 		private void Randomize()
 		{
-			var randomValue = _randomizer.NextDouble();
+			var randomValue = Root.Randomizer.NextDouble();
 			_randomizedValue.SetValue(randomValue);
 		}
 	}

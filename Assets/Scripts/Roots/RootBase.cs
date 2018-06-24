@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Scripts.Contexts;
 using Scripts.Core;
@@ -18,11 +19,14 @@ namespace Scripts
 		protected RootBase(RootModel model, BaseContext parent)
 			: base(model, null)
 		{
+			Randomizer = new Random();
 			_context = parent;
 
 			PropertyLookup = new PropertyLookup(this, this); // This is the root
 			ResourceManager = new ResourcePooler(this);
 		}
+
+		public Random Randomizer { get; private set; }
 
 		public BaseContext Context
 		{
