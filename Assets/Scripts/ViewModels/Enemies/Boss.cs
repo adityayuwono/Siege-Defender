@@ -63,7 +63,7 @@ namespace Scripts.ViewModels.Enemies
 		{
 			get { return _model.Speed; }
 		}
-		
+
 		public override bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
 		{
 			if (_skillInterruptThreshold > 0)

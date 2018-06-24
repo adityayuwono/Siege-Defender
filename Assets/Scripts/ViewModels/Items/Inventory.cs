@@ -108,9 +108,6 @@ namespace Scripts.ViewModels.Items
 				{
 					combinedItems.Add(item);
 				}
-
-				o.Hide("Combining item");
-				o.Deactivate("Combining item");
 			}
 		}
 

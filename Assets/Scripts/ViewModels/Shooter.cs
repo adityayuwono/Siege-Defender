@@ -4,7 +4,6 @@ using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
-using Scripts.Models.Items;
 using Scripts.Models.Weapons;
 using Scripts.ViewModels.Items;
 using Scripts.ViewModels.Weapons;

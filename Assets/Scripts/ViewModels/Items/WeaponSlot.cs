@@ -6,14 +6,10 @@ namespace Scripts.ViewModels.Items
 {
 	public class WeaponSlot : EquipmentSlot
 	{
-		private WeaponSlotModel _model;
-		
 		public readonly AdjustableProperty<ProjectileItem> ProjectileItem;
 
 		public WeaponSlot(WeaponSlotModel model, Inventory parent) : base(model, parent)
 		{
-			_model = model;
-
 			ProjectileItem = new AdjustableProperty<ProjectileItem>("ProjectileItem", this, true);
 			ProjectileItem.SetValue(CurrentItem as ProjectileItem);
 		}
