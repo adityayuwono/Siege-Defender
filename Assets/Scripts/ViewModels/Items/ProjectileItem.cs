@@ -109,10 +109,10 @@ namespace Scripts.ViewModels.Items
 			var stats = "Damage\nSpeed\n\nRate of Fire\nAmmunition\nReload Time";
 			var numbers =
 				string.Format(
-					"{0}\n{1}\n\n{2}\n{3}\n{4}",
+					"{0}\n{1}\n\n{2}/s\n{3}\n{4}",
 					string.Format("{0}-{1}", projectileModel.Stats.Damage[0], projectileModel.Stats.Damage[1]),
 					string.Format("{0}-{1}", projectileModel.Stats.SpeedDeviation[0], projectileModel.Stats.SpeedDeviation[1]),
-					projectileModel.Stats.RoF,
+					Math.Round(1f / projectileModel.Stats.RoF, 2),
 					projectileModel.Stats.Ammunition,
 					projectileModel.Stats.ReloadTime
 				);
@@ -120,7 +120,7 @@ namespace Scripts.ViewModels.Items
 			if (enchantment != null)
 			{
 				augmentation =
-					string.Format("{0}\n\n\n{1}\n{2}\n{3}",
+					string.Format("{0}\n\n\n{1}/s\n{2}\n{3}",
 						string.Format("{0}-{1}", enchantment.Stats.Damage[0], enchantment.Stats.Damage[1]),
 						enchantment.Stats.RoF,
 						enchantment.Stats.Ammunition,
