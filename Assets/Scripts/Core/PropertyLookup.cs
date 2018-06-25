@@ -112,9 +112,6 @@ namespace Scripts.Core
 			if (!propertyDict.ContainsKey(viewModelId))
 			{
 				return null;
-				throw new EngineException(_engine,
-					string.Format("PropertyLookup: Failed to find Property with Id: '{0}' of ViewModel: '{1}'", propertyId,
-						viewModelId));
 			}
 
 			// This means we found the property, return it
