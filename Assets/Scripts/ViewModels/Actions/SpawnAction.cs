@@ -5,7 +5,8 @@ namespace Scripts.ViewModels.Actions
 {
 	public class SpawnAction : BaseAction
 	{
-		private SpawnActionModel _model;
+		private readonly SpawnActionModel _model;
+
 		public SpawnAction(SpawnActionModel model, Base parent) : base(model, parent)
 		{
 			_model = model;
@@ -15,8 +16,16 @@ namespace Scripts.ViewModels.Actions
 		{
 			base.Invoke();
 
+			var enemyId = _model.EnemyId;
+			if (_model.EnemyId.Contains(";"))
+			{
+				var enemyIds = _model.EnemyId.Split(';');
+				var randomIndex = Root.Randomizer.Next(0, enemyIds.Length);
+				enemyId = enemyIds[randomIndex];
+			}
+
 			var scene = GetParent<Scene>();
-			var enemy = scene.EnemyManager.GetEnemy(_model.EnemyId, scene);
+			var enemy = scene.EnemyManager.GetEnemy(enemyId, scene);
 			enemy.Activate(GetParent<LivingObject>().Position);
 			enemy.Show();
 		}
