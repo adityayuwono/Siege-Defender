@@ -17,6 +17,7 @@ namespace Scripts.Views.GUIs
 			base.OnLoad();
 
 			_viewModel.Value.OnChange += Value_OnChange;
+			Value_OnChange();
 		}
 
 		protected override void OnDestroy()
