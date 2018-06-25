@@ -41,6 +41,8 @@ namespace Scripts.ViewModels
 
 			Target = new Target(_model.Target, this);
 			Elements.Add(Target);
+
+			GetParent<Player>().SpeedUpDuration.OnChange += UpdateShootingSpeed;
 		}
 
 		public float ReloadDuration
@@ -164,6 +166,22 @@ namespace Scripts.ViewModels
 			AmmunitionProperty = _projectileModel.Stats.Ammunition;
 			MaxAmmunition.SetValue(_projectileModel.Stats.Ammunition);
 			IsReloading.SetValue(false);
+		}
+
+		private void UpdateShootingSpeed()
+		{
+			var isSpeedUpActive = GetParent<Player>().SpeedUpDuration.GetValue() > 0;
+			if (isSpeedUpActive)
+			{
+				Interval.SetValue(_projectileModel.Stats.RoF / 1.25f);
+			}
+			else
+			{
+				Interval.SetValue(_projectileModel.Stats.RoF);
+			}
+
+			StopShooting();
+			StartShooting();
 		}
 	}
 }
