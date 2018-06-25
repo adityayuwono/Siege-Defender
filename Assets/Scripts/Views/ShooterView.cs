@@ -23,6 +23,7 @@ namespace Scripts.Views
 		{
 			var shootingUI = GameObject.AddComponent<ShootingController>();
 			shootingUI.MainTexture = image;
+			shootingUI.Target = _target.Transform;
 			shootingUI.Setup(_viewModel);
 		}
 

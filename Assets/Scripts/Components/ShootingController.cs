@@ -11,6 +11,8 @@ namespace Scripts.Components
 	/// </summary>
 	public class ShootingController : BaseTexturedController
 	{
+		public Transform Target;
+
 		private Shooter _shooterView;
 
 		protected override void OnSetup()
@@ -22,6 +24,8 @@ namespace Scripts.Components
 
 		private void Update()
 		{
+			transform.LookAt(Target);
+
 			var rectTransform = MainTexture.GetComponent<RectTransform>();
 #if !UNITY_EDITOR
 // If Android
