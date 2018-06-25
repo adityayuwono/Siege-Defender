@@ -14,6 +14,7 @@ namespace Scripts.ViewModels.Enemies
 	/// </summary>
 	public class LivingObject : Object
 	{
+		public event Action Hit;
 		public event Action Death;
 		public event Func<Vector3> RequestPositionUpdate;
 		public event Action DeathEnd;
@@ -110,6 +111,11 @@ namespace Scripts.ViewModels.Enemies
 				}
 
 				Health.SetValue(currentHealth);
+
+				if (Hit != null)
+				{
+					Hit();
+				}
 			}
 
 			// Because Vector3 is a struct and structs can't be null

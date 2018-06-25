@@ -35,91 +35,96 @@ namespace Scripts.ViewModels.Enemies
 			{
 				case Event.Interrupt:
 				{
-					var parentBoss = _parentObject as Boss;
-					if (parentBoss != null)
+					var boss = _parentObject as Boss;
+					if (boss != null)
 					{
-						parentBoss.OnInterrupt += InvokeEvent;
+						boss.OnInterrupt += InvokeEvent;
 					}
 				}
 					break;
 				case Event.Click:
 				{
-					var parentButton = _parentObject as ButtonGUI;
-					if (parentButton != null)
+					var buttonGUI = _parentObject as ButtonGUI;
+					if (buttonGUI != null)
 					{
-						parentButton.OnClick += InvokeEvent;
+						buttonGUI.OnClick += InvokeEvent;
 					}
 				}
 					break;
 				case Event.Break:
 				{
-					var parentButton = _parentObject as Limb;
-					if (parentButton != null)
+					var limb = _parentObject as Limb;
+					if (limb != null)
 					{
-						parentButton.OnBreak += InvokeEvent;
+						limb.OnBreak += InvokeEvent;
 					}
 				}
 					break;
 				case Event.Spawn:
 				{
-					var parentButton = _parentObject as Enemy;
-					if (parentButton != null)
+					var enemy = _parentObject as Enemy;
+					if (enemy != null)
 					{
-						parentButton.Spawn += InvokeEvent;
+						enemy.Spawn += InvokeEvent;
 					}
 				}
 					break;
 				case Event.Attack:
 				{
-					var parentButton = _parentObject as Enemy;
-					if (parentButton != null)
+					var enemy = _parentObject as Enemy;
+					if (enemy != null)
 					{
-						parentButton.Attack += InvokeEvent;
+						enemy.Attack += InvokeEvent;
 					}
 				}
 					break;
 				case Event.Walk:
 				{
-					var parentButton = _parentObject as Enemy;
-					if (parentButton != null)
+					var enemy = _parentObject as Enemy;
+					if (enemy != null)
 					{
-						parentButton.Walk += InvokeEvent;
+						enemy.Walk += InvokeEvent;
 					}
 				}
 					break;
 				case Event.Death:
 				{
-					var parentButton = _parentObject as LivingObject;
-					if (parentButton != null)
+					var livingObject = _parentObject as LivingObject;
+					if (livingObject != null)
 					{
-						parentButton.Death += InvokeEvent;
+						livingObject.Death += InvokeEvent;
 					}
 				}
 					break;
 				case Event.DeathEnd:
 				{
-					var parentButton = _parentObject as LivingObject;
-					if (parentButton != null)
+					var livingObject = _parentObject as LivingObject;
+					if (livingObject != null)
 					{
-						parentButton.DeathEnd += InvokeEvent;
+						livingObject.DeathEnd += InvokeEvent;
 					}
 				}
 					break;
 				case Event.Hit:
 				{
-					var parentButton = _parentObject as Projectile;
-					if (parentButton != null)
+					var projectile = _parentObject as Projectile;
+					if (projectile != null)
 					{
-						parentButton.Hit += InvokeEvent;
+						projectile.Hit += InvokeEvent;
+					}
+					var livingObject = _parentObject as LivingObject;
+					if (livingObject != null)
+					{
+						livingObject.Hit += InvokeEvent;
 					}
 				}
 					break;
 				case Event.GameOver:
 				{
-					var parentButton = _parentObject as Player;
-					if (parentButton != null)
+					var player = _parentObject as Player;
+					if (player != null)
 					{
-						parentButton.OnGameOver += InvokeEvent;
+						player.OnGameOver += InvokeEvent;
 					}
 				}
 					break;
@@ -132,8 +137,11 @@ namespace Scripts.ViewModels.Enemies
 
 		private void InvokeEvent()
 		{
-			_isInvoked = true;
-			base.OnActivate();
+			if (!_isInvoked)
+			{
+				_isInvoked = true;
+				base.OnActivate();
+			}
 		}
 
 		protected override void OnDeactivate()
@@ -142,91 +150,96 @@ namespace Scripts.ViewModels.Enemies
 			{
 				case Event.Interrupt:
 				{
-					var parentBoss = _parentObject as Boss;
-					if (parentBoss != null)
+					var boss = _parentObject as Boss;
+					if (boss != null)
 					{
-						parentBoss.OnInterrupt -= InvokeEvent;
+						boss.OnInterrupt -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.Click:
 				{
-					var parentButton = _parentObject as ButtonGUI;
-					if (parentButton != null)
+					var buttonGUI = _parentObject as ButtonGUI;
+					if (buttonGUI != null)
 					{
-						parentButton.OnClick -= InvokeEvent;
+						buttonGUI.OnClick -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.Break:
 				{
-					var parentButton = _parentObject as Limb;
-					if (parentButton != null)
+					var limb = _parentObject as Limb;
+					if (limb != null)
 					{
-						parentButton.OnBreak -= InvokeEvent;
+						limb.OnBreak -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.Spawn:
 				{
-					var parentButton = _parentObject as Enemy;
-					if (parentButton != null)
+					var enemy = _parentObject as Enemy;
+					if (enemy != null)
 					{
-						parentButton.Spawn -= InvokeEvent;
+						enemy.Spawn -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.Attack:
 				{
-					var parentButton = _parentObject as Enemy;
-					if (parentButton != null)
+					var enemy = _parentObject as Enemy;
+					if (enemy != null)
 					{
-						parentButton.Attack -= InvokeEvent;
+						enemy.Attack -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.Walk:
 				{
-					var parentButton = _parentObject as Enemy;
-					if (parentButton != null)
+					var enemy = _parentObject as Enemy;
+					if (enemy != null)
 					{
-						parentButton.Walk -= InvokeEvent;
+						enemy.Walk -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.Death:
 				{
-					var parentButton = _parentObject as LivingObject;
-					if (parentButton != null)
+					var livingObject = _parentObject as LivingObject;
+					if (livingObject != null)
 					{
-						parentButton.Death -= InvokeEvent;
+						livingObject.Death -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.DeathEnd:
 				{
-					var parentButton = _parentObject as LivingObject;
-					if (parentButton != null)
+					var livingObject = _parentObject as LivingObject;
+					if (livingObject != null)
 					{
-						parentButton.DeathEnd -= InvokeEvent;
+						livingObject.DeathEnd -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.Hit:
 				{
-					var parentButton = _parentObject as Projectile;
-					if (parentButton != null)
+					var projectile = _parentObject as Projectile;
+					if (projectile != null)
 					{
-						parentButton.Hit -= InvokeEvent;
+						projectile.Hit -= InvokeEvent;
+					}
+					var livingObject = _parentObject as LivingObject;
+					if (livingObject != null)
+					{
+						livingObject.Hit -= InvokeEvent;
 					}
 				}
 					break;
 				case Event.GameOver:
 				{
-					var parentButton = _parentObject as Player;
-					if (parentButton != null)
+					var player = _parentObject as Player;
+					if (player != null)
 					{
-						parentButton.OnGameOver -= InvokeEvent;
+						player.OnGameOver -= InvokeEvent;
 					}
 				}
 					break;
