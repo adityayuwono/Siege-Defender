@@ -185,6 +185,15 @@ namespace Scripts.Core
 						return tryProperty;
 					}
 
+					if (i + 1 < paths.Length)
+					{
+						tryProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+						if (tryProperty != null)
+						{
+							return tryProperty;
+						}
+					}
+
 					// Try for a property, if it is found then return it
 					var tryThisProperty = context.PropertyLookup.GetProperty("This", currentPath);
 					if (tryThisProperty != null)
