@@ -220,6 +220,11 @@ namespace Scripts.Core
 			// Yeah... nothing
 			return null;
 		}
+		
+		public Property<T> GetProperty<T>(string path)
+		{
+			return GetProperty(path) as Property<T>;
+		}
 
 		public Binding GetBinding(string path)
 		{
@@ -300,11 +305,6 @@ namespace Scripts.Core
 
 			// Yeah... nothing
 			return null;
-		}
-
-		public Property<T> GetProperty<T>(string path)
-		{
-			return GetProperty(path) as Property<T>;
 		}
 
 		#endregion
