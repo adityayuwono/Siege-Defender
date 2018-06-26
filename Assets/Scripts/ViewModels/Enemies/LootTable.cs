@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Scripts.Contexts;
-using Scripts.Interfaces;
 using Scripts.Models.Enemies;
 using Scripts.ViewModels.Items;
 
