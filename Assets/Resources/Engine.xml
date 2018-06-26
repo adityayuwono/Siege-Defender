@@ -663,7 +663,6 @@
           <EquipmentSlot AssetId="SlotBackground/Template12"/>
         </Inventory>
 
-
         <Button AssetId="TakeAll" >
           <Triggers>
             <EventTrigger Event="Click">
