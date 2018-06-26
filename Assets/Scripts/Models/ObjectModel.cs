@@ -37,7 +37,7 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "InventoryReference", Type = typeof(InventoryReferenceModel))]
 		[XmlArrayItem(ElementName = "Button", Type = typeof(ButtonModel))]
 		[XmlArrayItem(ElementName = "ProgressBar", Type = typeof(ProgressBarModel))]
-		[XmlArrayItem(ElementName = "CooldownGUI", Type = typeof(CooldownModel))]
+		[XmlArrayItem(ElementName = "Cooldown", Type = typeof(CooldownModel))]
 		[XmlArrayItem(ElementName = "ShooterGUI", Type = typeof(GUIs.ShooterModel))]
 		[XmlArrayItem(ElementName = "Label", Type = typeof(LabelModel))]
 		[XmlArrayItem(ElementName = "GameEndStats", Type = typeof(GameEndStatsModel))]
