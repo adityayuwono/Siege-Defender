@@ -17,12 +17,11 @@ namespace Scripts.Core
 			_context = context;
 			_properties = properties;
 			_bindingPaths = bindingPaths;
-
-			UpdateOnChangeBinding();
 		}
 
 		public void Bind(Action updateText)
 		{
+			UpdateOnChangeBinding();
 			_onChange = updateText;
 		}
 
@@ -53,7 +52,6 @@ namespace Scripts.Core
 			UnbindFromOnChange();
 			var newBinding = _context.PropertyLookup.GetBinding("{" + string.Join(".", _bindingPaths.ToArray()) + "}");
 			_properties = newBinding._properties;
-			newBinding.UnbindFromOnChange();
 			UpdateOnChangeBinding();
 			_onChange();
 		}
