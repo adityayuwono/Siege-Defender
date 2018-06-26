@@ -25,19 +25,26 @@ namespace Scripts.Extensions
 				queue.Add(child.GetChild(i));
 			}
 
+			var index = 0;
 			while (queue.Count > 0)
 			{
 				child = queue[0];
 				queue.RemoveAt(0);
 
-				var childSearchPattern = splitNames[splitNames.Length - 1];
+				var childSearchPattern = splitNames[index];
 
 				var isFound = child.name == childSearchPattern;
 				isFound &= includeInactive || child.gameObject.activeInHierarchy;
 
 				if (isFound)
 				{
-					return child;
+					index++;
+					if (index == splitNames.Length)
+					{
+						return child;
+					}
+					queue.Clear();
+					queue.Add(child);
 				}
 
 				for (var i = 0; i < child.childCount; i++)
