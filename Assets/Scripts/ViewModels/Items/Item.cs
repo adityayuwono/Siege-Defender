@@ -1,10 +1,13 @@
 ﻿using System;
+using Scripts.Core;
 using Scripts.Models.Items;
 
 namespace Scripts.ViewModels.Items
 {
 	public class Item : Object
 	{
+		public AdjustableProperty<String> BaseName;
+
 		public Action<Object> ParentChanged;
 
 		private readonly ItemModel _model;
@@ -14,7 +17,8 @@ namespace Scripts.ViewModels.Items
 		{
 			_model = model;
 
-			BaseName = _model.BaseItem;
+			BaseName = new AdjustableProperty<string>("BaseName", this);
+			BaseName.SetValue(_model.BaseItem);
 		}
 
 		public string BaseItem
@@ -26,11 +30,6 @@ namespace Scripts.ViewModels.Items
 		{
 			get { return _model; }
 		}
-
-		public string BaseName { get; protected set; }
-		public string Stats { get; protected set; }
-		public string Numbers { get; protected set; }
-		public string Augmentation { get; set; }
 
 		public string ItemSlotRoots
 		{

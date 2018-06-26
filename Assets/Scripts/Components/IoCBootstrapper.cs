@@ -66,7 +66,6 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<CooldownModel>().TypeOf<Object>().To<Cooldown>();
 			IoC.IoCContainer.RegisterFor<ShooterModel>().TypeOf<Object>().To<ShooterGUI>();
 			IoC.IoCContainer.RegisterFor<LabelModel>().TypeOf<Object>().To<Label>();
-			IoC.IoCContainer.RegisterFor<StatsLabelModel>().TypeOf<Object>().To<StatsLabel>();
 			IoC.IoCContainer.RegisterFor<GameEndStatsModel>().TypeOf<Object>().To<GameEndStats>();
 			IoC.IoCContainer.RegisterFor<BloodOverlayModel>().TypeOf<Object>().To<BloodOverlay>();
 
@@ -138,7 +137,6 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<Cooldown>().TypeOf<BaseView>().To<CooldownView>();
 			IoC.IoCContainer.RegisterFor<ShooterGUI>().TypeOf<BaseView>().To<ShooterView>();
 			IoC.IoCContainer.RegisterFor<Label>().TypeOf<BaseView>().To<LabelView>();
-			IoC.IoCContainer.RegisterFor<StatsLabel>().TypeOf<BaseView>().To<StatsLabelView>();
 			IoC.IoCContainer.RegisterFor<GameEndStats>().TypeOf<BaseView>().To<GameEndStatsView>();
 			IoC.IoCContainer.RegisterFor<BloodOverlay>().TypeOf<BaseView>().To<BloodOverlayView>();
 

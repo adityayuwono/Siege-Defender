@@ -221,6 +221,87 @@ namespace Scripts.Core
 			return null;
 		}
 
+		public Binding GetBinding(string path)
+		{
+			if (path.StartsWith("{") && path.EndsWith("}"))
+			{
+				path = path.Replace("{", "").Replace("}", "");
+
+				var paths = path.Split('.');
+
+				var context = _context;
+				var foundPath = String.Empty;
+				var properties = new List<Property>();
+				var bindingPaths = new List<string>();
+				for (var i = 0; i < paths.Length; i++)
+				{
+					var currentPath = paths[i];
+					if (!string.IsNullOrEmpty(foundPath))
+					{
+						currentPath = foundPath;
+						foundPath = String.Empty;
+					}
+
+					if (currentPath == "Root")
+					{
+						context = _engine;
+						continue;
+					}
+
+					if (currentPath == "DataRoot")
+					{
+						context = DataContext.Instance;
+						continue;
+					}
+
+					var isLast = i == paths.Length - 1;
+
+					if (!isLast)
+					{
+						var isOneBeforeLast = i + 1 == paths.Length - 1;
+
+						if (!isOneBeforeLast)
+						{
+							// As long as it's not the last one, keep iterating through context
+							var newContext = context.PropertyLookup.GetContext(currentPath);
+							if (newContext != null)
+							{
+								context = newContext;
+								continue;
+							}
+
+							var contextProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+							if (contextProperty != null)
+							{
+								var tryBase = (contextProperty.GetValue() as Base);
+								if (tryBase != null)
+								{
+									properties.Add(contextProperty);
+									bindingPaths.Add(currentPath);
+									bindingPaths.Add(paths[i + 1]);
+									foundPath = tryBase.Id;
+									continue;
+								}
+							}
+						}
+						else
+						{
+							var foundProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+							if (foundProperty != null)
+							{
+								properties.Add(foundProperty);
+								bindingPaths.Add(paths[i + 1]);
+								return new Binding(context, properties, bindingPaths);
+							}
+						}
+					}
+				}
+			}
+
+			// Yeah... nothing
+			return null;
+		}
+
 		public Property<T> GetProperty<T>(string path)
 		{
 			return GetProperty(path) as Property<T>;

@@ -260,6 +260,7 @@
     <Compile Include="Assets\Scripts\Contexts\GameContext.cs" />
     <Compile Include="Assets\Scripts\Contexts\MenuContext.cs" />
     <Compile Include="Assets\Scripts\Core\AdjustableProperty.cs" />
+    <Compile Include="Assets\Scripts\Core\Binding.cs" />
     <Compile Include="Assets\Scripts\Core\Property.cs" />
     <Compile Include="Assets\Scripts\Core\PropertyLookup.cs" />
     <Compile Include="Assets\Scripts\Core\SpriteLookup.cs" />
@@ -332,7 +333,6 @@
     <Compile Include="Assets\Scripts\Models\GUIs\RootModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\ShooterModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\StaticModel.cs" />
-    <Compile Include="Assets\Scripts\Models\GUIs\StatsLabelModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\PercentageModel.cs" />
     <Compile Include="Assets\Scripts\Models\IntervalModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\EnchantmentItemModel.cs" />
@@ -405,7 +405,6 @@
     <Compile Include="Assets\Scripts\ViewModels\GUIs\ProgressBar.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\ShooterGUIs.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\Static.cs" />
-    <Compile Include="Assets\Scripts\ViewModels\GUIs\StatsLabel.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\Percentage.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Interval.cs" />
     <Compile Include="Assets\Scripts\ViewModels\IntervalBase.cs" />
@@ -459,7 +458,6 @@
     <Compile Include="Assets\Scripts\Views\GUIs\ProgressBarView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\ShooterView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\StaticView.cs" />
-    <Compile Include="Assets\Scripts\Views\GUIs\StatsLabelView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\PercentageView.cs" />
     <Compile Include="Assets\Scripts\Views\IntervalView.cs" />
     <Compile Include="Assets\Scripts\Views\Items\EquipmentSlotView.cs" />

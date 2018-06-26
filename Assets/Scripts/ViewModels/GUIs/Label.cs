@@ -10,7 +10,7 @@ namespace Scripts.ViewModels.GUIs
 		public readonly Property<string> Text = new Property<string>();
 
 		private readonly LabelModel _model;
-		private Property<int> _propertyBinding;
+		private Binding _propertyBinding;
 
 		public Label(LabelModel model, Base parent) : base(model, parent)
 		{
@@ -24,10 +24,10 @@ namespace Scripts.ViewModels.GUIs
 		{
 			base.OnLoad();
 
-			_propertyBinding = GetParent<IContext>().PropertyLookup.GetProperty(_model.Text) as Property<int>;
+			_propertyBinding = GetParent<IContext>().PropertyLookup.GetBinding(_model.Text);
 			if (_propertyBinding != null)
 			{
-				_propertyBinding.OnChange += UpdateText;
+				_propertyBinding.Bind(UpdateText);
 				UpdateText();
 			}
 		}
@@ -36,7 +36,7 @@ namespace Scripts.ViewModels.GUIs
 		{
 			if (_propertyBinding != null)
 			{
-				_propertyBinding.OnChange -= UpdateText;
+				_propertyBinding.Unbind();
 			}
 
 			base.OnDestroyed();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Scripts.Contexts;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Models.Items;
 using Scripts.Models.Weapons;
@@ -10,6 +11,10 @@ namespace Scripts.ViewModels.Items
 {
 	public class ProjectileItem : Item
 	{
+		public AdjustableProperty<String> StatNames;
+		public AdjustableProperty<String> StatNumbers;
+		public AdjustableProperty<String> StatAugmentation;
+
 		private readonly ProjectileItemModel _model;
 
 		private ProjectileModel _projectileModel;
@@ -17,6 +22,10 @@ namespace Scripts.ViewModels.Items
 		public ProjectileItem(ProjectileItemModel model, Object parent)
 			: base(model, parent)
 		{
+			StatNames = new AdjustableProperty<string>("StatNames", this);
+			StatNumbers = new AdjustableProperty<string>("StatNumbers", this);
+			StatAugmentation = new AdjustableProperty<string>("StatAugmentation", this);
+
 			_model = model;
 		}
 
@@ -156,9 +165,9 @@ namespace Scripts.ViewModels.Items
 					);
 			}
 
-			Stats = stats;
-			Numbers = numbers;
-			Augmentation = augmentation;
+			StatNames.SetValue(stats);
+			StatNumbers.SetValue(numbers);
+			StatAugmentation.SetValue(augmentation);
 		}
 	}
 }

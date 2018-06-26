@@ -538,13 +538,14 @@
     <Scene Id="Equipments" AssetId="Equipments">
       <Elements>
         <InventoryReference Source="PlayerInventory" AssetId="InventoryRoot/PlayerInventory" />
-        <StatsLabel Source="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationLeft" />
-        <StatsLabel Source="{DataRoot.PlayerInventory.RightShooter.ProjectileItem}" IsStatic="true" AssetId="InventoryRoot/InformationRight" />
-
-        <StatsLabel Source="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem.BaseName}" IsStatic="true" AssetId="InventoryRoot/InformationLeft/BaseName" />
-        <StatsLabel Source="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem.StatNames}" IsStatic="true" AssetId="InventoryRoot/InformationLeft/StatNames" />
-        <StatsLabel Source="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem.StatNumbers}" IsStatic="true" AssetId="InventoryRoot/InformationLeft/StatNumbers" />
-        <StatsLabel Source="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem.StatAugmentation}" IsStatic="true" AssetId="InventoryRoot/InformationLeft/StatAugmentation" />
+        <Label Text="{DataRoot.PlayerInventory.RightShooter.ProjectileItem.BaseName}" IsStatic="true" AssetId="InventoryRoot/InformationRight/BaseName" />
+        <Label Text="{DataRoot.PlayerInventory.RightShooter.ProjectileItem.StatNames}" IsStatic="true" AssetId="InventoryRoot/InformationRight/StatNames" />
+        <Label Text="{DataRoot.PlayerInventory.RightShooter.ProjectileItem.StatNumbers}" IsStatic="true" AssetId="InventoryRoot/InformationRight/StatNumbers" />
+        <Label Text="{DataRoot.PlayerInventory.RightShooter.ProjectileItem.StatAugmentation}" IsStatic="true" AssetId="InventoryRoot/InformationRight/StatAugmentation" />
+        <Label Text="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem.BaseName}" IsStatic="true" AssetId="InventoryRoot/InformationLeft/BaseName" />
+        <Label Text="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem.StatNames}" IsStatic="true" AssetId="InventoryRoot/InformationLeft/StatNames" />
+        <Label Text="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem.StatNumbers}" IsStatic="true" AssetId="InventoryRoot/InformationLeft/StatNumbers" />
+        <Label Text="{DataRoot.PlayerInventory.LeftShooter.ProjectileItem.StatAugmentation}" IsStatic="true" AssetId="InventoryRoot/InformationLeft/StatAugmentation" />
 
         <Button AssetId="MainMenu" >
           <Triggers>
