@@ -1,5 +1,4 @@
-﻿using System;
-using Scripts.Core;
+﻿using Scripts.Core;
 using Scripts.Models.Actions;
 
 namespace Scripts.ViewModels.Actions

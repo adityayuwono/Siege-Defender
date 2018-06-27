@@ -4,7 +4,7 @@ using Scripts.ViewModels.GUIs;
 
 namespace Scripts.ViewModels
 {
-	public class ButtonGUI : GUIs.BaseGUI
+	public class ButtonGUI : BaseGUI
 	{
 		public event Action OnClick;
 
