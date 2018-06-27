@@ -1,14 +1,14 @@
 fileFormatVersion: 2
 guid: 6f45fa27263f6a5448fd8e06161a176b
-timeCreated: 1529170215
+timeCreated: 1530006386
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HardBone
-    21300002: BoneShard
-    21300004: PerfectCrystal
-    21300006: CrystalSpike
-    21300008: CrystalShard
+    21300000: Hard Bone
+    21300002: Bone Shard
+    21300004: Perfect Crystal
+    21300006: Crystal Spike
+    21300008: Crystal Shard
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -101,7 +101,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HardBone
+      name: Hard Bone
       rect:
         serializedVersion: 2
         x: 4
@@ -109,13 +109,13 @@ TextureImporter:
         width: 89
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BoneShard
+      name: Bone Shard
       rect:
         serializedVersion: 2
         x: 94
@@ -123,13 +123,13 @@ TextureImporter:
         width: 89
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PerfectCrystal
+      name: Perfect Crystal
       rect:
         serializedVersion: 2
         x: 185
@@ -137,13 +137,13 @@ TextureImporter:
         width: 90
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CrystalSpike
+      name: Crystal Spike
       rect:
         serializedVersion: 2
         x: 276
@@ -151,13 +151,13 @@ TextureImporter:
         width: 89
         height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CrystalShard
+      name: Crystal Shard
       rect:
         serializedVersion: 2
         x: 366
@@ -165,7 +165,7 @@ TextureImporter:
         width: 90
         height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

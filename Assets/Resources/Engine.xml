@@ -6,54 +6,65 @@
         RoF="0.1" Ammunition="100" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
         CriticalChance="0.005" CriticalDamageMultiplier="45"        
-        AoEId="AscalonExplosion" />
+        AoEId="Air Slash" />
     </Projectile>
-    <Projectile Id="WoodArrow" AssetId="Projectiles/WoodenBalista" >
+    <Projectile Id="Wood Arrow" AssetId="Projectiles/WoodenBalista" >
       <Stats Damage="9-12"
         SpeedDeviation="400-400"
         RoF="0.2" Ammunition="100" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
         CriticalChance="0.1" CriticalDamageMultiplier="1.5" />
     </Projectile>
-    <Projectile Id="ScatterArrow" AssetId="Projectiles/WoodenBalista" >
+    <Projectile Id="Scatter Arrow" AssetId="Projectiles/WoodenBalista" >
       <Stats Damage="3-5"
 			 SpeedDeviation="300-600"
        RoF="0.4" Ammunition="100" ReloadTime="0"
 			 Accuracy="0.5" Deviation="0" Scatters="5" />
     </Projectile>
-    <Projectile Id="IronArrow" AssetId="Projectiles/IronBalista" >
+    <Projectile Id="Iron Arrow" AssetId="Projectiles/IronBalista" >
       <Stats Damage="18-20"
         SpeedDeviation="700-800"
         RoF="0.35" Ammunition="100" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
         CriticalChance="0.2" CriticalDamageMultiplier="1.25" />
     </Projectile>
-    <Projectile Id="FireBall" AssetId="Projectiles/FireBall" >
+    <Projectile Id="Fire Ball" AssetId="Projectiles/FireBall" >
       <Stats Damage="6-9"
         SpeedDeviation="300-450"
         RoF="0.45" Ammunition="25" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
-        AoEId="FireDome" />
+        AoEId="Fire Dome" />
     </Projectile>
-    <Projectile Id="SkySplitter" AssetId="Projectiles/SkySplitter" >
+    <Projectile Id="Sky Splitter" AssetId="Projectiles/SkySplitter" >
       <Stats Damage="1-15"
         SpeedDeviation="500-500"
         RoF="0.75" Ammunition="99" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
-        AoEId="LightningStrike" />
+        AoEId="Lightning Strike" />
     </Projectile>
-    <Piercing Id="IronBall" AssetId="Projectiles/IronBall" >
+    <Piercing Id="Iron Ball" AssetId="Projectiles/IronBall" >
       <Stats Damage="60-80"
         SpeedDeviation="400-400"
   			RoF="2" Ammunition="4" ReloadTime="0"
   			Accuracy="1" Deviation="0" Scatters="1" />
-    </Piercing>
+    </Piercing>    
+
     <ParticleAoE Id="FireDome" 
-      AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="10" DamageMultiplier="0.75" Scatters="1" />
-    <ParticleAoE Id="AscalonExplosion" 
+      AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="10" DamageMultiplier="0.75" />
+    <ParticleAoE Id="Air Slash" 
       AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="2" DamageMultiplier="1" />
-    <ParticleAoE Id="LightningStrike" 
+    <ParticleAoE Id="Lightning Strike" 
       AssetId="SpecialEffects/3D_ThunderMagic_02" Radius="5" DamageMultiplier="0.5" IsGrounded="true" />
+    
+    <Projectile Id="Meteor Ball" AssetId="Projectiles/FireBall" >
+      <Stats Damage="60-90"
+        SpeedDeviation="500-600"
+        RoF="0.45" Ammunition="25" ReloadTime="0"
+        Accuracy="1" Deviation="0" Scatters="1" 
+        AoEId="Meteor Explosion" />
+    </Projectile>
+    <ParticleAoE Id="Meteor Explosion" 
+      AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="50" DamageMultiplier="2" />
 
   <!-- Enemies --> 
     <Enemy Id="CrystalSpider" AssetId="Enemies/CrystalSpider" Health="75" Speed="9" AttackSpeed="2" DeathDelay="1.3" CollisionEffectNormal="CrystalBreak_Small" Target="Player" >
@@ -71,7 +82,7 @@
     </Enemy>
     <StaticEnemy Id="CrystalShield" AssetId="Enemies/CrystalShield" Health="350"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
       <Elements>
-        <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnColumnFast" />
+        <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
       </Elements>
     </StaticEnemy>
     <StaticEnemy Id="SpiderColumn" AssetId="Enemies/SpiderColumn"  Health="100"  Speed="0" DeathDelay="0.4" CollisionEffectNormal="CrystalBreak_Small" >
@@ -194,12 +205,14 @@
           <Setter Target="{This.AnimationId}" Value="SmashSpawnShield" Wait="2.65" />
           <Setter Target="{This.AnimationId}" Value="Idle" />
           <Setter Target="{ShieldSpawn.Level}" Value="SpawnCrystalShield" />
+          <Setter Target="{SpiderColumns.Level}" Value="SpawnManySpiders" Wait="1" />
         </Skill>
         <Skill Id="ScreamingCrystalShield" IsQueuedable="true" >
           <Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
           <Setter Target="{This.AnimationId}" Value="SmashSpawnShield" Wait="2.65" />
           <Setter Target="{This.AnimationId}" Value="Idle" />
           <Setter Target="{ShieldSpawn.Level}" Value="SpawnCrystalShield" />
+          <Setter Target="{SpiderColumns.Level}" Value="SpawnManySpiders" Wait="1" />
         </Skill>
         <Skill Id="SpiderColumn">
           <Setter Target="{This.AnimationId}" Value="SmashSpawnPillar" Wait="2.3" />
@@ -266,11 +279,21 @@
 
       <Triggers>
         <Trigger TriggerOnce="false" >
-          <RandomCondition Target="{This}" Frequency="1" Value="40" />
+          <RandomCondition Target="{This}" Frequency="1" Value="50" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Setter Target="{This.ActiveSkill}" Value="Slam|RandomMovement" />
         </Trigger>
         <Trigger TriggerOnce="false" >
+          <RandomCondition Target="{This}" Frequency="1" Value="10" />
+          <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
+          <Setter Target="{This.ActiveSkill}" Value="RandomMovement" />
+        </Trigger>
+        <Trigger TriggerOnce="false" >
+          <RandomCondition Target="{This}" Frequency="1" Value="10" />
+          <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
+          <Setter Target="{This.ActiveSkill}" Value="ScreamingRandomMovement" />
+        </Trigger>
+        <!-- <Trigger TriggerOnce="false" >
           <RandomCondition Target="{This}" Frequency="1" Value="20" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
@@ -279,40 +302,28 @@
           <RandomCondition Target="{This}" Frequency="1" Value="20" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Setter Target="{This.ActiveSkill}" Value="SpiderSwarm" />
-        </Trigger>
-        <Trigger TriggerOnce="false" >
+        </Trigger> -->
+        <!-- <Trigger TriggerOnce="false" >
           <RandomCondition Target="{This}" Frequency="2" Value="35" />
           <Condition Target="{ShieldSpawn.ActiveObjects}" Value="\1" />
           <Condition Target="{SpiderColumns.ActiveObjects}" Value="\5" />
           <Setter Target="{This.ActiveSkill}" Value="SpiderColumn" />
-        </Trigger>
+        </Trigger> -->
 
         <Trigger>
-          <Condition Target="{This.Health}" Value="\1800" />
-          <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
-        </Trigger>
-        <Trigger>
-          <Condition Target="{This.Health}" Value="\1500" />
+          <Condition Target="{This.Health}" Value="\4000" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\1200" />
-          <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
-        </Trigger>
-        <Trigger>
-          <Condition Target="{This.Health}" Value="\900" />
+          <Condition Target="{This.Health}" Value="\3000" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\600" />
-          <Setter Target="{WarpGates.Level}" Value="SpiderColumnSwarm" />
-        </Trigger>
-        <Trigger>
-          <Condition Target="{This.Health}" Value="\300" />
+          <Condition Target="{This.Health}" Value="\2000" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
         <Trigger>
-          <Condition Target="{This.Health}" Value="\100" />
+          <Condition Target="{This.Health}" Value="\1000" />
           <Setter Target="{This.ActiveSkill}" Value="CrystalShield" />
         </Trigger>
 
@@ -332,15 +343,11 @@
     <SpecialEffect Id="ChargingSlam" AssetId="SpecialEffects/M_3D_Charge_02" />
     <SpecialEffect Id="HitSlam" AssetId="SpecialEffects/M_3D_CriticalHit_01" />
     <SpecialEffect Id="ItemDrop" AssetId="SpecialEffects/M_3D_ItemDrop_01" />
+  <!-- Special Effects -->
 
     <Object Id="House1" AssetId="Environtments/House1"/>
     <Object Id="House2" AssetId="Environtments/House2"/>
-    <Object Id="House3" AssetId="Environtments/House3"/>
-
-    <Enchantment Id="E1_1" Prefix="Scattering"/>
-    <Enchantment Id="E2_1" Prefix="Malicious"/>
-    <Enchantment Id="E3_1" Prefix="Fierce"/>
-    <Enchantment Id="E4_1" Prefix="Stablilized"/>
+    <Object Id="House3" AssetId="Environtments/House3"/>    
   </Objects>
 
   <Levels>
@@ -352,7 +359,7 @@
       <Cache EnemyId="StoneBreak" Count="10" />
       <Cache EnemyId="SpiderColumn" Count="5" />
 
-      <Spawn EnemyId="CrystalSpider" Count="2" />
+      <!-- <Spawn EnemyId="CrystalSpider" Count="2" />
       <Spawn EnemyId="SpiderColumn" Count="1" />
       <Spawn EnemyId="CrystalSpider" Count="3" />
       <Spawn EnemyId="SpiderColumn" Count="1" />
@@ -364,12 +371,11 @@
       <Spawn EnemyId="SpiderColumn" Count="3" />
       <Spawn EnemyId="CrystalSpider" Count="5" />
       <Spawn />
-      <Spawn EnemyId="StrongSpiderColumn" Count="2" />
+      <Spawn EnemyId="StrongSpiderColumn" Count="2" /> -->
       <Spawn EnemyId="ZombieAbomination" />
-      <SpawnInterval EnemyId="CrystalSpider" Count="2" Interval="13" LoopCount="-1" />
-      <SpawnInterval EnemyId="CrystalSpider" Count="1" Interval="7" LoopCount="-1" />
-      <SpawnInterval EnemyId="SpiderColumn" Count="1" Interval="23" LoopCount="-1" />
-      <SpawnInterval EnemyId="StrongSpiderColumn" Count="1" Interval="57" LoopCount="-1" />
+      <!-- <SpawnInterval EnemyId="CrystalSpider" Count="1" Interval="7" LoopCount="-1" /> -->
+      <!-- <SpawnInterval EnemyId="SpiderColumn" Count="1" Interval="23" LoopCount="-1" /> -->
+      <!-- <SpawnInterval EnemyId="StrongSpiderColumn" Count="1" Interval="57" LoopCount="-1" /> -->
     </Level>
     <SubLevel Id="SpawnCrystalShield" Interval="0.1" LoopCount="0">
       <Spawn EnemyId="CrystalShield" />
@@ -377,17 +383,16 @@
     <SubLevel Id="SpawnSpiderColumn" Interval="0.1" LoopCount="0">
       <Spawn EnemyId="SpiderColumn" />
     </SubLevel>
-    <SubLevel Id="SpawnManySpiders" Interval="0.1" LoopCount="0">
-      <Spawn EnemyId="CrystalSpider" Count="4" />
+    <SubLevel Id="SpawnManySpiders" Interval="3" LoopCount="3">
+      <Spawn EnemyId="CrystalSpider" Count="1" />
     </SubLevel>
     <SubLevel Id="SpiderColumnSwarm" Interval="1" LoopCount="0">
-      <Spawn EnemyId="StrongSpiderColumn"/>
       <Spawn EnemyId="StrongSpiderColumn"/>
     </SubLevel>
     <SubLevel Id="SpawnSpiders" Interval="5" LoopCount="1">
       <Spawn EnemyId="CrystalSpider" />
     </SubLevel>
-    <SubLevel Id="SpawnSpidersInfinite" Interval="23" LoopCount="-1">
+    <SubLevel Id="SpawnSpidersInfinite" Interval="11" LoopCount="-1">
       <Spawn EnemyId="CrystalSpider" />
     </SubLevel>
     <SubLevel Id="SpawnColumnFast" Interval="37" LoopCount="-1">
@@ -441,17 +446,17 @@
 
   <LootTables>
     <LootTable Id="BasicLoot" Drops="1">
-      <Loot ItemId="CrystalSpike" Chance="0.015" />
+      <Loot ItemId="Crystal Spike" Chance="0.015" />
     </LootTable>
     <LootTable Id="BossLimbLoot" Drops="2">
-      <Loot ItemId="PerfectCrystal" Chance="1" />
-      <Loot ItemId="CrystalShard" Chance="5" />
-      <Loot ItemId="HardBone" Chance="2.5" Max="2" />
-      <Loot ItemId="BoneShard" Chance="5" Max="1" />
+      <Loot ItemId="Perfect Crystal" Chance="1" />
+      <Loot ItemId="Crystal Shard" Chance="5" />
+      <Loot ItemId="Hard Bone" Chance="2.5" Max="2" />
+      <Loot ItemId="Bone Shard" Chance="5" Max="1" />
     </LootTable>
     <LootTable Id="CrystalLimbLoot" Drops="1">
-      <Loot ItemId="PerfectCrystal" Chance="5" />
-      <Loot ItemId="CrystalShard" Chance="10" />
+      <Loot ItemId="Perfect Crystal" Chance="5" />
+      <Loot ItemId="Crystal Shard" Chance="10" />
     </LootTable>
   </LootTables>
 
