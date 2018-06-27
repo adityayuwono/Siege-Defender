@@ -37,6 +37,7 @@ namespace Scripts.Models
 		public List<LevelModel> Levels { get; set; }
 
 		[XmlArray]
+		[XmlArrayItem(ElementName = "Enchantment", Type = typeof(EnchantmentItemModel))]
 		[XmlArrayItem(ElementName = "Item", Type = typeof(ItemModel))]
 		public List<ItemModel> Items { get; set; }
 
