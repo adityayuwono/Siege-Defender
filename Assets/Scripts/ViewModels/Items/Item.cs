@@ -1,16 +1,21 @@
 ﻿using System;
+using Scripts.Contexts;
 using Scripts.Core;
+using Scripts.Interfaces;
 using Scripts.Models.Items;
 
 namespace Scripts.ViewModels.Items
 {
 	public class Item : Object
 	{
-		public AdjustableProperty<String> BaseName;
+		public AdjustableProperty<string> BaseName;
+		public AdjustableProperty<int> Price;
+		public AdjustableProperty<string> Description;
 
 		public Action<Object> ParentChanged;
 
 		private readonly ItemModel _model;
+		private ItemModel _baseItemModel;
 
 		public Item(ItemModel model, Base parent)
 			: base(model, parent)
@@ -18,7 +23,8 @@ namespace Scripts.ViewModels.Items
 			_model = model;
 
 			BaseName = new AdjustableProperty<string>("BaseName", this);
-			BaseName.SetValue(_model.BaseItem);
+			Price = new AdjustableProperty<int>("Price", this);
+			Description = new AdjustableProperty<string>("Description", this);
 		}
 
 		public string BaseItem
@@ -40,11 +46,6 @@ namespace Scripts.ViewModels.Items
 		{
 			get { return _model.Quantity; }
 			set { _model.Quantity = value; }
-		}
-
-		public int Price
-		{
-			get { return _model.Price; }
 		}
 
 		public void ChangeParent(Object newParent)
