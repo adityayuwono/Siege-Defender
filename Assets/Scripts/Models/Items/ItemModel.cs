@@ -25,5 +25,8 @@ namespace Scripts.Models.Items
 
 		[XmlIgnore]
 		public string ItemSlotRoots { get; set; }
+
+		[XmlAttribute]
+		public string Description { get; set; }
 	}
 }

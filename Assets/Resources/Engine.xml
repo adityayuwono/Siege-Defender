@@ -420,12 +420,23 @@
       <MinStats RoF="0.50" Deviation="0.01" />
     </EnchantmentGenerator>
 
-    <Item Id="HardShell" AssetId="GUIs/ItemTemplate" BaseItem="HardShell" Price="1" />
-    <Item Id="BoneShard" AssetId="GUIs/ItemTemplate" BaseItem="BoneShard" Price="1" />
-    <Item Id="HardBone" AssetId="GUIs/ItemTemplate" BaseItem="HardBone" Price="3" />
-    <Item Id="CrystalSpike" AssetId="GUIs/ItemTemplate" BaseItem="CrystalSpike" Price="1" />
-    <Item Id="CrystalShard" AssetId="GUIs/ItemTemplate" BaseItem="CrystalShard" Price="7" />
-    <Item Id="PerfectCrystal" AssetId="GUIs/ItemTemplate" BaseItem="PerfectCrystal" Price="1000" />
+    <Enchantment Id="E1_1" AssetId="GUIs/EnchantmentTemplate" BaseItem="E1_1" Prefix="Scattering"/>
+    <Enchantment Id="E2_1" AssetId="GUIs/EnchantmentTemplate" BaseItem="E2_1" Prefix="Malicious"/>
+    <Enchantment Id="E3_1" AssetId="GUIs/EnchantmentTemplate" BaseItem="E3_1" Prefix="Fierce"/>
+    <Enchantment Id="E4_1" AssetId="GUIs/EnchantmentTemplate" BaseItem="E4_1" Prefix="Stablilized"/>
+
+    <Item Id="Hard Shell" AssetId="GUIs/ItemTemplate" BaseItem="Hard Shell" 
+      Price="1" Description="A Hard shell of an animal's exoskeleton, cheap but strong" />
+    <Item Id="Bone Shard" AssetId="GUIs/ItemTemplate" BaseItem="Bone Shard" 
+      Price="1" Description="Small bone shards, barely worth anything, but can be useful to create projectiles" />
+    <Item Id="Hard Bone" AssetId="GUIs/ItemTemplate" BaseItem="Hard Bone" 
+      Price="3" Description="An intact bone of a huge monster, durable and very useful to build weapons" />
+    <Item Id="Crystal Spike" AssetId="GUIs/ItemTemplate" BaseItem="Crystal Spike" 
+      Price="1" Description="Small broken piece of a crystal, need a lot of this to be useful" />
+    <Item Id="Crystal Shard" AssetId="GUIs/ItemTemplate" BaseItem="Crystal Shard" 
+      Price="7" Description="A shard of glowing crystal, looks like it contains magical energy, probably can be crafted to build a strong weapon" />
+    <Item Id="Perfect Crystal" AssetId="GUIs/ItemTemplate" BaseItem="Perfect Crystal" 
+      Price="1000" Description="A beautiful perfect crystal, can be used as a main ingredient to create strong weapon" />
   </Items>
 
   <LootTables>
