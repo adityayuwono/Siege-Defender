@@ -36,11 +36,19 @@ namespace Scripts.ViewModels.Actions
 				throw new EngineException(this, "Failed to find parent Context");
 			}
 
-			var property = parentContext.PropertyLookup.GetProperty(targetPath);
-			if (property != null)
+			var binding = parentContext.PropertyLookup.GetBinding(targetPath);
+			if (binding != null)
 			{
-				return property;
+				return binding.Get();
 			}
+#if UNITY_EDITOR
+			else
+			{
+				// Do it again to debug in editor
+				binding = parentContext.PropertyLookup.GetBinding(targetPath);
+			}
+#endif
+
 
 			throw new EngineException(this,
 				string.Format("Failed to find Target: {0}", targetPath));

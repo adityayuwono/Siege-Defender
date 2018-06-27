@@ -7,9 +7,8 @@ namespace Scripts.ViewModels.GUIs
 	public class Percentage : BaseGUI
 	{
 		private readonly PercentageModel _model;
-		public Property<float> MaxValue;
-
 		public Property<float> Value;
+		public Property<float> MaxValue;
 
 		public Percentage(PercentageModel model, Base parent) 
 			: base(model, parent)
@@ -21,8 +20,8 @@ namespace Scripts.ViewModels.GUIs
 		{
 			base.OnLoad();
 
-			Value = GetParent<IContext>().PropertyLookup.GetProperty<float>(_model.Value);
-			MaxValue = GetParent<IContext>().PropertyLookup.GetProperty<float>(_model.MaxValue);
+			Value = GetParent<IContext>().PropertyLookup.GetBinding(_model.Value).GetPropertyAs<float>();
+			MaxValue = GetParent<IContext>().PropertyLookup.GetBinding(_model.MaxValue).GetPropertyAs<float>();
 		}
 	}
 }

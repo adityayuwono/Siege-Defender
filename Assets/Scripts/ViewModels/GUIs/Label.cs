@@ -10,16 +10,17 @@ namespace Scripts.ViewModels.GUIs
 		public readonly Property<string> Text = new Property<string>();
 
 		private readonly LabelModel _model;
-		private Binding _propertyBinding;
+		private IBinding _propertyBinding;
 
 		public Label(LabelModel model, Base parent) : base(model, parent)
 		{
 			_model = model;
-			Color = Color.white;
+			Color = Color.clear;
 		}
 
 		public int Size { get; protected set; }
 		public Color Color { get; protected set; }
+
 		protected override void OnLoad()
 		{
 			base.OnLoad();
@@ -44,7 +45,11 @@ namespace Scripts.ViewModels.GUIs
 
 		private void UpdateText()
 		{
-			Text.SetValue(_propertyBinding.GetValue().ToString());
+			var bindingValue = _propertyBinding.GetValue();
+			if (bindingValue != null)
+			{
+				Text.SetValue(bindingValue.ToString());
+			};
 		}
 	}
 }

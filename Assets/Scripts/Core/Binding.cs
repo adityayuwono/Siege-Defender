@@ -5,7 +5,7 @@ using Scripts.Interfaces;
 
 namespace Scripts.Core
 {
-	public class Binding
+	public class Binding : IBinding
 	{
 		private Action _onChange;
 		private readonly IContext _context;
@@ -50,14 +50,37 @@ namespace Scripts.Core
 		private void UpdateBinding()
 		{
 			UnbindFromOnChange();
-			var newBinding = _context.PropertyLookup.GetBinding("{" + string.Join(".", _bindingPaths.ToArray()) + "}");
+			var newBinding = _context.PropertyLookup.GetBinding("{" + string.Join(".", _bindingPaths.ToArray()) + "}") as Binding;
 			_properties = newBinding._properties;
 			UpdateOnChangeBinding();
 			_onChange();
 		}
 
+		public object Get()
+		{
+			if (_properties.Count == 0)
+			{
+				return _context;
+			}
+			return GetProperty();
+		}
+
+		public Property GetProperty()
+		{
+			return _properties.Last();
+		}
+
+		public Property<T> GetPropertyAs<T>()
+		{
+			return GetProperty() as Property<T>;
+		}
+
 		public object GetValue()
 		{
+			if (_properties.Count == 0)
+			{
+				return "";
+			}
 			return _properties.Last().GetValue();
 		}
 	}

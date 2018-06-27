@@ -68,7 +68,7 @@ namespace Scripts.ViewModels
 			{
 				if (_model.AssetId.StartsWith("{"))
 				{
-					return GetParent<IContext>().PropertyLookup.GetProperty<string>(_model.AssetId).GetValue();
+					return GetParent<IContext>().PropertyLookup.GetBinding(_model.AssetId).GetValue().ToString();
 				}
 				return _model.AssetId;
 			}

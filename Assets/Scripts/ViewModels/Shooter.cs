@@ -112,15 +112,7 @@ namespace Scripts.ViewModels
 		{
 			base.OnLoad();
 
-			var projectileItemBinding = GetParent<IContext>().PropertyLookup.GetProperty<ProjectileItem>(_model.ProjectileId);
-			if (projectileItemBinding == null)
-			{
-				throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", _model.ProjectileId));
-			}
-
-			var projectileItem = projectileItemBinding.GetValue();
-
-			_projectileModel = projectileItem.UpdateModel();
+			_projectileModel = SetupBindingToProjectileItem(_model.ProjectileId);			
 
 			if (!string.IsNullOrEmpty(_projectileModel.Stats.AoEId))
 			{
@@ -136,6 +128,23 @@ namespace Scripts.ViewModels
 			UpdateProjectile();
 
 			IsShooting.SetValue(false);
+		}
+
+		private ProjectileModel SetupBindingToProjectileItem(string projectileId)
+		{
+			var projectileItemBinding = GetParent<IContext>().PropertyLookup.GetBinding(projectileId);
+			if (projectileItemBinding == null)
+			{
+				throw new EngineException(this, string.Format("Path: {0}, is not a valid Object", projectileId));
+			}
+
+			var projectileItem = projectileItemBinding.GetValue() as ProjectileItem;
+			if (projectileItem == null)
+			{
+				throw new EngineException(this, string.Format("Path: {0}, is not a valid Projectile Item", projectileId));
+			}
+
+			return projectileItem.UpdateModel();
 		}
 
 		private void UpdateProjectile()

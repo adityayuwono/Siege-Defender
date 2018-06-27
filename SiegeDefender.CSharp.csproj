@@ -261,6 +261,8 @@
     <Compile Include="Assets\Scripts\Contexts\MenuContext.cs" />
     <Compile Include="Assets\Scripts\Core\AdjustableProperty.cs" />
     <Compile Include="Assets\Scripts\Core\Binding.cs" />
+    <Compile Include="Assets\Scripts\Core\ChildBinding.cs" />
+    <Compile Include="Assets\Scripts\Core\IBinding.cs" />
     <Compile Include="Assets\Scripts\Core\Property.cs" />
     <Compile Include="Assets\Scripts\Core\PropertyLookup.cs" />
     <Compile Include="Assets\Scripts\Core\SpriteLookup.cs" />

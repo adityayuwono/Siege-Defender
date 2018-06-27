@@ -620,6 +620,14 @@
           <EquipmentSlot AssetId="SlotBackground/Template12"/>
         </Inventory>
 
+        <Label Text="{DataRoot.LootDrop.SelectedItem.BaseName}" IsStatic="true" AssetId="InventoryRoot/Information/BaseName" />
+        <Label Text="{DataRoot.LootDrop.SelectedItem.Price}" IsStatic="true" AssetId="InventoryRoot/Information/Price" />
+        <Label Text="{DataRoot.LootDrop.SelectedItem.Description}" IsStatic="true" AssetId="InventoryRoot/Information/Description" />
+
+        <Label Text="{ReceivedMaterials.SelectedItem.BaseName}" IsStatic="true" AssetId="InventoryRoot/Information/BaseName" />
+        <Label Text="{ReceivedMaterials.SelectedItem.Price}" IsStatic="true" AssetId="InventoryRoot/Information/Price" />
+        <Label Text="{ReceivedMaterials.SelectedItem.Description}" IsStatic="true" AssetId="InventoryRoot/Information/Description" />
+
         <Button AssetId="TakeAll" >
           <Triggers>
             <EventTrigger Event="Click">

@@ -123,110 +123,7 @@ namespace Scripts.Core
 		/// </summary>
 		/// <param name="path">string </param>
 		/// <returns>May return null</returns>
-		public object GetProperty(string path)
-		{
-			if (path.StartsWith("{") && path.EndsWith("}"))
-			{
-				path = path.Replace("{", "").Replace("}", "");
-
-				var paths = path.Split('.');
-
-				var context = _context;
-				for (var i = 0; i < paths.Length; i++)
-				{
-					var currentPath = paths[i];
-
-					if (currentPath == "Root")
-					{
-						context = _engine;
-						continue;
-					}
-
-					if (currentPath == "DataRoot")
-					{
-						context = DataContext.Instance;
-						continue;
-					}
-
-					var isLast = i == paths.Length - 1;
-
-					if (!isLast)
-					{
-						// As long as it's not the last one, keep iterating through context
-						var newContext = context.PropertyLookup.GetContext(currentPath);
-						if (newContext != null)
-						{
-							context = newContext;
-							continue;
-						}
-
-						var contextProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
-						if (contextProperty != null)
-						{
-							return contextProperty;
-						}
-
-						// No Context found, look for a child
-						var tryFindChild = context.PropertyLookup.GetChild(currentPath);
-						if (tryFindChild != null)
-						{
-						}
-					}
-
-					if (paths.Length == 1)
-					{
-						return context.PropertyLookup.GetContext(currentPath);
-					}
-
-					// Try for a property, if it is found then return it
-					var tryProperty = context.PropertyLookup.GetProperty(paths[i - 1], currentPath);
-					if (tryProperty != null)
-					{
-						return tryProperty;
-					}
-
-					if (i + 1 < paths.Length)
-					{
-						tryProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
-						if (tryProperty != null)
-						{
-							return tryProperty;
-						}
-					}
-
-					// Try for a property, if it is found then return it
-					var tryThisProperty = context.PropertyLookup.GetProperty("This", currentPath);
-					if (tryThisProperty != null)
-					{
-						return tryThisProperty;
-					}
-
-					// No Property found, then look for a context
-					var tryContext = context.PropertyLookup.GetContext(currentPath);
-					if (tryContext != null)
-					{
-						return tryContext;
-					}
-
-					// No Context found, look for a child
-					var tryChild = context.PropertyLookup.GetChild(currentPath);
-					if (tryChild != null)
-					{
-						return tryChild;
-					}
-				}
-			}
-
-			// Yeah... nothing
-			return null;
-		}
-		
-		public Property<T> GetProperty<T>(string path)
-		{
-			return GetProperty(path) as Property<T>;
-		}
-
-		public Binding GetBinding(string path)
+		public IBinding GetBinding(string path)
 		{
 			if (path.StartsWith("{") && path.EndsWith("}"))
 			{
@@ -247,6 +144,11 @@ namespace Scripts.Core
 						foundPath = String.Empty;
 					}
 
+					if (paths.Length == 1)
+					{
+						return new Binding(context, properties, bindingPaths);
+					}
+
 					if (currentPath == "Root")
 					{
 						context = _engine;
@@ -260,22 +162,44 @@ namespace Scripts.Core
 					}
 
 					var isLast = i == paths.Length - 1;
-
 					if (!isLast)
 					{
-						var isOneBeforeLast = i + 1 == paths.Length - 1;
-
-						if (!isOneBeforeLast)
+						// As long as it's not the last one, keep iterating through context
+						var newContext = context.PropertyLookup.GetContext(currentPath);
+						if (newContext != null)
 						{
-							// As long as it's not the last one, keep iterating through context
-							var newContext = context.PropertyLookup.GetContext(currentPath);
-							if (newContext != null)
+							context = newContext;
+							continue;
+						}
+
+						var isOneBeforeLast = i + 1 == paths.Length - 1;
+						if (isOneBeforeLast)
+						{
+							var foundProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+							if (foundProperty != null)
 							{
-								context = newContext;
+								properties.Add(foundProperty);
+								bindingPaths.Add(paths[i + 1]);
+								return new Binding(context, properties, bindingPaths);
+							}
+						}
+
+						var contextProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+						if (contextProperty != null)
+						{
+							var tryBase = (contextProperty.GetValue() as Base);
+							if (tryBase != null)
+							{
+								properties.Add(contextProperty);
+								bindingPaths.Add(currentPath);
+								bindingPaths.Add(paths[i + 1]);
+								foundPath = tryBase.Id;
 								continue;
 							}
-
-							var contextProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
+						}
+						else
+						{
+							contextProperty = context.PropertyLookup.GetProperty("This", currentPath);
 							if (contextProperty != null)
 							{
 								var tryBase = (contextProperty.GetValue() as Base);
@@ -287,17 +211,44 @@ namespace Scripts.Core
 									foundPath = tryBase.Id;
 									continue;
 								}
+								else
+								{
+									properties.Add(contextProperty);
+									bindingPaths.Add(currentPath);
+									bindingPaths.Add(paths[i + 1]);
+									return new Binding(context, properties, bindingPaths);
+								}
 							}
 						}
-						else
+					}
+					else
+					{
+						var foundContext = context.PropertyLookup.GetContext(currentPath);
+						if (foundContext != null)
 						{
-							var foundProperty = context.PropertyLookup.GetProperty(currentPath, paths[i + 1]);
-							if (foundProperty != null)
-							{
-								properties.Add(foundProperty);
-								bindingPaths.Add(paths[i + 1]);
-								return new Binding(context, properties, bindingPaths);
-							}
+							return new Binding(foundContext, properties, bindingPaths);
+						}
+
+						var foundProperty = context.PropertyLookup.GetProperty("This", currentPath);
+						if (foundProperty != null)
+						{
+							properties.Add(foundProperty);
+							bindingPaths.Add(currentPath);
+							return new Binding(context, properties, bindingPaths);
+						}
+
+						foundProperty = context.PropertyLookup.GetProperty(currentPath, paths[i]);
+						if (foundProperty != null)
+						{
+							properties.Add(foundProperty);
+							bindingPaths.Add(paths[i]);
+							return new Binding(context, properties, bindingPaths);
+						}
+
+						var foundChild = context.PropertyLookup.GetChild(currentPath);
+						if (foundChild != null)
+						{
+							return new ChildBinding(foundChild);
 						}
 					}
 				}
