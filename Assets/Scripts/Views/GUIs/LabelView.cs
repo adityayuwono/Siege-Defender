@@ -1,4 +1,5 @@
 ﻿using Scripts.ViewModels.GUIs;
+using UnityEngine;
 
 namespace Scripts.Views.GUIs
 {
@@ -25,7 +26,10 @@ namespace Scripts.Views.GUIs
 
 		private void Text_OnChange()
 		{
-			_text.color = _viewModel.Color;
+			if (_viewModel.Color != Color.clear)
+			{
+				_text.color = _viewModel.Color;
+			}
 			if (_viewModel.Size != 0)
 			{
 				_text.fontSize = _viewModel.Size;
