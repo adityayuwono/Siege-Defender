@@ -47,7 +47,6 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<RootModel>().TypeOf<Object>().To<Root>();
 			IoC.IoCContainer.RegisterFor<DamageDisplayModel>().TypeOf<Object>().To<DamageDisplayManager>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectManagerModel>().TypeOf<Object>().To<SpecialEffectManager>();
-			IoC.IoCContainer.RegisterFor<ObjectDisplayModel>().TypeOf<Object>().To<ObjectDisplay>();
 			
 			// Items
 			IoC.IoCContainer.RegisterFor<InventoryModel>().TypeOf<Object>().To<Inventory>();
@@ -119,7 +118,6 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<HealthBar>().TypeOf<BaseView>().To<HealthBarView>();
 			IoC.IoCContainer.RegisterFor<DamageDisplayManager>().TypeOf<BaseView>().To<DamageDisplayView>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectManager>().TypeOf<BaseView>().To<SpecialEffectManagerView>();
-			IoC.IoCContainer.RegisterFor<ObjectDisplay>().TypeOf<BaseView>().To<ObjectDisplayView>();
 
 			// Items
 			IoC.IoCContainer.RegisterFor<Item>().TypeOf<BaseView>().To<ItemView>();

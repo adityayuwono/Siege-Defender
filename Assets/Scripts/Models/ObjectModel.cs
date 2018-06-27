@@ -31,7 +31,6 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitboxModel))]
 		[XmlArrayItem(ElementName = "GUIRoot", Type = typeof(GUIs.RootModel))]
 		[XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplayModel))]
-		[XmlArrayItem(ElementName = "ObjectDisplay", Type = typeof(ObjectDisplayModel))]
 		// GUIs
 		[XmlArrayItem(ElementName = "Inventory", Type = typeof(InventoryModel))]
 		[XmlArrayItem(ElementName = "InventoryReference", Type = typeof(InventoryReferenceModel))]

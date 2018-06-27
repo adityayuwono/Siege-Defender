@@ -347,7 +347,6 @@
     <Compile Include="Assets\Scripts\Models\Levels\SpawnModel.cs" />
     <Compile Include="Assets\Scripts\Models\LoadSceneActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\MenuRootModel.cs" />
-    <Compile Include="Assets\Scripts\Models\ObjectDisplayModel.cs" />
     <Compile Include="Assets\Scripts\Models\ObjectModel.cs" />
     <Compile Include="Assets\Scripts\Models\ObjectSpawnModel.cs" />
     <Compile Include="Assets\Scripts\Models\PlayerDataModel.cs" />
@@ -419,7 +418,6 @@
     <Compile Include="Assets\Scripts\ViewModels\Actions\TransferInventoryItems.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\WeaponSlot.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Object.cs" />
-    <Compile Include="Assets\Scripts\ViewModels\ObjectDisplay.cs" />
     <Compile Include="Assets\Scripts\ViewModels\ObjectSpawn.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Player.cs" />
     <Compile Include="Assets\Scripts\ViewModels\PlayerHitbox.cs" />
@@ -464,7 +462,6 @@
     <Compile Include="Assets\Scripts\Views\Items\InventoryView.cs" />
     <Compile Include="Assets\Scripts\Views\Items\ItemView.cs" />
     <Compile Include="Assets\Scripts\Views\Items\WeaponSlotView.cs" />
-    <Compile Include="Assets\Scripts\Views\ObjectDisplayView.cs" />
     <Compile Include="Assets\Scripts\Views\ObjectSpawnView.cs" />
     <Compile Include="Assets\Scripts\Views\ObjectView.cs" />
     <Compile Include="Assets\Scripts\Views\ParticleAoEView.cs" />
