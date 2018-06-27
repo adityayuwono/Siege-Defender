@@ -9,7 +9,7 @@ namespace Scripts.ViewModels
 		private static bool _isDestructionInProgress;
 
 		protected readonly Dictionary<string, List<Object>> InactiveObjects = new Dictionary<string, List<Object>>();
-		public readonly Property<float> Interval = new Property<float>();
+		public readonly Property<float> Interval = new Property<float>("Interval");
 
 		protected IntervalBase(IntervalModel model, Base parent) : base(model, parent)
 		{

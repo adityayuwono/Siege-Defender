@@ -39,7 +39,7 @@ namespace Scripts.Roots
 		{
 			Money = new AdjustableProperty<int>("Money", this);
 
-			Inventories = new Property<List<Inventory>>();
+			Inventories = new Property<List<Inventory>>("Inventories");
 			Inventories.SetValue(new List<Inventory>());
 		}
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Contexts;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.ViewModels;
+using Scripts.ViewModels.Items;
 
 namespace Scripts.Core
 {
@@ -259,5 +261,25 @@ namespace Scripts.Core
 		}
 
 		#endregion
+
+		public void Detach(Base item)
+		{
+			foreach (var property in _properties.ToArray())
+			{
+				var propertyDictionary = property.Value;
+				if (propertyDictionary.ContainsKey(item.Id))
+				{
+					propertyDictionary.Remove(item.Id);
+				}
+			}
+		}
+
+		public void Attach(Base item)
+		{
+			foreach (var itemProperty in item.Properties)
+			{
+				RegisterProperty(item, itemProperty.PropertyId, itemProperty);
+			}
+		}
 	}
 }

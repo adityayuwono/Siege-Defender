@@ -13,8 +13,8 @@ namespace Scripts.ViewModels
 {
 	public class Shooter : Interval<ProjectileBase>
 	{
-		public readonly Property<bool> IsReloading = new Property<bool>();
-		public readonly Property<bool> IsShooting = new Property<bool>();
+		public readonly Property<bool> IsReloading = new Property<bool>("IsReloading");
+		public readonly Property<bool> IsShooting = new Property<bool>("IsShooting");
 
 		private readonly ShooterModel _model;
 

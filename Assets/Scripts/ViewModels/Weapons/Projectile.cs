@@ -11,7 +11,7 @@ namespace Scripts.ViewModels.Weapons
 		public event Action Hit;
 		public event Action<ObjectView, float> DoShooting;
 		public float[] SpeedDeviations;
-		public readonly Property<bool> IsKinematic = new Property<bool>();
+		public readonly Property<bool> IsKinematic = new Property<bool>("IsKinematic");
 
 		private readonly ProjectileModel _model;
 

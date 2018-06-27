@@ -5,7 +5,7 @@ namespace Scripts.ViewModels.Actions
 {
 	public class BaseCondition : TargetProperty
 	{
-		public readonly Property<bool> IsMatch = new Property<bool>();
+		public readonly Property<bool> IsMatch = new Property<bool>("IsMatch");
 
 		protected BaseCondition(BaseConditionModel model, Base parent) : base(model, parent)
 		{

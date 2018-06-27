@@ -21,7 +21,7 @@ namespace Scripts.ViewModels
 
 			if (string.IsNullOrEmpty(_model.IsVisible))
 			{
-				VisibilityBinding = new Property<bool>();
+				VisibilityBinding = new Property<bool>("VisibilityBinding");
 				VisibilityBinding.SetValue(true);
 			}
 			else

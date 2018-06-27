@@ -7,41 +7,53 @@ namespace Scripts.Core
 	{
 		private readonly bool _isAlwaysChanging;
 
-		public Property(bool isAlwaysChanging = false)
+		public Property(string propertyId, bool isAlwaysChanging = false) : base(propertyId)
 		{
 			_isAlwaysChanging = isAlwaysChanging;
-			_value = default(T);
+			Value = default(T);
 		}
 
 		public virtual void SetValue(T newValue)
 		{
-			if (_value != null && _value.Equals(newValue) && !_isAlwaysChanging) return;
+			if (Value != null && Value.Equals(newValue) && !_isAlwaysChanging)
+			{
+				return;
+			}
 
-			_value = newValue;
+			Value = newValue;
 
 			InvokeChangedEvent();
 		}
 
 		public new T GetValue()
 		{
-			return _value != null ? (T) _value : default(T);
+			return (T) Value;
 		}
 	}
 
 	public class Property : IChangeProperty
 	{
-		protected object _value;
-
 		public event Action OnChange;
+
+		protected object Value;
+
+		protected Property(string propertyId)
+		{
+			PropertyId = propertyId;
+		}
+		public string PropertyId { get; private set; }
 
 		public object GetValue()
 		{
-			return _value;
+			return Value;
 		}
 
 		protected void InvokeChangedEvent()
 		{
-			if (OnChange != null) OnChange();
+			if (OnChange != null)
+			{
+				OnChange();
+			}
 		}
 	}
 }

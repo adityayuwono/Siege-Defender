@@ -7,7 +7,7 @@ namespace Scripts.ViewModels.GUIs
 {
 	public class Label : Static
 	{
-		public readonly Property<string> Text = new Property<string>();
+		public readonly Property<string> Text = new Property<string>("Text");
 
 		private readonly LabelModel _model;
 		private IBinding _propertyBinding;

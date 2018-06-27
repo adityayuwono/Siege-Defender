@@ -12,7 +12,7 @@ namespace Scripts.ViewModels.Actions
 	{
 		private readonly RandomConditionModel _model;
 
-		private readonly Property<double> _randomizedValue = new Property<double>(true);
+		private readonly Property<double> _randomizedValue = new Property<double>("RandomizedValue", true);
 
 		private readonly double _threshold;
 

@@ -50,7 +50,9 @@ namespace Scripts.ViewModels.Items
 
 		public void ChangeParent(Object newParent)
 		{
+			GetParent<IContext>().PropertyLookup.Detach(this);
 			Parent = newParent;
+			GetParent<IContext>().PropertyLookup.Attach(this);
 
 			if (ParentChanged != null)
 			{

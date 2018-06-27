@@ -19,7 +19,7 @@ namespace Scripts.ViewModels.Actions
 			base.Invoke();
 
 			var items = TargetInventory.Elements.Where(e => e.GetType() == typeof(Item)).Cast<Item>().ToArray();
-			var totalItemPrice = items.Sum(i => i.Price);
+			var totalItemPrice = items.Sum(i => i.Price.GetValue());
 			foreach (var item in items)
 			{
 				TargetInventory.ReleaseItem(item);

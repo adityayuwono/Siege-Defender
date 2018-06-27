@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
@@ -16,6 +18,8 @@ namespace Scripts.ViewModels
 		public Action OnDestroy;
 		public Action<string> OnHide;
 		public Action OnShow;
+
+		public List<Property> Properties = new List<Property>();
 
 		protected Base(BaseModel model, IHaveRoot parent)
 		{
