@@ -29,13 +29,6 @@ namespace Scripts.ViewModels.Items
 			_model = model;
 		}
 
-		protected override void OnLoad()
-		{
-			base.OnLoad();
-
-			UpdateModel();
-		}
-
 		public ProjectileModel UpdateModel(EnchantmentItemModel enchantmentModel)
 		{
 			_model.Enchantment = enchantmentModel;
@@ -111,6 +104,11 @@ namespace Scripts.ViewModels.Items
 			_projectileModel = newProjectileModel;
 
 			return newProjectileModel;
+		}
+
+		protected override void UpdateItemStats()
+		{
+			UpdateModel();
 		}
 
 		private void UpdateStats(ProjectileModel projectileModel, EnchantmentItemModel enchantment)

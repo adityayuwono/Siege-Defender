@@ -56,5 +56,19 @@ namespace Scripts.ViewModels.Items
 				ParentChanged(newParent);
 			}
 		}
+		protected override void OnLoad()
+		{
+			base.OnLoad();
+
+			UpdateItemStats();
+		}
+
+		protected virtual void UpdateItemStats()
+		{
+			_baseItemModel = DataContext.Instance.GetItemModel(_model.BaseItem);
+			BaseName.SetValue(_baseItemModel.BaseItem);
+			Price.SetValue(_baseItemModel.Price);
+			Description.SetValue(_baseItemModel.Description);
+		}
 	}
 }
