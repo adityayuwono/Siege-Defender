@@ -39,12 +39,6 @@ namespace Scripts.ViewModels.Weapons
 			var isCrit = false;
 			var damage = CalculateDamage(ref isCrit);
 
-			var isDamageUpActive = GetParent<Player>().DamageUpDuration.GetValue() > 0;
-			if (isDamageUpActive)
-			{
-				damage *= 1.25f;
-			}
-
 			var isDamageApplied = enemy.ApplyDamage(damage, isCrit, contactPoint, attachToEnemy ? this : null);
 			if (isDamageApplied)
 			{
