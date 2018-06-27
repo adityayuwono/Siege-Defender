@@ -157,7 +157,9 @@ namespace Scripts.Roots
 		public ObjectModel GetObjectModel(IBase baseObject, string id)
 		{
 			if (ObjectModels.ContainsKey(id))
+			{
 				return ObjectModels[id];
+			}
 
 			throw new EngineException(baseObject, string.Format("ObjectModel not found, Id: {0}", id));
 		}
@@ -170,6 +172,10 @@ namespace Scripts.Roots
 
 		public ItemModel GetItemModel(string itemId)
 		{
+			if (!Items.ContainsKey(itemId))
+			{
+				throw new EngineException(this, string.Format("Failed to find item with Id: {0}", itemId));
+			}
 			return Copier.CopyAs<ItemModel>(Items[itemId]);
 		}
 
