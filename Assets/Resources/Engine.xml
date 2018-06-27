@@ -573,10 +573,6 @@
             <Element AssetId="LoadingCover" IsVisible="{This.IsLoadingInProgress}" />
             <Element AssetId="{DataRoot.PlayerOptions.ControlStyle.ItemId}" >
               <Elements>
-                <Cooldown AssetId="DamageUpLeft" Value="{Root.Play.PlayerCamera.DamageUpDuration}" MaxValue="{Root.Play.PlayerCamera.PowerUpMaxDuration}" />
-                <Cooldown AssetId="DamageUpRight" Value="{Root.Play.PlayerCamera.DamageUpDuration}" MaxValue="{Root.Play.PlayerCamera.PowerUpMaxDuration}" />
-                <Cooldown AssetId="SpeedUpLeft" Value="{Root.Play.PlayerCamera.SpeedUpDuration}" MaxValue="{Root.Play.PlayerCamera.PowerUpMaxDuration}" />
-                <Cooldown AssetId="SpeedUpRight" Value="{Root.Play.PlayerCamera.SpeedUpDuration}" MaxValue="{Root.Play.PlayerCamera.PowerUpMaxDuration}" />
                 <ShooterGUI ShooterTarget="ShooterWeaponLeft" AssetId="ShootingGUILeft" AimingAssetId="AimingGUILeft" />
                 <ShooterGUI ShooterTarget="ShooterWeaponRight" AssetId="ShootingGUIRight" AimingAssetId="AimingGUIRight" />
               </Elements>
