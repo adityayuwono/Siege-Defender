@@ -11,6 +11,8 @@ namespace Scripts.ViewModels.Items
 	{
 		public Action ChildrenChanged;
 
+		public AdjustableProperty<Item> SelectedItem;
+
 		private readonly InventoryModel _model;
 		private PropertyLookup _propertyLookup;
 
@@ -18,6 +20,8 @@ namespace Scripts.ViewModels.Items
 			: base(model, parent)
 		{
 			_model = model;
+
+			SelectedItem = new AdjustableProperty<Item>("SelectedItem", this, true);
 
 			foreach (var itemModel in _model.Items)
 			{
@@ -64,6 +68,13 @@ namespace Scripts.ViewModels.Items
 			base.Show();
 
 			InvokeChildrenChanged();
+		}
+
+		public override void Hide(string reason)
+		{
+			SelectedItem.SetValue(null);
+
+			base.Hide(reason);
 		}
 
 		public void AddItem(Item item)
@@ -126,6 +137,11 @@ namespace Scripts.ViewModels.Items
 			{
 				ChildrenChanged();
 			}
+		}
+
+		public void SelectItem(Item item)
+		{
+			SelectedItem.SetValue(item);
 		}
 	}
 }

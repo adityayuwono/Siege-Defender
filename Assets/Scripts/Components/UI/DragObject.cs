@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Scripts.ViewModels.Items;
 using UnityEngine;
 
 namespace Scripts.Components.UI
@@ -18,6 +19,9 @@ namespace Scripts.Components.UI
 		private void OnMouseUp()
 		{
 			IsDragMode = false;
+
+			(GetComponent<ViewModelController>().ViewModel as Item).Select();
+
 			var dragDropContainerController = _dragDropContainerControllers.FirstOrDefault();
 			if (dragDropContainerController != null)
 			{
