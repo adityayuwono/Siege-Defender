@@ -49,7 +49,7 @@
   			Accuracy="1" Deviation="0" Scatters="1" />
     </Piercing>    
 
-    <ParticleAoE Id="FireDome" 
+    <ParticleAoE Id="Fire Dome" 
       AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="10" DamageMultiplier="0.75" />
     <ParticleAoE Id="Air Slash" 
       AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="2" DamageMultiplier="1" />
@@ -424,6 +424,9 @@
       <MinStats RoF="0.15" Deviation="0.0001" />
       <MinStats RoF="0.50" Deviation="0.01" />
     </EnchantmentGenerator>
+
+    <Item Id="ControlStyle1" />
+    <Item Id="ControlStyle2" />
 
     <Enchantment Id="E1_1" AssetId="GUIs/EnchantmentTemplate" BaseItem="E1_1" Prefix="Scattering"/>
     <Enchantment Id="E2_1" AssetId="GUIs/EnchantmentTemplate" BaseItem="E2_1" Prefix="Malicious"/>
