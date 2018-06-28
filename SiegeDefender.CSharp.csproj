@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.2.1p2</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -270,13 +268,6 @@
     <Compile Include="Assets\Scripts\Extensions\RectTransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\UnityExtension.cs" />
     <Compile Include="Assets\Scripts\GameEndStatsManager.cs" />
-    <Compile Include="Assets\Scripts\Models\Actions\SpawnActionModel.cs" />
-    <Compile Include="Assets\Scripts\Models\Items\InventoryReferenceModel.cs" />
-    <Compile Include="Assets\Scripts\Models\Items\SaveGameModel.cs" />
-    <Compile Include="Assets\Scripts\Models\Items\ClearInventoryModel.cs" />
-    <Compile Include="Assets\Scripts\Models\Items\TransferInventoryItemsModel.cs" />
-    <Compile Include="Assets\Scripts\Roots\DataRoot.cs" />
-    <Compile Include="Assets\Scripts\Roots\GameRoot.cs" />
     <Compile Include="Assets\Scripts\Helpers\Copier.cs" />
     <Compile Include="Assets\Scripts\Helpers\Deserializer.cs" />
     <Compile Include="Assets\Scripts\Helpers\EngineException.cs" />
@@ -296,7 +287,6 @@
     <Compile Include="Assets\Scripts\Interfaces\IViewLookup.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IViewModelLookup.cs" />
     <Compile Include="Assets\Scripts\IoC.cs" />
-    <Compile Include="Assets\Scripts\Roots\MenuRoot.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\BaseActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\BaseConditionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\CreateItemActionModel.cs" />
@@ -305,6 +295,7 @@
     <Compile Include="Assets\Scripts\Models\Actions\MoveActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\RandomConditionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\SetterActionModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Actions\SpawnActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\SpecialEffectActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\StartSpecialEventModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\TargetPropertyModel.cs" />
@@ -331,17 +322,21 @@
     <Compile Include="Assets\Scripts\Models\GUIs\GameEndStatsModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\HealthBarModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\LabelModel.cs" />
+    <Compile Include="Assets\Scripts\Models\GUIs\PercentageModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\ProgressBarModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\RootModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\ShooterModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\StaticModel.cs" />
-    <Compile Include="Assets\Scripts\Models\GUIs\PercentageModel.cs" />
     <Compile Include="Assets\Scripts\Models\IntervalModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\ClearInventoryModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\EnchantmentItemModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\EquipmentSlotModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\InventoryModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\InventoryReferenceModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\ItemModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\ProjectileItemModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\SaveGameModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\TransferInventoryItemsModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\WeaponSlotModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\WeaponStatsModel.cs" />
     <Compile Include="Assets\Scripts\Models\Levels\LevelModel.cs" />
@@ -367,11 +362,15 @@
     <Compile Include="Assets\Scripts\Models\Weapons\ParticleAoEModel.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\PiercingProjectileModel.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\ProjectileModel.cs" />
+    <Compile Include="Assets\Scripts\Roots\DataRoot.cs" />
+    <Compile Include="Assets\Scripts\Roots\GameRoot.cs" />
+    <Compile Include="Assets\Scripts\Roots\MenuRoot.cs" />
     <Compile Include="Assets\Scripts\Roots\RootBase.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\ActionCollection.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\BaseAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\BaseCondition.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\BaseInventoryAction.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Actions\ClearInventory.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\CreateItemAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\LoadSceneAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\MoveAction.cs" />
@@ -381,6 +380,7 @@
     <Compile Include="Assets\Scripts\ViewModels\Actions\SpecialEffectAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\StartSpecialEventAction.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\TargetProperty.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Actions\TransferInventoryItems.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\ValueCondition.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Base.cs" />
     <Compile Include="Assets\Scripts\ViewModels\ButtonGUI.cs" />
@@ -397,16 +397,16 @@
     <Compile Include="Assets\Scripts\ViewModels\GUIs\BaseGUI.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\BloodOverlay.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\Cooldown.cs" />
-    <Compile Include="Assets\Scripts\ViewModels\GUIs\DamageDisplayManager.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\Damage.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\GUIs\DamageDisplayManager.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\GameEndStats.cs" />
-    <Compile Include="Assets\Scripts\ViewModels\GUIs\Root.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\HealthBar.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\Label.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\GUIs\Percentage.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\ProgressBar.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\GUIs\Root.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\ShooterGUIs.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\Static.cs" />
-    <Compile Include="Assets\Scripts\ViewModels\GUIs\Percentage.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Interval.cs" />
     <Compile Include="Assets\Scripts\ViewModels\IntervalBase.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\EnchantmentItem.cs" />
@@ -416,8 +416,6 @@
     <Compile Include="Assets\Scripts\ViewModels\Items\Item.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\ProjectileItem.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\SaveGame.cs" />
-    <Compile Include="Assets\Scripts\ViewModels\Actions\ClearInventory.cs" />
-    <Compile Include="Assets\Scripts\ViewModels\Actions\TransferInventoryItems.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\WeaponSlot.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Object.cs" />
     <Compile Include="Assets\Scripts\ViewModels\ObjectSpawn.cs" />
@@ -452,13 +450,13 @@
     <Compile Include="Assets\Scripts\Views\GUIs\DamageDisplayView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\DamageView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\GameEndStatsView.cs" />
-    <Compile Include="Assets\Scripts\Views\GUIs\RootView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\HealthBarView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\LabelView.cs" />
+    <Compile Include="Assets\Scripts\Views\GUIs\PercentageView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\ProgressBarView.cs" />
+    <Compile Include="Assets\Scripts\Views\GUIs\RootView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\ShooterView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\StaticView.cs" />
-    <Compile Include="Assets\Scripts\Views\GUIs\PercentageView.cs" />
     <Compile Include="Assets\Scripts\Views\IntervalView.cs" />
     <Compile Include="Assets\Scripts\Views\Items\EquipmentSlotView.cs" />
     <Compile Include="Assets\Scripts\Views\Items\InventoryView.cs" />
@@ -485,6 +483,7 @@
   <ItemGroup>
     <None Include="Assets\CustomAssets\Shaders\Unlit - Transparent Front.shader" />
     <None Include="Assets\PlayerSettings.xml" />
+    <None Include="Assets\Plugins\Epic Toon FX\ETFX Readme.txt" />
     <None Include="Assets\Plugins\FX Quest\!Readme.txt" />
     <None Include="Assets\Resources\Engine.xml" />
     <None Include="Assets\Resources\GUIs\Shaders\OverlayNoZTest.shader" />

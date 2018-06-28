@@ -219,6 +219,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\ParticleEffectsLibrary.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\PEButtonScript.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\PEDestoryTimed.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\UICanvasManager.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\Scripts\ETFXButtonScript.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\Scripts\ETFXFireProjectile.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\Scripts\ETFXLoopScript.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\Scripts\ETFXMouseOrbit.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\Scripts\ETFXProjectileScript.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Demo\Scripts\ETFXSceneManager.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Scripts\ETFXLightFade.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Scripts\ETFXPitchRandomizer.cs" />
+    <Compile Include="Assets\Plugins\Epic Toon FX\Scripts\ETFXRotation.cs" />
     <Compile Include="Assets\Plugins\FX Quest\Scripts\EQ_CloudFlow.cs" />
     <Compile Include="Assets\Plugins\FX Quest\Scripts\EQ_OrbitCamera.cs" />
     <Compile Include="Assets\Plugins\FX Quest\Scripts\EQ_ParticleMoveSample.cs" />
@@ -228,6 +241,7 @@
   <ItemGroup>
     <None Include="Assets\CustomAssets\Shaders\Unlit - Transparent Front.shader" />
     <None Include="Assets\PlayerSettings.xml" />
+    <None Include="Assets\Plugins\Epic Toon FX\ETFX Readme.txt" />
     <None Include="Assets\Plugins\FX Quest\!Readme.txt" />
     <None Include="Assets\Resources\Engine.xml" />
     <None Include="Assets\Resources\GUIs\Shaders\OverlayNoZTest.shader" />
