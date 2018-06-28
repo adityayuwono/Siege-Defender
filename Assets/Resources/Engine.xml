@@ -198,7 +198,6 @@
           <Setter Target="{This.AnimationId}" Value="Idle" Wait="4" />
         </Skill>
         <Skill Id="Scream">
-          <!-- Default Skill, this skill is always active -->
           <Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />
         </Skill>
         <Skill Id="CrystalShield" IsQueuedable="true" >
@@ -359,7 +358,7 @@
       <Cache EnemyId="StoneBreak" Count="10" />
       <Cache EnemyId="SpiderColumn" Count="5" />
 
-      <!-- <Spawn EnemyId="CrystalSpider" Count="2" />
+      <Spawn EnemyId="CrystalSpider" Count="2" />
       <Spawn EnemyId="SpiderColumn" Count="1" />
       <Spawn EnemyId="CrystalSpider" Count="3" />
       <Spawn EnemyId="SpiderColumn" Count="1" />
@@ -371,7 +370,7 @@
       <Spawn EnemyId="SpiderColumn" Count="3" />
       <Spawn EnemyId="CrystalSpider" Count="5" />
       <Spawn />
-      <Spawn EnemyId="StrongSpiderColumn" Count="2" /> -->
+      <Spawn EnemyId="StrongSpiderColumn" Count="2" />
       <Spawn EnemyId="ZombieAbomination" />
       <!-- <SpawnInterval EnemyId="CrystalSpider" Count="1" Interval="7" LoopCount="-1" /> -->
       <!-- <SpawnInterval EnemyId="SpiderColumn" Count="1" Interval="23" LoopCount="-1" /> -->
