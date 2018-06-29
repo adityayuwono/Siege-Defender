@@ -103,7 +103,7 @@
         <EnemySpawn AssetId="SpiderSpawn" LevelId="SpawnSpidersInfinite" />
       </Elements>
     </StaticEnemy>
-    <Boss Id="ZombieAbomination" AssetId="Enemies/ZombieAbomination" Health="5500" Speed="2.5" DeathDelay="5"
+    <Boss Id="ZombieAbomination" AssetId="Enemies/ZombieAbomination" Health="6000" Speed="2.5" DeathDelay="5"
 			CollisionEffectNormal="StoneBreak" >
       <Elements>
         <EnemySpawn Id="SpiderColumns" AssetId="SpiderColumns" LevelId="" />
@@ -112,7 +112,8 @@
       </Elements>
 
       <Limbs>
-        <Limb Id="Head" Health="300" AssetId="Head" DamageMultiplier="2"
+        <Limb Id="Head" Health="500" AssetId="Head" 
+          DamageMultiplier="1" BrokenDamageMultiplier="2"
 					CollisionEffectNormal="StoneBreak" >
           <Triggers>
             <EventTrigger Event="Break" >
@@ -123,7 +124,8 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="RightHand" Health="150" AssetId="RightHand" DamageMultiplier="0.75"
+        <Limb Id="RightHand" Health="300" AssetId="RightHand" 
+          DamageMultiplier="0.5" BrokenDamageMultiplier="1"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -135,7 +137,8 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="LeftHand" Health="150" AssetId="LeftHand" DamageMultiplier="0.75"
+        <Limb Id="LeftHand" Health="300" AssetId="LeftHand" 
+          DamageMultiplier="0.5" BrokenDamageMultiplier="1"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -147,15 +150,18 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="RightLeg" Health="100" AssetId="RightLeg" DamageMultiplier="0.75"
+        <Limb Id="RightLeg" Health="200" AssetId="RightLeg" 
+          DamageMultiplier="0.75" BrokenDamageMultiplier="1"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
         </Limb>
-        <Limb Id="LeftLeg" Health="100" AssetId="LeftLeg" DamageMultiplier="0.75"
+        <Limb Id="LeftLeg" Health="200" AssetId="LeftLeg" 
+          DamageMultiplier="0.75" BrokenDamageMultiplier="1"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
         </Limb>
-        <Limb Id="RightFoot" Health="100" AssetId="Bip001 R Foot" DamageMultiplier="0.75"
+        <Limb Id="RightFoot" Health="200" AssetId="Bip001 R Foot" 
+          DamageMultiplier="0.75" BrokenDamageMultiplier="1"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -167,7 +173,8 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="LeftFoot" Health="100" AssetId="Bip001 L Foot" DamageMultiplier="0.75"
+        <Limb Id="LeftFoot" Health="200" AssetId="Bip001 L Foot" 
+          DamageMultiplier="0.75" BrokenDamageMultiplier="1"
 					CollisionEffectNormal="CrystalBreak_Small"
 					CollisionEffectBroken="StoneBreak" >
           <Triggers>
@@ -179,7 +186,8 @@
             </EventTrigger>
           </Triggers>
         </Limb>
-        <Limb Id="Crystal" Health="200" AssetId="Bip001 Spine2" DamageMultiplier="0.25"
+        <Limb Id="Crystal" Health="300" AssetId="Bip001 Spine2" 
+          DamageMultiplier="0.25" BrokenDamageMultiplier="3"
 					CollisionEffectNormal="CrystalBreak_Small" >
           <Triggers>
             <EventTrigger Event="Break" >
@@ -195,7 +203,7 @@
       <Skills>
         <Skill Id="Idle">
           <!-- Default Skill, this skill is always active -->
-          <Setter Target="{This.AnimationId}" Value="Idle" Wait="4" />
+          <Setter Target="{This.AnimationId}" Value="Idle" Wait="2" />
         </Skill>
         <Skill Id="Scream">
           <Setter Target="{This.AnimationId}" Value="Scream" Wait="1.5" />

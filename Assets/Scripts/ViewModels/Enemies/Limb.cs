@@ -28,7 +28,7 @@ namespace Scripts.ViewModels.Enemies
 
 		public override bool ApplyDamage(float damage, bool isCrit, Vector3 contactPoint, ProjectileBase source = null)
 		{
-			var damageMultiplied = damage * _model.DamageMultiplier;
+			var damageMultiplied = damage * (_isBroken ? _model.BrokenDamageMultiplier : _model.DamageMultiplier);
 
 			base.ApplyDamage(damageMultiplied, isCrit, contactPoint, source);
 			return _parent.ApplyDamage(damageMultiplied, isCrit, Vector3.zero);

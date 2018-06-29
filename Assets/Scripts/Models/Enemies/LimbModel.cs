@@ -22,5 +22,9 @@ namespace Scripts.Models.Enemies
 		[XmlAttribute]
 		[DefaultValue(1f)]
 		public float DamageMultiplier { get; set; }
+
+		[XmlAttribute]
+		[DefaultValue(1f)]
+		public float BrokenDamageMultiplier { get; set; }
 	}
 }
