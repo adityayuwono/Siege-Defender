@@ -1,4 +1,5 @@
 ﻿using Scripts.Models.Weapons;
+using Scripts.ViewModels.Enemies;
 using UnityEngine;
 
 namespace Scripts.ViewModels.Weapons
@@ -25,7 +26,9 @@ namespace Scripts.ViewModels.Weapons
 		public void Show(Vector3 position)
 		{
 			if (_model.IsGrounded)
+			{
 				position.y = 0;
+			}
 
 			Position = position;
 			base.Show();
@@ -34,7 +37,14 @@ namespace Scripts.ViewModels.Weapons
 
 		public override void CollideWithTarget(Object targetObject, Vector3 collisionPosition, Vector3 contactPoint)
 		{
-			DamageEnemy(targetObject, contactPoint);
+			if (targetObject is Boss)
+			{
+				DamageEnemy(targetObject, collisionPosition);
+			}
+			else
+			{
+				DamageEnemy(targetObject, contactPoint);
+			}
 		}
 	}
 }
