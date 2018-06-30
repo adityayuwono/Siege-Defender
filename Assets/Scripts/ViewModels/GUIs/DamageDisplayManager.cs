@@ -14,6 +14,9 @@ namespace Scripts.ViewModels.GUIs
 
 		public void DisplayDamage(float damage, bool isCrit, Vector3 position)
 		{
+			var randomizer = Root.Randomizer;
+			position += new Vector3((float)randomizer.NextDouble(), (float)randomizer.NextDouble(), (float)randomizer.NextDouble());
+
 			var damageGUI = GetObject<Damage>(_model.DamageGUI);
 			damageGUI.ShowDamage(damage, isCrit, position);
 		}
