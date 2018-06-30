@@ -1,7 +1,7 @@
 <Engine Id="SiegeDefender">
   <Objects>
-    <Projectile Id="Ascalon" AssetId="Projectiles/IronBullet" >
       <Stats Damage="3-5"
+    <Projectile Id="Ascalon" AssetId="Projectiles/BulletSmallBlue" >
         SpeedDeviation="500-550"
         RoF="0.1" Ammunition="100" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
@@ -28,8 +28,8 @@
         Accuracy="1" Deviation="0" Scatters="1" 
         CriticalChance="0.2" CriticalDamageMultiplier="1.25" />
     </Projectile>
-    <Projectile Id="Fire Ball" AssetId="Projectiles/FireBall" >
       <Stats Damage="6-9"
+    <Projectile Id="Fire Ball" AssetId="Projectiles/RocketMissileFire" >
         SpeedDeviation="300-450"
         RoF="0.45" Ammunition="25" ReloadTime="0"
         Accuracy="1" Deviation="0" Scatters="1" 
@@ -49,8 +49,10 @@
   			Accuracy="1" Deviation="0" Scatters="1" />
     </Piercing>    
 
+    <ParticleAoE Id="Magic Bullet Explosion" 
+      AssetId="SpecialEffects/LaserExplosionBlue" Radius="3" DamageMultiplier="0.5" />
     <ParticleAoE Id="Fire Dome" 
-      AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="10" DamageMultiplier="0.75" />
+      AssetId="SpecialEffects/M_3D_AirExplode_04" Radius="5" DamageMultiplier="1.25" />
     <ParticleAoE Id="Air Slash" 
       AssetId="SpecialEffects/M_2D_AirExplode_01" Radius="2" DamageMultiplier="1" />
     <ParticleAoE Id="Lightning Strike" 
