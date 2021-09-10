@@ -24,12 +24,11 @@ namespace Scripts.Models
 			Position = "0,0,0";
 		}
 
-		[XmlArray(ElementName = "Elements")]
 		// 3D Objects
 		[XmlArrayItem(ElementName = "Element", Type = typeof(ElementModel))]
 		[XmlArrayItem(ElementName = "Player", Type = typeof(PlayerModel))]
 		[XmlArrayItem(ElementName = "PlayerHitbox", Type = typeof(PlayerHitboxModel))]
-		[XmlArrayItem(ElementName = "GUIRoot", Type = typeof(GUIs.RootModel))]
+		[XmlArrayItem(ElementName = "GUIRoot", Type = typeof(GUIs.GUIRootModel))]
 		[XmlArrayItem(ElementName = "DamageDisplay", Type = typeof(DamageDisplayModel))]
 		// GUIs
 		[XmlArrayItem(ElementName = "Inventory", Type = typeof(InventoryModel))]
@@ -37,7 +36,7 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "Button", Type = typeof(ButtonModel))]
 		[XmlArrayItem(ElementName = "ProgressBar", Type = typeof(ProgressBarModel))]
 		[XmlArrayItem(ElementName = "Cooldown", Type = typeof(CooldownModel))]
-		[XmlArrayItem(ElementName = "ShooterGUI", Type = typeof(GUIs.ShooterModel))]
+		[XmlArrayItem(ElementName = "ShooterGUI", Type = typeof(GUIs.GUIShooterModel))]
 		[XmlArrayItem(ElementName = "Label", Type = typeof(LabelModel))]
 		[XmlArrayItem(ElementName = "GameEndStats", Type = typeof(GameEndStatsModel))]
 		[XmlArrayItem(ElementName = "BloodOverlay", Type = typeof(BloodOverlayModel))]
@@ -45,14 +44,7 @@ namespace Scripts.Models
 		[XmlArrayItem(ElementName = "EnemySpawn", Type = typeof(EnemyManagerModel))]
 		[XmlArrayItem(ElementName = "ObjectSpawn", Type = typeof(ObjectSpawnModel))]
 		[XmlArrayItem(ElementName = "SpecialEffectManager", Type = typeof(SpecialEffectManagerModel))]
-		public List<ObjectModel> ElementsSerialized
-		{
-			get { return Elements != null ? (Elements.Count > 0 ? Elements : null) : null; }
-			set { Elements = value; }
-		}
-
-		[XmlIgnore]
-		public List<ObjectModel> Elements { get; private set; }
+		public List<ObjectModel> Elements { get; set; }
 
 		[XmlAttribute]
 		public string AssetId { get; set; }

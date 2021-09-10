@@ -33,7 +33,7 @@ namespace Scripts.Models
 
 		[XmlArray]
 		[XmlArrayItem(ElementName = "Level", Type = typeof(LevelModel))]
-		[XmlArrayItem(ElementName = "SubLevel", Type = typeof(LevelModel))]
+		[XmlArrayItem(ElementName = "SubLevel", Type = typeof(SubLevelModel))]
 		public List<LevelModel> Levels { get; set; }
 
 		[XmlArray]

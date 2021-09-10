@@ -17,8 +17,8 @@ using Scripts.Views.Items;
 using Scripts.Views.Weapons;
 using UnityEngine;
 using Object = Scripts.ViewModels.Object;
-using RootModel = Scripts.Models.GUIs.RootModel;
-using ShooterModel = Scripts.Models.GUIs.ShooterModel;
+using GUIRootModel = Scripts.Models.GUIs.GUIRootModel;
+using GUIShooterModel = Scripts.Models.GUIs.GUIShooterModel;
 using ShooterView = Scripts.Views.GUIs.ShooterView;
 
 namespace Scripts.Components
@@ -44,7 +44,7 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<EnemyManagerModel>().TypeOf<Object>().To<EnemyManager>();
 			IoC.IoCContainer.RegisterFor<ObjectSpawnModel>().TypeOf<Object>().To<ObjectSpawn>();
 			IoC.IoCContainer.RegisterFor<PlayerHitboxModel>().TypeOf<Object>().To<PlayerHitbox>();
-			IoC.IoCContainer.RegisterFor<RootModel>().TypeOf<Object>().To<Root>();
+			IoC.IoCContainer.RegisterFor<GUIRootModel>().TypeOf<Object>().To<Root>();
 			IoC.IoCContainer.RegisterFor<DamageDisplayModel>().TypeOf<Object>().To<DamageDisplayManager>();
 			IoC.IoCContainer.RegisterFor<SpecialEffectManagerModel>().TypeOf<Object>().To<SpecialEffectManager>();
 			
@@ -59,11 +59,11 @@ namespace Scripts.Components
 			IoC.IoCContainer.RegisterFor<WeaponSlotModel>().TypeOf<EquipmentSlot>().To<WeaponSlot>();
 
 			// GUIs
-			IoC.IoCContainer.RegisterFor<RootModel>().TypeOf<Element>().To<Root>();
+			IoC.IoCContainer.RegisterFor<GUIRootModel>().TypeOf<Element>().To<Root>();
 			IoC.IoCContainer.RegisterFor<ButtonModel>().TypeOf<Object>().To<ButtonGUI>();
 			IoC.IoCContainer.RegisterFor<ProgressBarModel>().TypeOf<Object>().To<ProgressBar>();
 			IoC.IoCContainer.RegisterFor<CooldownModel>().TypeOf<Object>().To<Cooldown>();
-			IoC.IoCContainer.RegisterFor<ShooterModel>().TypeOf<Object>().To<ShooterGUI>();
+			IoC.IoCContainer.RegisterFor<GUIShooterModel>().TypeOf<Object>().To<ShooterGUI>();
 			IoC.IoCContainer.RegisterFor<LabelModel>().TypeOf<Object>().To<Label>();
 			IoC.IoCContainer.RegisterFor<GameEndStatsModel>().TypeOf<Object>().To<GameEndStats>();
 			IoC.IoCContainer.RegisterFor<BloodOverlayModel>().TypeOf<Object>().To<BloodOverlay>();

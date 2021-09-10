@@ -29,4 +29,10 @@ namespace Scripts.Models
 		[XmlElement(ElementName = "Cache", Type = typeof(SpawnModel))]
 		public List<SpawnModel> CacheList { get; set; }
 	}
+
+	[Serializable]
+	public class SubLevelModel : LevelModel
+    {
+
+    }
 }

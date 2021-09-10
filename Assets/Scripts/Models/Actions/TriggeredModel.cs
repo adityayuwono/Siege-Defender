@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Scripts.Models.Items;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using Scripts.Models.Items;
-using Scripts.Models.Levels;
 
 namespace Scripts.Models.Actions
 {
-	[Serializable]
+    [Serializable]
 	public class TriggeredModel : BaseModel
 	{
 		[XmlAttribute]

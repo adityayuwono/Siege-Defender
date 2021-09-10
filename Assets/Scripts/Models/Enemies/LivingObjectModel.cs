@@ -25,6 +25,7 @@ namespace Scripts.Models.Enemies
 		[DefaultValue("")]
 		public string CollisionEffectNormal { get; set; }
 
+		[XmlIgnore]
 		public int ProjectileLimit { get; protected set; }
 	}
 }
