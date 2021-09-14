@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,9 @@
     <UnityVersion>2020.3.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\Views\Weapons\ProjectileView.cs" />
     <Compile Include="Assets\Scripts\Models\PlayerDataModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\Event.cs" />
@@ -74,6 +77,7 @@
     <Compile Include="Assets\Scripts\Models\Enemies\LivingObjectModel.cs" />
     <Compile Include="Assets\Scripts\Views\Weapons\AoEView.cs" />
     <Compile Include="Assets\Scripts\Models\Enemies\LimbModel.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Items\ItemsSlot.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\ProgressBarModel.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Models\RandomPositionManagerModel.cs" />
@@ -149,6 +153,7 @@
     <Compile Include="Assets\Scripts\Models\GUIs\BaseGUIModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\SpawnActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Items\ProjectileItemModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\DropableSlotsModel.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\ProgressBar.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Actions\CreateItemAction.cs" />
     <Compile Include="Assets\Scripts\Views\ParticleAoEView.cs" />
@@ -202,12 +207,14 @@
     <Compile Include="Assets\Scripts\Views\GUIs\BaseGUIView.cs" />
     <Compile Include="Assets\Scripts\Contexts\DataContext.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\Views\Items\DropableSlotsView.cs" />
     <Compile Include="Assets\Scripts\Helpers\Copier.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\PiercingProjectileModel.cs" />
     <Compile Include="Assets\Scripts\Models\Enemies\SkillModel.cs" />
     <Compile Include="Assets\Scripts\Views\SpecialEffectView.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\TargetPropertyModel.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\LabelModel.cs" />
+    <Compile Include="Assets\Scripts\Views\Items\ItemsSlotView.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Items\EquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\ViewModels\GUIs\BaseGUI.cs" />
     <Compile Include="Assets\Scripts\Models\GUIs\CooldownModel.cs" />
@@ -223,9 +230,11 @@
     <Compile Include="Assets\Scripts\Contexts\MenuContext.cs" />
     <Compile Include="Assets\Scripts\Models\Items\EnchantmentItemModel.cs" />
     <Compile Include="Assets\Scripts\ViewModels\Enemies\LivingObject.cs" />
+    <Compile Include="Assets\Scripts\Models\Items\ItemsSlotModel.cs" />
     <Compile Include="Assets\Scripts\Helpers\FilePaths.cs" />
     <Compile Include="Assets\Scripts\Views\Enemies\EnemyManagerView.cs" />
     <Compile Include="Assets\Scripts\Views\GUIs\LabelView.cs" />
+    <Compile Include="Assets\Scripts\ViewModels\Items\DropableSlots.cs" />
     <Compile Include="Assets\Scripts\ViewModels\PlayerHitbox.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\BaseActionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Actions\ValueConditionModel.cs" />

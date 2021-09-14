@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Scripts.Core;
+﻿using Scripts.Core;
 using Scripts.Interfaces;
 using Scripts.Models.Items;
 
 namespace Scripts.ViewModels.Items
 {
-	public class Inventory : Element, IContext
+    public class Inventory : ItemsSlot, IContext
 	{
-		public Action ChildrenChanged;
-
 		public AdjustableProperty<Item> SelectedItem;
 
 		private readonly InventoryModel _model;
@@ -22,11 +17,6 @@ namespace Scripts.ViewModels.Items
 			_model = model;
 
 			SelectedItem = new AdjustableProperty<Item>("SelectedItem", this, true);
-
-			foreach (var itemModel in _model.Items)
-			{
-				Elements.Add(IoC.IoCContainer.GetInstance<Item>(itemModel.GetType(), new object[] {itemModel, this}));
-			}
 
 			foreach (var equipmentSlotModel in _model.EquipmentSlots)
 			{
@@ -57,71 +47,6 @@ namespace Scripts.ViewModels.Items
 			}
 		}
 
-		public void OverrideModelForShowing(IHaveRoot parent, string modelAssetId)
-		{
-			Parent = parent;
-			_model.AssetId = modelAssetId;
-		}
-
-		public override void Show()
-		{
-			base.Show();
-
-			InvokeChildrenChanged();
-		}
-
-		public override void Hide(string reason)
-		{
-			SelectedItem.SetValue(null);
-
-			base.Hide(reason);
-		}
-
-		public void AddItem(Item item)
-		{
-			// Item was removed from inventory
-
-			Elements.Add(item);
-			_model.Items.Add(item.Model);
-			
-			if (IsShown)
-			{
-				item.ChangeParent(this);
-			}
-
-			InvokeChildrenChanged();
-		}
-
-		public void ReleaseItem(Item itemViewModel)
-		{
-			// Item was added to inventory
-
-			_model.Items.Remove(itemViewModel.Model);
-			Elements.Remove(itemViewModel);
-
-			InvokeChildrenChanged();
-		}
-
-		public void CombineItemsToStack()
-		{
-			var objects = Elements.Where(e => e.GetType() == typeof(Item)).ToArray();
-			var combinedItems = new List<Item>();
-			foreach (var o in objects)
-			{
-				var item = o as Item;
-				var existingCombinedItem = combinedItems.FirstOrDefault(i => i.BaseItem == item.BaseItem);
-				if (existingCombinedItem != null)
-				{
-					existingCombinedItem.Quantity += item.Quantity;
-					ReleaseItem(item);
-				}
-				else
-				{
-					combinedItems.Add(item);
-				}
-			}
-		}
-
 		private static void GetItemFromSlot(Item item)
 		{
 			var equipmentSlot = item.GetParent<EquipmentSlot>();
@@ -131,12 +56,17 @@ namespace Scripts.ViewModels.Items
 			}
 		}
 
-		private void InvokeChildrenChanged()
+		public void OverrideModelForShowing(IHaveRoot parent, string modelAssetId)
 		{
-			if (ChildrenChanged != null)
-			{
-				ChildrenChanged();
-			}
+			Parent = parent;
+			_model.AssetId = modelAssetId;
+		}
+
+		public override void Hide(string reason)
+		{
+			SelectedItem.SetValue(null);
+
+			base.Hide(reason);
 		}
 
 		public void SelectItem(Item item)

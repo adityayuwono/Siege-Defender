@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Scripts.ViewModels.Items;
 using UnityEngine;
@@ -7,7 +8,18 @@ namespace Scripts.Components.UI
 {
 	public class DragObject : MonoBehaviour
 	{
-		public bool IsDragMode { get; set; }
+		public Action<bool> OnDragModeChanged;
+
+		private bool _isDragMode;
+		public bool IsDragMode 
+		{ 
+			get { return _isDragMode; } 
+			set 
+			{ 
+				_isDragMode = value;
+				OnDragModeChanged(_isDragMode);
+			} 
+		}
 
 		private readonly List<DragDropContainerController> _dragDropContainerControllers = new List<DragDropContainerController>();
 

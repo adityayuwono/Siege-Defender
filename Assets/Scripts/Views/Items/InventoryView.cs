@@ -1,10 +1,9 @@
 ﻿using Scripts.Components.UI;
-using Scripts.ViewModels;
 using Scripts.ViewModels.Items;
 
 namespace Scripts.Views.Items
 {
-	public class InventoryView : ElementView
+    public class InventoryView : ItemsSlotView
 	{
 		public const string ItemSlotRoots = "ItemSlot";
 

@@ -6,7 +6,7 @@ using Scripts.Models.Items;
 
 namespace Scripts.ViewModels.Items
 {
-	public class EquipmentSlot : Element
+	public class EquipmentSlot : DropableSlots
 	{
 		public Action<Item> OnItemUpdate;
 
@@ -36,19 +36,6 @@ namespace Scripts.ViewModels.Items
 		}
 		private Item _currentItem;
 
-		public virtual void HandleObjectDropped(Object droppedObject)
-		{
-			var isItemValid = CheckIfItemValid(droppedObject);
-			if (isItemValid)
-			{
-				var droppedItem = (Item) droppedObject;
-				if (droppedItem.GetParent<EquipmentSlot>() == null)
-				{
-					CurrentItem = droppedItem;
-				}
-			}
-		}
-
 		public override void Show()
 		{
 			base.Show();
@@ -67,6 +54,19 @@ namespace Scripts.ViewModels.Items
 			}
 
 			base.Hide(reason);
+		}
+
+		public override void HandleObjectDropped(Object droppedObject)
+		{
+			var isItemValid = CheckIfItemValid(droppedObject);
+			if (isItemValid)
+			{
+				var droppedItem = (Item)droppedObject;
+				if (droppedItem.GetParent<EquipmentSlot>() == null)
+				{
+					CurrentItem = droppedItem;
+				}
+			}
 		}
 
 		public void ReleaseItem()
