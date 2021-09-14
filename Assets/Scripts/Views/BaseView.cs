@@ -1,15 +1,17 @@
-﻿using Scripts.Helpers;
+﻿using Scripts.Core;
+using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.ViewModels;
 
 namespace Scripts.Views
 {
-	public class BaseView : IBase
+	public class BaseView : HaveRoot, IBaseView
 	{
 		private readonly Base _viewModel;
 		private bool _isShown;
 
-		protected BaseView(Base viewModel, BaseView parent)
+		protected BaseView(Base viewModel, BaseView parent) : 
+			base(viewModel, parent)
 		{
 			_viewModel = viewModel;
 
@@ -17,16 +19,8 @@ namespace Scripts.Views
 			_viewModel.OnHide += OnHide;
 
 			_viewModel.OnDestroy += OnDestroy;
-		}
 
-		public string Id
-		{
-			get { return _viewModel.Id; }
-		}
-
-		public string FullId
-		{
-			get { return _viewModel.FullId; }
+			Parent = parent;
 		}
 
 		protected virtual void OnShow()

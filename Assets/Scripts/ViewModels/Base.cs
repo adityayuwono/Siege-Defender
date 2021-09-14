@@ -1,199 +1,167 @@
-﻿using System;
-using System.Collections.Generic;
-using Scripts.Core;
+﻿using Scripts.Core;
 using Scripts.Helpers;
 using Scripts.Interfaces;
 using Scripts.Models;
-using Scripts.Roots;
 using Scripts.Views;
+using System;
+using System.Collections.Generic;
 
 namespace Scripts.ViewModels
 {
-	public class Base : IHaveRoot, IHaveView
-	{
-		private readonly BaseModel _model;
-		private bool _isActive;
-		private bool _isLoaded;
-		private string _lastDeactivationReason;
-		public Action OnDestroy;
-		public Action<string> OnHide;
-		public Action OnShow;
+    public class Base : HaveRoot, IHaveView
+    {
+        public Action OnDestroy;
+        public Action<string> OnHide;
+        public Action OnShow;
 
-		public List<Property> Properties = new List<Property>();
+        public List<Property> Properties = new List<Property>();
 
-		protected Base(BaseModel model, IHaveRoot parent)
-		{
-			_model = model;
-			Parent = parent;
+        private readonly BaseModel _model;
+        private bool _isActive;
+        private bool _isLoaded;
+        private string _lastDeactivationReason;
 
-			// Generate a unique Id if there's none
-			if (string.IsNullOrEmpty(_model.Id))
-			{
-				_model.Id = Guid.NewGuid().ToString();
-			}
-		}
+        protected Base(BaseModel model, IHaveRoot parent) :
+            base(model, parent)
+        {
+            _model = model;
+            Parent = parent;
 
-		public bool IsShown { get; private set; }
+            // Generate a unique Id if there's none
+            if (string.IsNullOrEmpty(_model.Id))
+            {
+                _model.Id = Guid.NewGuid().ToString();
+            }
+        }
 
-		public IHaveRoot Parent { get; protected set; }
+        public bool IsShown { get; private set; }
 
-		public virtual IRoot Root
-		{
-			get { return Parent.Root; }
-		}
+        public BaseView View { get; private set; }
 
-		public virtual GameRoot SDRoot
-		{
-			get { return Parent.SDRoot; }
-		}
+        public override string ToString()
+        {
+            return string.Format("{0}:{1}", GetType(), Id);
+        }
 
-		public virtual string Id
-		{
-			get { return _model.Id; }
-		}
+        #region Activation
 
-		public virtual string FullId
-		{
-			get { return Parent != null ? Parent.FullId + "/" + Id : Id; }
-		}
+        public void Activate()
+        {
+            if (_isActive)
+            {
+                throw new EngineException(this, "Failed to Activate.\n" + _lastDeactivationReason);
+            }
 
-		public BaseView View { get; private set; }
+            _isActive = true;
 
-		public T GetParent<T>() where T : class, IBase
-		{
-			if (Parent == null)
-			{
-				return null;
-			}
+            if (!_isLoaded)
+            {
+                _isLoaded = true;
+                OnLoad();
+            }
 
-			var parent = Parent as T;
-			return parent ?? Parent.GetParent<T>();
-		}
+            OnActivate();
+        }
 
-		public override string ToString()
-		{
-			return string.Format("{0}:{1}", GetType(), Id);
-		}
+        public virtual void Show()
+        {
+            if (IsShown)
+            {
+                throw new EngineException(this, "trying to show twice");
+            }
 
-		#region Activation
+            IsShown = true;
 
-		public void Activate()
-		{
-			if (_isActive)
-			{
-				throw new EngineException(this, "Failed to Activate.\n" + _lastDeactivationReason);
-			}
+            if (OnShow != null)
+            {
+                OnShow();
+            }
+        }
 
-			_isActive = true;
+        protected virtual void OnLoad()
+        {
+            Root.RegisterToLookup(this);
 
-			if (!_isLoaded)
-			{
-				_isLoaded = true;
-				OnLoad();
-			}
+            var parentHaveView = Parent as IHaveView;
+            View = IoC.IoCContainer.GetInstance<BaseView>(GetType(),
+                new object[] { this, parentHaveView != null ? parentHaveView.View : null });
+            Root.RegisterView(this, View);
+        }
 
-			OnActivate();
-		}
+        protected virtual void OnActivate()
+        {
+        }
 
-		public virtual void Show()
-		{
-			if (IsShown)
-			{
-				throw new EngineException(this, "trying to show twice");
-			}
+        #endregion
 
-			IsShown = true;
+        #region Deactivation
 
-			if (OnShow != null)
-			{
-				OnShow();
-			}
-		}
+        public void Deactivate(string reason)
+        {
+            //UnityEngine.Debug.Log(FullId+":"+reason);
+            var lastDeactivationReason = _lastDeactivationReason;
+            _lastDeactivationReason = reason;
 
-		protected virtual void OnLoad()
-		{
-			Root.RegisterToLookup(this);
+            if (!_isActive)
+            {
+                throw new EngineException(this,
+                    string.Format("Failed to Deactivate\n" +
+                                  "Reason for deactivation: {0}\n" +
+                                  "Last Deactivation reason was: {1}", reason, lastDeactivationReason));
+            }
 
-			var parentHaveView = Parent as IHaveView;
-			View = IoC.IoCContainer.GetInstance<BaseView>(GetType(),
-				new object[] {this, parentHaveView != null ? parentHaveView.View : null});
-			Root.RegisterView(this, View);
-		}
+            _isActive = false;
 
-		protected virtual void OnActivate()
-		{
-		}
+            OnDeactivate();
+        }
 
-		#endregion
+        public virtual void Hide(string reason)
+        {
+            if (!IsShown)
+            {
+                throw new EngineException(this, "Trying to hide twice");
+            }
 
-		#region Deactivation
+            IsShown = false;
 
-		public void Deactivate(string reason)
-		{
-			//UnityEngine.Debug.Log(FullId+":"+reason);
-			var lastDeactivationReason = _lastDeactivationReason;
-			_lastDeactivationReason = reason;
+            if (OnHide != null)
+            {
+                OnHide(reason);
+            }
+        }
 
-			if (!_isActive)
-			{
-				throw new EngineException(this,
-					string.Format("Failed to Deactivate\n" +
-								  "Reason for deactivation: {0}\n" +
-								  "Last Deactivation reason was: {1}", reason, lastDeactivationReason));
-			}
+        protected virtual void OnDeactivate()
+        {
+        }
 
-			_isActive = false;
+        #endregion
 
-			OnDeactivate();
-		}
+        #region Destruction
 
-		public virtual void Hide(string reason)
-		{
-			if (!IsShown)
-			{
-				throw new EngineException(this, "Trying to hide twice");
-			}
+        public void Destroy()
+        {
+            if (_isActive)
+            {
+                Deactivate("Destroyed");
+            }
 
-			IsShown = false;
+            OnDestroyed();
 
-			if (OnHide != null)
-			{
-				OnHide(reason);
-			}
-		}
+            if (OnDestroy != null)
+            {
+                OnDestroy();
+            }
 
-		protected virtual void OnDeactivate()
-		{
-		}
+            _isLoaded = false; // Finally we will reload a destroyed object
+        }
 
-		#endregion
+        protected virtual void OnDestroyed()
+        {
+            View = null;
+            Root.UnregisterView(this);
+            Root.UnregisterFromLookup(this);
+        }
 
-		#region Destruction
-
-		public void Destroy()
-		{
-			if (_isActive)
-			{
-				Deactivate("Destroyed");
-			}
-
-			OnDestroyed();
-
-			if (OnDestroy != null)
-			{
-				OnDestroy();
-			}
-
-			_isLoaded = false; // Finally we will reload a destroyed object
-		}
-
-		protected virtual void OnDestroyed()
-		{
-			View = null;
-			Root.UnregisterView(this);
-			Root.UnregisterFromLookup(this);
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

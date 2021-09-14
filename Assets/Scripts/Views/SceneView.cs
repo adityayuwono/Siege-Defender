@@ -19,7 +19,7 @@ namespace Scripts.Views
 			return gameObject;
 		}
 
-		protected override Transform GetParent()
+		protected override Transform ParentTransform()
 		{
 			return null;
 		}

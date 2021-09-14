@@ -45,9 +45,9 @@ namespace Scripts.Views
 			return tryFindChild == null ? base.GetGameObject() : tryFindChild.gameObject;
 		}
 
-		protected override Transform GetParent()
+		protected override Transform ParentTransform()
 		{
-			return GameObject.transform.parent != null ? GameObject.transform.parent : base.GetParent();
+			return GameObject.transform.parent != null ? GameObject.transform.parent : base.ParentTransform();
 		}
 
 		protected override void SetPosition()

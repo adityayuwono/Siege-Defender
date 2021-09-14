@@ -19,11 +19,11 @@ namespace Scripts.Views.GUIs
 			}
 		}
 
-		protected override Transform GetParent()
+		protected override Transform ParentTransform()
 		{
 			if (!_viewModel.IsStatic)
 			{
-				return base.GetParent();
+				return base.ParentTransform();
 			}
 			return null;
 		}

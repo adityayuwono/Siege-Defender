@@ -64,7 +64,7 @@ namespace Scripts.Views.Enemies
 			return tryFindChild.gameObject;
 		}
 
-		protected override Transform GetParent()
+		protected override Transform ParentTransform()
 		{
 			return GameObject.transform.parent;
 		}

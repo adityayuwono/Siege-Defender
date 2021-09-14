@@ -5,7 +5,7 @@ using Object = Scripts.ViewModels.Object;
 
 namespace Scripts.Components
 {
-	public class BaseController : MonoBehaviour, IBase
+	public class BaseController : MonoBehaviour, IBaseView
 	{
 		private bool _isSet;
 		protected Object ViewModel { get; private set; }

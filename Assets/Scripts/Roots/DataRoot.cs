@@ -154,7 +154,7 @@ namespace Scripts.Roots
 			ObjectModels.Add(newModel.Id, newModel);
 		}
 
-		public ObjectModel GetObjectModel(IBase baseObject, string id)
+		public ObjectModel GetObjectModel(IBaseView baseObject, string id)
 		{
 			if (ObjectModels.ContainsKey(id))
 			{

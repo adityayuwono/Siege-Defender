@@ -71,7 +71,7 @@ namespace Scripts.Views
 
 			GameObject.AddComponent<ViewModelController>().ViewModel = _viewModel;
 
-			var parent = GetParent();
+			var parent = ParentTransform();
 			if (parent != null)
 			{
 				GameObject.transform.SetParent(parent, false);
@@ -80,7 +80,7 @@ namespace Scripts.Views
 			_viewModel.OnStartSpecialEvent += Object_OnStartSpecialEvent;
 		}
 
-		protected virtual Transform GetParent()
+		protected virtual Transform ParentTransform()
 		{
 			Transform parentTransform;
 			if (_parent == null || _parent.GameObject == null)
